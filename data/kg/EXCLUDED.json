@@ -1,0 +1,4 @@
+{
+  "graph.gpickle": "487 MB; regenerable from kg_nodes/kg_edges via scripts/build_graph.py",
+  "kg_dict.json": "337 MB; regenerable from kg_nodes/kg_edges via scripts/build_graph.py"
+}

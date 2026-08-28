@@ -1,0 +1,123 @@
+{
+  "tables": [
+    {
+      "table": "allergens_v8.parquet",
+      "rows": 224003,
+      "columns": 24
+    },
+    {
+      "table": "allergens_full.parquet",
+      "rows": 224003,
+      "columns": 3
+    },
+    {
+      "table": "fix_allergens.parquet",
+      "rows": 44645,
+      "columns": 4
+    },
+    {
+      "table": "renutrition_v3.parquet",
+      "rows": 224003,
+      "columns": 18
+    },
+    {
+      "table": "nutrition_totals.parquet",
+      "rows": 224003,
+      "columns": 6
+    },
+    {
+      "table": "fix_nutrition.parquet",
+      "rows": 3625,
+      "columns": 7
+    },
+    {
+      "table": "fix7_atwater.parquet",
+      "rows": 224003,
+      "columns": 5
+    },
+    {
+      "table": "gluten_confidence_v2.parquet",
+      "rows": 224003,
+      "columns": 3
+    },
+    {
+      "table": "fix11_nonveg.parquet",
+      "rows": 224003,
+      "columns": 6
+    },
+    {
+      "table": "fix14_region.parquet",
+      "rows": 224003,
+      "columns": 5
+    },
+    {
+      "table": "fix_region.parquet",
+      "rows": 2980,
+      "columns": 4
+    },
+    {
+      "table": "fix_region_review.parquet",
+      "rows": 496,
+      "columns": 5
+    },
+    {
+      "table": "fix_subcontinental_region.parquet",
+      "rows": 1446,
+      "columns": 4
+    },
+    {
+      "table": "fix_cuisine_scope.parquet",
+      "rows": 224003,
+      "columns": 6
+    },
+    {
+      "table": "fix_occasion_context.parquet",
+      "rows": 224003,
+      "columns": 5
+    },
+    {
+      "table": "fix_spicelevel.parquet",
+      "rows": 100109,
+      "columns": 3
+    },
+    {
+      "table": "fix_glhg.parquet",
+      "rows": 3930,
+      "columns": 5
+    },
+    {
+      "table": "fix_savory_convert.parquet",
+      "rows": 2316,
+      "columns": 5
+    },
+    {
+      "table": "fix_ingredient_reclassify.parquet",
+      "rows": 899,
+      "columns": 4
+    },
+    {
+      "table": "fix_recipe_rename.parquet",
+      "rows": 16754,
+      "columns": 5
+    },
+    {
+      "table": "fix_variants.parquet",
+      "rows": 224003,
+      "columns": 7
+    },
+    {
+      "table": "fix_text.parquet",
+      "rows": 42287,
+      "columns": 7
+    },
+    {
+      "table": "quarantine_list.parquet",
+      "rows": 147695,
+      "columns": 5
+    }
+  ],
+  "excluded": {
+    "mojibake_rows.csv": "carries raw Description and Ingredients prose; withheld under the two-tier release model (paper section 3.5). The per-row outcome is published as the `mojibake_fixed` flag in recipes_structured.parquet.",
+    "fix_mojibake.csv": "carries Description_fix and Ingredients_fix prose; withheld for the same reason as mojibake_rows.csv."
+  }
+}

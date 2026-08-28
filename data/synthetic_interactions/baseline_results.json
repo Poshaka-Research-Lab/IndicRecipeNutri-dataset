@@ -1,0 +1,30 @@
+{
+  "dataset": "bench_foodcom",
+  "n_users": 35833,
+  "n_items": 16688,
+  "n_train_int": 658098,
+  "metrics": [
+    {
+      "model": "Popularity",
+      "Recall@10": 0.0144,
+      "Recall@20": 0.0231,
+      "NDCG@10": 0.012,
+      "HR@10": 0.0611
+    },
+    {
+      "model": "ItemKNN",
+      "Recall@10": 0.0089,
+      "Recall@20": 0.0139,
+      "NDCG@10": 0.0079,
+      "HR@10": 0.0461
+    },
+    {
+      "model": "BPR-MF",
+      "Recall@10": 0.0083,
+      "Recall@20": 0.0139,
+      "NDCG@10": 0.0064,
+      "HR@10": 0.0341
+    }
+  ],
+  "note": "Standard implicit top-N, leave-last-20%-out per user, all-item ranking, seen-item masking."
+}

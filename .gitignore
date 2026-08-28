@@ -1,0 +1,22 @@
+# Never commit the working masters or intermediate build states.
+MASTER_*.csv
+MASTER_pre_*
+*.bak.csv
+*.gpickle
+kg_dict.json
+
+# Large derived artefacts belong in the separate Zenodo record, not in git.
+*.npy
+recipe_text.parquet
+struct_vectors.parquet
+*.gguf
+
+# Local
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
+desktop.ini
+.~lock.*#
+*.tmp

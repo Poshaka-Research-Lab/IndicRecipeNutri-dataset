@@ -1,0 +1,23 @@
+# Data files are byte-exact artefacts with published SHA-256 digests. Any line-ending
+# translation would change those bytes on checkout and break `verify_release.py
+# --strict-checksums` on a different platform than the one that built them.
+* -text
+
+# Source and docs are normalised to LF so the repo is consistent across platforms.
+*.py    text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.cff   text eol=lf
+*.json  text eol=lf diff
+.gitattributes text eol=lf
+.gitignore     text eol=lf
+
+# But not these: they carry published digests or are data payloads.
+data/**/*.json  -text
+data/**/*.jsonl -text
+checksums/SHA256SUMS -text
+
+*.parquet binary
+*.csv     binary
+*.txt     binary

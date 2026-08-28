@@ -1,0 +1,29 @@
+{
+  "title": "IndicRecipeNutri",
+  "description": "<p>A corpus of 224,003 Indian recipes with multilingual provenance and estimated dish-level micronutrition; a typed, IFCT-grounded knowledge graph of 227,500 nodes and 6,169,941 edges across 17 node types and 20 relation types; a 66-query retrieval benchmark with knowledge-graph-derived gold sets; and a synthetic collaborative interaction log.</p><p><strong>Two-tier release.</strong> Structured, factual and derived fields are published under CC BY 4.0 with per-recipe source attribution. Raw recipe prose is not redistributed; a rehydration index of source URLs and SHA-256 text digests is published instead, together with a re-fetch script.</p><p><strong>Known defects are published, not hidden.</strong> An independent allergen and diet audit ships with the data. See the datasheet before use, and do not use the allergen flags for end-user safety decisions.</p>",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Badgujar, Hemprasad Yashwant"
+    }
+  ],
+  "keywords": [
+    "recipe dataset",
+    "food knowledge graph",
+    "Indian cuisine",
+    "computational nutrition",
+    "allergens",
+    "recommender systems",
+    "information retrieval"
+  ],
+  "notes": "Corpus build v11. Recipe prose is withheld under the two-tier release model; see docs/DATASHEET.md.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
