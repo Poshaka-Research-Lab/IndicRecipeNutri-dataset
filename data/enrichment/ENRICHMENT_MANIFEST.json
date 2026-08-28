@@ -2,118 +2,141 @@
   "tables": [
     {
       "table": "allergens_v8.parquet",
-      "rows": 224003,
-      "columns": 24
+      "rows": 224002,
+      "columns": 24,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "allergens_full.parquet",
-      "rows": 224003,
-      "columns": 3
+      "rows": 224002,
+      "columns": 3,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_allergens.parquet",
-      "rows": 44645,
-      "columns": 4
+      "rows": 44644,
+      "columns": 4,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "renutrition_v3.parquet",
-      "rows": 224003,
-      "columns": 18
+      "rows": 224002,
+      "columns": 18,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "nutrition_totals.parquet",
-      "rows": 224003,
-      "columns": 6
+      "rows": 224002,
+      "columns": 6,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_nutrition.parquet",
       "rows": 3625,
-      "columns": 7
+      "columns": 7,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix7_atwater.parquet",
-      "rows": 224003,
-      "columns": 5
+      "rows": 224002,
+      "columns": 5,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "gluten_confidence_v2.parquet",
-      "rows": 224003,
-      "columns": 3
+      "rows": 224002,
+      "columns": 3,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix11_nonveg.parquet",
-      "rows": 224003,
-      "columns": 6
+      "rows": 224002,
+      "columns": 6,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix14_region.parquet",
-      "rows": 224003,
-      "columns": 5
+      "rows": 224002,
+      "columns": 5,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_region.parquet",
       "rows": 2980,
-      "columns": 4
+      "columns": 4,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_region_review.parquet",
       "rows": 496,
-      "columns": 5
+      "columns": 5,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_subcontinental_region.parquet",
       "rows": 1446,
-      "columns": 4
+      "columns": 4,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_cuisine_scope.parquet",
-      "rows": 224003,
-      "columns": 6
+      "rows": 224002,
+      "columns": 6,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_occasion_context.parquet",
-      "rows": 224003,
-      "columns": 5
+      "rows": 224002,
+      "columns": 5,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_spicelevel.parquet",
-      "rows": 100109,
-      "columns": 3
+      "rows": 100108,
+      "columns": 3,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_glhg.parquet",
       "rows": 3930,
-      "columns": 5
+      "columns": 5,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_savory_convert.parquet",
       "rows": 2316,
-      "columns": 5
+      "columns": 5,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_ingredient_reclassify.parquet",
       "rows": 899,
-      "columns": 4
+      "columns": 4,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_recipe_rename.parquet",
       "rows": 16754,
-      "columns": 5
+      "columns": 5,
+      "rows_dropped_by_exclusion": 0
     },
     {
       "table": "fix_variants.parquet",
-      "rows": 224003,
-      "columns": 7
+      "rows": 224002,
+      "columns": 7,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "fix_text.parquet",
-      "rows": 42287,
-      "columns": 7
+      "rows": 42286,
+      "columns": 7,
+      "rows_dropped_by_exclusion": 1
     },
     {
       "table": "quarantine_list.parquet",
-      "rows": 147695,
-      "columns": 5
+      "rows": 147694,
+      "columns": 5,
+      "rows_dropped_by_exclusion": 1
     }
   ],
   "excluded": {

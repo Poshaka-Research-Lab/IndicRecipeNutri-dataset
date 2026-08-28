@@ -1,7 +1,10 @@
 {
   "corpus_build": "v11",
   "source_master": "MASTER_indian_recipes_enriched.csv",
-  "rows": 224003,
+  "rows": 224002,
+  "excluded_recipe_ids": {
+    "211731": "Withdrawn at the maintainer's request. Its IngredientsList contained no ingredients at all - the scrape captured the source site's sidebar navigation, with the site owner's email address attached. One of 101 rows from SourceSite=savorytales with the same scrape defect; the other 100 carry no personal data and are retained, flagged in quarantine_list."
+  },
   "columns_retained": 129,
   "columns_withheld": [
     "Description",
@@ -141,17 +144,11 @@
     "Lang_base",
     "mojibake_fixed"
   ],
-  "rehydratable_rows": 219196,
+  "rehydratable_rows": 219195,
   "non_rehydratable_rows": 4807,
   "redactions": {
-    "total": 1,
-    "matches": [
-      {
-        "column": "IngredientsList",
-        "recipe_id": 211731,
-        "pattern": "email"
-      }
-    ],
+    "total": 0,
+    "matches": [],
     "policy": "Only the matched substring is replaced, with [redacted-<pattern>]. The cell is otherwise untouched and the source master is not modified."
   },
   "withholding_policy": "Prose columns are withheld under the two-tier release model (paper section 3.5). Their SHA-256 digest is published in rehydration_index.parquet so reconstructed text can be verified."

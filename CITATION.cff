@@ -3,8 +3,8 @@ message: "If you use this dataset, please cite it as below."
 type: dataset
 title: "IndicRecipeNutri"
 abstract: >-
-  A corpus of 224,003 Indian recipes with multilingual provenance and estimated
-  dish-level micronutrition, a typed IFCT-grounded knowledge graph of 227,500 nodes
+  A corpus of 224,002 Indian recipes with multilingual provenance and estimated
+  dish-level micronutrition, a typed IFCT-grounded knowledge graph of 227,499 nodes
   and 6.17M edges, a 66-query retrieval benchmark, and a synthetic collaborative
   interaction log. Structured and derived fields only; recipe prose is not
   redistributed and is recoverable via the published rehydration index.

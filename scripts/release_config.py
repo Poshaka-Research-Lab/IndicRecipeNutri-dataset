@@ -47,9 +47,26 @@ REHYDRATION_KEY_COLUMNS = ["recipe_id", "URL", "SourceSite", "Lang"]
 # Every figure below is read from an artefact in the source tree, never asserted from
 # memory. `kg_stats.json` is the authority for the KG counts; the corpus count is the
 # row count of the v11 master.
-EXPECTED_RECIPES = 224_003
-EXPECTED_KG_NODES = 227_500
-EXPECTED_KG_EDGES = 6_169_941
+# Rows present in the working master.
+EXPECTED_SOURCE_RECIPES = 224_003
+
+# Rows withdrawn from the published release. The master is not modified; the exclusion
+# is applied by every builder and enforced by the verifier, so it is reversible by
+# deleting an entry here and rebuilding.
+EXCLUDED_RECIPE_IDS = {
+    211731: (
+        "Withdrawn at the maintainer's request. Its IngredientsList contained no "
+        "ingredients at all - the scrape captured the source site's sidebar "
+        "navigation, with the site owner's email address attached. One of 101 rows "
+        "from SourceSite=savorytales with the same scrape defect; the other 100 "
+        "carry no personal data and are retained, flagged in quarantine_list."
+    ),
+}
+
+# Rows actually published.
+EXPECTED_RECIPES = EXPECTED_SOURCE_RECIPES - len(EXCLUDED_RECIPE_IDS)
+EXPECTED_KG_NODES = 227_500 - len(EXCLUDED_RECIPE_IDS)
+EXPECTED_KG_EDGES = 6_169_926  # 6,169,941 less the 15 edges of the excluded recipe
 EXPECTED_BENCHMARK_QUERIES = 66
 EXPECTED_CORPUS_BUILD = "v11"
 

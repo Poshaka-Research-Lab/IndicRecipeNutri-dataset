@@ -34,6 +34,7 @@ import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
+    EXCLUDED_RECIPE_IDS,
     EXPECTED_KG_EDGES,
     PARQUET_COMPRESSION,
     PARQUET_COMPRESSION_LEVEL,
@@ -96,6 +97,62 @@ def read_parquet_resilient(path: Path) -> "pa.Table":
     return pa.Table.from_batches(fetched, fetched.schema)
 
 
+def excluded_node_ids() -> set[str]:
+    return {f"recipe::{rid}" for rid in EXCLUDED_RECIPE_IDS}
+
+
+def apply_exclusions(table: "pa.Table", which: str) -> "pa.Table":
+    """Drop the excluded recipes' node and every edge incident on them."""
+    if not EXCLUDED_RECIPE_IDS:
+        return table
+
+    ids = excluded_node_ids()
+    df = table.to_pandas()
+    before = len(df)
+
+    if "node_id" in df.columns:
+        df = df[~df["node_id"].isin(ids)]
+    elif {"head", "tail"} <= set(df.columns):
+        df = df[~(df["head"].isin(ids) | df["tail"].isin(ids))]
+    else:
+        print(f"FATAL: cannot apply exclusions to {which} — unrecognised schema", file=sys.stderr)
+        raise SystemExit(1)
+
+    print(f"  {which}: dropped {before - len(df)} row(s) for excluded recipes")
+    return pa.Table.from_pandas(df.reset_index(drop=True), preserve_index=False)
+
+
+def recompute_stats(nodes_path: Path, edges_path: Path, template: dict) -> dict:
+    """Rebuild kg_stats.json from the published tables.
+
+    Verified before use: every field of the shipped statistics file reproduces exactly
+    from the unfiltered node and edge tables, so recomputing after exclusion yields a
+    statistics file that describes what is actually published rather than what was
+    built upstream.
+    """
+    import pandas as pd
+
+    nodes = pd.read_parquet(nodes_path)
+    edges = pd.read_parquet(edges_path)
+
+    def tail_counts(relation: str) -> dict:
+        counts = edges[edges["rel"] == relation]["tail"].value_counts()
+        return {k.split("::", 1)[1]: int(v) for k, v in counts.items()}
+
+    stats = dict(template)
+    stats["recipes"] = int((nodes["type"] == "recipe").sum())
+    stats["nodes"] = int(len(nodes))
+    stats["edges"] = int(len(edges))
+    stats["node_types"] = {k: int(v) for k, v in nodes["type"].value_counts().items()}
+    stats["edge_types"] = {k: int(v) for k, v in edges["rel"].value_counts().items()}
+    stats["unique_ingredients"] = int((nodes["type"] == "ingredient").sum())
+    stats["diet_tags"] = tail_counts("has_diet")
+    stats["health_tags"] = tail_counts("has_health_tag")
+    stats["excluded_recipe_ids"] = sorted(EXCLUDED_RECIPE_IDS)
+    stats["recomputed_by"] = "scripts/build_kg.py after applying EXCLUDED_RECIPE_IDS"
+    return stats
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--source", type=Path, default=KG_DIR)
@@ -110,6 +167,7 @@ def main() -> int:
             print(f"FATAL: missing {src}", file=sys.stderr)
             return 1
         table = read_parquet_resilient(src)
+        table = apply_exclusions(table, dst_name)
         dst = args.out / dst_name
         pq.write_table(
             table,
@@ -131,8 +189,14 @@ def main() -> int:
         shutil.copy2(src, dst)
         print(f"copied     {dst_name}  ({dst.stat().st_size / 1e6:.1f} MB)")
 
-    # ------------------------------------------------- check against the stats file
-    stats = json.loads((args.out / "kg_stats.json").read_text(encoding="utf-8"))
+    # ------------------------------------- recompute the statistics after exclusion
+    stats_path = args.out / "kg_stats.json"
+    template = json.loads(stats_path.read_text(encoding="utf-8"))
+    stats = recompute_stats(
+        args.out / "kg_nodes.parquet", args.out / "kg_edges.parquet", template
+    )
+    stats_path.write_text(json.dumps(stats, indent=2), encoding="utf-8")
+    print(f"recomputed kg_stats.json from the published tables")
     n_nodes = pq.read_metadata(args.out / "kg_nodes.parquet").num_rows
     n_edges = pq.read_metadata(args.out / "kg_edges.parquet").num_rows
 

@@ -1,8 +1,8 @@
 # IndicRecipeNutri — dataset
 
-A corpus of **224,003 Indian recipes** with multilingual provenance and estimated
-dish-level micronutrition, a typed **IFCT-grounded knowledge graph** of 227,500 nodes
-and 6,169,941 edges, a **66-query retrieval benchmark**, and a **synthetic
+A corpus of **224,002 Indian recipes** with multilingual provenance and estimated
+dish-level micronutrition, a typed **IFCT-grounded knowledge graph** of 227,499 nodes
+and 6,169,926 edges, a **66-query retrieval benchmark**, and a **synthetic
 collaborative interaction log**.
 
 > ### ⚠️ Version 0.1.0 is a pre-release. Do not cite it.
@@ -20,7 +20,7 @@ collaborative interaction log**.
 
 | path | contents |
 |---|---|
-| `data/corpus/` | 224,003 recipes × 129 published columns; rehydration index; corpus manifest; allergen audit |
+| `data/corpus/` | 224,002 recipes × 129 published columns; rehydration index; corpus manifest; allergen audit |
 | `data/kg/` | knowledge-graph nodes and edges, statistics, ingredient vocabulary |
 | `data/enrichment/` | 23 companion tables — allergens, nutrition, region, diet, quality flags |
 | `data/benchmark/` | 66-query retrieval benchmark with gold sets, plus its audit |
@@ -59,7 +59,7 @@ and verify you reconstructed the same text:
 python scripts/rehydrate.py --out prose.parquet --limit 100
 ```
 
-**219,196 of 224,003 rows are rehydratable.** The other 4,807 came from pre-existing
+**219,195 of 224,002 rows are rehydratable.** The other 4,807 came from pre-existing
 datasets rather than scraped pages and carry placeholder URLs; they are flagged
 `source_kind = "derived_dataset"`.
 

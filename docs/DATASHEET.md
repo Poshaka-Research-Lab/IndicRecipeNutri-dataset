@@ -39,11 +39,11 @@ included — see *Distribution*.
 
 | | count |
 |---|---|
-| Recipes | 224,003 |
+| Recipes published | 224,002 (of 224,003 in the master; 1 withdrawn) |
 | Published columns | 129 (of 134 in the working master; 5 withheld) |
 | Distinct source sites | 380 |
-| Knowledge-graph nodes | 227,500 |
-| Knowledge-graph edges | 6,169,941 |
+| Knowledge-graph nodes | 227,499 |
+| Knowledge-graph edges | 6,169,926 |
 | Node types / relation types | 17 / 20 |
 | Canonical ingredient vocabulary | 1,205 |
 | Ingredient nodes in the graph | 1,199 |
@@ -167,7 +167,7 @@ expected to over-fire; those two rates are the least reliable in the table.
 
 | diet label | rows | conflicting | rate | breakdown |
 |---|---:|---:|---:|---|
-| Vegan | 92,171 | 3,042 | 3.30% | milk 2,960 · egg 53 · fish 42 · shellfish 23 |
+| Vegan | 92,170 | 3,042 | 3.30% | milk 2,960 · egg 53 · fish 42 · shellfish 23 |
 | Vegetarian | 88,418 | 331 | 0.37% | fish 274 · shellfish 61 |
 | Eggetarian | 14,471 | 10 | 0.07% | fish 6 · shellfish 4 |
 
@@ -176,14 +176,17 @@ list paneer or panir, of which 216 are labelled `Vegan` and 169 carry `has_milk 
 False`. Paneer is a dairy cheese. These rows are wrong on both the diet label and the
 milk flag.
 
-**Scrape residue in `IngredientsList`.** 101 rows, all from `SourceSite =
-savorytales` (`recipe_id` 211731 onward), carry site sidebar navigation instead of
-ingredients — entries such as *"Train Berth Guide: Lower, Upper, Middle & Side Berth"*
-and *"Delhi to Manali: Route, Distance, Train, Bus, Road & Travel Guide"*. All 101 are
-flagged `has_ingredients = True`, which is wrong, and all 101 are already listed in
+**Scrape residue in `IngredientsList`.** 100 published rows, all from `SourceSite =
+savorytales`, carry site sidebar navigation instead of ingredients — entries such as
+*"Train Berth Guide: Lower, Upper, Middle & Side Berth"* and *"Delhi to Manali: Route,
+Distance, Train, Bus, Road & Travel Guide"*. All are flagged `has_ingredients = True`,
+which is wrong, and all are already listed in
 `data/enrichment/quarantine_list.parquet`. The quality pipeline caught them; the
 enrich-don't-remove policy kept them in place. They are **not** repaired in this
 release. Filter on the quarantine list before using ingredient text at scale.
+
+A 101st row of the same cluster, `recipe_id 211731`, additionally carried a personal
+email address and was withdrawn — see below.
 
 **Benchmark gold sets.** Fourteen of the 289 gold-set members for the query
 *"Vegan recipes without milk"* (4.84%) are paneer dishes. The other five constraint
@@ -193,6 +196,31 @@ A prior audit of an earlier benchmark version found a 46.9% contamination rate o
 analogous dairy query; that query was dropped in the v3 rebuild and the rate on its
 replacement is 4.84%. **The generating mechanism is unchanged** — gold sets are
 templated from the same labels the audit finds defective.
+
+---
+
+## Withdrawn records
+
+**One recipe is withdrawn from the published release: `recipe_id 211731`.**
+
+Its `IngredientsList` contained no ingredients at all — the scrape had captured the
+source site's sidebar navigation with the site owner's email address attached. It is
+one of 101 rows from `SourceSite = savorytales` carrying that defect; it is the only
+one that also carried personal data.
+
+The withdrawal removes 1 corpus row, 1 knowledge-graph node (`recipe::211731`), its 15
+incident edges, and 1 row from each of 15 enrichment tables. It appears in no benchmark
+gold set and in no synthetic interaction. Published counts are therefore **224,002
+recipes, 227,499 nodes, 6,169,926 edges**, and `kg_stats.json` is recomputed from the
+published tables rather than carried over from upstream.
+
+**The working master is not modified.** The exclusion lives in
+`scripts/release_config.py` as `EXCLUDED_RECIPE_IDS`, is applied by every builder, and
+is enforced by `scripts/verify_release.py`, which fails the release if a withdrawn
+recipe survives anywhere in the payload. Removing the entry and rebuilding restores the
+row, so the withdrawal is reversible and auditable rather than a silent deletion.
+
+Withdrawal requests are handled under [`TAKEDOWN.md`](TAKEDOWN.md).
 
 ---
 
@@ -230,11 +258,10 @@ data — are redistributed only to the extent their own terms permit. See
 *Pattern-based, done and recorded.* `scripts/build_corpus.py` redacts personal-data
 matches (email, phone, card) from every published string column, and
 `scripts/verify_release.py` re-sweeps the written artefacts and fails the release on
-any survivor. **One redaction was applied in 0.1.0**: an email address in the
-`IngredientsList` of `recipe_id 211731`. Only the matched substring is replaced, with
-`[redacted-email]`; the cell is otherwise untouched and the working master is not
-modified. The record is in `data/corpus/corpus_manifest.json` under `redactions`, and
-the redaction is reapplied on every build rather than baked in once.
+any survivor. **In 0.1.0 the sweep finds nothing**, because the single row that carried
+an email address was withdrawn outright — see *Withdrawn records* below. The redaction
+machinery stays in the build so a future corpus revision cannot reintroduce one
+silently.
 
 *Semantic, still outstanding.* The paper states a PII pass removed author names,
 contact details and personal anecdotes. Author names and anecdotes are not

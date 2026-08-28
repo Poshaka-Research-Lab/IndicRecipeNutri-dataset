@@ -30,6 +30,7 @@ import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
+    EXCLUDED_RECIPE_IDS,
     EXPECTED_BENCHMARK_QUERIES,
     EXPECTED_KG_EDGES,
     EXPECTED_KG_NODES,
@@ -231,6 +232,50 @@ def check_checksums(root: Path, strict: bool) -> None:
 # -------------------------------------------------------------------- 5. disclosure
 
 
+def check_exclusions(root: Path) -> None:
+    """No withdrawn recipe may survive anywhere in the published payload."""
+    if not EXCLUDED_RECIPE_IDS:
+        return
+
+    node_ids = {f"recipe::{rid}" for rid in EXCLUDED_RECIPE_IDS}
+
+    for path in published_parquet(root):
+        schema = pq.read_schema(path)
+        cols = [c for c in ("recipe_id", "node_id", "head", "tail") if c in schema.names]
+        if not cols:
+            continue
+        df = pd.read_parquet(path, columns=cols)
+        for col in cols:
+            if col == "recipe_id":
+                hit = df[col].isin(EXCLUDED_RECIPE_IDS)
+            else:
+                hit = df[col].isin(node_ids)
+            if hit.any():
+                fail(
+                    "exclusion",
+                    f"{path.relative_to(root)} still references excluded recipe(s) "
+                    f"in column '{col}': {int(hit.sum())} row(s)",
+                )
+
+    bench = root / "data" / "benchmark" / "eval_queries.jsonl"
+    if bench.exists():
+        for line in bench.open(encoding="utf-8"):
+            if not line.strip():
+                continue
+            query = json.loads(line)
+            leaked = node_ids.intersection(query.get("relevant", []))
+            if leaked:
+                fail(
+                    "exclusion",
+                    f"benchmark query {query['query']!r} cites excluded {sorted(leaked)}",
+                )
+
+    notes.append(
+        f"exclusion: {len(EXCLUDED_RECIPE_IDS)} withdrawn recipe(s) absent from all "
+        "published artefacts"
+    )
+
+
 def check_disclosure(root: Path) -> None:
     for rel in REQUIRED_ARTEFACTS:
         if not (root / rel).exists():
@@ -266,6 +311,7 @@ def main() -> int:
     check_licence(args.root)
     check_integrity(args.root)
     check_pii(args.root)
+    check_exclusions(args.root)
     check_checksums(args.root, args.strict_checksums)
     check_disclosure(args.root)
 

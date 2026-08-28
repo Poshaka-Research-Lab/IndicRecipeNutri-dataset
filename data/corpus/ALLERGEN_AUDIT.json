@@ -1,7 +1,7 @@
 {
   "method": "The parsed IngredientsList is matched against an allergen ingredient lexicon after removing plant-substitute phrasings (e.g. 'almond milk', 'peanut butter'). The result is compared with the has_<allergen> flag in allergens_v8. Lexicon hits are review candidates, not confirmed defects, so every rate is an upper bound.",
   "asymmetry": "False negatives (ingredient present, flag absent) are the direction that matters for allergen safety and are reported as the headline. False positives are recorded but are an acceptable cost.",
-  "corpus_rows": 224003,
+  "corpus_rows": 224002,
   "allergens": {
     "egg": {
       "lexical_present": 10462,
@@ -696,7 +696,7 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 92171,
+      "rows_with_label": 92170,
       "conflicting_rows": 3042,
       "rate": 0.033,
       "by_allergen": {

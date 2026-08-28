@@ -9,9 +9,10 @@ build (`v11`) is recorded separately in `data/corpus/corpus_manifest.json` and
 First assembled release. **Pre-release: not citable.** Five gates below are open.
 
 ### Added
-- Structured corpus: 224,003 recipes × 129 columns, Parquet + zstd (51 MB).
+- Structured corpus: 224,002 recipes × 129 columns, Parquet + zstd (51 MB).
 - Rehydration index with source URL, SHA-256 prose digest, and a `rehydratable` flag.
-- Knowledge graph: 227,500 nodes / 6,169,941 edges, verified against `kg_stats.json`.
+- Knowledge graph: 227,499 nodes / 6,169,926 edges, recomputed from the published
+  tables after exclusion rather than copied from upstream.
 - 23 enrichment companion tables (138 MB CSV → 26 MB Parquet).
 - 66-query retrieval benchmark with a two-leg gold-set audit.
 - Synthetic interaction log: 50,000 users, 990,273 ratings, with its datasheet.
@@ -25,12 +26,21 @@ First assembled release. **Pre-release: not citable.** Five gates below are open
   older Arrow could not have opened the graph. Re-encoded through the release's own
   writer. No value changed; the counts were re-verified afterwards.
 
+### Withdrawn
+- **`recipe_id 211731` is withdrawn from the release.** Its `IngredientsList` held no
+  ingredients — the scrape captured the source site's sidebar navigation with the
+  owner's email address attached. Removes 1 corpus row, 1 KG node, its 15 edges, and
+  1 row from each of 15 enrichment tables; it is in no gold set and no synthetic
+  interaction. Published totals are now **224,002 / 227,499 / 6,169,926** and
+  `kg_stats.json` is recomputed from the published tables.
+- The working master is unmodified. The exclusion is declared in
+  `release_config.py:EXCLUDED_RECIPE_IDS`, applied by every builder, and enforced by
+  `verify_release.py`, so it is reversible and auditable rather than a silent delete.
+
 ### Privacy
-- **One redaction applied.** An email address in the `IngredientsList` of
-  `recipe_id 211731` is replaced with `[redacted-email]` in the published artefact.
-  Only the matched substring changes; the working master is untouched and the
-  redaction is reapplied on every build. Recorded in `corpus_manifest.json`.
-  `verify_release.py` re-sweeps the written files and now passes.
+- The pattern-based redaction pass (email, phone, card) runs on every build and now
+  finds nothing, the one match having been withdrawn outright. It stays in place so a
+  future corpus revision cannot reintroduce personal data silently.
 
 ### Known defects — measured, published, not fixed
 - Allergen false negatives, upper bounds: sesame 9.39%, tree_nuts 6.36%,
@@ -41,9 +51,10 @@ First assembled release. **Pre-release: not citable.** Five gates below are open
   169 with `has_milk = False`.
 - Benchmark: 14 of 289 gold-set members (4.84%) for *"Vegan recipes without milk"* are
   paneer dishes. The other five constraint queries show no lexical conflict.
-- **101 `savorytales` rows carry sidebar navigation instead of ingredients**, all
+- **100 `savorytales` rows carry sidebar navigation instead of ingredients**, all
   wrongly flagged `has_ingredients = True`. Already present in the published
-  quarantine list; not repaired here. The redacted email sat in the first of them.
+  quarantine list; not repaired here. A 101st, `recipe_id 211731`, also carried an
+  email address and was withdrawn entirely — see *Withdrawn*.
 
 ### Open gates for 1.0.0
 1. **Third-party terms unverified** — IFCT 2017, FlavorDB, FoodOn, RecipeDB NER, plus

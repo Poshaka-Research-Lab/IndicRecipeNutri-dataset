@@ -21,6 +21,7 @@ import pyarrow.parquet as pq
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
+    EXCLUDED_RECIPE_IDS,
     PARQUET_COMPRESSION,
     PARQUET_COMPRESSION_LEVEL,
     PARQUET_ROW_GROUP_SIZE,
@@ -116,6 +117,13 @@ def main() -> int:
             )
             return 1
 
+        if EXCLUDED_RECIPE_IDS and "recipe_id" in df.columns:
+            before = len(df)
+            df = df[~df["recipe_id"].isin(EXCLUDED_RECIPE_IDS)].reset_index(drop=True)
+            dropped = before - len(df)
+        else:
+            dropped = 0
+
         dst = args.out / (src.stem + ".parquet")
         pq.write_table(
             pa.Table.from_pandas(df, preserve_index=False),
@@ -126,8 +134,14 @@ def main() -> int:
         )
         total_in += src.stat().st_size
         total_out += dst.stat().st_size
-        written.append({"table": dst.name, "rows": int(len(df)), "columns": int(len(df.columns))})
-        print(f"  {dst.name:38s} {len(df):>9,} rows  {dst.stat().st_size / 1e6:6.1f} MB")
+        written.append({
+            "table": dst.name,
+            "rows": int(len(df)),
+            "columns": int(len(df.columns)),
+            "rows_dropped_by_exclusion": dropped,
+        })
+        flag = f"  (-{dropped} excluded)" if dropped else ""
+        print(f"  {dst.name:38s} {len(df):>9,} rows  {dst.stat().st_size / 1e6:6.1f} MB{flag}")
 
     print(f"\n{len(written)} tables: {total_in / 1e6:.0f} MB CSV -> {total_out / 1e6:.0f} MB Parquet")
 

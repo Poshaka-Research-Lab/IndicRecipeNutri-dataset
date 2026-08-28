@@ -30,7 +30,9 @@ from release_config import (  # noqa: E402
     EXPECTED_CORPUS_BUILD,
     PII_EXEMPT_COLUMNS,
     PII_PATTERNS,
+    EXCLUDED_RECIPE_IDS,
     EXPECTED_RECIPES,
+    EXPECTED_SOURCE_RECIPES,
     MASTER_CSV,
     PARQUET_COMPRESSION,
     PARQUET_COMPRESSION_LEVEL,
@@ -113,11 +115,29 @@ def main() -> int:
     df = pd.read_csv(args.source, low_memory=False)
     print(f"  {len(df):,} rows x {len(df.columns)} columns")
 
-    if len(df) != EXPECTED_RECIPES:
+    if len(df) != EXPECTED_SOURCE_RECIPES:
         print(
-            f"FATAL: expected {EXPECTED_RECIPES:,} rows, got {len(df):,}. "
+            f"FATAL: expected {EXPECTED_SOURCE_RECIPES:,} source rows, got {len(df):,}. "
             "Either the master changed or release_config.py is stale — resolve "
             "before releasing.",
+            file=sys.stderr,
+        )
+        return 1
+
+    # ------------------------------------------------------------------ exclusions
+    if EXCLUDED_RECIPE_IDS:
+        drop = df["recipe_id"].isin(EXCLUDED_RECIPE_IDS)
+        for rid, reason in EXCLUDED_RECIPE_IDS.items():
+            present = "present" if (df["recipe_id"] == rid).any() else "ALREADY ABSENT"
+            print(f"excluding recipe_id={rid} ({present})")
+            print(f"  reason: {reason}")
+        df = df[~drop].reset_index(drop=True)
+        print(f"  {len(df):,} rows remain")
+
+    if len(df) != EXPECTED_RECIPES:
+        print(
+            f"FATAL: after exclusions expected {EXPECTED_RECIPES:,} rows, "
+            f"got {len(df):,}.",
             file=sys.stderr,
         )
         return 1
@@ -186,6 +206,7 @@ def main() -> int:
         "corpus_build": EXPECTED_CORPUS_BUILD,
         "source_master": args.source.name,
         "rows": int(len(structured)),
+        "excluded_recipe_ids": {str(k): v for k, v in EXCLUDED_RECIPE_IDS.items()},
         "columns_retained": int(len(structured.columns)),
         "columns_withheld": present_prose,
         "column_names": list(structured.columns),

@@ -27,7 +27,8 @@ recorded as a gap in `docs/DATASHEET.md`, not papered over.
 The working master is versioned v6 through v11, each snapshotted with a column hash and
 a manifest. `docs/VERSIONS.md` carries the per-build record and
 `data/versions/columns_v*.txt` the per-build column lists. This release is built from
-**v11** (224,003 rows × 134 columns), of which 129 columns are published.
+**v11** (224,003 rows × 134 columns), of which 129 columns and 224,002 rows are
+published — one recipe is withdrawn, see `DATASHEET.md`.
 
 The roughly 18 GB of intermediate `MASTER_pre_*` snapshots are not published. They are
 build states, not product; the column lists and the enrichment companion tables carry

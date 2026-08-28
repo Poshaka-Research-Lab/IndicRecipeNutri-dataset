@@ -18,7 +18,7 @@ extent its own licence permits, and the combined graph is released only to that 
 
 ## Upstream recipe datasets — found during the 0.1.0 build, not in the paper's list
 
-4,807 of the 224,003 recipes (2.1%) did not come from a scraped page. They came from
+4,807 of the 224,002 published recipes (2.1%) did not come from a scraped page. They came from
 pre-existing datasets and carry a placeholder URL, so they cannot be rehydrated by
 re-fetching. They are flagged `source_kind = "derived_dataset"` in
 `data/corpus/rehydration_index.parquet`.
