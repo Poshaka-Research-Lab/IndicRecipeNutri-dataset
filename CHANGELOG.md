@@ -25,6 +25,13 @@ First assembled release. **Pre-release: not citable.** Five gates below are open
   older Arrow could not have opened the graph. Re-encoded through the release's own
   writer. No value changed; the counts were re-verified afterwards.
 
+### Privacy
+- **One redaction applied.** An email address in the `IngredientsList` of
+  `recipe_id 211731` is replaced with `[redacted-email]` in the published artefact.
+  Only the matched substring changes; the working master is untouched and the
+  redaction is reapplied on every build. Recorded in `corpus_manifest.json`.
+  `verify_release.py` re-sweeps the written files and now passes.
+
 ### Known defects — measured, published, not fixed
 - Allergen false negatives, upper bounds: sesame 9.39%, tree_nuts 6.36%,
   shellfish 5.61%, soy 5.46%, peanut 3.62%, mustard 3.13%, egg 2.35%, fish 1.89%,
@@ -34,13 +41,17 @@ First assembled release. **Pre-release: not citable.** Five gates below are open
   169 with `has_milk = False`.
 - Benchmark: 14 of 289 gold-set members (4.84%) for *"Vegan recipes without milk"* are
   paneer dishes. The other five constraint queries show no lexical conflict.
+- **101 `savorytales` rows carry sidebar navigation instead of ingredients**, all
+  wrongly flagged `has_ingredients = True`. Already present in the published
+  quarantine list; not repaired here. The redacted email sat in the first of them.
 
 ### Open gates for 1.0.0
 1. **Third-party terms unverified** — IFCT 2017, FlavorDB, FoodOn, RecipeDB NER, plus
    four upstream recipe datasets found during this build (3a2m, IndB, RecipeNLG,
    indori; 4,807 rows). If any is share-alike, CC BY 4.0 on the graph is wrong.
-2. **No PII-pass run artefact.** The build-time pattern sweep is a guard, not the
-   documented pass.
+2. **Semantic PII pass has no run artefact.** Pattern-based redaction is now done and
+   recorded, but author names and personal anecdotes are not pattern-matchable and the
+   pass the paper describes is still unevidenced.
 3. **Split protocol undocumented.** Do not describe the train/test/val split as
    random, temporal or cold-start until the assignment rule is established.
 4. **No collection timestamps** in the published schema, though the paper states they

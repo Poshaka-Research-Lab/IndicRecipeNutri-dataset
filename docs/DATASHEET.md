@@ -176,6 +176,15 @@ list paneer or panir, of which 216 are labelled `Vegan` and 169 carry `has_milk 
 False`. Paneer is a dairy cheese. These rows are wrong on both the diet label and the
 milk flag.
 
+**Scrape residue in `IngredientsList`.** 101 rows, all from `SourceSite =
+savorytales` (`recipe_id` 211731 onward), carry site sidebar navigation instead of
+ingredients — entries such as *"Train Berth Guide: Lower, Upper, Middle & Side Berth"*
+and *"Delhi to Manali: Route, Distance, Train, Bus, Road & Travel Guide"*. All 101 are
+flagged `has_ingredients = True`, which is wrong, and all 101 are already listed in
+`data/enrichment/quarantine_list.parquet`. The quality pipeline caught them; the
+enrich-don't-remove policy kept them in place. They are **not** repaired in this
+release. Filter on the quarantine list before using ingredient text at scale.
+
 **Benchmark gold sets.** Fourteen of the 289 gold-set members for the query
 *"Vegan recipes without milk"* (4.84%) are paneer dishes. The other five constraint
 queries show no lexical conflict. See
@@ -216,11 +225,21 @@ data — are redistributed only to the extent their own terms permit. See
 [`THIRD_PARTY_TERMS.md`](THIRD_PARTY_TERMS.md); those terms are `⟨TBD⟩` and gate the
 1.0.0 release.
 
-**PII.** The paper states a PII pass was run over free-text fields. **No run artefact
-for that pass exists**, so it is recorded here as `⟨TBD⟩` rather than as done.
-`scripts/verify_release.py` runs a pattern sweep (email, phone, card) over every
-published string column at build time and fails the release on a hit; that is a guard,
-not a substitute for the documented pass.
+**PII.** Two mechanisms, and they cover different things.
+
+*Pattern-based, done and recorded.* `scripts/build_corpus.py` redacts personal-data
+matches (email, phone, card) from every published string column, and
+`scripts/verify_release.py` re-sweeps the written artefacts and fails the release on
+any survivor. **One redaction was applied in 0.1.0**: an email address in the
+`IngredientsList` of `recipe_id 211731`. Only the matched substring is replaced, with
+`[redacted-email]`; the cell is otherwise untouched and the working master is not
+modified. The record is in `data/corpus/corpus_manifest.json` under `redactions`, and
+the redaction is reapplied on every build rather than baked in once.
+
+*Semantic, still outstanding.* The paper states a PII pass removed author names,
+contact details and personal anecdotes. Author names and anecdotes are not
+pattern-matchable and **no run artefact for that pass exists**, so it remains `⟨TBD⟩`.
+The pattern sweep is a guard, not a substitute for it.
 
 **Takedown.** See [`TAKEDOWN.md`](TAKEDOWN.md).
 

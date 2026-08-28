@@ -148,7 +148,7 @@ Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 
 ## `data/corpus/rehydration_index.parquet`
 
-224,003 rows x 10 columns - 11.5 MB
+224,003 rows x 12 columns - 11.5 MB
 
 | column | type | non-null | distinct | example |
 |---|---|---:|---:|---|
@@ -157,6 +157,8 @@ Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 | `SourceSite` | object | 224,003 | 380 | 3a2m_indian |
 | `Lang` | object | 222,476 | 66 | en |
 | `text_sha256` | object | 224,003 | 221,371 | 4a47d90be51b6b09a9306d47928c4600cf4073f9 |
+| `rehydratable` | bool | 224,003 | 2 | False |
+| `source_kind` | object | 224,003 | 2 | derived_dataset |
 | `had_description` | bool | 224,003 | 2 | True |
 | `had_instructions` | bool | 224,003 | 2 | True |
 | `had_ingredients` | bool | 224,003 | 2 | True |

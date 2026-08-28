@@ -143,5 +143,16 @@
   ],
   "rehydratable_rows": 219196,
   "non_rehydratable_rows": 4807,
+  "redactions": {
+    "total": 1,
+    "matches": [
+      {
+        "column": "IngredientsList",
+        "recipe_id": 211731,
+        "pattern": "email"
+      }
+    ],
+    "policy": "Only the matched substring is replaced, with [redacted-<pattern>]. The cell is otherwise untouched and the source master is not modified."
+  },
   "withholding_policy": "Prose columns are withheld under the two-tier release model (paper section 3.5). Their SHA-256 digest is published in rehydration_index.parquet so reconstructed text can be verified."
 }

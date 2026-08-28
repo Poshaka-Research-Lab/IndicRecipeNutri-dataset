@@ -28,6 +28,8 @@ import pyarrow.parquet as pq
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
     EXPECTED_CORPUS_BUILD,
+    PII_EXEMPT_COLUMNS,
+    PII_PATTERNS,
     EXPECTED_RECIPES,
     MASTER_CSV,
     PARQUET_COMPRESSION,
@@ -49,6 +51,50 @@ def prose_digest(row: pd.Series) -> str:
         val = row.get(col)
         parts.append("" if pd.isna(val) else str(val))
     return hashlib.sha256("\x00".join(parts).encode("utf-8")).hexdigest()
+
+
+def redact_pii(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Replace personal-data matches in published string columns with a marker.
+
+    This is a privacy action, not a data repair. Only the matched substring is
+    replaced; the surrounding cell is left exactly as it was, so no recipe content is
+    altered and the redaction is visible rather than silent. The working master is
+    never modified — the redaction lives in the published artefact only, and is
+    reapplied on every build.
+
+    Every match is recorded by column, row and pattern so the action is auditable.
+    """
+    frame = frame.copy()
+    record: dict = {"total": 0, "matches": [], "policy": (
+        "Only the matched substring is replaced, with [redacted-<pattern>]. The cell "
+        "is otherwise untouched and the source master is not modified."
+    )}
+
+    ids = frame["recipe_id"] if "recipe_id" in frame.columns else pd.Series(frame.index)
+
+    for column in frame.columns:
+        if column in PII_EXEMPT_COLUMNS or frame[column].dtype != object:
+            continue
+        series = frame[column]
+        for name, pattern in PII_PATTERNS.items():
+            if name == "credit_card":
+                # Over-fires on decimal quantities; the release verifier applies the
+                # anchored version. Redaction stays conservative and skips it.
+                continue
+            hits = series.fillna("").astype(str).str.contains(pattern, regex=True, na=False)
+            if not hits.any():
+                continue
+            for rid in ids[hits].tolist():
+                record["matches"].append(
+                    {"column": column, "recipe_id": int(rid), "pattern": name}
+                )
+            record["total"] += int(hits.sum())
+            series = series.astype(str).str.replace(
+                pattern, f"[redacted-{name}]", regex=True
+            ).where(frame[column].notna())
+        frame[column] = series
+
+    return frame, record
 
 
 def main() -> int:
@@ -110,6 +156,15 @@ def main() -> int:
     structured = df.drop(columns=present_prose)
     print(f"  {len(structured):,} rows x {len(structured.columns)} columns retained")
 
+    # ------------------------------------------------------------------- redaction
+    structured, redactions = redact_pii(structured)
+    if redactions["total"]:
+        print(f"redacted {redactions['total']} personal-data match(es):")
+        for entry in redactions["matches"]:
+            print(f"  {entry['column']} row recipe_id={entry['recipe_id']} ({entry['pattern']})")
+    else:
+        print("redaction: no personal-data matches found")
+
     # ------------------------------------------------------------------- write out
     for name, frame in (
         ("recipes_structured.parquet", structured),
@@ -136,6 +191,7 @@ def main() -> int:
         "column_names": list(structured.columns),
         "rehydratable_rows": int(index["rehydratable"].sum()),
         "non_rehydratable_rows": int((~index["rehydratable"]).sum()),
+        "redactions": redactions,
         "withholding_policy": (
             "Prose columns are withheld under the two-tier release model "
             "(paper section 3.5). Their SHA-256 digest is published in "
