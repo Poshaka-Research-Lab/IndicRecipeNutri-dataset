@@ -104,9 +104,14 @@ def main() -> int:
                                       "median magnitude against physiological range on "
                                       "2026-09-02, and the derivation is in each column's "
                                       "basis_note so it can be checked rather than trusted. "
-                                      "Two columns remain genuinely unresolved and say TBD "
-                                      "in their note: Nut_VitaminA (ug RAE vs ug retinol) "
-                                      "and Nut_Folate (total vs DFE).",
+                                      "The two that were TBD were resolved on 2026-09-05 "
+                                      "from the builder rather than from magnitude: "
+                                      "Nut_VitaminA is ug RAE (FDC nutrient 1106) and "
+                                      "Nut_Folate is TOTAL folate (FDC 1177), not DFE — so "
+                                      "DV_Folate, which divides by the 400 ug DFE Daily "
+                                      "Value, is not a DFE percentage. Both carry a caveat "
+                                      "for the 2.5% of composition rows drawn from the INDB "
+                                      "spreadsheets, whose headers state no vitamer basis.",
         "unit_vocabulary": {
             "kcal": "kilocalories", "g": "grams", "mg": "milligrams",
             "ug": "micrograms", "min": "minutes", "%": "percent",
@@ -123,7 +128,10 @@ def main() -> int:
         "columns": {k: v for k, v in sorted(COLUMN_UNITS.items())},
         "undeclared_numeric_columns": gaps,
         "files_stamped": results,
-    }, open(out, "w", encoding="utf-8"), indent=1)
+    # newline="\n" is load-bearing: docs/*.json is `text eol=lf` in .gitattributes and this
+    # file's digest is pinned. Written with the platform default it is CRLF here and LF on a
+    # Linux checkout, so --strict-checksums passes locally and fails on the runner.
+    }, open(out, "w", encoding="utf-8", newline="\n"), indent=1)
     print(f"\nwrote {out.relative_to(REPO_ROOT)}  ({len(COLUMN_UNITS)} declarations)")
     if gaps:
         print("\nNUMERIC COLUMNS WITH NO UNIT — the gate will fail on these:")

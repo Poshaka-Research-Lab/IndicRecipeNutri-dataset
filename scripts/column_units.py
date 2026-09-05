@@ -90,18 +90,30 @@ COLUMN_UNITS: dict[str, dict] = {
                                        "supplementary food-composition table, 0-1"),
     "Nut_VitaminD": _n(_UG, f"median 0, p95 1.52; IU would be ~40x larger, so this is "
                             f"micrograms not IU; {NUTRIENT_MAGNITUDE}"),
-    # ---- the two genuinely unresolved ones -----------------------------------------
-    "Nut_VitaminA": _n(_UG, "MAGNITUDE resolves ug vs IU (median 25.9; IU would be ~10x "
-                            "larger). What is NOT resolved is whether it is ug RAE or ug "
-                            "retinol: TBD. Check which USDA field the enrichment read "
-                            "(VITA_RAE vs VITA_IU vs RETOL). Consequence: RAE and retinol "
-                            "differ by up to 12x for plant-source carotenoids, which is most "
-                            "of this corpus."),
-    "Nut_Folate": _n(_UG, "MAGNITUDE resolves ug (median 29.36). Whether it is total folate "
-                          "or ug DFE is TBD, and it matters because DV_Folate divides by the "
-                          "400 ug DFE Daily Value: if the numerator is total folate the "
-                          "quotient is not a DFE percentage. Check the USDA field read "
-                          "(FOL vs FOLDFE)."),
+    # ---- resolved 2026-09-05 from the build path, not from magnitude -----------------
+    # Both were TBD because magnitude cannot separate the vitamer bases. Reading the builder
+    # settles them: the composition table behind these columns (nutrition/fct_ifct.parquet,
+    # 7,991 rows) is 7,793 USDA rows (97.5%) + 144 INDB-UK + 54 INDB-US, and the USDA path
+    # selects nutrients by FoodData Central id, which names the basis exactly.
+    "Nut_VitaminA": _n(_UG, "ug RAE (retinol activity equivalents). MAGNITUDE resolves ug vs "
+                            "IU (median 25.9; IU would be ~10x larger); the BASIS is resolved "
+                            "by the builder, which reads FoodData Central nutrient id 1106 = "
+                            "'Vitamin A, RAE' — not 1104 (IU) and not 1105 (Retinol). "
+                            "scraper/build_fct.py::USDA_MAP. This matters because RAE and "
+                            "retinol differ by up to 12x for the plant-source carotenoids that "
+                            "dominate this corpus. CAVEAT: the 198 non-USDA rows (2.5%) come "
+                            "from the INDB US/UK spreadsheets, whose header `vita_ug` does not "
+                            "state a vitamer basis; those rows are NOT independently resolved."),
+    "Nut_Folate": _n(_UG, "ug of TOTAL folate — NOT ug DFE. MAGNITUDE resolves ug (median "
+                          "29.36); the BASIS is FoodData Central nutrient id 1177 = 'Folate, "
+                          "total', not 1190 = 'Folate, DFE'. scraper/build_fct.py::USDA_MAP. "
+                          "CONSEQUENCE, and it is a real one: DV_Folate divides by the 400 ug "
+                          "**DFE** Daily Value while this numerator is total folate, so "
+                          "DV_Folate is NOT a DFE percentage. DFE = food folate + 1.7 x folic "
+                          "acid, so DFE >= total folate and the quotient UNDER-reports; the two "
+                          "coincide only where folic acid is zero, which is most of an "
+                          "unfortified Indian corpus but not all of it. Same 2.5% INDB caveat "
+                          "as Nut_VitaminA: its `folate_ug` header states no basis."),
     # ---- per 100 g. NOTE THE TWO DIFFERENT UNITS UNDER ONE PREFIX ------------------
     "per100g_kcal": U(unit="kcal", basis="100g", domain=[0, 900],
                       basis_note="900 kcal/100g is pure fat, the physical ceiling for any "

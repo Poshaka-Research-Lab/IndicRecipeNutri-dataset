@@ -665,9 +665,11 @@ def check_units(root: Path) -> None:
     if total:
         notes.append(
             f"units: {stamped} of {total} dimensioned columns carry machine-readable unit "
-            f"metadata; docs/UNITS.json is the human-readable registry. Two units remain "
-            f"genuinely unresolved and say TBD: Nut_VitaminA (ug RAE vs ug retinol) and "
-            f"Nut_Folate (total vs DFE) — both affect DV_* quotients"
+            f"metadata; docs/UNITS.json is the human-readable registry. The two former TBDs "
+            f"are resolved from the builder: Nut_VitaminA is ug RAE (FDC 1106), Nut_Folate is "
+            f"TOTAL folate (FDC 1177) — so DV_Folate divides a total-folate numerator by a "
+            f"400 ug DFE denominator and is NOT a DFE percentage (it under-reports where "
+            f"folic acid is non-zero). 2.5% of composition rows are INDB, basis unstated"
         )
 
 

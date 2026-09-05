@@ -1,7 +1,7 @@
 {
  "what": "Unit, basis and physical domain for every dimensioned column in the IndicRecipeNutri release. Authoritative over column NAMES where the two disagree \u2014 see grams_per_serving_v3, whose name declares the wrong basis.",
  "generated_by": "scripts/stamp_units.py from scripts/column_units.py",
- "how_units_were_established": "The build never recorded them. Each was derived from median magnitude against physiological range on 2026-09-02, and the derivation is in each column's basis_note so it can be checked rather than trusted. Two columns remain genuinely unresolved and say TBD in their note: Nut_VitaminA (ug RAE vs ug retinol) and Nut_Folate (total vs DFE).",
+ "how_units_were_established": "The build never recorded them. Each was derived from median magnitude against physiological range on 2026-09-02, and the derivation is in each column's basis_note so it can be checked rather than trusted. The two that were TBD were resolved on 2026-09-05 from the builder rather than from magnitude: Nut_VitaminA is ug RAE (FDC nutrient 1106) and Nut_Folate is TOTAL folate (FDC 1177), not DFE \u2014 so DV_Folate, which divides by the 400 ug DFE Daily Value, is not a DFE percentage. Both carry a caveat for the 2.5% of composition rows drawn from the INDB spreadsheets, whose headers state no vitamer basis.",
  "unit_vocabulary": {
   "kcal": "kilocalories",
   "g": "grams",
@@ -1662,7 +1662,7 @@
    "unit": "ug",
    "basis": "dish",
    "domain": null,
-   "basis_note": "MAGNITUDE resolves ug (median 29.36). Whether it is total folate or ug DFE is TBD, and it matters because DV_Folate divides by the 400 ug DFE Daily Value: if the numerator is total folate the quotient is not a DFE percentage. Check the USDA field read (FOL vs FOLDFE)."
+   "basis_note": "ug of TOTAL folate \u2014 NOT ug DFE. MAGNITUDE resolves ug (median 29.36); the BASIS is FoodData Central nutrient id 1177 = 'Folate, total', not 1190 = 'Folate, DFE'. scraper/build_fct.py::USDA_MAP. CONSEQUENCE, and it is a real one: DV_Folate divides by the 400 ug **DFE** Daily Value while this numerator is total folate, so DV_Folate is NOT a DFE percentage. DFE = food folate + 1.7 x folic acid, so DFE >= total folate and the quotient UNDER-reports; the two coincide only where folic acid is zero, which is most of an unfortified Indian corpus but not all of it. Same 2.5% INDB caveat as Nut_VitaminA: its `folate_ug` header states no basis."
   },
   "Nut_Folate_orig": {
    "unit": "ug",
@@ -2661,7 +2661,7 @@
    "unit": "ug",
    "basis": "dish",
    "domain": null,
-   "basis_note": "MAGNITUDE resolves ug vs IU (median 25.9; IU would be ~10x larger). What is NOT resolved is whether it is ug RAE or ug retinol: TBD. Check which USDA field the enrichment read (VITA_RAE vs VITA_IU vs RETOL). Consequence: RAE and retinol differ by up to 12x for plant-source carotenoids, which is most of this corpus."
+   "basis_note": "ug RAE (retinol activity equivalents). MAGNITUDE resolves ug vs IU (median 25.9; IU would be ~10x larger); the BASIS is resolved by the builder, which reads FoodData Central nutrient id 1106 = 'Vitamin A, RAE' \u2014 not 1104 (IU) and not 1105 (Retinol). scraper/build_fct.py::USDA_MAP. This matters because RAE and retinol differ by up to 12x for the plant-source carotenoids that dominate this corpus. CAVEAT: the 198 non-USDA rows (2.5%) come from the INDB US/UK spreadsheets, whose header `vita_ug` does not state a vitamer basis; those rows are NOT independently resolved."
   },
   "Nut_VitaminA_orig": {
    "unit": "ug",
