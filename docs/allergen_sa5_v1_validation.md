@@ -19,15 +19,18 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 * **Column scanned.** `IngredientsList`, the canonicalised list that ships. Earlier
   versions of this report scanned a raw `Ingredients` column that is **not** part of
   the release, so their figures were not reproducible from the published data.
-* **Word boundaries.** `\b`-anchored, so `hing` does not match `garnishing`. The
-  corpus is fully Roman (`ingredients_romanised`), which is what makes `\b` safe here;
-  it is not reliable against Indic script and must not be reused on one.
+* **Word boundaries.** Short terms are `\b`-anchored on both sides, so `hing` does not
+  match `garnishing`. The long `asafoetida` spellings drop the LEFT boundary only,
+  because quantities fuse to the word in scraped text (`pinchasafoetida`, `2asafetida`)
+  and `\b` does not fire between a digit and a letter. The corpus is fully Roman
+  (`ingredients_romanised`), which is what makes `\b` usable at all; it is not reliable
+  against Indic script and must not be reused on one.
 * **Precision (text-confirmable).** Of the recipes carrying the label, the share whose
   ingredient list names the allergen or a regional synonym.
 * **Recall (text-confirmable).** Of the recipes naming it, the share that carry the label.
-* **Status.** Derived, not asserted: `agrees` requires precision ≥ 70%
-  and recall ≥ 99%. Recall is held to the higher bar because a missing
-  allergen label is the asymmetric error.
+* **Status.** Derived, not asserted. **Any** false negative returns `REVIEW` with the
+  count, whatever the rate — a missed allergen is not a rounding error against a
+  percentage (CLAUDE.md §4.3). Absent that, `agrees` needs precision ≥ 70% and recall ≥ 99%.
 
 ## Corpus-wide agreement
 
@@ -36,20 +39,25 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 | coconut | 36,824 | 35,524 | 35,524 | 1,300 | 0 | 96.47% | 100.00% | agrees |
 | tamarind | 12,163 | 12,059 | 12,059 | 104 | 0 | 99.14% | 100.00% | agrees |
 | fenugreek | 20,025 | 17,864 | 17,864 | 2,161 | 0 | 89.21% | 100.00% | agrees |
-| asafoetida | 30,518 | 23,478 | 23,478 | 7,040 | 0 | 76.93% | 100.00% | agrees |
+| asafoetida | 30,518 | 23,741 | 23,657 | 6,861 | 84 | 77.52% | 99.65% | REVIEW — 84 fail-open |
 
-> **Read the recall column with care — it is close to a tautology.** The labels were
-> derived from a lexicon that is a superset of the regex above, so a row naming the
-> allergen is labelled almost by construction, and recall lands at 100.00% for all four
-> classes. A non-zero FN here would mean a real defect (a later pass dropped a label
-> whose text still names it), which is why the column is computed and shown at all —
-> but 100% is the expected reading, not an achievement, and it is not evidence that the
-> corpus contains no unlabelled instances of these foods. Only the precision column and
-> the blend breakdown below carry information.
+> **Read the recall column with care.** For `coconut`, `tamarind` and `fenugreek` it is
+> close to a tautology: the labels were derived from a lexicon that is a superset of the
+> regex, so a row naming the allergen is labelled almost by construction and 100.00% is
+> the expected reading, not an achievement. It is **not** evidence that the corpus
+> contains no unlabelled instances of those foods.
+>
+> `asafoetida` is the exception, and it is the one worth reading. Its arm carries a
+> **misspelling family** the labelling lexicon does not, so its FN count is a genuine
+> measurement rather than a definitional zero — and it is **non-zero**. Those rows are
+> recipes that name asafoetida in a spelling the labeller missed, so they carry no
+> asafoetida label. That is a **fail-open** direction, the one CLAUDE.md §4.3 says is
+> never traded, and it is tracked in
+> `_docs/audits/PROPOSE_asafoetida_spellings_2026-09-05.tsv`.
 
 ## Why asafoetida's precision is the outlier
 
-**7,040** recipes carry the `asafoetida` label without naming it in the shipped
+**6,861** recipes carry the `asafoetida` label without naming it in the shipped
 ingredient list. An earlier version of this report put that count at 1,321 and
 attributed it to *"valid knowledge-graph (KG-sourced) labels"*. **There is no KG
 allergen source in this payload** — `allergens_sa5_src` takes only `lexicon_v8` (72,941), `none` (146,445). The actual
@@ -62,18 +70,18 @@ chaat masala contains asafoetida; its ingredient list does not say so. Labelling
 recipes is correct and is the fail-closed behaviour Codex CXC 80-2020 requires — but it
 makes the label deliberately exceed the text, which is what depresses precision here.
 
-Of those 7,040 rows, **6,578 (93.4%)** name such a blend:
+Of those 6,861 rows, **6,529 (95.2%)** name such a blend:
 
 | Blend named | Recipes |
 |---|---:|
-| chaat masala | 4,287 |
-| chat masala | 932 |
-| sev | 771 |
-| sambar powder | 637 |
-| pav bhaji | 563 |
-| garam masala | 407 |
+| chaat masala | 4,285 |
+| chat masala | 931 |
+| sev | 766 |
+| sambar powder | 630 |
+| pav bhaji | 560 |
+| garam masala | 385 |
 
-Leaving **462** rows (0.21% of the corpus) where the
+Leaving **332** rows (0.15% of the corpus) where the
 label is not explained by either a spelling variant or a named blend. These are
 recorded, not resolved. They are a **known open item**, and because the residual
 direction is a label the text does not support — an over-warning, not a missed

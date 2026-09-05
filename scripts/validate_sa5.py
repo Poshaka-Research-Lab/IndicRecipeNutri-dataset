@@ -65,7 +65,16 @@ PATTERNS = {
     "coconut": r"\b(?:coconut|nariyal|khopra|thengai|kobbari|kopra)\b",
     "tamarind": r"\b(?:tamarind|imli|puli|chinch|chintapandu)\b",
     "fenugreek": r"\b(?:fenugreek|methi|kasuri\s+methi|vendhayam|menthulu)\b",
-    "asafoetida": r"\b(?:asafo?etida|heeng|hing|perungayam|inguva|kayam)\b",
+    # The asafoetida arm carries a MISSPELLING FAMILY as well as the regional synonyms.
+    # Scraped ingredient text spells this word 19 different ways -- `aseftida`, `asaefoetida`,
+    # `asofeotida`, `asafotedia` -- and an exact-spelling scan reads every one of them as a
+    # false positive of the LABEL when it is really a gap in the SCAN. The long forms are
+    # matched without a left word boundary because quantities fuse to the word
+    # (`pinchasafoetida`, `2asafetida`), where `\b` fails against the preceding digit.
+    # The SHORT forms keep `\b` on both sides and are never loosened: bare `hing` without a
+    # boundary matches `garnishing`, `dishing` and `washing`.
+    "asafoetida": (r"(?:a+s[aeo]+f[aeo]*t[ie]d[ia]|a+ss?af[ae]tida|asaf[oe]+dita|asafoted?ia)"
+                   r"|\b(?:heeng|hing|perungayam|inguva|kayam)\b"),
 }
 
 # Spice blends that contain asafoetida as an undeclared component. Used ONLY to explain
@@ -102,10 +111,18 @@ def build() -> str:
         fn = int((~flagged & in_text).sum())
         prec = tp / (tp + fp) if tp + fp else 0.0
         rec = tp / (tp + fn) if tp + fn else 0.0
-        ok = prec >= MIN_PRECISION and rec >= MIN_RECALL
+        # ANY false negative fails the row, whatever the rate. A recall threshold lets 84
+        # fail-open rows read as "agrees" at 99.65%, which is the asymmetry CLAUDE.md 4.3
+        # forbids trading: a missed allergen is not a rounding error against a percentage.
+        # MIN_RECALL is kept only as a second, weaker tripwire.
+        if fn:
+            status = f"REVIEW — {fn:,} fail-open"
+        elif prec >= MIN_PRECISION and rec >= MIN_RECALL:
+            status = "agrees"
+        else:
+            status = "REVIEW — precision"
         rows.append(dict(allergen=allergen, flagged=tp + fp, lexical=tp + fn, tp=tp, fp=fp,
-                         fn=fn, precision=prec, recall=rec,
-                         status="agrees" if ok else "REVIEW"))
+                         fn=fn, precision=prec, recall=rec, status=status))
 
     # Explain the largest FP block rather than asserting a cause for it.
     rx = re.compile(PATTERNS["asafoetida"], re.IGNORECASE)
@@ -143,15 +160,19 @@ def build() -> str:
     A("* **Column scanned.** `IngredientsList`, the canonicalised list that ships. Earlier")
     A("  versions of this report scanned a raw `Ingredients` column that is **not** part of")
     A("  the release, so their figures were not reproducible from the published data.")
-    A("* **Word boundaries.** `\\b`-anchored, so `hing` does not match `garnishing`. The")
-    A("  corpus is fully Roman (`ingredients_romanised`), which is what makes `\\b` safe here;")
-    A("  it is not reliable against Indic script and must not be reused on one.")
+    A("* **Word boundaries.** Short terms are `\\b`-anchored on both sides, so `hing` does not")
+    A("  match `garnishing`. The long `asafoetida` spellings drop the LEFT boundary only,")
+    A("  because quantities fuse to the word in scraped text (`pinchasafoetida`, `2asafetida`)")
+    A("  and `\\b` does not fire between a digit and a letter. The corpus is fully Roman")
+    A("  (`ingredients_romanised`), which is what makes `\\b` usable at all; it is not reliable")
+    A("  against Indic script and must not be reused on one.")
     A("* **Precision (text-confirmable).** Of the recipes carrying the label, the share whose")
     A("  ingredient list names the allergen or a regional synonym.")
     A("* **Recall (text-confirmable).** Of the recipes naming it, the share that carry the label.")
-    A(f"* **Status.** Derived, not asserted: `agrees` requires precision ≥ {MIN_PRECISION:.0%}")
-    A(f"  and recall ≥ {MIN_RECALL:.0%}. Recall is held to the higher bar because a missing")
-    A("  allergen label is the asymmetric error.")
+    A("* **Status.** Derived, not asserted. **Any** false negative returns `REVIEW` with the")
+    A("  count, whatever the rate — a missed allergen is not a rounding error against a")
+    A(f"  percentage (CLAUDE.md §4.3). Absent that, `agrees` needs precision ≥ "
+      f"{MIN_PRECISION:.0%} and recall ≥ {MIN_RECALL:.0%}.")
     A("")
     A("## Corpus-wide agreement")
     A("")
@@ -162,14 +183,19 @@ def build() -> str:
           f"{r['fp']:,} | {r['fn']:,} | {r['precision']:.2%} | {r['recall']:.2%} | "
           f"{r['status']} |")
     A("")
-    A("> **Read the recall column with care — it is close to a tautology.** The labels were")
-    A("> derived from a lexicon that is a superset of the regex above, so a row naming the")
-    A("> allergen is labelled almost by construction, and recall lands at 100.00% for all four")
-    A("> classes. A non-zero FN here would mean a real defect (a later pass dropped a label")
-    A("> whose text still names it), which is why the column is computed and shown at all —")
-    A("> but 100% is the expected reading, not an achievement, and it is not evidence that the")
-    A("> corpus contains no unlabelled instances of these foods. Only the precision column and")
-    A("> the blend breakdown below carry information.")
+    A("> **Read the recall column with care.** For `coconut`, `tamarind` and `fenugreek` it is")
+    A("> close to a tautology: the labels were derived from a lexicon that is a superset of the")
+    A("> regex, so a row naming the allergen is labelled almost by construction and 100.00% is")
+    A("> the expected reading, not an achievement. It is **not** evidence that the corpus")
+    A("> contains no unlabelled instances of those foods.")
+    A(">")
+    A("> `asafoetida` is the exception, and it is the one worth reading. Its arm carries a")
+    A("> **misspelling family** the labelling lexicon does not, so its FN count is a genuine")
+    A("> measurement rather than a definitional zero — and it is **non-zero**. Those rows are")
+    A("> recipes that name asafoetida in a spelling the labeller missed, so they carry no")
+    A("> asafoetida label. That is a **fail-open** direction, the one CLAUDE.md §4.3 says is")
+    A("> never traded, and it is tracked in")
+    A("> `_docs/audits/PROPOSE_asafoetida_spellings_2026-09-05.tsv`.")
     A("")
     A("## Why asafoetida's precision is the outlier")
     A("")
