@@ -1,32 +1,131 @@
-# Data licence — Creative Commons Attribution 4.0 International (CC BY 4.0)
+# Data licence — CC BY-NC-SA 4.0, with one more-restrictive directory
 
-The data files in `data/` are licensed under CC BY 4.0.
-Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+**`data/` is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+(CC BY-NC-SA 4.0)** — https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+**`data/kg_flavor/` is CC BY-NC-SA 3.0**, with its own `LICENSE` file, because FlavorDB's
+own terms are the 3.0 version.
+
+| path | licence | obligation |
+|---|---|---|
+| `data/` — everything else | **CC BY-NC-SA 4.0** | attribution + NonCommercial + ShareAlike |
+| `data/kg/` | **CC BY-NC-SA 4.0 + 3.0** | contains FlavorDB-derived content since 2026-08-29 — see below |
+| `data/kg_flavor/` | **CC BY-NC-SA 3.0** | same, under FlavorDB's own version |
+
+## Change 2026-08-29 — the flavour layer is now inside the core graph
+
+FlavorDB-derived content was previously isolated in `data/kg_flavor/` so that `data/kg/`
+could be lifted out as a less-encumbered artefact. **That separation no longer holds.** On
+instruction, everything is included: `data/kg/` now carries **1,601 `compound` nodes,
+25,854 `has_compound` edges and 14,181 `shares_flavor` edges** derived from FlavorDB
+(40,035 edges in total), plus further flavour records attached as attributes to existing
+`pairs_with` edges.
+
+> Counts corrected 2026-09-02 against the shipped artefact. They previously read 1,613 /
+> 25,999 / 14,365 and named a fourth quantity (605 attribute records) that no published file
+> carries.
+
+Two consequences, stated precisely so neither is overread:
+
+1. **The top-level licence does not change.** `data/` was already CC BY-NC-SA 4.0 because
+   of the 9,384 retained upstream recipes listed below. The merge does not turn a CC BY
+   dataset into an NC-SA one; it was NC-SA already.
+2. **What is lost is separability.** Before, a consumer wanting to avoid FlavorDB's 3.0
+   terms could take `data/kg/` alone. They no longer can — the FlavorDB obligations now
+   reach every part of the knowledge graph. `data/kg_flavor/` is retained as the standalone
+   copy for anyone who wants the layer identified rather than mixed in.
+
+`scripts/verify_release.py` reports this position on every run. It used to *fail* the build
+when compound nodes appeared in `data/kg/`; it now records them, because the separation was
+the thing being protected and the separation has been deliberately given up.
+
+## Why NonCommercial and ShareAlike apply
+
+The corpus retains 9,384 recipes (4.19%) that came from upstream datasets rather than from
+our own scraping, and those datasets carry NC or NC-SA terms:
+
+| source | recipes | licence | where the source sits |
+|---|---:|---|---|
+| `3a2m_indian` | 3,803 | `CC BY-NC-SA 4.0` | `text_corpora/3A2M` |
+| `yummly` | 2,923 | `CC BY-NC 4.0` | `cultural/yummly_whats_cooking/{train,test}.json` |
+| `foodcom` | 2,628 | `CC BY-NC-SA 4.0` | `datasets/foodcom/foodcom.zip` |
+| `recipenlg_indian` | 30 | `CC BY-NC-SA 4.0` | `datasets/recipenlg` |
+
+Plus the FlavorDB-derived flavour layer in `data/kg_flavor/` (`CC BY-NC-SA 3.0`).
+
+**Both restrictions bind regardless of how this project itself uses the data:**
+
+- **NonCommercial** governs what we *grant onward*. Publishing under CC BY 4.0 would hand
+  downstream users commercial rights we do not hold and cannot sublicense.
+- **ShareAlike** binds the publisher, not only the commercial user. Derivatives of SA
+  material must carry the same terms.
+
+CC BY-NC-SA 3.0 permits relicensing adaptations under a later version of the same licence,
+so 4.0 is the correct target for `data/`.
+
+### Provenance of those four sources — recorded so it is not re-litigated
+
+Checked 2026-08-29. `3a2m_indian`, `yummly` and `recipenlg_indian` carry **synthetic URLs**
+on non-existent domains (`3a2m.dataset`, `yummly.whatscooking`, `recipenlg.dataset`);
+`foodcom` carries real `food.com` URLs but is sourced from `datasets/foodcom/foodcom.zip`.
+None has a scraper URL list under `scraped_indian_recipes/scraper/urls/`, and `CLAUDE.md`
+§6.1 names all four as *primary corpora* — downloaded datasets, not scrapes. They are
+retained by decision; the licence follows the contents.
+
+**A path back to CC BY 4.0 exists and is one line.** `EXCLUDED_SOURCE_SITES` in
+`scripts/release_config.py` is present but empty. Populating it with those four sources
+removes 9,384 recipes (4.19%), leaves 214,618, and — with the flavour layer already
+isolated — makes `data/` eligible for CC BY 4.0. The mechanism was built, exercised and
+reversed; re-enabling it is a four-line edit and a rebuild.
 
 ## Attribution
 
-    Badgujar, H. Y. (2026). IndicRecipeNutri [Data set]. CC BY 4.0.
+    Badgujar, H. Y. (2026). IndicRecipeNutri [Data set]. CC BY-NC-SA 4.0.
     https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset
 
-Per-recipe source attribution is retained in the `SourceSite` and `URL` columns and
-must not be stripped when redistributing.
+Per-recipe source attribution is retained in the `SourceSite` and `URL` columns and must not
+be stripped. The per-row `source_licence` column states each recipe's own terms.
+
+Third-party attributions that travel with the data:
+
+- **USDA SR Legacy** — U.S. Department of Agriculture, Agricultural Research Service.
+  Public domain.
+- **UK CoFID** — McCance and Widdowson's *The Composition of Foods*, Open Government Licence.
+- **FoodOn** — the FoodOn ontology, CC BY 4.0.
+- **3A2M · Yummly (What's Cooking) · Food.com · RecipeNLG** — the four upstream recipe
+  datasets above.
+- **FlavorDB** — binds on `data/kg/` **and** `data/kg_flavor/`. Corrected 2026-09-02: this
+  line said "only if you load `data/kg_flavor/`", contradicting the statement above that
+  `data/kg/` carries 40,035 FlavorDB-derived edges. Taking the core graph alone does **not**
+  avoid FlavorDB's terms.
+
+### Layers previously recorded here that are NOT used
+
+Three entries were carried in `docs/THIRD_PARTY_TERMS.md` and are not part of this build:
+**RecipeDB NER** (no folder, no tagger, nothing reads it), **IFCT 2017** (no IFCT data is
+read; "IFCT" names only the 42-nutrient schema) and **INDB** (those spreadsheets carry
+`primarysource: usda` and `ukfct`). The nutrition layer is **7,847 USDA + 144 UK CoFID**
+and contains no Indian composition data.
+
+## What ShareAlike and NonCommercial mean for you
+
+Build on this data and your contributions must carry **CC BY-NC-SA 4.0** too. You may not
+use it for commercial advantage or monetary compensation. Academic research, teaching and
+non-commercial publication are permitted.
 
 ## Scope and limits — read this
 
-This licence covers **our** contribution: the structured, derived and factual fields,
-the knowledge-graph structure, the enrichment tables, the benchmark and the synthetic
+This licence covers **our** contribution: the structured, derived and factual fields, the
+knowledge-graph structure, the enrichment tables, the benchmark and the synthetic
 interaction log.
 
 It does **not** and cannot cover:
 
-1. **Recipe prose from the source sites.** It is not in this release. If you rehydrate
-   it, your use of that text is governed by each source site's terms, not by this
-   licence.
-2. **Third-party layers** — IFCT 2017, FlavorDB, FoodOn, the RecipeDB NER training
-   data, and the upstream recipe datasets that contributed 4,807 rows. Each is
-   governed by its own terms. **Those terms are currently unverified** and are a
-   release gate; see `docs/THIRD_PARTY_TERMS.md`. Until that file is completed, do not
-   assume the graph layers derived from those sources are cleared for redistribution.
+1. **Recipe prose from the source sites.** It is not in this release. If you rehydrate it,
+   your use of that text is governed by each source site's terms, not by this licence.
+2. **The source pages themselves.** 211,090 published recipes (94.2%) are marked
+   `source_licence = "Proprietary (Copyright)"`: we hold structured facts derived from those
+   pages, not the pages.
 
 ## No warranty
 

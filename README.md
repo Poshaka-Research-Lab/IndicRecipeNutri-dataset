@@ -1,11 +1,11 @@
 # IndicRecipeNutri — dataset
 
-A corpus of **224,002 Indian recipes** with multilingual provenance and estimated
-dish-level micronutrition, a typed **IFCT-grounded knowledge graph** of 227,499 nodes
-and 6,169,926 edges, a **66-query retrieval benchmark**, and a **synthetic
+A corpus of **220,187 Indian recipes** with multilingual provenance and estimated
+dish-level micronutrition, a typed **knowledge graph** of 223,406 nodes
+and 6,270,620 edges, a **68-query retrieval benchmark**, and a **synthetic
 collaborative interaction log**.
 
-> ### ⚠️ Version 0.1.0 is a pre-release. Do not cite it.
+> ### ⚠️ Version 0.2.0 is a pre-release. Do not cite it.
 >
 > Five release gates are open, tracked in [`CHANGELOG.md`](CHANGELOG.md). Two of them
 > are licence questions that could change what is redistributable. The data is real and
@@ -16,20 +16,33 @@ collaborative interaction log**.
 
 ---
 
+> **Nutrition grounding, stated precisely (corrected again 2026-08-29).** The food
+> composition table uses the **IFCT 42-nutrient schema**, but **no IFCT data and no Indian
+> composition data are in it.** Its values are **7,847 USDA** (SR Legacy plus a 54-row
+> supplement) and **144 UK CoFID**, established by reading `primarysource` in the source
+> spreadsheets. An earlier note here said "2.5% INDB India-curated"; those 198 rows carry
+> `primarysource: usda` and `ukfct`, so that was a misattribution too.
+>
+> The schema is IFCT; the data is Western. **Do not describe this corpus as IFCT-grounded
+> or as India-grounded in its nutrition.** Grounding in IFCT 2017 or INDB proper is an open
+> enhancement, not a property of this release. The `nut_indb_frac` column is published as
+> `nut_suppl_fct_frac` for the same reason. Upside: the layer is public domain and OGL, so
+> it carries no NonCommercial or ShareAlike obligation.
+
 ## What is here
 
 | path | contents |
 |---|---|
-| `data/corpus/` | 224,002 recipes × 129 published columns; rehydration index; corpus manifest; allergen audit |
+| `data/corpus/` | 220,187 recipes × 251 published columns; rehydration index; corpus manifest; allergen audit |
 | `data/kg/` | knowledge-graph nodes and edges, statistics, ingredient vocabulary |
-| `data/enrichment/` | 23 companion tables — allergens, nutrition, region, diet, quality flags |
-| `data/benchmark/` | 66-query retrieval benchmark with gold sets, plus its audit |
+| `data/enrichment/` | 28 companion tables — allergens, nutrition, region, diet, quality flags |
+| `data/benchmark/` | 68-query retrieval benchmark with gold sets, plus its audit |
 | `data/synthetic_interactions/` | 50,000 users, 990,273 ratings, with its own datasheet |
 | `docs/` | datasheet, data dictionary, provenance, third-party terms, takedown policy |
 | `scripts/` | builders, auditors, the release verifier, and the rehydration client |
 
 Everything is Parquet with zstd compression and 50,000-row groups. The whole release is
-about **170 MB** — no Git LFS, so the Zenodo archive contains the real files rather than
+about **440 MB** — no Git LFS, so the Zenodo archive contains the real files rather than
 LFS pointer stubs.
 
 ## Quick start
@@ -59,7 +72,7 @@ and verify you reconstructed the same text:
 python scripts/rehydrate.py --out prose.parquet --limit 100
 ```
 
-**219,195 of 224,002 rows are rehydratable.** The other 4,807 came from pre-existing
+**215,380 of 220,187 rows are rehydratable.** The other 4,807 came from pre-existing
 datasets rather than scraped pages and carry placeholder URLs; they are flagged
 `source_kind = "derived_dataset"`.
 
@@ -99,8 +112,8 @@ the presence of the required audit artefacts. A failing check aborts the release
 than shipping it.
 
 ```bash
-git tag -a v0.1.0 -m "pre-release"
-git push origin v0.1.0
+git tag -a v0.2.0 -m "pre-release"
+git push origin v0.2.0
 ```
 
 Zenodo archives each published GitHub release and mints a version DOI. **Cite the
@@ -112,13 +125,23 @@ repo will not appear in the Zenodo list otherwise.
 
 ## Licence
 
-- **Data** — CC BY 4.0 ([`LICENSE-DATA`](LICENSE-DATA)), with per-recipe source
+- **Data** — **CC BY-NC-SA 4.0** ([`LICENSE-DATA`](LICENSE-DATA)); `data/kg_flavor/` is CC BY-NC-SA 3.0, with per-recipe source
   attribution retained in the `SourceSite` and `URL` columns.
 - **Code** — MIT ([`LICENSE-CODE`](LICENSE-CODE)).
-- **Third-party layers** — IFCT 2017, FlavorDB, FoodOn, the RecipeDB NER training data,
-  and four upstream recipe datasets, each under its own terms. Those terms are
-  **unverified** and are a release gate; see
+- **Third-party layers** — USDA SR Legacy (public domain), UK CoFID (Open Government
+  Licence), FoodOn (CC BY 4.0), and FlavorDB (CC BY-NC-SA 3.0 — **in `data/kg/` as well as
+  `data/kg_flavor/`**; 1,601 compound nodes and 40,035 edges, so the core graph is NOT free
+  of its terms. "isolated in `data/kg_flavor/`" here was wrong and was corrected 2026-09-02). **RecipeDB NER, IFCT 2017 and INDB were previously listed here and
+  are not used at all** — the per-layer audit is in
   [`docs/THIRD_PARTY_TERMS.md`](docs/THIRD_PARTY_TERMS.md).
+
+> **Licence, 2026-08-29 — settled at CC BY-NC-SA 4.0.** It moved twice while the
+> dependencies were audited. Three of six recorded third-party layers turned out never
+> to have been used (RecipeDB NER, IFCT 2017, INDB), and FlavorDB was isolated into
+> `data/kg_flavor/`. That would have allowed CC BY 4.0 — but **9,384 recipes (4.26%)
+> from upstream NC/NC-SA datasets are retained by decision**, so NonCommercial and
+> ShareAlike apply to the corpus. `LICENSE-DATA` records the one-line route back to
+> CC BY 4.0 if those recipes are ever dropped.
 
 To request removal of content, see [`docs/TAKEDOWN.md`](docs/TAKEDOWN.md).
 

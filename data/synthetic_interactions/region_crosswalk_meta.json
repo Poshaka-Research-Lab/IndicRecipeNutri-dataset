@@ -1,0 +1,12 @@
+{
+  "user_codes": 28,
+  "kg_region_entities": 24,
+  "matches": {
+    "exact": 22,
+    "folded": 1,
+    "renamed": 2,
+    "unreachable": 3
+  },
+  "users_unreachable": 189,
+  "note": "users.csv deliberately NOT remapped: interactions.csv, train.txt and test.txt were built against its id space and gen.py cannot be re-run."
+}

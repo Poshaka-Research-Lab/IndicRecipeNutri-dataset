@@ -1,0 +1,9 @@
+{
+  "layer": "B6 contrast pairing",
+  "source": "our own corpus only",
+  "min_expected": 30.0,
+  "max_pmi": -1.0,
+  "pairs": 5092,
+  "why": "The food-pairing hypothesis predicts shared aroma compounds imply good pairing. Indian cuisine is the standard counter-example, reported to pair on contrast. A layer recording only attraction cannot express that.",
+  "caveat": "An expected-count floor is essential: two rare ingredients co-occur zero times by chance, and reporting that as avoidance would measure sparsity, not cuisine."
+}

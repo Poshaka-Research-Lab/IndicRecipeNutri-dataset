@@ -3,17 +3,18 @@ message: "If you use this dataset, please cite it as below."
 type: dataset
 title: "IndicRecipeNutri"
 abstract: >-
-  A corpus of 224,002 Indian recipes with multilingual provenance and estimated
-  dish-level micronutrition, a typed IFCT-grounded knowledge graph of 227,499 nodes
-  and 6.17M edges, a 66-query retrieval benchmark, and a synthetic collaborative
+  A corpus of 220,187 Indian recipes with multilingual provenance and estimated
+  dish-level micronutrition, a typed knowledge graph of 223,406 nodes
+  and 6.27M edges, a 68-query retrieval benchmark, and a synthetic collaborative
   interaction log. Structured and derived fields only; recipe prose is not
   redistributed and is recoverable via the published rehydration index.
 authors:
   - family-names: Badgujar
     given-names: Hemprasad Yashwant
     email: hemprasad.badagujar@gmail.com
-version: 0.1.0
-license: CC-BY-4.0
+version: 0.3.0
+date-released: 2026-09-05
+license: CC-BY-NC-SA-4.0
 repository-code: "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset"
 keywords:
   - recipe dataset

@@ -1,0 +1,12 @@
+{
+ "recipes": 51235,
+ "median_ape": 21.0,
+ "mean_ape": 35.4,
+ "within_25pct": 54.4,
+ "within_50pct": 77.2,
+ "median_ratio": 1.173,
+ "ratio_iqr": [
+  1.02,
+  1.452
+ ]
+}

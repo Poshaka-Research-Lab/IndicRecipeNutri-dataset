@@ -1,0 +1,11 @@
+{
+  "method": "pointwise mutual information over has_ingredient co-occurrence",
+  "source": "our own corpus only - no third-party data",
+  "recipes": 216194,
+  "ingredients": 1028,
+  "min_support": 50,
+  "min_pmi": 0.5,
+  "top_per_ingredient": 15,
+  "pairs": 3173,
+  "caveat": "A co-occurrence statistic, not a flavour-chemistry claim. Two ingredients may co-occur because they pair well or because both appear in every biryani; the support floor mitigates but does not eliminate the second."
+}

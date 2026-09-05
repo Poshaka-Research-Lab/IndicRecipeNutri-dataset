@@ -1,103 +1,473 @@
 {
-  "method": "The parsed IngredientsList is matched against an allergen ingredient lexicon after removing plant-substitute phrasings (e.g. 'almond milk', 'peanut butter'). The result is compared with the has_<allergen> flag in allergens_v8. Lexicon hits are review candidates, not confirmed defects, so every rate is an upper bound.",
-  "asymmetry": "False negatives (ingredient present, flag absent) are the direction that matters for allergen safety and are reported as the headline. False positives are recorded but are an acceptable cost.",
-  "corpus_rows": 224002,
+  "WHAT_THIS_IS_NOT": "NOT an accuracy measurement, and the rates below are NOT upper bounds on the allergen defect. This is a consistency check between two term lists written by the same author. Where both are blind to the same food it reports zero defects. For a held-out human measurement see T12_MEASURED below.",
+  "T12_MEASURED": {
+    "source": "scraped_indian_recipes/data/lexicons/T12/T12_pilot_SCORED_v2.tsv",
+    "n_annotated": 794,
+    "positive_stratum_false_negatives": 0,
+    "positive_stratum_n": 202,
+    "positive_stratum_fnr_upper_95": 0.0187,
+    "raw_pilot_fnr": 0.3688,
+    "raw_pilot_fnr_ci95": [
+      0.3177,
+      0.4229
+    ],
+    "raw_pilot_caveat": "50% hard-negative draw; over-estimates the corpus rate by construction",
+    "corpus_fnr": null,
+    "corpus_fnr_withheld_because": "The corpus-level estimate rests on 10 negative-stratum rows PER CLASS. 80% of the previously published 140,988-missed figure came from a single class on 6 false negatives in 10 rows (asafoetida, extrapolated across 188,114 recipes). A Wilson 95% interval on 6/10 is [0.313, 0.832], which extrapolates to 58,817-156,477 for that class alone; with mustard the two together span 62,128-231,344. A point estimate on a range that wide is not a measurement. Re-run with adequate n in the negative stratum -- see _admin/plan/TODO_VERIFIABLE_2026-09-05.md item T3 -- before publishing any corpus-level rate."
+  },
+  "method": "The parsed IngredientsList is re-scanned with LEXICAL_EVIDENCE (release_config.py) after removing plant-substitute phrasings (e.g. 'almond milk', 'peanut butter'), and compared with the has_<allergen> flag derived from data/corpus/allergens.parquet, which came from lexicons/allergen_lexicon_v14.py. Disagreement between the two lists is what is counted. Agreement is NOT evidence of correctness.",
+  "known_blind_spots": {
+    "probe": "the eight blind spots the R5 pass fixed in the labelling lexicon on 2026-09-02, re-tested here against the AUDIT lexicon on every build",
+    "audit_lexicon_blind_on": 8,
+    "of": 8,
+    "detail": [
+      {
+        "allergen": "tree_nuts",
+        "text": "1 cup Chestnuts (Roasted)",
+        "note": "Castanea is a FALCPA tree nut",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "tree_nuts",
+        "text": "2 cups chestnuts",
+        "note": "same",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "gluten",
+        "text": "whole grain spelt flour",
+        "note": "spelt is wheat",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "gluten",
+        "text": "pearled farro",
+        "note": "farro is wheat",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "gluten",
+        "text": "1 cup kamut",
+        "note": "kamut is wheat",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "gluten",
+        "text": "einkorn flour",
+        "note": "einkorn is wheat",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "milk",
+        "text": "Kova/Mava(unsweetened) 300 gm",
+        "note": "mava/kova are khoya spellings",
+        "audit_lexicon_blind": true
+      },
+      {
+        "allergen": "shellfish",
+        "text": "250 grams Oyster Mushrooms",
+        "note": "FALSE-POSITIVE direction: a fungus",
+        "audit_lexicon_blind": true
+      }
+    ],
+    "reading": "every case this audit is blind to is a case where it will report a false-negative rate of zero while the corpus carries the defect"
+  },
+  "asymmetry": "A false negative (ingredient present, flag absent) is the catastrophic direction and is the headline. False positives are NOT free: per the workspace guardrail as qualified 2026-08-28, at per-user volume they train a user to dismiss the channel (85-98% override rates in the medication-safety literature), which inverts the safety mechanism. R5 removed 55 recipes wrongly labelled shellfish on `oyster mushroom`, one of them a vegan soup.",
+  "corpus_rows": 219386,
   "allergens": {
-    "egg": {
-      "lexical_present": 10462,
-      "flagged_present": 18512,
-      "false_negatives": 246,
-      "false_negative_rate_of_lexical": 0.0235,
-      "false_positives_flag_only": 8296,
+    "asafoetida": {
+      "lexical_present": 22384,
+      "flagged_present": 30517,
+      "false_negatives": 1,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 8134,
+      "audit_lexicon_coverage_of_flagged": 0.7335,
+      "unaudited_flagged_rows": 8134,
       "false_negative_examples": [
+        {
+          "recipe_id": 209831,
+          "name": "How to make temple style curd rice? | Temple Style Curd Rice in Tamil"
+        }
+      ]
+    },
+    "celery": {
+      "lexical_present": 2317,
+      "flagged_present": 2357,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 40,
+      "audit_lexicon_coverage_of_flagged": 0.983,
+      "unaudited_flagged_rows": 40,
+      "false_negative_examples": []
+    },
+    "coconut": {
+      "lexical_present": 35524,
+      "flagged_present": 36822,
+      "false_negatives": 2,
+      "false_negative_rate_of_lexical": 0.0001,
+      "false_positives_flag_only": 1300,
+      "audit_lexicon_coverage_of_flagged": 0.9647,
+      "unaudited_flagged_rows": 1300,
+      "false_negative_examples": [
+        {
+          "recipe_id": 173494,
+          "name": "Peanut butter recipe in Kannada | How to make peanut butter"
+        },
+        {
+          "recipe_id": 173901,
+          "name": "Hasi menthe thambli recipe in Kannada | How to make raw fenugreek tambli"
+        }
+      ]
+    },
+    "egg": {
+      "lexical_present": 10543,
+      "flagged_present": 21637,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 11094,
+      "audit_lexicon_coverage_of_flagged": 0.4873,
+      "unaudited_flagged_rows": 11094,
+      "false_negative_examples": []
+    },
+    "fenugreek": {
+      "lexical_present": 17864,
+      "flagged_present": 20024,
+      "false_negatives": 1,
+      "false_negative_rate_of_lexical": 0.0001,
+      "false_positives_flag_only": 2161,
+      "audit_lexicon_coverage_of_flagged": 0.8921,
+      "unaudited_flagged_rows": 2161,
+      "false_negative_examples": [
+        {
+          "recipe_id": 173695,
+          "name": "Hunasekayi thokku recipe in Kannada | How to make fennel seeds"
+        }
+      ]
+    },
+    "fish": {
+      "lexical_present": 4830,
+      "flagged_present": 5829,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 999,
+      "audit_lexicon_coverage_of_flagged": 0.8286,
+      "unaudited_flagged_rows": 999,
+      "false_negative_examples": []
+    },
+    "ghee": {
+      "lexical_present": 33493,
+      "flagged_present": 33541,
+      "false_negatives": 7,
+      "false_negative_rate_of_lexical": 0.0002,
+      "false_positives_flag_only": 55,
+      "audit_lexicon_coverage_of_flagged": 0.9984,
+      "unaudited_flagged_rows": 55,
+      "false_negative_examples": [
+        {
+          "recipe_id": 101647,
+          "name": "Puliyaanam"
+        },
+        {
+          "recipe_id": 107237,
+          "name": "Seer Fish-Surmai Fish Pollichathu"
+        },
+        {
+          "recipe_id": 107240,
+          "name": "Kuttanadan Seer Fish-Surmai Fish Fry(Meen)"
+        },
+        {
+          "recipe_id": 107581,
+          "name": "Fish Biriyani In Malabar Style"
+        },
+        {
+          "recipe_id": 109294,
+          "name": "Puliyaanam"
+        },
+        {
+          "recipe_id": 126694,
+          "name": "How to make Malpua | malpua banavani rit | malpua recipe in gujarati | malpua recipe | malpua banavani rit gujarati ma | Malpuva Recipe | How to make wheat flour malpuwa | How to make Malpuwa"
+        },
+        {
+          "recipe_id": 126818,
+          "name": "FISH FRY KERALA STYLE / MEEN VARUTHADHU"
+        }
+      ]
+    },
+    "gluten": {
+      "lexical_present": 38137,
+      "flagged_present": 72012,
+      "false_negatives": 3,
+      "false_negative_rate_of_lexical": 0.0001,
+      "false_positives_flag_only": 33878,
+      "audit_lexicon_coverage_of_flagged": 0.5296,
+      "unaudited_flagged_rows": 33878,
+      "false_negative_examples": [
+        {
+          "recipe_id": 173401,
+          "name": "You can download recipe in Kannada | How to thresh paddy"
+        },
+        {
+          "recipe_id": 173528,
+          "name": "Sabbakki idli recipe in Kannada | How to make Sabbakki Idli"
+        },
+        {
+          "recipe_id": 210274,
+          "name": "No pressure cooker, no microwave oven, you can make cake..!"
+        }
+      ]
+    },
+    "milk": {
+      "lexical_present": 110778,
+      "flagged_present": 116433,
+      "false_negatives": 32,
+      "false_negative_rate_of_lexical": 0.0003,
+      "false_positives_flag_only": 5687,
+      "audit_lexicon_coverage_of_flagged": 0.9512,
+      "unaudited_flagged_rows": 5687,
+      "false_negative_examples": [
+        {
+          "recipe_id": 33216,
+          "name": "Vegan Curry"
+        },
+        {
+          "recipe_id": 76668,
+          "name": "Tofu Makhani"
+        },
+        {
+          "recipe_id": 76700,
+          "name": "Easy Tofu Curry"
+        },
+        {
+          "recipe_id": 76797,
+          "name": "Misal Pav Recipe"
+        },
+        {
+          "recipe_id": 76802,
+          "name": "Vegan Irish Lamb Salan"
+        },
+        {
+          "recipe_id": 76852,
+          "name": "Vegan Beef Salan"
+        },
+        {
+          "recipe_id": 76880,
+          "name": "Vegan Guinness Pie"
+        },
+        {
+          "recipe_id": 77322,
+          "name": "Aloo Kulcha"
+        },
+        {
+          "recipe_id": 77435,
+          "name": "Grilled Tofu Steaks in a Creamy Vegan Cajun Sauce"
+        },
+        {
+          "recipe_id": 77503,
+          "name": "Instant Pot Vegan \"Beef\" Salan"
+        },
+        {
+          "recipe_id": 90139,
+          "name": "Indian Tofu Kadai With Bell Peppers"
+        },
+        {
+          "recipe_id": 100486,
+          "name": "Lauki Kofta Curry, the Best Vegan Recipe"
+        },
+        {
+          "recipe_id": 140762,
+          "name": "Vegan German Chocolate Cupcakes"
+        },
+        {
+          "recipe_id": 152893,
+          "name": "Mushroom Matar Korma"
+        },
+        {
+          "recipe_id": 152919,
+          "name": "Sarson ka Saag and Makki ki Roti"
+        }
+      ]
+    },
+    "mustard": {
+      "lexical_present": 33642,
+      "flagged_present": 36687,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 3045,
+      "audit_lexicon_coverage_of_flagged": 0.917,
+      "unaudited_flagged_rows": 3045,
+      "false_negative_examples": []
+    },
+    "peanut": {
+      "lexical_present": 4291,
+      "flagged_present": 11476,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 7185,
+      "audit_lexicon_coverage_of_flagged": 0.3739,
+      "unaudited_flagged_rows": 7185,
+      "false_negative_examples": []
+    },
+    "sesame": {
+      "lexical_present": 11864,
+      "flagged_present": 13727,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 1863,
+      "audit_lexicon_coverage_of_flagged": 0.8643,
+      "unaudited_flagged_rows": 1863,
+      "false_negative_examples": []
+    },
+    "shellfish": {
+      "lexical_present": 1633,
+      "flagged_present": 4202,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 2569,
+      "audit_lexicon_coverage_of_flagged": 0.3886,
+      "unaudited_flagged_rows": 2569,
+      "false_negative_examples": []
+    },
+    "soy": {
+      "lexical_present": 8031,
+      "flagged_present": 9049,
+      "false_negatives": 1,
+      "false_negative_rate_of_lexical": 0.0001,
+      "false_positives_flag_only": 1019,
+      "audit_lexicon_coverage_of_flagged": 0.8874,
+      "unaudited_flagged_rows": 1019,
+      "false_negative_examples": [
+        {
+          "recipe_id": 202159,
+          "name": "fish sauce"
+        }
+      ]
+    },
+    "sulphites": {
+      "lexical_present": 0,
+      "flagged_present": 23966,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": null,
+      "false_positives_flag_only": 23966,
+      "audit_lexicon_coverage_of_flagged": 0.0,
+      "unaudited_flagged_rows": 23966,
+      "false_negative_examples": []
+    },
+    "tamarind": {
+      "lexical_present": 12059,
+      "flagged_present": 12162,
+      "false_negatives": 1,
+      "false_negative_rate_of_lexical": 0.0001,
+      "false_positives_flag_only": 104,
+      "audit_lexicon_coverage_of_flagged": 0.9914,
+      "unaudited_flagged_rows": 104,
+      "false_negative_examples": [
+        {
+          "recipe_id": 173695,
+          "name": "Hunasekayi thokku recipe in Kannada | How to make fennel seeds"
+        }
+      ]
+    },
+    "tree_nuts": {
+      "lexical_present": 15012,
+      "flagged_present": 33278,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
+      "false_positives_flag_only": 18266,
+      "audit_lexicon_coverage_of_flagged": 0.4511,
+      "unaudited_flagged_rows": 18266,
+      "false_negative_examples": []
+    }
+  },
+  "diet_conflicts": {
+    "Vegan": {
+      "rows_with_label": 83940,
+      "conflicting_rows": 293,
+      "rate": 0.0035,
+      "by_allergen": {
+        "milk": 215,
+        "egg": 72,
+        "fish": 4,
+        "shellfish": 2
+      },
+      "examples": [
+        {
+          "recipe_id": 372,
+          "name": "Palak Paneer - Veganized!"
+        },
+        {
+          "recipe_id": 3079,
+          "name": "Hussain's Masala scrambled eggs"
+        },
         {
           "recipe_id": 5753,
           "name": "Beet Quinoa Sliders Recipe"
-        },
-        {
-          "recipe_id": 6970,
-          "name": "Croquettes Recipe With Bhetki Fish"
         },
         {
           "recipe_id": 7259,
           "name": "Egg Kothu Paratha Recipe"
         },
         {
-          "recipe_id": 7748,
-          "name": "Grilled Vegetable Empanadas Recipe"
-        },
-        {
-          "recipe_id": 7819,
-          "name": "Handi Biryani Recipe With Chicken"
-        },
-        {
-          "recipe_id": 8098,
-          "name": "Hyderabadi Chicken Shikampuri Kebab Recipe"
-        },
-        {
           "recipe_id": 9455,
           "name": "Mixed Beans Kachumber Recipe"
         },
         {
-          "recipe_id": 9470,
-          "name": "Mixed Vegetable Cutlet Recipe"
+          "recipe_id": 23811,
+          "name": "Caesar Kachumber Recipe"
         },
         {
-          "recipe_id": 9686,
-          "name": "Mushroom and beet wellington With Red Vinaigrette Sauce Recipe"
+          "recipe_id": 24002,
+          "name": "Eggless Chocolate Cake Recipe (Soft & Moist)"
         },
         {
-          "recipe_id": 9728,
-          "name": "Mushrooms And Zucchini Puffs Recipe"
+          "recipe_id": 24014,
+          "name": "Eggless Pumpkin Bread Recipe"
         },
         {
-          "recipe_id": 10508,
-          "name": "Potato Roulade Recipe"
+          "recipe_id": 24996,
+          "name": "Zucchini Bread Recipe (Chocolate & Eggless)"
         },
         {
-          "recipe_id": 11098,
-          "name": "Savory Cheela With Roasted Peppers In Sun Dried Tomato Pesto Recipe"
+          "recipe_id": 25199,
+          "name": "Homemade Fresh Grape Wine (Black or Green)"
         },
         {
-          "recipe_id": 11233,
-          "name": "Singapore Style Chicken Layered Pulao Recipe"
+          "recipe_id": 28306,
+          "name": "Vegan Kofta Sliders - Veg Sliders"
         },
         {
-          "recipe_id": 12724,
-          "name": "Chilli Chicken Recipe (Crispy Restaurant Style)"
+          "recipe_id": 29318,
+          "name": "Begun Pora (Roasted egg"
         },
         {
-          "recipe_id": 12801,
-          "name": "Fish Pakora"
+          "recipe_id": 30260,
+          "name": "Vegan oats chickpea veggie pancakes | indian pudla | besan oats cheela"
+        },
+        {
+          "recipe_id": 30332,
+          "name": "Easy Instant Pot Vegan Chili recipe"
+        },
+        {
+          "recipe_id": 30418,
+          "name": "Eggless fruit cake without alcohol (Vegan)"
         }
       ]
     },
-    "fish": {
-      "lexical_present": 4601,
-      "flagged_present": 4954,
-      "false_negatives": 87,
-      "false_negative_rate_of_lexical": 0.0189,
-      "false_positives_flag_only": 440,
-      "false_negative_examples": [
+    "Vegetarian": {
+      "rows_with_label": 88632,
+      "conflicting_rows": 13,
+      "rate": 0.0001,
+      "by_allergen": {
+        "fish": 11,
+        "shellfish": 2
+      },
+      "examples": [
         {
-          "recipe_id": 23394,
-          "name": "Chicken Keema Pav"
-        },
-        {
-          "recipe_id": 26909,
-          "name": "Thai Chicken Sevai Kachumber"
-        },
-        {
-          "recipe_id": 29386,
-          "name": "Doi Mach (Fish in Yogurt Sauce)"
+          "recipe_id": 29402,
+          "name": "Muri"
         },
         {
           "recipe_id": 29823,
           "name": "Shorshe-posto diye Katla Machher Jhal"
-        },
-        {
-          "recipe_id": 30208,
-          "name": "Trinidad Shrimp Callaloo with Spinach"
         },
         {
           "recipe_id": 33020,
@@ -108,787 +478,52 @@
           "name": "Khao Pad (Vegan Thai Pulao)"
         },
         {
-          "recipe_id": 33072,
-          "name": "Vegan Pad See Ew"
+          "recipe_id": 89622,
+          "name": "Macher Matha Diye Moong Dal"
         },
         {
-          "recipe_id": 33310,
-          "name": "Vegan Massaman Curry"
+          "recipe_id": 93757,
+          "name": "Thai Green Papaya Kachumber"
         },
         {
-          "recipe_id": 33346,
-          "name": "Ginataang Gulay"
+          "recipe_id": 96714,
+          "name": "Machcher Dompokht"
         },
         {
-          "recipe_id": 42442,
-          "name": "Easy Stovetop Balinese Beef Rendang Recipe"
+          "recipe_id": 123227,
+          "name": "Vietnamese Cucumber Kachumber"
         },
         {
-          "recipe_id": 43424,
-          "name": "My Cooking Diaries \"Cooklikececilia.Com\""
+          "recipe_id": 148270,
+          "name": "Macher Dompokht Recipe"
         },
         {
-          "recipe_id": 45327,
-          "name": "Murrel Fish Head Curry/Chepala Talakaya Pulusu"
+          "recipe_id": 158720,
+          "name": "Indian dish (yummly #49588)"
         },
         {
-          "recipe_id": 54808,
-          "name": "Fish Burger with freshwater River fish - a Bengali way to give a twist to the usual kind"
+          "recipe_id": 160331,
+          "name": "Indian dish (yummly #16004)"
         },
         {
-          "recipe_id": 54822,
-          "name": "Nellore Chepala Pulusu/Fish in Tamarind Gravy"
-        }
-      ]
-    },
-    "gluten": {
-      "lexical_present": 38330,
-      "flagged_present": 63162,
-      "false_negatives": 687,
-      "false_negative_rate_of_lexical": 0.0179,
-      "false_positives_flag_only": 25519,
-      "false_negative_examples": [
-        {
-          "recipe_id": 3691,
-          "name": "French Onion Soup With Paneer Croutons"
-        },
-        {
-          "recipe_id": 4798,
-          "name": "seekh kabab recipe | veg seekh kabab recipe | vegetable seekh kabab"
-        },
-        {
-          "recipe_id": 5407,
-          "name": "Arbi Ke Kebab Recipe (Spicy Colocasia Kebab) Recipe"
-        },
-        {
-          "recipe_id": 5521,
-          "name": "Awadhi Khaas Nihari Recipe"
-        },
-        {
-          "recipe_id": 5761,
-          "name": "Beetroot And Chickpea Kebab/Tikki Recipe - Evening Snack"
-        },
-        {
-          "recipe_id": 6580,
-          "name": "Simple & Easy Chicken Cutlet Recipe - High Protein Dish"
-        },
-        {
-          "recipe_id": 6968,
-          "name": "Crispy Whole Wheat Uttapam With Spinach Pesto & Roasted Vegetables Recipe"
-        },
-        {
-          "recipe_id": 6970,
-          "name": "Croquettes Recipe With Bhetki Fish"
-        },
-        {
-          "recipe_id": 7230,
-          "name": "Dum Pukht Gosht Recipe - Slow Cooked Mutton Curry"
-        },
-        {
-          "recipe_id": 7247,
-          "name": "Egg Bhurji Stuffed Roti Pockets Recipe"
-        },
-        {
-          "recipe_id": 7727,
-          "name": "Grilled Chutney Paneer Bhurji Masala Sandwich Recipe"
-        },
-        {
-          "recipe_id": 7742,
-          "name": "Grilled Tofu in Spicy Plum Barbecue Sauce"
-        },
-        {
-          "recipe_id": 8022,
-          "name": "Homemade Vada Pav Recipe With Spinach Corn Tikki"
-        },
-        {
-          "recipe_id": 8108,
-          "name": "Hyderabadi Vegetable Biryani Recipe | Vegetable Dum Biryani"
-        },
-        {
-          "recipe_id": 8230,
-          "name": "Japanese Style Chicken Katsu Curry Recipe"
-        }
-      ]
-    },
-    "milk": {
-      "lexical_present": 111952,
-      "flagged_present": 114388,
-      "false_negatives": 2073,
-      "false_negative_rate_of_lexical": 0.0185,
-      "false_positives_flag_only": 4509,
-      "false_negative_examples": [
-        {
-          "recipe_id": 43,
-          "name": "Bhuni Chana Dal With Paneer (Fried Bengal Gram With Cottage Cheese)"
-        },
-        {
-          "recipe_id": 122,
-          "name": "Paneer Egg Roll"
-        },
-        {
-          "recipe_id": 161,
-          "name": "Cottage Cheese (Paneer) Parcels"
-        },
-        {
-          "recipe_id": 215,
-          "name": "Cabbage With Paneer And Tomato (Bund Gobhi Paneer)"
-        },
-        {
-          "recipe_id": 226,
-          "name": "Paneer Tikka Pulao"
-        },
-        {
-          "recipe_id": 239,
-          "name": "Lemon Coriander Paneer"
-        },
-        {
-          "recipe_id": 274,
-          "name": "Sauteed Arugula And Spinach With Paneer And Roasted Cashews"
-        },
-        {
-          "recipe_id": 422,
-          "name": "Cashew Paneer"
-        },
-        {
-          "recipe_id": 601,
-          "name": "Scrambled Paneer"
-        },
-        {
-          "recipe_id": 639,
-          "name": "Instant Paneer Tikka Masala"
-        },
-        {
-          "recipe_id": 656,
-          "name": "Green Peas Potato Paneer Cutlet"
-        },
-        {
-          "recipe_id": 663,
-          "name": "Aloo Mutter Paneer Stuffed Parathas"
-        },
-        {
-          "recipe_id": 685,
-          "name": "Muttar Paneer - Nigella Lawson"
-        },
-        {
-          "recipe_id": 727,
-          "name": "Stir Fried Paneer With Veggies (Paneer Burji)"
-        },
-        {
-          "recipe_id": 748,
-          "name": "Vijay'S Favourite Paneer-Peas-Potatoes Sabzi"
-        }
-      ]
-    },
-    "mustard": {
-      "lexical_present": 33772,
-      "flagged_present": 34813,
-      "false_negatives": 1057,
-      "false_negative_rate_of_lexical": 0.0313,
-      "false_positives_flag_only": 2098,
-      "false_negative_examples": [
-        {
-          "recipe_id": 4016,
-          "name": "bisi bele bath recipe | bisibelabath recipe | bisibele bhath or bisibele rice"
-        },
-        {
-          "recipe_id": 4683,
-          "name": "Poha Chivda Recipe | Poha Namkeen Mixture 2 Ways"
-        },
-        {
-          "recipe_id": 5466,
-          "name": "Assamese Sesame Kaffir Lime Chicken Curry"
-        },
-        {
-          "recipe_id": 5649,
-          "name": "Baked Stuffed Baati With Churma And Panchratna Dal Recipe"
-        },
-        {
-          "recipe_id": 5753,
-          "name": "Beet Quinoa Sliders Recipe"
-        },
-        {
-          "recipe_id": 5844,
-          "name": "Bengali Kosha Mangsho Recipe-Slow Cooked Mutton Curry"
-        },
-        {
-          "recipe_id": 5873,
-          "name": "Bengali Style Raw Jackfruit Curry Recipe - Enchor\u2019er Dalana"
-        },
-        {
-          "recipe_id": 5924,
-          "name": "Bharva Baingan Masala Recipe - Stuffed Brinjal Masala"
-        },
-        {
-          "recipe_id": 5939,
-          "name": "Bharwa Parwal Sabzi Recipe -Stuffed Pointed Gourd Dry Vegetable"
-        },
-        {
-          "recipe_id": 6502,
-          "name": "Chettinad Kathirikai Chops Recipe - Brinjal Curry for Biryani"
-        },
-        {
-          "recipe_id": 6526,
-          "name": "Chettinad Chicken Roast Recipe | Chicken Ghee Roast Recipe"
-        },
-        {
-          "recipe_id": 7005,
-          "name": "Curd Rice With Carrots Recipe"
-        },
-        {
-          "recipe_id": 7022,
-          "name": "Dahi Baingan Recipe - Brinjal In Curd Based Gravy"
-        },
-        {
-          "recipe_id": 7059,
-          "name": "Dal Dhokli Recipe With Sprouted Moong Dal"
-        },
-        {
-          "recipe_id": 7159,
-          "name": "Doi Bhetki Recipe - Bengali Style Yogurt Fish Curry"
-        }
-      ]
-    },
-    "peanut": {
-      "lexical_present": 4312,
-      "flagged_present": 9868,
-      "false_negatives": 156,
-      "false_negative_rate_of_lexical": 0.0362,
-      "false_positives_flag_only": 5712,
-      "false_negative_examples": [
-        {
-          "recipe_id": 5218,
-          "name": "Delicious Aloo Poha Recipe (Batata Poha): A Quick and Easy Breakfast Delight"
-        },
-        {
-          "recipe_id": 5296,
-          "name": "Andhra Dondakaya Ulli Kura Karam Recipe | Dondakaya Poriyal | Kovakkai Curry"
-        },
-        {
-          "recipe_id": 5489,
-          "name": "Aval Upma Recipe - South Indian Style Poha"
-        },
-        {
-          "recipe_id": 5492,
-          "name": "Avalakki Bisi Bele Bhat Recipe"
-        },
-        {
-          "recipe_id": 5964,
-          "name": "Bhogichi Bhaji Recipe - Maharashtrian Mixed Vegetable Sabzi"
-        },
-        {
-          "recipe_id": 6080,
-          "name": "Ambur Style Brinjal Curry Recipe"
-        },
-        {
-          "recipe_id": 6535,
-          "name": "Chettinad Style Puliyogare Gojju Recipe"
-        },
-        {
-          "recipe_id": 6848,
-          "name": "Cold Sesame Sevai Recipe"
-        },
-        {
-          "recipe_id": 7005,
-          "name": "Curd Rice With Carrots Recipe"
-        },
-        {
-          "recipe_id": 7019,
-          "name": "Dadpe Pohe Recipe (Maharashtrian Poha)"
-        },
-        {
-          "recipe_id": 8093,
-          "name": "Hyderabadi Bagara Baingan Recipe - Brinjal In Spicy Peanut Curry"
-        },
-        {
-          "recipe_id": 8145,
-          "name": "Vegetables in Schezwan Chilli Garlic Sauce Recipe - Indo Chinese Dish"
-        },
-        {
-          "recipe_id": 8173,
-          "name": "Instant Puliyodharai Powder Recipe (Puliyogare/Pulihora Powder)"
-        },
-        {
-          "recipe_id": 8403,
-          "name": "Karnataka Style Badanekai Yennegai Gojju Recipe (Stuffed Brinjal Recipe)"
-        },
-        {
-          "recipe_id": 8669,
-          "name": "Khara Avalakki Recipe (Karnataka Style Poha)"
-        }
-      ]
-    },
-    "sesame": {
-      "lexical_present": 11896,
-      "flagged_present": 11105,
-      "false_negatives": 1117,
-      "false_negative_rate_of_lexical": 0.0939,
-      "false_positives_flag_only": 326,
-      "false_negative_examples": [
-        {
-          "recipe_id": 3955,
-          "name": "baingan masala recipe | brinjal masala recipe | eggplant masala curry"
-        },
-        {
-          "recipe_id": 4443,
-          "name": "masala kulcha recipe | aloo paneer kulcha | stuffed kulcha recipe"
-        },
-        {
-          "recipe_id": 5230,
-          "name": "Alu Vadi Or Patrode Recipe - Maharashtrian Snack With Colocasia Leaves"
-        },
-        {
-          "recipe_id": 5280,
-          "name": "Pandu Mirapakaya Pachadi - Andhra Red Chilli Chutney Recipe"
-        },
-        {
-          "recipe_id": 5290,
-          "name": "Chamadumpa Vepudu Recipe - Andhra Style Colocasia Stir Fry | Arbi Sabzi"
-        },
-        {
-          "recipe_id": 5336,
-          "name": "Andhra Style Pulihora Recipe (Spicy & Tangy Tamarind Rice)"
-        },
-        {
-          "recipe_id": 5359,
-          "name": "Appalam Vatha Kuzhambu Recipe - Papad In Tamarind Gravy"
-        },
-        {
-          "recipe_id": 5426,
-          "name": "Asian Cabbage Kachumber with Ginger Peanut Dressing"
-        },
-        {
-          "recipe_id": 5433,
-          "name": "Asian Style Baby Corn With Sesame Seeds & Peanut Sauce Recipe"
-        },
-        {
-          "recipe_id": 5440,
-          "name": "Asian Style Mixed Pulao Recipe"
-        },
-        {
-          "recipe_id": 5646,
-          "name": "Baked Samosa Pinwheels Recipe"
-        },
-        {
-          "recipe_id": 5817,
-          "name": "Bendakaya Pulusu Recipe - Andhra Style Tangy Ladies Finger Curry"
-        },
-        {
-          "recipe_id": 5964,
-          "name": "Bhogichi Bhaji Recipe - Maharashtrian Mixed Vegetable Sabzi"
-        },
-        {
-          "recipe_id": 6080,
-          "name": "Ambur Style Brinjal Curry Recipe"
-        },
-        {
-          "recipe_id": 6233,
-          "name": "Capsicum In Coconut And Peanut Gravy Recipe"
-        }
-      ]
-    },
-    "shellfish": {
-      "lexical_present": 1657,
-      "flagged_present": 3397,
-      "false_negatives": 93,
-      "false_negative_rate_of_lexical": 0.0561,
-      "false_positives_flag_only": 1833,
-      "false_negative_examples": [
-        {
-          "recipe_id": 6210,
-          "name": "Calamari Roast Recipe (Kerala Style Squid)"
-        },
-        {
-          "recipe_id": 13085,
-          "name": "Shrimp Tikka Masala (Shrimp Masala)"
-        },
-        {
-          "recipe_id": 14859,
-          "name": "Dalgona candy | Squid game Dalgona"
-        },
-        {
-          "recipe_id": 26515,
-          "name": "Salt and Pepper Squid"
-        },
-        {
-          "recipe_id": 26601,
-          "name": "Goan-Style Squid"
-        },
-        {
-          "recipe_id": 33351,
-          "name": "Vegan Lumpiang Sariwa Recipe"
-        },
-        {
-          "recipe_id": 33383,
-          "name": "Vegan Pancit Canton Recipe"
-        },
-        {
-          "recipe_id": 55011,
-          "name": "Thai Panang Mutton Curry"
-        },
-        {
-          "recipe_id": 63612,
-          "name": "Creamy Tartar Sauce"
-        },
-        {
-          "recipe_id": 67876,
-          "name": "Shrimp Korma (Indian Prawn Korma) Recipe"
-        },
-        {
-          "recipe_id": 70793,
-          "name": "Steamed Shrimp Momo"
-        },
-        {
-          "recipe_id": 71007,
-          "name": "Sri Lankan Fried Calamari"
-        },
-        {
-          "recipe_id": 71296,
-          "name": "Ana \u2013 Chingri (Prawn & Pineapple)"
-        },
-        {
-          "recipe_id": 71489,
-          "name": "Nasi Goreng"
-        },
-        {
-          "recipe_id": 71496,
-          "name": "Chicken Kapitan"
-        }
-      ]
-    },
-    "soy": {
-      "lexical_present": 7901,
-      "flagged_present": 8258,
-      "false_negatives": 431,
-      "false_negative_rate_of_lexical": 0.0546,
-      "false_positives_flag_only": 788,
-      "false_negative_examples": [
-        {
-          "recipe_id": 5241,
-          "name": "American Chop Suey Recipe With Sweet and Sour Vegetables | Using Millet Noodles"
-        },
-        {
-          "recipe_id": 6471,
-          "name": "Cheesy & Spicy Pull Apart Bread Recipe With Indian Spices"
-        },
-        {
-          "recipe_id": 9423,
-          "name": "Mini Idli Manchurian Recipe"
-        },
-        {
-          "recipe_id": 11904,
-          "name": "Thai Basil Vegetarian Pulao With Pineapple and Spicy Thai Red Chillies Recipe"
-        },
-        {
-          "recipe_id": 12036,
-          "name": "Tofu Masala Rice Recipe (Tofu Pulao)"
-        },
-        {
-          "recipe_id": 12325,
-          "name": "Vegetarian Chinese Sizzler With Sevai & Momos Recipe"
-        },
-        {
-          "recipe_id": 12340,
-          "name": "Vegetarian Nasi Goreng Recipe"
-        },
-        {
-          "recipe_id": 12978,
-          "name": "Paneer fried rice"
-        },
-        {
-          "recipe_id": 13033,
-          "name": "Quinoa Pulao Recipe"
-        },
-        {
-          "recipe_id": 13057,
-          "name": "Salmon Pulao"
-        },
-        {
-          "recipe_id": 13133,
-          "name": "Tofu Bhurji Recipe"
-        },
-        {
-          "recipe_id": 13152,
-          "name": "Vegetable Tikka Masala"
-        },
-        {
-          "recipe_id": 16768,
-          "name": "Broccoli Recipe (Baby Corn And Paneer Stir Fry)"
-        },
-        {
-          "recipe_id": 17722,
-          "name": "Crispy Fried Vegetables In Burnt Garlic Sauce Recipe"
-        },
-        {
-          "recipe_id": 18559,
-          "name": "Green Vegetable Noodles In Red Curry Sauce Recipe"
-        }
-      ]
-    },
-    "tree_nuts": {
-      "lexical_present": 15227,
-      "flagged_present": 29140,
-      "false_negatives": 969,
-      "false_negative_rate_of_lexical": 0.0636,
-      "false_positives_flag_only": 14882,
-      "false_negative_examples": [
-        {
-          "recipe_id": 3224,
-          "name": "Badam/Pista Kulfi Ice Cream"
-        },
-        {
-          "recipe_id": 4015,
-          "name": "Bisi Bele Bath Recipe with Bisibelabath Rice Masala Powder"
-        },
-        {
-          "recipe_id": 4016,
-          "name": "bisi bele bath recipe | bisibelabath recipe | bisibele bhath or bisibele rice"
-        },
-        {
-          "recipe_id": 4612,
-          "name": "paneer capsicum recipe | paneer capsicum curry masala | paneer gravy"
-        },
-        {
-          "recipe_id": 4807,
-          "name": "Shahi Paneer Recipe: Creamy and Delicious Dish"
-        },
-        {
-          "recipe_id": 5013,
-          "name": "Meal Maker Curry Recipe meal maker curry in hindi | Soya Chunks Gravy"
-        },
-        {
-          "recipe_id": 5443,
-          "name": "Indo Chinese Soya Stir Fry Recipe With Cashew Nuts"
-        },
-        {
-          "recipe_id": 6413,
-          "name": "Chap Badami Recipe (Lamb Ribs Cooked In Almond Paste)"
-        },
-        {
-          "recipe_id": 6495,
-          "name": "Chettinad Beetroot Kurma Recipe"
-        },
-        {
-          "recipe_id": 6722,
-          "name": "Eggless Layered Chocolate Cake Recipe With Mascarpone Cheese"
-        },
-        {
-          "recipe_id": 6822,
-          "name": "Coconut Chocolate Balls Recipe"
-        },
-        {
-          "recipe_id": 7112,
-          "name": "Detox Blueberry Kachumber Recipe"
-        },
-        {
-          "recipe_id": 7137,
-          "name": "Dhingri Dolma Recipe -Awadhi Style Mushroom Paneer Masala"
-        },
-        {
-          "recipe_id": 7336,
-          "name": "Stuffed Roasted Eggplant"
-        },
-        {
-          "recipe_id": 7387,
-          "name": "Fish Tikka Masala Gravy Recipe"
-        }
-      ]
-    }
-  },
-  "diet_conflicts": {
-    "Vegan": {
-      "rows_with_label": 92170,
-      "conflicting_rows": 3042,
-      "rate": 0.033,
-      "by_allergen": {
-        "milk": 2960,
-        "egg": 53,
-        "fish": 42,
-        "shellfish": 23
-      },
-      "examples": [
-        {
-          "recipe_id": 43,
-          "name": "Bhuni Chana Dal With Paneer (Fried Bengal Gram With Cottage Cheese)"
-        },
-        {
-          "recipe_id": 161,
-          "name": "Cottage Cheese (Paneer) Parcels"
-        },
-        {
-          "recipe_id": 215,
-          "name": "Cabbage With Paneer And Tomato (Bund Gobhi Paneer)"
-        },
-        {
-          "recipe_id": 226,
-          "name": "Paneer Tikka Pulao"
-        },
-        {
-          "recipe_id": 239,
-          "name": "Lemon Coriander Paneer"
-        },
-        {
-          "recipe_id": 274,
-          "name": "Sauteed Arugula And Spinach With Paneer And Roasted Cashews"
-        },
-        {
-          "recipe_id": 422,
-          "name": "Cashew Paneer"
-        },
-        {
-          "recipe_id": 601,
-          "name": "Scrambled Paneer"
-        },
-        {
-          "recipe_id": 639,
-          "name": "Instant Paneer Tikka Masala"
-        },
-        {
-          "recipe_id": 656,
-          "name": "Green Peas Potato Paneer Cutlet"
-        },
-        {
-          "recipe_id": 663,
-          "name": "Aloo Mutter Paneer Stuffed Parathas"
-        },
-        {
-          "recipe_id": 685,
-          "name": "Muttar Paneer - Nigella Lawson"
-        },
-        {
-          "recipe_id": 727,
-          "name": "Stir Fried Paneer With Veggies (Paneer Burji)"
-        },
-        {
-          "recipe_id": 748,
-          "name": "Vijay'S Favourite Paneer-Peas-Potatoes Sabzi"
-        },
-        {
-          "recipe_id": 2000,
-          "name": "Paneer Jalfrezi (Paneer With Green Peppers, Onions And Tomatoes)"
-        }
-      ]
-    },
-    "Vegetarian": {
-      "rows_with_label": 88418,
-      "conflicting_rows": 331,
-      "rate": 0.0037,
-      "by_allergen": {
-        "fish": 274,
-        "shellfish": 61
-      },
-      "examples": [
-        {
-          "recipe_id": 10250,
-          "name": "Parshe Macher Jhal Recipe - Mullet In Mustard Sauce"
-        },
-        {
-          "recipe_id": 11055,
-          "name": "Sankara Meen Kuzhambu Recipe"
-        },
-        {
-          "recipe_id": 12422,
-          "name": "Vietnamese Rice Paper Rolls Recipe"
-        },
-        {
-          "recipe_id": 13085,
-          "name": "Shrimp Tikka Masala (Shrimp Masala)"
-        },
-        {
-          "recipe_id": 23498,
-          "name": "One Pot Penang Curry Quinoa"
-        },
-        {
-          "recipe_id": 23534,
-          "name": "Super Bowl Series: Masala Wings!"
-        },
-        {
-          "recipe_id": 25341,
-          "name": "Hassar Curry"
-        },
-        {
-          "recipe_id": 25404,
-          "name": "Bake and Saltfish: A classic Caribbean breakfast"
-        },
-        {
-          "recipe_id": 25548,
-          "name": "Ambot Tik | Goan Shark Ambotik Curry"
-        },
-        {
-          "recipe_id": 25799,
-          "name": "Karimeen Pollichathu"
-        },
-        {
-          "recipe_id": 26306,
-          "name": "Imli Macchi Tikka"
-        },
-        {
-          "recipe_id": 26673,
-          "name": "Machi ka Khatta"
-        },
-        {
-          "recipe_id": 26977,
-          "name": "Haakh Gadh"
-        },
-        {
-          "recipe_id": 27065,
-          "name": "Sweet Pumpkin and Peanut Curry"
+          "recipe_id": 193427,
+          "name": "Veggie Lettuce Frankie"
         },
         {
-          "recipe_id": 27608,
-          "name": "Meen Peera Pattichathu"
+          "recipe_id": 193935,
+          "name": "Vazhaipoo Vadai Recipe | Banana Flower Fritters | South Indian Snack"
         }
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 14471,
-      "conflicting_rows": 10,
-      "rate": 0.0007,
+      "rows_with_label": 14259,
+      "conflicting_rows": 0,
+      "rate": 0.0,
       "by_allergen": {
-        "fish": 6,
-        "shellfish": 4
+        "fish": 0,
+        "shellfish": 0
       },
-      "examples": [
-        {
-          "recipe_id": 54808,
-          "name": "Fish Burger with freshwater River fish - a Bengali way to give a twist to the usual kind"
-        },
-        {
-          "recipe_id": 63637,
-          "name": "Tin Fish Biryani"
-        },
-        {
-          "recipe_id": 120483,
-          "name": "Spicy Catfish Thai Curry with Masoor Dal"
-        },
-        {
-          "recipe_id": 139795,
-          "name": "Malu Paan ~ Sri Lankan Fish Buns"
-        },
-        {
-          "recipe_id": 141472,
-          "name": "Egg in a hole with Salmon and Spicy Tartar Sauce"
-        },
-        {
-          "recipe_id": 180224,
-          "name": "Siomai"
-        },
-        {
-          "recipe_id": 180285,
-          "name": "Singapore Chilli Crab Recipe"
-        },
-        {
-          "recipe_id": 190001,
-          "name": "Authentic Nasi Goreng Recipe | Shu Han Lee"
-        },
-        {
-          "recipe_id": 190121,
-          "name": "Rick Stein's Pad Thai with Tofu Recipe | Authentic Step-by-step Guide"
-        },
-        {
-          "recipe_id": 220470,
-          "name": "Baked Bang Bang Shrimps"
-        }
-      ]
+      "examples": []
     }
   }
 }

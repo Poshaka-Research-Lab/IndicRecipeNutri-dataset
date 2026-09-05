@@ -1,0 +1,29 @@
+user_home_region,n_users,kg_entity,match,in_primary_axis,note
+Pan-Indian,12553,region_supra:Pan-Indian,exact,false,supra-regional / community bucket
+Tamil Nadu,3736,region:Tamil_Nadu,exact,true,primary 14-region axis
+Kerala,3580,region:Kerala,exact,true,primary 14-region axis
+South India,3520,region_supra:South_India,exact,false,supra-regional / community bucket
+Punjab,3293,region:Punjab,exact,true,primary 14-region axis
+North India,3045,region_supra:North_India,exact,false,supra-regional / community bucket
+West Bengal,2658,region:West_Bengal,exact,true,primary 14-region axis
+Maharashtra,2310,region:Maharashtra,exact,true,primary 14-region axis
+Karnataka,2308,region:Karnataka,exact,true,primary 14-region axis
+Mughlai (North India),2016,region_supra:North_India,folded,false,"culinary lineage, not a geography (CLAUDE.md 6.2)"
+Gujarat,2000,region:Gujarat,exact,true,primary 14-region axis
+Andhra Pradesh,1397,region:Andhra_Pradesh,exact,true,primary 14-region axis
+Goa,1265,region:Goa,exact,true,primary 14-region axis
+Bihar,975,region:Bihar,exact,true,primary 14-region axis
+Telangana,932,region:Telangana,exact,true,primary 14-region axis
+Rajasthan,924,region:Rajasthan,exact,true,primary 14-region axis
+Uttar Pradesh,709,region:Uttar_Pradesh,exact,true,primary 14-region axis
+Jammu & Kashmir,679,region:Jammu_&_Kashmir,exact,true,primary 14-region axis
+Sindhi (community),589,region_supra:Sindhi,renamed,false,community code
+Parsi (community),381,region_supra:Parsi,renamed,false,community code
+Assam,254,region_supra:Assam,exact,false,supra-regional / community bucket
+Himachal Pradesh,249,region_supra:Himachal_Pradesh,exact,false,supra-regional / community bucket
+Odisha,246,region_supra:Odisha,exact,false,supra-regional / community bucket
+East India,104,region_supra:East_India,exact,false,supra-regional / community bucket
+Uttarakhand,91,,unreachable,false,below --min_per_region; no KG entity
+Nagaland,88,region_supra:Nagaland,exact,false,supra-regional / community bucket
+West India,68,,unreachable,false,below --min_per_region; no KG entity
+Manipur,30,,unreachable,false,below --min_per_region; no KG entity

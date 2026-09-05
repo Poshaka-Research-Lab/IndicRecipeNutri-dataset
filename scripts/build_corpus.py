@@ -2,7 +2,7 @@
 
 Produces two artefacts under `data/corpus/`:
 
-  recipes_structured.parquet   the v11 master with every prose column removed
+  recipes_structured.parquet   the v15 master with every prose column removed
   rehydration_index.parquet    recipe_id -> source URL + a digest of the prose we held
 
 The prose columns are never written. Their SHA-256 digest goes into the rehydration
@@ -31,6 +31,7 @@ from release_config import (  # noqa: E402
     PII_EXEMPT_COLUMNS,
     PII_PATTERNS,
     EXCLUDED_RECIPE_IDS,
+    EXCLUDED_SOURCE_SITES,
     EXPECTED_RECIPES,
     EXPECTED_SOURCE_RECIPES,
     MASTER_CSV,
@@ -124,6 +125,42 @@ def main() -> int:
         )
         return 1
 
+    # 2026-08-29: `nut_indb_frac` is MISNAMED in the master. It was documented as the
+    # share of dish calories sourced from "INDB India-curated foods", but the FCT's
+    # `source` labels `INDB-US` / `INDB-UK` are themselves misattributed: the two
+    # spreadsheets carry `primarysource` = `usda` (54 rows) and `ukfct` (144 rows).
+    # There is NO Indian composition data in the table -- it is 7,847 USDA plus 144 UK
+    # CoFID. Publishing a column whose name asserts India-grounding would repeat the
+    # retracted "IFCT-grounded" claim.
+    #
+    # The quantity itself is real and worth keeping: it is the share of calories drawn
+    # from the supplementary tables rather than USDA SR Legacy. Renamed on publish only;
+    # the master is not rewritten.
+    if "nut_indb_frac" in df.columns:
+        df = df.rename(columns={"nut_indb_frac": "nut_suppl_fct_frac"})
+        print("renamed nut_indb_frac -> nut_suppl_fct_frac (see DATASHEET: no INDB data exists)")
+
+    # A2, 2026-08-29. Same rename-on-publish pattern, for a safety column this time.
+    #
+    # `Allergens_filled` is superseded by `Allergens_v2` and was shipping beside it with no
+    # marker saying so. It is the worse column in every respect that matters:
+    #
+    #   * 12 real classes, not 16 -- coconut, asafoetida, fenugreek and tamarind, this
+    #     workspace's own declared South Asian extension, are absent entirely
+    #   * 129 distinct values in the published frame, because some rows are still COMMA
+    #     separated (`dairy,mustard`) where v2 is semicolon-only and has 18
+    #   * un-normalised tokens survive: `dairy` alongside `milk`, `peanuts` alongside `peanut`
+    #   * none of the later fixes: celery 501 vs 2,403, tree_nuts 29,140 vs 31,750,
+    #     shellfish 3,397 vs 3,854
+    #
+    # It is renamed rather than dropped so a v1-era claim stays reproducible, but the name
+    # now says what it is. A consumer scanning the schema for "the allergen column" can no
+    # longer land on the fail-open one by accident, which is exactly how it stayed unnoticed.
+    if "Allergens_filled" in df.columns:
+        df = df.rename(columns={"Allergens_filled": "Allergens_v1_superseded"})
+        print("renamed Allergens_filled -> Allergens_v1_superseded "
+              "(12 of 16 classes, comma-encoded; use Allergens_v2)")
+
     # ------------------------------------------------------------------ exclusions
     if EXCLUDED_RECIPE_IDS:
         drop = df["recipe_id"].isin(EXCLUDED_RECIPE_IDS)
@@ -133,6 +170,18 @@ def main() -> int:
             print(f"  reason: {reason}")
         df = df[~drop].reset_index(drop=True)
         print(f"  {len(df):,} rows remain")
+
+    # D4.1: licence-driven source exclusions. These rows are not ours -- they came from
+    # upstream datasets under NonCommercial / ShareAlike terms that would propagate to
+    # the whole release. The master keeps them; this is a publication filter.
+    if EXCLUDED_SOURCE_SITES and "SourceSite" in df.columns:
+        before = len(df)
+        for site, reason in EXCLUDED_SOURCE_SITES.items():
+            n = int((df["SourceSite"] == site).sum())
+            print(f"excluding SourceSite={site}: {n:,} rows")
+            print(f"  reason: {reason}")
+        df = df[~df["SourceSite"].isin(EXCLUDED_SOURCE_SITES)].reset_index(drop=True)
+        print(f"  removed {before - len(df):,} rows; {len(df):,} remain")
 
     if len(df) != EXPECTED_RECIPES:
         print(
@@ -207,6 +256,7 @@ def main() -> int:
         "source_master": args.source.name,
         "rows": int(len(structured)),
         "excluded_recipe_ids": {str(k): v for k, v in EXCLUDED_RECIPE_IDS.items()},
+        "excluded_source_sites": dict(EXCLUDED_SOURCE_SITES),
         "columns_retained": int(len(structured.columns)),
         "columns_withheld": present_prose,
         "column_names": list(structured.columns),

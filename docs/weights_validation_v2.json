@@ -1,0 +1,96 @@
+{
+ "source": "D:\\datasets\\recipe1m_plus\\recipes_with_nutritional_info.json",
+ "rows": 311435,
+ "headline": {
+  "mape_mean": 67.3,
+  "mape_median": 19.0,
+  "median_ae_g": 9.6,
+  "within_25pct": 57.0,
+  "within_50pct": 63.0
+ },
+ "by_true_weight_band": [
+  {
+   "band": "0-5 g",
+   "rows": 38084,
+   "share_pct": 12.23,
+   "mape": 171.4,
+   "median_ae_g": 0.8,
+   "within_25pct": 41.3,
+   "within_50pct": 42.0
+  },
+  {
+   "band": "5-15 g",
+   "rows": 38970,
+   "share_pct": 12.51,
+   "mape": 67.1,
+   "median_ae_g": 1.6,
+   "within_25pct": 64.3,
+   "within_50pct": 67.7
+  },
+  {
+   "band": "15-50 g",
+   "rows": 53045,
+   "share_pct": 17.03,
+   "mape": 68.4,
+   "median_ae_g": 6.0,
+   "within_25pct": 53.0,
+   "within_50pct": 60.7
+  },
+  {
+   "band": "50-150 g",
+   "rows": 53010,
+   "share_pct": 17.02,
+   "mape": 59.6,
+   "median_ae_g": 14.0,
+   "within_25pct": 59.9,
+   "within_50pct": 65.3
+  },
+  {
+   "band": "150-500 g",
+   "rows": 67180,
+   "share_pct": 21.57,
+   "mape": 37.2,
+   "median_ae_g": 32.0,
+   "within_25pct": 61.8,
+   "within_50pct": 68.7
+  },
+  {
+   "band": "500+ g",
+   "rows": 61146,
+   "share_pct": 19.63,
+   "mape": 41.4,
+   "median_ae_g": 435.2,
+   "within_25pct": 57.9,
+   "within_50pct": 66.8
+  }
+ ],
+ "per_tier": {
+  "A": {
+   "rows": 305120,
+   "share_pct": 97.97,
+   "mape": 64.3,
+   "median_ape": 19.0,
+   "median_ae_g": 9.6,
+   "within_25pct": 57.8
+  },
+  "B": {
+   "rows": 3489,
+   "share_pct": 1.12,
+   "mape": 156.9,
+   "median_ape": 83.8,
+   "median_ae_g": 0.4,
+   "within_25pct": 32.8
+  },
+  "C": {
+   "rows": 2826,
+   "share_pct": 0.91,
+   "mape": 281.6,
+   "median_ape": 90.5,
+   "median_ae_g": 467.2,
+   "within_25pct": 3.3
+  }
+ },
+ "tiers_D_E": "UNREACHABLE by construction: they require `qty is None`, and every Recipe1M+ record carries a quantity. ~33% of the corpus relies on these nominal constants and is unvalidated against this reference.",
+ "why_mape_misleads": "MAPE divides by the true weight, so a 6 g spice predicted at 12 g scores 100% while a 400 g protein predicted at 430 g scores 7.5%. A per-100g figure is a ratio over the dish total, which the heavy ingredients dominate \u2014 the stratum MAPE weights least.",
+ "caveat": "Recipe1M+ is a Western corpus with USDA-style ingredient names. Indian units (katori, chhatak, mutthi) do not occur. This validates the quantity-to-gram mechanics, not Indian unit coverage."
+}

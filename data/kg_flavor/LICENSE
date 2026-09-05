@@ -1,0 +1,30 @@
+# Licence for this directory ONLY — CC BY-NC-SA 3.0
+
+**This directory is licensed differently from the rest of the release.**
+
+The rest of `data/` carries the dataset's own licence. The files here are derived from
+**FlavorDB** and are therefore governed by FlavorDB's terms:
+
+    Creative Commons Attribution-NonCommercial-ShareAlike 3.0
+    https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+## What that means
+
+- **NonCommercial** — you may not use these files for commercial advantage.
+- **ShareAlike** — anything you build from them must carry the same terms.
+- **Attribution** — FlavorDB must be credited.
+
+## Attribution
+
+    Garg, N., Sethupathy, A., Tuwani, R., et al. FlavorDB: a database of flavor
+    molecules. Nucleic Acids Research (2018).
+    https://cosylab.iiitd.edu.in/flavordb/
+
+## Why it is separated
+
+If these files were merged into `data/kg/`, NonCommercial and ShareAlike would propagate
+to the entire knowledge graph and to the release as a whole. Keeping them in their own
+directory means a consumer who needs permissive terms can simply not load them, and the
+core graph stays unencumbered.
+
+**Do not copy these tables into `data/kg/`.** That single act would relicense everything.

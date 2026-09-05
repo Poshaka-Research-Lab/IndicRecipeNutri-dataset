@@ -1,0 +1,17 @@
+{
+  "method": "per-region PMI over has_ingredient, scored by lift against corpus PMI",
+  "source": "our own corpus only - no third-party data",
+  "axis": "14 state-level administrative-cultural regions (CLAUDE.md 6.2)",
+  "scope_filter": "cuisine_scope == 'indian' only. Excludes indian-adapted, non-indian and indo-fusion, which otherwise surface as spurious regional signal (e.g. 'West Bengal: egg + ketchup', an Indo-Chinese dish carrying a Bengali region label).",
+  "k": 14,
+  "min_support": 20,
+  "min_pmi": 1.0,
+  "top_per_region": 200,
+  "pairs": 1847,
+  "evidence_tiers": {
+    "strong": ">=200 qualifying pairs",
+    "moderate": "50-199",
+    "indicative": "<50 - never a standalone finding"
+  },
+  "note": "lift_vs_all is the regional signal: how much MORE characteristic a pair is here than nationally. A molecular pairing database cannot express this, because a compound profile does not vary by region."
+}

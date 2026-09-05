@@ -1,6 +1,6 @@
 """Stage the retrieval benchmark and the synthetic interaction log.
 
-The benchmark is the 66-query silver set with knowledge-graph-derived gold sets. Its
+The benchmark is the 68-query silver set with knowledge-graph-derived gold sets. Its
 gold sets are templated from the KG, which is the mechanism a prior audit found could
 admit contradictory members into an allergen-free gold set. This script therefore does
 not merely copy the file: it recomputes a contamination report for every constraint
@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import sys
@@ -25,6 +26,11 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+# Explicit, not inherited from release_config's insert: this import sits ABOVE that one and
+# would otherwise depend on import order to find the module.
+sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+import allergen_taxonomy as _AT  # noqa: E402
+import allergen_surface  # noqa: E402
 from release_config import (  # noqa: E402
     BENCH_SYNTH_DIR,
     LEXICAL_EVIDENCE,
@@ -56,23 +62,9 @@ SYNTH_FILES = [
 # from the allergen columns and are therefore auditable for contradiction.
 CONSTRAINT_RE = re.compile(r"^(?P<diet>.+?) recipes without (?P<allergen>\w+)$")
 
-# Allergen token in the query -> the boolean column in allergens_v8 that contradicts it.
-ALLERGEN_COLUMN = {
-    "milk": "has_milk",
-    "gluten": "has_gluten",
-    "mustard": "has_mustard",
-    "tree_nuts": "has_tree_nuts",
-    "sesame": "has_sesame",
-    "peanut": "has_peanut",
-    "soy": "has_soy",
-    "fish": "has_fish",
-    "shellfish": "has_shellfish",
-    "egg": "has_egg",
-    "fenugreek": "has_fenugreek",
-    "asafoetida": "has_asafoetida",
-    "tamarind": "has_tamarind",
-    "coconut": "has_coconut",
-}
+# Allergen token in the query -> the boolean column, in the wide view derived from
+# data/corpus/allergens.parquet, that contradicts it.
+ALLERGEN_COLUMN = {t: _AT.has_column(t) for t in _AT.TOKENS}
 
 
 def audit_gold_sets(
@@ -93,6 +85,7 @@ def audit_gold_sets(
 
     rows, total_gold, total_flag, total_lex = 0, 0, 0, 0
     per_query = []
+    unauditable: list[str] = []
 
     for q in queries:
         m = CONSTRAINT_RE.match(q["query"])
@@ -137,13 +130,35 @@ def audit_gold_sets(
             entry["lexical_rate"] = None
             entry["note_lexical"] = f"no ingredient lexicon for '{allergen}'"
 
+        # A gold set nothing can check must not ship. Until 2026-09-04 this function wrote
+        # `note_flag` / `note_lexical` into the JSON and returned normally, so
+        # `Diabetic-Friendly recipes without ghee` -- 256 gold recipes -- was published with
+        # BOTH legs null. The note was accurate and nobody read it.
+        #
+        # DISCLOSURE IS NOT VERIFICATION. Both legs null is fatal; one leg null is fatal
+        # too, because a single leg cannot distinguish "clean" from "unchecked" -- leg A
+        # shares a provenance with the gold sets and leg B is the independent one, so
+        # losing either leaves a materially weaker claim than the audit reports making.
+        if entry.get("flag_contradicting") is None or entry.get("lexical_candidates") is None:
+            missing = []
+            if entry.get("flag_contradicting") is None:
+                missing.append(f"leg A (no column {ALLERGEN_COLUMN.get(allergen)!r} in the "
+                               f"allergen table -- is it stale?)")
+            if entry.get("lexical_candidates") is None:
+                missing.append("leg B (no LEXICAL_EVIDENCE pattern in release_config)")
+            unauditable.append(
+                f"{q['query']!r} ({len(ids)} gold): cannot run " + " and ".join(missing)
+            )
+
         per_query.append(entry)
         total_gold += len(ids)
 
     return {
+        "unauditable": unauditable,
         "method": {
             "leg_a_flag": (
-                "Each gold-set member is looked up in allergens_v8; it contradicts the "
+                "Each gold-set member is looked up in the wide view derived from "
+                "data/corpus/allergens.parquet; it contradicts the "
                 "query if the corresponding has_<allergen> flag is true. NOT independent "
                 "of the gold sets — both derive from the allergen labelling."
             ),
@@ -191,13 +206,16 @@ def main() -> int:
     shutil.copy2(src, bench_out / "eval_queries.jsonl")
     print(f"copied   eval_queries.jsonl  ({len(queries)} queries)")
 
-    allergen_path = REPO_ROOT / "data" / "enrichment" / "allergens_v8.parquet"
-    if not allergen_path.exists():
-        print(
-            "FATAL: run build_enrichment.py first — the gold-set audit needs "
-            "allergens_v8.parquet",
-            file=sys.stderr,
-        )
+    # D-4, 2026-09-04: leg A now reads the release's ONE allergen surface --
+    # `data/corpus/allergens.parquet`, derived from the master at build time -- instead of
+    # `data/enrichment/allergens_v8.parquet`, which was dropped. That table published a
+    # superseded generation of the label: no `ghee` class at all, and `sulphites` on 5,118
+    # rows where the corpus says 23,955. Leg A was therefore checking gold sets against a
+    # weaker allergen labelling than the one the release ships.
+    try:
+        allergens = allergen_surface.load_wide(REPO_ROOT)
+    except FileNotFoundError as exc:
+        print(f"FATAL: {exc}", file=sys.stderr)
         return 1
 
     corpus_path = REPO_ROOT / "data" / "corpus" / "recipes_structured.parquet"
@@ -205,7 +223,6 @@ def main() -> int:
         print("FATAL: run build_corpus.py first — the lexical leg needs the corpus", file=sys.stderr)
         return 1
 
-    allergens = pd.read_parquet(allergen_path)
     corpus = pd.read_parquet(
         corpus_path, columns=["recipe_id", "RecipeName", "IngredientsList"]
     )
@@ -213,6 +230,23 @@ def main() -> int:
     (bench_out / "GOLD_SET_AUDIT.json").write_text(
         json.dumps(report, indent=2), encoding="utf-8"
     )
+
+    # Written first, THEN refused: the report is the evidence for the refusal, so it has to
+    # survive on disk for whoever has to fix this.
+    if report["unauditable"]:
+        print(
+            f"FATAL: {len(report['unauditable'])} gold set(s) cannot be audited. A gold "
+            f"set nothing can check must not ship.",
+            file=sys.stderr,
+        )
+        for line in report["unauditable"]:
+            print(f"  - {line}", file=sys.stderr)
+        print(
+            "  Fix the missing leg, or remove the query. See "
+            "GOLD_SET_AUDIT.json for the full report.",
+            file=sys.stderr,
+        )
+        return 1
 
     print(
         f"audited  {report['queries_audited']} constraint queries, "
@@ -242,6 +276,31 @@ def main() -> int:
             print(f"FATAL: missing {s}", file=sys.stderr)
             return 1
         shutil.copy2(s, synth_out / name)
+
+    # C2, 2026-08-29. `entity_list.txt` follows the KGAT convention "org_id remap_id",
+    # SPACE-separated -- but 14 of its entity names contain spaces of their own:
+    # `region:West Bengal 16701`, `course:Main Course 16694`, `region:Mughlai (North India)`.
+    # A whitespace split therefore yields `region:West`, silently and with no error, and the
+    # rows it corrupts are exactly the multi-word regions. It fooled this workspace's own
+    # audit into reporting a truncated region vocabulary that does not exist in the data.
+    #
+    # Fixed on publish by underscoring the name, which keeps the two-field contract the
+    # format actually promises. The remap ids are untouched, so any join still works.
+    ent = synth_out / "entity_list.txt"
+    lines = ent.read_text(encoding="utf-8").splitlines()
+    out, fixed = [lines[0]], 0
+    for line in lines[1:]:
+        if not line.strip():
+            continue
+        name, remap = line.rsplit(" ", 1)
+        if " " in name:
+            name = name.replace(" ", "_")
+            fixed += 1
+        out.append(f"{name} {remap}")
+    ent.write_text(chr(10).join(out) + chr(10), encoding="utf-8")
+    print(f"entity_list.txt: underscored {fixed} names containing spaces "
+          "(the file is space-delimited; they were unparseable)")
+
     total = sum((synth_out / n).stat().st_size for n in SYNTH_FILES)
     print(f"copied   {len(SYNTH_FILES)} synthetic-interaction files ({total / 1e6:.1f} MB)")
 

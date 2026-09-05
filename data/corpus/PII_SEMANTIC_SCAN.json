@@ -1,0 +1,38 @@
+{
+  "scanned_rows": 224002,
+  "prose_columns_present": [],
+  "prose_columns_withheld": [
+    "Description",
+    "Enrich_Log",
+    "Ingredients",
+    "Instructions",
+    "Keywords"
+  ],
+  "possessive_name_titles": 2132,
+  "known_publisher_titles": 16,
+  "review_candidates": 2116,
+  "kinship_term_titles": 488,
+  "top_tokens": {
+    "solai": 151,
+    "mum": 83,
+    "valentine": 77,
+    "oliver": 70,
+    "hussain": 61,
+    "priya": 60,
+    "mom": 60,
+    "berry": 53,
+    "that": 47,
+    "lady": 44,
+    "jane": 44,
+    "iyer": 39,
+    "mother": 35,
+    "lawson": 29,
+    "grandma": 25,
+    "tso": 22,
+    "domino": 21,
+    "stein": 21,
+    "mary": 20,
+    "shepherd": 19
+  },
+  "note": "Anecdotes are not published: the five prose columns are dropped at build time, so the semantic PII surface is RecipeName plus structured fields only. A publisher's own name on their own recipe is attribution and is required by section 3.5; a private individual's is not. This scan does not make that call automatically and the candidate list needs human review."
+}

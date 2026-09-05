@@ -1,0 +1,148 @@
+{
+  "version": "v3-candidate",
+  "source_attrs": "D:\\datasets\\scraped_indian_recipes\\retrieval\\recipe_attrs_v15.csv",
+  "seed": 42,
+  "hotc": 18000,
+  "primary_share": 0.7,
+  "min_per_region": 300,
+  "catalogue": {
+    "hotc_requested": 18000,
+    "hotc_realised": 18000,
+    "primary_share_requested": 0.7,
+    "min_per_region": 300,
+    "n_recipes": 220187,
+    "primary_axis_recipes": 59965,
+    "primary_axis_in_catalogue": 12600,
+    "per_region": {
+      "Pan-Indian": {
+        "recipes": 135852,
+        "catalogue": 3101
+      },
+      "North India": {
+        "recipes": 12108,
+        "catalogue": 925
+      },
+      "South India": {
+        "recipes": 11582,
+        "catalogue": 905
+      },
+      "Kerala": {
+        "recipes": 11527,
+        "catalogue": 1446
+      },
+      "Tamil Nadu": {
+        "recipes": 11375,
+        "catalogue": 1438
+      },
+      "Punjab": {
+        "recipes": 10508,
+        "catalogue": 1393
+      },
+      "West Bengal": {
+        "recipes": 6431,
+        "catalogue": 1156
+      },
+      "Maharashtra": {
+        "recipes": 5017,
+        "catalogue": 1056
+      },
+      "Karnataka": {
+        "recipes": 4788,
+        "catalogue": 1038
+      },
+      "Gujarat": {
+        "recipes": 3677,
+        "catalogue": 947
+      },
+      "Andhra Pradesh": {
+        "recipes": 1862,
+        "catalogue": 759
+      },
+      "Goa": {
+        "recipes": 1545,
+        "catalogue": 718
+      },
+      "Rajasthan": {
+        "recipes": 871,
+        "catalogue": 614
+      },
+      "Bihar": {
+        "recipes": 771,
+        "catalogue": 595
+      },
+      "Telangana": {
+        "recipes": 743,
+        "catalogue": 590
+      },
+      "Jammu & Kashmir": {
+        "recipes": 457,
+        "catalogue": 457
+      },
+      "Uttar Pradesh": {
+        "recipes": 393,
+        "catalogue": 393
+      },
+      "Sindhi": {
+        "recipes": 306,
+        "catalogue": 147
+      },
+      "Parsi": {
+        "recipes": 149,
+        "catalogue": 102
+      },
+      "Odisha": {
+        "recipes": 80,
+        "catalogue": 75
+      },
+      "Assam": {
+        "recipes": 65,
+        "catalogue": 65
+      },
+      "Himachal Pradesh": {
+        "recipes": 52,
+        "catalogue": 52
+      },
+      "Uttarakhand": {
+        "recipes": 8,
+        "catalogue": 8
+      },
+      "Nagaland": {
+        "recipes": 8,
+        "catalogue": 8
+      },
+      "East India": {
+        "recipes": 8,
+        "catalogue": 8
+      },
+      "West India": {
+        "recipes": 3,
+        "catalogue": 3
+      },
+      "Manipur": {
+        "recipes": 1,
+        "catalogue": 1
+      }
+    },
+    "prefer_convertible": false,
+    "corpus_per100g_convertible": 164531,
+    "primary_axis_convertible": 48138,
+    "primary_axis_in_catalogue_convertible": 9970
+  },
+  "n_users": 50000,
+  "n_items_total_rated": 18028,
+  "n_interactions_total": 990273,
+  "n_positives_post_10core": 816787,
+  "n_users_post_10core": 35641,
+  "n_items_post_10core": 16194,
+  "n_primary_axis_items_post_10core": 11021,
+  "n_train": 654605,
+  "n_test": 162182,
+  "per_user_count_mean": 19.805,
+  "n_kg_triples": 80970,
+  "n_kg_entities": 16245,
+  "train_test_leakage": 0,
+  "diet_violation_vegan_on_nonvegan": 0,
+  "diet_violation_veg_on_nonveg": 0,
+  "id_space": "interactions.csv/item_list.txt org_id = MASTER recipe_id (v15 corpus)",
+  "synthetic_interactions": true
+}

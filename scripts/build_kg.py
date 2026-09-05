@@ -35,6 +35,7 @@ import pyarrow.parquet as pq
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
     EXCLUDED_RECIPE_IDS,
+    EXCLUDED_SOURCE_SITES,
     EXPECTED_KG_EDGES,
     PARQUET_COMPRESSION,
     PARQUET_COMPRESSION_LEVEL,
@@ -97,13 +98,41 @@ def read_parquet_resilient(path: Path) -> "pa.Table":
     return pa.Table.from_batches(fetched, fetched.schema)
 
 
+_SITE_EXCLUDED_CACHE: set[str] | None = None
+
+
+def site_excluded_recipe_ids() -> set[str]:
+    """recipe_ids dropped from the release for LICENCE reasons (D4.1).
+
+    The KG is built over the FULL master, so the site-level exclusions applied by
+    build_corpus.py have to be applied here too or the graph would keep 9,384 recipe
+    nodes that the published corpus does not contain -- a silent inconsistency between
+    two files in the same release.
+    """
+    global _SITE_EXCLUDED_CACHE
+    if _SITE_EXCLUDED_CACHE is not None:
+        return _SITE_EXCLUDED_CACHE
+    if not EXCLUDED_SOURCE_SITES:
+        _SITE_EXCLUDED_CACHE = set()
+        return _SITE_EXCLUDED_CACHE
+    import pandas as pd
+    master = SOURCE_MASTER if "SOURCE_MASTER" in globals() else None
+    src = master or r"D:\datasets\scraped_indian_recipes\data\MASTER_indian_recipes_enriched.csv"
+    df = pd.read_csv(src, usecols=["recipe_id", "SourceSite"], low_memory=False)
+    ids = df.loc[df["SourceSite"].isin(EXCLUDED_SOURCE_SITES), "recipe_id"]
+    _SITE_EXCLUDED_CACHE = {int(x) for x in ids}
+    print(f"  site-excluded recipes to drop from the KG: {len(_SITE_EXCLUDED_CACHE):,}")
+    return _SITE_EXCLUDED_CACHE
+
+
 def excluded_node_ids() -> set[str]:
-    return {f"recipe::{rid}" for rid in EXCLUDED_RECIPE_IDS}
+    rids = set(EXCLUDED_RECIPE_IDS) | site_excluded_recipe_ids()
+    return {f"recipe::{rid}" for rid in rids}
 
 
 def apply_exclusions(table: "pa.Table", which: str) -> "pa.Table":
     """Drop the excluded recipes' node and every edge incident on them."""
-    if not EXCLUDED_RECIPE_IDS:
+    if not (EXCLUDED_RECIPE_IDS or EXCLUDED_SOURCE_SITES):
         return table
 
     ids = excluded_node_ids()
@@ -113,6 +142,13 @@ def apply_exclusions(table: "pa.Table", which: str) -> "pa.Table":
     if "node_id" in df.columns:
         df = df[~df["node_id"].isin(ids)]
     elif {"head", "tail"} <= set(df.columns):
+        df = df[~(df["head"].isin(ids) | df["tail"].isin(ids))]
+    elif {"src", "dst"} <= set(df.columns):
+        # 2026-08-29: kg_export.py emits src/rel/dst, but the PUBLISHED contract is
+        # head/rel/tail (DATA_DICTIONARY documents those names, and downstream code
+        # reads them). Rename on ingest rather than changing the published schema --
+        # a column rename in a released dataset breaks every consumer silently.
+        df = df.rename(columns={"src": "head", "dst": "tail"})
         df = df[~(df["head"].isin(ids) | df["tail"].isin(ids))]
     else:
         print(f"FATAL: cannot apply exclusions to {which} — unrecognised schema", file=sys.stderr)

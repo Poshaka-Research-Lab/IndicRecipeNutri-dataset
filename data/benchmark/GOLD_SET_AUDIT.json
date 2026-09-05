@@ -1,70 +1,30 @@
 {
+  "unauditable": [],
   "method": {
-    "leg_a_flag": "Each gold-set member is looked up in allergens_v8; it contradicts the query if the corresponding has_<allergen> flag is true. NOT independent of the gold sets \u2014 both derive from the allergen labelling.",
+    "leg_a_flag": "Each gold-set member is looked up in the wide view derived from data/corpus/allergens.parquet; it contradicts the query if the corresponding has_<allergen> flag is true. NOT independent of the gold sets \u2014 both derive from the allergen labelling.",
     "leg_b_lexical": "Each gold-set member's parsed IngredientsList is matched against an allergen ingredient lexicon, minus plant-substitute phrasings. Independent of the flags. Hits are review candidates, not confirmed defects."
   },
-  "queries_audited": 6,
-  "gold_entries_audited": 1601,
+  "queries_audited": 7,
+  "gold_entries_audited": 1596,
   "flag_contradicting_total": 0,
   "flag_overall_rate": 0.0,
-  "lexical_candidates_total": 14,
-  "lexical_overall_rate": 0.0087,
+  "lexical_candidates_total": 0,
+  "lexical_overall_rate": 0.0,
   "per_query": [
     {
-      "query": "Vegan recipes without milk",
+      "query": "Vegetarian recipes without milk",
       "allergen": "milk",
-      "gold_n": 289,
+      "gold_n": 8,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
-      "lexical_candidates": 14,
-      "lexical_rate": 0.0484,
-      "lexical_examples": [
-        {
-          "recipe_id": 226,
-          "name": "Paneer Tikka Pulao"
-        },
-        {
-          "recipe_id": 639,
-          "name": "Instant Paneer Tikka Masala"
-        },
-        {
-          "recipe_id": 43,
-          "name": "Bhuni Chana Dal With Paneer (Fried Bengal Gram With Cottage Cheese)"
-        },
-        {
-          "recipe_id": 656,
-          "name": "Green Peas Potato Paneer Cutlet"
-        },
-        {
-          "recipe_id": 422,
-          "name": "Cashew Paneer"
-        },
-        {
-          "recipe_id": 748,
-          "name": "Vijay'S Favourite Paneer-Peas-Potatoes Sabzi"
-        },
-        {
-          "recipe_id": 161,
-          "name": "Cottage Cheese (Paneer) Parcels"
-        },
-        {
-          "recipe_id": 215,
-          "name": "Cabbage With Paneer And Tomato (Bund Gobhi Paneer)"
-        },
-        {
-          "recipe_id": 663,
-          "name": "Aloo Mutter Paneer Stuffed Parathas"
-        },
-        {
-          "recipe_id": 274,
-          "name": "Sauteed Arugula And Spinach With Paneer And Roasted Cashews"
-        }
-      ]
+      "lexical_candidates": 0,
+      "lexical_rate": 0.0,
+      "lexical_examples": []
     },
     {
-      "query": "Vegetarian recipes without gluten",
+      "query": "Vegan recipes without gluten",
       "allergen": "gluten",
-      "gold_n": 247,
+      "gold_n": 223,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -72,9 +32,9 @@
       "lexical_examples": []
     },
     {
-      "query": "Diabetic-Friendly recipes without mustard",
+      "query": "Non-Vegetarian recipes without mustard",
       "allergen": "mustard",
-      "gold_n": 248,
+      "gold_n": 283,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -82,9 +42,9 @@
       "lexical_examples": []
     },
     {
-      "query": "Non-Vegetarian recipes without tree_nuts",
-      "allergen": "tree_nuts",
-      "gold_n": 266,
+      "query": "Diabetic-Friendly recipes without ghee",
+      "allergen": "ghee",
+      "gold_n": 256,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -92,9 +52,9 @@
       "lexical_examples": []
     },
     {
-      "query": "Jain recipes without sesame",
-      "allergen": "sesame",
-      "gold_n": 272,
+      "query": "Eggetarian recipes without asafoetida",
+      "allergen": "asafoetida",
+      "gold_n": 291,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -102,9 +62,19 @@
       "lexical_examples": []
     },
     {
-      "query": "Sattvic recipes without peanut",
-      "allergen": "peanut",
-      "gold_n": 279,
+      "query": "Jain recipes without sulphites",
+      "allergen": "sulphites",
+      "gold_n": 275,
+      "flag_contradicting": 0,
+      "flag_rate": 0.0,
+      "lexical_candidates": 0,
+      "lexical_rate": 0.0,
+      "lexical_examples": []
+    },
+    {
+      "query": "Sattvic recipes without fenugreek",
+      "allergen": "fenugreek",
+      "gold_n": 260,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,

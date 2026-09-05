@@ -28,6 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Data artefacts are in Git LFS. Without this the runner holds pointer stubs and
+          # the guard below fires on a false alarm instead of on a real one.
+          lfs: true
 
       - uses: actions/setup-python@v5
         with:
@@ -36,16 +40,40 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --quiet "pandas>=2.0" "pyarrow>=14"
 
-      - name: Confirm no Git LFS pointers
-        # Zenodo archives the GitHub zipball, and GitHub replaces LFS-tracked files
-        # with pointer stubs in source archives by default. A pointer that reaches
-        # Zenodo produces a record full of 130-byte text files, silently.
+      - name: Confirm no Git LFS pointers in the checkout
+        # First half: the working tree the verifier is about to read.
         run: |
           if find data -type f -size -1k | xargs -r grep -l "git-lfs.github.com/spec" 2>/dev/null | grep .; then
-            echo "::error::Git LFS pointer files found under data/. Zenodo would archive stubs."
+            echo "::error::LFS pointer files in the checkout. Is 'lfs: true' set on actions/checkout?"
             exit 1
           fi
-          echo "no LFS pointers"
+          echo "checkout: no LFS pointers"
+
+      - name: Confirm the ZIPBALL carries real LFS content
+        # Second half, and the one that actually protects the published record.
+        #
+        # Zenodo archives the GitHub zipball, and GitHub omits LFS content from source
+        # archives BY DEFAULT -- the repository setting
+        #   Settings -> General -> Archives -> [x] Include Git LFS objects in archives
+        # must be ON. If it is off, the checkout above is clean and the Zenodo record still
+        # fills with 130-byte pointer stubs. Testing the checkout alone would pass while the
+        # thing being published is broken, so the zipball itself is downloaded and inspected.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REF="${GITHUB_REF#refs/tags/}"
+          [ "$REF" = "$GITHUB_REF" ] && REF="${GITHUB_SHA}"
+          gh api "repos/${GITHUB_REPOSITORY}/zipball/${REF}" > archive.zip
+          mkdir -p _zip && unzip -q archive.zip -d _zip
+          if find _zip -type f -name '*.parquet' -size -1k | head -1 | grep .; then
+            echo "::error::The source archive contains LFS POINTERS, not data. Enable \
+          'Include Git LFS objects in archives' in the repository settings (Settings -> \
+          General -> Archives). Zenodo would otherwise archive 130-byte stubs."
+            find _zip -type f -name '*.parquet' -size -1k | head -5
+            exit 1
+          fi
+          echo "zipball: LFS objects included — safe for Zenodo"
+          rm -rf _zip archive.zip
 
       - name: Verify release
         run: python scripts/verify_release.py --strict-checksums
@@ -77,7 +105,9 @@ jobs:
               echo "| \`$d\` | $(find $d -type f | wc -l) | $(du -sh $d | cut -f1) |"
             done
             echo ""
-            echo "Total: $(du -sh data docs | awk '{s+=$1} END {print}' ; du -ch data docs | tail -1 | cut -f1)"
+            # `du -sh` prints human-readable sizes; summing those with awk yields an
+            # empty line. `du -ch` already computes the total, so use it directly.
+            echo "Total: $(du -ch data docs | tail -1 | cut -f1)"
           } >> "$GITHUB_STEP_SUMMARY"
 
   release:

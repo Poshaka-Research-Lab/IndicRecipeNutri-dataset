@@ -21,3 +21,37 @@ checksums/SHA256SUMS -text
 *.parquet binary
 *.csv     binary
 *.txt     binary
+
+# ---------------------------------------------------------------- Git LFS
+#
+# WHY. `data/corpus/recipes_structured.parquet` reached 99.1 MB against GitHub's hard
+# 100 MB per-file limit, and it grows with every added column -- three were added on
+# 2026-09-05 alone. Without LFS the next rebuild makes the repository unpushable.
+#
+# HISTORY IS SAFE. The largest blob across all existing commits is 49.0 MB, so no
+# `lfs migrate` and no history rewrite is required. LFS applies from the next commit.
+#
+# BYTE-EXACTNESS, which is what the `* -text` rule above protects. LFS stores and restores
+# the object verbatim and performs no line-ending translation; each line below carries its
+# own `-text`. Verified: staging the 99 MB parquet through the filter left its working-tree
+# SHA-256 unchanged, and the LFS OID IS that SHA-256, so it is directly comparable to
+# checksums/SHA256SUMS.
+#
+# !! REQUIRES A REPOSITORY SETTING !!
+# GitHub omits LFS content from source archives BY DEFAULT, and Zenodo archives the zipball.
+# Settings -> General -> Archives -> [x] Include Git LFS objects in archives
+# must be ON, or the Zenodo record fills with 130-byte pointer stubs, silently. The release
+# workflow downloads its own zipball and fails if that happens, so the setting cannot be off
+# without the build saying so.
+*.parquet filter=lfs diff=lfs merge=lfs -text
+#
+# The four bulk files below are listed per DIRECTORY-GLOB, not per exact path. The earlier
+# exact-path form covered `synthetic_interactions/` only, so when `synthetic_interactions_v3/`
+# was added its 24.6 MB `interactions.csv` -- LARGER than the v1 file the rule was written for
+# -- matched nothing and would have been committed raw. A generation-numbered directory is
+# going to keep happening; the glob covers the next one too.
+data/synthetic_interactions*/interactions.csv filter=lfs diff=lfs merge=lfs -text
+data/synthetic_interactions*/users.csv        filter=lfs diff=lfs merge=lfs -text
+data/synthetic_interactions*/train.txt        filter=lfs diff=lfs merge=lfs -text
+data/synthetic_interactions*/kg_final.txt     filter=lfs diff=lfs merge=lfs -text
+data/synthetic_interactions*/test.txt         filter=lfs diff=lfs merge=lfs -text

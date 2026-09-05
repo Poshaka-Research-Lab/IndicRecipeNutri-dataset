@@ -1,0 +1,5874 @@
+{
+ "what": "Unit, basis and physical domain for every dimensioned column in the IndicRecipeNutri release. Authoritative over column NAMES where the two disagree \u2014 see grams_per_serving_v3, whose name declares the wrong basis.",
+ "generated_by": "scripts/stamp_units.py from scripts/column_units.py",
+ "how_units_were_established": "The build never recorded them. Each was derived from median magnitude against physiological range on 2026-09-02, and the derivation is in each column's basis_note so it can be checked rather than trusted. Two columns remain genuinely unresolved and say TBD in their note: Nut_VitaminA (ug RAE vs ug retinol) and Nut_Folate (total vs DFE).",
+ "unit_vocabulary": {
+  "kcal": "kilocalories",
+  "g": "grams",
+  "mg": "milligrams",
+  "ug": "micrograms",
+  "min": "minutes",
+  "%": "percent",
+  "1": "dimensionless ratio or count"
+ },
+ "watch_out": [
+  "per100g_sodium is mg/100g; per100g_salt is g/100g. Same prefix, 400x apart.",
+  "ProteinPct/CarbPct/FatPct are percent of ENERGY, not of mass.",
+  "grams_per_serving_v3 is a whole-dish weight despite its name.",
+  "DV_* are percentages of US FDA 2016 Daily Values, not an Indian reference intake. ICMR-NIN 2020 RDAs differ."
+ ],
+ "dv_reference": {
+  "standard": "US FDA Daily Values, 2016 Nutrition Facts label revision (21 CFR 101.9)",
+  "how_established": "derived from the data: DV_Protein median 14% x 50 g = 7.00 g against an observed Nut_Protein median of 6.79 g, and DV_Folate median 7% x 400 ug = 28.0 ug against an observed Nut_Folate median of 29.36 ug. Two nutrients, two different DV magnitudes, both consistent.",
+  "caveat": "NOT an Indian reference intake. ICMR-NIN 2020 RDAs differ, and for an India-focused corpus that is a limitation a consumer must know about.",
+  "values": {
+   "DV_Protein": [
+    50,
+    "g"
+   ],
+   "DV_Fiber": [
+    28,
+    "g"
+   ],
+   "DV_Iron": [
+    18,
+    "mg"
+   ],
+   "DV_Calcium": [
+    1300,
+    "mg"
+   ],
+   "DV_VitaminC": [
+    90,
+    "mg"
+   ],
+   "DV_VitaminA": [
+    900,
+    "ug"
+   ],
+   "DV_Folate": [
+    400,
+    "ug"
+   ],
+   "DV_VitaminB12": [
+    2.4,
+    "ug"
+   ],
+   "DV_VitaminD": [
+    20,
+    "ug"
+   ],
+   "DV_Zinc": [
+    11,
+    "mg"
+   ]
+  }
+ },
+ "columns": {
+  "CarbPct": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "percent of energy"
+  },
+  "CarbPct_orig": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of CarbPct"
+  },
+  "CarbPct_pre_r5": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of CarbPct"
+  },
+  "CarbPct_pre_r6": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of CarbPct"
+  },
+  "CarbPct_pre_r7": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of CarbPct"
+  },
+  "CarbPct_pre_r8": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of CarbPct"
+  },
+  "CarbPct_pre_r9": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of CarbPct"
+  },
+  "CarbPct_predensity": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of CarbPct"
+  },
+  "CarbPct_uncorrected": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of CarbPct"
+  },
+  "CookTimeMins": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "declared in name"
+  },
+  "CookTimeMins_orig": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of CookTimeMins"
+  },
+  "CookTimeMins_pre_r5": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of CookTimeMins"
+  },
+  "CookTimeMins_pre_r6": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of CookTimeMins"
+  },
+  "CookTimeMins_pre_r7": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of CookTimeMins"
+  },
+  "CookTimeMins_pre_r8": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of CookTimeMins"
+  },
+  "CookTimeMins_pre_r9": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of CookTimeMins"
+  },
+  "CookTimeMins_predensity": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of CookTimeMins"
+  },
+  "CookTimeMins_uncorrected": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of CookTimeMins"
+  },
+  "DV_Calcium": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (1300 mg); see DV_REFERENCE"
+  },
+  "DV_Calcium_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Calcium"
+  },
+  "DV_Calcium_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Calcium"
+  },
+  "DV_Calcium_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Calcium"
+  },
+  "DV_Calcium_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Calcium"
+  },
+  "DV_Calcium_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Calcium"
+  },
+  "DV_Calcium_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Calcium"
+  },
+  "DV_Calcium_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Calcium"
+  },
+  "DV_Calcium_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Calcium"
+  },
+  "DV_Fiber": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (28 g); see DV_REFERENCE"
+  },
+  "DV_Fiber_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Fiber"
+  },
+  "DV_Fiber_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Fiber"
+  },
+  "DV_Fiber_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Fiber"
+  },
+  "DV_Fiber_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Fiber"
+  },
+  "DV_Fiber_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Fiber"
+  },
+  "DV_Fiber_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Fiber"
+  },
+  "DV_Fiber_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Fiber"
+  },
+  "DV_Fiber_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Fiber"
+  },
+  "DV_Folate": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (400 ug); see DV_REFERENCE"
+  },
+  "DV_Folate_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Folate"
+  },
+  "DV_Folate_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Folate"
+  },
+  "DV_Folate_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Folate"
+  },
+  "DV_Folate_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Folate"
+  },
+  "DV_Folate_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Folate"
+  },
+  "DV_Folate_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Folate"
+  },
+  "DV_Folate_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Folate"
+  },
+  "DV_Folate_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Folate"
+  },
+  "DV_Iron": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (18 mg); see DV_REFERENCE"
+  },
+  "DV_Iron_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Iron"
+  },
+  "DV_Iron_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Iron"
+  },
+  "DV_Iron_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Iron"
+  },
+  "DV_Iron_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Iron"
+  },
+  "DV_Iron_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Iron"
+  },
+  "DV_Iron_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Iron"
+  },
+  "DV_Iron_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Iron"
+  },
+  "DV_Iron_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Iron"
+  },
+  "DV_Protein": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (50 g); see DV_REFERENCE"
+  },
+  "DV_Protein_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Protein"
+  },
+  "DV_Protein_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Protein"
+  },
+  "DV_Protein_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Protein"
+  },
+  "DV_Protein_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Protein"
+  },
+  "DV_Protein_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Protein"
+  },
+  "DV_Protein_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Protein"
+  },
+  "DV_Protein_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Protein"
+  },
+  "DV_Protein_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Protein"
+  },
+  "DV_VitaminA": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (900 ug); see DV_REFERENCE"
+  },
+  "DV_VitaminA_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_VitaminA"
+  },
+  "DV_VitaminA_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_VitaminA"
+  },
+  "DV_VitaminA_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_VitaminA"
+  },
+  "DV_VitaminA_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_VitaminA"
+  },
+  "DV_VitaminA_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_VitaminA"
+  },
+  "DV_VitaminA_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_VitaminA"
+  },
+  "DV_VitaminA_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_VitaminA"
+  },
+  "DV_VitaminA_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_VitaminA"
+  },
+  "DV_VitaminB12": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (2.4 ug); see DV_REFERENCE"
+  },
+  "DV_VitaminB12_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_VitaminB12"
+  },
+  "DV_VitaminB12_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_VitaminB12"
+  },
+  "DV_VitaminB12_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_VitaminB12"
+  },
+  "DV_VitaminB12_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_VitaminB12"
+  },
+  "DV_VitaminB12_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_VitaminB12"
+  },
+  "DV_VitaminB12_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_VitaminB12"
+  },
+  "DV_VitaminB12_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_VitaminB12"
+  },
+  "DV_VitaminB12_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_VitaminB12"
+  },
+  "DV_VitaminC": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (90 mg); see DV_REFERENCE"
+  },
+  "DV_VitaminC_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_VitaminC"
+  },
+  "DV_VitaminC_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_VitaminC"
+  },
+  "DV_VitaminC_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_VitaminC"
+  },
+  "DV_VitaminC_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_VitaminC"
+  },
+  "DV_VitaminC_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_VitaminC"
+  },
+  "DV_VitaminC_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_VitaminC"
+  },
+  "DV_VitaminC_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_VitaminC"
+  },
+  "DV_VitaminC_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_VitaminC"
+  },
+  "DV_VitaminD": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (20 ug); see DV_REFERENCE"
+  },
+  "DV_VitaminD_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_VitaminD"
+  },
+  "DV_VitaminD_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_VitaminD"
+  },
+  "DV_VitaminD_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_VitaminD"
+  },
+  "DV_VitaminD_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_VitaminD"
+  },
+  "DV_VitaminD_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_VitaminD"
+  },
+  "DV_VitaminD_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_VitaminD"
+  },
+  "DV_VitaminD_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_VitaminD"
+  },
+  "DV_VitaminD_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_VitaminD"
+  },
+  "DV_Zinc": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "percent of the US FDA 2016 Daily Value (11 mg); see DV_REFERENCE"
+  },
+  "DV_Zinc_orig": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of DV_Zinc"
+  },
+  "DV_Zinc_pre_r5": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of DV_Zinc"
+  },
+  "DV_Zinc_pre_r6": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of DV_Zinc"
+  },
+  "DV_Zinc_pre_r7": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of DV_Zinc"
+  },
+  "DV_Zinc_pre_r8": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of DV_Zinc"
+  },
+  "DV_Zinc_pre_r9": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of DV_Zinc"
+  },
+  "DV_Zinc_predensity": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of DV_Zinc"
+  },
+  "DV_Zinc_uncorrected": {
+   "unit": "%",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of DV_Zinc"
+  },
+  "FatPct": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "percent of energy"
+  },
+  "FatPct_orig": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of FatPct"
+  },
+  "FatPct_pre_r5": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of FatPct"
+  },
+  "FatPct_pre_r6": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of FatPct"
+  },
+  "FatPct_pre_r7": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of FatPct"
+  },
+  "FatPct_pre_r8": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of FatPct"
+  },
+  "FatPct_pre_r9": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of FatPct"
+  },
+  "FatPct_predensity": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of FatPct"
+  },
+  "FatPct_uncorrected": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of FatPct"
+  },
+  "GlycemicLoad_numeric": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "glycemic load is dimensionless by construction"
+  },
+  "GlycemicLoad_numeric_orig": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_pre_r5": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_pre_r6": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_pre_r7": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_pre_r8": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_pre_r9": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_predensity": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of GlycemicLoad_numeric"
+  },
+  "GlycemicLoad_numeric_uncorrected": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of GlycemicLoad_numeric"
+  },
+  "Nut_Calcium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 61.7; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Calcium_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Calcium"
+  },
+  "Nut_Calcium_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Calcium"
+  },
+  "Nut_Calcium_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Calcium"
+  },
+  "Nut_Calcium_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Calcium"
+  },
+  "Nut_Calcium_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Calcium"
+  },
+  "Nut_Calcium_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Calcium"
+  },
+  "Nut_Calcium_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Calcium"
+  },
+  "Nut_Calcium_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Calcium"
+  },
+  "Nut_Calories": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 253 kcal/dish; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Calories_orig": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Calories"
+  },
+  "Nut_Calories_pre_r5": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Calories"
+  },
+  "Nut_Calories_pre_r6": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Calories"
+  },
+  "Nut_Calories_pre_r7": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Calories"
+  },
+  "Nut_Calories_pre_r8": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Calories"
+  },
+  "Nut_Calories_pre_r9": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Calories"
+  },
+  "Nut_Calories_predensity": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Calories"
+  },
+  "Nut_Calories_uncorrected": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Calories"
+  },
+  "Nut_Carbohydrates": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 24.0 g/dish; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Carbohydrates_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Carbohydrates"
+  },
+  "Nut_Carbohydrates_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Carbohydrates"
+  },
+  "Nut_Cholesterol": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 4.74; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Cholesterol_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Cholesterol"
+  },
+  "Nut_Cholesterol_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Cholesterol"
+  },
+  "Nut_Confidence": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction, 0-1"
+  },
+  "Nut_Confidence_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of Nut_Confidence"
+  },
+  "Nut_Confidence_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of Nut_Confidence"
+  },
+  "Nut_Confidence_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of Nut_Confidence"
+  },
+  "Nut_Confidence_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of Nut_Confidence"
+  },
+  "Nut_Confidence_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of Nut_Confidence"
+  },
+  "Nut_Confidence_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of Nut_Confidence"
+  },
+  "Nut_Confidence_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of Nut_Confidence"
+  },
+  "Nut_Confidence_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of Nut_Confidence"
+  },
+  "Nut_Copper": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.14; ug would put a dish at 140 ug, far below typical dietary copper; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Copper_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Copper"
+  },
+  "Nut_Copper_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Copper"
+  },
+  "Nut_Copper_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Copper"
+  },
+  "Nut_Copper_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Copper"
+  },
+  "Nut_Copper_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Copper"
+  },
+  "Nut_Copper_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Copper"
+  },
+  "Nut_Copper_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Copper"
+  },
+  "Nut_Copper_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Copper"
+  },
+  "Nut_Fat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 9.38 g/dish; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Fat_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Fat"
+  },
+  "Nut_Fat_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Fat"
+  },
+  "Nut_Fat_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Fat"
+  },
+  "Nut_Fat_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Fat"
+  },
+  "Nut_Fat_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Fat"
+  },
+  "Nut_Fat_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Fat"
+  },
+  "Nut_Fat_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Fat"
+  },
+  "Nut_Fat_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Fat"
+  },
+  "Nut_Fiber": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Fiber_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Fiber"
+  },
+  "Nut_Fiber_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Fiber"
+  },
+  "Nut_Fiber_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Fiber"
+  },
+  "Nut_Fiber_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Fiber"
+  },
+  "Nut_Fiber_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Fiber"
+  },
+  "Nut_Fiber_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Fiber"
+  },
+  "Nut_Fiber_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Fiber"
+  },
+  "Nut_Fiber_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Fiber"
+  },
+  "Nut_Folate": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "MAGNITUDE resolves ug (median 29.36). Whether it is total folate or ug DFE is TBD, and it matters because DV_Folate divides by the 400 ug DFE Daily Value: if the numerator is total folate the quotient is not a DFE percentage. Check the USDA field read (FOL vs FOLDFE)."
+  },
+  "Nut_Folate_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Folate"
+  },
+  "Nut_Folate_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Folate"
+  },
+  "Nut_Folate_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Folate"
+  },
+  "Nut_Folate_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Folate"
+  },
+  "Nut_Folate_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Folate"
+  },
+  "Nut_Folate_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Folate"
+  },
+  "Nut_Folate_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Folate"
+  },
+  "Nut_Folate_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Folate"
+  },
+  "Nut_Iron": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 2.37; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Iron_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Iron"
+  },
+  "Nut_Iron_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Iron"
+  },
+  "Nut_Iron_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Iron"
+  },
+  "Nut_Iron_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Iron"
+  },
+  "Nut_Iron_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Iron"
+  },
+  "Nut_Iron_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Iron"
+  },
+  "Nut_Iron_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Iron"
+  },
+  "Nut_Iron_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Iron"
+  },
+  "Nut_Magnesium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Magnesium_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Magnesium"
+  },
+  "Nut_Magnesium_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Magnesium"
+  },
+  "Nut_Magnesium_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Magnesium"
+  },
+  "Nut_Magnesium_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Magnesium"
+  },
+  "Nut_Magnesium_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Magnesium"
+  },
+  "Nut_Magnesium_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Magnesium"
+  },
+  "Nut_Magnesium_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Magnesium"
+  },
+  "Nut_Magnesium_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Magnesium"
+  },
+  "Nut_Manganese": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.56; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Manganese_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Manganese"
+  },
+  "Nut_Manganese_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Manganese"
+  },
+  "Nut_Manganese_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Manganese"
+  },
+  "Nut_Manganese_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Manganese"
+  },
+  "Nut_Manganese_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Manganese"
+  },
+  "Nut_Manganese_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Manganese"
+  },
+  "Nut_Manganese_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Manganese"
+  },
+  "Nut_Manganese_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Manganese"
+  },
+  "Nut_MatchCov": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction, 0-1"
+  },
+  "Nut_MatchCov_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of Nut_MatchCov"
+  },
+  "Nut_MatchCov_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of Nut_MatchCov"
+  },
+  "Nut_MatchCov_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of Nut_MatchCov"
+  },
+  "Nut_MatchCov_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of Nut_MatchCov"
+  },
+  "Nut_MatchCov_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of Nut_MatchCov"
+  },
+  "Nut_MatchCov_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of Nut_MatchCov"
+  },
+  "Nut_MatchCov_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of Nut_MatchCov"
+  },
+  "Nut_MatchCov_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of Nut_MatchCov"
+  },
+  "Nut_MonounsaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_MonounsaturatedFat_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_MonounsaturatedFat"
+  },
+  "Nut_MonounsaturatedFat_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_MonounsaturatedFat"
+  },
+  "Nut_Niacin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 1.08; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Niacin_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Niacin"
+  },
+  "Nut_Niacin_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Niacin"
+  },
+  "Nut_Niacin_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Niacin"
+  },
+  "Nut_Niacin_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Niacin"
+  },
+  "Nut_Niacin_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Niacin"
+  },
+  "Nut_Niacin_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Niacin"
+  },
+  "Nut_Niacin_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Niacin"
+  },
+  "Nut_Niacin_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Niacin"
+  },
+  "Nut_Phosphorus": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Phosphorus_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Phosphorus"
+  },
+  "Nut_Phosphorus_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Phosphorus"
+  },
+  "Nut_PolyunsaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_PolyunsaturatedFat_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_PolyunsaturatedFat"
+  },
+  "Nut_PolyunsaturatedFat_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_PolyunsaturatedFat"
+  },
+  "Nut_Potassium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Potassium_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Potassium"
+  },
+  "Nut_Potassium_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Potassium"
+  },
+  "Nut_Potassium_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Potassium"
+  },
+  "Nut_Potassium_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Potassium"
+  },
+  "Nut_Potassium_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Potassium"
+  },
+  "Nut_Potassium_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Potassium"
+  },
+  "Nut_Potassium_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Potassium"
+  },
+  "Nut_Potassium_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Potassium"
+  },
+  "Nut_Protein": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 6.79 g/dish; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Protein_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Protein"
+  },
+  "Nut_Protein_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Protein"
+  },
+  "Nut_Protein_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Protein"
+  },
+  "Nut_Protein_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Protein"
+  },
+  "Nut_Protein_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Protein"
+  },
+  "Nut_Protein_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Protein"
+  },
+  "Nut_Protein_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Protein"
+  },
+  "Nut_Protein_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Protein"
+  },
+  "Nut_Riboflavin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.12; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Riboflavin_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Riboflavin"
+  },
+  "Nut_Riboflavin_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Riboflavin"
+  },
+  "Nut_SaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_SaturatedFat_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_SaturatedFat"
+  },
+  "Nut_SaturatedFat_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_SaturatedFat"
+  },
+  "Nut_Selenium": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 4.62; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Selenium_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Selenium"
+  },
+  "Nut_Selenium_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Selenium"
+  },
+  "Nut_Selenium_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Selenium"
+  },
+  "Nut_Selenium_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Selenium"
+  },
+  "Nut_Selenium_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Selenium"
+  },
+  "Nut_Selenium_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Selenium"
+  },
+  "Nut_Selenium_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Selenium"
+  },
+  "Nut_Selenium_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Selenium"
+  },
+  "Nut_Sodium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 342; g would be absurd for a dish; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Sodium_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Sodium"
+  },
+  "Nut_Sodium_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Sodium"
+  },
+  "Nut_Sodium_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Sodium"
+  },
+  "Nut_Sodium_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Sodium"
+  },
+  "Nut_Sodium_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Sodium"
+  },
+  "Nut_Sodium_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Sodium"
+  },
+  "Nut_Sodium_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Sodium"
+  },
+  "Nut_Sodium_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Sodium"
+  },
+  "Nut_Sugar": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Sugar_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Sugar"
+  },
+  "Nut_Sugar_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Sugar"
+  },
+  "Nut_Sugar_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Sugar"
+  },
+  "Nut_Sugar_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Sugar"
+  },
+  "Nut_Sugar_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Sugar"
+  },
+  "Nut_Sugar_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Sugar"
+  },
+  "Nut_Sugar_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Sugar"
+  },
+  "Nut_Sugar_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Sugar"
+  },
+  "Nut_Thiamin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.11; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Thiamin_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Thiamin"
+  },
+  "Nut_Thiamin_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Thiamin"
+  },
+  "Nut_Thiamin_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Thiamin"
+  },
+  "Nut_Thiamin_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Thiamin"
+  },
+  "Nut_Thiamin_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Thiamin"
+  },
+  "Nut_Thiamin_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Thiamin"
+  },
+  "Nut_Thiamin_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Thiamin"
+  },
+  "Nut_Thiamin_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Thiamin"
+  },
+  "Nut_TransFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_TransFat_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_TransFat"
+  },
+  "Nut_TransFat_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_TransFat"
+  },
+  "Nut_TransFat_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_TransFat"
+  },
+  "Nut_TransFat_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_TransFat"
+  },
+  "Nut_TransFat_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_TransFat"
+  },
+  "Nut_TransFat_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_TransFat"
+  },
+  "Nut_TransFat_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_TransFat"
+  },
+  "Nut_TransFat_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_TransFat"
+  },
+  "Nut_VitaminA": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "MAGNITUDE resolves ug vs IU (median 25.9; IU would be ~10x larger). What is NOT resolved is whether it is ug RAE or ug retinol: TBD. Check which USDA field the enrichment read (VITA_RAE vs VITA_IU vs RETOL). Consequence: RAE and retinol differ by up to 12x for plant-source carotenoids, which is most of this corpus."
+  },
+  "Nut_VitaminA_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminA"
+  },
+  "Nut_VitaminA_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminA"
+  },
+  "Nut_VitaminA_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminA"
+  },
+  "Nut_VitaminA_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminA"
+  },
+  "Nut_VitaminA_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminA"
+  },
+  "Nut_VitaminA_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminA"
+  },
+  "Nut_VitaminA_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminA"
+  },
+  "Nut_VitaminA_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminA"
+  },
+  "Nut_VitaminB12": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.01; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminB12_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminB12"
+  },
+  "Nut_VitaminB12_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminB12"
+  },
+  "Nut_VitaminB6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pyridoxine is reported in mg in every reference intake (US FDA DV 1.7 mg); derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminB6_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminB6"
+  },
+  "Nut_VitaminB6_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminB6"
+  },
+  "Nut_VitaminC": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 2.84; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminC_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminC"
+  },
+  "Nut_VitaminC_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminC"
+  },
+  "Nut_VitaminC_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminC"
+  },
+  "Nut_VitaminC_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminC"
+  },
+  "Nut_VitaminC_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminC"
+  },
+  "Nut_VitaminC_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminC"
+  },
+  "Nut_VitaminC_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminC"
+  },
+  "Nut_VitaminC_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminC"
+  },
+  "Nut_VitaminD": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0, p95 1.52; IU would be ~40x larger, so this is micrograms not IU; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminD_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminD"
+  },
+  "Nut_VitaminD_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminD"
+  },
+  "Nut_VitaminD_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminD"
+  },
+  "Nut_VitaminD_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminD"
+  },
+  "Nut_VitaminD_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminD"
+  },
+  "Nut_VitaminD_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminD"
+  },
+  "Nut_VitaminD_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminD"
+  },
+  "Nut_VitaminD_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminD"
+  },
+  "Nut_VitaminE": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.73, alpha-tocopherol; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminE_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminE"
+  },
+  "Nut_VitaminE_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminE"
+  },
+  "Nut_VitaminE_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminE"
+  },
+  "Nut_VitaminE_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminE"
+  },
+  "Nut_VitaminE_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminE"
+  },
+  "Nut_VitaminE_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminE"
+  },
+  "Nut_VitaminE_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminE"
+  },
+  "Nut_VitaminE_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminE"
+  },
+  "Nut_VitaminK": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 6.08; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_VitaminK_orig": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_VitaminK"
+  },
+  "Nut_VitaminK_pre_r5": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_VitaminK"
+  },
+  "Nut_VitaminK_pre_r6": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_VitaminK"
+  },
+  "Nut_VitaminK_pre_r7": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_VitaminK"
+  },
+  "Nut_VitaminK_pre_r8": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_VitaminK"
+  },
+  "Nut_VitaminK_pre_r9": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_VitaminK"
+  },
+  "Nut_VitaminK_predensity": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_VitaminK"
+  },
+  "Nut_VitaminK_uncorrected": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_VitaminK"
+  },
+  "Nut_Zinc": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "median 0.80; derived from median magnitude against physiological range 2026-09-02"
+  },
+  "Nut_Zinc_orig": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "original source value of Nut_Zinc"
+  },
+  "Nut_Zinc_pre_r5": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R5 pass of Nut_Zinc"
+  },
+  "Nut_Zinc_pre_r6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R6 pass of Nut_Zinc"
+  },
+  "Nut_Zinc_pre_r7": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R7 pass of Nut_Zinc"
+  },
+  "Nut_Zinc_pre_r8": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R8 pass of Nut_Zinc"
+  },
+  "Nut_Zinc_pre_r9": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "value before the R9 pass of Nut_Zinc"
+  },
+  "Nut_Zinc_predensity": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-density-correction value of Nut_Zinc"
+  },
+  "Nut_Zinc_uncorrected": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "pre-correction value of Nut_Zinc"
+  },
+  "PrepTimeMins": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "declared in name"
+  },
+  "PrepTimeMins_orig": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of PrepTimeMins"
+  },
+  "PrepTimeMins_pre_r5": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of PrepTimeMins"
+  },
+  "PrepTimeMins_pre_r6": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of PrepTimeMins"
+  },
+  "PrepTimeMins_pre_r7": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of PrepTimeMins"
+  },
+  "PrepTimeMins_pre_r8": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of PrepTimeMins"
+  },
+  "PrepTimeMins_pre_r9": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of PrepTimeMins"
+  },
+  "PrepTimeMins_predensity": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of PrepTimeMins"
+  },
+  "PrepTimeMins_uncorrected": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of PrepTimeMins"
+  },
+  "ProteinPct": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "percent of ENERGY, not of mass. Medians 11/45/42 sum to 98, consistent with an energy split and not with a mass split."
+  },
+  "ProteinPct_orig": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of ProteinPct"
+  },
+  "ProteinPct_pre_r5": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of ProteinPct"
+  },
+  "ProteinPct_pre_r6": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of ProteinPct"
+  },
+  "ProteinPct_pre_r7": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of ProteinPct"
+  },
+  "ProteinPct_pre_r8": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of ProteinPct"
+  },
+  "ProteinPct_pre_r9": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of ProteinPct"
+  },
+  "ProteinPct_predensity": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of ProteinPct"
+  },
+  "ProteinPct_uncorrected": {
+   "unit": "%",
+   "basis": "energy",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of ProteinPct"
+  },
+  "RatingAverage": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "0-5 stars for most rows, but 373 rows carry a 0-100 percentage on the same column \u2014 see the mixed-scale finding; the domain here is the intended one"
+  },
+  "RatingAverage_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "original source value of RatingAverage"
+  },
+  "RatingAverage_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "value before the R5 pass of RatingAverage"
+  },
+  "RatingAverage_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "value before the R6 pass of RatingAverage"
+  },
+  "RatingAverage_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "value before the R7 pass of RatingAverage"
+  },
+  "RatingAverage_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "value before the R8 pass of RatingAverage"
+  },
+  "RatingAverage_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "value before the R9 pass of RatingAverage"
+  },
+  "RatingAverage_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "pre-density-correction value of RatingAverage"
+  },
+  "RatingAverage_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    5
+   ],
+   "basis_note": "pre-correction value of RatingAverage"
+  },
+  "RatingCount": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "count"
+  },
+  "RatingCount_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of RatingCount"
+  },
+  "RatingCount_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of RatingCount"
+  },
+  "RatingCount_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of RatingCount"
+  },
+  "RatingCount_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of RatingCount"
+  },
+  "RatingCount_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of RatingCount"
+  },
+  "RatingCount_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of RatingCount"
+  },
+  "RatingCount_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of RatingCount"
+  },
+  "RatingCount_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of RatingCount"
+  },
+  "Servings_num": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "count of servings"
+  },
+  "Servings_num_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "original source value of Servings_num"
+  },
+  "Servings_num_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R5 pass of Servings_num"
+  },
+  "Servings_num_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R6 pass of Servings_num"
+  },
+  "Servings_num_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R7 pass of Servings_num"
+  },
+  "Servings_num_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R8 pass of Servings_num"
+  },
+  "Servings_num_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R9 pass of Servings_num"
+  },
+  "Servings_num_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "pre-density-correction value of Servings_num"
+  },
+  "Servings_num_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "pre-correction value of Servings_num"
+  },
+  "StepCount": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "count"
+  },
+  "StepCount_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of StepCount"
+  },
+  "StepCount_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of StepCount"
+  },
+  "StepCount_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of StepCount"
+  },
+  "StepCount_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of StepCount"
+  },
+  "StepCount_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of StepCount"
+  },
+  "StepCount_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of StepCount"
+  },
+  "StepCount_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of StepCount"
+  },
+  "StepCount_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of StepCount"
+  },
+  "TotalTimeMins": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "declared in name"
+  },
+  "TotalTimeMins_orig": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of TotalTimeMins"
+  },
+  "TotalTimeMins_pre_r5": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of TotalTimeMins"
+  },
+  "TotalTimeMins_pre_r6": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of TotalTimeMins"
+  },
+  "TotalTimeMins_pre_r7": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of TotalTimeMins"
+  },
+  "TotalTimeMins_pre_r8": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of TotalTimeMins"
+  },
+  "TotalTimeMins_pre_r9": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of TotalTimeMins"
+  },
+  "TotalTimeMins_predensity": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of TotalTimeMins"
+  },
+  "TotalTimeMins_uncorrected": {
+   "unit": "min",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of TotalTimeMins"
+  },
+  "atwater_relerr": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "relative error, dimensionless; not bounded above"
+  },
+  "atwater_relerr_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of atwater_relerr"
+  },
+  "atwater_relerr_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of atwater_relerr"
+  },
+  "atwater_relerr_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of atwater_relerr"
+  },
+  "atwater_relerr_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of atwater_relerr"
+  },
+  "atwater_relerr_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of atwater_relerr"
+  },
+  "atwater_relerr_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of atwater_relerr"
+  },
+  "atwater_relerr_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of atwater_relerr"
+  },
+  "atwater_relerr_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of atwater_relerr"
+  },
+  "badlist_n_items": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "count"
+  },
+  "badlist_n_items_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of badlist_n_items"
+  },
+  "badlist_n_items_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of badlist_n_items"
+  },
+  "badlist_n_items_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of badlist_n_items"
+  },
+  "badlist_n_items_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of badlist_n_items"
+  },
+  "badlist_n_items_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of badlist_n_items"
+  },
+  "badlist_n_items_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of badlist_n_items"
+  },
+  "badlist_n_items_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of badlist_n_items"
+  },
+  "badlist_n_items_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of badlist_n_items"
+  },
+  "confident_coverage": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction, 0-1"
+  },
+  "confident_coverage_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of confident_coverage"
+  },
+  "confident_coverage_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of confident_coverage"
+  },
+  "confident_coverage_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of confident_coverage"
+  },
+  "confident_coverage_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of confident_coverage"
+  },
+  "confident_coverage_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of confident_coverage"
+  },
+  "confident_coverage_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of confident_coverage"
+  },
+  "confident_coverage_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of confident_coverage"
+  },
+  "confident_coverage_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of confident_coverage"
+  },
+  "dish_type_agreement": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction, 0-1"
+  },
+  "dish_type_agreement_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of dish_type_agreement"
+  },
+  "dish_type_agreement_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of dish_type_agreement"
+  },
+  "dish_type_agreement_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of dish_type_agreement"
+  },
+  "dish_type_agreement_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of dish_type_agreement"
+  },
+  "dish_type_agreement_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of dish_type_agreement"
+  },
+  "dish_type_agreement_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of dish_type_agreement"
+  },
+  "dish_type_agreement_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of dish_type_agreement"
+  },
+  "dish_type_agreement_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of dish_type_agreement"
+  },
+  "dup_family_id": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "identifier, not a quantity"
+  },
+  "dup_family_id_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "original source value of dup_family_id"
+  },
+  "dup_family_id_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R5 pass of dup_family_id"
+  },
+  "dup_family_id_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R6 pass of dup_family_id"
+  },
+  "dup_family_id_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R7 pass of dup_family_id"
+  },
+  "dup_family_id_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R8 pass of dup_family_id"
+  },
+  "dup_family_id_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R9 pass of dup_family_id"
+  },
+  "dup_family_id_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "pre-density-correction value of dup_family_id"
+  },
+  "dup_family_id_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "pre-correction value of dup_family_id"
+  },
+  "dup_family_size": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "count"
+  },
+  "dup_family_size_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "original source value of dup_family_size"
+  },
+  "dup_family_size_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R5 pass of dup_family_size"
+  },
+  "dup_family_size_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R6 pass of dup_family_size"
+  },
+  "dup_family_size_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R7 pass of dup_family_size"
+  },
+  "dup_family_size_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R8 pass of dup_family_size"
+  },
+  "dup_family_size_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "value before the R9 pass of dup_family_size"
+  },
+  "dup_family_size_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "pre-density-correction value of dup_family_size"
+  },
+  "dup_family_size_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    1,
+    null
+   ],
+   "basis_note": "pre-correction value of dup_family_size"
+  },
+  "fsa_n_green": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "count of green lights, 0-4"
+  },
+  "fsa_n_green_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "original source value of fsa_n_green"
+  },
+  "fsa_n_green_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R5 pass of fsa_n_green"
+  },
+  "fsa_n_green_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R6 pass of fsa_n_green"
+  },
+  "fsa_n_green_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R7 pass of fsa_n_green"
+  },
+  "fsa_n_green_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R8 pass of fsa_n_green"
+  },
+  "fsa_n_green_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R9 pass of fsa_n_green"
+  },
+  "fsa_n_green_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-density-correction value of fsa_n_green"
+  },
+  "fsa_n_green_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-correction value of fsa_n_green"
+  },
+  "fsa_n_labelled": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "how many of the four FSA lights are set on this row \u2014 the denominator for fsa_n_red / fsa_n_green, which is not 4 everywhere because light coverage is partial"
+  },
+  "fsa_n_labelled_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "original source value of fsa_n_labelled"
+  },
+  "fsa_n_labelled_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R5 pass of fsa_n_labelled"
+  },
+  "fsa_n_labelled_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R6 pass of fsa_n_labelled"
+  },
+  "fsa_n_labelled_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R7 pass of fsa_n_labelled"
+  },
+  "fsa_n_labelled_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R8 pass of fsa_n_labelled"
+  },
+  "fsa_n_labelled_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R9 pass of fsa_n_labelled"
+  },
+  "fsa_n_labelled_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-density-correction value of fsa_n_labelled"
+  },
+  "fsa_n_labelled_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-correction value of fsa_n_labelled"
+  },
+  "fsa_n_red": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "count of red lights, 0-4"
+  },
+  "fsa_n_red_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "original source value of fsa_n_red"
+  },
+  "fsa_n_red_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R5 pass of fsa_n_red"
+  },
+  "fsa_n_red_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R6 pass of fsa_n_red"
+  },
+  "fsa_n_red_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R7 pass of fsa_n_red"
+  },
+  "fsa_n_red_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R8 pass of fsa_n_red"
+  },
+  "fsa_n_red_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "value before the R9 pass of fsa_n_red"
+  },
+  "fsa_n_red_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-density-correction value of fsa_n_red"
+  },
+  "fsa_n_red_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    4
+   ],
+   "basis_note": "pre-correction value of fsa_n_red"
+  },
+  "fsa_portion_g": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "grams_per_serving_v3 / Servings_num \u2014 a real per-serving weight, unlike the column it is derived from. Null where Servings_num is outside 1..20, meaning the FSA per-portion rule was not applicable rather than not triggered."
+  },
+  "fsa_portion_g_orig": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of fsa_portion_g"
+  },
+  "fsa_portion_g_pre_r5": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of fsa_portion_g"
+  },
+  "fsa_portion_g_pre_r6": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of fsa_portion_g"
+  },
+  "fsa_portion_g_pre_r7": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of fsa_portion_g"
+  },
+  "fsa_portion_g_pre_r8": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of fsa_portion_g"
+  },
+  "fsa_portion_g_pre_r9": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of fsa_portion_g"
+  },
+  "fsa_portion_g_predensity": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of fsa_portion_g"
+  },
+  "fsa_portion_g_uncorrected": {
+   "unit": "g",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of fsa_portion_g"
+  },
+  "glycemic": {
+   "unit": "1",
+   "basis": "serving",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "kg_nodes alias of GlycemicLoad_numeric; glycemic load is dimensionless by construction. Typed as a real number since 2026-09-02 \u2014 it previously shipped as a stringified float using the empty string as a second missing value beside real nulls, so filtering it required knowing both."
+  },
+  "grams_per_serving_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "as grams_per_serving_v3, pre-correction"
+  },
+  "grams_per_serving_v3": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "THE NAME IS WRONG: median 705 g is a whole-dish weight, not one serving. Kept for compatibility; the basis declared here is authoritative over the name."
+  },
+  "grams_per_serving_v3_orig": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_pre_r5": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_pre_r6": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_pre_r7": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_pre_r8": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_pre_r9": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_predensity": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of grams_per_serving_v3"
+  },
+  "grams_per_serving_v3_uncorrected": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of grams_per_serving_v3"
+  },
+  "ing_weight_confident_frac": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction, 0-1"
+  },
+  "ing_weight_confident_frac_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of ing_weight_confident_frac"
+  },
+  "ing_weight_confident_frac_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of ing_weight_confident_frac"
+  },
+  "ingredient_items_total": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "parsed ingredient items on the row \u2014 the denominator for ingredients_unreadable_items"
+  },
+  "ingredient_items_total_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of ingredient_items_total"
+  },
+  "ingredient_items_total_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of ingredient_items_total"
+  },
+  "ingredient_items_total_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of ingredient_items_total"
+  },
+  "ingredient_items_total_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of ingredient_items_total"
+  },
+  "ingredient_items_total_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of ingredient_items_total"
+  },
+  "ingredient_items_total_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of ingredient_items_total"
+  },
+  "ingredient_items_total_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of ingredient_items_total"
+  },
+  "ingredient_items_total_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of ingredient_items_total"
+  },
+  "ingredients_unreadable_items": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "items in a script the allergen lexicon cannot match (Devanagari, Bengali, Gurmukhi, Gujarati, Odia, Tamil, Telugu, Kannada, Malayalam, Arabic, CJK, Thai, Hangul). Non-zero means an allergen ABSENCE claim on this row is not supported \u2014 see allergen_scan_incomplete"
+  },
+  "ingredients_unreadable_items_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of ingredients_unreadable_items"
+  },
+  "ingredients_unreadable_items_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of ingredients_unreadable_items"
+  },
+  "n_Calcium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Calcium \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Calories": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Calories \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Carbohydrates": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Carbohydrates \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Cholesterol": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Cholesterol \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Confidence": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "kg_nodes alias of Nut_Confidence \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Copper": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Copper \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Fat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Fat \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Fiber": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Fiber \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Folate": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Folate \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Iron": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Iron \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Magnesium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Magnesium \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Manganese": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Manganese \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_MatchCov": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "kg_nodes alias of Nut_MatchCov \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_MonounsaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_MonounsaturatedFat \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Niacin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Niacin \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Phosphorus": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Phosphorus \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_PolyunsaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_PolyunsaturatedFat \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Potassium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Potassium \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Protein": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Protein \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Riboflavin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Riboflavin \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_SaturatedFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_SaturatedFat \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Selenium": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Selenium \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Sodium": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Sodium \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Sugar": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Sugar \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Thiamin": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Thiamin \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_TransFat": {
+   "unit": "g",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_TransFat \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminA": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminA \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminB12": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminB12 \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminB6": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminB6 \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminC": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminC \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminD": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminD \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminE": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminE \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_VitaminK": {
+   "unit": "ug",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_VitaminK \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "n_Zinc": {
+   "unit": "mg",
+   "basis": "dish",
+   "domain": null,
+   "basis_note": "kg_nodes alias of Nut_Zinc \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
+  },
+  "nut_suppl_fct_frac": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "fraction of the nutrition vector supplied by a supplementary food-composition table, 0-1"
+  },
+  "nut_suppl_fct_frac_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of nut_suppl_fct_frac"
+  },
+  "nut_suppl_fct_frac_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of nut_suppl_fct_frac"
+  },
+  "per100g_carb": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_carb_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_carb"
+  },
+  "per100g_carb_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_carb"
+  },
+  "per100g_carb_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_carb"
+  },
+  "per100g_carb_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_carb"
+  },
+  "per100g_carb_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_carb"
+  },
+  "per100g_carb_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_carb"
+  },
+  "per100g_carb_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_carb"
+  },
+  "per100g_carb_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_carb"
+  },
+  "per100g_fat": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_fat_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_fat"
+  },
+  "per100g_fat_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_fat"
+  },
+  "per100g_fat_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_fat"
+  },
+  "per100g_fat_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_fat"
+  },
+  "per100g_fat_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_fat"
+  },
+  "per100g_fat_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_fat"
+  },
+  "per100g_fat_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_fat"
+  },
+  "per100g_fat_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_fat"
+  },
+  "per100g_fiber": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_fiber_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_fiber"
+  },
+  "per100g_fiber_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_fiber"
+  },
+  "per100g_fiber_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_fiber"
+  },
+  "per100g_fiber_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_fiber"
+  },
+  "per100g_fiber_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_fiber"
+  },
+  "per100g_fiber_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_fiber"
+  },
+  "per100g_fiber_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_fiber"
+  },
+  "per100g_fiber_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_fiber"
+  },
+  "per100g_kcal": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "900 kcal/100g is pure fat, the physical ceiling for any food; enforced by gate M17"
+  },
+  "per100g_kcal_orig": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "original source value of per100g_kcal"
+  },
+  "per100g_kcal_pre_r5": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "value before the R5 pass of per100g_kcal"
+  },
+  "per100g_kcal_pre_r6": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "value before the R6 pass of per100g_kcal"
+  },
+  "per100g_kcal_pre_r7": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "value before the R7 pass of per100g_kcal"
+  },
+  "per100g_kcal_pre_r8": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "value before the R8 pass of per100g_kcal"
+  },
+  "per100g_kcal_pre_r9": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "value before the R9 pass of per100g_kcal"
+  },
+  "per100g_kcal_predensity": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "pre-density-correction value of per100g_kcal"
+  },
+  "per100g_kcal_uncorrected": {
+   "unit": "kcal",
+   "basis": "100g",
+   "domain": [
+    0,
+    900
+   ],
+   "basis_note": "pre-correction value of per100g_kcal"
+  },
+  "per100g_protein": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_protein_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_protein"
+  },
+  "per100g_protein_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_protein"
+  },
+  "per100g_protein_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_protein"
+  },
+  "per100g_protein_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_protein"
+  },
+  "per100g_protein_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_protein"
+  },
+  "per100g_protein_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_protein"
+  },
+  "per100g_protein_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_protein"
+  },
+  "per100g_protein_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_protein"
+  },
+  "per100g_salt": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "GRAMS per 100 g. Exactly per100g_sodium * 0.0025 on all 155,978 rows where both are present (the 2.5 g salt per 1 g sodium molar conversion, with the mg->g factor). So the two columns differ in unit AND in scale by 400x."
+  },
+  "per100g_salt_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_salt"
+  },
+  "per100g_salt_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_salt"
+  },
+  "per100g_salt_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_salt"
+  },
+  "per100g_salt_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_salt"
+  },
+  "per100g_salt_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_salt"
+  },
+  "per100g_salt_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_salt"
+  },
+  "per100g_salt_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_salt"
+  },
+  "per100g_salt_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_salt"
+  },
+  "per100g_satfat": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_satfat_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_satfat"
+  },
+  "per100g_satfat_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_satfat"
+  },
+  "per100g_satfat_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_satfat"
+  },
+  "per100g_satfat_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_satfat"
+  },
+  "per100g_satfat_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_satfat"
+  },
+  "per100g_satfat_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_satfat"
+  },
+  "per100g_satfat_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_satfat"
+  },
+  "per100g_satfat_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_satfat"
+  },
+  "per100g_sodium": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "MILLIGRAMS per 100 g \u2014 NOT grams, unlike every other per100g_ mass column. 110,235 rows exceed 100, which is correct for mg and would be impossible for g."
+  },
+  "per100g_sodium_orig": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "original source value of per100g_sodium"
+  },
+  "per100g_sodium_pre_r5": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "value before the R5 pass of per100g_sodium"
+  },
+  "per100g_sodium_pre_r6": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "value before the R6 pass of per100g_sodium"
+  },
+  "per100g_sodium_pre_r7": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "value before the R7 pass of per100g_sodium"
+  },
+  "per100g_sodium_pre_r8": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "value before the R8 pass of per100g_sodium"
+  },
+  "per100g_sodium_pre_r9": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "value before the R9 pass of per100g_sodium"
+  },
+  "per100g_sodium_predensity": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "pre-density-correction value of per100g_sodium"
+  },
+  "per100g_sodium_uncorrected": {
+   "unit": "mg",
+   "basis": "100g",
+   "domain": [
+    0,
+    100000
+   ],
+   "basis_note": "pre-correction value of per100g_sodium"
+  },
+  "per100g_sugar": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "mass fraction"
+  },
+  "per100g_sugar_orig": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "original source value of per100g_sugar"
+  },
+  "per100g_sugar_pre_r5": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R5 pass of per100g_sugar"
+  },
+  "per100g_sugar_pre_r6": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R6 pass of per100g_sugar"
+  },
+  "per100g_sugar_pre_r7": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R7 pass of per100g_sugar"
+  },
+  "per100g_sugar_pre_r8": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R8 pass of per100g_sugar"
+  },
+  "per100g_sugar_pre_r9": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "value before the R9 pass of per100g_sugar"
+  },
+  "per100g_sugar_predensity": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-density-correction value of per100g_sugar"
+  },
+  "per100g_sugar_uncorrected": {
+   "unit": "g",
+   "basis": "100g",
+   "domain": [
+    0,
+    100
+   ],
+   "basis_note": "pre-correction value of per100g_sugar"
+  },
+  "recipe_id": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "identifier, not a quantity"
+  },
+  "recipe_id_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "original source value of recipe_id"
+  },
+  "recipe_id_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R5 pass of recipe_id"
+  },
+  "recipe_id_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R6 pass of recipe_id"
+  },
+  "recipe_id_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R7 pass of recipe_id"
+  },
+  "recipe_id_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R8 pass of recipe_id"
+  },
+  "recipe_id_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "value before the R9 pass of recipe_id"
+  },
+  "recipe_id_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "pre-density-correction value of recipe_id"
+  },
+  "recipe_id_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": null,
+   "basis_note": "pre-correction value of recipe_id"
+  }
+ },
+ "undeclared_numeric_columns": {},
+ "files_stamped": [
+  {
+   "file": "data\\corpus\\recipes_structured.parquet",
+   "columns": 268,
+   "stamped": 103,
+   "rows": 219386
+  },
+  {
+   "file": "data\\kg\\kg_nodes.parquet",
+   "columns": 44,
+   "stamped": 33,
+   "rows": 222578
+  }
+ ]
+}

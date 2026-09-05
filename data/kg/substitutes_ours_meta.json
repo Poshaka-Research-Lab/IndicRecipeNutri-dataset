@@ -1,0 +1,17 @@
+{
+  "layer": "B7 v2 substitution candidates",
+  "source": "our own corpus only",
+  "method": "cosine over PPMI co-occurrence vectors, WEIGHTED BY co-occurrence avoidance and restricted to same ING2CAT category",
+  "score": "cosine * (1 - normalised PMI rank)",
+  "supersedes": "v1 ranked on cosine alone and returned pairs used TOGETHER (coriander->cumin 0.88, ghee->cardamom 0.81) rather than pairs that replace each other",
+  "min_freq": 100,
+  "top_per_ingredient": 8,
+  "min_score": 0.15,
+  "rows": 3314,
+  "ingredients": 439,
+  "NOT_ALLERGEN_AWARE": "Candidates for review only. cashew and almond will score highly and are BOTH tree nuts. Re-apply the hard allergen filter after using this table; never substitute across an allergen boundary on its say-so.",
+  "VERDICT_2026_08_29": "DOES NOT WORK. Reviewed against culinary knowledge and rejected. The v2 additions (co-occurrence avoidance + same-category restriction) did not fix the underlying problem: co-occurrence statistics cannot distinguish 'plays a similar role' from 'appears in similar dishes'. Concretely: ghee -> curd / milk was scored a top candidate and is WRONG -- ghee is a clarified fat, curd is a fermented dairy product, milk is a liquid; they are not interchangeable. (Ghee is not interchangeable with butter either: the water and milk solids are removed, which changes smoke point and behaviour.) The one apparent success, cashew -> cashewnut, was a VOCABULARY DUPLICATE, not a substitution -- since merged.",
+  "why_it_cannot_work_as_built": "Substitutability is a claim about FUNCTION -- fat vs acid vs thickener vs aromatic -- and about sensory outcome. Neither is recoverable from which ingredients share a recipe. Two ingredients with identical co-occurrence profiles may be a fat and a spice.",
+  "what_would_be_needed": "A functional-role attribute per ingredient (fat / acid / sweetener / thickener / aromatic / protein / starch), then substitution WITHIN role and within allergen class. That is a curation task on ~1,030 ingredients, not a statistic. The existing ING2CAT covers only 207 of them and is a food-group taxonomy, not a functional one.",
+  "status": "SHIPPED AS A NEGATIVE RESULT - do not use for substitution recommendations"
+}

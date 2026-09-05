@@ -43,5 +43,4 @@ gen.py · baselines.py · baseline_results.json.
 
 ## Limitations / ethics
 Synthetic — not real human behaviour; rewards methods that recover region/diet/health structure.
-Use for method comparison / cold-start, not for claims about real Indian users. recipe_id joins
-to the IndicRecipeNutri master. Generated 2026-08-21.
+Same replacement text as data/synthetic_interactions/DATASHEET.md line 46 above.
