@@ -39,7 +39,7 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 | coconut | 36,824 | 35,524 | 35,524 | 1,300 | 0 | 96.47% | 100.00% | agrees |
 | tamarind | 12,163 | 12,059 | 12,059 | 104 | 0 | 99.14% | 100.00% | agrees |
 | fenugreek | 20,025 | 17,864 | 17,864 | 2,161 | 0 | 89.21% | 100.00% | agrees |
-| asafoetida | 30,518 | 23,741 | 23,657 | 6,861 | 84 | 77.52% | 99.65% | REVIEW — 84 fail-open |
+| asafoetida | 30,607 | 23,741 | 23,741 | 6,866 | 0 | 77.57% | 100.00% | agrees |
 
 > **Read the recall column with care.** For `coconut`, `tamarind` and `fenugreek` it is
 > close to a tautology: the labels were derived from a lexicon that is a superset of the
@@ -47,17 +47,23 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 > the expected reading, not an achievement. It is **not** evidence that the corpus
 > contains no unlabelled instances of those foods.
 >
-> `asafoetida` is the exception, and it is the one worth reading. Its arm carries a
-> **misspelling family** the labelling lexicon does not, so its FN count is a genuine
-> measurement rather than a definitional zero — and it is **non-zero**. Those rows are
-> recipes that name asafoetida in a spelling the labeller missed, so they carry no
-> asafoetida label. That is a **fail-open** direction, the one CLAUDE.md §4.3 says is
-> never traded, and it is tracked in
-> `_docs/audits/PROPOSE_asafoetida_spellings_2026-09-05.tsv`.
+> `asafoetida` is the one worth reading. Its arm carries a **misspelling family** —
+> 24 further spellings and the quantity-fused forms (`teaspoonasafoetida`) — so its FN
+> count is a genuine measurement rather than a definitional zero.
+>
+> It reads **zero**, and that zero was earned rather than assumed. It was **84**
+> when the family was first measured: recipes naming asafoetida in a spelling the
+> labelling lexicon did not carry, holding no asafoetida label — **fail-open**, the
+> direction CLAUDE.md §4.3 says is never traded. None was `unknown`, and 70 carried
+> other classes confidently, so the fail-closed sentinel did not cover them. Pass
+> V27 put the spellings into the lexicon and relabelled 89 rows; a second round was
+> needed because the first listed only spellings ending in `-a` and left 11
+> (`asafatedia`, `asafetide`) behind. A non-zero value here again would mean a new
+> source spelling it a new way, and is a defect to act on, not a rate to tolerate.
 
 ## Why asafoetida's precision is the outlier
 
-**6,861** recipes carry the `asafoetida` label without naming it in the shipped
+**6,866** recipes carry the `asafoetida` label without naming it in the shipped
 ingredient list. An earlier version of this report put that count at 1,321 and
 attributed it to *"valid knowledge-graph (KG-sourced) labels"*. **There is no KG
 allergen source in this payload** — `allergens_sa5_src` takes only `lexicon_v8` (72,941), `none` (146,445). The actual
@@ -70,18 +76,18 @@ chaat masala contains asafoetida; its ingredient list does not say so. Labelling
 recipes is correct and is the fail-closed behaviour Codex CXC 80-2020 requires — but it
 makes the label deliberately exceed the text, which is what depresses precision here.
 
-Of those 6,861 rows, **6,529 (95.2%)** name such a blend:
+Of those 6,866 rows, **6,530 (95.1%)** name such a blend:
 
 | Blend named | Recipes |
 |---|---:|
 | chaat masala | 4,285 |
 | chat masala | 931 |
-| sev | 766 |
+| sev | 767 |
 | sambar powder | 630 |
 | pav bhaji | 560 |
-| garam masala | 385 |
+| garam masala | 386 |
 
-Leaving **332** rows (0.15% of the corpus) where the
+Leaving **336** rows (0.15% of the corpus) where the
 label is not explained by either a spelling variant or a named blend. These are
 recorded, not resolved. They are a **known open item**, and because the residual
 direction is a label the text does not support — an over-warning, not a missed

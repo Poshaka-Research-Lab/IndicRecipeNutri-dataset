@@ -216,7 +216,7 @@ Covering **all 43 published Parquet tables**.
 | `badlist_n_items` | float64 |  | 219,386 | 52 | 11.0 |  |
 | `badlist_hard` | bool |  | 219,386 | 2 | False |  |
 | `badlist_any` | bool |  | 219,386 | 2 | False |  |
-| `allergen_tier` | object |  | 196,542 | 9,619 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 196,545 | 9,622 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `review_m1m2` | bool |  | 219,386 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
 | `ingredient_src` | object |  | 3,314 | 1 | title_evidence |  |
@@ -380,7 +380,7 @@ Covering **all 43 published Parquet tables**.
 | `Allergens_v1_superseded` | object |  | 219,386 | 484 | milk;gluten | ⚠ **Superseded, do not use for safety.** 12 of the 16 classes (no coconut / asafoetida / fenugreek / tamarind), some rows comma-separated, un-normalised `dairy` and `peanuts` tokens. Retained only so a v1-era claim stays reproducible. |
 | `allergens_inferred` | bool |  | 219,386 | 2 | False |  |
 | `allergens_src` | object |  | 218,615 | 2 | source/v5 |  |
-| `Allergens_v2` | object |  | 219,386 | 3,565 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
+| `Allergens_v2` | object |  | 219,386 | 3,567 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
 | `allergens_encoding_fixed` | bool |  | 219,386 | 1 | True |  |
 | `allergens_sa5_src` | object |  | 219,386 | 2 | none |  |
 | `nutrition_estimated` | bool |  | 219,386 | 2 | False |  |
@@ -477,7 +477,7 @@ Covering **all 43 published Parquet tables**.
 | `Diet_prior` | object |  | 315 | 3 | Vegan |  |
 | `diet_v13` | object |  | 1,823 | 4 | flagged_weak_evidence_only |  |
 | `diet_meat_class` | object |  | 32,392 | 15 | poultry |  |
-| `allergen_tier` | object |  | 196,542 | 9,619 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 196,545 | 9,622 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | bool |  | 219,386 | 2 | False |  |
 | `review_m1m2` | bool |  | 219,386 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
@@ -927,7 +927,7 @@ Covering **all 43 published Parquet tables**.
 
 ## `data/kg/kg_edges.parquet`
 
-6,292,304 rows x 3 columns - 7.0 MB (statistics from the first 500,000 rows)
+6,292,393 rows x 3 columns - 7.0 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|

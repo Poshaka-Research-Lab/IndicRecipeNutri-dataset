@@ -233,7 +233,11 @@ def main() -> int:
     print(f"  payload manifest: {len(files)} files")
 
     target = REPO_ROOT / "docs" / "DATA_DICTIONARY.md"
-    target.write_text("\n".join(out) + "\n", encoding="utf-8")
+    # newline="\n": this file is `text eol=lf` in .gitattributes and its digest is pinned in
+    # checksums/SHA256SUMS. The platform default makes it CRLF here and LF in the object
+    # store, so --strict-checksums passes locally and fails on the Linux runner.
+    with target.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write("\n".join(out) + "\n")
     print(f"wrote {target}")
     return 0
 

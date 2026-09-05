@@ -2,7 +2,7 @@
   "version": "v3",
   "recipes": 219386,
   "nodes": 222578,
-  "edges": 6292304,
+  "edges": 6292393,
   "node_types": {
     "recipe": 219386,
     "compound": 1601,
@@ -26,7 +26,7 @@
     "has_ingredient": 1779597,
     "has_health_tag": 1725659,
     "suitable_for": 895759,
-    "contains_allergen": 485030,
+    "contains_allergen": 485119,
     "cooked_by": 404237,
     "has_diet": 256151,
     "is_course": 219386,

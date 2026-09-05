@@ -56,6 +56,34 @@ Corpus still on master **v15**. **Breaking:** two published enrichment tables ar
 - `contains_allergen` now carries all 17 declared classes on every surface. `ghee` reaches
   the tabular surfaces, not only the graph.
 
+### Fixed — an allergen fail-open (V27)
+
+**89 recipes named asafoetida in a spelling the labelling lexicon did not carry, and so held
+no asafoetida label.** None was marked `unknown`, and 70 carried other classes confidently
+(`mustard:direct` and the like) — so the row *was* assessed and this class was missed. The
+fail-closed sentinel did not cover them. That is the direction the guardrails say is never
+traded, and it is now closed: the class goes 30,518 → **30,607**, and `contains_allergen`
+30,518 → 30,607 for a KG total of **6,292,393** (+89), reconciling both ways with no
+remainder.
+
+The corpus spells this word 24 ways beyond the canonical two — `aseftida`, `asaefoetida`,
+`asafotedia`, `asafatedia` — and glues quantities to it (`teaspoonasafoetida` on 30 rows,
+`pinchasafoetida` on 18), where a word boundary cannot fire. All of it is now in
+`allergen_lexicon_v14`, explicitly and observed-in-context rather than as a fuzzy pattern,
+with the one wildcard confined to the canonical spelling, which is not a substring of any
+other word. Harness 63/63 positive, 33/33 negative.
+
+Found by widening `scripts/validate_sa5.py` until its recall stopped being a tautology.
+Two rounds were needed: the first arm listed only spellings ending in `-a` and left 11 rows
+behind. Two candidate rows (14006, 14048) were deliberately **not** labelled — they are
+`unknown`, and asserting a class on an unassessed row collapses the sentinel; gate M28.7
+caught that on the first attempt, along with 3 rows that would have carried both a class and
+`none_detected`.
+
+`scripts/validate_sa5.py` also joins the build chain rather than only the gate suite: it
+writes a checksummed document, so leaving it out meant every rebuild produced the staleness
+its own gate then failed on.
+
 ### Fixed — documentation that described a superseded payload
 
 Two shipped validation reports carried figures that no longer matched the data beside them.

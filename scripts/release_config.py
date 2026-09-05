@@ -548,7 +548,31 @@ EXPECTED_KG_NODES = 222_578
 #          MASTER_pre_retranslate.bak.csv and the current master (1,779,444 -> 1,779,597).
 #
 # Both terms measured; no remainder.
-EXPECTED_KG_EDGES = 6_292_304
+#
+# MOVED 2026-09-05 (V27, asafoetida misspellings): 6,292,304 -> 6,292,393, delta +89.
+#
+#    +89   contains_allergen, ALL of them asafoetida, one per recipe. Reconciles exactly
+#          against the pass: 89 rows gained the label, and the asafoetida class goes
+#          30,518 -> 30,607. Same number both ways, so the delta carries no remainder.
+#
+#          It was +76 on the first run. TWO rows were withdrawn from the change after
+#          gate M28.7 caught them: 14006 and 14048 are marked `unknown` -- allergens never
+#          assessed, empty ingredient list, already fail-closed. Asserting a positive class
+#          on an unassessed row buys no safety and COLLAPSES THE SENTINEL, leaving the wide
+#          surface at `unassessed` while Allergens_v2 claimed `present`. The pass now skips
+#          `unknown` rows outright. A separate 3 rows had `none_detected` cleared, which is
+#          correct: a row cannot be both scanned-clean and carrying a class.
+#     0   nodes. EXPECTED_KG_NODES stays 222,578: labelling an existing recipe with an
+#          existing class creates an edge between two nodes that were already there.
+#
+# WHY those 76 rows moved: they name asafoetida in one of 19 spellings the lexicon did not
+# carry (`aseftida`, `asaefoetida`, `asafotedia`, ...), so they read "assessed, no
+# asafoetida" while their own ingredient list said `a pinch aseftida`. None was marked
+# `unknown`, and 70 carried other classes confidently, so the fail-closed sentinel did not
+# cover them -- this was fail-open, not unassessed. See
+# `data/apply_asafoetida_spellings_v27.py` and
+# `_docs/audits/PROPOSE_asafoetida_spellings_2026-09-05.tsv`.
+EXPECTED_KG_EDGES = 6_292_393
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

@@ -77,18 +77,13 @@
   "allergens": {
     "asafoetida": {
       "lexical_present": 22384,
-      "flagged_present": 30517,
-      "false_negatives": 1,
+      "flagged_present": 30592,
+      "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 8134,
-      "audit_lexicon_coverage_of_flagged": 0.7335,
-      "unaudited_flagged_rows": 8134,
-      "false_negative_examples": [
-        {
-          "recipe_id": 209831,
-          "name": "How to make temple style curd rice? | Temple Style Curd Rice in Tamil"
-        }
-      ]
+      "false_positives_flag_only": 8208,
+      "audit_lexicon_coverage_of_flagged": 0.7317,
+      "unaudited_flagged_rows": 8208,
+      "false_negative_examples": []
     },
     "celery": {
       "lexical_present": 2317,
@@ -102,22 +97,13 @@
     },
     "coconut": {
       "lexical_present": 35524,
-      "flagged_present": 36822,
-      "false_negatives": 2,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 36824,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 1300,
       "audit_lexicon_coverage_of_flagged": 0.9647,
       "unaudited_flagged_rows": 1300,
-      "false_negative_examples": [
-        {
-          "recipe_id": 173494,
-          "name": "Peanut butter recipe in Kannada | How to make peanut butter"
-        },
-        {
-          "recipe_id": 173901,
-          "name": "Hasi menthe thambli recipe in Kannada | How to make raw fenugreek tambli"
-        }
-      ]
+      "false_negative_examples": []
     },
     "egg": {
       "lexical_present": 10543,
@@ -131,18 +117,13 @@
     },
     "fenugreek": {
       "lexical_present": 17864,
-      "flagged_present": 20024,
-      "false_negatives": 1,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 20025,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 2161,
       "audit_lexicon_coverage_of_flagged": 0.8921,
       "unaudited_flagged_rows": 2161,
-      "false_negative_examples": [
-        {
-          "recipe_id": 173695,
-          "name": "Hunasekayi thokku recipe in Kannada | How to make fennel seeds"
-        }
-      ]
+      "false_negative_examples": []
     },
     "fish": {
       "lexical_present": 4830,
@@ -195,31 +176,18 @@
     },
     "gluten": {
       "lexical_present": 38137,
-      "flagged_present": 72012,
-      "false_negatives": 3,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 72015,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 33878,
       "audit_lexicon_coverage_of_flagged": 0.5296,
       "unaudited_flagged_rows": 33878,
-      "false_negative_examples": [
-        {
-          "recipe_id": 173401,
-          "name": "You can download recipe in Kannada | How to thresh paddy"
-        },
-        {
-          "recipe_id": 173528,
-          "name": "Sabbakki idli recipe in Kannada | How to make Sabbakki Idli"
-        },
-        {
-          "recipe_id": 210274,
-          "name": "No pressure cooker, no microwave oven, you can make cake..!"
-        }
-      ]
+      "false_negative_examples": []
     },
     "milk": {
       "lexical_present": 110778,
-      "flagged_present": 116433,
-      "false_negatives": 32,
+      "flagged_present": 116435,
+      "false_negatives": 30,
       "false_negative_rate_of_lexical": 0.0003,
       "false_positives_flag_only": 5687,
       "audit_lexicon_coverage_of_flagged": 0.9512,
@@ -309,12 +277,12 @@
     },
     "sesame": {
       "lexical_present": 11864,
-      "flagged_present": 13727,
+      "flagged_present": 13729,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1863,
-      "audit_lexicon_coverage_of_flagged": 0.8643,
-      "unaudited_flagged_rows": 1863,
+      "false_positives_flag_only": 1865,
+      "audit_lexicon_coverage_of_flagged": 0.8642,
+      "unaudited_flagged_rows": 1865,
       "false_negative_examples": []
     },
     "shellfish": {
@@ -329,52 +297,42 @@
     },
     "soy": {
       "lexical_present": 8031,
-      "flagged_present": 9049,
-      "false_negatives": 1,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 9050,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 1019,
       "audit_lexicon_coverage_of_flagged": 0.8874,
       "unaudited_flagged_rows": 1019,
-      "false_negative_examples": [
-        {
-          "recipe_id": 202159,
-          "name": "fish sauce"
-        }
-      ]
+      "false_negative_examples": []
     },
     "sulphites": {
       "lexical_present": 0,
-      "flagged_present": 23966,
+      "flagged_present": 23989,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": null,
-      "false_positives_flag_only": 23966,
+      "false_positives_flag_only": 23989,
       "audit_lexicon_coverage_of_flagged": 0.0,
-      "unaudited_flagged_rows": 23966,
+      "unaudited_flagged_rows": 23989,
       "false_negative_examples": []
     },
     "tamarind": {
       "lexical_present": 12059,
-      "flagged_present": 12162,
-      "false_negatives": 1,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 12163,
+      "false_negatives": 0,
+      "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 104,
       "audit_lexicon_coverage_of_flagged": 0.9914,
       "unaudited_flagged_rows": 104,
-      "false_negative_examples": [
-        {
-          "recipe_id": 173695,
-          "name": "Hunasekayi thokku recipe in Kannada | How to make fennel seeds"
-        }
-      ]
+      "false_negative_examples": []
     },
     "tree_nuts": {
       "lexical_present": 15012,
-      "flagged_present": 33278,
+      "flagged_present": 33279,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 18266,
+      "false_positives_flag_only": 18267,
       "audit_lexicon_coverage_of_flagged": 0.4511,
-      "unaudited_flagged_rows": 18266,
+      "unaudited_flagged_rows": 18267,
       "false_negative_examples": []
     }
   },
