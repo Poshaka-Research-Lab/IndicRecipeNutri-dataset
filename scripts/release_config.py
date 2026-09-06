@@ -43,9 +43,13 @@ EXPECTED_TAXONOMY_HASH = "0d259036dbdc260f"
 
 # --------------------------------------------------------------------------- paths
 
-# Root of the *source* tree the release is built from. Overridable so the builders
-# can run on a machine where the working corpus lives somewhere else.
-SOURCE_ROOT = Path("D:/datasets/scraped_indian_recipes")
+# Root of the *source* tree the release is built from. The comment here has said
+# "overridable" since it was written, and until 2026-09-06 it was not: the path was a
+# literal, so the claim was false and there was no way to exercise the source-less code
+# paths below without deleting files. Now it really is overridable, which is also how the
+# vendored-fallback branches are tested.
+SOURCE_ROOT = Path(os.environ.get("INDICRECIPE_SOURCE_ROOT",
+                                  "D:/datasets/scraped_indian_recipes"))
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -163,6 +167,27 @@ EXCLUDED_RECIPE_IDS = {
 # `scraped_indian_recipes/data/_docs/V7_NONRECIPE_2026-09-01.md`.
 _WITHDRAWN_JSON = SOURCE_ROOT / "data" / "nonrecipe_withdrawn_v7.json"
 
+# VENDORED FALLBACK, written by `_admin/scripts/gen_release_withdrawn.py` and shipped in the
+# payload. IDS ONLY -- the quarantine records themselves stay unpublished, since they hold
+# the very rows the withdrawal removed and one V7 population was withdrawn for PII.
+#
+# The SOURCE tree still wins when reachable, so a stale copy cannot mask a canonical change;
+# this is what makes the check run on a clone, in CI, and for a Zenodo depositor. The
+# alternative -- INDICRECIPE_ALLOW_NO_WITHDRAWN_LIST=1 -- is explicitly NOT used here: as
+# `_load_withdrawn` says in its own error text, an empty list makes the exclusion check pass
+# vacuously, and a guard that reports success while checking nothing is worse than a red
+# build.
+_VENDORED_WITHDRAWN = REPO_ROOT / "data" / "provenance" / "withdrawn_ids.json"
+
+
+def _vendored(key: str) -> dict | None:
+    if not _VENDORED_WITHDRAWN.exists():
+        return None
+    import json
+    with _VENDORED_WITHDRAWN.open(encoding="utf-8") as fh:
+        block = json.load(fh).get(key)
+    return {int(k): str(v) for k, v in block.items()} if block else None
+
 
 def _load_withdrawn() -> dict:
     """Load the withdrawn-id list, and FAIL if it is missing rather than returning {}.
@@ -179,6 +204,9 @@ def _load_withdrawn() -> dict:
     import json
     import os
     if not _WITHDRAWN_JSON.exists():
+        vendored = _vendored("v7_nonrecipe")
+        if vendored:
+            return vendored
         if os.environ.get("INDICRECIPE_ALLOW_NO_WITHDRAWN_LIST") == "1":
             return {}
         raise FileNotFoundError(
@@ -218,6 +246,9 @@ def _load_grihshobha() -> dict:
     import csv
     import os
     if not _GRIHSHOBHA_CSV.exists():
+        vendored = _vendored("v8_grihshobha")
+        if vendored:
+            return vendored
         if os.environ.get("INDICRECIPE_ALLOW_NO_WITHDRAWN_LIST") == "1":
             return {}
         raise FileNotFoundError(
