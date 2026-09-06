@@ -30,6 +30,24 @@ payload, and this one is harder to notice because nobody re-reads the author lis
 The surname rule is positional, not longest-token: `Hemprasad Y. Badgujar` yields
 `Hemprasad` on a longest-token rule, which is how the first version of the guard failed.
 
+### Changed — one name format across every record
+
+The dataset spelled its own authors two ways: `.zenodo.json` supplied a literal
+`Given Family` string, while a record edited through Zenodo's structured form composes
+`Family, Given`. So 0.3.0 and 0.4.1 render as `Hemprasad Y. Badgujar` and 0.4.0 — corrected
+by hand — renders as `Badgujar, Hemprasad Y.`. Cosmetic, but citation tools match on
+strings, and two spellings of one author across versions of one dataset is exactly the kind
+of thing that fragments a citation record.
+
+`.zenodo.json` now uses `Family, Given`, which is the DataCite convention and what the web
+form produces, so every future release matches by construction. `check_authorship` compares
+**surnames** rather than whole strings, which is why it kept passing across the change —
+that was the right call when it was written.
+
+Honorifics are kept as published. `Dr.` in a given-name field is not standard DataCite
+practice and does interfere with author disambiguation, but these are other people's names
+as they already appear on a minted DOI, and normalising them is the authors' call.
+
 ### Fixed — the citation prose described a payload three releases old
 
 `.zenodo.json`'s description and `CITATION.cff`'s abstract both still said 220,187 recipes,
