@@ -4,6 +4,37 @@ Versions follow semver and describe the **release**, not the corpus build. The c
 build (`v15`) is recorded separately in `data/corpus/corpus_manifest.json` and
 `.zenodo.json`.
 
+## [0.4.1] — 2026-09-06
+
+Metadata only. No data, no code behaviour, no counts changed.
+
+### Fixed — 0.4.0 dropped two co-authors from its own DOI
+
+The published 0.3.0 Zenodo record credits three authors with affiliations. `.zenodo.json`
+and `CITATION.cff` in this repository named **one**: the co-authors had been added by hand
+on the Zenodo record and never written back here. Zenodo regenerates a record's metadata
+from `.zenodo.json` on every release, so publishing 0.4.0 **silently dropped Dr. Santosh P.
+Borde and Dr. Yogesh Gurav** into a permanent DOI (`10.5281/zenodo.22537252`). Nothing
+failed; the release was green.
+
+All three authors and their affiliations are now declared in both files, preserved exactly
+as published on the 0.3.0 record so an existing citation does not change form.
+
+`verify_release.py` gained a **`check_authorship`** guard: `.zenodo.json` and
+`CITATION.cff` must name the same people, compared by surname because the two formats
+spell a name differently by design (`Dr. Santosh P. Borde` against family/given plus
+`name-prefix`). Attribution is not a cosmetic field — a metadata file that disagrees with
+the record it generates is the same class of defect as a count that disagrees with its
+payload, and this one is harder to notice because nobody re-reads the author list.
+
+The surname rule is positional, not longest-token: `Hemprasad Y. Badgujar` yields
+`Hemprasad` on a longest-token rule, which is how the first version of the guard failed.
+
+### Fixed
+- `CITATION.cff` abstract still described 220,187 recipes, 223,406 nodes, 6.27M edges and
+  a 68-query benchmark. Re-measured against the payload.
+- README BibTeX lists all three authors and both version DOIs.
+
 ## [0.4.0] — 2026-09-06
 
 First release whose verification runs anywhere but the authoring machine, and the first

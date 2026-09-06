@@ -6,7 +6,16 @@
   "license": "cc-by-nc-sa-4.0",
   "creators": [
     {
-      "name": "Badgujar, Hemprasad Yashwant"
+      "name": "Hemprasad Y. Badgujar",
+      "affiliation": "Ajeenkya D Y Patil University, Pune"
+    },
+    {
+      "name": "Dr. Santosh P. Borde",
+      "affiliation": "Ajeenkya D Y Patil University, Pune"
+    },
+    {
+      "name": "Dr. Yogesh Gurav",
+      "affiliation": "Dr. D. Y. Patil Technical Campus Pune"
     }
   ],
   "keywords": [
@@ -18,7 +27,7 @@
     "recommender systems",
     "information retrieval"
   ],
-  "version": "0.4.0",
+  "version": "0.4.1",
   "notes": "Corpus build v15. Recipe prose is withheld under the two-tier release model; see docs/DATASHEET.md.\n\nMETADATA COMPLETENESS (2026-09-02). Two fields are deliberately absent rather than filled with a placeholder:\n  * publication_date — unset on purpose. Zenodo defaults it to the deposition date, which is the honest value; asserting a date here for a dataset whose own DATASHEET says 'NOT release-ready' would be a claim about an event that has not happened.\n  * creators[].orcid — not recorded anywhere in this repository. It is the author's to supply; an ORCID is an identifier for a specific person and must not be guessed.",
   "related_identifiers": [
     {

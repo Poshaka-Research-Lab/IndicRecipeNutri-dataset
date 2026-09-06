@@ -688,7 +688,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 
 # --------------------------------------------------------------------- release identity
 
-DATASET_VERSION = "0.4.0"
+DATASET_VERSION = "0.4.1"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

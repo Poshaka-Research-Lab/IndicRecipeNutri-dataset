@@ -1,6 +1,6 @@
 # IndicRecipeNutri
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512535.svg)](https://doi.org/10.5281/zenodo.22512535)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 
@@ -12,9 +12,11 @@ benchmark** with gold sets; and two **synthetic collaborative interaction logs**
 Every ingredient field is English/Roman. Every published figure in this file was measured
 from the payload at build time, not carried over from a previous release.
 
-**DOI:** [10.5281/zenodo.22512535](https://doi.org/10.5281/zenodo.22512535) (this version)
-· [10.5281/zenodo.22512534](https://doi.org/10.5281/zenodo.22512534) (concept DOI — always
-resolves to the latest). **Cite the concept DOI** unless you need to pin a version.
+**DOI:** [10.5281/zenodo.22512534](https://doi.org/10.5281/zenodo.22512534) — the **concept
+DOI**, which always resolves to the latest version. **Cite this** unless you need to pin a
+specific one; the badge above points at it for the same reason, so it does not go stale
+every release. Per-version DOIs: `10.5281/zenodo.22512535` (0.3.0),
+`10.5281/zenodo.22537252` (0.4.0).
 
 > **Read [`docs/DATASHEET.md`](docs/DATASHEET.md) before using this.** It documents
 > measured defects, and the allergen surface has known limits that matter if you build
@@ -187,7 +189,7 @@ Tag-driven, and it verifies *before* it publishes. See
 settings that must be on before the first tag.
 
 ```bash
-git tag -a v0.4.0 -m "..." && git push origin v0.4.0
+git tag -a v0.4.1 -m "..." && git push origin v0.4.1
 ```
 
 Zenodo archives each published GitHub release and mints a version DOI.
@@ -216,19 +218,23 @@ To request removal of content, see [`docs/TAKEDOWN.md`](docs/TAKEDOWN.md).
 ## Citation
 
 ```bibtex
-@dataset{badgujar_indicrecipenutri,
-  author    = {Badgujar, Hemprasad Yashwant},
-  title     = {IndicRecipeNutri: an Indian recipe--nutrition corpus with a
-               typed knowledge graph and a retrieval benchmark},
+@dataset{badgujar_borde_gurav_indicrecipenutri,
+  author    = {Badgujar, Hemprasad Y. and Borde, Santosh P. and Gurav, Yogesh},
+  title     = {IndicRecipeNutri},
+  year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.22512534},
   url       = {https://doi.org/10.5281/zenodo.22512534}
 }
 ```
 
-The DOI above is the **concept DOI** and always resolves to the latest version; use
-`10.5281/zenodo.22512535` to pin this one. Machine-readable metadata is in
-[`CITATION.cff`](CITATION.cff) and [`.zenodo.json`](.zenodo.json).
+The DOI above is the **concept DOI** and always resolves to the latest version. To pin a
+specific one: `10.5281/zenodo.22512535` (0.3.0), `10.5281/zenodo.22537252` (0.4.0).
+
+Machine-readable metadata is in [`CITATION.cff`](CITATION.cff) and
+[`.zenodo.json`](.zenodo.json), and the two are checked against each other at release time
+— the published record is generated from `.zenodo.json`, so a disagreement between them
+would mean the DOI credits a different author list than the repository does.
 
 The associated paper is *IndicRecipeNutri: A Single-Store, Tri-Modal, Explainable Retriever
 for Nutrition-Grounded Indian Recipe Recommendation* — venue and DOI pending.

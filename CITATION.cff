@@ -3,16 +3,32 @@ message: "If you use this dataset, please cite it as below."
 type: dataset
 title: "IndicRecipeNutri"
 abstract: >-
-  A corpus of 220,187 Indian recipes with multilingual provenance and estimated
-  dish-level micronutrition, a typed knowledge graph of 223,406 nodes
-  and 6.27M edges, a 68-query retrieval benchmark, and a synthetic collaborative
-  interaction log. Structured and derived fields only; recipe prose is not
+  A corpus of 219,386 Indian recipes across 378 source sites, with parsed
+  ingredients in English/Roman, a 17-class allergen surface carrying an explicit
+  unassessed sentinel, dish-level nutrition estimates and FSA traffic lights; a
+  typed knowledge graph of 222,578 nodes and 6,292,393 edges; a 67-query
+  retrieval benchmark with gold sets; and two synthetic collaborative
+  interaction logs. Structured and derived fields only; recipe prose is not
   redistributed and is recoverable via the published rehydration index.
+# All three authors, matching the Zenodo record. They were present on the 0.3.0 record only
+# as a manual edit there, and were absent from this file and from `.zenodo.json` — so
+# publishing 0.4.0 regenerated the record from the repo metadata and DROPPED the two
+# co-authors silently. Restored 2026-09-06 at the source, and `verify_release.py` now checks
+# the two files agree, so a release cannot quietly change its own author list again.
 authors:
   - family-names: Badgujar
-    given-names: Hemprasad Yashwant
+    given-names: Hemprasad Y.
+    affiliation: "Ajeenkya D Y Patil University, Pune"
     email: hemprasad.badagujar@gmail.com
-version: 0.4.0
+  - family-names: Borde
+    given-names: Santosh P.
+    name-prefix: Dr.
+    affiliation: "Ajeenkya D Y Patil University, Pune"
+  - family-names: Gurav
+    given-names: Yogesh
+    name-prefix: Dr.
+    affiliation: "Dr. D. Y. Patil Technical Campus Pune"
+version: 0.4.1
 date-released: 2026-09-06
 license: CC-BY-NC-SA-4.0
 repository-code: "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset"

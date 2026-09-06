@@ -218,6 +218,65 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def check_authorship(root: Path) -> None:
+    """`.zenodo.json` and `CITATION.cff` name the same people.
+
+    WHY THIS EXISTS. `.zenodo.json` listed one author while the published 0.3.0 record
+    carried three -- the co-authors had been added by hand on Zenodo and never written back
+    to the repository. Publishing 0.4.0 regenerated the record from the repo metadata and
+    DROPPED THEM, silently, into a permanent DOI. Nothing failed; the release was green.
+
+    Attribution is not a cosmetic field, and a metadata file that disagrees with the record
+    it generates is the same class of defect as a count that disagrees with its payload.
+    This compares surnames rather than exact strings, because the two formats spell a name
+    differently by design (`Dr. Santosh P. Borde` vs family/given plus `name-prefix`).
+    """
+    zen = root / ".zenodo.json"
+    cff = root / "CITATION.cff"
+    if not zen.exists() or not cff.exists():
+        return
+    creators = json.loads(zen.read_text(encoding="utf-8")).get("creators", [])
+    if not creators:
+        fail("authorship", ".zenodo.json declares no creators")
+        return
+    # Surname = the longest alphabetic token that is not an honorific or an initial.
+    def surnames(names: list[str]) -> set[str]:
+        out = set()
+        for n in names:
+            toks = [t.strip(".,") for t in re.split(r"[,\s]+", n) if t.strip(".,")]
+            toks = [t for t in toks if t.lower() not in {"dr", "prof", "mr", "ms", "mrs",
+                                                         "shri", "smt"} and len(t) > 1]
+            if toks:
+                # By POSITION, not by length. "Hemprasad Y. Badgujar" picks "Hemprasad" on a
+                # longest-token rule, which is exactly how the first version of this check
+                # failed. `Family, Given` -> before the comma; `Given M. Family` -> last.
+                out.add((toks[0] if "," in n else toks[-1]).lower())
+        return out
+
+    zen_names = surnames([c.get("name", "") for c in creators])
+    cff_text = cff.read_text(encoding="utf-8")
+    cff_names = {m.lower() for m in re.findall(r"^\s*-?\s*family-names:\s*\"?([^\"\n]+)\"?",
+                                               cff_text, re.M)}
+    cff_names = {n.strip().lower() for n in cff_names}
+
+    if zen_names != cff_names:
+        fail("authorship",
+             f".zenodo.json and CITATION.cff name different people — "
+             f"only in .zenodo.json: {sorted(zen_names - cff_names) or 'none'}; "
+             f"only in CITATION.cff: {sorted(cff_names - zen_names) or 'none'}. "
+             f"The published record is generated from .zenodo.json, so a disagreement here "
+             f"means the DOI will credit a different author list than the repository does.")
+        return
+    missing_aff = [c.get("name") for c in creators if not c.get("affiliation")]
+    if missing_aff:
+        notes.append(f"authorship: {len(creators)} creators agree across .zenodo.json and "
+                     f"CITATION.cff; {len(missing_aff)} carry no affiliation ({', '.join(missing_aff)})")
+    else:
+        notes.append(f"authorship: {len(creators)} creators, agreeing across .zenodo.json and "
+                     f"CITATION.cff, all with affiliations — "
+                     f"{', '.join(c['name'] for c in creators)}")
+
+
 def check_taxonomy_vendored() -> None:
     """The allergen taxonomy this checkout actually imported is the one it should have.
 
@@ -785,6 +844,7 @@ def main() -> int:
     check_exclusions(args.root)
     check_static_id_lists(args.root)
     check_units(args.root)
+    check_authorship(args.root)
     check_taxonomy_vendored()
     check_checksums(args.root, args.strict_checksums)
     check_disclosure(args.root)
