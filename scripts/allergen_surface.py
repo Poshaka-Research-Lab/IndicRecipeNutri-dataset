@@ -46,11 +46,15 @@ from __future__ import annotations
 
 import os
 import sys
+import pathlib
 from pathlib import Path
 
 import pandas as pd
 
+# Public accessor: this must import on a clone that has never seen the datasets
+# root, so the vendored copy in this directory is the fallback.
 sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
 import allergen_taxonomy as _AT  # noqa: E402
 
 #: The one published allergen surface, relative to the release repo root.

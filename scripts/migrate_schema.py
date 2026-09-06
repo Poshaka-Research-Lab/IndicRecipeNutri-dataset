@@ -38,9 +38,13 @@ import json
 import os
 import re
 import sys
+import pathlib
 from datetime import datetime, timezone
 
+# Second entry is the vendored taxonomy beside this script, so the import does not
+# depend on a path that exists on one machine.
 sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
 import paths as _paths  # noqa: E402
 import allergen_taxonomy as _AT  # noqa: E402
 

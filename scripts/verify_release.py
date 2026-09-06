@@ -35,6 +35,7 @@ from release_config import (  # noqa: E402
     DECLARED_ALLERGENS,
     EXPECTED_KG_EDGES,
     EXPECTED_KG_NODES,
+    EXPECTED_TAXONOMY_HASH,
     UNASSESSED_TOKEN,
     EXPECTED_RECIPES,
     PII_EXEMPT_COLUMNS,
@@ -52,6 +53,7 @@ from build_enrichment import prose_stem  # noqa: E402
 # tests the same scope the manifest is written over. Two hand-kept copies of that scope
 # would drift, and the drift would be silent in the safe direction-looking way.
 import make_checksums as mk  # noqa: E402
+import allergen_taxonomy as _AT  # noqa: E402
 
 # A published string column whose values run this long is prose by any other name.
 # `IngredientsList` is a parsed JSON array and is legitimately long, so it is exempt.
@@ -214,6 +216,28 @@ def sha256(path: Path) -> str:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def check_taxonomy_vendored() -> None:
+    """The allergen taxonomy this checkout actually imported is the one it should have.
+
+    Self-contained ON PURPOSE. Gate M27 compares the canonical file to its copies, but that
+    needs both visible at once and so only runs on the authoring machine. This compares the
+    imported payload to a digest pinned in `release_config.py`, which works on a clone that
+    has never seen the datasets root -- a reviewer's, CI's, or a Zenodo depositor's.
+
+    Until 2026-09-06 the import itself could not succeed off this machine at all, so nothing
+    downstream of it had ever run anywhere else.
+    """
+    got = _AT.source_hash()
+    if got != EXPECTED_TAXONOMY_HASH:
+        fail("taxonomy",
+             f"allergen taxonomy payload hash {got} != pinned {EXPECTED_TAXONOMY_HASH}. The "
+             f"vendored copy has drifted from the canonical file, or the taxonomy changed "
+             f"without the pin moving — run `_admin/scripts/gen_release_taxonomy.py`.")
+        return
+    notes.append(f"taxonomy: {len(_AT.TOKENS)} tokens, payload hash {got}, matches the pin — "
+                 f"verified without needing the datasets root")
 
 
 def check_checksums(root: Path, strict: bool) -> None:
@@ -686,6 +710,7 @@ def main() -> int:
     check_exclusions(args.root)
     check_static_id_lists(args.root)
     check_units(args.root)
+    check_taxonomy_vendored()
     check_checksums(args.root, args.strict_checksums)
     check_disclosure(args.root)
     check_licence_tiers(args.root)

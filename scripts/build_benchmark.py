@@ -21,6 +21,7 @@ import os
 import re
 import shutil
 import sys
+import pathlib
 from pathlib import Path
 
 import pandas as pd
@@ -28,7 +29,10 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 # Explicit, not inherited from release_config's insert: this import sits ABOVE that one and
 # would otherwise depend on import order to find the module.
+# Second entry is the vendored taxonomy beside this script, so the import does not
+# depend on a path that exists on one machine.
 sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
 import allergen_taxonomy as _AT  # noqa: E402
 import allergen_surface  # noqa: E402
 from release_config import (  # noqa: E402

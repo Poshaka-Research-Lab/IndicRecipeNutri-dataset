@@ -25,9 +25,13 @@ import csv
 import json
 import os
 import sys
+import pathlib
 from collections import Counter
 
+# Second entry is the vendored taxonomy beside this script, so the import does not
+# depend on a path that exists on one machine.
 sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = r"D:\datasets\IndicRecipeNutri-dataset"

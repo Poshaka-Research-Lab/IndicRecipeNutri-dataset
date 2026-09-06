@@ -16,8 +16,30 @@ from pathlib import Path
 # allergen classes and whose tables declare 16. `paths.bootstrap()` would do this insert
 # too, but this module is imported by the validator as well as the builders and must not
 # depend on the working tree being importable, so the insert is explicit and minimal.
+#
+# TWO path entries, in this order, and the order is the point. The datasets root goes FIRST
+# so the canonical file wins on the authoring machine and the vendored copy can never mask a
+# stale canonical. This script's own directory goes second, carrying the VENDORED COPY that
+# `_admin/scripts/gen_release_taxonomy.py` writes -- which is what makes this repository
+# self-contained.
+#
+# It was not self-contained until 2026-09-06. `DATASETS_ROOT` defaults to `D:\datasets`, a
+# path that exists on exactly one machine, so on every other checkout this import raised
+# `ModuleNotFoundError: No module named 'allergen_taxonomy'` -- caught by the first
+# `release.yml` dry run, on the `Verify release` step. The consequence was larger than a
+# failed job: every check the release makes about itself was unrunnable by CI, by a reviewer,
+# by a Zenodo depositor, or by anyone who cloned the archive and wanted to check the payload
+# against SHA256SUMS. A dataset whose integrity check runs only on the author's laptop has
+# not published its integrity check.
 sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
+sys.path.insert(1, str(Path(__file__).resolve().parent))
 import allergen_taxonomy as _AT  # noqa: E402
+
+# Pinned digest of the taxonomy PAYLOAD (tokens, 16-class map, provenance), not of the file.
+# `verify_release.py` compares `_AT.source_hash()` against this, which is the drift check
+# that works on a clone that has never seen the datasets root -- unlike the M27 check, which
+# needs both files visible at once. Move it only when the taxonomy itself is meant to change.
+EXPECTED_TAXONOMY_HASH = "0d259036dbdc260f"
 
 # --------------------------------------------------------------------------- paths
 
