@@ -4,6 +4,106 @@ Versions follow semver and describe the **release**, not the corpus build. The c
 build (`v15`) is recorded separately in `data/corpus/corpus_manifest.json` and
 `.zenodo.json`.
 
+## [0.4.0] — 2026-09-06
+
+First release whose verification runs anywhere but the authoring machine, and the first
+whose two long-standing audit disclosures were investigated rather than restated. No
+recipe data changed: row, column and graph counts are identical to 0.3.0.
+
+### Fixed — the audit lexicon's coverage was a regex bug, not a design limit
+
+0.3.0 disclosed that the independent audit lexicon "covers under 60% of flagged rows" for
+six classes, and 121,480 flagged rows went unaudited. That was read for months as
+deliberate narrowness. **It was a plural-matching bug.** Every pattern was singular and
+`\b`-anchored on both sides, so `\bcashew\b` could not match `cashews` — `s` is a word
+character, so the closing boundary fails — and recipe text writes count nouns in the
+plural nearly always.
+
+The giveaway was in the numbers the whole time: the classes that scored well are exactly
+the **mass nouns**, which have no plural to miss (milk 95.1%, ghee 99.8%, tamarind 99.1%,
+coconut 96.5%), and the ones that scored badly are exactly the **count nouns**. A
+vocabulary gap does not sort itself by grammatical number.
+
+| class | 0.3.0 | 0.4.0 |
+|---|---:|---:|
+| peanut | 37.4% | **92.9%** |
+| tree_nuts | 45.1% | **92.6%** |
+| shellfish | 38.9% | **88.9%** |
+| egg | 48.7% | **86.6%** |
+| gluten | 53.0% | **74.8%** |
+
+Unaudited flagged rows **121,480 → 72,919**, of which 23,989 are sulphites (below). Rows
+the audit lexicon now matches that the labeller did *not* flag stayed near zero, so this
+is coverage, not over-matching. `s?` does not compromise the audit's independence: it is a
+morphology fix, not an import of the labelling lexicon's vocabulary.
+
+Gluten was extended with unambiguous wheat products (`suji`, `vermicelli`, `semiya`,
+`noodles`, `breadcrumbs`, qualified flours). **Bare `flour` is deliberately excluded** —
+rice, gram and corn flour are gluten-free, and it appears in 22,426 of the previously
+unmatched rows, so matching it would manufacture agreement on no evidence.
+
+### Changed — `sulphites` is reported as unauditable, not as 0% covered
+
+The two legs ask different questions. The labeller uses a **carrier rule** — vinegar
+(10,227 flagged rows), raisins (7,089), wine, dried fruit — because that is where
+sulphites are. The independent leg asks whether the recipe *declares* the additive, which
+a home recipe never does. Coverage is 0 by construction and always will be.
+
+Giving the independent leg a carrier list would make it agree with the labeller on the
+labeller's own theory and report that agreement as corroboration. It deliberately does
+not, and the release now says the class is **not independently auditable** rather than
+reporting it as a coverage failure.
+
+### Fixed — the static-id guard checked one population of three and one directory of two
+
+`synthetic_interactions` is pinned to the pre-withdrawal corpus by decision (V9.5): its
+generator cannot be re-run here, and regenerating would invalidate the published
+`baseline_results.json`. That decision stands. What was wrong is that "pinned" meant
+"pinned against the subset we happened to check".
+
+- It tested `WITHDRAWN_NONRECIPE_IDS` (V7 only) while `all_withdrawn_ids()` exists so a
+  population cannot be added without every consumer seeing it — the very failure the
+  registry was built for. **V8 references it never counted: 70 / 70 / 3,462.**
+- **`data/synthetic_interactions_v3/` was published and entirely unchecked.** It is a
+  later generation and is V7-clean (0 references where v1 has 315), but carries 12 / 12 /
+  1,087 V8 references of its own.
+
+Both directories are now pinned against all **4,617** withdrawn ids across every
+population: `synthetic_interactions` 385 / 385 / 20,161, `synthetic_interactions_v3`
+12 / 12 / 1,087.
+
+### Fixed — the repository was not self-contained
+
+`release_config.py` imported `allergen_taxonomy` from `D:\datasets`, a path that exists on
+one machine, and read both withdrawal lists from the source tree. The first release
+workflow run died with `ModuleNotFoundError` before executing a single check.
+
+The consequence was larger than a red build: **every check the release makes about itself
+could only ever run here** — not in CI, not for a reviewer, not for a Zenodo depositor,
+not for anyone cloning the archive to check the payload against `SHA256SUMS`.
+
+- `scripts/allergen_taxonomy.py` — verbatim vendored copy, regenerated in the build chain.
+  The datasets root stays first on the path, so the canonical file still wins locally and
+  the copy can never mask a stale canonical. `verify_release` compares its payload hash to
+  a pin, which is the drift check that works on a clone.
+- `data/provenance/withdrawn_ids.json` — **ids only**. The source files are quarantine
+  records holding the withdrawn rows, and one population was withdrawn for PII, so
+  vendoring them wholesale would republish exactly what the withdrawal removed. Publishing
+  the ids lets a user verify their absence for themselves.
+- `INDICRECIPE_ALLOW_NO_WITHDRAWN_LIST=1` exists and is deliberately **not** used: an
+  empty list makes the exclusion check pass vacuously.
+- `SOURCE_ROOT` is now genuinely overridable via `INDICRECIPE_SOURCE_ROOT`. Its comment
+  had claimed "overridable" while the path was a literal.
+
+Verified by simulating a clone with neither root present: `verify_release
+--strict-checksums` exits 0.
+
+### Changed
+- **README rewritten.** Every figure re-measured from the payload; the previous one still
+  described 220,187 rows, 68 benchmark queries, 251 columns and "no Git LFS". Adds the
+  DOI, an allergen section stating the four things that matter before building on the
+  labels, and a section on verifying a download.
+
 ## [0.3.0] — 2026-09-05
 
 Corpus still on master **v15**. **Breaking:** two published enrichment tables are removed,

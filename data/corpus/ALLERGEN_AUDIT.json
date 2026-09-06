@@ -77,42 +77,42 @@
   "allergens": {
     "asafoetida": {
       "lexical_present": 22384,
-      "flagged_present": 30592,
+      "flagged_present": 30607,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 8208,
-      "audit_lexicon_coverage_of_flagged": 0.7317,
-      "unaudited_flagged_rows": 8208,
+      "false_positives_flag_only": 8223,
+      "audit_lexicon_coverage_of_flagged": 0.7313,
+      "unaudited_flagged_rows": 8223,
       "false_negative_examples": []
     },
     "celery": {
-      "lexical_present": 2317,
+      "lexical_present": 2348,
       "flagged_present": 2357,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 40,
-      "audit_lexicon_coverage_of_flagged": 0.983,
-      "unaudited_flagged_rows": 40,
+      "false_positives_flag_only": 9,
+      "audit_lexicon_coverage_of_flagged": 0.9962,
+      "unaudited_flagged_rows": 9,
       "false_negative_examples": []
     },
     "coconut": {
-      "lexical_present": 35524,
+      "lexical_present": 35564,
       "flagged_present": 36824,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1300,
-      "audit_lexicon_coverage_of_flagged": 0.9647,
-      "unaudited_flagged_rows": 1300,
+      "false_positives_flag_only": 1260,
+      "audit_lexicon_coverage_of_flagged": 0.9658,
+      "unaudited_flagged_rows": 1260,
       "false_negative_examples": []
     },
     "egg": {
-      "lexical_present": 10543,
+      "lexical_present": 18733,
       "flagged_present": 21637,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 11094,
-      "audit_lexicon_coverage_of_flagged": 0.4873,
-      "unaudited_flagged_rows": 11094,
+      "false_positives_flag_only": 2904,
+      "audit_lexicon_coverage_of_flagged": 0.8658,
+      "unaudited_flagged_rows": 2904,
       "false_negative_examples": []
     },
     "fenugreek": {
@@ -126,13 +126,13 @@
       "false_negative_examples": []
     },
     "fish": {
-      "lexical_present": 4830,
+      "lexical_present": 4919,
       "flagged_present": 5829,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 999,
-      "audit_lexicon_coverage_of_flagged": 0.8286,
-      "unaudited_flagged_rows": 999,
+      "false_positives_flag_only": 910,
+      "audit_lexicon_coverage_of_flagged": 0.8439,
+      "unaudited_flagged_rows": 910,
       "false_negative_examples": []
     },
     "ghee": {
@@ -175,23 +175,84 @@
       ]
     },
     "gluten": {
-      "lexical_present": 38137,
+      "lexical_present": 53938,
       "flagged_present": 72015,
-      "false_negatives": 0,
-      "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 33878,
-      "audit_lexicon_coverage_of_flagged": 0.5296,
-      "unaudited_flagged_rows": 33878,
-      "false_negative_examples": []
+      "false_negatives": 93,
+      "false_negative_rate_of_lexical": 0.0017,
+      "false_positives_flag_only": 18170,
+      "audit_lexicon_coverage_of_flagged": 0.7477,
+      "unaudited_flagged_rows": 18170,
+      "false_negative_examples": [
+        {
+          "recipe_id": 29430,
+          "name": "French Toast"
+        },
+        {
+          "recipe_id": 29507,
+          "name": "Indian Style Crispy Grilled Fish Sandwich"
+        },
+        {
+          "recipe_id": 50385,
+          "name": "Tandoori mayo sandwich with mayo dip"
+        },
+        {
+          "recipe_id": 50421,
+          "name": "Tandoori Mayo Paneer Sandwich"
+        },
+        {
+          "recipe_id": 50422,
+          "name": "Tandoori Mayo sandwich"
+        },
+        {
+          "recipe_id": 55808,
+          "name": "Chickpea Sandwich"
+        },
+        {
+          "recipe_id": 57820,
+          "name": "Vegan Veggie Tikki Burger"
+        },
+        {
+          "recipe_id": 61205,
+          "name": "Paneer Kabab Recipe"
+        },
+        {
+          "recipe_id": 71446,
+          "name": "Tantuni Recipe with Yoghurt Sauce"
+        },
+        {
+          "recipe_id": 84771,
+          "name": "French Toast/ Classic French Toast"
+        },
+        {
+          "recipe_id": 85587,
+          "name": "Corn and Mayo Sandwich, Corn Mayonnaise Sandwich"
+        },
+        {
+          "recipe_id": 91884,
+          "name": "Gluten Free Rocky Road"
+        },
+        {
+          "recipe_id": 96139,
+          "name": "Masala Cheese Toast"
+        },
+        {
+          "recipe_id": 113644,
+          "name": "Meathead Pork Belly Apple Kachumber Masala Sandwich"
+        },
+        {
+          "recipe_id": 126241,
+          "name": "Mango Ice Cream Cake | Mango Ice Cream Cake | Mango Ice Cream Cake recipe in gujarati"
+        }
+      ]
     },
     "milk": {
-      "lexical_present": 110778,
+      "lexical_present": 110999,
       "flagged_present": 116435,
       "false_negatives": 30,
       "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 5687,
-      "audit_lexicon_coverage_of_flagged": 0.9512,
-      "unaudited_flagged_rows": 5687,
+      "false_positives_flag_only": 5466,
+      "audit_lexicon_coverage_of_flagged": 0.9531,
+      "unaudited_flagged_rows": 5466,
       "false_negative_examples": [
         {
           "recipe_id": 33216,
@@ -256,23 +317,84 @@
       ]
     },
     "mustard": {
-      "lexical_present": 33642,
+      "lexical_present": 33661,
       "flagged_present": 36687,
-      "false_negatives": 0,
-      "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 3045,
+      "false_negatives": 18,
+      "false_negative_rate_of_lexical": 0.0005,
+      "false_positives_flag_only": 3044,
       "audit_lexicon_coverage_of_flagged": 0.917,
-      "unaudited_flagged_rows": 3045,
-      "false_negative_examples": []
+      "unaudited_flagged_rows": 3044,
+      "false_negative_examples": [
+        {
+          "recipe_id": 29049,
+          "name": "Egg Pepper Gravy recipe"
+        },
+        {
+          "recipe_id": 32115,
+          "name": "Iyengar milagu kuzhambu"
+        },
+        {
+          "recipe_id": 32785,
+          "name": "Onion tomato chutney"
+        },
+        {
+          "recipe_id": 53016,
+          "name": "Gujarati Khaman Dhokla"
+        },
+        {
+          "recipe_id": 62053,
+          "name": "Kela Upkari/Raw Banana Curry (South Indian Style Plantain Stir Fry)"
+        },
+        {
+          "recipe_id": 62095,
+          "name": "Green Beans with Coconut and Peanuts"
+        },
+        {
+          "recipe_id": 85741,
+          "name": "Peanut Coconut Chutney Recipe"
+        },
+        {
+          "recipe_id": 93554,
+          "name": "Simple Tomato Raita"
+        },
+        {
+          "recipe_id": 101759,
+          "name": "Spicy King Fish Curry With Coconut"
+        },
+        {
+          "recipe_id": 110784,
+          "name": "Milagu Sadam"
+        },
+        {
+          "recipe_id": 111035,
+          "name": "Fish Curry Easy"
+        },
+        {
+          "recipe_id": 117761,
+          "name": "Khandvi And Aam Panna With Chia Seeds And Mint."
+        },
+        {
+          "recipe_id": 155388,
+          "name": "Instant Pot Ulava Charu Recipe | Horsegram Lentil Soup"
+        },
+        {
+          "recipe_id": 193434,
+          "name": "Baked Oats & Nuts"
+        },
+        {
+          "recipe_id": 207517,
+          "name": "Beans Carrot Thoran / Carrot and Beans Thoran"
+        }
+      ]
     },
     "peanut": {
-      "lexical_present": 4291,
+      "lexical_present": 10663,
       "flagged_present": 11476,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 7185,
-      "audit_lexicon_coverage_of_flagged": 0.3739,
-      "unaudited_flagged_rows": 7185,
+      "false_positives_flag_only": 813,
+      "audit_lexicon_coverage_of_flagged": 0.9292,
+      "unaudited_flagged_rows": 813,
       "false_negative_examples": []
     },
     "sesame": {
@@ -286,13 +408,13 @@
       "false_negative_examples": []
     },
     "shellfish": {
-      "lexical_present": 1633,
+      "lexical_present": 3736,
       "flagged_present": 4202,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 2569,
-      "audit_lexicon_coverage_of_flagged": 0.3886,
-      "unaudited_flagged_rows": 2569,
+      "false_positives_flag_only": 466,
+      "audit_lexicon_coverage_of_flagged": 0.8891,
+      "unaudited_flagged_rows": 466,
       "false_negative_examples": []
     },
     "soy": {
@@ -326,99 +448,103 @@
       "false_negative_examples": []
     },
     "tree_nuts": {
-      "lexical_present": 15012,
+      "lexical_present": 30818,
       "flagged_present": 33279,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 18267,
-      "audit_lexicon_coverage_of_flagged": 0.4511,
-      "unaudited_flagged_rows": 18267,
+      "false_positives_flag_only": 2461,
+      "audit_lexicon_coverage_of_flagged": 0.926,
+      "unaudited_flagged_rows": 2461,
       "false_negative_examples": []
     }
   },
   "diet_conflicts": {
     "Vegan": {
       "rows_with_label": 83940,
-      "conflicting_rows": 293,
-      "rate": 0.0035,
+      "conflicting_rows": 516,
+      "rate": 0.0061,
       "by_allergen": {
-        "milk": 215,
-        "egg": 72,
+        "milk": 384,
+        "egg": 124,
         "fish": 4,
-        "shellfish": 2
+        "shellfish": 4
       },
       "examples": [
         {
+          "recipe_id": 11,
+          "name": "Cucumber Peanut Raita"
+        },
+        {
+          "recipe_id": 102,
+          "name": "Gobhi Korma"
+        },
+        {
           "recipe_id": 372,
           "name": "Palak Paneer - Veganized!"
+        },
+        {
+          "recipe_id": 428,
+          "name": "My Favourite Curry- Gujrati Kadhi"
+        },
+        {
+          "recipe_id": 478,
+          "name": "Rose Lassi"
+        },
+        {
+          "recipe_id": 544,
+          "name": "Instant Rava Dosa (Semolina Pancakes)"
+        },
+        {
+          "recipe_id": 683,
+          "name": "Chilled Glass Of Shahi Meethi Lassi"
+        },
+        {
+          "recipe_id": 2649,
+          "name": "Cooling Cucumber Raita"
+        },
+        {
+          "recipe_id": 3026,
+          "name": "Aloo Gobi (Potato Cauliflower Vegetable) Recipe"
         },
         {
           "recipe_id": 3079,
           "name": "Hussain's Masala scrambled eggs"
         },
         {
+          "recipe_id": 3255,
+          "name": "Onion and Tomatoes Raita (Pyaaz Tamatar Ka Raita)"
+        },
+        {
+          "recipe_id": 3572,
+          "name": "Banana Peel Raita"
+        },
+        {
           "recipe_id": 5753,
           "name": "Beet Quinoa Sliders Recipe"
         },
         {
+          "recipe_id": 5862,
+          "name": "Bengali Style Dimer Chop Recipe"
+        },
+        {
           "recipe_id": 7259,
           "name": "Egg Kothu Paratha Recipe"
-        },
-        {
-          "recipe_id": 9455,
-          "name": "Mixed Beans Kachumber Recipe"
-        },
-        {
-          "recipe_id": 23811,
-          "name": "Caesar Kachumber Recipe"
-        },
-        {
-          "recipe_id": 24002,
-          "name": "Eggless Chocolate Cake Recipe (Soft & Moist)"
-        },
-        {
-          "recipe_id": 24014,
-          "name": "Eggless Pumpkin Bread Recipe"
-        },
-        {
-          "recipe_id": 24996,
-          "name": "Zucchini Bread Recipe (Chocolate & Eggless)"
-        },
-        {
-          "recipe_id": 25199,
-          "name": "Homemade Fresh Grape Wine (Black or Green)"
-        },
-        {
-          "recipe_id": 28306,
-          "name": "Vegan Kofta Sliders - Veg Sliders"
-        },
-        {
-          "recipe_id": 29318,
-          "name": "Begun Pora (Roasted egg"
-        },
-        {
-          "recipe_id": 30260,
-          "name": "Vegan oats chickpea veggie pancakes | indian pudla | besan oats cheela"
-        },
-        {
-          "recipe_id": 30332,
-          "name": "Easy Instant Pot Vegan Chili recipe"
-        },
-        {
-          "recipe_id": 30418,
-          "name": "Eggless fruit cake without alcohol (Vegan)"
         }
       ]
     },
     "Vegetarian": {
       "rows_with_label": 88632,
-      "conflicting_rows": 13,
-      "rate": 0.0001,
+      "conflicting_rows": 17,
+      "rate": 0.0002,
       "by_allergen": {
         "fish": 11,
-        "shellfish": 2
+        "shellfish": 6
       },
       "examples": [
+        {
+          "recipe_id": 1988,
+          "name": "Lobster Tandoori"
+        },
         {
           "recipe_id": 29402,
           "name": "Muri"
@@ -434,6 +560,10 @@
         {
           "recipe_id": 33026,
           "name": "Khao Pad (Vegan Thai Pulao)"
+        },
+        {
+          "recipe_id": 81436,
+          "name": "Mammalapuram Kal Erra Recipe"
         },
         {
           "recipe_id": 89622,
@@ -452,6 +582,10 @@
           "name": "Vietnamese Cucumber Kachumber"
         },
         {
+          "recipe_id": 129591,
+          "name": "Lobster Biryani"
+        },
+        {
           "recipe_id": 148270,
           "name": "Macher Dompokht Recipe"
         },
@@ -464,24 +598,25 @@
           "name": "Indian dish (yummly #16004)"
         },
         {
-          "recipe_id": 193427,
-          "name": "Veggie Lettuce Frankie"
-        },
-        {
-          "recipe_id": 193935,
-          "name": "Vazhaipoo Vadai Recipe | Banana Flower Fritters | South Indian Snack"
+          "recipe_id": 191561,
+          "name": "Emily Scott Grilled Lobster with Red Chilli and Garlic Butter Recipe"
         }
       ]
     },
     "Eggetarian": {
       "rows_with_label": 14259,
-      "conflicting_rows": 0,
-      "rate": 0.0,
+      "conflicting_rows": 1,
+      "rate": 0.0001,
       "by_allergen": {
         "fish": 0,
-        "shellfish": 0
+        "shellfish": 1
       },
-      "examples": []
+      "examples": [
+        {
+          "recipe_id": 96886,
+          "name": "Lobster Thermidor"
+        }
+      ]
     }
   }
 }

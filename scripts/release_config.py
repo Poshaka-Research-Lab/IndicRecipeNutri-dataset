@@ -688,7 +688,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 
 # --------------------------------------------------------------------- release identity
 
-DATASET_VERSION = "0.3.0"
+DATASET_VERSION = "0.4.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet
@@ -731,26 +731,66 @@ PII_EXEMPT_COLUMNS = {
 # provenance, so agreement between them is a consistency check, not evidence of
 # correctness. `NEGATIVE` removes the plant-substitute phrasings that make a bare
 # "milk" match useless ("almond milk" in a vegan recipe is not dairy).
+#
+# PLURALS, fixed 2026-09-06, and this is why the coverage figures moved.
+# Every pattern here was singular and `\b`-anchored on both sides, so `\bcashew\b` could NOT
+# match `cashews`: `s` is a word character, so the closing boundary fails. Recipe text writes
+# count nouns in the plural almost always -- "2 eggs", "cup peanuts", "500g prawns".
+#
+# The symptom was read for months as a design limit -- the release disclosure said the audit
+# lexicon "covers under 60% of flagged rows" for six classes, as though it were deliberately
+# narrow. It was a REGEX BUG, and the giveaway sat in the numbers the whole time: the classes
+# that scored well are exactly the MASS NOUNS, which have no plural to miss (milk 95.1%,
+# ghee 99.8%, tamarind 99.1%, coconut 96.5%, celery 98.3%), and the ones that scored badly
+# are exactly the COUNT NOUNS (peanut 37.4%, shellfish 38.9%, tree_nuts 45.1%, egg 48.7%).
+# A vocabulary gap does not sort itself by grammatical number.
+#
+# `s?` does not touch the independence this leg exists for. It is a morphology fix, not an
+# import of `allergen_lexicon_v14`'s vocabulary: the two statements are still written
+# separately, and neither is derived from the other.
 LEXICAL_EVIDENCE = {
     "milk": (
-        r"\b(?:milk|curd|yogurt|yoghurt|dahi|paneer|panir|ghee|butter|cream|khoya|"
-        r"mawa|khoa|malai|cheese|buttermilk|chenna|rabri)\b"
+        r"\b(?:milks?|curds?|yogh?urts?|dahi|paneers?|panir|ghee|butter|creams?|khoya|"
+        r"mawa|khoa|malai|cheeses?|buttermilk|chenna|rabri)\b"
     ),
-    "gluten": r"\b(?:wheat|maida|atta|semolina|sooji|rava|barley|rye|seitan|bread|pasta)\b",
-    "mustard": r"\b(?:mustard|sarson|rai|kasundi)\b",
-    "tree_nuts": r"\b(?:almond|cashew|walnut|pistachio|pecan|hazelnut|badam|kaju|akhrot)\b",
+    # Wheat products that are unambiguous, read off the corpus rather than off leg A.
+    # BARE `flour` IS DELIBERATELY ABSENT. Rice flour, gram flour (besan) and corn flour are
+    # gluten-FREE, and `flour` appears in 22,426 of the rows this leg currently misses -- so
+    # matching it would manufacture agreement on no evidence, which is the opposite of what
+    # a second opinion is for. Only qualified flours match, and NEGATIVE strips the rest.
+    "gluten": (
+        r"\b(?:wheats?|maida|atta|semolina|sooji|suji|rava|rawa|barley|rye|seitan|"
+        r"breads?|breadcrumbs?|pastas?|noodles?|macaroni|vermicelli|semiya|sevai|"
+        r"dalia|couscous|bulgur|biscuits?|rusks?)\b"
+        r"|\b(?:whole[\s-]*wheat|all[\s-]*purpose|plain|refined)[\s-]*flours?\b"
+    ),
+    "mustard": r"\b(?:mustards?|sarson|rai|kasundi)\b",
+    "tree_nuts": (
+        r"\b(?:almonds?|cashews?|walnuts?|pistachios?|pecans?|hazelnuts?|badam|kaju|"
+        r"akhrot)\b"
+    ),
     "sesame": r"\b(?:sesame|til|tahini|gingelly)\b",
-    "peanut": r"\b(?:peanut|groundnut|moongphali)\b",
-    "soy": r"\b(?:soy|soya|tofu|edamame|tempeh)\b",
-    "fish": r"\b(?:fish|anchovy|tuna|salmon|pomfret|rohu)\b",
-    "shellfish": r"\b(?:prawn|shrimp|crab|lobster|squid|clam|mussel)\b",
-    "egg": r"\b(?:egg|anda|albumen)\b",
-    "coconut": r"\b(?:coconut|nariyal|khopra|thengai|kobbari|kopra)\b",
+    "peanut": r"\b(?:peanuts?|ground[\s-]*nuts?|moongphali|mungfali)\b",
+    "soy": r"\b(?:soya?|tofu|edamame|tempeh)\b",
+    "fish": r"\b(?:fish(?:es)?|anchov(?:y|ies)|tuna|salmon|pomfrets?|rohu)\b",
+    "shellfish": r"\b(?:prawns?|shrimps?|crabs?|lobsters?|squid|clams?|mussels?)\b",
+    "egg": r"\b(?:eggs?|anda|albumen)\b",
+    "coconut": r"\b(?:coconuts?|nariyal|khopra|thengai|kobbari|kopra)\b",
     "tamarind": r"\b(?:tamarind|imli|puli|chinch|chintapandu)\b",
     "fenugreek": r"\b(?:fenugreek|methi|kasuri\s+methi|vendhayam|menthulu)\b",
     "asafoetida": r"\b(?:asafoetida|hing|perungayam|inguva|kayam)\b",
-    "celery": r"\b(?:celery)\b",
-    "sulphites": r"\b(?:sulphite|sulfite|sulphur\s+dioxide|sulfur\s+dioxide)\b",
+    "celery": r"\b(?:celery|celeriac)\b",
+    # STRUCTURALLY UNAUDITABLE FROM INGREDIENT TEXT, and left that way deliberately.
+    # This arm asks "does the recipe DECLARE a sulphite". Leg A labels sulphites from a
+    # CARRIER rule instead -- vinegar (10,227 flagged rows), raisins (7,089), wine, dried
+    # fruit -- because that is where sulphites actually are. A home recipe essentially never
+    # names the additive, so this arm matches 0 of 23,989 flagged rows and always will.
+    #
+    # That is a FINDING, not an omission. Giving this arm a carrier list would destroy the
+    # only thing it is for: it would then agree with leg A by construction, on leg A's own
+    # theory, and the audit would report that agreement as independent corroboration. The
+    # audit reports sulphites as UNAUDITABLE rather than as 0% covered.
+    "sulphites": r"\b(?:sulphites?|sulfites?|sulphur\s+dioxide|sulfur\s+dioxide|e22[0-8])\b",
     # Added 2026-09-04. Its absence is why `Diabetic-Friendly recipes without ghee` (256
     # gold recipes) shipped with BOTH audit legs null -- leg A had no column and leg B had
     # no pattern, so nothing checked that gold set at all.

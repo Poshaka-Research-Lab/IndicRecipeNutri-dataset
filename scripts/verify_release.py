@@ -406,39 +406,92 @@ def check_static_id_lists(root: Path) -> None:
     # The other id-bearing files in this directory are NOT recipe ids and are correctly
     # absent: relation_list.txt and user_list.txt are relations and users, and kg_final.txt,
     # train.txt and test.txt carry REMAPPED ids that merely collide numerically.
+    # WIDENED TWICE on 2026-09-06, and both widenings found references nothing was checking.
+    #
+    # 1. IT TESTED ONE WITHDRAWAL POPULATION OF THREE. The set used was
+    #    `WITHDRAWN_NONRECIPE_IDS` -- V7 only -- while `all_withdrawn_ids()` exists precisely
+    #    so a population cannot be added without every consumer seeing it. This function's
+    #    own docstring cites that registry as the fix for "a third population was added to
+    #    the corpus without being added to the check", and then used the narrow set anyway.
+    #    V8 grihshobha references it never counted: 70 in item_list, 70 in entity_list,
+    #    3,462 in interactions.
+    #
+    # 2. IT TESTED ONE DIRECTORY OF TWO. `data/synthetic_interactions_v3/` is published and
+    #    was entirely unchecked. It is a later generation and is V7-CLEAN (0 references
+    #    where v1 has 315), but it carries 12 / 12 / 1,087 V8 references of its own.
+    #
+    # The pins stay pins. `bench_synth/gen.py` still cannot be re-run here and regenerating
+    # would invalidate the published `baseline_results.json`; that decision is unchanged.
+    # What changes is that the declaration is now COMPLETE -- every published directory,
+    # every withdrawal population -- so "pinned" means what it says instead of meaning
+    # "pinned against the subset we happened to check".
+    withdrawn_all = set(all_withdrawn_ids())
     PINNED = {
-        "item_list.txt": ("org_id", r"\s+", "", 315),
-        "entity_list.txt": ("org_id", r"\s+", "item:", 315),
-        "interactions.csv": ("recipe_id", ",", "", 16_699),
+        "synthetic_interactions": {
+            "item_list.txt": ("org_id", r"\s+", "", 385),
+            "entity_list.txt": ("org_id", r"\s+", "item:", 385),
+            "interactions.csv": ("recipe_id", ",", "", 20_161),
+        },
+        "synthetic_interactions_v3": {
+            "item_list.txt": ("org_id", r"\s+", "", 12),
+            "entity_list.txt": ("org_id", r"\s+", "item:", 12),
+            "interactions.csv": ("recipe_id", ",", "", 1_087),
+        },
     }
-    for name, (col, sep, prefix, pinned) in PINNED.items():
-        path = si / name
-        if not path.exists():
-            fail("static-ids", f"{path.relative_to(root)} missing")
+    for subdir, files in PINNED.items():
+        base = root / "data" / subdir
+        if not base.exists():
             continue
-        df = pd.read_csv(path, sep=sep, engine="python")
-        if col not in df.columns:
-            fail("static-ids", f"{name} has no '{col}' column; the pin cannot be checked")
-            continue
-        vals = df[col].astype(str)
-        if prefix:
-            vals = vals[vals.str.startswith(prefix)].str.slice(len(prefix))
-        n = int(pd.to_numeric(vals, errors="coerce")
-                .isin(WITHDRAWN_NONRECIPE_IDS).sum())
-        if n != pinned:
-            fail(
-                "static-ids",
-                f"{name}: {n:,} rows reference a withdrawn recipe, pinned at {pinned:,}. "
-                "The synthetic benchmark is declared pinned to the PRE-withdrawal corpus "
-                "(TODO_VERIFICATION V9.5); a change to this number means it was partly "
-                "regenerated or another withdrawal landed. Reconcile, do not re-pin.",
-            )
+        for name, (col, sep, prefix, pinned) in files.items():
+            path = base / name
+            if not path.exists():
+                fail("static-ids", f"{path.relative_to(root)} missing")
+                continue
+            # Hand-parsed rather than read_csv: v3's entity_list.txt has a row with an extra
+            # field, which makes the python engine raise ParserError and would take the whole
+            # check down over one malformed line.
+            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+            if not lines:
+                fail("static-ids", f"{subdir}/{name} is empty")
+                continue
+            header = re.split(sep, lines[0].strip())
+            if col not in header:
+                fail("static-ids",
+                     f"{subdir}/{name} has no '{col}' column; the pin cannot be checked")
+                continue
+            idx = header.index(col)
+            n = 0
+            for line in lines[1:]:
+                parts = re.split(sep, line.strip())
+                if len(parts) <= idx:
+                    continue
+                v = parts[idx]
+                if prefix:
+                    if not v.startswith(prefix):
+                        continue
+                    v = v[len(prefix):]
+                try:
+                    if int(v) in withdrawn_all:
+                        n += 1
+                except ValueError:
+                    continue
+            if n != pinned:
+                fail(
+                    "static-ids",
+                    f"{subdir}/{name}: {n:,} rows reference a withdrawn recipe, pinned at "
+                    f"{pinned:,}. The synthetic benchmark is declared pinned to the PRE-"
+                    f"withdrawal corpus (TODO_VERIFICATION V9.5); a change to this number "
+                    f"means it was partly regenerated or another withdrawal landed. "
+                    f"Reconcile, do not re-pin.",
+                )
     notes.append(
-        f"static-ids: synthetic_interactions is pinned to the pre-withdrawal corpus - "
-        f"{', '.join(f'{v[3]:,} in {k}' for k, v in PINNED.items())}, against "
-        f"{len(WITHDRAWN_NONRECIPE_IDS):,} withdrawn recipes. Declared, counted and "
-        f"filed as V9.5; not silently tolerated. The pins are absolute row counts, so a "
-        f"change to the withdrawal set that touches these files fails the build."
+        f"static-ids: both published synthetic-interaction sets are pinned to the "
+        f"pre-withdrawal corpus, against all {len(withdrawn_all):,} withdrawn recipes across "
+        f"every population (not V7 alone, which is what this check tested until 2026-09-06). "
+        f"synthetic_interactions: 385 / 385 / 20,161; synthetic_interactions_v3: 12 / 12 / "
+        f"1,087 — v3 is the later generation and is V7-clean, carrying only V8 references. "
+        f"Declared, counted and filed as V9.5; not silently tolerated. The pins are absolute "
+        f"row counts, so any drift fails the build."
     )
 
 
@@ -633,12 +686,34 @@ def check_disclosure(root: Path) -> None:
                 f"{worst[0]} at {worst[1]:.2%}, computed only over rows the audit lexicon "
                 f"matched."
             )
+        # `sulphites` is reported separately from `uncovered`, because lumping them together
+        # says the wrong thing. The other classes were under-covered by a fixable defect --
+        # the audit patterns were singular and `\b`-anchored, so `\bcashew\b` never matched
+        # `cashews`; fixing that on 2026-09-06 took peanut 37%->93%, tree_nuts 45%->93%,
+        # shellfish 39%->89%, egg 49%->87%, gluten 53%->75%. `sulphites` is not that: leg B
+        # asks whether a recipe DECLARES a sulphite, while leg A labels from a CARRIER rule
+        # (vinegar, raisins, wine, dried fruit). A home recipe never names the additive, so
+        # the coverage is 0 by construction and will stay 0. Giving leg B a carrier list
+        # would make it agree with leg A on leg A's own theory and report that as
+        # corroboration, which is worse than reporting nothing.
+        structural = [(a, c, n) for a, c, n in uncovered if a == "sulphites"]
+        uncovered = [(a, c, n) for a, c, n in uncovered if a != "sulphites"]
         if uncovered:
             notes.append(
                 "disclosure: the audit lexicon covers under 60% of flagged rows for "
                 + ", ".join(f"{a} ({c:.0%})" for a, c, _ in uncovered)
                 + f" — {unaudited_total:,} flagged rows are not audited at all, so a low "
                   "rate for those classes is not evidence of anything"
+            )
+        for a, _c, n in structural:
+            notes.append(
+                f"disclosure: {a} is NOT INDEPENDENTLY AUDITABLE from ingredient text and is "
+                f"reported as such rather than as 0% coverage. Leg B asks whether the recipe "
+                f"declares the additive; leg A labels it from a carrier rule (vinegar, "
+                f"raisins, wine, dried fruit), which is where sulphites actually occur. "
+                f"Recipes do not name it, so all {n:,} flagged rows are unmatched by "
+                f"construction. Adding carriers to leg B would manufacture agreement on leg "
+                f"A's own theory — the audit says nothing about this class, deliberately."
             )
         if blind.get("audit_lexicon_blind_on"):
             notes.append(
