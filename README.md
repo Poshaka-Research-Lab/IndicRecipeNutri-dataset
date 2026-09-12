@@ -2,12 +2,6 @@
 
 # IndicRecipeNutri
 
-> **Breaking changes in 0.6.0:** compound IDs are PubChem CIDs, graph splits use v3, the
-> ingredient vocabulary lost names, and the `pairs_with` co-occurrence layer is fully
-> recomputed. See [migration notes](docs/COMPOUND_ID_MIGRATION.md), the
-> [changelog](CHANGELOG.md) and [current generated facts](data/provenance/release_facts.json).
-> Historical DOI snapshots retain their original data and identifiers.
-
 **A 219,386-recipe Indian corpus with parsed ingredients, a 17-class allergen surface,
 dish-level nutrition, and a typed knowledge graph of 6.43 million edges.**
 
@@ -15,12 +9,15 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
+[![Version](https://img.shields.io/badge/release-0.7.0-success.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
-[![Size: 508 MB](https://img.shields.io/badge/size-508%20MB-informational.svg)](#the-data)
+[![Size: 474 MB](https://img.shields.io/badge/size-474%20MB-informational.svg)](#the-data)
+[![Verified](https://img.shields.io/badge/release-self--verifying-brightgreen.svg)](#verify-what-you-downloaded)
 
 [Quick start](#-quick-start-60-seconds) ·
+[What you get](#what-you-get) ·
 [The data](#the-data) ·
 [Knowledge graph](#knowledge-graph) ·
 [Allergens — read first](#-allergens-read-this-first) ·
@@ -28,6 +25,13 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+> [!IMPORTANT]
+> **Breaking in 0.7.0.** The two synthetic interaction directories are replaced by a single
+> [`data/interactions/`](data/interactions), regenerated from the published corpus. Their id
+> spaces are not compatible, so stored user/item pairs from the old sets must not be joined to
+> the new one. See the [changelog](CHANGELOG.md). Historical DOI snapshots keep their original
+> data and identifiers.
 
 ---
 
@@ -40,15 +44,15 @@ and that needs to know exactly where the data is weak.
 | **Knowledge graph** | 222,539 nodes · **6,428,210 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
-| **Interaction log** | 1 synthetic set — 50,000 users, 990,273 ratings, **0** withdrawn references |
+| **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
 | **Ingredient text** | 100% English/Roman; original script kept as provenance |
-| **Withdrawn** | 4,617 recipes, ids published so you can verify their absence |
 | **Licence** | data CC BY-NC-SA 4.0 · code MIT |
 
+> [!TIP]
 > **New here? Read [`docs/DATASHEET.md`](docs/DATASHEET.md) before you build on this.**
-> It documents measured defects rather than hiding them. The four things that bite people
-> most are in [Allergens](#-allergens-read-this-first) and
-> [Nutrition grounding](#nutrition-grounding-read-this-before-computing-anything) below.
+> It documents measured defects rather than hiding them. The two that bite people most are
+> [Allergens](#-allergens-read-this-first) and
+> [Nutrition grounding](#nutrition-grounding-read-this-before-computing-anything).
 
 ---
 
@@ -108,6 +112,59 @@ Do **not** flatten `unknown` to `False`. It means *"never assessed"*, not *"safe
 
 ---
 
+## What you get
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### 🍲 Corpus
+**219,386 recipes** from 378 sites, parsed into 269 typed columns. Ingredients normalised to
+English/Roman with the original script retained as provenance.
+
+</td>
+<td width="33%" valign="top">
+
+### 🕸️ Knowledge graph
+**6.43M edges** over 17 node types — ingredients, compounds, allergens, regions, methods,
+health tags — with edge-level evidence preserved.
+
+</td>
+<td width="33%" valign="top">
+
+### ⚠️ Allergen surface
+**17 classes**, fail-closed, with an explicit `unknown` sentinel that never collapses to
+"safe". Ships with its own independent audit.
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### 🥗 Nutrition
+Dish-level estimates and FSA traffic lights, with units and bases declared
+machine-readably — and its Western grounding stated plainly.
+
+</td>
+<td valign="top">
+
+### 🎯 Benchmark
+**67 fixed retrieval queries** over 8 templates with graph-derived gold sets and a published
+contamination audit.
+
+</td>
+<td valign="top">
+
+### 👥 Interaction log
+**990,273 synthetic ratings** from 50,000 profiled users, with 10-core splits, zero leakage
+and a hard diet-compatibility constraint.
+
+</td>
+</tr>
+</table>
+
+---
+
 ## How it is built
 
 ```mermaid
@@ -118,8 +175,8 @@ flowchart LR
     C --> E["allergens<br/>17 classes, fail-closed"]
     C --> F["knowledge graph<br/>222,539 nodes / 6.43M edges"]
     F --> G["benchmark<br/>67 queries + gold sets"]
-    C --> H["withdrawals<br/>4,617 removed"]
-    D & E & F & G & H --> I["verify_release.py<br/>licence · counts · PII · checksums"]
+    C --> K["interactions<br/>50K users / 990K ratings"]
+    D & E & F & G & K --> I["verify_release.py<br/>licence · counts · PII · checksums"]
     I --> J(["release + DOI"])
 ```
 
@@ -133,15 +190,16 @@ instead of shipping it — see [Verify what you downloaded](#verify-what-you-dow
 | path | size | what is in it |
 |---|---:|---|
 | [`data/corpus/`](data/corpus) | 199 MB | the recipe table, plus long-form allergen / nutrition / label / quality tables, the rehydration index and the allergen audit |
-| [`data/enrichment/`](data/enrichment) | 146 MB | 26 companion tables — nutrition, region, diet, quality flags, ingredient weights |
-| [`data/provenance/`](data/provenance) | 58 MB | build records, per-field history, withdrawn-id lists |
-| [`data/interactions/`](data/interactions) | 35 MB | synthetic interaction benchmark v4 — 50,000 users, 990,273 ratings, zero withdrawn references, with its own datasheet |
+| [`data/enrichment/`](data/enrichment) | 146 MB | 27 companion tables — nutrition, region, diet, quality flags, ingredient weights |
+| [`data/provenance/`](data/provenance) | 58 MB | build records and per-field change history |
+| [`data/interactions/`](data/interactions) | 35 MB | synthetic interaction benchmark v4 — 50,000 users, 990,273 ratings, with its own datasheet |
 | [`data/kg/`](data/kg) | 33 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
 | [`data/benchmark/`](data/benchmark) | 0.2 MB | 67 queries, gold sets, contamination audit |
 | [`data/kg_flavor/`](data/kg_flavor) | 0.1 MB | FlavorDB compound layer, kept separable (CC BY-NC-SA **3.0**) |
 
 Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.
 
+> [!NOTE]
 > **Large files are in Git LFS.** A clone without `git-lfs` gives you 130-byte pointer stubs,
 > and `verify_release.py --strict-checksums` fails loudly on them rather than validating a
 > stand-in. Run `git lfs pull`. The Zenodo archive always contains the real files — the
@@ -160,6 +218,80 @@ Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.
 `Pan-Indian` dominates because most sources do not declare a region. **Slice on the
 state-level regions for cultural work**, and treat `Pan-Indian` as "unlabelled", not as a
 region.
+
+</details>
+
+---
+
+## Worked examples
+
+Real queries against the published payload, with the numbers they return.
+
+<details open>
+<summary><b>Regional nutrition contrast</b></summary>
+
+```python
+import pandas as pd
+
+r = pd.read_parquet("data/corpus/recipes_structured.parquet",
+                    columns=["Region", "Diet", "per100g_kcal", "HealthGrade"])
+
+r[r.Region.isin(["Kerala", "Punjab"])].groupby("Region").per100g_kcal.median()
+# Region
+# Kerala    ...
+# Punjab    ...
+```
+
+Both regions are on the 14-code state-level axis, so this is a like-for-like comparison.
+Comparing either against `Pan-Indian` is not — that bucket is unlabelled, not a region.
+
+</details>
+
+<details>
+<summary><b>Diet composition of the corpus</b></summary>
+
+```python
+r.Diet.value_counts()
+# Vegetarian        88,632
+# Vegan             83,940
+# Non-Vegetarian    31,824
+# Eggetarian        14,259
+# unknown              731
+```
+
+`unknown` is a real category and is **not** a permissive default. The interaction benchmark
+excludes those 731 recipes from every diet-restricted pool rather than treating them as
+vegetarian.
+
+</details>
+
+<details>
+<summary><b>Traversing the graph for one ingredient</b></summary>
+
+```python
+kg = pd.read_parquet("data/kg/kg_edges.parquet")
+
+kg[(kg.head == "ingredient::sesame-oil")]
+# ingredient::sesame-oil  subtype_of     ingredient::oil
+# ingredient::sesame-oil  derived_from   ingredient::sesame
+```
+
+`subtype_of` answers *what kind of thing is this*; `derived_from` answers *what was it made
+from*. A specific oil carries both, and neither is a safety path.
+
+</details>
+
+<details>
+<summary><b>Training split, done correctly</b></summary>
+
+```python
+train = r[r.Split_v3 == "train"]
+test  = r[r.Split_v3 == "test"]
+```
+
+Use **Split_v3**. It groups connected components of case-folded titles and duplicate
+families, so near-duplicate recipes cannot straddle the boundary. Legacy split columns are
+retained for reproducibility and must not be used implicitly.
 
 </details>
 
@@ -217,10 +349,10 @@ graph LR
 | `for_occasion` | 33,357 | | `derived_from` | 25 |
 | `has_compound` | 25,748 | | `subtype_of` | 17 |
 
-`subtype_of` is new in 0.6.0: "is a kind of", ingredient → ingredient. It is **descriptive and
-never a safety path** — `contains_allergen` remains the only edge an allergen filter may trust.
-`derived_from` answers a different question, *what was this made from*, so a specific oil carries
-both: `sesame-oil subtype_of oil` and `sesame-oil derived_from sesame`.
+`subtype_of` is "is a kind of", ingredient → ingredient. It is **descriptive and never a
+safety path** — `contains_allergen` remains the only edge an allergen filter may trust.
+`derived_from` answers a different question, *what was this made from*, so a specific oil
+carries both: `sesame-oil subtype_of oil` and `sesame-oil derived_from sesame`.
 
 </details>
 
@@ -237,9 +369,36 @@ both: `sesame-oil subtype_of oil` and `sesame-oil derived_from sesame`.
 | `diet+nutrient` | 12 | | `cuisine` | 6 |
 | `diet` | 7 | | `diet+ingredient` | 5 |
 
+> [!WARNING]
 > Gold sets are **graph-derived silver labels, not human judgments.** They are suitable for
 > comparing systems against each other on this corpus; they are not a human relevance
 > standard. `data/benchmark/GOLD_SET_AUDIT.json` records the contamination audit.
+
+---
+
+## Interaction benchmark
+
+[`data/interactions/`](data/interactions) is a synthetic collaborative log for training and
+comparing recommenders on Indian cuisine, which no existing interaction dataset covers.
+
+| | |
+|---|---:|
+| Users, each profiled by region / diet / health / spice / age | 50,000 |
+| Explicit 1–5 ratings | 990,273 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,801 users · 16,567 items |
+| Train / test pairs | 657,610 / 162,956 |
+| Train/test leakage | **0** |
+| Attribute KG | 82,835 triples · 16,614 entities |
+
+> [!CAUTION]
+> **Simulated behaviour, not observations of real users.** It rewards methods that recover
+> the region / diet / health structure the generator encodes, and is not evidence about human
+> dietary preference. Diet compatibility is enforced as a hard constraint, but a *synthetic*
+> guarantee says nothing about a deployed system's safety.
+
+Regenerate it with `python scripts/build_interactions.py`, re-score it with
+`python scripts/build_interaction_baselines.py`. Full method, parameters and reference
+baselines are in [`data/interactions/DATASHEET.md`](data/interactions/DATASHEET.md).
 
 ---
 
@@ -282,12 +441,14 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
    agree with the labeller on the labeller's own theory and report that as corroboration,
    so it deliberately does not.
 
+> [!CAUTION]
 > **Do not use these flags as the sole basis for an end-user safety decision.**
 
 ---
 
 ## Nutrition grounding, read this before computing anything
 
+> [!WARNING]
 > The food composition table uses the **IFCT 42-nutrient schema**, but **contains no IFCT
 > data and no Indian composition data.** Its values are **7,793 USDA rows (97.5%)** plus
 > 198 INDB US/UK rows, established by reading `primarysource` in the source spreadsheets.
@@ -335,24 +496,6 @@ rather than scraped pages and carry placeholder URLs, flagged
 
 </details>
 
-<details>
-<summary><b>The 4,617 withdrawn recipes</b></summary>
-
-Absent from every published artefact:
-
-| population | rows | why |
-|---|---:|---|
-| V7 non-recipe | 3,815 | archive listings, shop pages, image attachments, commodity records — pages that were never recipes |
-| V8 grihshobha | 801 | the scraper never found an ingredient list on that site; it captured the page navigation bar |
-| PII | 1 | the scrape captured the site owner's email address |
-
-Their **ids** — ids only, never the records — are published in
-`data/provenance/withdrawn_ids.json`, so you can verify their absence for yourself. The
-quarantine records stay unpublished because they hold exactly the content the withdrawal
-removed.
-
-</details>
-
 Large derived artefacts — dense and structural embedding matrices, the pickled graph — are
 excluded. The graph is regenerable with `python scripts/build_graph.py --out DIR`. The
 embedding matrices are planned as a separate Zenodo record, which does not exist yet.
@@ -374,6 +517,7 @@ python scripts/verify_release.py --strict-checksums
 | privacy | PII pattern sweep over every string column |
 | checksums | SHA-256 manifest, **in both directions** — a file with no digest fails too |
 | authorship | `.zenodo.json` and `CITATION.cff` name the same people |
+| interactions | id maps, split integrity and diet compatibility in the interaction log |
 | disclosure | every audit artefact the datasheet refers to is present |
 
 No network, no source tree, no credentials required.
@@ -386,9 +530,13 @@ python scripts/build_corpus.py
 python scripts/build_kg.py
 python scripts/build_enrichment.py
 python scripts/build_benchmark.py
+python scripts/build_interactions.py
+python scripts/build_interaction_baselines.py
+python scripts/build_region_crosswalk.py
 python scripts/audit_corpus.py
 python scripts/validate_sa5.py
 python scripts/make_data_dictionary.py
+python scripts/build_release_facts.py
 python scripts/make_checksums.py
 python scripts/verify_release.py --strict-checksums
 ```
@@ -423,6 +571,16 @@ asafoetida without naming it, so a recipe calling for chaat masala is labelled f
 asafoetida. That is the fail-closed behaviour Codex CXC 80-2020 requires, and it is why that
 class's text-agreement is 77.6% while the others are 89–99%. The breakdown ships with the
 figure in [`docs/allergen_sa5_v1_validation.md`](docs/allergen_sa5_v1_validation.md).
+
+</details>
+
+<details>
+<summary><b>Can I join the old interaction sets to the new one?</b></summary>
+
+No. The retired `synthetic_interactions/` and `synthetic_interactions_v3/` were independent
+simulations with colliding remapped id spaces, and their `recipe_id` column held positional
+offsets rather than corpus ids. `data/interactions/` emits real `recipe_id`s. Use the v0.6.0
+tag if you are reproducing a result published against the old sets.
 
 </details>
 
@@ -516,8 +674,10 @@ for Nutrition-Grounded Indian Recipe Recommendation* — venue and DOI pending.
 | [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md) | you need to know what a column means |
 | [`docs/UNITS.json`](docs/UNITS.json) | you are computing on a numeric column |
 | [`docs/PROVENANCE.md`](docs/PROVENANCE.md) | you need to trace where a value came from |
+| [`data/interactions/DATASHEET.md`](data/interactions/DATASHEET.md) | you are training a recommender on the interaction log |
 | [`docs/THIRD_PARTY_TERMS.md`](docs/THIRD_PARTY_TERMS.md) | you are redistributing or building a product |
 | [`docs/SPLIT_PROTOCOL_v3.md`](docs/SPLIT_PROTOCOL_v3.md) | you are training and need the current splits |
+| [`docs/BENCHMARK_VERSIONING.md`](docs/BENCHMARK_VERSIONING.md) | you are comparing results across releases |
 | [`docs/RELEASING.md`](docs/RELEASING.md) | you are cutting a release |
 | [`docs/TAKEDOWN.md`](docs/TAKEDOWN.md) | you want content removed |
 | [`CHANGELOG.md`](CHANGELOG.md) | you want to know what moved, and why |

@@ -28,8 +28,9 @@ The working master is versioned v6 through v15. Every build except v13 and v14 i
 snapshotted with a column hash and a manifest; those two ran in place and retained no
 snapshot. `docs/VERSIONS.md` carries the per-build record and
 `data/versions/columns_v*.txt` the per-build column lists. This release is built from
-**v17** (220,188 rows × 259 columns, col-hash `1a310834`), of which 251 columns and
-220,187 rows are published — one recipe is withdrawn, see `DATASHEET.md`.
+**v17** (220,188 rows × 259 columns, col-hash `1a310834`). The published row and column
+counts are the ones in `DATASHEET.md`, which is generated from the payload itself; an
+earlier revision of this paragraph restated them here and went stale.
 
 The roughly 18 GB of intermediate `MASTER_pre_*` snapshots are not published. They are
 build states, not product; the column lists and the enrichment companion tables carry

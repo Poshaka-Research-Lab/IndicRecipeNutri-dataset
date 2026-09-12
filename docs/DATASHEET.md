@@ -44,9 +44,9 @@ The release verifier checks graph/corpus split parity by ID and both group const
 These checks do not establish the absence of all possible semantic near-duplicates.
 The 67 benchmark queries use graph-derived silver labels, not human relevance judgments.
 Synthetic interactions are simulated behaviour, not observations of real users.
-`data/interactions/` is regenerated from the published corpus, so it references no withdrawn
-recipe. `verify_release.py` checks that, the id maps, both splits, and that no user with a
-dietary restriction is served an incompatible or undeclared recipe.
+`data/interactions/` is regenerated from the published corpus, so every recipe it references
+is live in this release. `verify_release.py` checks that, the id maps, both splits, and that
+no user with a dietary restriction is served an incompatible or undeclared recipe.
 
 ## Representation
 
@@ -108,8 +108,8 @@ table when an explanation needs weights or supporting attributes.
 ## Provenance, access and maintenance
 
 Per-record attribution is retained. Original prose can be rehydrated where source
-URLs permit; see the rehydration index and script. Withdrawn IDs are recorded in
-`data/provenance/withdrawn_ids.json`; removal procedures are in `TAKEDOWN.md`.
+URLs permit; see the rehydration index and script. Exclusion records are in
+`data/provenance/`; removal procedures are in `TAKEDOWN.md`.
 Data and code licences are documented in `LICENSE-DATA` and `LICENSE-CODE`;
 third-party fields retain their own source obligations. See `CITATION.cff` for creators
 and citation metadata. Funding information has not been supplied.
