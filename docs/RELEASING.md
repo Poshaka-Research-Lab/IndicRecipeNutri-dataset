@@ -65,11 +65,11 @@ Zenodo reads it on each archive.
 ## Every release
 
 1. **Rebuild and gate, *if a corpus or KG input changed*.**
-   `python D:\datasets\_admin\rebuild_all.py` — all eight gates green.
+   `python D:\datasets\_admin\rebuild_all.py` — all 15 gates green.
 
    **When to skip it.** This step exists because the knowledge graph must be built twice: the
    pairing layer is PMI over the graph, so a single build leaves `pairs_with` describing the
-   previous generation, and no gate catches it. That risk only exists when the corpus, the
+   previous generation; the pairing-currency gate now detects that mismatch. That risk only exists when the corpus, the
    vocabulary or the KG builders changed. A release that touches only `docs/`, `scripts/` or
    a derived directory outside `data/corpus/` and `data/kg/` has nothing to make stale, and
    running a full rebuild then can only perturb the pinned counts in `release_config.py` —

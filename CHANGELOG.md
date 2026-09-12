@@ -1,29 +1,35 @@
 # Changelog
 
-## [Unreleased] — local vocabulary rebuild, 2026-09-13
+## [0.9.0] ? 2026-09-13 ? ingredient identities and substitution repairs
 
-- Remove equipment/adjective ingredient nodes `cheesecloth` and `creamy`; retain
-  legitimate composite foods such as ice cream, creamer and prepared buttercream.
-- Add `soya-chaap` from explicit soy/soya/soyabean/soybean-chaap phrases (49 recipes),
-  route explicit mutton chaap to `mutton`, and leave bare `chaap` unresolved.
-- Route explicit sugar-substitute phrases to `sweetener`. Retain the 36 unresolved
+- Retire the equipment/adjective ingredient nodes `cheesecloth` and `creamy`.
+  Retain valid composite foods including cheesecake, ice cream, milkshake,
+  buttercream and creamer.
+- Add `soya-chaap` for explicit soy/soya/soyabean/soybean-chaap phrases (49 recipes).
+  Resolve explicit mutton chaap to `mutton`; keep bare `chaap` unresolved.
+- Resolve explicit sugar-substitute phrases to `sweetener`; preserve 36 unresolved
   `substitute` cases for contextual parser review.
 - Abstain from ingredient-level nutrient matching for unspecified soya-chaap and
-  sweetener formulations: the old matches selected raw soybeans and a frozen ice pop.
-  Recipe nutrient values and allergen declarations are unchanged.
-- Vocabulary-batch graph: **222,539 nodes / 6,428,312 edges**. The 186 reviewed recipe ingredient
-  lists account for -34 ingredient edges; recomputed nutrient thresholds account for
-  -14 `rich_in` edges; refreshed co-occurrence adds one pairing edge. All other relation
-  endpoint sets are unchanged. The published 0.8.0 snapshot below remains historical.
-- Follow-up substitution repair: restore cashew <-> almond and chili -> paprika/cayenne
-  with canonical spellings. Retire the chilli/chili identity and ambiguous
-  coriander/cilantro declarations. Four substitutions replace one co-occurrence
-  graph slot (its measurement remains in the pairing table); current local graph:
-  **222,539 nodes / 6,428,315 edges**, including 30 `substitute_for` edges.
+  sweetener formulations. Their former matches selected raw soybeans and a frozen
+  ice pop. Recipe nutrient values and allergen declarations are unchanged.
+- Restore cashew <-> almond and chili -> paprika/cayenne substitutions using canonical
+  spellings. Retire the chilli/chili identity and ambiguous coriander/cilantro
+  declarations. Both graph passes now report zero skipped substitutions.
+- Release graph: **222,539 nodes / 6,428,315 edges**, with 927 ingredient nodes and
+  30 `substitute_for` edges. Relative to 0.8.0: one fewer node; -34 ingredient edges,
+  -14 `rich_in` edges, +4 substitution edges; pairing edge count unchanged. The
+  almond -> cashew co-occurrence measurement remains in the pairing table even
+  though its graph slot now carries the curated substitution.
 
-Full source/release reconciliation and execution logs are maintained locally under
-`datasets/_admin/progress/VOCAB_REBUILD_20260913/`. No new release tag or publication
-is part of this rebuild.
+**Compatibility:** ingredient identifiers and graph-derived benchmark gold sets have
+changed. Refresh ingredient joins and compare retrieval results within a single release.
+All 219,386 recipes and all structured recipe, nutrition and allergen values are unchanged.
+Exactly 186 recipe ingredient lists changed; every source/release graph delta was reconciled.
+
+**Validation:** the full two-pass graph rebuild and downstream release/CARE rebuild
+completed. All 15 gates passed in one run, including 146 build contracts, 46 release
+contracts, strict checksum verification and 90 CARE tests. The version-only preparation
+reuses that verified payload and reruns release checks; it does not rebuild the graph again.
 
 ## [0.8.0] — 2026-09-13 — the form axis, and an 11th category
 

@@ -1005,7 +1005,9 @@ EXPECTED_CORPUS_BUILD = "v15"
 # Four ingredient nodes are retired -- `soy`, `soya`, `soyabean`, `urad` -- so a stored join on
 # `ingredient::soy` or `ingredient::urad` no longer resolves. Five are added, and the published
 # node and edge counts move. A patch bump would claim this is backward-compatible; it is not.
-DATASET_VERSION = "0.8.0"
+# 0.9.0 publishes the reviewed vocabulary identities, nutrient abstentions, and
+# canonical substitution repair. Ingredient identifiers and graph edges change.
+DATASET_VERSION = "0.9.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet
