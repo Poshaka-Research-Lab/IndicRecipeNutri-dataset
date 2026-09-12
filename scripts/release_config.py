@@ -490,7 +490,10 @@ EXPECTED_RECIPES = (EXPECTED_SOURCE_RECIPES - len(EXCLUDED_RECIPE_IDS)
 #                   as the -5 recorded above: a class whose last member left.
 # The prediction said ~930 ingredient nodes. That was MY arithmetic error -- I approved
 # retiring `urad` and then failed to subtract it. Recorded rather than quietly corrected.
-EXPECTED_KG_NODES = 222_540
+# 2026-09-13, approved local vocabulary batch: +soya-chaap, -cheesecloth, -creamy.
+# Source/release node and edge sets reconciled under the unchanged recipe exclusion.
+# Evidence: datasets/_admin/progress/VOCAB_REBUILD_20260913/*reconciliation.json.
+EXPECTED_KG_NODES = 222_539
 # 2026-08-30: 6,307,080 -> 6,321,106 (+14,026). Every edge accounted for, none unexplained:
 #   for_occasion  +10,045  the duplicate-family merge filled 6,114 `Occasion` values, and
 #                          Occasion is multi-valued, so rows expand to more edges
@@ -863,7 +866,14 @@ EXPECTED_KG_NODES = 222_540
 # Baseline for all of this is the COMMITTED v0.7.1 tag via a detached worktree, not the release
 # working tree: build_kg.py writes the KG tables BEFORE it checks counts, so a failed run
 # leaves them dirty and diffing against them reports no change at all.
-EXPECTED_KG_EDGES = 6_428_359
+# 2026-09-13: 6,428,359 -> 6,428,312 (-47), zero unexplained endpoint residual.
+# has_ingredient -34 (169 removed / 135 added across the 186 reviewed recipes);
+# rich_in -14 (16 removed / 2 added): retire two noise identities, abstain for
+# unspecified sweetener/soya-chaap formulations, then recompute percentile cutoffs;
+# pairs_with +1 (cardamom -> sweetener). All other relation endpoint sets unchanged.
+# Every retained pair's support/PMI/NPMI was recomputed independently from exported
+# ingredient baskets. Recipe exclusions and all 485,120 allergen edges are unchanged.
+EXPECTED_KG_EDGES = 6_428_312
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

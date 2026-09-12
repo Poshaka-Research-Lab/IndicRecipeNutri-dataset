@@ -1,12 +1,12 @@
 {
   "version": "v3",
   "recipes": 219386,
-  "nodes": 222540,
-  "edges": 6428359,
+  "nodes": 222539,
+  "edges": 6428312,
   "node_types": {
     "recipe": 219386,
     "compound": 1607,
-    "ingredient": 928,
+    "ingredient": 927,
     "foodclass": 363,
     "cuisine": 53,
     "occasion": 44,
@@ -23,7 +23,7 @@
     "context": 2
   },
   "edge_types": {
-    "has_ingredient": 1916245,
+    "has_ingredient": 1916211,
     "has_health_tag": 1725659,
     "suitable_for": 895759,
     "contains_allergen": 485120,
@@ -36,8 +36,8 @@
     "has_compound": 25748,
     "shares_flavor": 13670,
     "in_context": 7287,
-    "pairs_with": 3265,
-    "rich_in": 3013,
+    "pairs_with": 3266,
+    "rich_in": 2999,
     "grounded_as": 369,
     "is_a": 173,
     "typical_region": 48,
@@ -46,7 +46,7 @@
     "substitute_for": 26,
     "subtype_of": 17
   },
-  "unique_ingredients": 928,
+  "unique_ingredients": 927,
   "diet_tags": {
     "Vegetarian": 88632,
     "Vegan": 83940,

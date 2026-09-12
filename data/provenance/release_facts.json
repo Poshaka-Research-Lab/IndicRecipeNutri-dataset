@@ -10,9 +10,9 @@
     "train": 197355,
     "val": 10938
   },
-  "nodes": 222540,
-  "edges": 6428359,
-  "edge_evidence_rows": 236354,
+  "nodes": 222539,
+  "edges": 6428312,
+  "edge_evidence_rows": 236355,
   "node_types": {
     "allergen": 18,
     "category": 11,
@@ -24,7 +24,7 @@
     "diet": 8,
     "foodclass": 363,
     "healthtag": 30,
-    "ingredient": 928,
+    "ingredient": 927,
     "method": 11,
     "nutrient": 22,
     "occasion": 44,
@@ -42,14 +42,14 @@
     "has_compound": 25748,
     "has_diet": 256151,
     "has_health_tag": 1725659,
-    "has_ingredient": 1916245,
+    "has_ingredient": 1916211,
     "in_context": 7287,
     "in_cuisine": 219386,
     "in_zone": 27,
     "is_a": 173,
     "is_course": 219386,
-    "pairs_with": 3265,
-    "rich_in": 3013,
+    "pairs_with": 3266,
+    "rich_in": 2999,
     "shares_flavor": 13670,
     "substitute_for": 26,
     "subtype_of": 17,
@@ -94,8 +94,8 @@
   "unassessed_allergen_recipes": 1274,
   "input_sha256": {
     "data/corpus/recipes_structured.parquet": "ec49a7931ac861d08fef6af3ee394e528557bbcb9001ec115a70ef5d680f0b4d",
-    "data/kg/kg_nodes.parquet": "de6f76c6de766322967dc92d1fe0d892dc8a9ab9714a1cf4b9a30d0f37bb0390",
-    "data/kg/kg_edges.parquet": "e83fb54b2d0ca5ce5163dcb64ab67066544bac50e5c13bd7cc0eaa5c094a52a5",
-    "data/kg/kg_edge_evidence.parquet": "045a0ec5e3acc2e7b6c6da997196ba66a20b032222c1299c61b2f97f840776a4"
+    "data/kg/kg_nodes.parquet": "a3fb085a68b2cd7ce57b19ee30acfd87ab266a1ac7719873a53dbb69984f96e0",
+    "data/kg/kg_edges.parquet": "0c01e749c2a621144a95a84de7e0e6d23109a08b42f973b2fef95b549d234257",
+    "data/kg/kg_edge_evidence.parquet": "5803f775c4f070c75050d6d6912005c1383e16f90ecea99c3b7a98d59ac67eb5"
   }
 }

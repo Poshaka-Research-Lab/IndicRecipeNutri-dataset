@@ -1,5 +1,25 @@
 # Changelog
 
+## [Unreleased] — local vocabulary rebuild, 2026-09-13
+
+- Remove equipment/adjective ingredient nodes `cheesecloth` and `creamy`; retain
+  legitimate composite foods such as ice cream, creamer and prepared buttercream.
+- Add `soya-chaap` from explicit soy/soya/soyabean/soybean-chaap phrases (49 recipes),
+  route explicit mutton chaap to `mutton`, and leave bare `chaap` unresolved.
+- Route explicit sugar-substitute phrases to `sweetener`. Retain the 36 unresolved
+  `substitute` cases for contextual parser review.
+- Abstain from ingredient-level nutrient matching for unspecified soya-chaap and
+  sweetener formulations: the old matches selected raw soybeans and a frozen ice pop.
+  Recipe nutrient values and allergen declarations are unchanged.
+- Local graph: **222,539 nodes / 6,428,312 edges**. The 186 reviewed recipe ingredient
+  lists account for -34 ingredient edges; recomputed nutrient thresholds account for
+  -14 `rich_in` edges; refreshed co-occurrence adds one pairing edge. All other relation
+  endpoint sets are unchanged. The published 0.8.0 snapshot below remains historical.
+
+Full source/release reconciliation and execution logs are maintained locally under
+`datasets/_admin/progress/VOCAB_REBUILD_20260913/`. No new release tag or publication
+is part of this rebuild.
+
 ## [0.8.0] — 2026-09-13 — the form axis, and an 11th category
 
 **Breaking: four ingredient nodes are retired.** `soy`, `soya`, `soyabean` and `urad` no

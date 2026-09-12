@@ -16,10 +16,10 @@ original instructions, headnotes and other withheld prose are not redistributed.
 | Recipes | 219,386 |
 | Wide-view columns | 269 |
 | Source sites | 378 |
-| Graph nodes | 222,540 |
-| Graph triples | 6,428,359 |
-| Edge evidence rows | 236,354 |
-| Ingredient nodes | 928 |
+| Graph nodes | 222,539 |
+| Graph triples | 6,428,312 |
+| Edge evidence rows | 236,355 |
+| Ingredient nodes | 927 |
 | Compound nodes | 1,607 |
 | Node types / relation types | 17 / 22 |
 | Benchmark queries | 67 |

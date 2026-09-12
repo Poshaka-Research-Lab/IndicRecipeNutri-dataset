@@ -6,7 +6,7 @@ abstract: >-
   A corpus of 219,386 Indian recipes across 378 source sites, with parsed
   ingredients in English/Roman, a 17-class allergen surface carrying an explicit
   unassessed sentinel, dish-level nutrition estimates and FSA traffic lights; a
-  typed knowledge graph of 222,540 nodes and 6,428,359 edges; a 67-query
+  typed knowledge graph of 222,539 nodes and 6,428,312 edges; a 67-query
   retrieval benchmark with gold sets; and a synthetic collaborative
   interaction log. Structured and derived fields only; recipe prose is not
   redistributed and is recoverable via the published rehydration index.
