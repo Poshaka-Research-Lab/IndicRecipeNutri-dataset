@@ -11,8 +11,8 @@
     "val": 10938
   },
   "nodes": 222539,
-  "edges": 6428312,
-  "edge_evidence_rows": 236355,
+  "edges": 6428315,
+  "edge_evidence_rows": 236354,
   "node_types": {
     "allergen": 18,
     "category": 11,
@@ -48,10 +48,10 @@
     "in_zone": 27,
     "is_a": 173,
     "is_course": 219386,
-    "pairs_with": 3266,
+    "pairs_with": 3265,
     "rich_in": 2999,
     "shares_flavor": 13670,
-    "substitute_for": 26,
+    "substitute_for": 30,
     "subtype_of": 17,
     "suitable_for": 895759,
     "typical_region": 48
@@ -95,7 +95,7 @@
   "input_sha256": {
     "data/corpus/recipes_structured.parquet": "ec49a7931ac861d08fef6af3ee394e528557bbcb9001ec115a70ef5d680f0b4d",
     "data/kg/kg_nodes.parquet": "a3fb085a68b2cd7ce57b19ee30acfd87ab266a1ac7719873a53dbb69984f96e0",
-    "data/kg/kg_edges.parquet": "0c01e749c2a621144a95a84de7e0e6d23109a08b42f973b2fef95b549d234257",
-    "data/kg/kg_edge_evidence.parquet": "5803f775c4f070c75050d6d6912005c1383e16f90ecea99c3b7a98d59ac67eb5"
+    "data/kg/kg_edges.parquet": "8ccb6d05dc255cd9781b18a02a75eaaef7c2e4adc33c53057a5ce761a2bf0c58",
+    "data/kg/kg_edge_evidence.parquet": "98e59ad4e50b9d1c11aff38653cf93cddc8a92fe22caca3b512272a52f24fe2e"
   }
 }

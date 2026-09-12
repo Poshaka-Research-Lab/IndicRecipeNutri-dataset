@@ -8,8 +8,8 @@
   },
   "input_sha256": {
     "kg_nodes.parquet": "a3fb085a68b2cd7ce57b19ee30acfd87ab266a1ac7719873a53dbb69984f96e0",
-    "kg_edges.parquet": "0c01e749c2a621144a95a84de7e0e6d23109a08b42f973b2fef95b549d234257",
-    "kg_edge_evidence.parquet": "5803f775c4f070c75050d6d6912005c1383e16f90ecea99c3b7a98d59ac67eb5"
+    "kg_edges.parquet": "8ccb6d05dc255cd9781b18a02a75eaaef7c2e4adc33c53057a5ce761a2bf0c58",
+    "kg_edge_evidence.parquet": "98e59ad4e50b9d1c11aff38653cf93cddc8a92fe22caca3b512272a52f24fe2e"
   },
   "mapping_validation": "legacy mappings; food identity review not completed"
 }

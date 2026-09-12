@@ -873,7 +873,10 @@ EXPECTED_KG_NODES = 222_539
 # pairs_with +1 (cardamom -> sweetener). All other relation endpoint sets unchanged.
 # Every retained pair's support/PMI/NPMI was recomputed independently from exported
 # ingredient baskets. Recipe exclusions and all 485,120 allergen edges are unchanged.
-EXPECTED_KG_EDGES = 6_428_312
+# Follow-up local substitution repair: four canonical substitutions restored;
+# almond -> cashew replaces one pairs_with slot, net +3. Full source/release
+# table comparison reconciled; all nodes and every other relation unchanged.
+EXPECTED_KG_EDGES = 6_428_315
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

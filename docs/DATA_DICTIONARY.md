@@ -930,18 +930,18 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/kg/kg_edge_evidence.parquet`
 
-236,355 rows x 4 columns - 0.8 MB
+236,354 rows x 4 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 236,355 | 219,833 | recipe::0 |  |
-| `rel` | object |  | 236,355 | 5 | from_region |  |
-| `tail` | object |  | 236,355 | 486 | region::North India |  |
-| `attributes_json` | object |  | 236,355 | 9,959 | {"in_primary_axis": false, "scope": "ind |  |
+| `head` | object |  | 236,354 | 219,833 | recipe::0 |  |
+| `rel` | object |  | 236,354 | 5 | from_region |  |
+| `tail` | object |  | 236,354 | 486 | region::North India |  |
+| `attributes_json` | object |  | 236,354 | 9,958 | {"in_primary_axis": false, "scope": "ind |  |
 
 ## `data/kg/kg_edges.parquet`
 
-6,428,312 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,428,315 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|

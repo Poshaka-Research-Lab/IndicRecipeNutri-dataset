@@ -11,10 +11,15 @@
 - Abstain from ingredient-level nutrient matching for unspecified soya-chaap and
   sweetener formulations: the old matches selected raw soybeans and a frozen ice pop.
   Recipe nutrient values and allergen declarations are unchanged.
-- Local graph: **222,539 nodes / 6,428,312 edges**. The 186 reviewed recipe ingredient
+- Vocabulary-batch graph: **222,539 nodes / 6,428,312 edges**. The 186 reviewed recipe ingredient
   lists account for -34 ingredient edges; recomputed nutrient thresholds account for
   -14 `rich_in` edges; refreshed co-occurrence adds one pairing edge. All other relation
   endpoint sets are unchanged. The published 0.8.0 snapshot below remains historical.
+- Follow-up substitution repair: restore cashew <-> almond and chili -> paprika/cayenne
+  with canonical spellings. Retire the chilli/chili identity and ambiguous
+  coriander/cilantro declarations. Four substitutions replace one co-occurrence
+  graph slot (its measurement remains in the pairing table); current local graph:
+  **222,539 nodes / 6,428,315 edges**, including 30 `substitute_for` edges.
 
 Full source/release reconciliation and execution logs are maintained locally under
 `datasets/_admin/progress/VOCAB_REBUILD_20260913/`. No new release tag or publication

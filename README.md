@@ -41,7 +41,7 @@ and that needs to know exactly where the data is weak.
 |---|---|
 | **Recipes** | 219,386, across **378 source sites** |
 | **Columns** | 269; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,539 nodes · **6,428,312 edges** · 17 node types · 22 relation types |
+| **Knowledge graph** | 222,539 nodes · **6,428,315 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -90,7 +90,7 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,428,312 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,428,315 rows
 kg[kg.rel == "contains_allergen"]                      # 485,120 rows
 ```
 
@@ -299,7 +299,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,539 nodes, 6,428,312 edges, 17 node types, 22 relation types.
+222,539 nodes, 6,428,315 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
