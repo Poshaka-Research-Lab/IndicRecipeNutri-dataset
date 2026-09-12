@@ -476,7 +476,21 @@ EXPECTED_RECIPES = (EXPECTED_SOURCE_RECIPES - len(EXCLUDED_RECIPE_IDS)
 # it would have destroyed those lines while the node count still looked right, because
 # `cardamom` is fed by seven other surfaces. The apply script asserts the mapping and refuses to
 # run otherwise, and the reconciliation asserts `cardamom` RISES (it did, +211).
-EXPECTED_KG_NODES = 222_539
+# 2026-09-13: 222,539 -> 222,540 (+1). The form-axis pass, pre-registered in
+# _admin/KG_DELTA_PREDICTION_form_axis_20260912.md and scored in the RECONCILED file beside it.
+#   ingredient  +1  five added (`chana-dal`, `moong-dal`, `urad-dal`, `soya-chunks`,
+#                   `soy-flour`) less four retired (`soy`, `soya`, `soyabean`, `urad`).
+#                   `soy` was ONE NODE DOING FIVE JOBS -- a condiment, a milk, a flour, a
+#                   textured protein and a bean -- while `soy sauce` sat starved at 122
+#                   recipes on two obscure surfaces. It now holds 4,740.
+#   category    +1  `analogue`, the 11th: tofu, tempeh, seitan, plant-milk, soymilk and the
+#                   six vegan-* nodes. Every one was uncategorised while its dairy counterpart
+#                   was already `dairy` -- which is the one query a vegan user actually asks.
+#   foodclass   -1  `black gram bean`, whose sole grounding ingredient was `urad`. Same shape
+#                   as the -5 recorded above: a class whose last member left.
+# The prediction said ~930 ingredient nodes. That was MY arithmetic error -- I approved
+# retiring `urad` and then failed to subtract it. Recorded rather than quietly corrected.
+EXPECTED_KG_NODES = 222_540
 # 2026-08-30: 6,307,080 -> 6,321,106 (+14,026). Every edge accounted for, none unexplained:
 #   for_occasion  +10,045  the duplicate-family merge filled 6,114 `Occasion` values, and
 #                          Occasion is multi-valued, so rows expand to more edges
@@ -827,7 +841,29 @@ EXPECTED_KG_NODES = 222_539
 # deliberately wide, because two effects pull opposite ways: salt now sits in ~62% of baskets so
 # its PMI collapses toward zero and it should fail the 0.5 floor despite being the #1 ingredient,
 # while a larger basket count N lifts every other pair's PMI slightly.
-EXPECTED_KG_EDGES = 6_428_210
+# 2026-09-13: 6,428,210 -> 6,428,359 (+149). Form axis + 11th category. Fully decomposed,
+# nothing unattributed:
+#   is_a           +25  11 analogue members, 11 oils INHERITED through `subtype_of`, and 3 net
+#                       legume (4 added, less `urad` which took its legume edge with it).
+#                       The inheritance is new: `is_a` is keyed on bare words via ING2CAT, so
+#                       `olive-oil` carried no category at all while `oil` sat in `fat_oil`.
+#   has_ingredient +72  a recipe naming BOTH `chana` and `chana dal` earned one edge before
+#                       and earns two now. The prediction said "unchanged"; that was wrong.
+#   pairs_with     +41  } capped per-ingredient PMI layers over `has_ingredient`. Splitting a
+#   shares_flavor   -3  } 7,505-recipe node changes co-occurrence for every partner. Treating
+#   rich_in        +10  } these as invariant was the 0.6.0 error; they were pre-registered here.
+#   derived_from    +5  six emitted, and `soymilk`->`soy` displaced by `soymilk`->`soybean`.
+#                       `urad-dal`->`urad` correctly skipped: the builder emits only where both
+#                       endpoints reached the graph, and the parent had retired.
+#   grounded_as     -1  `urad` --grounded_as-> FOODON_03309936, orphaned with the node.
+#   substitute_for  +0  it fell to 25 on the first pass because SUBS["chicken"] still listed
+#                       the retired `soy` and `if nb in G` dropped it SILENTLY. Repointed to
+#                       `soya-chunks` -- live, and the more honest target, since `soy` meant
+#                       soy sauce 91% of the time. A third rebuild restored it.
+# Baseline for all of this is the COMMITTED v0.7.1 tag via a detached worktree, not the release
+# working tree: build_kg.py writes the KG tables BEFORE it checks counts, so a failed run
+# leaves them dirty and diffing against them reports no change at all.
+EXPECTED_KG_EDGES = 6_428_359
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;
@@ -951,7 +987,12 @@ EXPECTED_CORPUS_BUILD = "v15"
 # 0.7.0 -> 0.7.1 is a PATCH bump: nothing a consumer joins on has moved. No published
 # identifier, count or table changed. The release corrects documentation figures, retires a
 # dead constant, and moves the CI actions off the deprecated Node 20 runtime.
-DATASET_VERSION = "0.7.1"
+#
+# 0.7.1 -> 0.8.0, and BREAKING by the usual test: identifiers consumers join on have changed.
+# Four ingredient nodes are retired -- `soy`, `soya`, `soyabean`, `urad` -- so a stored join on
+# `ingredient::soy` or `ingredient::urad` no longer resolves. Five are added, and the published
+# node and edge counts move. A patch bump would claim this is backward-compatible; it is not.
+DATASET_VERSION = "0.8.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

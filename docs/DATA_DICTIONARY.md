@@ -930,34 +930,34 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/kg/kg_edge_evidence.parquet`
 
-236,311 rows x 4 columns - 0.8 MB
+236,354 rows x 4 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 236,311 | 219,829 | recipe::0 |  |
-| `rel` | object |  | 236,311 | 5 | from_region |  |
-| `tail` | object |  | 236,311 | 484 | region::North India |  |
-| `attributes_json` | object |  | 236,311 | 9,917 | {"in_primary_axis": false, "scope": "ind |  |
+| `head` | object |  | 236,354 | 219,833 | recipe::0 |  |
+| `rel` | object |  | 236,354 | 5 | from_region |  |
+| `tail` | object |  | 236,354 | 486 | region::North India |  |
+| `attributes_json` | object |  | 236,354 | 9,959 | {"in_primary_axis": false, "scope": "ind |  |
 
 ## `data/kg/kg_edges.parquet`
 
-6,428,210 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,428,359 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 500,000 | 16,723 | recipe::0 |  |
+| `head` | object |  | 500,000 | 16,725 | recipe::0 |  |
 | `rel` | object |  | 500,000 | 22 | in_cuisine |  |
-| `tail` | object |  | 500,000 | 2,865 | cuisine::Indian |  |
+| `tail` | object |  | 500,000 | 2,867 | cuisine::Indian |  |
 
 ## `data/kg/kg_nodes.parquet`
 
-222,539 rows x 44 columns - 25.2 MB
+222,540 rows x 44 columns - 25.2 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `node_id` | object |  | 222,539 | 222,539 | recipe::0 |  |
-| `type` | object |  | 222,539 | 17 | recipe |  |
-| `name` | object |  | 222,539 | 201,329 | Mutton Nihari |  |
+| `node_id` | object |  | 222,540 | 222,540 | recipe::0 |  |
+| `type` | object |  | 222,540 | 17 | recipe |  |
+| `name` | object |  | 222,540 | 201,331 | Mutton Nihari |  |
 | `url` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
 | `split` | object |  | 219,386 | 3 | test |  |
 | `health_grade` | object |  | 219,386 | 5 | B |  |
@@ -1188,7 +1188,7 @@ All 86 files under `data/`, so nothing ships undescribed.
 | `ingredient_tier.json` | 0.02 MB | metadata / manifest |
 | `kg_edge_evidence.parquet` | 0.82 MB | columnar table — documented above |
 | `kg_edges.parquet` | 7.17 MB | columnar table — documented above |
-| `kg_nodes.parquet` | 25.21 MB | columnar table — documented above |
+| `kg_nodes.parquet` | 25.19 MB | columnar table — documented above |
 | `kg_stats.json` | 0.00 MB | metadata / manifest |
 | `pairs_avoid.parquet` | 0.08 MB | columnar table — documented above |
 | `pairs_avoid_meta.json` | 0.00 MB | metadata / manifest |

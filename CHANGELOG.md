@@ -1,5 +1,89 @@
 # Changelog
 
+## [0.8.0] — 2026-09-13 — the form axis, and an 11th category
+
+**Breaking: four ingredient nodes are retired.** `soy`, `soya`, `soyabean` and `urad` no
+longer exist. A stored join on `ingredient::soy` or `ingredient::urad` will not resolve. Five
+nodes are added — `chana-dal`, `moong-dal`, `urad-dal`, `soya-chunks`, `soy-flour` — and the
+published graph moves to **222,540 nodes / 6,428,359 edges**.
+
+### Fixed — one node was doing five jobs
+
+`ingredient::soy` linked 5,314 recipes and absorbed a condiment, a milk, a flour, a textured
+protein and a bean. Measured against the published corpus: **4,839 of those recipes are soy
+sauce** (`soy sauce` 4,188 + `soya sauce` 651), 522 textured protein, 298 dairy analogue, 135
+the bean, 35 flour. Meanwhile the `soy sauce` node that should have held the condiment sat
+**starved at 122 recipes**, fed by two obscure surfaces (`aminos`, `manis`).
+
+A recommender reading that graph could substitute soy sauce for soy milk. **`soy sauce` now
+holds 4,740 recipes.**
+
+Bare `soy` is gone rather than kept: only 378 recipes reached it without a known compound, and
+**198 of those read `soy (from title`** — a title-extraction artefact, not an ingredient. The
+rest are abbreviations (`dark soy`) or uncatalogued compounds (`soy curls`).
+
+### Changed — the pulses split on evidence, not symmetry
+
+Measured per token rather than applied uniformly:
+
+| | bare recipes | outcome |
+|---|---:|---|
+| `chana` | 2,041 genuine (`kala chana`, `kabuli chana`) | **kept**, plus new `chana-dal` |
+| `moong` | 1,247 genuine (`moong sprouts`, `sprouted moong`) | **kept**, plus new `moong-dal` |
+| `urad` | 703, but nearly all `urad dhal`/`urad daal` spelling variants | **collapsed** into `urad-dal` |
+
+62 surfaces were re-pointed. No surface was deleted and no value set to `null` — a null value
+is a line-killer, because `clean_ing_head` tests membership rather than value.
+
+This also settles an inconsistency: `toor dal` and `masoor dal` were already modelled as
+form-suffixed nodes while `chana`, `urad` and `moong` were bare.
+
+### Added — `analogue`, the 11th `is_a` category
+
+`tofu`, `tempeh`, `seitan`, `plant-milk`, `soymilk` and the six `vegan-*` nodes — 11 nodes,
+≈3,809 recipes. Every one was uncategorised while its dairy counterpart (`milk`, `butter`,
+`yogurt`, `cream`, `cheese`, `paneer`) already sat in `dairy`. They are **not** dairy, and that
+distinction is the one query a vegan user actually asks.
+
+### Added — `is_a` inherits through `subtype_of`
+
+The category layer is keyed on bare words via `ING2CAT`, so `olive-oil` carried no category at
+all while `oil` sat in `fat_oil`. A subtype is a member of its parent's category by definition,
+so this derives what the graph already implies. **`fat_oil` goes from 1 member to 12**, picking
+up olive, vegetable, coconut, mustard, sesame, sunflower, groundnut, grapeseed, soybean, almond
+and walnut oil across ~40,000 recipes. The six salts correctly did *not* inherit: their parent
+`salt` has no category to pass down.
+
+### Fixed — two defects the reconciliation exposed, invisible in the totals
+
+1. **A duplicate dict key.** `DERIVED_FROM` already declared `"soymilk":"soy"`; this pass added
+   `"soymilk":"soybean"` to the same literal. Python keeps the last, so the build was correct —
+   but the file retained a dead line carrying a live-looking allergen comment.
+2. **A curated substitution died silently.** `SUBS["chicken"]` still named the retired `soy`,
+   and the builder's `if nb in G` guard dropped it without a word: `substitute_for` fell 26 →
+   25 with nothing reporting which pair was lost. Repointed to `soya-chunks` — live, and more
+   honest, since `soy` meant soy sauce 91% of the time. Restored to 26.
+
+   The general shape: **retiring a node silently breaks every curated structure that named it.**
+   `DERIVED_FROM`, `SUBTYPE_OF` and `SUBS` all skip a missing endpoint by design, and none
+   reports what it skipped.
+
+### The ledger
+
+Pre-registered in `_admin/KG_DELTA_PREDICTION_form_axis_20260912.md` and scored against the
+committed `v0.7.1` tag. **Residual: zero.**
+
+`is_a` +25 · `has_ingredient` +72 · `pairs_with` +41 · `rich_in` +10 · `derived_from` +5 ·
+`shares_flavor` −3 · `grounded_as` −1 = **+149**.
+
+`contains_allergen` **held at 485,120**, as required — soy is a declared allergen class, and a
+move there would have meant the allergen surface was reading the ingredient node rather than
+the allergen column.
+
+Five predictions were wrong and are recorded with their causes in the reconciled document,
+including a node-count arithmetic error of my own and a `foodclass −1` (`black gram bean`,
+whose sole grounding ingredient was `urad`) that was not predicted at all.
+
 ## [0.7.1] — 2026-09-12 — review pass: corrected figures, dead config, Node 20
 
 No published identifier, count or table changed. This is a documentation, configuration and
