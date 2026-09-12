@@ -1,0 +1,12 @@
+{
+  "user_codes": 27,
+  "kg_region_entities": 23,
+  "matches": {
+    "exact": 23,
+    "unreachable": 4
+  },
+  "users_unreachable": 289,
+  "users_unreachable_pct": 0.578,
+  "renames_required": 0,
+  "note": "Users and KG entities are both drawn from the published Region column, so every code resolves by exact string and no rename table is needed. The unreachable codes are regions whose recipes did not survive the iterative 10-core, not naming mismatches. users.csv is deliberately not remapped: the generator weighted 0.35*region-match, so regional preference was real at generation time and rewriting it afterwards would misdescribe the log."
+}

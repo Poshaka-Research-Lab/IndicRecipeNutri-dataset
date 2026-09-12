@@ -38,7 +38,6 @@ sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
 import allergen_taxonomy as _AT  # noqa: E402
 import allergen_surface  # noqa: E402
 from release_config import (  # noqa: E402
-    BENCH_SYNTH_DIR,
     LEXICAL_EVIDENCE,
     NEGATIVE,
     EXPECTED_BENCHMARK_QUERIES,
@@ -191,10 +190,11 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=REPO_ROOT / "data")
     args = ap.parse_args()
 
+    # No synthetic-interaction directory is created here. This used to mkdir
+    # `data/synthetic_interactions/` for the staging step removed in v0.7.0; left in place it
+    # would recreate an empty copy of the very directory that release deletes, on every build.
     bench_out = args.out / "benchmark"
-    synth_out = args.out / "synthetic_interactions"
     bench_out.mkdir(parents=True, exist_ok=True)
-    synth_out.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------------- benchmark
     src = RETRIEVAL_DIR / "eval_queries.jsonl"
@@ -308,10 +308,9 @@ def main() -> int:
             f"{r['lexical_rate']:6.2%}"
         )
 
-    # Preserve both historical generations from byte-pinned recovered sources.
-    from synthetic_history_contract import stage_historical_synthetic
-    stage_historical_synthetic(BENCH_SYNTH_DIR / 'historical', args.out)
-
+    # The two frozen generations this used to stage were retired in v0.7.0. They are not
+    # rebuilt here: `data/interactions/` is produced by scripts/build_interactions.py from the
+    # published corpus, and validated by scripts/interactions_contract.py.
     return 0
 
 

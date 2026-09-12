@@ -1,0 +1,33 @@
+{
+  "dataset": "IndicRecipeNutri synthetic interactions (data/interactions, v4)",
+  "generator": "scripts/build_interactions.py",
+  "evaluator": "scripts/build_interaction_baselines.py",
+  "seed": 0,
+  "n_users": 35801,
+  "n_items": 16567,
+  "n_train_int": 657610,
+  "metrics": [
+    {
+      "model": "Popularity",
+      "Recall@10": 0.0114,
+      "Recall@20": 0.0196,
+      "NDCG@10": 0.0089,
+      "HR@10": 0.0496
+    },
+    {
+      "model": "ItemKNN",
+      "Recall@10": 0.0059,
+      "Recall@20": 0.0102,
+      "NDCG@10": 0.005,
+      "HR@10": 0.0336
+    },
+    {
+      "model": "BPR-MF",
+      "Recall@10": 0.0049,
+      "Recall@20": 0.0088,
+      "NDCG@10": 0.0039,
+      "HR@10": 0.0227
+    }
+  ],
+  "protocol": "implicit top-N; per-user leave-last-20%-out (temporal); full-item ranking; seen items masked. Synthetic behaviour, not observed users."
+}

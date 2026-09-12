@@ -42,7 +42,7 @@ git push origin main            # then check: git ls-remote origin refs/heads/ma
 
 **Settings → General → Archives → ☑ Include Git LFS objects in archives**
 
-Large artefacts (`*.parquet` and the bulk `synthetic_interactions*/` files) are stored in Git LFS.
+Large artefacts (`*.parquet` and the bulk `data/*interactions*/` files) are stored in Git LFS.
 GitHub omits LFS content from source archives **by default**, and Zenodo archives the
 zipball — so with this off, the DOI would point at a record full of 130-byte pointer stubs,
 and nothing would say so.
@@ -97,13 +97,28 @@ stops before creating anything.
 
 ## Watch the LFS quota
 
-GitHub's free tier is **1 GB of LFS storage and 1 GB/month bandwidth**. Every rebuild of
-`data/corpus/recipes_structured.parquet` (~99 MB) stores a **new** object — LFS keeps every
-version — so roughly **ten rebuilds** exhausts the free tier. Current tracked payload is
-~510 MB across 53 LFS files.
+**CORRECTED 2026-09-12.** This section previously said the allowance was **1 GB** and that
+"roughly ten rebuilds exhausts the free tier". That was wrong, and the error caused a false
+alarm during the 0.6.0 release — a warning that the next push might be blocked. Read from the
+organisation's billing page on 2026-09-12: **0.2 GB used of 10 GB included.** Two percent.
 
-When it gets close: buy a data pack, or move the largest artefacts to a Zenodo-only tier the
-way `docs/PROVENANCE.md` already does for the ~930 MB embedding matrices.
+Every rebuild of `data/corpus/recipes_structured.parquet` (~99 MB) still stores a **new** object,
+because LFS keeps every version — so consumption does grow one payload at a time and is worth
+watching. But the headroom is fifty times what this document claimed.
+
+Check it at **github.com/organizations/Poshaka-Research-Lab/settings/billing**. It cannot be
+read from the API with the usual token: the org billing endpoint returns 410 Moved and its
+replacement needs the `admin:org` scope, which a `repo`-scoped token does not carry. So the
+number has to come from the web page, and it should be re-read rather than assumed — including
+from this paragraph, which was itself wrong for months.
+
+If it ever does get close: buy a data pack, or move the largest artefacts to a Zenodo-only tier
+the way `docs/PROVENANCE.md` already does for the ~930 MB embedding matrices.
+
+Local disk is a separate matter. `.git/lfs` holds every version ever fetched — 2,104 MB across
+98 objects as of 0.6.0, including nine ~99 MB copies of the corpus parquet. `git lfs prune`
+reclaims almost nothing there, because the retention window still covers the recent commits that
+reference them.
 
 ## If a clone has no git-lfs
 

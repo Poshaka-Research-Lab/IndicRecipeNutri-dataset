@@ -473,27 +473,35 @@ def check_exclusions(root: Path) -> None:
 def check_static_id_lists(root: Path) -> None:
     """Withdrawn recipes may not be referenced by the STATIC benchmark artefacts either.
 
-    `check_exclusions` above scans published *.parquet. `data/synthetic_interactions/` is
-    plain text and CSV, so it was outside every scan -- and after the V7 withdrawal
-    (2026-09-01) it still referenced recipes that had left the corpus. All three gate suites
-    were green while it did. That is the failure mode CLAUDE.md names: a gate that does not
-    cover the path that broke.
+    `check_exclusions` above scans published *.parquet. `data/interactions/` is plain text
+    and CSV, so it was outside every scan -- and after the V7 withdrawal (2026-09-01) its
+    predecessor still referenced recipes that had left the corpus. All three gate suites were
+    green while it did. That is the failure mode CLAUDE.md names: a gate that does not cover
+    the path that broke.
 
     This check is COLUMN-AWARE on purpose. A regex sweep for withdrawn ids over these files
     reports `user_list.txt` and `train.txt` as offenders, which is wrong -- those hold user
     ids and REMAPPED ids that merely collide numerically with a recipe id. Only the columns
     named below actually carry a `recipe_id`.
 
-    The counts are PINNED, not waived. `bench_synth/gen.py` is a static generator whose
-    paths point at another machine (`/mnt/user-data/uploads/...`), so it cannot be re-run
-    here, and regenerating a synthetic benchmark would invalidate the published
-    `baseline_results.json`. That is a decision, not a side effect, and it is filed as
-    TODO_VERIFICATION V9.5. Until then the artefact is DECLARED as pinned to the
-    pre-withdrawal corpus at exactly these counts, and any drift -- a further withdrawal, a
-    partial regeneration -- fails the build instead of passing silently.
+    THE PINS ARE GONE, AND THAT IS THE POINT (2026-09-12, v0.7.0).
+
+    This check used to DECLARE two directories as pinned to the pre-withdrawal corpus at
+    exactly 385 / 385 / 20,161 and 12 / 12 / 1,087 withdrawn references. The justification
+    was that `gen.py` hardcoded `/mnt/user-data/uploads/...` and so could not be re-run, and
+    that regenerating would invalidate the published `baseline_results.json`. Both premises
+    have been retired: `scripts/build_interactions.py` regenerates the set from the PUBLISHED
+    corpus with no machine-specific path, and `scripts/build_interaction_baselines.py`
+    recomputes the baselines against it.
+
+    So the expected count is ZERO, not a declared number. A pinned nonzero count can only
+    ever assert "this artefact is stale in exactly the way we already knew"; zero asserts
+    that the artefact and the corpus agree. Generating from `data/corpus/` makes that true
+    by construction rather than by audit, and the generator refuses to write its output if
+    the audit does not come back clean.
     """
-    si = root / "data" / "synthetic_interactions"
-    if not si.exists() or not WITHDRAWN_NONRECIPE_IDS:
+    si = root / "data" / "interactions"
+    if not si.exists():
         return
 
     # file -> (column holding a recipe_id, separator, id prefix to strip, pinned row count)
@@ -507,39 +515,21 @@ def check_static_id_lists(root: Path) -> None:
     # The other id-bearing files in this directory are NOT recipe ids and are correctly
     # absent: relation_list.txt and user_list.txt are relations and users, and kg_final.txt,
     # train.txt and test.txt carry REMAPPED ids that merely collide numerically.
-    # WIDENED TWICE on 2026-09-06, and both widenings found references nothing was checking.
     #
-    # 1. IT TESTED ONE WITHDRAWAL POPULATION OF THREE. The set used was
-    #    `WITHDRAWN_NONRECIPE_IDS` -- V7 only -- while `all_withdrawn_ids()` exists precisely
-    #    so a population cannot be added without every consumer seeing it. This function's
-    #    own docstring cites that registry as the fix for "a third population was added to
-    #    the corpus without being added to the check", and then used the narrow set anyway.
-    #    V8 grihshobha references it never counted: 70 in item_list, 70 in entity_list,
-    #    3,462 in interactions.
-    #
-    # 2. IT TESTED ONE DIRECTORY OF TWO. `data/synthetic_interactions_v3/` is published and
-    #    was entirely unchecked. It is a later generation and is V7-CLEAN (0 references
-    #    where v1 has 315), but it carries 12 / 12 / 1,087 V8 references of its own.
-    #
-    # The pins stay pins. `bench_synth/gen.py` still cannot be re-run here and regenerating
-    # would invalidate the published `baseline_results.json`; that decision is unchanged.
-    # What changes is that the declaration is now COMPLETE -- every published directory,
-    # every withdrawal population -- so "pinned" means what it says instead of meaning
-    # "pinned against the subset we happened to check".
+    # Tested against `all_withdrawn_ids()`, never one population. The 2026-09-06 version used
+    # `WITHDRAWN_NONRECIPE_IDS` -- V7 only -- while the registry existed precisely so a
+    # population could not be added without every consumer seeing it, and it missed 70 / 70 /
+    # 3,462 V8 grihshobha references as a direct result. The registry is the whole set or the
+    # check is worth nothing.
     withdrawn_all = set(all_withdrawn_ids())
-    PINNED = {
-        "synthetic_interactions": {
-            "item_list.txt": ("org_id", r"\s+", "", 385),
-            "entity_list.txt": ("org_id", r"\s+", "item:", 385),
-            "interactions.csv": ("recipe_id", ",", "", 20_161),
-        },
-        "synthetic_interactions_v3": {
-            "item_list.txt": ("org_id", r"\s+", "", 12),
-            "entity_list.txt": ("org_id", r"\s+", "item:", 12),
-            "interactions.csv": ("recipe_id", ",", "", 1_087),
+    EXPECTED = {
+        "interactions": {
+            "item_list.txt": ("org_id", r"\s+", "", 0),
+            "entity_list.txt": ("org_id", r"\s+", "item:", 0),
+            "interactions.csv": ("recipe_id", ",", "", 0),
         },
     }
-    for subdir, files in PINNED.items():
+    for subdir, files in EXPECTED.items():
         base = root / "data" / subdir
         if not base.exists():
             continue
@@ -579,20 +569,19 @@ def check_static_id_lists(root: Path) -> None:
             if n != pinned:
                 fail(
                     "static-ids",
-                    f"{subdir}/{name}: {n:,} rows reference a withdrawn recipe, pinned at "
-                    f"{pinned:,}. The synthetic benchmark is declared pinned to the PRE-"
-                    f"withdrawal corpus (TODO_VERIFICATION V9.5); a change to this number "
-                    f"means it was partly regenerated or another withdrawal landed. "
-                    f"Reconcile, do not re-pin.",
+                    f"{subdir}/{name}: {n:,} rows reference a withdrawn recipe, expected "
+                    f"{pinned:,}. The interaction benchmark is generated FROM the published "
+                    f"corpus by scripts/build_interactions.py, so a withdrawn id cannot "
+                    f"appear unless the artefact is stale or a withdrawal landed after it "
+                    f"was built. Regenerate it — do not pin the number.",
                 )
     notes.append(
-        f"static-ids: both published synthetic-interaction sets are pinned to the "
-        f"pre-withdrawal corpus, against all {len(withdrawn_all):,} withdrawn recipes across "
-        f"every population (not V7 alone, which is what this check tested until 2026-09-06). "
-        f"synthetic_interactions: 385 / 385 / 20,161; synthetic_interactions_v3: 12 / 12 / "
-        f"1,087 — v3 is the later generation and is V7-clean, carrying only V8 references. "
-        f"Declared, counted and filed as V9.5; not silently tolerated. The pins are absolute "
-        f"row counts, so any drift fails the build."
+        f"static-ids: data/interactions references ZERO of the {len(withdrawn_all):,} "
+        f"withdrawn recipes, across every withdrawal population. This supersedes the v0.6.0 "
+        f"declaration, which PINNED two directories at 385 / 385 / 20,161 and 12 / 12 / "
+        f"1,087 because their generator hardcoded another machine's paths and could not be "
+        f"re-run. scripts/build_interactions.py regenerates from data/corpus/, so agreement "
+        f"with the corpus is structural now rather than declared."
     )
 
 
@@ -884,9 +873,15 @@ def main() -> int:
     from benchmark_contract import validate_benchmark
     for problem in validate_benchmark(args.root):
         fail('benchmark-version', problem)
-    from synthetic_history_contract import validate_historical_synthetic
-    for problem in validate_historical_synthetic(args.root):
-        fail('synthetic-history', problem)
+    from interactions_contract import validate_interactions
+    interaction_problems = validate_interactions(args.root)
+    for problem in interaction_problems:
+        fail('interactions', problem)
+    if not interaction_problems:
+        notes.append("interactions: id maps injective, item/entity namespaces agree, KG and "
+                     "both splits resolve, no train/test overlap, every referenced recipe "
+                     "live and none withdrawn, and no restricted-diet user served an "
+                     "incompatible or undeclared recipe")
     from split_contract import validate_release_splits
     try:
         split_problems = validate_release_splits(args.root)

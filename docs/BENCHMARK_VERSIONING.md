@@ -35,30 +35,34 @@ feature ablations specified by the database improvement plan remain outstanding.
 Neither of these silver generations supplies those missing judgments.
 
 
-The two synthetic interaction exports are retained as **historical snapshots**.
-Neither is an aligned current-corpus benchmark. Each folder carries `SNAPSHOT.json`
-with independently pinned file hashes and `HISTORICAL_MANIFEST.json` with ID
-membership, train/test counts and current withdrawal reconciliation. Their data,
-existing results and generators remain byte-for-byte unchanged. The source archive
-was recovered from inspected local release bytes; the original full-corpus hash is
-unknown. Having a generator beside an output does not prove full regeneration from
-its original inputs.
+`data/interactions/` is a **single** synthetic interaction benchmark, regenerated from
+the published corpus by `scripts/build_interactions.py`. It is simulated behaviour and
+is not an aligned human benchmark.
 
-| Snapshot | Post-core items | Train pairs | Test pairs | Withdrawn catalogue items | Withdrawn raw interaction rows |
+It replaces two retired exports, `synthetic_interactions/` (v1) and
+`synthetic_interactions_v3/`. They were **not merged**, because they could not be: they
+were independent simulations whose remapped id spaces collide, so concatenating them
+would have invented users rating across two catalogues and destroyed both the 10-core
+property and the zero-leakage guarantee. Both remain at the `v0.6.0` tag and its DOI for
+reproducing results published against them.
+
+| Generation | Post-core items | Train pairs | Test pairs | Withdrawn catalogue items | Withdrawn raw interaction rows |
 |---|---:|---:|---:|---:|---:|
-| Historical v1 | 16,688 | 658,098 | 163,115 | 385 | 20,161 |
-| Historical v3 | 16,194 | 654,605 | 162,182 | 12 | 1,087 |
+| **Current (v4)** | 16,567 | 657,610 | 162,956 | **0** | **0** |
+| Retired v1 (`v0.6.0`) | 16,688 | 658,098 | 163,115 | 385 | 20,161 |
+| Retired v3 (`v0.6.0`) | 16,194 | 654,605 | 162,182 | 12 | 1,087 |
 
-Both train/test files resolve through their user and item remap tables, with no
-shared user-item pair across the two splits. These are **interaction splits**, not
-recipe `Split_v3` or duplicate-family splits. The raw pre-core interaction logs have
-389 distinct withdrawn recipe IDs in v1 and 12 in v3; the post-core item tables have
-385 and 12 respectively. These denominators describe different populations. All
-recipe IDs missing from today's corpus reconcile to recorded withdrawals.
+**The zeros are structural, not audited.** Generating from `data/corpus/` means a
+withdrawn recipe cannot be selected. The retired sets could only ever be *declared*
+clean at a pinned count, because their generator hardcoded another machine's paths and
+could not be re-run; that pin is now retired along with them.
 
-The historical KG resolves within its own exported entity/relation namespace.
-Original learned-feature training scope is not established, so these snapshots do
-not support an inductive claim. Use the exact historical files for historical result
-comparisons; a new experiment requiring current features needs a separately versioned
-aligned dataset and fresh results. Do not silently join withdrawn historical items
-to current features or relabel old results as current.
+Do not join either retired set to the current one. Their `recipe_id` column held
+dataframe row offsets rather than corpus ids, so the id spaces are not comparable even
+where the numbers overlap.
+
+Train and test resolve through the user and item remap tables with no shared user-item
+pair. These are **interaction splits**, not recipe `Split_v3` or duplicate-family
+splits. The attribute KG resolves within its own exported entity/relation namespace, and
+learned-feature training scope is not established, so this benchmark supports no
+inductive claim.

@@ -1,123 +1,135 @@
 #!/usr/bin/env python3
-r"""R2 - the region crosswalk. Makes the user/KG vocabulary mismatch explicit.
+r"""The region crosswalk: which user home_regions have no KG entity, and why.
 
-`users.csv` profiles 50,000 synthetic users with `home_region` drawn from the **28-code**
-vocabulary the generator used in August. The KG was rebuilt on **14 primary state-level
-regions + 10 marked supra-regional buckets = 24 entities**. Six user codes do not resolve
-by string, and four of those have no target at all:
+REWRITTEN 2026-09-12 for v0.7.0. The previous version documented a **vocabulary mismatch**:
+`users.csv` profiled its users with the generator's 28-code August vocabulary
+(`Parsi (community)`, `Sindhi (community)`, `Mughlai (North India)`) while the KG had been
+rebuilt on a different set, so six codes did not resolve by string and a hand-maintained
+`MANUAL` table renamed or folded three of them.
 
-    Parsi (community)      -> region_supra:Parsi          (renamed)
-    Sindhi (community)     -> region_supra:Sindhi         (renamed)
-    Mughlai (North India)  -> region_supra:North_India    (folded; a culinary lineage, not
-                                                           a geography - CLAUDE.md 6.2)
-    Uttarakhand            -> (none)   8 recipes, below --min_per_region
-    Manipur                -> (none)   1 recipe
-    West India             -> (none)   3 recipes
+**That mismatch is gone.** `data/interactions` is generated from
+`data/corpus/recipes_structured.parquet`, so user home_regions and KG region entities are now
+drawn from the same published `Region` column. Measured after the v4 rebuild: every code
+resolves by exact string, including `Sindhi` and `Parsi`, and the `MANUAL` table has been
+deleted rather than carried forward as dead configuration.
 
-The generator weighted `0.35 * region-match`, so those users' region preference was real at
-generation time and is unreachable now. **Remapping `users.csv` was rejected**: it would
-change a file that `interactions.csv`, `train.txt` and `test.txt` were built against, and
-the generator cannot be re-run. A crosswalk states the mismatch instead of erasing it.
+What survives is a smaller and entirely different gap, which is worth publishing precisely
+because it is easy to mistake for the old one: a region can have users but no KG entity when
+none of its recipes survived the **iterative 10-core** on the interaction log. An entity
+exists only for an item retained after that filter, and the corpus's smallest regions hold
+too few recipes to accumulate ten distinct users each. Nothing is misnamed; those regions are
+simply unreachable through the graph.
+
+The old meta note also claimed `users.csv` could not be remapped because "gen.py cannot be
+re-run". That is no longer true — `scripts/build_interactions.py` regenerates the whole set —
+so the reason to leave the profiles alone is now a modelling one and is stated as such: the
+generator weighted `0.35 * region-match`, so a user's regional preference was real at
+generation time, and rewriting it after the fact would misdescribe how the log was produced.
+
+Usage:  python scripts/build_region_crosswalk.py
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import json
-import os
 import sys
-import pathlib
 from collections import Counter
+from pathlib import Path
 
-# Second entry is the vendored taxonomy beside this script, so the import does not
-# depend on a path that exists on one machine.
-sys.path.insert(0, os.environ.get("DATASETS_ROOT", r"D:\datasets"))
-sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT = r"D:\datasets\IndicRecipeNutri-dataset"
-SI = os.path.join(ROOT, "data", "synthetic_interactions")
+from release_config import REPO_ROOT  # noqa: E402
 
+# The 14 state-level regions of the primary evaluation axis (CLAUDE.md 6.2). Recorded per row
+# so a reader can tell an axis region from a supra-regional bucket or a community code.
 AXIS_14 = {"Andhra Pradesh", "Bihar", "Goa", "Gujarat", "Jammu & Kashmir", "Karnataka",
            "Kerala", "Maharashtra", "Punjab", "Rajasthan", "Tamil Nadu", "Telangana",
            "Uttar Pradesh", "West Bengal"}
 
-# explicit, reviewed mappings for the codes that do not match by string
-MANUAL = {
-    "Parsi (community)":     ("region_supra:Parsi",       "renamed", "community code"),
-    "Sindhi (community)":    ("region_supra:Sindhi",      "renamed", "community code"),
-    "Mughlai (North India)": ("region_supra:North_India", "folded",
-                              "culinary lineage, not a geography (CLAUDE.md 6.2)"),
-}
-
-
-def safe(x: str) -> str:
-    return "_".join(str(x).split())
+FIELDS = ["user_home_region", "n_users", "kg_entity", "match", "in_primary_axis",
+          "corpus_recipes", "note"]
 
 
 def main() -> int:
-    ents = []
-    with open(os.path.join(SI, "entity_list.txt"), encoding="utf-8") as fh:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--data", type=Path, default=REPO_ROOT / "data" / "interactions")
+    ap.add_argument("--corpus", type=Path,
+                    default=REPO_ROOT / "data" / "corpus" / "recipes_structured.parquet")
+    args = ap.parse_args()
+
+    import pandas as pd
+
+    entities = []
+    with (args.data / "entity_list.txt").open(encoding="utf-8") as fh:
         next(fh)
         for line in fh:
-            parts = line.split()
-            if parts:
-                ents.append(parts[0])
-    kg_regions = {e for e in ents if e.startswith(("region:", "region_supra:"))}
-    print(f"KG region entities: {len(kg_regions)}  "
-          f"(primary {sum(1 for e in kg_regions if e.startswith('region:'))}, "
-          f"supra {sum(1 for e in kg_regions if e.startswith('region_supra:'))})")
+            if line.strip():
+                entities.append(line.rsplit(None, 1)[0])
+    kg_regions = {e for e in entities if e.startswith("region:")}
+    print(f"KG region entities: {len(kg_regions)}")
 
-    users = Counter()
-    with open(os.path.join(SI, "users.csv"), encoding="utf-8") as fh:
-        for r in csv.DictReader(fh):
-            users[r.get("home_region", "")] += 1
-    print(f"user home_region codes: {len(users)}   users: {sum(users.values()):,}")
+    users: Counter[str] = Counter()
+    with (args.data / "users.csv").open(encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            users[row.get("home_region", "")] += 1
+    total_users = sum(users.values())
+    print(f"user home_region codes: {len(users)}   users: {total_users:,}")
 
-    rows, unresolved_users = [], 0
+    corpus_counts = (pd.read_parquet(args.corpus, columns=["Region"])
+                     .Region.fillna("Pan-Indian").astype(str).value_counts().to_dict())
+
+    rows, unreachable_users = [], 0
     for code, n in sorted(users.items(), key=lambda kv: -kv[1]):
-        if code in MANUAL:
-            ent, kind, note = MANUAL[code]
-            if ent not in kg_regions:
-                ent, kind, note = "", "unreachable", note + "; target absent from the KG"
+        entity = f"region:{code}"
+        if entity in kg_regions:
+            match, note = "exact", "resolves by string against the published Region column"
         else:
-            prim = f"region:{safe(code)}"
-            supra = f"region_supra:{safe(code)}"
-            if prim in kg_regions:
-                ent, kind, note = prim, "exact", "primary 14-region axis"
-            elif supra in kg_regions:
-                ent, kind, note = supra, "exact", "supra-regional / community bucket"
-            else:
-                ent, kind, note = "", "unreachable", "below --min_per_region; no KG entity"
-        if not ent:
-            unresolved_users += n
-        rows.append({"user_home_region": code, "n_users": n, "kg_entity": ent,
-                     "match": kind, "in_primary_axis": str(code in AXIS_14).lower(),
-                     "note": note})
+            match = "unreachable"
+            note = (f"no item from this region survived the iterative 10-core "
+                    f"({corpus_counts.get(code, 0)} recipes in the corpus), so the graph "
+                    f"carries no entity for it")
+            entity = ""
+            unreachable_users += n
+        rows.append({"user_home_region": code, "n_users": n, "kg_entity": entity,
+                     "match": match, "in_primary_axis": str(code in AXIS_14).lower(),
+                     "corpus_recipes": corpus_counts.get(code, 0), "note": note})
 
-    out = os.path.join(SI, "region_crosswalk.csv")
-    with open(out, "w", encoding="utf-8", newline="") as fh:
-        wr = csv.DictWriter(fh, fieldnames=["user_home_region", "n_users", "kg_entity",
-                                            "match", "in_primary_axis", "note"])
-        wr.writeheader()
-        wr.writerows(rows)
+    out = args.data / "region_crosswalk.csv"
+    with out.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
 
     kinds = Counter(r["match"] for r in rows)
     print(f"\n{'match':<14}{'codes':>7}")
     for k, v in kinds.most_common():
         print(f"  {k:<12}{v:>7}")
-    print(f"\nunreachable codes: {kinds['unreachable']}   "
-          f"users affected: {unresolved_users:,} ({100*unresolved_users/sum(users.values()):.2f}%)")
     for r in rows:
         if r["match"] != "exact":
-            print(f"  {r['user_home_region']:<24} -> {r['kg_entity'] or '(none)':<28} "
-                  f"{r['match']:<12} {r['n_users']:>6,} users")
+            print(f"  {r['user_home_region']:<22} -> (none)   {r['n_users']:>6,} users, "
+                  f"{r['corpus_recipes']:>5} corpus recipes")
+    print(f"\nunreachable codes: {kinds['unreachable']}   users affected: "
+          f"{unreachable_users:,} ({100 * unreachable_users / total_users:.3f}%)")
 
-    meta = {"user_codes": len(users), "kg_region_entities": len(kg_regions),
-            "matches": dict(kinds), "users_unreachable": unresolved_users,
-            "note": "users.csv deliberately NOT remapped: interactions.csv, train.txt and "
-                    "test.txt were built against its id space and gen.py cannot be re-run."}
-    json.dump(meta, open(os.path.join(SI, "region_crosswalk_meta.json"), "w",
-                         encoding="utf-8"), indent=2)
+    meta = {
+        "user_codes": len(users),
+        "kg_region_entities": len(kg_regions),
+        "matches": dict(kinds),
+        "users_unreachable": unreachable_users,
+        "users_unreachable_pct": round(100 * unreachable_users / total_users, 3),
+        "renames_required": 0,
+        "note": "Users and KG entities are both drawn from the published Region column, so "
+                "every code resolves by exact string and no rename table is needed. The "
+                "unreachable codes are regions whose recipes did not survive the iterative "
+                "10-core, not naming mismatches. users.csv is deliberately not remapped: the "
+                "generator weighted 0.35*region-match, so regional preference was real at "
+                "generation time and rewriting it afterwards would misdescribe the log.",
+    }
+    (args.data / "region_crosswalk_meta.json").write_text(
+        json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"\nwrote {out}")
     return 0
 

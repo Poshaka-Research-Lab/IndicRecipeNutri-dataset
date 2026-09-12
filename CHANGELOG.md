@@ -1,5 +1,79 @@
 # Changelog
 
+## [0.7.0] — 2026-09-12 — one interaction benchmark, regenerated clean
+
+**Breaking: `data/synthetic_interactions/` and `data/synthetic_interactions_v3/` are removed**
+and replaced by a single `data/interactions/`. Any path or manifest entry naming the old
+directories breaks, and the interaction id space is different (see defect 3 below), so stored
+user/item pairs from either retired set must not be joined to the new one. Both remain
+reachable at the `v0.6.0` tag and its DOI for anyone reproducing published results.
+
+**They were not merged, because they could not be.** The two directories were independent
+simulations, not two halves of one dataset: their remapped id spaces collide. `user_id 0`
+rated recipe 4489 in v1 and recipe 121171 in v3, and exactly 2 of ~16,000 `item_list` entries
+agreed. Concatenating them would have invented users who rated across two different
+catalogues and destroyed both guarantees the verifier checks — the 10-core property and
+`train_test_leakage = 0`. One coherent set could only come from regeneration.
+
+`scripts/build_interactions.py` now generates it from `data/corpus/recipes_structured.parquet`
+— the published corpus — with no machine-specific path. `scripts/build_interaction_baselines.py`
+re-scores it. Both replace scripts that shipped *inside* the data directory and hardcoded
+`/tmp/bench/synth50` and `/mnt/user-data/uploads/...`, which is why the artefact could never be
+rebuilt and had to be pinned instead.
+
+**The pins are retired, and that is the substance of this release.** v0.6.0 declared the two
+directories pinned to the pre-withdrawal corpus at 385 / 385 / 20,161 and 12 / 12 / 1,087
+withdrawn-recipe references. Generating from the published corpus makes the count **0** by
+construction rather than by declaration; `verify_release.py` now expects zero and fails on
+anything else instead of accepting a number.
+
+### Fixed — three defects in the retired generator, all of them silent
+
+1. **The glycemic term never operated, in either published generation.** `gen.py` mapped
+   `GlycemicLoad` through `{'low','medium','high'}`, but that column is ~98.6% **numeric** in
+   both source CSVs and holds no such value — so `.map()` returned NaN for every row,
+   `.fillna(0.5)` made the score a constant, and the `diabetic` profile (15% of users)
+   silently reduced to HealthGrade alone. The published datasheet's "diabetic→low
+   glycemic/grade A-B" described a term that had never run. The categorical column it wanted,
+   `gl_bucket`, was sitting directly beside it. v4 maps `gl_bucket` — **216,353 of 219,386
+   recipes (98.62%)** against 0.00% before — and the build now fails if that ratio ever falls
+   below half.
+2. **Diet normalisation failed open on a hard constraint.** `norm_diet()` returned
+   `'Vegetarian'` for anything it did not recognise, so **731** recipes carrying
+   `Diet == 'unknown'` entered the Vegan, Vegetarian and Eggetarian candidate pools — and the
+   audit reported zero violations because it re-used the same function on the same values. An
+   undeclared diet is now its own class, excluded from every pool, and the audit reads the raw
+   corpus column so it can fail. `scripts/interactions_contract.py` re-checks it at release
+   time against the corpus, independently of the generator that produced the artefact.
+3. **Ids were positional, not recipe ids.** Candidate selection produced dataframe row
+   offsets, which were written into a column named `recipe_id` and read as corpus ids by
+   `item_list.txt`, `entity_list.txt` and the static-id gate alike. Position is mapped to
+   `recipe_id` explicitly now.
+
+### The payload
+
+50,000 users · **990,273** ratings over 18,010 distinct recipes · after positives (≥4),
+iterative 10-core and a per-user temporal 80/20 split: **35,801 users / 16,567 items /
+820,566 interactions** (train 657,610, test 162,956) · **0** leakage · attribute KG of
+**82,835** triples over 16,614 entities · all 27 published `Region` codes represented.
+`data/` is now 83 files, ≈474 MB.
+
+- `scripts/synthetic_history_contract.py` is replaced by `scripts/interactions_contract.py`.
+  The old one staged two frozen generations and pinned their `SNAPSHOT.json` digests; a
+  regenerable artefact needs no byte-pin, because `checksums/SHA256SUMS` already covers every
+  file in both directions. The new contract checks what a digest cannot see: injective id
+  maps, item/entity namespace agreement, KG and split referential integrity, no train/test
+  overlap, every referenced recipe live and unwithdrawn, and the diet hard constraint.
+- `scripts/build_region_crosswalk.py` is rewritten. Its old premise — a vocabulary mismatch
+  needing a hand-maintained rename table for `Sindhi (community)`, `Parsi (community)` and
+  `Mughlai (North India)` — is gone, because users and KG entities are now drawn from the same
+  published `Region` column and every code resolves by exact string. What remains is smaller
+  and real: 4 codes and 289 users (**0.578%**) whose regions had no item survive the 10-core.
+- `.gitattributes` LFS globs widened from `data/synthetic_interactions*/` to
+  `data/*interactions*/`. An anchored glob would have matched the new directory **not at all**
+  and committed its 24.7 MB `interactions.csv` raw — the same failure the previous widening
+  was written to prevent, one directory later.
+
 ## [0.6.0] — 2026-09-12 — vocabulary, a new relation, and the salt family
 
 **Breaking: `pairs_with` is recomputed.** The empirical co-occurrence layer had been PMI over a

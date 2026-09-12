@@ -932,7 +932,19 @@ EXPECTED_CORPUS_BUILD = "v15"
 #      joining on `ingredient::eggplant`, `ingredient::peas` or `ingredient::kosher` breaks.
 # Not 1.0.0: that asserts a stable public interface, and the open gates listed in CHANGELOG
 # 0.1.0 are not closed.
-DATASET_VERSION = "0.6.0"
+#
+# 0.6.0 -> 0.7.0, and breaking by the same test: identifiers consumers join on have changed.
+#   1. TWO PUBLISHED DIRECTORIES ARE REMOVED. `data/synthetic_interactions/` and
+#      `data/synthetic_interactions_v3/` are replaced by a single `data/interactions/`. Any
+#      path, manifest entry or script referencing the old names breaks. They were independent
+#      simulations with colliding remapped id spaces and could not be merged, so one coherent
+#      set required regeneration rather than a rename.
+#   2. THE INTERACTION ID SPACE IS DIFFERENT. The retired generator selected candidates as
+#      dataframe row offsets and wrote them into a column named `recipe_id`, which everything
+#      downstream then read as a corpus id. `data/interactions` emits real `recipe_id`s, so
+#      stored user/item pairs from either retired set do not carry over and must not be
+#      joined to this one. The retired directories stay reachable at the v0.6.0 tag and DOI.
+DATASET_VERSION = "0.7.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

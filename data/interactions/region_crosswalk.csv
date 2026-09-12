@@ -1,0 +1,28 @@
+user_home_region,n_users,kg_entity,match,in_primary_axis,corpus_recipes,note
+Pan-Indian,12480,region:Pan-Indian,exact,false,135055,resolves by string against the published Region column
+North India,3766,region:North India,exact,false,12108,resolves by string against the published Region column
+Kerala,3742,region:Kerala,exact,true,11527,resolves by string against the published Region column
+Tamil Nadu,3725,region:Tamil Nadu,exact,true,11375,resolves by string against the published Region column
+South India,3672,region:South India,exact,false,11581,resolves by string against the published Region column
+Punjab,3588,region:Punjab,exact,true,10505,resolves by string against the published Region column
+West Bengal,2703,region:West Bengal,exact,true,6431,resolves by string against the published Region column
+Maharashtra,2479,region:Maharashtra,exact,true,5017,resolves by string against the published Region column
+Karnataka,2341,region:Karnataka,exact,true,4788,resolves by string against the published Region column
+Gujarat,2060,region:Gujarat,exact,true,3677,resolves by string against the published Region column
+Andhra Pradesh,1431,region:Andhra Pradesh,exact,true,1862,resolves by string against the published Region column
+Goa,1398,region:Goa,exact,true,1545,resolves by string against the published Region column
+Rajasthan,1007,region:Rajasthan,exact,true,871,resolves by string against the published Region column
+Bihar,982,region:Bihar,exact,true,771,resolves by string against the published Region column
+Telangana,934,region:Telangana,exact,true,743,resolves by string against the published Region column
+Jammu & Kashmir,751,region:Jammu & Kashmir,exact,true,457,resolves by string against the published Region column
+Uttar Pradesh,681,region:Uttar Pradesh,exact,true,393,resolves by string against the published Region column
+Sindhi,635,region:Sindhi,exact,false,306,resolves by string against the published Region column
+Parsi,432,region:Parsi,exact,false,149,resolves by string against the published Region column
+Odisha,286,region:Odisha,exact,false,80,resolves by string against the published Region column
+Assam,272,region:Assam,exact,false,65,resolves by string against the published Region column
+Himachal Pradesh,248,region:Himachal Pradesh,exact,false,52,resolves by string against the published Region column
+Nagaland,100,,unreachable,false,8,"no item from this region survived the iterative 10-core (8 recipes in the corpus), so the graph carries no entity for it"
+Uttarakhand,98,region:Uttarakhand,exact,false,8,resolves by string against the published Region column
+East India,97,,unreachable,false,8,"no item from this region survived the iterative 10-core (8 recipes in the corpus), so the graph carries no entity for it"
+West India,59,,unreachable,false,3,"no item from this region survived the iterative 10-core (3 recipes in the corpus), so the graph carries no entity for it"
+Manipur,33,,unreachable,false,1,"no item from this region survived the iterative 10-core (1 recipes in the corpus), so the graph carries no entity for it"

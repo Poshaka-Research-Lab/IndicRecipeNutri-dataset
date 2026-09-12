@@ -104,7 +104,7 @@ jobs:
             echo ""
             echo "| directory | files | size |"
             echo "|---|---:|---:|"
-            for d in data/corpus data/kg data/enrichment data/benchmark data/synthetic_interactions docs; do
+            for d in data/corpus data/kg data/enrichment data/benchmark data/interactions docs; do
               echo "| \`$d\` | $(find $d -type f | wc -l) | $(du -sh $d | cut -f1) |"
             done
             echo ""

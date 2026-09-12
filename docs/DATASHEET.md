@@ -44,8 +44,9 @@ The release verifier checks graph/corpus split parity by ID and both group const
 These checks do not establish the absence of all possible semantic near-duplicates.
 The 67 benchmark queries use graph-derived silver labels, not human relevance judgments.
 Synthetic interactions are simulated behaviour, not observations of real users.
-Their documented historical withdrawal exceptions are checked by `verify_release.py`;
-they must be tied to their declared snapshot rather than treated as an aligned user study.
+`data/interactions/` is regenerated from the published corpus, so it references no withdrawn
+recipe. `verify_release.py` checks that, the id maps, both splits, and that no user with a
+dietary restriction is served an incompatible or undeclared recipe.
 
 ## Representation
 

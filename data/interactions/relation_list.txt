@@ -1,0 +1,6 @@
+org_id remap_id
+has_region 0
+has_diet 1
+has_course 2
+has_healthgrade 3
+has_spice 4

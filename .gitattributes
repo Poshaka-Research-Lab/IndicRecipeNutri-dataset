@@ -45,13 +45,20 @@ checksums/SHA256SUMS -text
 # without the build saying so.
 *.parquet filter=lfs diff=lfs merge=lfs -text
 #
-# The four bulk files below are listed per DIRECTORY-GLOB, not per exact path. The earlier
+# The bulk files below are listed per DIRECTORY-GLOB, not per exact path. The earlier
 # exact-path form covered `synthetic_interactions/` only, so when `synthetic_interactions_v3/`
 # was added its 24.6 MB `interactions.csv` -- LARGER than the v1 file the rule was written for
 # -- matched nothing and would have been committed raw. A generation-numbered directory is
 # going to keep happening; the glob covers the next one too.
-data/synthetic_interactions*/interactions.csv filter=lfs diff=lfs merge=lfs -text
-data/synthetic_interactions*/users.csv        filter=lfs diff=lfs merge=lfs -text
-data/synthetic_interactions*/train.txt        filter=lfs diff=lfs merge=lfs -text
-data/synthetic_interactions*/kg_final.txt     filter=lfs diff=lfs merge=lfs -text
-data/synthetic_interactions*/test.txt         filter=lfs diff=lfs merge=lfs -text
+#
+# WIDENED 2026-09-12 from `synthetic_interactions*` to `*interactions*` for the v4
+# consolidation. v1 and v3 are replaced by a single `data/interactions/`, and a glob anchored
+# on `synthetic_` would have matched the new directory NOT AT ALL -- committing its 24 MB
+# interactions.csv raw, which is precisely the failure the previous widening was written to
+# prevent, repeated one directory later. `*interactions*` covers both old names, the new one,
+# and any future generation suffix, so no transition state is left uncovered.
+data/*interactions*/interactions.csv filter=lfs diff=lfs merge=lfs -text
+data/*interactions*/users.csv        filter=lfs diff=lfs merge=lfs -text
+data/*interactions*/train.txt        filter=lfs diff=lfs merge=lfs -text
+data/*interactions*/kg_final.txt     filter=lfs diff=lfs merge=lfs -text
+data/*interactions*/test.txt         filter=lfs diff=lfs merge=lfs -text

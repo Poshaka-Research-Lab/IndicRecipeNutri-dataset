@@ -1095,7 +1095,7 @@ Covering **all 44 published Parquet tables**.
 
 ## Every published file
 
-All 103 files under `data/`, so nothing ships undescribed.
+All 86 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
@@ -1157,6 +1157,25 @@ All 103 files under `data/`, so nothing ships undescribed.
 | `quarantine_list.parquet` | 0.70 MB | columnar table — documented above |
 | `renutrition_v3.parquet` | 8.13 MB | columnar table — documented above |
 
+### `data/interactions/` — **Synthetic interaction benchmark, v4.** Regenerated 2026-09-12 from the published corpus by `scripts/build_interactions.py`, replacing the two earlier generations, which could not be merged because their remapped id spaces collide. Zero withdrawn-recipe references by construction; ids are corpus `recipe_id`s, not positional indices. Simulated behaviour, not observed users.
+
+| file | size | kind |
+|---|---:|---|
+| `baseline_results.json` | 0.00 MB | metadata / manifest |
+| `DATASHEET.md` | 0.01 MB | prose |
+| `entity_list.txt` | 0.28 MB | plain-text id or triple list |
+| `interactions.csv` | 25.92 MB | delimited text |
+| `item_list.txt` | 0.20 MB | plain-text id or triple list |
+| `kg_final.txt` | 1.10 MB | plain-text id or triple list |
+| `region_crosswalk.csv` | 0.00 MB | delimited text |
+| `region_crosswalk_meta.json` | 0.00 MB | metadata / manifest |
+| `relation_list.txt` | 0.00 MB | plain-text id or triple list |
+| `stats.json` | 0.00 MB | metadata / manifest |
+| `test.txt` | 1.05 MB | plain-text id or triple list |
+| `train.txt` | 3.63 MB | plain-text id or triple list |
+| `user_list.txt` | 0.41 MB | plain-text id or triple list |
+| `users.csv` | 2.62 MB | delimited text |
+
 ### `data/kg/`
 
 | file | size | kind |
@@ -1199,44 +1218,3 @@ All 103 files under `data/`, so nothing ships undescribed.
 | `language_source_evidence.json` | 0.00 MB | metadata / manifest |
 | `release_facts.json` | 0.00 MB | metadata / manifest |
 | `withdrawn_ids.json` | 0.83 MB | metadata / manifest |
-
-### `data/synthetic_interactions/` — **Historical v1.** Frozen bytes, membership and interaction splits are pinned in HISTORICAL_MANIFEST.json. Contains withdrawn recipes; not current-corpus evaluation.
-
-| file | size | kind |
-|---|---:|---|
-| `baseline_results.json` | 0.00 MB | metadata / manifest |
-| `baselines.py` | 0.00 MB | generator kept beside its output so the artefact is reproducible |
-| `DATASHEET.md` | 0.00 MB | prose |
-| `DISTRIBUTION_REPORT.md` | 0.00 MB | prose |
-| `entity_list.txt` | 0.31 MB | plain-text id or triple list |
-| `gen.py` | 0.02 MB | generator kept beside its output so the artefact is reproducible |
-| `HISTORICAL_MANIFEST.json` | 0.02 MB | metadata / manifest |
-| `interactions.csv` | 24.93 MB | delimited text |
-| `item_list.txt` | 0.20 MB | plain-text id or triple list |
-| `kg_final.txt` | 3.53 MB | plain-text id or triple list |
-| `region_crosswalk.csv` | 0.00 MB | delimited text |
-| `region_crosswalk_meta.json` | 0.00 MB | metadata / manifest |
-| `relation_list.txt` | 0.00 MB | plain-text id or triple list |
-| `SNAPSHOT.json` | 0.00 MB | metadata / manifest |
-| `stats.json` | 0.00 MB | metadata / manifest |
-| `test.txt` | 1.06 MB | plain-text id or triple list |
-| `train.txt` | 3.64 MB | plain-text id or triple list |
-| `user_list.txt` | 0.41 MB | plain-text id or triple list |
-| `users.csv` | 2.61 MB | delimited text |
-
-### `data/synthetic_interactions_v3/` — **Historical v3.** Later generation, also containing withdrawn recipes. Use only with its exact frozen snapshot and disclosed interaction protocol.
-
-| file | size | kind |
-|---|---:|---|
-| `entity_list.txt` | 0.29 MB | plain-text id or triple list |
-| `HISTORICAL_MANIFEST.json` | 0.00 MB | metadata / manifest |
-| `interactions.csv` | 25.81 MB | delimited text |
-| `item_list.txt` | 0.21 MB | plain-text id or triple list |
-| `kg_final.txt` | 1.16 MB | plain-text id or triple list |
-| `relation_list.txt` | 0.00 MB | plain-text id or triple list |
-| `SNAPSHOT.json` | 0.00 MB | metadata / manifest |
-| `stats.json` | 0.00 MB | metadata / manifest |
-| `test.txt` | 1.08 MB | plain-text id or triple list |
-| `train.txt` | 3.65 MB | plain-text id or triple list |
-| `user_list.txt` | 0.44 MB | plain-text id or triple list |
-| `users.csv` | 2.62 MB | delimited text |

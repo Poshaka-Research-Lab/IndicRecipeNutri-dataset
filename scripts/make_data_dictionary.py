@@ -206,12 +206,12 @@ def main() -> int:
         ".py": "generator kept beside its output so the artefact is reproducible",
     }
     NOTES = {
-        "data/synthetic_interactions": "**Historical v1.** Frozen bytes, membership and "
-                                       "interaction splits are pinned in HISTORICAL_MANIFEST.json. "
-                                       "Contains withdrawn recipes; not current-corpus evaluation.",
-        "data/synthetic_interactions_v3": "**Historical v3.** Later generation, also containing "
-                                          "withdrawn recipes. Use only with its exact frozen "
-                                          "snapshot and disclosed interaction protocol.",
+        "data/interactions": "**Synthetic interaction benchmark, v4.** Regenerated 2026-09-12 "
+                             "from the published corpus by `scripts/build_interactions.py`, "
+                             "replacing the two earlier generations, which could not be merged "
+                             "because their remapped id spaces collide. Zero withdrawn-recipe "
+                             "references by construction; ids are corpus `recipe_id`s, not "
+                             "positional indices. Simulated behaviour, not observed users.",
         "data/kg_flavor": "FlavorDB-derived flavour layer, `CC BY-NC-SA 3.0`. Note the same "
                           "content is ALSO inside `data/kg/`, so taking the core graph "
                           "alone does not avoid FlavorDB's terms.",

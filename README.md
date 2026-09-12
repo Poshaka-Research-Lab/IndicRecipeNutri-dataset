@@ -40,7 +40,7 @@ and that needs to know exactly where the data is weak.
 | **Knowledge graph** | 222,539 nodes · **6,428,210 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
-| **Interaction logs** | 2 synthetic sets — 50,000 users, 990,273 ratings each |
+| **Interaction log** | 1 synthetic set — 50,000 users, 990,273 ratings, **0** withdrawn references |
 | **Ingredient text** | 100% English/Roman; original script kept as provenance |
 | **Withdrawn** | 4,617 recipes, ids published so you can verify their absence |
 | **Licence** | data CC BY-NC-SA 4.0 · code MIT |
@@ -135,13 +135,12 @@ instead of shipping it — see [Verify what you downloaded](#verify-what-you-dow
 | [`data/corpus/`](data/corpus) | 199 MB | the recipe table, plus long-form allergen / nutrition / label / quality tables, the rehydration index and the allergen audit |
 | [`data/enrichment/`](data/enrichment) | 146 MB | 26 companion tables — nutrition, region, diet, quality flags, ingredient weights |
 | [`data/provenance/`](data/provenance) | 58 MB | build records, per-field history, withdrawn-id lists |
-| [`data/synthetic_interactions/`](data/synthetic_interactions) | 37 MB | 50,000 users, 990,273 ratings, with its own datasheet |
-| [`data/synthetic_interactions_v3/`](data/synthetic_interactions_v3) | 35 MB | historical v3; includes 12 later-withdrawn catalogue items |
+| [`data/interactions/`](data/interactions) | 35 MB | synthetic interaction benchmark v4 — 50,000 users, 990,273 ratings, zero withdrawn references, with its own datasheet |
 | [`data/kg/`](data/kg) | 33 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
 | [`data/benchmark/`](data/benchmark) | 0.2 MB | 67 queries, gold sets, contamination audit |
 | [`data/kg_flavor/`](data/kg_flavor) | 0.1 MB | FlavorDB compound layer, kept separable (CC BY-NC-SA **3.0**) |
 
-Parquet, zstd-compressed, 50,000-row groups. **≈508 MB** total.
+Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.
 
 > **Large files are in Git LFS.** A clone without `git-lfs` gives you 130-byte pointer stubs,
 > and `verify_release.py --strict-checksums` fails loudly on them rather than validating a

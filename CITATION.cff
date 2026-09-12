@@ -7,8 +7,8 @@ abstract: >-
   ingredients in English/Roman, a 17-class allergen surface carrying an explicit
   unassessed sentinel, dish-level nutrition estimates and FSA traffic lights; a
   typed knowledge graph of 222,539 nodes and 6,428,210 edges; a 67-query
-  retrieval benchmark with gold sets; and two synthetic collaborative
-  interaction logs. Structured and derived fields only; recipe prose is not
+  retrieval benchmark with gold sets; and a synthetic collaborative
+  interaction log. Structured and derived fields only; recipe prose is not
   redistributed and is recoverable via the published rehydration index.
 # All three authors, matching the Zenodo record. They were present on the 0.3.0 record only
 # as a manual edit there, and were absent from this file and from `.zenodo.json` — so
@@ -24,11 +24,13 @@ authors:
     given-names: Santosh P.
     name-prefix: Dr.
     affiliation: "Ajeenkya D Y Patil University, Pune"
+    email: sprao.borde@adypu.edu.in
   - family-names: Gurav
     given-names: Yogesh
     name-prefix: Dr.
     affiliation: "Dr. D. Y. Patil Technical Campus Pune"
-version: 0.6.0
+    email: ybgurav1977@gmail.com
+version: 0.7.0
 date-released: 2026-09-12
 license: CC-BY-NC-SA-4.0
 repository-code: "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset"
