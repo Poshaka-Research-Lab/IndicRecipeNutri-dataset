@@ -73,7 +73,7 @@ QUALITY = ["recipe_id", "has_instructions", "has_ingredients", "has_rating",
            "diet_contradicts_ingredients", "contains_pork", "contains_beef",
            "contains_poultry", "contains_fish", "contains_alcohol", "contains_gelatin",
            "sulphites_possible", "sulphites_possible_src", "nonveg_corrected",
-           "mojibake_fixed", "qty_source", "ing_weight_confident_frac", "nut_indb_frac",
+           "mojibake_fixed", "qty_source", "ing_weight_confident_frac", "nut_indb_frac", "nut_suppl_fct_frac",
            "confident_coverage", "dup_family_id", "dup_family_size", "is_family_primary",
            "family_filled"]
 
@@ -123,6 +123,11 @@ def main() -> int:
     if EXCLUDED_SOURCE_SITES and "SourceSite" in df.columns:
         df = df[~df["SourceSite"].isin(set(EXCLUDED_SOURCE_SITES))]
     df = df.reset_index(drop=True)
+    from nutrition_contract import normalize_fraction_name, validate_folate_frame
+    df = normalize_fraction_name(df, retain_legacy=True)
+    folate_problems = validate_folate_frame(df)
+    if folate_problems:
+        raise ValueError('; '.join(folate_problems))
     print(f"release exclusions applied: {before - len(df)} row(s) withheld "
           f"({sorted(EXCLUDED_RECIPE_IDS)})")
 
@@ -249,11 +254,32 @@ def main() -> int:
     fh = pd.concat(hist, ignore_index=True) if hist else pd.DataFrame(
         columns=[ID, "field", "generation", "value_num", "value_str"])
     fh["build_id"] = BUILD_ID
+    # Corrective history is keyed separately upstream; do not widen the master with
+    # another backup column or overwrite the correction's own generation/build ID.
+    correction_counts = {}
+    for history_name in ['nutrition_basis_history', 'language_source_history', 'allergen_tier_history']:
+        history_path = pathlib.Path(_paths.DATA) / f'corrections/{history_name}.parquet'
+        correction_counts[history_name] = 0
+        if history_path.exists():
+            extra = pd.read_parquet(history_path)
+            required = [ID, 'field', 'generation', 'value_num', 'value_str', 'build_id']
+            if set(extra.columns) != set(required) or extra.duplicated([ID, 'field', 'generation']).any():
+                raise ValueError(f'invalid {history_name} ledger')
+            extra = extra[extra[ID].isin(df[ID])]
+            correction_counts[history_name] = len(extra)
+            extra = extra.astype({c: fh[c].dtype for c in required})
+            fh = pd.concat([fh, extra[required]], ignore_index=True)
+    correction_rows = correction_counts['nutrition_basis_history']
+    if correction_counts['language_source_history']:
+        evidence_path = pathlib.Path(_paths.DATA) / 'corrections/language_source_evidence.json'
+        evidence = json.loads(evidence_path.read_text(encoding='utf-8'))
+        pathlib.Path(OUT, 'provenance', 'language_source_evidence.json').write_text(
+            json.dumps(evidence, indent=2)+'\n', encoding='utf-8', newline='\n')
     pth = os.path.join(OUT, "provenance", "field_history.parquet")
     fh.to_parquet(pth, index=False)
-    written["field_history"] = {"rows": len(fh), "cols": 5,
+    written["field_history"] = {"rows": len(fh), "cols": len(fh.columns),
                                 "mb": round(os.path.getsize(pth) / 1e6, 1)}
-    print(f"    wrote {'field_history.parquet':<30}{len(fh):>9,} x 5    "
+    print(f"    wrote {'field_history.parquet':<30}{len(fh):>9,} x {len(fh.columns)}    "
           f"{written['field_history']['mb']:>6.1f} MB   (long form)")
     print(f"      {fh['field'].nunique()} distinct fields, generations: "
           f"{fh['generation'].value_counts().to_dict()}")
@@ -280,9 +306,12 @@ def main() -> int:
                           "script": "migrate_schema.py",
                           "rows": n, "source_columns": len(cols),
                           "tables": written,
+                          "nutrition_basis_history_rows": correction_rows,
+                          "language_source_history_rows": correction_counts["language_source_history"],
+                          "allergen_tier_history_rows": correction_counts["allergen_tier_history"],
                           "note": "S-1 split. 64 build-history columns moved to "
                                   "field_history rows. A future fix adds rows, not columns."}},
-              open(os.path.join(OUT, "provenance", "builds.json"), "w", encoding="utf-8"),
+              open(os.path.join(OUT, "provenance", "builds.json"), "w", encoding="utf-8", newline="\n"),
               indent=2)
 
     tot = sum(v["cols"] for k, v in written.items() if k not in ("allergens", "field_history"))

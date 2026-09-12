@@ -10,7 +10,7 @@ master documents none; they are not guessed.
 Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 `Enrich_Log`) are withheld from every table below — see `DATASHEET.md`.
 
-Covering **all 43 published Parquet tables**.
+Covering **all 44 published Parquet tables**.
 
 
 ## `data/corpus/allergens.parquet`
@@ -96,7 +96,7 @@ Covering **all 43 published Parquet tables**.
 
 ## `data/corpus/nutrition_derived.parquet`
 
-219,386 rows x 45 columns - 13.0 MB
+219,386 rows x 46 columns - 12.7 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -110,7 +110,7 @@ Covering **all 43 published Parquet tables**.
 | `DV_Calcium` | float64 | `%` per dish | 219,386 | 231 | 2.0 |  |
 | `DV_VitaminC` | float64 | `%` per dish | 219,386 | 588 | 3.0 |  |
 | `DV_VitaminA` | float64 | `%` per dish | 219,386 | 489 | 4.0 |  |
-| `DV_Folate` | float64 | `%` per dish | 219,386 | 564 | 2.0 |  |
+| `DV_Folate` | float64 | `%` per unavailable | 0 | 0 |  | Unavailable under folate_basis_v1: total folate does not establish DFE. Historical values remain in field_history; see docs/FOLATE_BASIS_MIGRATION.md. |
 | `DV_VitaminB12` | float64 | `%` per dish | 219,386 | 682 | 0.0 |  |
 | `DV_VitaminD` | float64 | `%` per dish | 219,386 | 177 | 0.0 |  |
 | `DV_Zinc` | float64 | `%` per dish | 219,386 | 349 | 3.0 |  |
@@ -145,10 +145,11 @@ Covering **all 43 published Parquet tables**.
 | `fsa_salt_pre_portion` | object |  | 155,978 | 3 | red |  |
 | `fsa_portion_g` | float64 | `g` per serving | 158,867 | 10,036 | 108.8 |  |
 | `fsa_portion_override_applied` | bool |  | 219,386 | 2 | False |  |
+| `DV_Folate_basis` | object |  | 219,386 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
 
 ## `data/corpus/quality.parquet`
 
-219,386 rows x 23 columns - 2.5 MB
+219,386 rows x 24 columns - 2.9 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -169,7 +170,8 @@ Covering **all 43 published Parquet tables**.
 | `mojibake_fixed` | bool |  | 219,386 | 2 | False |  |
 | `qty_source` | object |  | 219,386 | 3 | none |  |
 | `ing_weight_confident_frac` | float64 | [0, 1] | 219,386 | 371 | 0.0 |  |
-| `nut_indb_frac` | float64 |  | 219,386 | 9,901 | 0.6108 |  |
+| `nut_indb_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Deprecated compatibility alias of nut_suppl_fct_frac; identical values in quality.parquet. Does not establish Indian composition coverage. |
+| `nut_suppl_fct_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
 | `confident_coverage` | float64 | [0, 1] | 219,386 | 246 | 0.0 |  |
 | `dup_family_id` | float64 |  | 44,283 | 13,054 | 0.0 |  |
 | `dup_family_size` | int64 |  | 219,386 | 62 | 7 |  |
@@ -187,8 +189,8 @@ Covering **all 43 published Parquet tables**.
 | `Title_normalized` | object |  | 219,386 | 198,769 | Mutton Nihari |  |
 | `URL` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
 | `SourceSite` | object |  | 219,386 | 378 | 3a2m_indian |  |
-| `Lang` | object |  | 217,956 | 66 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
-| `Lang_base` | object |  | 217,956 | 60 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
+| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `Lang_base` | object |  | 217,956 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
 | `Servings` | object |  | 157,565 | 1,778 | 2 |  |
 | `Servings_num` | float64 |  | 166,082 | 216 | 4.0 |  |
 | `PrepTimeMins` | float64 | `min` | 154,075 | 232 | 5.0 |  |
@@ -200,7 +202,7 @@ Covering **all 43 published Parquet tables**.
 | `RatingCount` | float64 |  | 90,512 | 5,492 | 0.0 |  |
 | `IngredientsList` | object |  | 219,386 | 211,672 | ["mutton", "ghee", "onions", "ginger pas |  |
 | `Description_Source` | object |  | 219,386 | 2 | generated |  |
-| `Ingredients_Source` | object |  | 218,468 | 7 | scraped |  |
+| `Ingredients_Source` | object |  | 218,468 | 8 | scraped |  |
 | `source_licence` | object |  | 219,386 | 5 | CC BY-NC-SA 4.0 |  |
 | `source_terms_url` | object |  | 219,386 | 384 | https://arxiv.org/abs/2303.16778 |  |
 | `Split_v2` | object |  | 219,386 | 3 | train | ⚠ **Leaks.** Groups on `Title_normalized` without case-folding and ignores `dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is inflated. Use `Split_v3`. |
@@ -216,10 +218,10 @@ Covering **all 43 published Parquet tables**.
 | `badlist_n_items` | float64 |  | 219,386 | 52 | 11.0 |  |
 | `badlist_hard` | bool |  | 219,386 | 2 | False |  |
 | `badlist_any` | bool |  | 219,386 | 2 | False |  |
-| `allergen_tier` | object |  | 196,545 | 9,622 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 196,518 | 9,502 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `review_m1m2` | bool |  | 219,386 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
-| `ingredient_src` | object |  | 3,314 | 1 | title_evidence |  |
+| `ingredient_src` | object |  | 3,315 | 2 | title_evidence |  |
 | `dish_type` | object |  | 413 | 57 | mango lassi |  |
 | `dish_type_agreement` | float64 | [0, 1] | 413 | 7 | 0.5 |  |
 | `dish_type_src` | object |  | 413 | 1 | corpus_neighbours |  |
@@ -259,7 +261,7 @@ Covering **all 43 published Parquet tables**.
 
 ## `data/corpus/recipes_structured.parquet`
 
-219,386 rows x 268 columns - 103.9 MB
+219,386 rows x 269 columns - 103.6 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -275,7 +277,7 @@ Covering **all 43 published Parquet tables**.
 | `IngredientsList` | object |  | 219,386 | 211,672 | ["mutton", "ghee", "onions", "ginger pas |  |
 | `RatingAverage` | float64 | [0, 5] | 117,585 | 746 | 0.0 |  |
 | `RatingCount` | float64 |  | 90,512 | 5,492 | 0.0 |  |
-| `Lang` | object |  | 217,956 | 66 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
 | `Nut_Calories` | float64 | `kcal` per dish | 219,386 | 91,081 | 69.17 |  |
 | `Nut_Carbohydrates` | float64 | `g` per dish | 216,353 | 22,624 | 7.82 |  |
 | `Nut_Protein` | float64 | `g` per dish | 218,737 | 9,690 | 2.22 |  |
@@ -331,11 +333,11 @@ Covering **all 43 published Parquet tables**.
 | `DV_Calcium` | float64 | `%` per dish | 219,386 | 231 | 2.0 |  |
 | `DV_VitaminC` | float64 | `%` per dish | 219,386 | 588 | 3.0 |  |
 | `DV_VitaminA` | float64 | `%` per dish | 219,386 | 489 | 4.0 |  |
-| `DV_Folate` | float64 | `%` per dish | 219,386 | 564 | 2.0 |  |
+| `DV_Folate` | float64 | `%` per unavailable | 0 | 0 |  | Unavailable under folate_basis_v1: total folate does not establish DFE. Historical values remain in field_history; see docs/FOLATE_BASIS_MIGRATION.md. |
 | `DV_VitaminB12` | float64 | `%` per dish | 219,386 | 682 | 0.0 |  |
 | `DV_VitaminD` | float64 | `%` per dish | 219,386 | 177 | 0.0 |  |
 | `DV_Zinc` | float64 | `%` per dish | 219,386 | 349 | 3.0 |  |
-| `Ingredients_Source` | object |  | 218,468 | 7 | scraped |  |
+| `Ingredients_Source` | object |  | 218,468 | 8 | scraped |  |
 | `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
 | `Title_normalized` | object |  | 219,386 | 198,769 | Mutton Nihari |  |
 | `Diet` | object |  | 219,386 | 5 | Non-Vegetarian |  |
@@ -379,7 +381,7 @@ Covering **all 43 published Parquet tables**.
 | `SpiceLevel_src` | object |  | 219,386 | 2 | ingredient-rule |  |
 | `Allergens_v1_superseded` | object |  | 219,386 | 484 | milk;gluten | ⚠ **Superseded, do not use for safety.** 12 of the 16 classes (no coconut / asafoetida / fenugreek / tamarind), some rows comma-separated, un-normalised `dairy` and `peanuts` tokens. Retained only so a v1-era claim stays reproducible. |
 | `allergens_inferred` | bool |  | 219,386 | 2 | False |  |
-| `allergens_src` | object |  | 218,615 | 2 | source/v5 |  |
+| `allergens_src` | object |  | 218,615 | 3 | source/v5 |  |
 | `Allergens_v2` | object |  | 219,386 | 3,567 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
 | `allergens_encoding_fixed` | bool |  | 219,386 | 1 | True |  |
 | `allergens_sa5_src` | object |  | 219,386 | 2 | none |  |
@@ -406,11 +408,10 @@ Covering **all 43 published Parquet tables**.
 | `has_ingredients` | bool |  | 219,386 | 2 | True |  |
 | `has_rating` | bool |  | 219,386 | 2 | True |  |
 | `Servings_num` | float64 |  | 166,082 | 216 | 4.0 |  |
-| `Lang_base` | object |  | 217,956 | 60 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
+| `Lang_base` | object |  | 217,956 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
 | `mojibake_fixed` | bool |  | 219,386 | 2 | False |  |
 | `qty_source` | object |  | 219,386 | 3 | none |  |
 | `ing_weight_confident_frac` | float64 | [0, 1] | 219,386 | 371 | 0.0 |  |
-| `nut_suppl_fct_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 |  |
 | `source_licence` | object |  | 219,386 | 5 | CC BY-NC-SA 4.0 |  |
 | `source_terms_url` | object |  | 219,386 | 384 | https://arxiv.org/abs/2303.16778 |  |
 | `allergens_tn_fix` | bool |  | 219,386 | 2 | False |  |
@@ -477,11 +478,11 @@ Covering **all 43 published Parquet tables**.
 | `Diet_prior` | object |  | 315 | 3 | Vegan |  |
 | `diet_v13` | object |  | 1,823 | 4 | flagged_weak_evidence_only |  |
 | `diet_meat_class` | object |  | 32,392 | 15 | poultry |  |
-| `allergen_tier` | object |  | 196,545 | 9,622 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 196,518 | 9,502 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | bool |  | 219,386 | 2 | False |  |
 | `review_m1m2` | bool |  | 219,386 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
-| `ingredient_src` | object |  | 3,314 | 1 | title_evidence |  |
+| `ingredient_src` | object |  | 3,315 | 2 | title_evidence |  |
 | `dish_type` | object |  | 413 | 57 | mango lassi |  |
 | `dish_type_agreement` | float64 | [0, 1] | 413 | 7 | 0.5 |  |
 | `dish_type_src` | object |  | 413 | 1 | corpus_neighbours |  |
@@ -531,6 +532,8 @@ Covering **all 43 published Parquet tables**.
 | `IngredientsList_src_script` | object |  | 714 | 714 | ["1kg भूरा onion", "300gramginger", "400 |  |
 | `allergen_from_instructions` | object |  | 290 | 3 | asafoetida |  |
 | `ingredients_romanised` | object |  | 714 | 1 | translated |  |
+| `DV_Folate_basis` | object |  | 219,386 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
+| `nut_suppl_fct_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
 
 ## `data/corpus/rehydration_index.parquet`
 
@@ -541,7 +544,7 @@ Covering **all 43 published Parquet tables**.
 | `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
 | `URL` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
 | `SourceSite` | object |  | 219,386 | 378 | 3a2m_indian |  |
-| `Lang` | object |  | 217,956 | 66 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
 | `text_sha256` | object |  | 219,386 | 218,566 | fc44268315b4226b66fdedcd1918b9d37a5bc644 |  |
 | `rehydratable` | bool |  | 219,386 | 2 | False |  |
 | `source_kind` | object |  | 219,386 | 2 | derived_dataset |  |
@@ -925,27 +928,38 @@ Covering **all 43 published Parquet tables**.
 | `per100g_fiber` | float64 | `g` per 100g [0, 100] | 178,333 | 14,606 | 2.041 |  |
 | `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,978 | 128,906 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
 
-## `data/kg/kg_edges.parquet`
+## `data/kg/kg_edge_evidence.parquet`
 
-6,292,393 rows x 3 columns - 7.0 MB (statistics from the first 500,000 rows)
+236,311 rows x 4 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 500,000 | 17,115 | recipe::0 |  |
-| `rel` | object |  | 500,000 | 21 | in_cuisine |  |
-| `tail` | object |  | 500,000 | 2,888 | cuisine::Indian |  |
+| `head` | object |  | 236,311 | 219,829 | recipe::0 |  |
+| `rel` | object |  | 236,311 | 5 | from_region |  |
+| `tail` | object |  | 236,311 | 484 | region::North India |  |
+| `attributes_json` | object |  | 236,311 | 9,917 | {"in_primary_axis": false, "scope": "ind |  |
+
+## `data/kg/kg_edges.parquet`
+
+6,428,210 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `head` | object |  | 500,000 | 16,723 | recipe::0 |  |
+| `rel` | object |  | 500,000 | 22 | in_cuisine |  |
+| `tail` | object |  | 500,000 | 2,865 | cuisine::Indian |  |
 
 ## `data/kg/kg_nodes.parquet`
 
-222,578 rows x 44 columns - 25.2 MB
+222,539 rows x 44 columns - 25.2 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `node_id` | object |  | 222,578 | 222,578 | recipe::0 |  |
-| `type` | object |  | 222,578 | 17 | recipe |  |
-| `name` | object |  | 222,578 | 201,367 | Mutton Nihari |  |
+| `node_id` | object |  | 222,539 | 222,539 | recipe::0 |  |
+| `type` | object |  | 222,539 | 17 | recipe |  |
+| `name` | object |  | 222,539 | 201,329 | Mutton Nihari |  |
 | `url` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
-| `split` | object |  | 219,386 | 3 | train |  |
+| `split` | object |  | 219,386 | 3 | test |  |
 | `health_grade` | object |  | 219,386 | 5 | B |  |
 | `spice` | object |  | 219,386 | 3 | medium |  |
 | `difficulty` | object |  | 219,386 | 4 | hard |  |
@@ -984,7 +998,7 @@ Covering **all 43 published Parquet tables**.
 | `n_Selenium` | float64 | `ug` per dish | 219,386 | 10,150 | 1.75 |  |
 | `n_Manganese` | float64 | `mg` per dish | 219,386 | 2,993 | 0.55 |  |
 | `primary_axis` | object |  | 27 | 2 | False |  |
-| `pubchem_id` | object |  | 1,601 | 1,601 | 1130 |  |
+| `pubchem_id` | object |  | 1,607 | 1,607 | 1130 |  |
 
 ## `data/kg/pairs_avoid.parquet`
 
@@ -1043,29 +1057,30 @@ Covering **all 43 published Parquet tables**.
 
 ## `data/kg_flavor/flavor_edges.parquet`
 
-42,554 rows x 5 columns - 0.1 MB
+39,998 rows x 5 columns - 0.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 42,554 | 252 | ingredient::adobo |  |
-| `rel` | object |  | 42,554 | 2 | has_compound |  |
-| `tail` | object |  | 42,554 | 1,837 | compound::1130 |  |
-| `shared_compounds` | float64 |  | 15,849 | 167 | 188.0 |  |
-| `jaccard` | float64 |  | 15,849 | 4,263 | 0.5095 |  |
+| `head` | object |  | 39,998 | 242 | ingredient::adobo |  |
+| `rel` | object |  | 39,998 | 2 | has_compound |  |
+| `tail` | object |  | 39,998 | 1,793 | compound::1130 |  |
+| `shared_compounds` | float64 |  | 14,250 | 167 | 93.0 |  |
+| `jaccard` | float64 |  | 14,250 | 4,147 | 1.0 |  |
 
 ## `data/kg_flavor/flavor_nodes.parquet`
 
-1,641 rows x 3 columns - 0.0 MB
+1,607 rows x 4 columns - 0.0 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `node_id` | object |  | 1,641 | 1,641 | compound::1130 |  |
-| `type` | object |  | 1,641 | 1 | compound |  |
-| `name` | object |  | 1,641 | 1,635 | thiamine |  |
+| `node_id` | object |  | 1,607 | 1,607 | compound::100031 |  |
+| `type` | object |  | 1,607 | 1 | compound |  |
+| `name` | object |  | 1,607 | 1,601 | 4-Isopropenyl-1-methyl-7-oxabicyclo[4.1. |  |
+| `pubchem_id` | object |  | 1,607 | 1,607 | 100031 |  |
 
 ## `data/provenance/field_history.parquet`
 
-7,692,492 rows x 6 columns - 57.5 MB (statistics from the first 500,000 rows)
+7,912,281 rows x 6 columns - 58.6 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1080,15 +1095,19 @@ Covering **all 43 published Parquet tables**.
 
 ## Every published file
 
-All 88 files under `data/`, so nothing ships undescribed.
+All 103 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
 
 | file | size | kind |
 |---|---:|---|
-| `eval_queries.jsonl` | 0.21 MB | one JSON object per line |
+| `BENCHMARK_MANIFEST.json` | 0.00 MB | metadata / manifest |
+| `eval_queries.jsonl` | 0.22 MB | one JSON object per line |
+| `eval_queries_protocol.json` | 0.00 MB | metadata / manifest |
 | `GOLD_SET_AUDIT.json` | 0.00 MB | metadata / manifest |
+| `silver_regression_v1.json` | 0.00 MB | metadata / manifest |
+| `silver_regression_v1.jsonl` | 0.21 MB | one JSON object per line |
 
 ### `data/corpus/`
 
@@ -1098,12 +1117,12 @@ All 88 files under `data/`, so nothing ships undescribed.
 | `allergens.parquet` | 2.24 MB | columnar table — documented above |
 | `corpus_manifest.json` | 0.01 MB | metadata / manifest |
 | `labels.parquet` | 2.96 MB | columnar table — documented above |
-| `nutrition.parquet` | 16.13 MB | columnar table — documented above |
-| `nutrition_derived.parquet` | 12.95 MB | columnar table — documented above |
+| `nutrition.parquet` | 16.14 MB | columnar table — documented above |
+| `nutrition_derived.parquet` | 12.71 MB | columnar table — documented above |
 | `PII_SEMANTIC_SCAN.json` | 0.00 MB | metadata / manifest |
-| `quality.parquet` | 2.45 MB | columnar table — documented above |
-| `recipes.parquet` | 46.95 MB | columnar table — documented above |
-| `recipes_structured.parquet` | 103.88 MB | columnar table — documented above |
+| `quality.parquet` | 2.89 MB | columnar table — documented above |
+| `recipes.parquet` | 46.94 MB | columnar table — documented above |
+| `recipes_structured.parquet` | 103.64 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
 
 ### `data/enrichment/`
@@ -1142,12 +1161,15 @@ All 88 files under `data/`, so nothing ships undescribed.
 
 | file | size | kind |
 |---|---:|---|
+| `compound_id_crosswalk.csv` | 0.09 MB | delimited text |
 | `EXCLUDED.json` | 0.00 MB | metadata / manifest |
+| `ingredient_bridge_food.csv` | 0.00 MB | delimited text |
 | `ingredient_freq.json` | 0.28 MB | metadata / manifest |
 | `ingredient_map.json` | 0.04 MB | metadata / manifest |
 | `ingredient_tier.json` | 0.02 MB | metadata / manifest |
-| `kg_edges.parquet` | 7.04 MB | columnar table — documented above |
-| `kg_nodes.parquet` | 25.24 MB | columnar table — documented above |
+| `kg_edge_evidence.parquet` | 0.82 MB | columnar table — documented above |
+| `kg_edges.parquet` | 7.17 MB | columnar table — documented above |
+| `kg_nodes.parquet` | 25.21 MB | columnar table — documented above |
 | `kg_stats.json` | 0.00 MB | metadata / manifest |
 | `pairs_avoid.parquet` | 0.08 MB | columnar table — documented above |
 | `pairs_avoid_meta.json` | 0.00 MB | metadata / manifest |
@@ -1162,7 +1184,8 @@ All 88 files under `data/`, so nothing ships undescribed.
 
 | file | size | kind |
 |---|---:|---|
-| `flavor_edges.parquet` | 0.11 MB | columnar table — documented above |
+| `flavor_edges.parquet` | 0.10 MB | columnar table — documented above |
+| `flavor_manifest.json` | 0.00 MB | metadata / manifest |
 | `flavor_nodes.parquet` | 0.03 MB | columnar table — documented above |
 | `LICENSE` | 0.00 MB | ⟨undescribed⟩ |
 | `README.md` | 0.00 MB | prose |
@@ -1172,9 +1195,12 @@ All 88 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `builds.json` | 0.00 MB | metadata / manifest |
-| `field_history.parquet` | 57.49 MB | columnar table — documented above |
+| `field_history.parquet` | 58.63 MB | columnar table — documented above |
+| `language_source_evidence.json` | 0.00 MB | metadata / manifest |
+| `release_facts.json` | 0.00 MB | metadata / manifest |
+| `withdrawn_ids.json` | 0.83 MB | metadata / manifest |
 
-### `data/synthetic_interactions/` — ⚠ **v1, superseded.** Pinned to the PRE-withdrawal corpus: its `item_list.txt` and `interactions.csv` reference recipe ids withdrawn by the V7 pass. Kept so a v1-era result stays reproducible; do not build on it.
+### `data/synthetic_interactions/` — **Historical v1.** Frozen bytes, membership and interaction splits are pinned in HISTORICAL_MANIFEST.json. Contains withdrawn recipes; not current-corpus evaluation.
 
 | file | size | kind |
 |---|---:|---|
@@ -1184,27 +1210,31 @@ All 88 files under `data/`, so nothing ships undescribed.
 | `DISTRIBUTION_REPORT.md` | 0.00 MB | prose |
 | `entity_list.txt` | 0.31 MB | plain-text id or triple list |
 | `gen.py` | 0.02 MB | generator kept beside its output so the artefact is reproducible |
+| `HISTORICAL_MANIFEST.json` | 0.02 MB | metadata / manifest |
 | `interactions.csv` | 24.93 MB | delimited text |
 | `item_list.txt` | 0.20 MB | plain-text id or triple list |
 | `kg_final.txt` | 3.53 MB | plain-text id or triple list |
 | `region_crosswalk.csv` | 0.00 MB | delimited text |
 | `region_crosswalk_meta.json` | 0.00 MB | metadata / manifest |
 | `relation_list.txt` | 0.00 MB | plain-text id or triple list |
+| `SNAPSHOT.json` | 0.00 MB | metadata / manifest |
 | `stats.json` | 0.00 MB | metadata / manifest |
 | `test.txt` | 1.06 MB | plain-text id or triple list |
 | `train.txt` | 3.64 MB | plain-text id or triple list |
 | `user_list.txt` | 0.41 MB | plain-text id or triple list |
 | `users.csv` | 2.61 MB | delimited text |
 
-### `data/synthetic_interactions_v3/` — **Use this one.** Rebuilt against the current corpus.
+### `data/synthetic_interactions_v3/` — **Historical v3.** Later generation, also containing withdrawn recipes. Use only with its exact frozen snapshot and disclosed interaction protocol.
 
 | file | size | kind |
 |---|---:|---|
 | `entity_list.txt` | 0.29 MB | plain-text id or triple list |
+| `HISTORICAL_MANIFEST.json` | 0.00 MB | metadata / manifest |
 | `interactions.csv` | 25.81 MB | delimited text |
 | `item_list.txt` | 0.21 MB | plain-text id or triple list |
 | `kg_final.txt` | 1.16 MB | plain-text id or triple list |
 | `relation_list.txt` | 0.00 MB | plain-text id or triple list |
+| `SNAPSHOT.json` | 0.00 MB | metadata / manifest |
 | `stats.json` | 0.00 MB | metadata / manifest |
 | `test.txt` | 1.08 MB | plain-text id or triple list |
 | `train.txt` | 3.65 MB | plain-text id or triple list |

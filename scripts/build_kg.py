@@ -49,13 +49,19 @@ from release_config import (  # noqa: E402
 TABLES = {
     "kg_nodes.parquet": "kg_nodes.parquet",
     "kg_edges.parquet": "kg_edges.parquet",
+    "kg_edge_evidence.parquet": "kg_edge_evidence.parquet",
 }
 
 VOCAB = {
+    "compound_id_crosswalk.csv": "compound_id_crosswalk.csv",
     "kg_stats.json": "kg_stats.json",
     "ingredient_map.json": "ingredient_map.json",
     "ingredient_tier.json": "ingredient_tier.json",
     "ingredient_freq.json": "ingredient_freq.json",
+    # 2026-09-12: which bridge food an Indian ingredient's compound profile is borrowed from,
+    # WITH THE FORM IT DIFFERS BY. amchur is dried unripe mango, not mango, so the row carries
+    # `with_caveat` and the transform; only `direct` rows are the same food in the same form.
+    "ingredient_bridge_food.csv": "ingredient_bridge_food.csv",
 }
 
 # Regenerable, deliberately excluded. Recorded so the omission is explicit rather
@@ -222,7 +228,10 @@ def main() -> int:
             print(f"FATAL: missing {src}", file=sys.stderr)
             return 1
         dst = args.out / dst_name
-        shutil.copy2(src, dst)
+        if src.suffix == ".json":
+            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+        else:
+            shutil.copy2(src, dst)
         print(f"copied     {dst_name}  ({dst.stat().st_size / 1e6:.1f} MB)")
 
     # ------------------------------------- recompute the statistics after exclusion
@@ -231,7 +240,7 @@ def main() -> int:
     stats = recompute_stats(
         args.out / "kg_nodes.parquet", args.out / "kg_edges.parquet", template
     )
-    stats_path.write_text(json.dumps(stats, indent=2), encoding="utf-8")
+    stats_path.write_text(json.dumps(stats, indent=2), encoding="utf-8", newline="\n")
     print(f"recomputed kg_stats.json from the published tables")
     n_nodes = pq.read_metadata(args.out / "kg_nodes.parquet").num_rows
     n_edges = pq.read_metadata(args.out / "kg_edges.parquet").num_rows
@@ -254,7 +263,7 @@ def main() -> int:
 
     print(f"verified {n_nodes:,} nodes / {n_edges:,} edges against kg_stats.json")
 
-    (args.out / "EXCLUDED.json").write_text(json.dumps(EXCLUDED, indent=2), encoding="utf-8")
+    (args.out / "EXCLUDED.json").write_text(json.dumps(EXCLUDED, indent=2), encoding="utf-8", newline="\n")
     print("wrote    EXCLUDED.json")
     return 0
 

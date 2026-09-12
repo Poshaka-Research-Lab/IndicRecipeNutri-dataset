@@ -1,19 +1,37 @@
 {
-  "WHAT_THIS_IS_NOT": "NOT an accuracy measurement, and the rates below are NOT upper bounds on the allergen defect. This is a consistency check between two term lists written by the same author. Where both are blind to the same food it reports zero defects. For a held-out human measurement see T12_MEASURED below.",
+  "WHAT_THIS_IS_NOT": "NOT an accuracy measurement, and the rates below are NOT upper bounds on the allergen defect. This is a consistency check between two term lists written by the same author. Where both are blind to the same food it reports zero defects. For the returned-label diagnostic and its limits see T12_MEASURED below.",
   "T12_MEASURED": {
-    "source": "scraped_indian_recipes/data/lexicons/T12/T12_pilot_SCORED_v2.tsv",
-    "n_annotated": 794,
-    "positive_stratum_false_negatives": 0,
-    "positive_stratum_n": 202,
-    "positive_stratum_fnr_upper_95": 0.0187,
-    "raw_pilot_fnr": 0.3688,
-    "raw_pilot_fnr_ci95": [
-      0.3177,
-      0.4229
-    ],
-    "raw_pilot_caveat": "50% hard-negative draw; over-estimates the corpus rate by construction",
-    "corpus_fnr": null,
-    "corpus_fnr_withheld_because": "The corpus-level estimate rests on 10 negative-stratum rows PER CLASS. 80% of the previously published 140,988-missed figure came from a single class on 6 false negatives in 10 rows (asafoetida, extrapolated across 188,114 recipes). A Wilson 95% interval on 6/10 is [0.313, 0.832], which extrapolates to 58,817-156,477 for that class alone; with mustard the two together span 62,128-231,344. A point estimate on a range that wide is not a measurement. Re-run with adequate n in the negative stratum -- see _admin/plan/TODO_VERIFIABLE_2026-09-05.md item T3 -- before publishing any corpus-level rate."
+    "protocol": "t12_scoring_contract_v1",
+    "tasks_in_key": 794,
+    "completed_assignments": 794,
+    "unique_recipe_allergen_pairs": 794,
+    "scored_unique_pairs": 794,
+    "unannotated_pairs": 0,
+    "unadjudicated_disagreements": [],
+    "raw_pair_confusion": {
+      "tp": 202,
+      "fp": 38,
+      "fn": 118,
+      "tn": 433,
+      "unclear": 3,
+      "unassessed_system": 0
+    },
+    "raw_assessed_pair_fnr": 0.36875,
+    "population_fnr": null,
+    "population_fnr_reason": "draw allocations are not population inclusion weights; population inference requires a separately validated sampling/response model",
+    "agreement_pairs": 0,
+    "kappa": null,
+    "kappa_computed": false,
+    "reviewer_identifiers": [],
+    "assigned_annotator_ids": [],
+    "interpretation": "conditional diagnostic of supplied labels; reviewer independence and adjudication are not established by a filled file",
+    "positive_stratum_n": 240,
+    "positive_stratum_interpretation": "Selection on predicted presence precludes false negatives in this stratum; zero FN here is not a sensitivity estimate or confidence bound.",
+    "inputs": {
+      "data\\lexicons\\T12\\T12_pilot_RETURNED.tsv": "b9e9394c3187525e38eeef87e2e4c3e3aa7876ddeb6d02c197fa44bdb0ccfa49",
+      "data\\lexicons\\T12\\T12_pilot_800_WITH_KEY.tsv": "682020ad9a760bc3499408ebd8b096523048c8882ecef80c906f281f36be4ce7",
+      "data\\lexicons\\t12_scoring_contract.py": "368c424c5dacd3066b5fdd709e73eab59508bb9ecea937978688d6b3d4afebcc"
+    }
   },
   "method": "The parsed IngredientsList is re-scanned with LEXICAL_EVIDENCE (release_config.py) after removing plant-substitute phrasings (e.g. 'almond milk', 'peanut butter'), and compared with the has_<allergen> flag derived from data/corpus/allergens.parquet, which came from lexicons/allergen_lexicon_v14.py. Disagreement between the two lists is what is counted. Agreement is NOT evidence of correctness.",
   "known_blind_spots": {
@@ -448,12 +466,12 @@
       "false_negative_examples": []
     },
     "tree_nuts": {
-      "lexical_present": 30818,
-      "flagged_present": 33279,
+      "lexical_present": 30819,
+      "flagged_present": 33280,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
       "false_positives_flag_only": 2461,
-      "audit_lexicon_coverage_of_flagged": 0.926,
+      "audit_lexicon_coverage_of_flagged": 0.9261,
       "unaudited_flagged_rows": 2461,
       "false_negative_examples": []
     }

@@ -779,11 +779,10 @@ def check_disclosure(root: Path) -> None:
         if worst:
             notes.append(
                 f"disclosure: ALLERGEN_AUDIT is a two-lexicon consistency check, NOT an "
-                f"accuracy measurement. The held-out T12 pilot (n=794) confirmed "
-                f"0 false negatives in 202 positive-stratum rows (95% upper bound 1.87%); "
-                f"its raw 36.88% figure is a 50%-hard-negative draw and over-estimates the "
-                f"corpus by construction; the corpus-level rate is WITHHELD — it rested on "
-                f"10 rows per class. Highest disagreement rate is "
+                f"accuracy measurement. T12 returned labels are a stratified diagnostic; "
+                f"zero FN among selected predicted-positive rows does not measure sensitivity. "
+                f"Reviewer independence and population weights are unverified; no corpus "
+                f"rate is claimed. Highest disagreement rate is "
                 f"{worst[0]} at {worst[1]:.2%}, computed only over rows the audit lexicon "
                 f"matched."
             )
@@ -867,9 +866,9 @@ def check_units(root: Path) -> None:
             f"units: {stamped} of {total} dimensioned columns carry machine-readable unit "
             f"metadata; docs/UNITS.json is the human-readable registry. The two former TBDs "
             f"are resolved from the builder: Nut_VitaminA is ug RAE (FDC 1106), Nut_Folate is "
-            f"TOTAL folate (FDC 1177) — so DV_Folate divides a total-folate numerator by a "
-            f"400 ug DFE denominator and is NOT a DFE percentage (it under-reports where "
-            f"folic acid is non-zero). 2.5% of composition rows are INDB, basis unstated"
+            f"TOTAL folate (FDC 1177). DV_Folate is suppressed with an unavailable basis "
+            f"and preserved historical values. 2.5% of composition rows use supplemental "
+            f"US/UK tables with unstated folate basis"
         )
 
 
@@ -882,6 +881,21 @@ def main() -> int:
     print(f"verifying {args.root}\n")
     check_licence(args.root)
     check_integrity(args.root)
+    from benchmark_contract import validate_benchmark
+    for problem in validate_benchmark(args.root):
+        fail('benchmark-version', problem)
+    from synthetic_history_contract import validate_historical_synthetic
+    for problem in validate_historical_synthetic(args.root):
+        fail('synthetic-history', problem)
+    from split_contract import validate_release_splits
+    try:
+        split_problems = validate_release_splits(args.root)
+    except (KeyError, ValueError, OSError) as exc:
+        split_problems = [f"cannot validate canonical split: {exc}"]
+    for problem in split_problems:
+        fail("split-v3", problem)
+    if not split_problems:
+        notes.append("split-v3: graph and both corpus views agree by recipe ID; no case-folded title or duplicate-family boundary crossings")
     check_pii(args.root)
     check_exclusions(args.root)
     check_static_id_lists(args.root)
@@ -891,8 +905,40 @@ def main() -> int:
     check_taxonomy_vendored()
     check_checksums(args.root, args.strict_checksums)
     check_disclosure(args.root)
+    from build_release_facts import check as check_current_facts
+    for stale_path in check_current_facts(args.root):
+        fail("release-facts", f"{stale_path} differs from current payload; run scripts/build_release_facts.py")
     check_licence_tiers(args.root)
     check_kg_allergens(args.root)
+    from edge_evidence import validate_release_evidence
+    try:
+        evidence_problems = validate_release_evidence(args.root)
+    except (KeyError, ValueError, OSError) as exc:
+        evidence_problems = [f"cannot validate edge evidence: {exc}"]
+    for problem in evidence_problems:
+        fail("edge-evidence", problem)
+    if not evidence_problems:
+        notes.append("edge-evidence: unique typed-triple keys, valid JSON attributes, all assertions reference live triples")
+    from source_recovery_contract import validate_release_source_recovery
+    for problem in validate_release_source_recovery(args.root):
+        fail('source-recovery', problem)
+    from allergen_tier_contract import validate_release_tiers
+    for problem in validate_release_tiers(args.root):
+        fail('allergen-tiers', problem)
+    from nutrition_contract import validate_release_nutrition_alias, validate_release_folate
+    nutrition_problems = validate_release_nutrition_alias(args.root)
+    for problem in nutrition_problems:
+        fail("nutrition-provenance", problem)
+    if not nutrition_problems:
+        notes.append("nutrition-provenance: canonical supplemental FCT calorie fraction agrees across wide and quality tables")
+    for problem in validate_release_folate(args.root):
+        fail('folate-basis', problem)
+    from flavor_contract import validate_release_flavor
+    flavor_problems = validate_release_flavor(args.root)
+    for problem in flavor_problems:
+        fail("flavor-contract", problem)
+    if not flavor_problems:
+        notes.append("flavor-contract: CID identities, crosswalk ambiguity and optional tables reproduce from core evidence")
 
     for note in notes:
         print(f"  note  {note}")

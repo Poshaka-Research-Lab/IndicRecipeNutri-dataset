@@ -2,8 +2,14 @@
 
 # IndicRecipeNutri
 
+> **Breaking changes in 0.6.0:** compound IDs are PubChem CIDs, graph splits use v3, the
+> ingredient vocabulary lost names, and the `pairs_with` co-occurrence layer is fully
+> recomputed. See [migration notes](docs/COMPOUND_ID_MIGRATION.md), the
+> [changelog](CHANGELOG.md) and [current generated facts](data/provenance/release_facts.json).
+> Historical DOI snapshots retain their original data and identifiers.
+
 **A 219,386-recipe Indian corpus with parsed ingredients, a 17-class allergen surface,
-dish-level nutrition, and a typed knowledge graph of 6.29 million edges.**
+dish-level nutrition, and a typed knowledge graph of 6.43 million edges.**
 
 Built for retrieval and recommendation research that needs *culturally specific* food data —
 and that needs to know exactly where the data is weak.
@@ -30,10 +36,10 @@ and that needs to know exactly where the data is weak.
 | | |
 |---|---|
 | **Recipes** | 219,386, across **378 source sites** |
-| **Columns** | 268 — 36 `Nut_*`, 35 `per100g_*`, 25 allergen, 21 `fsa_*`, 10 `DV_*`, 141 other |
-| **Knowledge graph** | 222,578 nodes · **6,292,393 edges** · 17 node types · 21 relation types |
+| **Columns** | 269; field definitions and current fill rates are in the generated data dictionary |
+| **Knowledge graph** | 222,539 nodes · **6,428,210 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
-| **Benchmark** | 67 queries, 8 templates, graph-derived gold sets |
+| **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction logs** | 2 synthetic sets — 50,000 users, 990,273 ratings each |
 | **Ingredient text** | 100% English/Roman; original script kept as provenance |
 | **Withdrawn** | 4,617 recipes, ids published so you can verify their absence |
@@ -60,7 +66,7 @@ import pandas as pd
 
 recipes = pd.read_parquet("data/corpus/recipes_structured.parquet")
 print(len(recipes), "recipes,", len(recipes.columns), "columns")
-# 219386 recipes, 268 columns
+# 219386 recipes, 269 columns
 ```
 
 <details>
@@ -80,8 +86,8 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,292,393 rows
-kg[kg.rel == "contains_allergen"]                      # 485,119 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,428,210 rows
+kg[kg.rel == "contains_allergen"]                      # 485,120 rows
 ```
 
 </details>
@@ -107,10 +113,10 @@ Do **not** flatten `unknown` to `False`. It means *"never assessed"*, not *"safe
 ```mermaid
 flowchart LR
     A["378 recipe sites<br/>+ open datasets"] --> B["parse & normalise<br/>ingredients → English/Roman"]
-    B --> C["corpus<br/>219,386 × 268"]
+    B --> C["corpus<br/>219,386 × 269"]
     C --> D["nutrition<br/>USDA-grounded"]
     C --> E["allergens<br/>17 classes, fail-closed"]
-    C --> F["knowledge graph<br/>222,578 nodes / 6.29M edges"]
+    C --> F["knowledge graph<br/>222,539 nodes / 6.43M edges"]
     F --> G["benchmark<br/>67 queries + gold sets"]
     C --> H["withdrawals<br/>4,617 removed"]
     D & E & F & G & H --> I["verify_release.py<br/>licence · counts · PII · checksums"]
@@ -130,7 +136,7 @@ instead of shipping it — see [Verify what you downloaded](#verify-what-you-dow
 | [`data/enrichment/`](data/enrichment) | 146 MB | 26 companion tables — nutrition, region, diet, quality flags, ingredient weights |
 | [`data/provenance/`](data/provenance) | 58 MB | build records, per-field history, withdrawn-id lists |
 | [`data/synthetic_interactions/`](data/synthetic_interactions) | 37 MB | 50,000 users, 990,273 ratings, with its own datasheet |
-| [`data/synthetic_interactions_v3/`](data/synthetic_interactions_v3) | 35 MB | later generation, clean of the V7 withdrawal |
+| [`data/synthetic_interactions_v3/`](data/synthetic_interactions_v3) | 35 MB | historical v3; includes 12 later-withdrawn catalogue items |
 | [`data/kg/`](data/kg) | 33 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
 | [`data/benchmark/`](data/benchmark) | 0.2 MB | 67 queries, gold sets, contamination audit |
 | [`data/kg_flavor/`](data/kg_flavor) | 0.1 MB | FlavorDB compound layer, kept separable (CC BY-NC-SA **3.0**) |
@@ -162,13 +168,13 @@ region.
 
 ## Knowledge graph
 
-222,578 nodes, 6,292,393 edges, 17 node types, 21 relation types.
+222,539 nodes, 6,428,210 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
-    R((recipe)) -->|has_ingredient 1.78M| I((ingredient))
+    R((recipe)) -->|has_ingredient 1.92M| I((ingredient))
     R -->|has_health_tag 1.73M| H((healthtag))
-    R -->|suitable_for 896K| D((diet))
+    R -->|suitable_for 896K| D((condition))
     R -->|contains_allergen 485K| A((allergen))
     R -->|cooked_by 404K| M((method))
     R -->|in_cuisine 219K| C((cuisine))
@@ -184,9 +190,9 @@ graph LR
 | type | n | | type | n |
 |---|---:|---|---|---:|
 | `recipe` | 219,386 | | `nutrient` | 22 |
-| `compound` | 1,601 | | `allergen` | 18 |
-| `ingredient` | 960 | | `condition` | 13 |
-| `foodclass` | 376 | | `course` | 12 |
+| `compound` | 1,607 | | `allergen` | 18 |
+| `ingredient` | 927 | | `condition` | 13 |
+| `foodclass` | 364 | | `course` | 12 |
 | `cuisine` | 53 | | `method` | 11 |
 | `occasion` | 44 | | `category` | 10 |
 | `healthtag` | 30 | | `diet` | 8 |
@@ -196,21 +202,26 @@ graph LR
 </details>
 
 <details>
-<summary><b>All 21 relation types, with counts</b></summary>
+<summary><b>All 22 relation types, with counts</b></summary>
 
 | relation | edges | | relation | edges |
 |---|---:|---|---|---:|
-| `has_ingredient` | 1,779,597 | | `has_compound` | 25,854 |
-| `has_health_tag` | 1,725,659 | | `shares_flavor` | 14,180 |
-| `suitable_for` | 895,759 | | `in_context` | 7,287 |
-| `contains_allergen` | 485,119 | | `pairs_with` | 3,245 |
-| `cooked_by` | 404,237 | | `rich_in` | 3,131 |
-| `has_diet` | 256,151 | | `grounded_as` | 383 |
-| `is_course` | 219,386 | | `is_a` | 151 |
-| `in_cuisine` | 219,386 | | `typical_region` | 48 |
-| `from_region` | 219,386 | | `in_zone` | 27 |
-| `for_occasion` | 33,357 | | `substitute_for` | 26 |
-| | | | `derived_from` | 24 |
+| `has_ingredient` | 1,916,173 | | `shares_flavor` | 13,673 |
+| `has_health_tag` | 1,725,659 | | `in_context` | 7,287 |
+| `suitable_for` | 895,759 | | `pairs_with` | 3,224 |
+| `contains_allergen` | 485,120 | | `rich_in` | 3,003 |
+| `cooked_by` | 404,237 | | `grounded_as` | 370 |
+| `has_diet` | 256,151 | | `is_a` | 148 |
+| `is_course` | 219,386 | | `typical_region` | 48 |
+| `in_cuisine` | 219,386 | | `in_zone` | 27 |
+| `from_region` | 219,386 | | `substitute_for` | 26 |
+| `for_occasion` | 33,357 | | `derived_from` | 25 |
+| `has_compound` | 25,748 | | `subtype_of` | 17 |
+
+`subtype_of` is new in 0.6.0: "is a kind of", ingredient → ingredient. It is **descriptive and
+never a safety path** — `contains_allergen` remains the only edge an allergen filter may trust.
+`derived_from` answers a different question, *what was this made from*, so a specific oil carries
+both: `sesame-oil subtype_of oil` and `sesame-oil derived_from sesame`.
 
 </details>
 
@@ -245,7 +256,7 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 | `coconut` | 36,824 | | `tamarind` | 12,163 |
 | `mustard` | 36,687 | | `peanut` | 11,476 |
 | `ghee` | 33,541 | | `soy` | 9,050 |
-| `tree_nuts` | 33,279 | | `fish` | 5,829 |
+| `tree_nuts` | 33,280 | | `fish` | 5,829 |
 | `asafoetida` | 30,607 | | `shellfish` | 4,202 |
 | `sulphites` | 23,989 | | `celery` | 2,357 |
 | `egg` | 21,637 | | **`unknown`** | **1,274** |
@@ -261,9 +272,10 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
    regulatory authority.
 3. **The audit is a consistency check, not an accuracy measurement.** It compares two
    independently written lexicons; agreement means they agree, not that either is right. A
-   held-out pilot (n=794) found **0 false negatives in 202 positive-stratum rows** (95%
-   upper bound 1.87%). The corpus-level rate is **withheld** — it rested on 10 rows per
-   class, which is not enough to publish.
+   returned pilot has 794 rows: 202 TP, 38 FP, 118 FN, 433 TN and 3 unclear.
+   The predicted-positive stratum has 240 rows; zero FN in that selected stratum
+   does not measure sensitivity. Raw FNR 118/320 describes this sample only.
+   Reviewer independence and population weights are unverified; no corpus rate is claimed.
 4. **`sulphites` is not independently auditable, and is reported as such.** The label comes
    from a *carrier* rule — vinegar, raisins, wine, dried fruit — because that is where
    sulphites are. A home recipe never names the additive, so the independent lexicon matches
@@ -284,16 +296,19 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 > **The schema is Indian; the data is Western.** Do not describe this corpus as
 > IFCT-grounded or as India-grounded in its nutrition. Grounding in IFCT 2017 or INDB proper
 > is an open enhancement, not a property of this release — which is why the column ships as
-> `nut_suppl_fct_frac` and not `nut_indb_frac`.
+> `nut_suppl_fct_frac`. The narrow quality table also retains `nut_indb_frac` as a
+> deprecated compatibility alias with identical values. This is the share of
+> computed ingredient calories from supplemental FCT rows. Legacy zero values can
+> also indicate an unavailable calorie denominator.
 
 Two nutrient bases were traced to the builder and are easy to get wrong:
 
 | column | basis | consequence |
 |---|---|---|
 | `Nut_VitaminA` | **µg RAE** (FoodData Central nutrient 1106) | not IU, not retinol — they differ by up to 12× for plant carotenoids |
-| `Nut_Folate` | **total folate** (nutrient 1177), **not DFE** | `DV_Folate` divides it by a 400 µg **DFE** Daily Value, so it is *not* a DFE percentage |
+| `Nut_Folate` | **total folate** (nutrient 1177), **not DFE** | `DV_Folate` is unavailable; `DV_Folate_basis` explains the mismatch. Previous unsupported percentages are retained in field history. |
 
-Units for all 136 dimensioned columns are machine-readable in the Parquet field metadata and
+Unit and basis declarations are machine-readable in the Parquet field metadata and
 human-readable in [`docs/UNITS.json`](docs/UNITS.json).
 
 ---
@@ -446,7 +461,7 @@ Pin a version DOI only if your result depends on an exact snapshot.
 
 **Third-party layers** — USDA SR Legacy (public domain), UK CoFID (Open Government Licence),
 FoodOn (CC BY 4.0), FlavorDB (CC BY-NC-SA 3.0 — present in `data/kg/` as well as
-`data/kg_flavor/`, 1,601 compound nodes and 40,034 edges, so the core graph is **not** free
+`data/kg_flavor/`, 1,607 compound nodes and 40,049 edges, so the core graph is **not** free
 of its terms).
 
 > **RecipeDB NER, IFCT 2017 and INDB were previously listed as dependencies and are not used
@@ -503,7 +518,7 @@ for Nutrition-Grounded Indian Recipe Recommendation* — venue and DOI pending.
 | [`docs/UNITS.json`](docs/UNITS.json) | you are computing on a numeric column |
 | [`docs/PROVENANCE.md`](docs/PROVENANCE.md) | you need to trace where a value came from |
 | [`docs/THIRD_PARTY_TERMS.md`](docs/THIRD_PARTY_TERMS.md) | you are redistributing or building a product |
-| [`docs/SPLIT_PROTOCOL_v2.md`](docs/SPLIT_PROTOCOL_v2.md) | you are training and need the splits |
+| [`docs/SPLIT_PROTOCOL_v3.md`](docs/SPLIT_PROTOCOL_v3.md) | you are training and need the current splits |
 | [`docs/RELEASING.md`](docs/RELEASING.md) | you are cutting a release |
 | [`docs/TAKEDOWN.md`](docs/TAKEDOWN.md) | you want content removed |
 | [`CHANGELOG.md`](CHANGELOG.md) | you want to know what moved, and why |

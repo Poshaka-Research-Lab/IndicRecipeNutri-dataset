@@ -1,6 +1,6 @@
 {
   "title": "IndicRecipeNutri",
-  "description": "<p>A corpus of 219,386 Indian recipes across 378 source sites, with parsed ingredients in English/Roman, a 17-class allergen surface carrying an explicit unassessed sentinel, and estimated dish-level micronutrition; a typed knowledge graph of 222,578 nodes and 6,292,393 edges across 17 node types and 21 relation types; a 67-query retrieval benchmark with knowledge-graph-derived gold sets; and two synthetic collaborative interaction logs. The food-composition layer uses the IFCT 42-nutrient schema but contains no IFCT and no Indian composition data; its values are USDA SR Legacy and UK CoFID.</p><p><strong>Two-tier release.</strong> Structured, factual and derived fields are published under CC BY-NC-SA 4.0 with per-recipe source attribution. Raw recipe prose is not redistributed; a rehydration index of source URLs and SHA-256 text digests is published instead, together with a re-fetch script.</p><p><strong>Known defects are published, not hidden.</strong> An independent allergen and diet audit ships with the data. See the datasheet before use, and do not use the allergen flags for end-user safety decisions.</p>",
+  "description": "<p>A corpus of 219,386 Indian recipes across 378 source sites, with parsed ingredients in English/Roman, a 17-class allergen surface carrying an explicit unassessed sentinel, and estimated dish-level micronutrition; a typed knowledge graph of 222,539 nodes and 6,428,210 edges across 17 node types and 22 relation types; a 67-query retrieval benchmark with knowledge-graph-derived gold sets; and two synthetic collaborative interaction logs. The food-composition layer uses the IFCT 42-nutrient schema but contains no IFCT and no Indian composition data; its values are USDA SR Legacy and UK CoFID.</p><p><strong>Two-tier release.</strong> Structured, factual and derived fields are published under CC BY-NC-SA 4.0 with per-recipe source attribution. Raw recipe prose is not redistributed; a rehydration index of source URLs and SHA-256 text digests is published instead, together with a re-fetch script.</p><p><strong>Known defects are published, not hidden.</strong> An independent allergen and diet audit ships with the data. See the datasheet before use, and do not use the allergen flags for end-user safety decisions.</p>",
   "upload_type": "dataset",
   "access_right": "open",
   "license": "cc-by-nc-sa-4.0",
@@ -27,8 +27,8 @@
     "recommender systems",
     "information retrieval"
   ],
-  "version": "0.4.1",
-  "notes": "Corpus build v15. Recipe prose is withheld under the two-tier release model; see docs/DATASHEET.md.\n\nMETADATA COMPLETENESS (2026-09-02). Two fields are deliberately absent rather than filled with a placeholder:\n  * publication_date — unset on purpose. Zenodo defaults it to the deposition date, which is the honest value; asserting a date here for a dataset whose own DATASHEET says 'NOT release-ready' would be a claim about an event that has not happened.\n  * creators[].orcid — not recorded anywhere in this repository. It is the author's to supply; an ORCID is an identifier for a specific person and must not be guessed.",
+  "version": "0.6.0",
+  "notes": "Corpus build v15; release version 0.6.0. The release is versioned separately from the corpus build — data/corpus/corpus_manifest.json records the pairing.\n\nVERIFY YOUR COPY. Every published file has a SHA-256 digest in checksums/SHA256SUMS, and scripts/verify_release.py --strict-checksums checks the payload against it. A GitHub clone without git-lfs yields 130-byte pointer stubs rather than data; run 'git lfs pull'.\n\nBENCHMARK RESULTS ARE NOT COMPARABLE ACROSS VERSIONS. The 67 questions are frozen, but their gold sets are re-derived from the knowledge graph on every release. Compare systems only within a single release, using the query and relevance hashes recorded in data/benchmark/BENCHMARK_MANIFEST.json.\n\nTHE ALLERGEN 'unknown' SENTINEL MEANS 'never assessed', NOT 'safe'. Do not flatten it to False. Read the allergen surface through scripts/allergen_surface.py, which keeps the sentinel intact.\n\nORCIDs are not supplied: an ORCID identifies a specific person and must not be guessed.",
   "related_identifiers": [
     {
       "identifier": "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset",
@@ -57,5 +57,5 @@
       "term": "Indian cuisine"
     }
   ],
-  "publication_date": "2026-09-06"
+  "publication_date": "2026-09-12"
 }

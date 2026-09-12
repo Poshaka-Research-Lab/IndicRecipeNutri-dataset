@@ -1,0 +1,18 @@
+{
+  "files": {
+    "entity_list.txt": "ce6e4d24fcfc4efce0a315f2ff859dccda973be7ff5c593b79676df1d60d10fe",
+    "interactions.csv": "507266573389a5d7f61ad4965ed031ca7dca22592b50b91187a17eb7897078ae",
+    "item_list.txt": "d826e28dce107d740a2f831d5f2aa5d3d4b9b11b744f243a8d019ef51fed3086",
+    "kg_final.txt": "be6d3400d76bf61e190581275ee7d2c1425992f474a19bee3c4f9f1fe9dba778",
+    "relation_list.txt": "9da527ad72fd7d02ebf059a92135f05149cca6ba9187f4e024dfbd6a0febbfd9",
+    "stats.json": "497981329c8cadcb6f32d02cd20855821e64e07e2268a8703f77389883b85430",
+    "test.txt": "2a8e9d5c3a814ac697b6506c98ab2d63e56b21659c421c6d5d2a5e69e8190a82",
+    "train.txt": "a4646400635b30fe34f649dec5bcc0f78ee776a85d9ee2989a6c04788958c215",
+    "user_list.txt": "771572dec7f6ec50d1a7cc44fbac5d4a58a7e96198885dbe7ccf389cf8498b47",
+    "users.csv": "10bf8d6dc0847885597eecba3a178f9803db665dd6a22cf7cb19732ed10d71cd"
+  },
+  "original_corpus_provenance": "not established by an archived full corpus snapshot",
+  "original_corpus_snapshot_sha256": null,
+  "recovery_provenance": "byte-for-byte recovery from the inspected local release; not a fresh generator run",
+  "snapshot_id": "synthetic_v3_historical_20260912"
+}

@@ -1,7 +1,7 @@
 {
  "what": "Unit, basis and physical domain for every dimensioned column in the IndicRecipeNutri release. Authoritative over column NAMES where the two disagree \u2014 see grams_per_serving_v3, whose name declares the wrong basis.",
  "generated_by": "scripts/stamp_units.py from scripts/column_units.py",
- "how_units_were_established": "The build never recorded them. Each was derived from median magnitude against physiological range on 2026-09-02, and the derivation is in each column's basis_note so it can be checked rather than trusted. The two that were TBD were resolved on 2026-09-05 from the builder rather than from magnitude: Nut_VitaminA is ug RAE (FDC nutrient 1106) and Nut_Folate is TOTAL folate (FDC 1177), not DFE \u2014 so DV_Folate, which divides by the 400 ug DFE Daily Value, is not a DFE percentage. Both carry a caveat for the 2.5% of composition rows drawn from the INDB spreadsheets, whose headers state no vitamer basis.",
+ "how_units_were_established": "The build never recorded them. Each was derived from median magnitude against physiological range on 2026-09-02, and the derivation is in each column's basis_note so it can be checked rather than trusted. The two that were TBD were resolved on 2026-09-05 from the builder rather than from magnitude: Nut_VitaminA is ug RAE (FDC nutrient 1106) and Nut_Folate is TOTAL folate (FDC 1177), not DFE \u2014 so DV_Folate is now suppressed because its historical 400 ug DFE denominator was incompatible with total folate. Both carry a caveat for the 2.5% of composition rows drawn from the INDB spreadsheets, whose headers state no vitamer basis.",
  "unit_vocabulary": {
   "kcal": "kilocalories",
   "g": "grams",
@@ -15,11 +15,14 @@
   "per100g_sodium is mg/100g; per100g_salt is g/100g. Same prefix, 400x apart.",
   "ProteinPct/CarbPct/FatPct are percent of ENERGY, not of mass.",
   "grams_per_serving_v3 is a whole-dish weight despite its name.",
-  "DV_* are percentages of US FDA 2016 Daily Values, not an Indian reference intake. ICMR-NIN 2020 RDAs differ."
+  "DV_* are percentages of US FDA 2016 Daily Values, not an Indian reference intake. ICMR-NIN 2020 RDAs differ. DV_Folate is suppressed with an unavailable basis."
  ],
  "dv_reference": {
   "standard": "US FDA Daily Values, 2016 Nutrition Facts label revision (21 CFR 101.9)",
-  "how_established": "derived from the data: DV_Protein median 14% x 50 g = 7.00 g against an observed Nut_Protein median of 6.79 g, and DV_Folate median 7% x 400 ug = 28.0 ug against an observed Nut_Folate median of 29.36 ug. Two nutrients, two different DV magnitudes, both consistent.",
+  "how_established": "Historical builder enrich_params2.py declares these denominators. DV_Folate's 400 ug DFE denominator was incompatible with the total-folate numerator; active percentages are suppressed under folate_basis_v1.",
+  "unavailable_columns": {
+   "DV_Folate": "unavailable_total_folate_not_dfe"
+  },
   "caveat": "NOT an Indian reference intake. ICMR-NIN 2020 RDAs differ, and for an India-focused corpus that is a limitation a consumer must know about.",
   "values": {
    "DV_Protein": [
@@ -391,16 +394,16 @@
   },
   "DV_Folate": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
    ],
-   "basis_note": "percent of the US FDA 2016 Daily Value (400 ug); see DV_REFERENCE"
+   "basis_note": "Suppressed under folate_basis_v1. Total folate does not establish DFE; see DV_Folate_basis. Previous unsupported percentages are historical only."
   },
   "DV_Folate_orig": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -409,7 +412,7 @@
   },
   "DV_Folate_pre_r5": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -418,7 +421,7 @@
   },
   "DV_Folate_pre_r6": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -427,7 +430,7 @@
   },
   "DV_Folate_pre_r7": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -436,7 +439,7 @@
   },
   "DV_Folate_pre_r8": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -445,7 +448,7 @@
   },
   "DV_Folate_pre_r9": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -454,7 +457,7 @@
   },
   "DV_Folate_predensity": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -463,7 +466,7 @@
   },
   "DV_Folate_uncorrected": {
    "unit": "%",
-   "basis": "dish",
+   "basis": "unavailable",
    "domain": [
     0,
     null
@@ -1662,7 +1665,7 @@
    "unit": "ug",
    "basis": "dish",
    "domain": null,
-   "basis_note": "ug of TOTAL folate \u2014 NOT ug DFE. MAGNITUDE resolves ug (median 29.36); the BASIS is FoodData Central nutrient id 1177 = 'Folate, total', not 1190 = 'Folate, DFE'. scraper/build_fct.py::USDA_MAP. CONSEQUENCE, and it is a real one: DV_Folate divides by the 400 ug **DFE** Daily Value while this numerator is total folate, so DV_Folate is NOT a DFE percentage. DFE = food folate + 1.7 x folic acid, so DFE >= total folate and the quotient UNDER-reports; the two coincide only where folic acid is zero, which is most of an unfortified Indian corpus but not all of it. Same 2.5% INDB caveat as Nut_VitaminA: its `folate_ug` header states no basis."
+   "basis_note": "ug of TOTAL folate \u2014 NOT ug DFE. MAGNITUDE resolves ug (median 29.36); the BASIS is FoodData Central nutrient id 1177 = 'Folate, total', not 1190 = 'Folate, DFE'. scraper/build_fct.py::USDA_MAP. DV_Folate is suppressed: the total-folate numerator cannot generally be converted to DFE without food-folate/folic-acid components. DV_Folate_basis records unavailable_total_folate_not_dfe. Historical percentages are retained in field_history. Same 2.5% INDB caveat as Nut_VitaminA: its `folate_ug` header states no basis."
   },
   "Nut_Folate_orig": {
    "unit": "ug",
@@ -4991,6 +4994,87 @@
    "domain": null,
    "basis_note": "kg_nodes alias of Nut_Zinc \u2014 same quantity, same unit; the duplicate prefix is a schema defect, not a different measurement"
   },
+  "nut_indb_frac": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "Deprecated compatibility alias of nut_suppl_fct_frac in quality.parquet; identical values, not Indian-origin nutrition coverage. Share of computed ingredient calories from supplemental FCT rows; legacy zero can also indicate an unavailable calorie denominator."
+  },
+  "nut_indb_frac_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of nut_indb_frac"
+  },
+  "nut_indb_frac_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of nut_indb_frac"
+  },
+  "nut_indb_frac_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of nut_indb_frac"
+  },
+  "nut_indb_frac_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of nut_indb_frac"
+  },
+  "nut_indb_frac_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of nut_indb_frac"
+  },
+  "nut_indb_frac_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of nut_indb_frac"
+  },
+  "nut_indb_frac_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of nut_indb_frac"
+  },
+  "nut_indb_frac_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of nut_indb_frac"
+  },
   "nut_suppl_fct_frac": {
    "unit": "1",
    "basis": "row",
@@ -4998,7 +5082,7 @@
     0,
     1
    ],
-   "basis_note": "fraction of the nutrition vector supplied by a supplementary food-composition table, 0-1"
+   "basis_note": "share of computed ingredient calories supplied by supplemental FCT rows historically tagged INDB-US/INDB-UK, 0-1; not Indian-origin composition coverage. Legacy builder emits 0 when its calorie denominator is unavailable; zero alone cannot distinguish no support."
   },
   "nut_suppl_fct_frac_orig": {
    "unit": "1",
@@ -5860,15 +5944,33 @@
  "files_stamped": [
   {
    "file": "data\\corpus\\recipes_structured.parquet",
-   "columns": 268,
+   "columns": 269,
    "stamped": 103,
+   "rows": 219386
+  },
+  {
+   "file": "data\\corpus\\quality.parquet",
+   "columns": 24,
+   "stamped": 7,
+   "rows": 219386
+  },
+  {
+   "file": "data\\corpus\\nutrition.parquet",
+   "columns": 36,
+   "stamped": 35,
+   "rows": 219386
+  },
+  {
+   "file": "data\\corpus\\nutrition_derived.parquet",
+   "columns": 46,
+   "stamped": 29,
    "rows": 219386
   },
   {
    "file": "data\\kg\\kg_nodes.parquet",
    "columns": 44,
    "stamped": 33,
-   "rows": 222578
+   "rows": 222539
   }
  ]
 }

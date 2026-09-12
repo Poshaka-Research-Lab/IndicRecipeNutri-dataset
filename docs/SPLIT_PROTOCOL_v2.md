@@ -1,5 +1,9 @@
 # Split Protocol (v2)
 
+**Historical protocol; do not use for new evaluation.** Its original zero-leakage
+claim below used an insufficient grouping check. Use [Split v3](SPLIT_PROTOCOL_v3.md),
+which includes case-folded title and duplicate-family connected components.
+
 This document describes the Grouped Stratified Split (v2) protocol implemented in the v15 master database, as required by Milestone 3.
 
 ## The Problem with Split v1

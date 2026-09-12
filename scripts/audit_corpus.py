@@ -25,28 +25,14 @@ WHY THAT IS NOT INDEPENDENCE — demonstrated, not asserted
     `known_blind_spots` in the emitted JSON re-runs that probe on every build, so the file
     states its own blindness instead of leaving a reader to discover it.
 
-THE NUMBERS THAT DO MEASURE ACCURACY  -- REWRITTEN 2026-09-05, T1
-    This section used to say "n=394 ... measured 28.2% false negatives. That is the figure
-    a consumer must use." THAT FIGURE COULD NOT BE REPRODUCED. Both scored pilot files hold
-    794 rows, not 394; recomputing gives 118/320 = 36.88%. Three numbers were in
-    circulation -- 28.2%, 34.55%, 36.88% -- and this file published the lowest.
-
-    What the held-out pilot (n=794) actually supports:
-
-      * 0 false negatives in 202 POSITIVE-STRATUM rows, 95% upper bound 1.87%.
-        Every row the system called `present`, the annotator confirmed. This is the solid
-        result and the one a consumer can rely on.
-      * A raw 36.88% (CI 31.8-42.3%) across all strata. Real, but a property of the
-        SAMPLING DESIGN -- a 50% hard-negative draw concentrates false negatives by
-        construction -- so it over-estimates the corpus rate and must not be quoted as one.
-      * NO corpus-level rate. It is withheld, not unknown-by-omission: the estimate rested
-        on 10 negative-stratum rows PER CLASS, and 80% of the former 140,988-missed headline
-        came from 6 false negatives in 10 rows for asafoetida alone. Wilson 95% on 6/10 is
-        [0.313, 0.832] -> 58,817-156,477 for that one class.
-
-    The run that would make a corpus rate publishable is item T3 in
-    _admin/plan/TODO_VERIFIABLE_2026-09-05.md: re-weight the full sheet to put real n behind
-    the negative stratum, asafoetida first.
+T12 DIAGNOSTIC -- CORRECTED 2026-09-12
+    The returned pilot contains 794 rows: TP 202, FP 38, FN 118, TN 433,
+    and 3 unclear. The predicted-positive stratum has 240 rows, not 202.
+    Its zero false negatives follow from selection on predicted presence;
+    they cannot establish sensitivity or a false-negative confidence bound.
+    Raw FNR 118/320 is conditional on this draw and these returned labels.
+    Reviewer independence and population inclusion weights are not established.
+    No corpus-wide rate or direction of bias is inferred.
 
 BOTH DIRECTIONS COST SOMETHING
     A false negative is the catastrophic direction and stays the headline. But this file
@@ -73,6 +59,7 @@ from release_config import (  # noqa: E402
     LEXICAL_EVIDENCE,
     NEGATIVE,
     REPO_ROOT,
+    SOURCE_ROOT,
 )
 import allergen_surface  # noqa: E402
 
@@ -124,6 +111,29 @@ def blind_spot_probe() -> list[dict]:
     return out
 
 
+def t12_diagnostic():
+    """Recompute the diagnostic from returned labels, keeping input identities."""
+    import hashlib
+    import importlib.util
+    helper = SOURCE_ROOT / 'data/lexicons/t12_scoring_contract.py'
+    spec = importlib.util.spec_from_file_location('t12_release_scoring', helper)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    folder = helper.parent / 'T12'
+    returned = folder / 'T12_pilot_RETURNED.tsv'
+    key = folder / 'T12_pilot_800_WITH_KEY.tsv'
+    annotations = pd.read_csv(returned, sep='\t', keep_default_na=False)
+    labels = pd.read_csv(key, sep='\t', keep_default_na=False)
+    report, pairs = module.score_tables(annotations, labels)
+    report['positive_stratum_n'] = int(labels.stratum.eq('positive').sum())
+    report['positive_stratum_interpretation'] = (
+        'Selection on predicted presence precludes false negatives in this stratum; '
+        'zero FN here is not a sensitivity estimate or confidence bound.')
+    report['inputs'] = {str(p.relative_to(SOURCE_ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                        for p in (returned, key, helper)}
+    return report
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=REPO_ROOT / "data" / "corpus")
@@ -146,46 +156,9 @@ def main() -> int:
             "NOT an accuracy measurement, and the rates below are NOT upper bounds on the "
             "allergen defect. This is a consistency check between two term lists written by "
             "the same author. Where both are blind to the same food it reports zero defects. "
-            "For a held-out human measurement see T12_MEASURED below."
+            "For the returned-label diagnostic and its limits see T12_MEASURED below."
         ),
-        # REPLACED 2026-09-05 (T1). This field previously read "the measured accuracy figure
-        # is 28.2% false negatives (T12 pilot, n=394)". THAT FIGURE COULD NOT BE REPRODUCED:
-        # both scored pilot files on disk carry 794 rows, not 394, and recomputing from
-        # T12_pilot_SCORED_v2.tsv gives 118/320 = 36.88%. Three different numbers were in
-        # circulation (28.2%, 34.55%, 36.88%) and the release published the most favourable.
-        #
-        # What replaces it is deliberately less flattering and actually supportable.
-        "T12_MEASURED": {
-            "source": "scraped_indian_recipes/data/lexicons/T12/T12_pilot_SCORED_v2.tsv",
-            "n_annotated": 794,
-            # The one result the sample size genuinely supports. Every row the system
-            # labelled `present` was confirmed present by the annotator.
-            "positive_stratum_false_negatives": 0,
-            "positive_stratum_n": 202,
-            "positive_stratum_fnr_upper_95": 0.0187,
-            # Real, but it is a property of the sampling design, not of the corpus: the draw
-            # is 50% hard-negative, which is where false negatives are concentrated by
-            # construction. It is an over-estimate of the corpus rate and must not be quoted
-            # as one.
-            "raw_pilot_fnr": 0.3688,
-            "raw_pilot_fnr_ci95": [0.3177, 0.4229],
-            "raw_pilot_caveat": (
-                "50% hard-negative draw; over-estimates the corpus rate by construction"
-            ),
-            # WITHHELD, with the reason stated rather than the number.
-            "corpus_fnr": None,
-            "corpus_fnr_withheld_because": (
-                "The corpus-level estimate rests on 10 negative-stratum rows PER CLASS. "
-                "80% of the previously published 140,988-missed figure came from a single "
-                "class on 6 false negatives in 10 rows (asafoetida, extrapolated across "
-                "188,114 recipes). A Wilson 95% interval on 6/10 is [0.313, 0.832], which "
-                "extrapolates to 58,817-156,477 for that class alone; with mustard the two "
-                "together span 62,128-231,344. A point estimate on a range that wide is not "
-                "a measurement. Re-run with adequate n in the negative stratum -- see "
-                "_admin/plan/TODO_VERIFIABLE_2026-09-05.md item T3 -- before publishing any "
-                "corpus-level rate."
-            ),
-        },
+        "T12_MEASURED": t12_diagnostic(),
         "method": (
             "The parsed IngredientsList is re-scanned with LEXICAL_EVIDENCE (release_config"
             ".py) after removing plant-substitute phrasings (e.g. 'almond milk', 'peanut "
@@ -298,7 +271,7 @@ def main() -> int:
         )
 
     out = args.out / "ALLERGEN_AUDIT.json"
-    out.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    out.write_text(json.dumps(report, indent=2) + '\n', encoding="utf-8", newline='\n')
     print(f"\nwrote    {out}")
     return 0
 

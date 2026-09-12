@@ -1,0 +1,9 @@
+{
+  "version": "silver_regression_v1",
+  "sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
+  "queries": 67,
+  "source": "local release immediately before source ingredient recovery propagation",
+  "labels": "frozen historical graph-derived silver, not human judgments",
+  "split_protocol": "full-graph transductive regression, not held-out relevance evaluation",
+  "status": "immutable baseline; current graph labels may differ after corrections"
+}

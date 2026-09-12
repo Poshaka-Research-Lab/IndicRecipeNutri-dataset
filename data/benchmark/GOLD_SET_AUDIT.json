@@ -5,7 +5,7 @@
     "leg_b_lexical": "Each gold-set member's parsed IngredientsList is matched against an allergen ingredient lexicon, minus plant-substitute phrasings. Independent of the flags. Hits are review candidates, not confirmed defects."
   },
   "queries_audited": 7,
-  "gold_entries_audited": 1596,
+  "gold_entries_audited": 1592,
   "flag_contradicting_total": 0,
   "flag_overall_rate": 0.0,
   "lexical_candidates_total": 0,
@@ -64,7 +64,7 @@
     {
       "query": "Jain recipes without sulphites",
       "allergen": "sulphites",
-      "gold_n": 275,
+      "gold_n": 273,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -74,7 +74,7 @@
     {
       "query": "Sattvic recipes without fenugreek",
       "allergen": "fenugreek",
-      "gold_n": 260,
+      "gold_n": 258,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,

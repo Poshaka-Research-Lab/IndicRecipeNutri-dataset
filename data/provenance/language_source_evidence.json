@@ -1,0 +1,12 @@
+{
+  "version": "language_source_review_v1",
+  "recipe_id": 131172,
+  "source_url": "https://www.sharmispassions.com/thengai-podi-recipe/",
+  "local_source_sha256": "7b74ff837cff0a40a43473d9f06e7cafecec98257efb45d9fc4d2343f45077d6",
+  "basis": "source page prose observed in English; shifted local language value is a serving count",
+  "target_language": "en",
+  "regional_variant": null,
+  "history_rows": 2,
+  "master_before_sha256": "0a5df859153887122b270a28734fd348f73eafe35d44d4eeb12909cf86fe0707",
+  "master_after_sha256": "493da38d45adb87c5b27780481a2f703fe299fa9fed4cc38476771203158c7dd"
+}

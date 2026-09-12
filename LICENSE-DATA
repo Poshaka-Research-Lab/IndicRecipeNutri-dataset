@@ -14,6 +14,12 @@ own terms are the 3.0 version.
 
 ## Change 2026-08-29 — the flavour layer is now inside the core graph
 
+**Count update for the local unreleased candidate, 2026-09-12:** 1,607 compound nodes,
+25,869 has_compound and 14,180 shares_flavor edges (40,049 total), with 580 additional
+molecular-sharing assertions on pairing edges preserved in the evidence table.
+This corrects chemical identity and counts; the licence declaration above is unchanged.
+The following paragraphs preserve the historical integration decision and counts.
+
 FlavorDB-derived content was previously isolated in `data/kg_flavor/` so that `data/kg/`
 could be lifted out as a less-encumbered artefact. **That separation no longer holds.** On
 instruction, everything is included: `data/kg/` now carries **1,601 `compound` nodes,

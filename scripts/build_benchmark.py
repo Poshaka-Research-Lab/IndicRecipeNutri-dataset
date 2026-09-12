@@ -1,14 +1,15 @@
 """Stage the retrieval benchmark and the synthetic interaction log.
 
-The benchmark is the 68-query silver set with knowledge-graph-derived gold sets. Its
+The benchmark is the fixed 67-query silver set with knowledge-graph-derived gold sets. Its
 gold sets are templated from the KG, which is the mechanism a prior audit found could
 admit contradictory members into an allergen-free gold set. This script therefore does
 not merely copy the file: it recomputes a contamination report for every constraint
 query and writes it alongside, so the defect is visible in the release rather than
 discovered by a reader.
 
-The synthetic interaction log is copied wholesale; it is synthetic, so no licence or
-PII question arises, but its datasheet travels with it.
+Both synthetic interaction generations are staged from pinned historical archives.
+They retain their original data and results; manifests disclose membership and
+withdrawals relative to the current corpus. Neither is current human relevance data.
 
 Usage:  python scripts/build_benchmark.py [--out PATH]
 """
@@ -16,6 +17,7 @@ Usage:  python scripts/build_benchmark.py [--out PATH]
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -40,6 +42,7 @@ from release_config import (  # noqa: E402
     LEXICAL_EVIDENCE,
     NEGATIVE,
     EXPECTED_BENCHMARK_QUERIES,
+    EXPECTED_SILVER_REGRESSION_SHA256,
     REPO_ROOT,
     RETRIEVAL_DIR,
 )
@@ -210,6 +213,38 @@ def main() -> int:
     shutil.copy2(src, bench_out / "eval_queries.jsonl")
     print(f"copied   eval_queries.jsonl  ({len(queries)} queries)")
 
+    # Keep a fixed historical regression set; regenerated frequency-band queries
+    # must not silently replace the baseline used to compare system versions.
+    frozen = RETRIEVAL_DIR / 'benchmark_protocol' / 'silver_regression_v1.jsonl'
+    frozen_meta = frozen.with_suffix('.json')
+    if hashlib.sha256(frozen.read_bytes()).hexdigest() != EXPECTED_SILVER_REGRESSION_SHA256:
+        raise ValueError('frozen silver regression digest changed')
+    for path in [frozen, frozen_meta]:
+        shutil.copy2(path, bench_out / path.name)
+    protocol_path = RETRIEVAL_DIR / 'eval_queries_protocol.json'
+    protocol = json.loads(protocol_path.read_text(encoding='utf-8'))
+    if protocol['queries_sha256'] != hashlib.sha256(src.read_bytes()).hexdigest():
+        raise ValueError('silver protocol describes a different query generation')
+    if protocol['protocol'] != 'fixed_silver_v1' or protocol['definitions_changed'] != 0:
+        raise ValueError('expected the fixed silver question protocol')
+    shutil.copy2(protocol_path, bench_out / protocol_path.name)
+    graph_path = REPO_ROOT / 'data/kg/kg_edges.parquet'
+    with graph_path.open('rb') as stream:
+        graph_hash = hashlib.file_digest(stream, 'sha256').hexdigest()
+    manifest = {
+        'version': 'graph_silver_manifest_v1',
+        'current_queries_sha256': hashlib.sha256(src.read_bytes()).hexdigest(),
+        'current_query_count': len(queries), 'graph_edges_sha256': graph_hash,
+        'label_protocol': protocol['protocol'],
+        'frozen_regression_sha256': EXPECTED_SILVER_REGRESSION_SHA256,
+        'frozen_regression_queries': 67,
+        'evaluation_mode': 'full-graph transductive diagnostic; not held-out human relevance',
+        'comparison_rule': 'compare systems only with identical query and relevance hashes',
+        'limitation': 'frequency bands can select malformed vocabulary; these labels do not establish culinary relevance',
+    }
+    (bench_out / 'BENCHMARK_MANIFEST.json').write_text(
+        json.dumps(manifest, indent=2) + '\n', encoding='utf-8', newline='\n')
+
     # D-4, 2026-09-04: leg A now reads the release's ONE allergen surface --
     # `data/corpus/allergens.parquet`, derived from the master at build time -- instead of
     # `data/enrichment/allergens_v8.parquet`, which was dropped. That table published a
@@ -232,7 +267,7 @@ def main() -> int:
     )
     report = audit_gold_sets(queries, allergens, corpus)
     (bench_out / "GOLD_SET_AUDIT.json").write_text(
-        json.dumps(report, indent=2), encoding="utf-8"
+        json.dumps(report, indent=2) + '\n', encoding="utf-8", newline='\n'
     )
 
     # Written first, THEN refused: the report is the evidence for the refusal, so it has to
@@ -273,40 +308,9 @@ def main() -> int:
             f"{r['lexical_rate']:6.2%}"
         )
 
-    # -------------------------------------------------------- synthetic interactions
-    for name in SYNTH_FILES:
-        s = BENCH_SYNTH_DIR / name
-        if not s.exists():
-            print(f"FATAL: missing {s}", file=sys.stderr)
-            return 1
-        shutil.copy2(s, synth_out / name)
-
-    # C2, 2026-08-29. `entity_list.txt` follows the KGAT convention "org_id remap_id",
-    # SPACE-separated -- but 14 of its entity names contain spaces of their own:
-    # `region:West Bengal 16701`, `course:Main Course 16694`, `region:Mughlai (North India)`.
-    # A whitespace split therefore yields `region:West`, silently and with no error, and the
-    # rows it corrupts are exactly the multi-word regions. It fooled this workspace's own
-    # audit into reporting a truncated region vocabulary that does not exist in the data.
-    #
-    # Fixed on publish by underscoring the name, which keeps the two-field contract the
-    # format actually promises. The remap ids are untouched, so any join still works.
-    ent = synth_out / "entity_list.txt"
-    lines = ent.read_text(encoding="utf-8").splitlines()
-    out, fixed = [lines[0]], 0
-    for line in lines[1:]:
-        if not line.strip():
-            continue
-        name, remap = line.rsplit(" ", 1)
-        if " " in name:
-            name = name.replace(" ", "_")
-            fixed += 1
-        out.append(f"{name} {remap}")
-    ent.write_text(chr(10).join(out) + chr(10), encoding="utf-8")
-    print(f"entity_list.txt: underscored {fixed} names containing spaces "
-          "(the file is space-delimited; they were unparseable)")
-
-    total = sum((synth_out / n).stat().st_size for n in SYNTH_FILES)
-    print(f"copied   {len(SYNTH_FILES)} synthetic-interaction files ({total / 1e6:.1f} MB)")
+    # Preserve both historical generations from byte-pinned recovered sources.
+    from synthetic_history_contract import stage_historical_synthetic
+    stage_historical_synthetic(BENCH_SYNTH_DIR / 'historical', args.out)
 
     return 0
 

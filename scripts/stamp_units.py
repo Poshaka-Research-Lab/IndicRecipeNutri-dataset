@@ -32,6 +32,9 @@ from release_config import REPO_ROOT  # noqa: E402
 
 TARGETS = [
     "data/corpus/recipes_structured.parquet",
+    "data/corpus/quality.parquet",
+    "data/corpus/nutrition.parquet",
+    "data/corpus/nutrition_derived.parquet",
     "data/kg/kg_nodes.parquet",
 ]
 
@@ -108,8 +111,8 @@ def main() -> int:
                                       "from the builder rather than from magnitude: "
                                       "Nut_VitaminA is ug RAE (FDC nutrient 1106) and "
                                       "Nut_Folate is TOTAL folate (FDC 1177), not DFE — so "
-                                      "DV_Folate, which divides by the 400 ug DFE Daily "
-                                      "Value, is not a DFE percentage. Both carry a caveat "
+                                      "DV_Folate is now suppressed because its historical 400 ug DFE "
+                                      "denominator was incompatible with total folate. Both carry a caveat "
                                       "for the 2.5% of composition rows drawn from the INDB "
                                       "spreadsheets, whose headers state no vitamer basis.",
         "unit_vocabulary": {
@@ -122,7 +125,7 @@ def main() -> int:
             "ProteinPct/CarbPct/FatPct are percent of ENERGY, not of mass.",
             "grams_per_serving_v3 is a whole-dish weight despite its name.",
             "DV_* are percentages of US FDA 2016 Daily Values, not an Indian reference "
-            "intake. ICMR-NIN 2020 RDAs differ.",
+            "intake. ICMR-NIN 2020 RDAs differ. DV_Folate is suppressed with an unavailable basis.",
         ],
         "dv_reference": DV_REFERENCE,
         "columns": {k: v for k, v in sorted(COLUMN_UNITS.items())},

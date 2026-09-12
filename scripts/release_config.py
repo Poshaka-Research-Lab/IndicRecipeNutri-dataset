@@ -412,7 +412,68 @@ EXPECTED_RECIPES = (EXPECTED_SOURCE_RECIPES - len(EXCLUDED_RECIPE_IDS)
 # cuisine 53, occasion 44, healthtag 30, region 27.
 # MOVED 2026-09-05: 222,607 -> 222,578, delta -29 -- exactly P6's dropped ingredient nodes.
 # Nothing else moved: the corpus row count is unchanged at 219,387 (219,386 published).
-EXPECTED_KG_NODES = 222_578
+# 2026-09-12: compound names collapsed distinct PubChem identities. Rebuilding active
+# legacy CSV associations with CID keys adds 6 compound nodes; no other family moves.
+# 2026-09-12 (vocabulary pass): 222,584 -> 222,567, delta -17. Every node accounted for:
+#   ingredient  -14  twelve singular/plural duplicates merged -- the graph held `cranberries`
+#                    AND `cranberry` as separate foods, splitting one food's recipes across two
+#                    nodes -- plus the truncation fragments `mato` and `matoes` folded into
+#                    `tomato` (+354 mentions recovered). Kept side = the member carrying
+#                    compound links, NOT the larger one: fix_flavor_compounds.csv is keyed by
+#                    NAME, so keeping the link-less plural would have orphaned 898
+#                    ingredient->compound links. 1,011 links preserved.
+#   foodclass    -3  `Engraulidae`, `noodle`, `sprout`: classes whose only member was a dropped
+#                    spelling. No class with a surviving member was removed.
+# Evidence: scraped_indian_recipes/data/kg/ALIAS_PROPOSALS_2026-09-12.tsv (121 rows, five
+# classes) and _admin/plan/PLAN_SENSORY_DIMENSIONS_2026-09-12.md 9.7.
+# 2026-09-12 (review decisions): 222,567 -> 222,548, delta -19. Applied from the researcher's
+# 154 marks in the Ingredient Review Bench. Every node accounted for:
+#   ingredient  -15  seven merges (`peas`->pea, `eggplant`->brinjal, `anise`->star anise,
+#                    `bitter`->bitters, `candies`->candy, `patti`->patties, `card`->cardamom)
+#                    plus eight accepted removals (`blood`, `dish`, `fast`, `freeze`,
+#                    `machine`, `picnic`, `towel`, `package`).
+#                    KEEP-DIRECTION INVERTED HERE, by decision. The earlier rule was "keep the
+#                    member carrying compound links"; it produces a perverse result when the
+#                    link-holder is tiny -- `peas` had 169 CIDs but 45 edges against `pea`'s 0
+#                    CIDs and 10,422 edges. The big name survives and the links are RE-POINTED,
+#                    which loses nothing: `pea` gained 169 and `brinjal` 132 they never had.
+#   foodclass    -4  classes whose only member was a dropped name.
+# Delta pre-registered before the rebuild and scored after:
+# _admin/progress/KG_DELTA_{PREDICTION,RECONCILED}_review_20260912.md. `contains_allergen` was
+# required not to move and did not (485,120 both sides).
+# 2026-09-12 (token splits, then the salt family + plant-analogue block): 222,548 -> 222,559,
+# delta +11. EVERY ONE IS AN INGREDIENT NODE; no other family moved in either pass.
+#   +1   `vegetable-oil`, from the 30 multiword token splits (`pearl`/`finger`/`plant`/`root`
+#        and `vegetable oil`). 871 lines that previously resolved to NOTHING were recovered by
+#        the phrase pass and 8,359 re-routed between foods.
+#   +12  born in the second pass: four salt varieties on the researcher's ruling
+#        (`black-salt`, `kosher-salt`, `pink-salt`, `fruit-salt`) and eight plant analogues
+#        (`plant-milk`, `vegan-butter`, `vegan-yogurt`, `vegan-cheese`, `vegan-cream`,
+#        `vegan-ghee`, `vegan-meat`, `egg-replacer`).
+#   -2   `kosher` and `requiredsalt` died outright: each had exactly one surface and it was
+#        repointed away.
+# `pink`, `himalayan` and `table` SURVIVE as junk residue of 17, 2 and 17 lines. The salt
+# varieties are routed by two-gram surface rather than by repointing the bare token, because
+# `pink` is a colour and `table` occurs in "table spoon" -- repointing them would be over-reach.
+# Both deltas were pre-registered before their rebuild and scored after:
+# _admin/progress/KG_DELTA_{PREDICTION,RECONCILED}_{splits,salt_analogue}_20260912.md.
+# 2026-09-12 (bench round 2): 222,559 -> 222,539, delta -20. From the researcher's decisions in
+# the review bench. Every node accounted for:
+#   ingredient  -15  SEVENTEEN canonicals removed, TWO added. Gone: fifteen junk tokens
+#                    (`season`, `unsalted`, `drink`, `salted`, `salty`, `pink`, `table`, `dairy`,
+#                    `culture`, `feet`, `fire`, `past`, `virgin`, `cook`, `himalayan`) carrying
+#                    487 lines between them; plus `leavening`, whose only surface `eno` was
+#                    REPOINTED to `fruit-salt` because the corpus names it fruit salt in its own
+#                    text; plus `cardamon`, merged into `cardamom` on the ruling that they are
+#                    the same word. Added: `sea-salt` and `rock-salt`.
+#   foodclass    -5  classes whose last member was a removed name.
+#
+# `card` WAS DELIBERATELY NOT REMOVED, though it was on the accepted junk list. It is a working
+# alias -> `cardamom` carrying 26,323 lines with ZERO lines resolving to `card` itself; deleting
+# it would have destroyed those lines while the node count still looked right, because
+# `cardamom` is fed by seven other surfaces. The apply script asserts the mapping and refuses to
+# run otherwise, and the reconciliation asserts `cardamom` RISES (it did, +211).
+EXPECTED_KG_NODES = 222_539
 # 2026-08-30: 6,307,080 -> 6,321,106 (+14,026). Every edge accounted for, none unexplained:
 #   for_occasion  +10,045  the duplicate-family merge filled 6,114 `Occasion` values, and
 #                          Occasion is multi-valued, so rows expand to more edges
@@ -625,7 +686,145 @@ EXPECTED_KG_NODES = 222_578
 # cover them -- this was fail-open, not unassessed. See
 # `data/apply_asafoetida_spellings_v27.py` and
 # `_docs/audits/PROPOSE_asafoetida_spellings_2026-09-05.tsv`.
-EXPECTED_KG_EDGES = 6_292_393
+# 2026-09-12: CID identity repair restores 15 has_compound associations that shared
+# name-keyed endpoints. 25,854 -> 25,869; every other relation count is unchanged.
+# 2026-09-12: reviewed recipe 23064 source restoration plus preparation-token
+# parser repair: has_ingredient +734/-5 (five displacements at the existing
+# 20-ingredient cap), contains_allergen +1 tree_nuts, pairs_with +4/-1 after
+# both KG passes. All other relations and all node attributes are unchanged.
+# Exact triples: _admin/progress/DB_IMPLEMENTATION_2026-09-12/
+# source_ingredient_recovery/graph_delta.json and graph_{added,removed}_triples.csv.
+# 2026-09-12 (vocabulary pass): 6,293,141 -> 6,292,904, delta -237. Every edge accounted for:
+#   has_ingredient -116  where one recipe used BOTH spellings, its two edges collapse to one.
+#                        Measured before merging: the pairs co-occur in very few recipes
+#                        (pea/peas 3, oat/oats 13), which is why this is 116 and not 911.
+#   rich_in         -53  DERIVED, recomputed: rich_in is the top quartile per nutrient over the
+#                        ingredient's matched FCT row, so a changed canonical can match a
+#                        different row. Not knowledge lost: for every merged node except
+#                        `gooseberry` the canonical still matches the FCT directly.
+#   pairs_with      -64  DERIVED: PMI recomputed over a corpus with 14 fewer ingredient nodes.
+#   grounded_as      -3  the three removed foodclass nodes.
+#   is_a             -1  `berries` carried is_a fruit; the kept `berry` is not in the category
+#                        vocabulary. Recorded as a residue rather than patched by hand.
+# A surface-form fallback for the FCT lookup was measured and REFUSED: it gains 12 matches,
+# several of them wrong (`ragi` <- `finger millet flour` attaches flour nutrition to a grain),
+# while silently moving 110 ingredients onto a DIFFERENT FCT row -- an unreviewed corpus-wide
+# change to a layer that feeds explanation text ("rich in iron").
+# The complete two-pass refresh after the alias change adds 15 net triples:
+# pairs_with +54/-8, shares_flavor +3/-34 (overlap moves into attached evidence).
+# All other relations and all node attributes unchanged; the 40,629-row complete
+# flavour view is exactly equal including numerical evidence. Reconciliation:
+# _admin/progress/DB_IMPLEMENTATION_2026-09-12/alias_pair_refresh/graph_delta.json
+# and molecular_evidence_parity.json. Pairing files now use the merged vocabulary.
+# 2026-09-12 (review decisions): 6,292,919 -> 6,292,011, delta -908. Every edge accounted for,
+# and the family sums match the total exactly:
+#   shares_flavor  -487  the largest mover. `peas` (169 CIDs), `eggplant` (132) and `anise`
+#                        (145) were compound-rich; molecular-similarity pairs are recomputed
+#                        onto `pea`, `brinjal` and `star anise`, and a pair set is not
+#                        preserved under a rename.
+#   has_ingredient -210  190 edges on the eight removed non-ingredients (`dish` 134 is most of
+#                        it) plus ~20 collapses where one recipe used BOTH members of a merged
+#                        pair. `package` is removed as a token but its 14 lines are queued at
+#                        data/kg/EXTRACTION_REQUEUE_20260912.json - the food underneath
+#                        ("packaged coleslaw") is real even though the packaging word is not.
+#   has_compound   -121  exactly the `anise`/`star anise` duplicates: the same (name, CID) row
+#                        twice. NO compound knowledge is lost - the same pass ADDED 169 links
+#                        to `pea` and 132 to `brinjal`, which had none.
+#   rich_in         -53  DERIVED: top-quartile FCT matching recomputed over 15 fewer nodes.
+#   pairs_with      -30  DERIVED: PMI recomputed.
+#   grounded_as      -5  the four removed foodclass nodes, plus one.
+#   is_a             -2  category membership of two dropped names.
+# `contains_allergen` was REQUIRED not to move and did not: 485,120 on both sides. A vocabulary
+# change that shifts an allergen count is a defect, not a delta.
+# 2026-09-12 (token splits, then the salt family + plant-analogue block): 6,292,011 -> 6,292,995,
+# delta +984. Both passes closed to ZERO RESIDUAL against a pre-registered prediction; the family
+# sums below add to the total exactly:
+#   has_ingredient  +949  (+435 splits, +514 salt/analogue). Mostly REDISTRIBUTION, not growth:
+#                         `oil` shed 6,510 lines to `vegetable-oil`, `salt` 3,009 to `black-salt`
+#                         (the node named `salt` had been 74% kala namak), `fruit` 704 to
+#                         `fruit-salt` (Eno fruit salt is a leavening agent that was sitting on a
+#                         real food node), and ~1,539 analogue lines left `butter` -470,
+#                         `milk` -391, `yogurt` -285, `cheese` -158, `cream` -89, `ghee` -70 and
+#                         the meat nodes. Real growth is only the lines that previously resolved
+#                         to NOTHING -- 871 recovered by the phrase pass, ~390 by the analogues.
+#   subtype_of       +15  A NEW RELATION. "is a kind of", not "is made from", on the researcher's
+#                         correction: "vegetable oil doesn't derive from oil, rather those are
+#                         derived from vegetable and type of oil; same with kosher salt is not
+#                         derive but type of salt." 11 oils + 4 salts. `rel_map.json` 21 -> 22.
+#   rich_in          +35  DERIVED, recomputed over a changed ingredient set.
+#   derived_from      +1  `vegetable-oil` -> `vegetable`, the SOURCE claim that `subtype_of`
+#                         deliberately does not carry.
+#   pairs_with       -16  DERIVED: PMI recomputed. The total is capped, so membership churns.
+# `contains_allergen` was REQUIRED not to move and did not: 485,120 across both passes. A
+# vocabulary change that shifts an allergen count is a defect, not a delta.
+#
+# The release drops 1 node and 14 edges for recipe 211731 (withdrawn for PII), and NONE of the 14
+# is a `has_ingredient` edge -- suitable_for 5, has_health_tag 4, then one each of in_cuisine,
+# from_region, is_course, has_diet, cooked_by. Measured, not carried forward: that row's scrape
+# captured sidebar navigation and its ingredient list is empty, which is why the figure is stable
+# across a vocabulary change rather than by luck.
+# 2026-09-12 (bench round 2): 6,292,995 -> 6,428,127, delta +135,132. The family sums close to
+# the total exactly, and the movement is overwhelmingly ONE change:
+#   has_ingredient  +135,224  PLAIN SALT RECOVERY. `salt` goes 1,191 -> 135,548 lines and becomes
+#                             the corpus's MOST COMMON INGREDIENT, above chili's 100,427. It had
+#                             been absent because `"salt"` sat in build_kg_v3.GENERIC, so
+#                             "salt to taste" resolved to nothing -- 147,749 of 163,252
+#                             salt-mentioning lines (90.5%) were dropped, and the node named
+#                             `salt` was in practice kala namak. TWO edits were required and
+#                             neither works alone: the GENERIC removal and a `salt` map surface.
+#                             Also inside this figure: `sea-salt` +3,093 and `rock-salt` +1,313
+#                             recovered from lines that resolved to nothing, `fruit-salt` +308
+#                             from `eno`, `cardamom` +211 from the `cardamon` merge, less 487
+#                             junk lines deliberately dropped.
+#   subtype_of           +2   `sea-salt` and `rock-salt`, both accepted. 17 of 17 declared.
+#   rich_in             -57   DERIVED, recomputed over 15 fewer ingredient nodes.
+#   pairs_with          -32   DERIVED: PMI recomputed; the total is capped so membership churns.
+#   grounded_as          -5   the five removed foodclass nodes.
+# `contains_allergen` was REQUIRED not to move and did not: 485,120.
+#
+# WATCH, recorded as inference not measurement: recipes emitting exactly 20 ingredients went
+# 2,624 -> 3,741 (+1,117). Giving ~135,000 recipes a salt edge pushes many to the `ings_of` cap,
+# and small falls on `black-salt` -33, `kosher-salt` -8, `pink-salt` -18 and the oils are
+# CONSISTENT WITH displacement past position 20 -- not separately isolated. On the token-split
+# pass, cap displacement was measured at +7 against a larger suspicion, so the effect is worth
+# measuring rather than assuming next time it matters.
+# 2026-09-12 (pairing recompute): 6,428,127 -> 6,428,210, delta +83. TWO relations moved:
+#   pairs_with     3,152 -> 3,224   (+72)  recomputed PMI over the current graph
+#   shares_flavor 13,662 -> 13,673   (+11)  knock-on: a molecular pair is MERGED onto an existing
+#                                           `pairs_with` edge rather than emitted separately, so
+#                                           changing pairing membership changes how many stay
+#                                           standalone. 588 were merged before this pass.
+# +72 +11 = +83, which closes against the guard exactly.
+#
+# CORRECTION, kept rather than overwritten. The first version of this comment said "ONE relation
+# moved ... pairs_with 3,152 -> 3,235". Both halves were wrong: 3,235 was obtained by ADDING THE
+# GUARD'S +83 TO THE OLD COUNT instead of reading the graph, and it silently absorbed the
+# shares_flavor movement into pairs_with. The pin value was right; the reasoning beside it was
+# derived by subtraction from an error message. Measure the relation counts.
+#
+# WHY THIS PASS EXISTED. `RELEASING.md` step 1 is `rebuild_all.py`, and it had not been run --
+# the chain was reconstructed from the workflow file instead. That chain BUILDS THE KG TWICE and
+# its docstring says why: "Running the builder once leaves the pairing layer one generation
+# stale, and nothing errors." It had been built once. `pairs_ours.parquet` was written at 06:17
+# against a graph rebuilt at 17:01, so the shipped `pairs_with` was PMI over a corpus with no
+# token splits, no plant-analogue block and NO SALT.
+#
+# Recorded as a gap in the guard suite, not only in the data: all 14 gates were run and 13 pass;
+# NONE asserts that the pairing layer is current relative to the graph it describes. The defect
+# was found by comparing file timestamps, not by a gate.
+#
+# The vocabulary did not change in this pass, so everything else is a control group and held:
+# nodes 222,539 (the guard reports every disagreement and named only edges), `has_ingredient`
+# 1,916,173, `contains_allergen` 485,120, `subtype_of` 17, `derived_from` 25, `is_a` 148,
+# `substitute_for` 26 -- the last from the curated SUBS dict at build_kg_v3.py:334, NOT from
+# `substitutes_ours.parquet`, so rebuilding that file moves no edge.
+#
+# Pre-registered before the run and scored after:
+# _admin/progress/KG_DELTA_PREDICTION_pairing_20260912.md predicted `pairs_with` 2,500-4,200 --
+# deliberately wide, because two effects pull opposite ways: salt now sits in ~62% of baskets so
+# its PMI collapses toward zero and it should fail the 0.5 floor despite being the #1 ingredient,
+# while a larger basket count N lifts every other pair's PMI slightly.
+EXPECTED_KG_EDGES = 6_428_210
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;
@@ -683,12 +882,57 @@ UNASSESSED_TOKEN = _AT.UNASSESSED
 # The `diet::unknown` sentinel remains excluded from generation (see EXPECTED_KG_NODES): it
 # clears the >=5-member threshold and would otherwise add two queries asking a retriever to
 # return the recipes whose diet could not be assessed.
+# 2026-09-12 source recovery/parser: diet+ingredient 5 -> 6; all other
+# template counts unchanged. Frequency bands select 12 new / 11 retired texts;
+# every shared query retains exactly the same relevant ID set. Reconciled in
+# source_ingredient_recovery/benchmark_delta.json. Preserve the old suite as
+# silver_regression_v1, separately from this regenerated graph diagnostic.
+# 2026-09-12 (vocabulary pass): 68 -> 67. ONE template moved - `diet+ingredient` 6 -> 5 - when
+# twelve duplicate ingredient nodes were merged and two truncation fragments folded into
+# `tomato` (ingredient nodes 960 -> 946). The lost query is `recipes with sprout`: `sprout`
+# merged into `sprouts`, so the subject no longer exists. Every other template is unchanged:
+# ingredient 12, diet 7, diet+allergenfree 7, course 6, cuisine 6, condition 12,
+# diet+nutrient 12. A drop in any OTHER template would mean the merge reached further than
+# intended - reconcile before raising this.
+#
+# The query TEXT churns more than the count does: 16 out, 15 in, 52 shared. Expected for the
+# reason the 2026-09-02 entry gives - the generator bands by frequency, so removing 14 nodes
+# reshuffles which terms sit in each band. The noise profile is unchanged before and after
+# (out: chenna, crystals, granules, maavu, pakoda; in: capsicm, bites, crust, puffs), which is
+# the check that this was a vocabulary change and not a corpus one.
+#
+# ALL 52 SHARED QUERIES KEEP EXACTLY THE SAME RELEVANT ID SET - 0 membership changes; 7 differ
+# only in list ordering. Regenerated by retrieval/structural/make_eval_queries_nx.py against
+# graph.gpickle at 222,568 nodes / 6,292,918 edges. Both baselines are preserved:
+# _admin/progress/eval_queries.pre_alias_20260912.jsonl (the 67-query release copy) and
+# eval_queries.source_pre_alias_20260912.jsonl (the 68-query source this replaces).
+# fixed_silver_v1 now retains the original 67 question definitions; the default
+# refresh updates labels without reselecting questions by changing frequency bands.
 EXPECTED_BENCHMARK_QUERIES = 67
+EXPECTED_SILVER_REGRESSION_SHA256 = '53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300'
 EXPECTED_CORPUS_BUILD = "v15"
 
 # --------------------------------------------------------------------- release identity
 
-DATASET_VERSION = "0.4.1"
+# 0.4.1 -> 0.6.0. Under semver `0.y.z` the MINOR position is the breaking position and
+# the patch position carries backward-compatible changes, so any breaking change takes 0.4.1 to
+# a minor bump. The count does not multiply it: one breaking change moves the minor position and
+# five move it once. A patch bump would claim these are backward-compatible, which is false.
+# 0.5.0 was prepared and never tagged, so no DOI exists behind it; the pairing recompute below
+# added a further breaking change and the release went out as 0.6.0.
+#
+# What is breaking here is that IDENTIFIERS CONSUMERS STORE AND JOIN ON changed -- keys, not
+# values:
+#   1. Compound ids are PubChem CIDs. They were name-keyed, and five ambiguous names had
+#      collapsed chemically distinct compounds; re-keying restored 6 nodes and 15 has_compound
+#      edges. A stored name-keyed compound id no longer resolves.
+#   2. The ingredient vocabulary lost names. 14 nodes in the alias pass (12 singular/plural
+#      merges plus `mato`/`matoes` folded into `tomato`) and 15 in the review-decisions pass
+#      (7 merges, 8 removals); then `kosher` and `requiredsalt` in the salt pass. A consumer
+#      joining on `ingredient::eggplant`, `ingredient::peas` or `ingredient::kosher` breaks.
+# Not 1.0.0: that asserts a stable public interface, and the open gates listed in CHANGELOG
+# 0.1.0 are not closed.
+DATASET_VERSION = "0.6.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

@@ -136,9 +136,11 @@ def main() -> int:
     # The quantity itself is real and worth keeping: it is the share of calories drawn
     # from the supplementary tables rather than USDA SR Legacy. Renamed on publish only;
     # the master is not rewritten.
-    if "nut_indb_frac" in df.columns:
-        df = df.rename(columns={"nut_indb_frac": "nut_suppl_fct_frac"})
-        print("renamed nut_indb_frac -> nut_suppl_fct_frac (see DATASHEET: no INDB data exists)")
+    from nutrition_contract import normalize_fraction_name, validate_folate_frame
+    df = normalize_fraction_name(df)
+    folate_problems = validate_folate_frame(df)
+    if folate_problems:
+        raise ValueError('; '.join(folate_problems))
 
     # A2, 2026-08-29. Same rename-on-publish pattern, for a safety column this time.
     #
@@ -270,7 +272,7 @@ def main() -> int:
         ),
     }
     manifest_path = args.out / "corpus_manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8", newline="\n")
     print(f"wrote    {manifest_path}")
 
     return 0

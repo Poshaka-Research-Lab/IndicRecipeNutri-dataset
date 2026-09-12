@@ -1,0 +1,12 @@
+{
+  "version": "graph_silver_manifest_v1",
+  "current_queries_sha256": "f9ea912787e356a5fb6e5cabd2363a8a1a32e374defc3ab1c5edc09bfb73aac7",
+  "current_query_count": 67,
+  "graph_edges_sha256": "6cc55cdd469d40d5a131d711f43e9342d3fb0e78d87d022536d1607c7dfbf612",
+  "label_protocol": "fixed_silver_v1",
+  "frozen_regression_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
+  "frozen_regression_queries": 67,
+  "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
+  "comparison_rule": "compare systems only with identical query and relevance hashes",
+  "limitation": "frequency bands can select malformed vocabulary; these labels do not establish culinary relevance"
+}

@@ -77,6 +77,10 @@ COLUMN_NOTES = {
                 "`dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test "
                 "set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is "
                 "inflated. Use `Split_v3`.",
+    "DV_Folate": "Unavailable under folate_basis_v1: total folate does not establish DFE. Historical values remain in field_history; see docs/FOLATE_BASIS_MIGRATION.md.",
+    "DV_Folate_basis": "Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe.",
+    "nut_indb_frac": "Deprecated compatibility alias of nut_suppl_fct_frac; identical values in quality.parquet. Does not establish Indian composition coverage.",
+    "nut_suppl_fct_frac": "Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator.",
     "Split_v3": "**Use this split.** Connected components over case-folded title AND "
                 "`dup_family_id`; 0 groups span a boundary. Seed 20260902.",
     "per100g_sodium": "**MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, "
@@ -202,13 +206,12 @@ def main() -> int:
         ".py": "generator kept beside its output so the artefact is reproducible",
     }
     NOTES = {
-        "data/synthetic_interactions": "⚠ **v1, superseded.** Pinned to the PRE-withdrawal "
-                                       "corpus: its `item_list.txt` and `interactions.csv` "
-                                       "reference recipe ids withdrawn by the V7 pass. Kept "
-                                       "so a v1-era result stays reproducible; do not build "
-                                       "on it.",
-        "data/synthetic_interactions_v3": "**Use this one.** Rebuilt against the current "
-                                          "corpus.",
+        "data/synthetic_interactions": "**Historical v1.** Frozen bytes, membership and "
+                                       "interaction splits are pinned in HISTORICAL_MANIFEST.json. "
+                                       "Contains withdrawn recipes; not current-corpus evaluation.",
+        "data/synthetic_interactions_v3": "**Historical v3.** Later generation, also containing "
+                                          "withdrawn recipes. Use only with its exact frozen "
+                                          "snapshot and disclosed interaction protocol.",
         "data/kg_flavor": "FlavorDB-derived flavour layer, `CC BY-NC-SA 3.0`. Note the same "
                           "content is ALSO inside `data/kg/`, so taking the core graph "
                           "alone does not avoid FlavorDB's terms.",

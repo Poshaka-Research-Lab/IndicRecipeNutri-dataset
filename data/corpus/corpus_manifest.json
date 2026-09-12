@@ -6,7 +6,7 @@
     "211731": "Withdrawn at the maintainer's request. Its IngredientsList contained no ingredients at all - the scrape captured the source site's sidebar navigation, with the site owner's email address attached. One of 101 rows from SourceSite=savorytales with the same scrape defect; the other 100 carry no personal data and are retained, flagged in quarantine_list."
   },
   "excluded_source_sites": {},
-  "columns_retained": 268,
+  "columns_retained": 269,
   "columns_withheld": [
     "Description",
     "Instructions",
@@ -168,7 +168,6 @@
     "mojibake_fixed",
     "qty_source",
     "ing_weight_confident_frac",
-    "nut_suppl_fct_frac",
     "source_licence",
     "source_terms_url",
     "allergens_tn_fix",
@@ -288,7 +287,9 @@
     "fsa_portion_override_applied",
     "IngredientsList_src_script",
     "allergen_from_instructions",
-    "ingredients_romanised"
+    "ingredients_romanised",
+    "DV_Folate_basis",
+    "nut_suppl_fct_frac"
   ],
   "rehydratable_rows": 214579,
   "non_rehydratable_rows": 4807,

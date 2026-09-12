@@ -45,7 +45,7 @@ def main() -> int:
         lines.append(f"{sha256(p)}  {rel}")
         total += p.stat().st_size
 
-    (out / "SHA256SUMS").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out / "SHA256SUMS").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(f"wrote {len(lines)} digests, {total / 1e6:.1f} MB total -> checksums/SHA256SUMS")
     return 0
 

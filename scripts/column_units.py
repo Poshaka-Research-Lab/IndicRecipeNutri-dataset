@@ -86,8 +86,15 @@ COLUMN_UNITS: dict[str, dict] = {
     "Nut_VitaminB6": _n(_MG, f"pyridoxine is reported in mg in every reference intake "
                              f"(US FDA DV 1.7 mg); {NUTRIENT_MAGNITUDE}"),
     "nut_suppl_fct_frac": U(unit="1", basis="row", domain=[0, 1],
-                            basis_note="fraction of the nutrition vector supplied by a "
-                                       "supplementary food-composition table, 0-1"),
+                            basis_note="share of computed ingredient calories supplied by supplemental "
+                                       "FCT rows historically tagged INDB-US/INDB-UK, 0-1; not Indian-origin "
+                                       "composition coverage. Legacy builder emits 0 when its calorie "
+                                       "denominator is unavailable; zero alone cannot distinguish no support."),
+    "nut_indb_frac": U(unit="1", basis="row", domain=[0, 1],
+                       basis_note="Deprecated compatibility alias of nut_suppl_fct_frac in quality.parquet; "
+                                  "identical values, not Indian-origin nutrition coverage. Share of computed "
+                                  "ingredient calories from supplemental FCT rows; legacy zero can also "
+                                  "indicate an unavailable calorie denominator."),
     "Nut_VitaminD": _n(_UG, f"median 0, p95 1.52; IU would be ~40x larger, so this is "
                             f"micrograms not IU; {NUTRIENT_MAGNITUDE}"),
     # ---- resolved 2026-09-05 from the build path, not from magnitude -----------------
@@ -107,12 +114,10 @@ COLUMN_UNITS: dict[str, dict] = {
     "Nut_Folate": _n(_UG, "ug of TOTAL folate — NOT ug DFE. MAGNITUDE resolves ug (median "
                           "29.36); the BASIS is FoodData Central nutrient id 1177 = 'Folate, "
                           "total', not 1190 = 'Folate, DFE'. scraper/build_fct.py::USDA_MAP. "
-                          "CONSEQUENCE, and it is a real one: DV_Folate divides by the 400 ug "
-                          "**DFE** Daily Value while this numerator is total folate, so "
-                          "DV_Folate is NOT a DFE percentage. DFE = food folate + 1.7 x folic "
-                          "acid, so DFE >= total folate and the quotient UNDER-reports; the two "
-                          "coincide only where folic acid is zero, which is most of an "
-                          "unfortified Indian corpus but not all of it. Same 2.5% INDB caveat "
+                          "DV_Folate is suppressed: the total-folate numerator cannot generally "
+                          "be converted to DFE without food-folate/folic-acid components. "
+                          "DV_Folate_basis records unavailable_total_folate_not_dfe. "
+                          "Historical percentages are retained in field_history. Same 2.5% INDB caveat "
                           "as Nut_VitaminA: its `folate_ug` header states no basis."),
     # ---- per 100 g. NOTE THE TWO DIFFERENT UNITS UNDER ONE PREFIX ------------------
     "per100g_kcal": U(unit="kcal", basis="100g", domain=[0, 900],
@@ -206,10 +211,10 @@ COLUMN_UNITS: dict[str, dict] = {
 # see the module docstring for the two independent cross-checks.
 DV_REFERENCE = {
     "standard": "US FDA Daily Values, 2016 Nutrition Facts label revision (21 CFR 101.9)",
-    "how_established": "derived from the data: DV_Protein median 14% x 50 g = 7.00 g against "
-                       "an observed Nut_Protein median of 6.79 g, and DV_Folate median 7% x "
-                       "400 ug = 28.0 ug against an observed Nut_Folate median of 29.36 ug. "
-                       "Two nutrients, two different DV magnitudes, both consistent.",
+    "how_established": "Historical builder enrich_params2.py declares these denominators. "
+                       "DV_Folate's 400 ug DFE denominator was incompatible with the total-folate "
+                       "numerator; active percentages are suppressed under folate_basis_v1.",
+    "unavailable_columns": {"DV_Folate": "unavailable_total_folate_not_dfe"},
     "caveat": "NOT an Indian reference intake. ICMR-NIN 2020 RDAs differ, and for an "
               "India-focused corpus that is a limitation a consumer must know about.",
     "values": {
@@ -224,6 +229,10 @@ for _c in DV_REFERENCE["values"]:
                          basis_note=f"percent of the US FDA 2016 Daily Value "
                                     f"({DV_REFERENCE['values'][_c][0]} "
                                     f"{DV_REFERENCE['values'][_c][1]}); see DV_REFERENCE")
+
+COLUMN_UNITS['DV_Folate'] = U(unit='%', basis='unavailable', domain=[0, None],
+    basis_note='Suppressed under folate_basis_v1. Total folate does not establish DFE; '
+               'see DV_Folate_basis. Previous unsupported percentages are historical only.')
 
 # Shadow families inherit the unit of the column they shadow, so they are declared
 # programmatically rather than by hand — 41 columns that would otherwise be 41 chances to

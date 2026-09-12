@@ -1,5 +1,12 @@
 # Third-party layers and their terms
 
+**Current local candidate, 2026-09-12:** the CID identity repair yields 1,607 compound
+nodes, 25,869 has_compound and 14,180 shares_flavor edges in the core, plus 580
+molecular-sharing assertions retained on pairing edges in the evidence table.
+The optional flavour view is generated from these same assertions. Earlier counts
+below are historical audit records; see `COMPOUND_ID_MIGRATION.md` and the generated
+release facts for the current payload. The source terms remain separately recorded.
+
 > ## 🔴 SUPERSEDED 2026-09-02 — THE RELEASE IS **NOT** DEPENDENCY-FREE
 >
 > **Read this before the 2026-08-29 banner below, which is now false.** FlavorDB was

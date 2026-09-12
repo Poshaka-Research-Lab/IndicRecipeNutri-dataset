@@ -1,0 +1,57 @@
+{
+  "protocol": "fixed_silver_v1",
+  "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
+  "query_count": 67,
+  "gold_cap": 300,
+  "queries_sha256": "f9ea912787e356a5fb6e5cabd2363a8a1a32e374defc3ab1c5edc09bfb73aac7",
+  "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
+  "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
+  "definitions_changed": 0,
+  "gold_changes_from_frozen": [
+    {
+      "query_id": "silver_e9aa1769c7007d32",
+      "query": "recipes with crust",
+      "added": [],
+      "removed": [
+        "recipe::138447",
+        "recipe::153237"
+      ]
+    },
+    {
+      "query_id": "silver_a6aeb5954ba85eaf",
+      "query": "recipes with ricotta",
+      "added": [],
+      "removed": [
+        "recipe::140566"
+      ]
+    },
+    {
+      "query_id": "silver_519b09f7822dd73c",
+      "query": "recipes with raddish",
+      "added": [],
+      "removed": [
+        "recipe::130787"
+      ]
+    },
+    {
+      "query_id": "silver_70da69c87d1d2f34",
+      "query": "Jain recipes without sulphites",
+      "added": [],
+      "removed": [
+        "recipe::8328",
+        "recipe::9636"
+      ]
+    },
+    {
+      "query_id": "silver_fc8499c9eab2caaa",
+      "query": "Sattvic recipes without fenugreek",
+      "added": [],
+      "removed": [
+        "recipe::8328",
+        "recipe::9636"
+      ]
+    }
+  ],
+  "unknown_policy": "unknown and unassessed recipes excluded from allergen-absence gold sets",
+  "insufficient_gold_queries": []
+}

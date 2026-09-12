@@ -65,6 +65,28 @@ LONG_PATH = Path("data") / "corpus" / "allergens.parquet"
 #: a safety filter. It is returned separately by `load_wide` for exactly that reason.
 PRESENT = "present"
 UNASSESSED = "unassessed"
+ABSENT = "absent"
+
+
+def validate_long(long: pd.DataFrame) -> None:
+    """Reject malformed assessments before deriving boolean presence flags.
+
+    Every observed recipe must have exactly one recognized status for each token.
+    Missing classes or unknown status spellings must never become assessed absence.
+    """
+    required = {"recipe_id", "allergen", "status"}
+    if not required.issubset(long.columns):
+        raise ValueError(f"allergen surface missing columns: {sorted(required - set(long.columns))}")
+    if long[list(required)].isna().any().any():
+        raise ValueError("allergen surface contains null identifiers, classes or statuses")
+    if not long["allergen"].isin(_AT.TOKENS).all():
+        raise ValueError("allergen surface contains an undeclared class")
+    if not long["status"].isin({PRESENT, ABSENT, UNASSESSED}).all():
+        raise ValueError("allergen surface contains an unrecognized status")
+    if long.duplicated(["recipe_id", "allergen"]).any():
+        raise ValueError("allergen surface contains duplicate recipe/class assessments")
+    if not long.groupby("recipe_id", sort=False).size().eq(len(_AT.TOKENS)).all():
+        raise ValueError("allergen surface has incomplete recipe/class assessments")
 
 
 def load_wide(repo_root: Path) -> pd.DataFrame:
@@ -75,8 +97,8 @@ def load_wide(repo_root: Path) -> pd.DataFrame:
 
     `has_<class>` is True only where `status == "present"`. An `unassessed` row is NOT
     silently False on the flag alone -- it is False there and True in
-    `allergen_unassessed`, so a consumer that ignores the second column gets the
-    conservative reading of the first rather than a fabricated absence.
+    `allergen_unassessed`. Consumers MUST check that second column before treating
+    a False presence flag as an assessed absence. Malformed input raises ValueError.
     """
     path = repo_root / LONG_PATH
     if not path.exists():
@@ -86,6 +108,7 @@ def load_wide(repo_root: Path) -> pd.DataFrame:
         )
 
     long = pd.read_parquet(path)
+    validate_long(long)
     present = long[long["status"] == PRESENT]
 
     # Built by set membership rather than a pivot. A pivot has to invent a value for every

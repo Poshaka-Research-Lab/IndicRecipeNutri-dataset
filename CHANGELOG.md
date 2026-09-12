@@ -1,8 +1,135 @@
 # Changelog
 
+## [0.6.0] — 2026-09-12 — vocabulary, a new relation, and the salt family
+
+**Breaking: `pairs_with` is recomputed.** The empirical co-occurrence layer had been PMI over a
+corpus generation that predated the token splits, the plant-analogue block and salt recovery —
+`pairs_ours.parquet` was written at 06:17 against a graph rebuilt at 17:01. The knowledge graph
+builds twice by design for exactly this reason, and it had been built once. Every `pairs_with`
+edge is regenerated here, so stored pairs from an earlier release will not all reappear.
+
+Recorded as a gap in the guard suite, not only in the data: **all 14 gates pass without catching
+this.** None asserts that the pairing layer is current relative to the graph it describes.
+
+
+- Suppressed unsupported `DV_Folate` percentages and added `DV_Folate_basis`.
+  Previous values remain in field history as `pre_folate_basis_v1`; total folate
+  and all other nutrient values are unchanged. Upstream builders and release
+  checks prevent reintroducing the unsupported conversion.
+- Added canonical `nut_suppl_fct_frac` to the narrow quality table, retained
+  `nut_indb_frac` as a deprecated identical alias, and added a recipe-ID parity gate.
+  Metadata now describes the computed-calorie basis and legacy zero-denominator
+  ambiguity on both surfaces. Values are unchanged.
+- Graph recipe splits now require Split_v3; corrected 40,773 stale v2 labels.
+- **Breaking:** compound IDs use PubChem CIDs. Five ambiguous names had collapsed
+  distinct chemicals; restored 6 compound nodes and 15 has_compound edges. See
+  `docs/COMPOUND_ID_MIGRATION.md` and the generated ambiguity-aware crosswalk.
+- Optional flavour tables now derive from the live core and its evidence, with a
+  deduplicating loader and no dangling ingredient references.
+- Preserve edge attributes in `kg_edge_evidence.parquet`; correct graph reconstruction
+  column interpretation and retain 580 molecular assertions attached to pairing edges.
+- Generate current release facts and datasheet; enforce split, evidence and flavour
+  contracts in verification and regression tests. These changes are not yet published.
+- **Fixed — a published allergen false negative.** Recipe 23064 carried
+  `100 gms walnuts (akhrot)` in `recipes_structured.parquet` and a `contains_allergen`
+  edge in the graph, while `data/corpus/allergens.parquet` published `tree_nuts` as
+  **absent** and `recipes.parquet` omitted two ingredient lines entirely. Both surfaces
+  are rebuilt from the master: the list is back to 10 items and `tree_nuts` reads
+  `present`. Measured as isolated — 1 of 219,386 recipes on each surface. The regression
+  guard written to catch exactly this had been failing open: `edges.tail` resolves to the
+  pandas DataFrame *method*, never the column, so it raised `TypeError` outside its own
+  except clause and never once executed its KG check. Repaired.
+- **Breaking: ingredient vocabulary.** Twelve singular/plural duplicate nodes merged and
+  two truncation fragments (`mato`, `matoes`) folded into `tomato`; ingredient nodes
+  **960 → 946**, graph 222,584 → 222,567 nodes. The graph had held e.g. `cranberries`
+  *and* `cranberry` as separate foods, splitting one food's recipes. The surviving node
+  is the one carrying compound links, not the one with more edges — edges are re-pointed
+  by the rebuild, but `fix_flavor_compounds.csv` is keyed by NAME, so keeping the larger
+  member would have orphaned 898 ingredient→compound links; **1,011 are preserved**.
+  Every dropped spelling remains a resolvable surface in `ingredient_map.json`, so a
+  lookup of `cranberries` still returns `cranberry`.
+- Added `data/kg/ingredient_bridge_food.csv` (18 rows): the bridge food whose compound
+  profile an Indian ingredient borrows, **with the form it differs by**. Nine are
+  `direct` (toor dal *is* dehulled split pigeon pea; maida *is* refined wheat flour);
+  seven are `with_caveat` — amchur is dried **unripe** mango, so it inherits ripe fresh
+  mango's profile only with the transform and caveat recorded. `ragi` and `bajra` are
+  withdrawn: no source held carries finger or pearl millet, and the generic `Millet` is
+  a different grain.
+- Benchmark regenerated from the rebuilt graph: **68 → 67** queries. One template moved
+  (`diet+ingredient` 6 → 5) because `recipes with sprout` lost its subject to the merge;
+  the other seven are unchanged, and all 52 shared queries keep identical relevant ID
+  sets. `data/kg_flavor/` and the corpus surfaces were regenerated to match.
+
+- **Added — `subtype_of`, a new relation.** "Is a kind of", which neither existing relation
+  could carry: `derived_from` asserts a derivation that is false here, and all 148 `is_a` edges
+  go ingredient → one of ten fixed *category* nodes, never ingredient → ingredient. 17 edges —
+  eleven oils and six salts. Relation types **21 → 22**, and `data/kg/typed/rel_map.json` gains
+  an entry. A specific oil now carries both: `subtype_of` → `oil` (what kind of thing it is) and
+  `derived_from` → its source material (what it was made from).
+- **Breaking: ingredient vocabulary, again.** Across three passes, 33 ingredient node names were
+  removed and 14 added. Ingredient nodes **931 → 927**; graph **222,548 → 222,539 nodes,
+  6,292,011 → 6,428,210 edges**. Every dropped spelling that names a real food remains a
+  resolvable surface in `ingredient_map.json`; the ones removed outright were not foods
+  (`season`, `salted`, `cooks`, `table`, `feet`…).
+- **Thirty multiword token splits.** `pearl` was five foods, `finger` three, `root` a plant part,
+  `plant` a food and a diet qualifier. **871 ingredient lines that previously resolved to nothing
+  were recovered** — the phrase pass repairs lines the last-noun fallback mangled, e.g.
+  `'vegetable oil omit'` used to walk to `omit` and drop — and 8,359 were re-routed between
+  foods. `oil` shed 6,510 lines to a new `vegetable-oil` node.
+- **The salt family was un-folded.** The node named `salt` was in practice *kala namak*: 3,111 of
+  its 4,233 lines were the `black salt` surface. `black-salt`, `kosher-salt`, `pink-salt` and
+  `fruit-salt` are now separate nodes, each `subtype_of salt`; `salt` falls to 1,191 lines.
+  **`fruit salt` had been landing on the real food node `fruit`** (705 lines) — Eno fruit salt is
+  a leavening agent, and that subtype edge is a naming claim, not a compositional one, recorded
+  as such beside the declaration.
+- **A plant-analogue block, so an analogue never lands on an animal food.** 1,629 lines whose
+  primary item was a plant analogue resolved onto `butter` (477), `milk` (397), `yogurt` (307),
+  `cheese` (172), `cream` (126), `ghee` (71) and the meat nodes including `beef` (18). Eight new
+  nodes — `plant-milk`, `vegan-butter`, `vegan-yogurt`, `vegan-cheese`, `vegan-cream`,
+  `vegan-ghee`, `vegan-meat`, `egg-replacer` — capture 94.5% of them. Substitution *notes* are
+  deliberately untouched: `'1 cup whole milk (or non dairy milk)'` is milk, and the parenthetical
+  is advice to a vegan reader.
+- **Benchmark labels refreshed against the rebuilt graph, question definitions frozen.** All 67
+  questions unchanged (`fixed_silver_v1`, `definitions_changed: 0`); only gold sets were
+  re-derived, and `unknown`/`unassessed` recipes are excluded from allergen-absence gold sets
+  rather than read as absence. Both audit legs now report **0.00%** across 7 constraint queries
+  and 1,592 gold entries.
+- **Salt is in the graph.** It was not. `"salt"` sat in the resolver's generic-word list, so
+  *"salt to taste"* resolved to nothing and **147,749 of the 163,252 salt-mentioning lines
+  (90.5%) were dropped** — while the node *named* `salt` was in practice kala namak, because
+  `black salt` was 3,111 of its own 4,233 lines. Recovering it took two changes, neither
+  sufficient alone: the generic-word removal and a `salt` map surface. **`salt` is now the
+  corpus's most common ingredient at 135,548 recipes**, above chili's 100,427. `sea-salt` (3,093)
+  and `rock-salt` (1,313, including *sendha namak*) recovered lines that also resolved to nothing.
+- **Seventeen non-food tokens removed from the vocabulary**, 487 lines: `season` (*"berry in
+  season"*), `salted`/`salty`/`unsalted` (preparation states), `cooks`, `past` (the word is
+  "paste"), `table` (*"GARNISHES FOR THE TABLE"*), `pink` (food colouring), `himalayan`
+  (sparkling water), and others. `cardamon` was merged into `cardamom`, and `eno` repointed to
+  `fruit-salt` — the corpus names it fruit salt in its own text.
+  - **`card` was deliberately kept**, though it looks like the same kind of junk. It is a
+    working truncation alias carrying **26,323 lines** to `cardamom`, with zero lines resolving
+    to itself. Removing it would have destroyed those lines while the node count still looked
+    correct, since `cardamom` has seven other surfaces. The builder asserts the mapping and
+    refuses to run without it.
+- Every graph movement across all three passes was **pre-registered before the rebuild and
+  scored after**, in
+  `_admin/progress/KG_DELTA_{PREDICTION,RECONCILED}_{splits,salt_analogue,round2}_20260912.md`.
+  All three closed to zero residual. `contains_allergen` was required not to move and did not:
+  **485,120** throughout. A vocabulary change that shifts an allergen count is a defect, not a
+  delta.
+- Known and recorded, not hidden: recipes emitting the maximum 20 ingredients rose 2,624 → 3,741
+  as salt entered. Small falls on `black-salt`, `kosher-salt`, `pink-salt` and the oils are
+  *consistent with* displacement past that cap, but were not separately isolated.
+
 Versions follow semver and describe the **release**, not the corpus build. The corpus
 build (`v15`) is recorded separately in `data/corpus/corpus_manifest.json` and
 `.zenodo.json`.
+
+**Why a minor bump and not a patch.** Under `0.y.z` the minor position is the breaking position,
+so *any* breaking change forces it — the number of them does not multiply the bump. What is
+breaking here is that identifiers consumers store and join on changed: compound ids became
+PubChem CIDs, and ingredient node names were removed. Not 1.0.0, which would assert a stable
+public interface while the open gates listed under 0.1.0 remain open.
 
 ## [0.4.1] — 2026-09-06
 
