@@ -56,7 +56,10 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 MASTER_CSV = SOURCE_ROOT / "data" / "MASTER_indian_recipes_enriched.csv"
 KG_DIR = SOURCE_ROOT / "data" / "kg"
 RETRIEVAL_DIR = SOURCE_ROOT / "retrieval"
-BENCH_SYNTH_DIR = SOURCE_ROOT.parent / "bench_synth"
+# `BENCH_SYNTH_DIR` was removed in 0.7.1. Its only consumer was the historical-snapshot
+# staging call in build_benchmark.py, retired with the two frozen generations in 0.7.0, and it
+# pointed outside the repository -- so it had become a constant that described a path this
+# release does not read and cannot verify.
 
 # --------------------------------------------------------------- the licence guard
 
@@ -944,7 +947,11 @@ EXPECTED_CORPUS_BUILD = "v15"
 #      downstream then read as a corpus id. `data/interactions` emits real `recipe_id`s, so
 #      stored user/item pairs from either retired set do not carry over and must not be
 #      joined to this one. The retired directories stay reachable at the v0.6.0 tag and DOI.
-DATASET_VERSION = "0.7.0"
+#
+# 0.7.0 -> 0.7.1 is a PATCH bump: nothing a consumer joins on has moved. No published
+# identifier, count or table changed. The release corrects documentation figures, retires a
+# dead constant, and moves the CI actions off the deprecated Node 20 runtime.
+DATASET_VERSION = "0.7.1"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

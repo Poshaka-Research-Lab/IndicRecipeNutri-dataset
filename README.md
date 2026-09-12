@@ -190,11 +190,11 @@ instead of shipping it — see [Verify what you downloaded](#verify-what-you-dow
 | path | size | what is in it |
 |---|---:|---|
 | [`data/corpus/`](data/corpus) | 199 MB | the recipe table, plus long-form allergen / nutrition / label / quality tables, the rehydration index and the allergen audit |
-| [`data/enrichment/`](data/enrichment) | 146 MB | 27 companion tables — nutrition, region, diet, quality flags, ingredient weights |
-| [`data/provenance/`](data/provenance) | 58 MB | build records and per-field change history |
+| [`data/enrichment/`](data/enrichment) | 146 MB | 26 companion tables — nutrition, region, diet, quality flags, ingredient weights |
+| [`data/provenance/`](data/provenance) | 60 MB | build records and per-field change history |
 | [`data/interactions/`](data/interactions) | 35 MB | synthetic interaction benchmark v4 — 50,000 users, 990,273 ratings, with its own datasheet |
 | [`data/kg/`](data/kg) | 33 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
-| [`data/benchmark/`](data/benchmark) | 0.2 MB | 67 queries, gold sets, contamination audit |
+| [`data/benchmark/`](data/benchmark) | 0.4 MB | 67 queries, gold sets, contamination audit |
 | [`data/kg_flavor/`](data/kg_flavor) | 0.1 MB | FlavorDB compound layer, kept separable (CC BY-NC-SA **3.0**) |
 
 Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.

@@ -64,7 +64,17 @@ Zenodo reads it on each archive.
 
 ## Every release
 
-1. **Rebuild and gate.** `python D:\datasets\_admin\rebuild_all.py` — all eight gates green.
+1. **Rebuild and gate, *if a corpus or KG input changed*.**
+   `python D:\datasets\_admin\rebuild_all.py` — all eight gates green.
+
+   **When to skip it.** This step exists because the knowledge graph must be built twice: the
+   pairing layer is PMI over the graph, so a single build leaves `pairs_with` describing the
+   previous generation, and no gate catches it. That risk only exists when the corpus, the
+   vocabulary or the KG builders changed. A release that touches only `docs/`, `scripts/` or
+   a derived directory outside `data/corpus/` and `data/kg/` has nothing to make stale, and
+   running a full rebuild then can only perturb the pinned counts in `release_config.py` —
+   which is a new reconciliation, not a safety gain. Skipped deliberately for 0.7.0 and 0.7.1
+   on exactly that reasoning; say so in the CHANGELOG when you skip it.
 2. **Update `CHANGELOG.md`** with a `## [x.y.z] — YYYY-MM-DD` section. The workflow extracts
    exactly this section as the release notes; if it is missing, the release publishes with
    "No CHANGELOG entry", which is worse than a wrong number because nobody reads it as an

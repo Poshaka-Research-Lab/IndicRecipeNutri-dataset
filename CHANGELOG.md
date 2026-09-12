@@ -1,5 +1,46 @@
 # Changelog
 
+## [0.7.1] — 2026-09-12 — review pass: corrected figures, dead config, Node 20
+
+No published identifier, count or table changed. This is a documentation, configuration and
+CI release, cut after reviewing what 0.7.0 actually shipped.
+
+### Fixed — figures that were wrong in 0.7.0
+
+- **The 0.7.0 entry said `data/` held 83 files. It holds 86.** The count was measured before
+  the interaction datasheet and the two region-crosswalk files were written into
+  `data/interactions/`. The 0.7.0 section above is corrected in place and the error is
+  recorded here rather than quietly overwritten.
+- **`README.md` said 27 companion tables in `data/enrichment/`. There are 26.** The directory
+  holds 27 files, but one is `ENRICHMENT_MANIFEST.json`, not a table. This was introduced by
+  the 0.7.0 README pass, which changed a correct 26 to an incorrect 27 — found by checking
+  the edit against the payload rather than against the previous sentence.
+- `data/benchmark/` is 0.4 MB, not 0.2 MB, and `data/provenance/` is 60 MB, not 58 MB. Both
+  figures predate 0.7.0 and had drifted as the directories grew.
+- **`docs/PROVENANCE.md`'s reproduce recipe was stale and incomplete.** It claimed 28
+  companion tables and 68 benchmark queries — the payload has 26 and 67 — and omitted
+  `build_interactions.py`, `build_interaction_baselines.py`, `build_region_crosswalk.py`,
+  `make_data_dictionary.py` and `build_release_facts.py`. It now also states why the tail is
+  ordered: `make_checksums.py` hashes `docs/` as well as `data/`, so anything regenerating
+  prose must run before it or leave a digest that no longer matches its file.
+
+### Removed
+
+- `release_config.BENCH_SYNTH_DIR`. Its only consumer was the historical-snapshot staging
+  call retired with the two frozen generations in 0.7.0, and it pointed outside the
+  repository — a constant naming a path this release neither reads nor can verify.
+
+### Changed
+
+- CI moves off the deprecated Node 20 runtime: `actions/checkout@v4` → `@v7` and
+  `actions/setup-python@v5` → `@v7`. Every 0.7.0 job carried a deprecation annotation.
+- `docs/RELEASING.md` now says **when** step 1 (`rebuild_all.py`) is required rather than
+  presenting it as unconditional. It exists because the knowledge graph must be built twice —
+  the pairing layer is PMI over the graph, and a single build leaves `pairs_with` describing
+  the previous generation with no gate to catch it. That risk exists only when the corpus,
+  the vocabulary or the KG builders changed. It was skipped deliberately for 0.7.0 and 0.7.1,
+  which is now a documented condition instead of an undocumented judgement call.
+
 ## [0.7.0] — 2026-09-12 — one interaction benchmark, regenerated clean
 
 **Breaking: `data/synthetic_interactions/` and `data/synthetic_interactions_v3/` are removed**
@@ -56,7 +97,8 @@ anything else instead of accepting a number.
 iterative 10-core and a per-user temporal 80/20 split: **35,801 users / 16,567 items /
 820,566 interactions** (train 657,610, test 162,956) · **0** leakage · attribute KG of
 **82,835** triples over 16,614 entities · all 27 published `Region` codes represented.
-`data/` is now 83 files, ≈474 MB.
+`data/` is now 86 files, ≈474 MB. *(Corrected in 0.7.1: this line shipped saying 83, a count
+taken before the interaction datasheet and the two region-crosswalk files were written.)*
 
 - `scripts/synthetic_history_contract.py` is replaced by `scripts/interactions_contract.py`.
   The old one staged two frozen generations and pinned their `SNAPSHOT.json` digests; a

@@ -39,14 +39,24 @@ the audit trail.
 ## How to reproduce this release from the working master
 
 ```
-python scripts/build_corpus.py       # structured corpus + rehydration index
-python scripts/build_kg.py           # nodes, edges, vocabulary, count check
-python scripts/build_enrichment.py   # 28 companion tables, CSV -> Parquet
-python scripts/build_benchmark.py    # 68 queries + two-leg gold-set audit
-python scripts/audit_corpus.py       # independent allergen and diet audit
-python scripts/make_checksums.py
+python scripts/build_corpus.py                 # structured corpus + rehydration index
+python scripts/build_kg.py                     # nodes, edges, vocabulary, count check
+python scripts/build_enrichment.py             # 26 companion tables, CSV -> Parquet
+python scripts/build_benchmark.py              # 67 queries + two-leg gold-set audit
+python scripts/build_interactions.py           # synthetic interaction benchmark
+python scripts/build_interaction_baselines.py  # its reference top-N baselines
+python scripts/build_region_crosswalk.py       # user home_region -> KG entity resolution
+python scripts/audit_corpus.py                 # independent allergen and diet audit
+python scripts/make_data_dictionary.py         # regenerate docs/DATA_DICTIONARY.md
+python scripts/build_release_facts.py          # regenerate release facts + datasheet
+python scripts/make_checksums.py               # LAST before verifying: hashes docs/ too
 python scripts/verify_release.py --strict-checksums
 ```
+
+Order matters at the tail. `make_checksums.py` hashes `data/`, `docs/` and five root files,
+so anything that regenerates prose — the data dictionary, the release facts, the datasheet —
+has to run **before** it. Regenerating a document afterwards leaves a digest that no longer
+matches the file, and `--strict-checksums` fails on it.
 
 `scripts/release_config.py` holds the expected counts and the withheld-column list;
 both the builders and the verifier import from it, so the licence guard and the
