@@ -1,12 +1,12 @@
 user_home_region,n_users,kg_entity,match,in_primary_axis,corpus_recipes,note
-Pan-Indian,12480,region:Pan-Indian,exact,false,135055,resolves by string against the published Region column
-North India,3766,region:North India,exact,false,12108,resolves by string against the published Region column
+Pan-Indian,12480,region:Pan-Indian,exact,false,135018,resolves by string against the published Region column
+North India,3766,region:North India,exact,false,12112,resolves by string against the published Region column
 Kerala,3742,region:Kerala,exact,true,11527,resolves by string against the published Region column
 Tamil Nadu,3725,region:Tamil Nadu,exact,true,11375,resolves by string against the published Region column
-South India,3672,region:South India,exact,false,11581,resolves by string against the published Region column
-Punjab,3588,region:Punjab,exact,true,10505,resolves by string against the published Region column
+South India,3672,region:South India,exact,false,11579,resolves by string against the published Region column
+Punjab,3588,region:Punjab,exact,true,10502,resolves by string against the published Region column
 West Bengal,2703,region:West Bengal,exact,true,6431,resolves by string against the published Region column
-Maharashtra,2479,region:Maharashtra,exact,true,5017,resolves by string against the published Region column
+Maharashtra,2479,region:Maharashtra,exact,true,5016,resolves by string against the published Region column
 Karnataka,2341,region:Karnataka,exact,true,4788,resolves by string against the published Region column
 Gujarat,2060,region:Gujarat,exact,true,3677,resolves by string against the published Region column
 Andhra Pradesh,1431,region:Andhra Pradesh,exact,true,1862,resolves by string against the published Region column

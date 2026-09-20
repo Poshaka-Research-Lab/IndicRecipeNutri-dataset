@@ -1,0 +1,51 @@
+{
+  "energy_policy": "ifct2017_source_kj_per_kcal_4_18",
+  "weight_policy": "existing_positive_quantity_unit_and_confident_tier_ab_v1",
+  "source_manifest_sha256": "702748067426d9051337ca46e226c16ebec26f87212c4159ad2744c059621c10",
+  "review_registry_sha256": "935cd762a12393d480254b5db4f4200ef7637495526ebf63362760ea3302bc62",
+  "active_match_status": "agent_reviewed_source_identity",
+  "human_labels": 0,
+  "quantity_approvals": 0,
+  "retention_policy": "legacy_assumed_cooked",
+  "retention_factors": {
+    "Nut_VitaminC": 0.75,
+    "Nut_Thiamin": 0.8,
+    "Nut_Riboflavin": 0.85,
+    "Nut_Niacin": 0.8,
+    "Nut_VitaminB6": 0.8,
+    "Nut_Folate": 0.75,
+    "Nut_VitaminB12": 0.75,
+    "Nut_VitaminA": 0.85,
+    "Nut_VitaminE": 0.85,
+    "Nut_VitaminK": 0.9,
+    "Nut_Calcium": 0.95,
+    "Nut_Iron": 0.95,
+    "Nut_Magnesium": 0.9,
+    "Nut_Phosphorus": 0.95,
+    "Nut_Potassium": 0.85,
+    "Nut_Sodium": 0.9,
+    "Nut_Zinc": 0.95,
+    "Nut_Copper": 0.9,
+    "Nut_Selenium": 0.9,
+    "Nut_Manganese": 0.9
+  },
+  "version": "released_ifct_source_provenance_v1",
+  "upstream_sha256": {
+    "recipe_ifct_fraction.parquet": "999f03ed12264c2d5c608acf13e4cb2bb9046f0e8bcfd905ac534daaf099e0d0",
+    "ifct_source_profiles.json": "4a0888759be83072dc3d666d4f76556400d385de4a5b090fa0511608bb246a93",
+    "ingredients_nutrition_manifest.json": "a9686caeca9ad9606bcc4393cc8de4aa9f2d1b4c57347d0afa877f38b1cbc0d7"
+  },
+  "scope": "agent_reviewed_source_identity_partial_estimated_composition",
+  "fraction_basis": "share_of_available_computed_ingredient_energy_not_complete_nutrient_coverage",
+  "compatible_components": [
+    "Nut_Protein",
+    "Nut_Fat",
+    "Nut_Fiber",
+    "Nut_Calories"
+  ],
+  "source_identity_fields": [
+    "fct_source",
+    "fct_food_id"
+  ],
+  "ifct_fct_idx_required": false
+}

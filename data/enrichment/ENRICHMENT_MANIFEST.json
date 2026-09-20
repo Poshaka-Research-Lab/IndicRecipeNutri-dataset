@@ -2,21 +2,21 @@
   "tables": [
     {
       "table": "fix_allergens.parquet",
-      "rows": 42703,
+      "rows": 42692,
       "columns": 4,
-      "rows_dropped_by_exclusion": 1942
+      "rows_dropped_by_exclusion": 1944
     },
     {
       "table": "renutrition_v3.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 18,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "nutrition_totals.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 6,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix_nutrition.parquet",
@@ -26,31 +26,31 @@
     },
     {
       "table": "fix7_atwater.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 5,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "gluten_confidence_v2.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 3,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix11_nonveg.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 6,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix14_region.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 5,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix_region.parquet",
-      "rows": 2901,
+      "rows": 2900,
       "columns": 4,
       "rows_dropped_by_exclusion": 79
     },
@@ -68,21 +68,21 @@
     },
     {
       "table": "fix_cuisine_scope.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 6,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix_occasion_context.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 5,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix_spicelevel.parquet",
-      "rows": 95840,
+      "rows": 95825,
       "columns": 3,
-      "rows_dropped_by_exclusion": 4269
+      "rows_dropped_by_exclusion": 4270
     },
     {
       "table": "fix_glhg.parquet",
@@ -110,51 +110,67 @@
     },
     {
       "table": "fix_variants.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 7,
-      "rows_dropped_by_exclusion": 4617
+      "rows_dropped_by_exclusion": 4619
     },
     {
       "table": "fix_text.parquet",
-      "rows": 39168,
+      "rows": 39151,
       "columns": 7,
-      "rows_dropped_by_exclusion": 3119
+      "rows_dropped_by_exclusion": 3120
     },
     {
       "table": "quarantine_list.parquet",
-      "rows": 143787,
+      "rows": 143738,
       "columns": 5,
-      "rows_dropped_by_exclusion": 3908
+      "rows_dropped_by_exclusion": 3910
     },
     {
       "table": "prep_features.parquet",
-      "rows": 219386,
+      "rows": 219384,
       "columns": 13,
-      "rows_dropped_by_exclusion": 1
+      "rows_dropped_by_exclusion": 3
     },
     {
       "table": "prep_ingredient.parquet",
-      "rows": 458060,
+      "rows": 458285,
       "columns": 4,
       "rows_dropped_by_exclusion": 0
     },
     {
       "table": "ingredients_recovered.parquet",
-      "rows": 5534,
+      "rows": 5532,
       "columns": 2,
-      "rows_dropped_by_exclusion": 63
+      "rows_dropped_by_exclusion": 65
     },
     {
       "table": "ingredients_weights.parquet",
-      "rows": 2335760,
-      "columns": 8,
-      "rows_dropped_by_exclusion": 31245
+      "rows": 2338910,
+      "columns": 11,
+      "rows_dropped_by_exclusion": 25
     },
     {
       "table": "ingredients_nutrition.parquet",
-      "rows": 2335760,
-      "columns": 40,
-      "rows_dropped_by_exclusion": 31245
+      "rows": 2338910,
+      "columns": 57,
+      "rows_dropped_by_exclusion": 25
+    },
+    {
+      "table": "recipe_ifct_fraction.parquet",
+      "rows": 218653,
+      "columns": 8,
+      "rows_dropped_by_exclusion": 3
+    }
+  ],
+  "metadata": [
+    {
+      "metadata": "ifct_source_profiles.json",
+      "sha256": "0b35b40a20e29fb6f91f2d2186670b47ef147c7fde1534eb1027e0f7dfd28cc0"
+    },
+    {
+      "metadata": "nutrition_source_provenance.json",
+      "sha256": "8dde3b9f370cdbccfe9a63f6b2bd164c7677e8d60b02eb349fbc767d02ece2ef"
     }
   ],
   "excluded": {

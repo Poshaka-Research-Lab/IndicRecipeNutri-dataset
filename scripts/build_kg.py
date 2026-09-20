@@ -124,6 +124,12 @@ def site_excluded_recipe_ids() -> set[str]:
     import pandas as pd
     master = SOURCE_MASTER if "SOURCE_MASTER" in globals() else None
     src = master or r"D:\datasets\scraped_indian_recipes\data\MASTER_indian_recipes_enriched.csv"
+    # The fourth place in the workspace that resolves the master, and the only one that
+    # does it with a literal rather than through paths.py or release_config.py. Gated on
+    # the source-installation reader gate immediately before the read, fail-closed.
+    import paths as _paths  # noqa: E402 -- release_config put DATASETS_ROOT on sys.path
+
+    _paths.source_gate().require_master_ready(str(Path(src).resolve()))
     df = pd.read_csv(src, usecols=["recipe_id", "SourceSite"], low_memory=False)
     ids = df.loc[df["SourceSite"].isin(EXCLUDED_SOURCE_SITES), "recipe_id"]
     _SITE_EXCLUDED_CACHE = {int(x) for x in ids}

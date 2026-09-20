@@ -40,6 +40,10 @@ def collect(root):
         'benchmark_templates': dict(sorted(Counter(q['template'] for q in queries).items())),
         'allergen_counts': {k: int(v) for k, v in allergens.loc[allergens.status.eq('present'), 'allergen'].value_counts().sort_index().items()},
         'pan_indian': int(corpus.Region.eq('Pan-Indian').sum()),
+        # c12 B2: a blank Region is counted and reported, never folded into a real region.
+        # Emitted only when non-zero so an unchanged payload keeps byte-identical facts.
+        **({'unknown_region': n_unknown} if (n_unknown := int(
+            (corpus.Region.isna() | corpus.Region.astype(str).str.strip().isin(['', 'unknown'])).sum())) else {}),
         'english': int(corpus.Lang_base.eq('en').sum()),
         'missing_language': int(corpus.Lang_base.isna().sum()),
         'missing_servings': int(corpus.Servings_num.isna().sum()),

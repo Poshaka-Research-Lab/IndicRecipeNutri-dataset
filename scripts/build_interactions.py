@@ -124,6 +124,23 @@ def zone_of(region: str) -> str:
     return "O"
 
 
+#: A blank Region is UNKNOWN, not Pan-Indian. `fillna("Pan-Indian")` used to give such a
+#: recipe the Pan-Indian region score, a `region:Pan-Indian` triple and a place in the
+#: Pan-Indian user pool (derived-recompute review c12 finding B2, 2026-09-17).
+UNKNOWN_REGION = "unknown"
+
+
+def region_codes(values) -> np.ndarray:
+    s = pd.Series(values, dtype=object)
+    text = s.where(s.notna(), "").astype(str)
+    return text.where(~text.str.strip().eq(""), UNKNOWN_REGION).values
+
+
+def home_region_codes(present) -> list:
+    """Regions a user may call home: every region that has recipes, never unknown."""
+    return [r for r in present if r != UNKNOWN_REGION]
+
+
 def pctl(series: pd.Series) -> np.ndarray:
     """Within-corpus percentile rank; missing values sit at the midpoint."""
     return pd.to_numeric(series, errors="coerce").rank(pct=True).fillna(0.5).values
@@ -162,9 +179,12 @@ def main() -> int:
         f"{k}={int((diet_arr == k).sum()):,}" for k in DECLARED))
     print(f"undeclared (excluded from every pool): {undeclared_n:,}")
 
-    region = df["Region"].fillna("Pan-Indian").astype(str).values
+    region = region_codes(df["Region"])
     zone_arr = np.array([zone_of(r) for r in region])
-    unzoned = sorted({r for r, z in zip(region, zone_arr) if z == "O"} - {"Pan-Indian"})
+    if (region == UNKNOWN_REGION).any():
+        print(f"recipes with unknown Region: {int((region == UNKNOWN_REGION).sum()):,} "
+              f"(no region score, no region triple, no user pool)")
+    unzoned = sorted({r for r, z in zip(region, zone_arr) if z == "O"} - {"Pan-Indian", UNKNOWN_REGION})
     if unzoned:
         print(f"NOTE region codes with no zone: {unzoned}")
 
@@ -224,7 +244,7 @@ def main() -> int:
 
     # ---- users
     nu = args.users
-    present = list(region_to_idx.keys())
+    present = home_region_codes(region_to_idx.keys())
     counts = {r: len(region_to_idx[r]) for r in present}
     non_pan = [r for r in present if r != "Pan-Indian"]
     sq = np.array([np.sqrt(counts[r]) for r in non_pan])
@@ -436,7 +456,8 @@ def main() -> int:
     for o in i_ids:
         i = pos_of[int(o)]
         h = i_remap[o]
-        triples.append((h, 0, node(f"region:{region[i]}")))
+        if region[i] != UNKNOWN_REGION:
+            triples.append((h, 0, node(f"region:{region[i]}")))
         triples.append((h, 1, node(f"diet:{diet_arr[i]}")))
         if course[i] != "Unknown":
             triples.append((h, 2, node(f"course:{course[i]}")))

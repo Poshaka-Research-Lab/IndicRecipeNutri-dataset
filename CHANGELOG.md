@@ -1,5 +1,97 @@
 # Changelog
 
+## [0.10.0] — 2026-09-20 — 58 recipes re-sourced; allergen labels human-reviewed
+
+**58 recipes now describe the dish their record names.** Each of the 58 carried text scraped from a *different*
+dish: title, ingredients or instructions belonged to the previous item on its source page. Each was re-sourced
+from its own page, and every value derived from that text was recomputed from the corrected text. `recipe_id`s
+are unchanged. For 57 of the 58 the dish identity changed; for 220115 only the source context changed, and its
+values stand.
+
+The correction was installed through a journalled, compare-and-swap transaction that ran the pinned value
+verifier over the exact bytes it then installed: 592 recomputed cells verified, 11 verified as still blank, and
+754 cells checked in all. The reader gate is pinned to those bytes.
+
+### Safety labels are recomputed, never inherited
+- On the 58, `Diet`, `Allergens_v2`, `allergen_tier`, `contains_*` and the related flags were blanked, then
+  recomputed from each recipe's own corrected text by the named writers, and checked value by value before the
+  install was allowed.
+- The owner overrode the lexicon where it misreads the text, on four recipes: 220894 and 220908 (cashew cream is
+  not dairy), 220871 (soy yogurt is not dairy) and 220892 ("No Ghee" is a negation; almond milk and cashew cream
+  are not dairy). Five class labels were removed: milk 4, ghee 1.
+- `Diet` on eight recipes is the owner's, against the recipe's own ingredients: 220871, 220894, 220900 and
+  220892 are Vegan or Vegetarian; 65047, 134864 and 209041 are Non-Vegetarian; 160540 is Non-Vegetarian after
+  re-sourcing.
+
+### Previous-dish history is blanked, not relabelled
+- On the 57 re-aligned recipes, history columns that described the previous dish are blank, with basis
+  `unavailable_source_context_correction`: `Region_orig`, `Cuisine_orig`, `Nut_Calories_orig`, the `_pre_*`
+  snapshots and `allergens_v14`. Three corpus-wide constant bookkeeping columns are kept.
+- **Kept on purpose:** `Split_v1_leaky` and `Split_v2`. Benchmark split membership is unchanged, so published
+  benchmark results stay comparable. Two title groups therefore span `Split_v2`: 220894 "Dal Makhani" (train)
+  against 31 validation recipes, and 220899 "Besan Oats Cheela…" (train) against 220898. Gate M3 names exactly
+  those two as documented exceptions; any other leak still fails.
+
+### Allergen labels: owner-reviewed corrections
+Every change below was decided by the workspace owner against each recipe's own ingredient list, and shipped
+through the same guarded install as one pinned document of 281 decided cells on 88 recipes.
+
+- **46 false positives removed:** fish 18, coconut 12, peanut 12, egg 2, sesame 1, sulphites 1. *kadalai* is
+  Bengal gram, not groundnut; "without coconut" titles are not coconut; the fish removals are unbranded
+  Worcestershire sauce where the recipe is vegan or vegetarian.
+- **Nine proposed removals were rejected** because the recipe itself contains the allergen: dahi, cheese, dalia,
+  pecans, mustard seeds, yogurt, tamarind juice, coconut oil — and, on re-reading, 168702's fish: the standard
+  Worcestershire sauce is made with anchovies, so an unbranded one is labelled as containing fish.
+- **17 additions:** tree_nuts 7, shellfish 3, fenugreek 3, fish 2, gluten 1, mustard 1.
+- Four recipes (38002, 130320, 131869, 160540) had no usable title or ingredient text and were re-sourced from
+  their own pages; their labels ship now. Their ingredient text follows in 0.10.1.
+- Gate M30's per-class floors and gate M28's per-class edge counts are re-measured. Every class that fell is
+  attributed, with zero residual: the 58 recomputed from their own corrected text, the owner's removals and the
+  owner's overrides. The reconciliation is in the gates' own comments.
+
+### Labels
+Course, Cuisine, Region and SpiceLevel for 21 of the 58 are the owner's, carrying `region_src` /
+`SpiceLevel_src = owner_label`. The remaining 37 ship as `unknown` rather than guessed. The cultural-facets table
+classifies `owner_label` as `owner_reviewed_label`: an assigned region, not a reviewed dish origin.
+
+### Enrichment tables keep their column types
+Blanking the 58 would otherwise have turned whole published columns into float or object. These 12 now read as
+pandas nullable types; Arrow and parquet types, and every present value, are unchanged:
+- `Int64`: `renutrition_v3.n_ingredients`, `fix_cuisine_scope.indian_sig`, `fix_variants.variant_group_id`,
+  `variant_index`, `variant_count`, `dup_of_recipe_id`, `quarantine_list.n_issues`;
+- `boolean`: `fix11_nonveg.animal_in_name`, `animal_in_ing`, `nonveg_corrected`, `fix7_atwater.atwater_fixed`,
+  `fix_cuisine_scope.out_of_scope`.
+
+A blank on the 58 reads as `<NA>`, never 0 or False.
+
+### Enrichment refresh
+The 33 source enrichment tables were refreshed against the corrected master in one journalled transaction:
+1,624 cells re-copied from the master, 2,900 blanked with a recorded basis, and 47 stale quarantine rows removed.
+The ingredient-occurrence layer drops 774 retired-key rows per table and inserts 639 replacements that carry no
+nutrient and no gram values. `fix11_nonveg.nonveg_corrected` is now refreshed from the master, like three
+neighbouring columns before it.
+
+### Flavour
+20 reviewed flavour decisions for 19 of the 58 are withdrawn: 17 exact and 3 proxy. They were bound to ingredient
+positions the correction retired. The history is preserved in the build records.
+
+### Two recipes withdrawn for personal data
+211731 was already withdrawn. 218869 and 222341 were withdrawn on 2026-09-15 and leave the payload with this
+release: their recovered ingredient text carried an individual's contact details and a credits block naming
+private individuals. The published corpus is 219,384 recipes.
+
+**Compatibility:** `recipe_id`s and split membership are unchanged. The content of 58 recipes changed; allergen
+labels changed on 67 recipes in all. Two recipes were withdrawn. With pandas, the 12 enrichment columns above
+read as `Int64` or `boolean` instead of `int64` or `bool`.
+
+**Release payload:** 219,384 recipes, 270 columns, 378 source sites; knowledge graph 222,537 nodes and 6,426,916
+edges; 67 benchmark queries; 1,274 recipes still carry the allergen `unknown` sentinel, which means never
+assessed, not safe.
+
+**Validation:** full rebuild from the corpus stage with the knowledge graph built twice, then all 15 gates green
+in one run: gate_v12 72 checks / 0 failures, gate_m27, gate_m28 and gate_m33 green after their pins were
+re-measured with per-class reconciliations, `verify_release --strict-checksums`, and the CARE suite at 90 tests.
+
 ## [0.9.0] ? 2026-09-13 ? ingredient identities and substitution repairs
 
 - Retire the equipment/adjective ingredient nodes `cheesecloth` and `creamy`.

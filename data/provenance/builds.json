@@ -1,47 +1,47 @@
 {
   "v15-2026-09-01": {
-    "date": "2026-09-12",
+    "date": "2026-09-20",
     "script": "migrate_schema.py",
-    "rows": 219386,
-    "source_columns": 270,
+    "rows": 219384,
+    "source_columns": 271,
     "tables": {
       "recipes": {
-        "rows": 219386,
+        "rows": 219384,
         "cols": 74,
-        "mb": 46.9
+        "mb": 47.0
       },
       "nutrition": {
-        "rows": 219386,
+        "rows": 219384,
         "cols": 36,
         "mb": 16.1
       },
       "nutrition_derived": {
-        "rows": 219386,
+        "rows": 219384,
         "cols": 46,
-        "mb": 12.7
+        "mb": 12.4
       },
       "labels": {
-        "rows": 219386,
+        "rows": 219384,
         "cols": 21,
         "mb": 3.0
       },
       "quality": {
-        "rows": 219386,
-        "cols": 24,
+        "rows": 219384,
+        "cols": 25,
         "mb": 2.9
       },
       "allergens": {
-        "rows": 3729562,
+        "rows": 3729528,
         "cols": 3,
         "mb": 2.2
       },
       "field_history": {
-        "rows": 7912281,
+        "rows": 8387861,
         "cols": 6,
-        "mb": 58.6
+        "mb": 61.6
       }
     },
-    "nutrition_basis_history_rows": 219386,
+    "nutrition_basis_history_rows": 219384,
     "language_source_history_rows": 2,
     "allergen_tier_history_rows": 401,
     "note": "S-1 split. 64 build-history columns moved to field_history rows. A future fix adds rows, not columns."

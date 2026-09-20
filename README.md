@@ -39,9 +39,9 @@ and that needs to know exactly where the data is weak.
 
 | | |
 |---|---|
-| **Recipes** | 219,386, across **378 source sites** |
-| **Columns** | 269; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,539 nodes · **6,428,315 edges** · 17 node types · 22 relation types |
+| **Recipes** | 219,384, across **378 source sites** |
+| **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
+| **Knowledge graph** | 222,537 nodes · **6,426,916 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -90,8 +90,8 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,428,315 rows
-kg[kg.rel == "contains_allergen"]                      # 485,120 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,916 rows
+kg[kg.rel == "contains_allergen"]                      # 485,065 rows
 ```
 
 </details>
@@ -299,7 +299,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,539 nodes, 6,428,315 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,426,916 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
@@ -340,7 +340,7 @@ graph LR
 | `has_ingredient` | 1,916,173 | | `shares_flavor` | 13,673 |
 | `has_health_tag` | 1,725,659 | | `in_context` | 7,287 |
 | `suitable_for` | 895,759 | | `pairs_with` | 3,224 |
-| `contains_allergen` | 485,120 | | `rich_in` | 3,003 |
+| `contains_allergen` | 485,065 | | `rich_in` | 3,003 |
 | `cooked_by` | 404,237 | | `grounded_as` | 370 |
 | `has_diet` | 256,151 | | `is_a` | 148 |
 | `is_course` | 219,386 | | `typical_region` | 48 |
@@ -409,15 +409,15 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 
 | class | recipes | | class | recipes |
 |---|---:|---|---|---:|
-| `milk` | 116,435 | | `fenugreek` | 20,025 |
-| `gluten` | 72,015 | | `sesame` | 13,729 |
-| `coconut` | 36,824 | | `tamarind` | 12,163 |
-| `mustard` | 36,687 | | `peanut` | 11,476 |
-| `ghee` | 33,541 | | `soy` | 9,050 |
-| `tree_nuts` | 33,280 | | `fish` | 5,829 |
-| `asafoetida` | 30,607 | | `shellfish` | 4,202 |
-| `sulphites` | 23,989 | | `celery` | 2,357 |
-| `egg` | 21,637 | | **`unknown`** | **1,274** |
+| `milk` | 116,418 | | `fenugreek` | 20,028 |
+| `gluten` | 71,994 | | `sesame` | 13,729 |
+| `coconut` | 36,811 | | `tamarind` | 12,163 |
+| `mustard` | 36,688 | | `peanut` | 11,464 |
+| `ghee` | 33,538 | | `soy` | 9,050 |
+| `tree_nuts` | 33,287 | | `fish` | 5,813 |
+| `asafoetida` | 30,612 | | `shellfish` | 4,205 |
+| `sulphites` | 23,990 | | `celery` | 2,357 |
+| `egg` | 21,634 | | **`unknown`** | **1,274** |
 
 **Four things you must know before building anything safety-facing.**
 

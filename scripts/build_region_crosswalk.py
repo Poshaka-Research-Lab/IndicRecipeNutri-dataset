@@ -51,6 +51,16 @@ AXIS_14 = {"Andhra Pradesh", "Bihar", "Goa", "Gujarat", "Jammu & Kashmir", "Karn
 FIELDS = ["user_home_region", "n_users", "kg_entity", "match", "in_primary_axis",
           "corpus_recipes", "note"]
 
+#: A blank Region is counted as UNKNOWN. `Region.fillna("Pan-Indian")` used to count it as
+#: Pan-Indian and inflate that published corpus_recipes figure (derived-recompute review c12 finding B2, 2026-09-17).
+UNKNOWN_REGION = "unknown"
+
+
+def corpus_region_counts(regions):
+    """{Region code: recipes}; NaN, blank and the literal "unknown" all count as "unknown"."""
+    text = regions.astype(object).where(regions.notna(), "").astype(str)
+    return text.where(~text.str.strip().eq(""), UNKNOWN_REGION).value_counts().to_dict()
+
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
@@ -78,8 +88,10 @@ def main() -> int:
     total_users = sum(users.values())
     print(f"user home_region codes: {len(users)}   users: {total_users:,}")
 
-    corpus_counts = (pd.read_parquet(args.corpus, columns=["Region"])
-                     .Region.fillna("Pan-Indian").astype(str).value_counts().to_dict())
+    corpus_counts = corpus_region_counts(pd.read_parquet(args.corpus, columns=["Region"]).Region)
+    if corpus_counts.get(UNKNOWN_REGION):
+        print(f"corpus recipes with unknown Region: {corpus_counts[UNKNOWN_REGION]:,} "
+              f"(counted as unknown, not Pan-Indian)")
 
     rows, unreachable_users = [], 0
     for code, n in sorted(users.items(), key=lambda kv: -kv[1]):
@@ -128,6 +140,8 @@ def main() -> int:
                 "generator weighted 0.35*region-match, so regional preference was real at "
                 "generation time and rewriting it afterwards would misdescribe the log.",
     }
+    if corpus_counts.get(UNKNOWN_REGION):
+        meta["corpus_recipes_unknown_region"] = corpus_counts[UNKNOWN_REGION]
     (args.data / "region_crosswalk_meta.json").write_text(
         json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"\nwrote {out}")

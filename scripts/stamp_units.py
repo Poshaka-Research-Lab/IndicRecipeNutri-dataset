@@ -29,6 +29,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from column_units import COLUMN_UNITS, DV_REFERENCE, undeclared  # noqa: E402
 from release_config import REPO_ROOT  # noqa: E402
+from nutrition_contract import DENSITY_BASIS_CONTRACT, FRACTION_BASIS_CONTRACT, WEIGHT_CONFIDENCE_CONTRACT
 
 TARGETS = [
     "data/corpus/recipes_structured.parquet",
@@ -36,6 +37,8 @@ TARGETS = [
     "data/corpus/nutrition.parquet",
     "data/corpus/nutrition_derived.parquet",
     "data/kg/kg_nodes.parquet",
+    # Optional upstream IFCT companion; the existing missing-file branch skips it.
+    "data/enrichment/recipe_ifct_fraction.parquet",
 ]
 
 
@@ -48,7 +51,13 @@ def stamp(path: Path) -> dict:
     for f in table.schema:
         decl = COLUMN_UNITS.get(f.name)
         if decl is None:
-            fields.append(f)
+            contracts = {'per100g_basis':DENSITY_BASIS_CONTRACT, 'nut_suppl_fct_basis':FRACTION_BASIS_CONTRACT}
+            if f.name in contracts:
+                metadata = dict(f.metadata or {})
+                metadata[b'value_semantics'] = json.dumps(contracts[f.name]).encode()
+                fields.append(f.with_metadata(metadata))
+            else:
+                fields.append(f)
             continue
         md = {
             b"unit": str(decl["unit"]).encode(),
@@ -57,6 +66,8 @@ def stamp(path: Path) -> dict:
         }
         if decl.get("domain"):
             md[b"domain"] = json.dumps(decl["domain"]).encode()
+        if f.name=='ing_weight_confident_frac':
+            md[b'value_semantics']=json.dumps(WEIGHT_CONFIDENCE_CONTRACT).encode()
         fields.append(f.with_metadata(md))
         stamped += 1
 
@@ -76,7 +87,13 @@ def stamp(path: Path) -> dict:
             "stamped": stamped, "rows": before_rows}
 
 
+def write_nutrition_basis():
+    (REPO_ROOT / 'docs' / 'NUTRITION_BASIS.json').write_text(
+        json.dumps({'density':DENSITY_BASIS_CONTRACT,'supplemental_fraction':FRACTION_BASIS_CONTRACT,'weight_confidence':WEIGHT_CONFIDENCE_CONTRACT}, indent=2) + '\n', encoding='utf-8', newline='\n')
+
+
 def main() -> int:
+    write_nutrition_basis()
     results, gaps = [], {}
     for rel in TARGETS:
         p = REPO_ROOT / rel

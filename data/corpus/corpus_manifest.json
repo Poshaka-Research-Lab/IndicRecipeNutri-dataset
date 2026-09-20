@@ -1,12 +1,14 @@
 {
   "corpus_build": "v15",
   "source_master": "MASTER_indian_recipes_enriched.csv",
-  "rows": 219386,
+  "rows": 219384,
   "excluded_recipe_ids": {
-    "211731": "Withdrawn at the maintainer's request. Its IngredientsList contained no ingredients at all - the scrape captured the source site's sidebar navigation, with the site owner's email address attached. One of 101 rows from SourceSite=savorytales with the same scrape defect; the other 100 carry no personal data and are retained, flagged in quarantine_list."
+    "211731": "Withdrawn at the maintainer's request. Its IngredientsList contained no ingredients at all - the scrape captured the source site's sidebar navigation, with the site owner's email address attached. One of 101 rows from SourceSite=savorytales with the same scrape defect; the other 100 carry no personal data and are retained, flagged in quarantine_list.",
+    "218869": "Withdrawn 2026-09-15. Its Ingredients_recovered text ends with an appeal to 'write mail to' a personal Gmail address, captured verbatim from the source page. The address matches PII_PATTERNS['email'] exactly; it survived only because Ingredients_recovered was in PII_EXEMPT_COLUMNS, which this change also removes. Same defect class as 211731 above: scraped page furniture carrying an individual's contact details.",
+    "222341": "Withdrawn 2026-09-15. Its Ingredients_recovered text is not an ingredient list at all but a credits block naming nine private individuals with their social handles. No pattern in PII_PATTERNS would ever match it - it is exactly the 'author names' the paper's section 3.5 claims were removed, and it was found by reading the column rather than by matching it."
   },
   "excluded_source_sites": {},
-  "columns_retained": 269,
+  "columns_retained": 270,
   "columns_withheld": [
     "Description",
     "Instructions",
@@ -289,9 +291,10 @@
     "allergen_from_instructions",
     "ingredients_romanised",
     "DV_Folate_basis",
-    "nut_suppl_fct_frac"
+    "nut_suppl_fct_frac",
+    "nut_suppl_fct_basis"
   ],
-  "rehydratable_rows": 214579,
+  "rehydratable_rows": 214577,
   "non_rehydratable_rows": 4807,
   "redactions": {
     "total": 0,

@@ -10,12 +10,12 @@ master documents none; they are not guessed.
 Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 `Enrich_Log`) are withheld from every table below — see `DATASHEET.md`.
 
-Covering **all 44 published Parquet tables**.
+Covering **all 45 published Parquet tables**.
 
 
 ## `data/corpus/allergens.parquet`
 
-3,729,562 rows x 3 columns - 2.2 MB (statistics from the first 500,000 rows)
+3,729,528 rows x 3 columns - 2.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -25,433 +25,434 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/corpus/labels.parquet`
 
-219,386 rows x 21 columns - 3.0 MB
+219,384 rows x 21 columns - 3.0 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Diet` | object |  | 219,386 | 5 | Non-Vegetarian |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Diet` | object |  | 219,384 | 5 | Non-Vegetarian |  |
 | `Diet_prior` | object |  | 315 | 3 | Vegan |  |
-| `Region` | object |  | 219,386 | 27 | North India |  |
-| `region_src` | object |  | 2,901 | 3 | default |  |
-| `region_normalised` | bool |  | 219,386 | 2 | False |  |
-| `Cuisine` | object |  | 219,386 | 53 | Indian |  |
-| `cuisine_scope` | object |  | 219,386 | 4 | indian |  |
-| `out_of_scope` | bool |  | 219,386 | 2 | False |  |
-| `Course` | object |  | 219,386 | 12 | Main Course |  |
-| `SpiceLevel` | object |  | 219,386 | 3 | medium |  |
-| `SpiceLevel_src` | object |  | 219,386 | 2 | ingredient-rule |  |
-| `Occasion` | object |  | 21,075 | 644 | eid |  |
+| `Region` | object |  | 219,347 | 27 | North India |  |
+| `region_src` | object |  | 2,921 | 4 | default |  |
+| `region_normalised` | object |  | 219,326 | 2 | False |  |
+| `Cuisine` | object |  | 219,347 | 53 | Indian |  |
+| `cuisine_scope` | object |  | 219,384 | 5 | indian |  |
+| `out_of_scope` | object |  | 219,326 | 2 | False |  |
+| `Course` | object |  | 219,347 | 12 | Main Course |  |
+| `SpiceLevel` | object |  | 219,346 | 3 | medium |  |
+| `SpiceLevel_src` | object |  | 219,346 | 3 | ingredient-rule |  |
+| `Occasion` | object |  | 21,074 | 644 | eid |  |
 | `DietaryContext` | object |  | 6,923 | 3 | jain_sattvic |  |
-| `CookingMethod` | object |  | 219,386 | 605 | fried |  |
-| `HealthGrade` | object |  | 219,386 | 5 | B |  |
-| `HealthConditions` | object |  | 211,512 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
-| `gl_bucket` | object |  | 216,353 | 3 | low |  |
-| `GlycemicLoad_numeric` | float64 | per serving | 216,353 | 15,974 | 1.79 |  |
+| `CookingMethod` | object |  | 219,326 | 605 | fried |  |
+| `HealthGrade` | object |  | 219,326 | 5 | B |  |
+| `HealthConditions` | object |  | 211,452 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
+| `gl_bucket` | object |  | 216,293 | 3 | low |  |
+| `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
 | `diet_v13` | object |  | 1,823 | 4 | flagged_weak_evidence_only |  |
-| `diet_meat_class` | object |  | 32,392 | 15 | poultry |  |
+| `diet_meat_class` | object |  | 32,394 | 15 | poultry |  |
 
 ## `data/corpus/nutrition.parquet`
 
-219,386 rows x 36 columns - 16.1 MB
+219,384 rows x 36 columns - 16.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Nut_Calories` | float64 | `kcal` per dish | 219,386 | 91,081 | 69.17 |  |
-| `Nut_Carbohydrates` | float64 | `g` per dish | 216,353 | 22,624 | 7.82 |  |
-| `Nut_Protein` | float64 | `g` per dish | 218,737 | 9,690 | 2.22 |  |
-| `Nut_Fat` | float64 | `g` per dish | 218,650 | 14,072 | 3.55 |  |
-| `Nut_SaturatedFat` | float64 | `g` per dish | 219,386 | 7,111 | 2.02 |  |
-| `Nut_TransFat` | float64 | `g` per dish | 219,386 | 390 | 0.0 |  |
-| `Nut_Cholesterol` | float64 | `mg` per dish | 219,386 | 21,251 | 9.69 |  |
-| `Nut_Sodium` | float64 | `mg` per dish | 219,386 | 97,753 | 878.0 |  |
-| `Nut_Potassium` | float64 | `mg` per dish | 219,386 | 97,923 | 143.39 |  |
-| `Nut_Fiber` | float64 | `g` per dish | 219,386 | 5,618 | 2.22 |  |
-| `Nut_Sugar` | float64 | `g` per dish | 219,386 | 12,605 | 0.44 |  |
-| `Nut_VitaminA` | float64 | `ug` per dish | 219,386 | 40,221 | 38.01 |  |
-| `Nut_VitaminC` | float64 | `mg` per dish | 219,386 | 11,663 | 2.79 |  |
-| `Nut_Calcium` | float64 | `mg` per dish | 219,386 | 48,085 | 31.65 |  |
-| `Nut_Iron` | float64 | `mg` per dish | 219,386 | 4,294 | 2.05 |  |
-| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 219,386 | 4,964 | 0.22 |  |
-| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 219,386 | 7,618 | 0.97 |  |
-| `Nut_Magnesium` | float64 | `mg` per dish | 219,386 | 32,307 | 10.6 |  |
-| `Nut_Phosphorus` | float64 | `mg` per dish | 219,386 | 60,341 | 25.08 |  |
-| `Nut_Zinc` | float64 | `mg` per dish | 219,386 | 2,431 | 0.32 |  |
-| `Nut_VitaminB6` | float64 | `mg` per dish | 219,386 | 573 | 0.05 |  |
-| `Nut_VitaminB12` | float64 | `ug` per dish | 219,386 | 1,234 | 0.0 |  |
-| `Nut_Folate` | float64 | `ug` per dish | 219,386 | 38,325 | 8.08 |  |
-| `Nut_VitaminD` | float64 | `ug` per dish | 219,386 | 1,105 | 0.0 |  |
-| `Nut_VitaminE` | float64 | `mg` per dish | 219,386 | 3,601 | 0.38 |  |
-| `Nut_VitaminK` | float64 | `ug` per dish | 219,386 | 21,760 | 14.34 |  |
-| `Nut_Thiamin` | float64 | `mg` per dish | 219,386 | 564 | 0.03 |  |
-| `Nut_Riboflavin` | float64 | `mg` per dish | 219,386 | 613 | 0.03 |  |
-| `Nut_Niacin` | float64 | `mg` per dish | 219,386 | 3,799 | 0.43 |  |
-| `Nut_Copper` | float64 | `mg` per dish | 219,386 | 916 | 0.07 |  |
-| `Nut_Selenium` | float64 | `ug` per dish | 219,386 | 10,150 | 1.75 |  |
-| `Nut_Manganese` | float64 | `mg` per dish | 219,386 | 2,993 | 0.55 |  |
-| `Nut_Tier` | object |  | 219,386 | 4 | A |  |
-| `Nut_MatchCov` | float64 | [0, 1] | 219,386 | 85 | 1.0 |  |
-| `Nut_Confidence` | float64 | [0, 1] | 219,386 | 87 | 1.0 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Nut_Calories` | float64 | `kcal` per dish | 219,326 | 91,076 | 69.17 |  |
+| `Nut_Carbohydrates` | float64 | `g` per dish | 216,293 | 22,624 | 7.82 |  |
+| `Nut_Protein` | float64 | `g` per dish | 218,677 | 9,690 | 2.22 |  |
+| `Nut_Fat` | float64 | `g` per dish | 218,590 | 14,072 | 3.55 |  |
+| `Nut_SaturatedFat` | float64 | `g` per dish | 219,326 | 7,111 | 2.02 |  |
+| `Nut_TransFat` | float64 | `g` per dish | 219,326 | 390 | 0.0 |  |
+| `Nut_Cholesterol` | float64 | `mg` per dish | 219,326 | 21,251 | 9.69 |  |
+| `Nut_Sodium` | float64 | `mg` per dish | 219,326 | 97,743 | 878.0 |  |
+| `Nut_Potassium` | float64 | `mg` per dish | 219,326 | 97,913 | 143.39 |  |
+| `Nut_Fiber` | float64 | `g` per dish | 219,326 | 5,618 | 2.22 |  |
+| `Nut_Sugar` | float64 | `g` per dish | 219,326 | 12,605 | 0.44 |  |
+| `Nut_VitaminA` | float64 | `ug` per dish | 219,326 | 40,217 | 38.01 |  |
+| `Nut_VitaminC` | float64 | `mg` per dish | 219,326 | 11,660 | 2.79 |  |
+| `Nut_Calcium` | float64 | `mg` per dish | 219,326 | 48,082 | 31.65 |  |
+| `Nut_Iron` | float64 | `mg` per dish | 219,326 | 4,294 | 2.05 |  |
+| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 219,326 | 4,964 | 0.22 |  |
+| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 219,326 | 7,618 | 0.97 |  |
+| `Nut_Magnesium` | float64 | `mg` per dish | 219,326 | 32,305 | 10.6 |  |
+| `Nut_Phosphorus` | float64 | `mg` per dish | 219,326 | 60,338 | 25.08 |  |
+| `Nut_Zinc` | float64 | `mg` per dish | 219,326 | 2,431 | 0.32 |  |
+| `Nut_VitaminB6` | float64 | `mg` per dish | 219,326 | 573 | 0.05 |  |
+| `Nut_VitaminB12` | float64 | `ug` per dish | 219,326 | 1,234 | 0.0 |  |
+| `Nut_Folate` | float64 | `ug` per dish | 219,326 | 38,320 | 8.08 |  |
+| `Nut_VitaminD` | float64 | `ug` per dish | 219,326 | 1,105 | 0.0 |  |
+| `Nut_VitaminE` | float64 | `mg` per dish | 219,326 | 3,601 | 0.38 |  |
+| `Nut_VitaminK` | float64 | `ug` per dish | 219,326 | 21,755 | 14.34 |  |
+| `Nut_Thiamin` | float64 | `mg` per dish | 219,326 | 564 | 0.03 |  |
+| `Nut_Riboflavin` | float64 | `mg` per dish | 219,326 | 613 | 0.03 |  |
+| `Nut_Niacin` | float64 | `mg` per dish | 219,326 | 3,799 | 0.43 |  |
+| `Nut_Copper` | float64 | `mg` per dish | 219,326 | 916 | 0.07 |  |
+| `Nut_Selenium` | float64 | `ug` per dish | 219,326 | 10,150 | 1.75 |  |
+| `Nut_Manganese` | float64 | `mg` per dish | 219,326 | 2,993 | 0.55 |  |
+| `Nut_Tier` | object |  | 219,326 | 4 | A |  |
+| `Nut_MatchCov` | float64 | [0, 1] | 219,326 | 85 | 1.0 |  |
+| `Nut_Confidence` | float64 | [0, 1] | 219,326 | 87 | 1.0 |  |
 
 ## `data/corpus/nutrition_derived.parquet`
 
-219,386 rows x 46 columns - 12.7 MB
+219,384 rows x 46 columns - 12.4 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `ProteinPct` | float64 | `%` per energy [0, 100] | 217,358 | 100 | 12.0 |  |
-| `CarbPct` | float64 | `%` per energy [0, 100] | 217,358 | 101 | 43.0 |  |
-| `FatPct` | float64 | `%` per energy [0, 100] | 217,358 | 101 | 44.0 |  |
-| `DV_Protein` | float64 | `%` per dish | 219,386 | 301 | 4.0 |  |
-| `DV_Fiber` | float64 | `%` per dish | 219,386 | 286 | 8.0 |  |
-| `DV_Iron` | float64 | `%` per dish | 219,386 | 251 | 11.0 |  |
-| `DV_Calcium` | float64 | `%` per dish | 219,386 | 231 | 2.0 |  |
-| `DV_VitaminC` | float64 | `%` per dish | 219,386 | 588 | 3.0 |  |
-| `DV_VitaminA` | float64 | `%` per dish | 219,386 | 489 | 4.0 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `ProteinPct` | float64 | `%` per energy [0, 100] | 217,299 | 100 | 12.0 |  |
+| `CarbPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 43.0 |  |
+| `FatPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 44.0 |  |
+| `DV_Protein` | float64 | `%` per dish | 219,326 | 301 | 4.0 |  |
+| `DV_Fiber` | float64 | `%` per dish | 219,326 | 286 | 8.0 |  |
+| `DV_Iron` | float64 | `%` per dish | 219,326 | 251 | 11.0 |  |
+| `DV_Calcium` | float64 | `%` per dish | 219,326 | 231 | 2.0 |  |
+| `DV_VitaminC` | float64 | `%` per dish | 219,326 | 588 | 3.0 |  |
+| `DV_VitaminA` | float64 | `%` per dish | 219,326 | 487 | 4.0 |  |
 | `DV_Folate` | float64 | `%` per unavailable | 0 | 0 |  | Unavailable under folate_basis_v1: total folate does not establish DFE. Historical values remain in field_history; see docs/FOLATE_BASIS_MIGRATION.md. |
-| `DV_VitaminB12` | float64 | `%` per dish | 219,386 | 682 | 0.0 |  |
-| `DV_VitaminD` | float64 | `%` per dish | 219,386 | 177 | 0.0 |  |
-| `DV_Zinc` | float64 | `%` per dish | 219,386 | 349 | 3.0 |  |
-| `atwater_relerr` | float64 |  | 211,830 | 2,452 | 0.043 |  |
-| `grams_per_serving_v3` | float64 | `g` per dish | 216,928 | 94,583 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
-| `serving_basis_v3` | object |  | 219,386 | 6 | portion |  |
-| `per100g_confident` | bool |  | 219,386 | 2 | True |  |
-| `per100g_available_v3` | bool |  | 219,386 | 2 | True |  |
-| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 178,333 | 144,761 | 63.605 |  |
-| `per100g_protein` | float64 | `g` per 100g [0, 100] | 178,095 | 24,387 | 2.041 |  |
-| `per100g_carb` | float64 | `g` per 100g [0, 100] | 177,143 | 63,934 | 7.191 |  |
-| `per100g_fat` | float64 | `g` per 100g [0, 100] | 177,981 | 36,375 | 3.264 |  |
-| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,978 | 17,456 | 1.857 |  |
-| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 178,333 | 33,140 | 0.405 |  |
-| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 178,333 | 14,606 | 2.041 |  |
-| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,978 | 128,906 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
-| `per100g_salt` | float64 | `g` per 100g [0, 100] | 155,978 | 128,906 | 2.01839 | **GRAMS** per 100 g, and exactly `per100g_sodium * 0.0025` on every row where both exist — it carries no independent information. |
-| `fsa_fat` | object |  | 168,368 | 3 | amber |  |
-| `fsa_saturates` | object |  | 155,978 | 3 | amber |  |
-| `fsa_sugars` | object |  | 168,716 | 3 | green |  |
-| `fsa_salt` | object |  | 155,978 | 3 | red |  |
-| `fsa_n_red` | float64 | [0, 4] | 168,756 | 5 | 1.0 |  |
-| `fsa_n_green` | float64 | [0, 4] | 168,756 | 5 | 1.0 |  |
-| `per100g_basis` | object |  | 219,386 | 5 | per_serving_v13 |  |
-| `per100g_density_corrected` | bool |  | 219,386 | 2 | True |  |
-| `per100g_v13` | object |  | 219,386 | 6 | recomputed |  |
-| `per100g_macrosum_implausible` | bool |  | 219,386 | 2 | False | True where protein+carb+fat exceeds 100 g per 100 g (12,110 rows, max 880). Values are NOT clipped — the upstream `grams_per_serving_v3` is wrong on these rows. |
-| `fsa_n_labelled` | float64 | [0, 4] | 168,756 | 4 | 4.0 | How many of the four FSA lights are set. The denominator for `fsa_n_red` / `fsa_n_green`, which is not 4 everywhere. |
-| `fsa_fat_pre_portion` | object |  | 168,318 | 3 | amber |  |
-| `fsa_saturates_pre_portion` | object |  | 155,978 | 3 | amber |  |
-| `fsa_sugars_pre_portion` | object |  | 168,670 | 3 | green |  |
-| `fsa_salt_pre_portion` | object |  | 155,978 | 3 | red |  |
-| `fsa_portion_g` | float64 | `g` per serving | 158,867 | 10,036 | 108.8 |  |
-| `fsa_portion_override_applied` | bool |  | 219,386 | 2 | False |  |
-| `DV_Folate_basis` | object |  | 219,386 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
+| `DV_VitaminB12` | float64 | `%` per dish | 219,326 | 682 | 0.0 |  |
+| `DV_VitaminD` | float64 | `%` per dish | 219,326 | 177 | 0.0 |  |
+| `DV_Zinc` | float64 | `%` per dish | 219,326 | 349 | 3.0 |  |
+| `atwater_relerr` | float64 |  | 211,771 | 2,452 | 0.043 |  |
+| `grams_per_serving_v3` | float64 | `g` per dish | 216,868 | 94,570 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
+| `serving_basis_v3` | object |  | 219,384 | 6 | portion |  |
+| `per100g_confident` | bool |  | 219,384 | 2 | True |  |
+| `per100g_available_v3` | bool |  | 219,384 | 2 | True |  |
+| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 158,966 | 131,225 | 63.605 |  |
+| `per100g_protein` | float64 | `g` per 100g [0, 100] | 158,667 | 24,226 | 2.041 |  |
+| `per100g_carb` | float64 | `g` per 100g [0, 100] | 156,979 | 60,669 | 7.191 |  |
+| `per100g_fat` | float64 | `g` per 100g [0, 100] | 158,423 | 35,002 | 3.264 |  |
+| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,971 | 17,456 | 1.857 |  |
+| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 157,324 | 30,629 | 0.405 |  |
+| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 158,335 | 14,190 | 2.041 |  |
+| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,971 | 128,900 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
+| `per100g_salt` | float64 | `g` per 100g [0, 100] | 155,971 | 128,900 | 2.01839 | **GRAMS** per 100 g, and exactly `per100g_sodium * 0.0025` on every row where both exist — it carries no independent information. |
+| `fsa_fat` | object |  | 157,401 | 3 | amber |  |
+| `fsa_saturates` | object |  | 155,971 | 3 | amber |  |
+| `fsa_sugars` | object |  | 156,795 | 3 | green |  |
+| `fsa_salt` | object |  | 155,971 | 3 | red |  |
+| `fsa_n_red` | float64 | [0, 4] | 155,971 | 5 | 1.0 |  |
+| `fsa_n_green` | float64 | [0, 4] | 155,971 | 5 | 1.0 |  |
+| `per100g_basis` | object |  | 219,384 | 6 | per_serving_v13 |  |
+| `per100g_density_corrected` | object |  | 219,327 | 2 | True |  |
+| `per100g_v13` | object |  | 219,327 | 7 | recomputed |  |
+| `per100g_macrosum_implausible` | object |  | 219,326 | 2 | False | True where protein+carb+fat exceeds 100 g per 100 g (12,110 rows, max 880). Values are NOT clipped — the upstream `grams_per_serving_v3` is wrong on these rows. |
+| `fsa_n_labelled` | float64 | [0, 4] | 156,029 | 3 | 4.0 | How many of the four FSA lights are set. The denominator for `fsa_n_red` / `fsa_n_green`, which is not 4 everywhere. |
+| `fsa_fat_pre_portion` | object |  | 168,311 | 3 | amber |  |
+| `fsa_saturates_pre_portion` | object |  | 155,971 | 3 | amber |  |
+| `fsa_sugars_pre_portion` | object |  | 168,663 | 3 | green |  |
+| `fsa_salt_pre_portion` | object |  | 155,971 | 3 | red |  |
+| `fsa_portion_g` | float64 | `g` per serving | 156,512 | 10,036 | 108.8 |  |
+| `fsa_portion_override_applied` | object |  | 219,326 | 2 | False |  |
+| `DV_Folate_basis` | object |  | 219,384 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
 
 ## `data/corpus/quality.parquet`
 
-219,386 rows x 24 columns - 2.9 MB
+219,384 rows x 25 columns - 2.9 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `has_instructions` | bool |  | 219,386 | 2 | True |  |
-| `has_ingredients` | bool |  | 219,386 | 2 | True |  |
-| `has_rating` | bool |  | 219,386 | 2 | True |  |
-| `diet_contradicts_ingredients` | bool |  | 219,386 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
-| `contains_pork` | bool |  | 219,386 | 2 | False |  |
-| `contains_beef` | bool |  | 219,386 | 2 | False |  |
-| `contains_poultry` | bool |  | 219,386 | 2 | True |  |
-| `contains_fish` | bool |  | 219,386 | 2 | False |  |
-| `contains_alcohol` | bool |  | 219,386 | 2 | False |  |
-| `contains_gelatin` | bool |  | 219,386 | 2 | False |  |
-| `sulphites_possible` | bool |  | 219,386 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 14,066 | 18 | raisin |  |
-| `nonveg_corrected` | bool |  | 219,386 | 2 | False |  |
-| `mojibake_fixed` | bool |  | 219,386 | 2 | False |  |
-| `qty_source` | object |  | 219,386 | 3 | none |  |
-| `ing_weight_confident_frac` | float64 | [0, 1] | 219,386 | 371 | 0.0 |  |
-| `nut_indb_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Deprecated compatibility alias of nut_suppl_fct_frac; identical values in quality.parquet. Does not establish Indian composition coverage. |
-| `nut_suppl_fct_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
-| `confident_coverage` | float64 | [0, 1] | 219,386 | 246 | 0.0 |  |
-| `dup_family_id` | float64 |  | 44,283 | 13,054 | 0.0 |  |
-| `dup_family_size` | int64 |  | 219,386 | 62 | 7 |  |
-| `is_family_primary` | bool |  | 219,386 | 2 | True |  |
-| `family_filled` | object |  | 24,156 | 248 | Servings_num\|RatingAverage\|RatingCount\|T |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `has_instructions` | bool |  | 219,384 | 2 | True |  |
+| `has_ingredients` | bool |  | 219,384 | 2 | True |  |
+| `has_rating` | bool |  | 219,384 | 2 | True |  |
+| `diet_contradicts_ingredients` | bool |  | 219,384 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
+| `contains_pork` | bool |  | 219,384 | 2 | False |  |
+| `contains_beef` | bool |  | 219,384 | 2 | False |  |
+| `contains_poultry` | bool |  | 219,384 | 2 | True |  |
+| `contains_fish` | bool |  | 219,384 | 2 | False |  |
+| `contains_alcohol` | bool |  | 219,384 | 2 | False |  |
+| `contains_gelatin` | bool |  | 219,384 | 2 | False |  |
+| `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
+| `sulphites_possible_src` | object |  | 14,064 | 18 | raisin |  |
+| `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
+| `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
+| `qty_source` | object |  | 219,384 | 3 | none |  |
+| `ing_weight_confident_frac` | float64 | [0, 1] | 218,653 | 350 | 0.0 |  |
+| `nut_indb_frac` | float64 | [0, 1] | 218,044 | 9,955 | 0.5818 | Deprecated compatibility alias of nut_suppl_fct_frac; identical values in quality.parquet. Does not establish Indian composition coverage. |
+| `nut_suppl_fct_frac` | float64 | [0, 1] | 218,044 | 9,955 | 0.5818 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
+| `nut_suppl_fct_basis` | object |  | 219,384 | 5 | partial_computed_ingredient_energy |  |
+| `confident_coverage` | float64 | [0, 1] | 219,384 | 246 | 0.0 |  |
+| `dup_family_id` | float64 |  | 44,289 | 13,057 | 0.0 |  |
+| `dup_family_size` | int64 |  | 219,384 | 62 | 7 |  |
+| `is_family_primary` | bool |  | 219,384 | 2 | True |  |
+| `family_filled` | object |  | 24,149 | 248 | Servings_num\|RatingAverage\|RatingCount\|T |  |
 
 ## `data/corpus/recipes.parquet`
 
-219,386 rows x 74 columns - 46.9 MB
+219,384 rows x 74 columns - 47.0 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `RecipeName` | object |  | 219,386 | 198,467 | Mutton Nihari |  |
-| `Title_normalized` | object |  | 219,386 | 198,769 | Mutton Nihari |  |
-| `URL` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
-| `SourceSite` | object |  | 219,386 | 378 | 3a2m_indian |  |
-| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
-| `Lang_base` | object |  | 217,956 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `RecipeName` | object |  | 219,384 | 198,462 | Mutton Nihari |  |
+| `Title_normalized` | object |  | 219,384 | 198,764 | Mutton Nihari |  |
+| `URL` | object |  | 219,384 | 219,384 | https://3a2m.dataset/recipe/23b5b76af243 |  |
+| `SourceSite` | object |  | 219,384 | 378 | 3a2m_indian |  |
+| `Lang` | object |  | 217,954 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `Lang_base` | object |  | 217,954 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
 | `Servings` | object |  | 157,565 | 1,778 | 2 |  |
-| `Servings_num` | float64 |  | 166,082 | 216 | 4.0 |  |
-| `PrepTimeMins` | float64 | `min` | 154,075 | 232 | 5.0 |  |
-| `CookTimeMins` | float64 | `min` | 130,871 | 228 | 120.0 |  |
-| `TotalTimeMins` | float64 | `min` | 159,037 | 686 | 125.0 |  |
-| `StepCount` | float64 |  | 207,172 | 187 | 13.0 |  |
-| `Difficulty` | object |  | 219,360 | 3 | hard |  |
-| `RatingAverage` | float64 | [0, 5] | 117,585 | 746 | 0.0 |  |
-| `RatingCount` | float64 |  | 90,512 | 5,492 | 0.0 |  |
-| `IngredientsList` | object |  | 219,386 | 211,672 | ["mutton", "ghee", "onions", "ginger pas |  |
-| `Description_Source` | object |  | 219,386 | 2 | generated |  |
-| `Ingredients_Source` | object |  | 218,468 | 8 | scraped |  |
-| `source_licence` | object |  | 219,386 | 5 | CC BY-NC-SA 4.0 |  |
-| `source_terms_url` | object |  | 219,386 | 384 | https://arxiv.org/abs/2303.16778 |  |
-| `Split_v2` | object |  | 219,386 | 3 | train | ⚠ **Leaks.** Groups on `Title_normalized` without case-folding and ignores `dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is inflated. Use `Split_v3`. |
-| `Split_v1_leaky` | object |  | 219,386 | 3 | train |  |
-| `gluten_confidence` | object |  | 219,386 | 3 | possible |  |
-| `gluten_declared` | bool |  | 219,386 | 2 | True |  |
-| `badlist_empty` | bool |  | 219,386 | 2 | False |  |
-| `badlist_nav` | bool |  | 219,386 | 2 | False |  |
-| `badlist_meta` | bool |  | 219,386 | 2 | False |  |
-| `badlist_instruction` | bool |  | 219,386 | 2 | False |  |
-| `badlist_prose` | bool |  | 219,386 | 2 | False |  |
-| `badlist_single` | bool |  | 219,386 | 2 | False |  |
-| `badlist_n_items` | float64 |  | 219,386 | 52 | 11.0 |  |
-| `badlist_hard` | bool |  | 219,386 | 2 | False |  |
-| `badlist_any` | bool |  | 219,386 | 2 | False |  |
-| `allergen_tier` | object |  | 196,518 | 9,502 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
-| `review_m1m2` | bool |  | 219,386 | 2 | False |  |
-| `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
-| `ingredient_src` | object |  | 3,315 | 2 | title_evidence |  |
+| `Servings_num` | float64 |  | 166,075 | 216 | 4.0 |  |
+| `PrepTimeMins` | float64 | `min` | 154,069 | 232 | 5.0 |  |
+| `CookTimeMins` | float64 | `min` | 130,867 | 228 | 120.0 |  |
+| `TotalTimeMins` | float64 | `min` | 159,031 | 686 | 125.0 |  |
+| `StepCount` | float64 |  | 207,170 | 187 | 13.0 |  |
+| `Difficulty` | object |  | 219,358 | 3 | hard |  |
+| `RatingAverage` | float64 | [0, 5] | 117,579 | 746 | 0.0 |  |
+| `RatingCount` | float64 |  | 90,506 | 5,492 | 0.0 |  |
+| `IngredientsList` | object |  | 219,384 | 211,670 | ["mutton", "ghee", "onions", "ginger pas |  |
+| `Description_Source` | object |  | 219,384 | 3 | generated |  |
+| `Ingredients_Source` | object |  | 218,466 | 9 | scraped |  |
+| `source_licence` | object |  | 219,384 | 5 | CC BY-NC-SA 4.0 |  |
+| `source_terms_url` | object |  | 219,384 | 384 | https://arxiv.org/abs/2303.16778 |  |
+| `Split_v2` | object |  | 219,384 | 3 | train | ⚠ **Leaks.** Groups on `Title_normalized` without case-folding and ignores `dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is inflated. Use `Split_v3`. |
+| `Split_v1_leaky` | object |  | 219,384 | 3 | train |  |
+| `gluten_confidence` | object |  | 219,384 | 3 | possible |  |
+| `gluten_declared` | bool |  | 219,384 | 2 | True |  |
+| `badlist_empty` | bool |  | 219,384 | 2 | False |  |
+| `badlist_nav` | bool |  | 219,384 | 2 | False |  |
+| `badlist_meta` | bool |  | 219,384 | 2 | False |  |
+| `badlist_instruction` | bool |  | 219,384 | 2 | False |  |
+| `badlist_prose` | bool |  | 219,384 | 2 | False |  |
+| `badlist_single` | bool |  | 219,384 | 2 | False |  |
+| `badlist_n_items` | float64 |  | 219,384 | 52 | 11.0 |  |
+| `badlist_hard` | bool |  | 219,384 | 2 | False |  |
+| `badlist_any` | bool |  | 219,384 | 2 | False |  |
+| `allergen_tier` | object |  | 196,509 | 9,494 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `review_m1m2` | object |  | 219,327 | 2 | False |  |
+| `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
+| `ingredient_src` | object |  | 3,371 | 5 | title_evidence |  |
 | `dish_type` | object |  | 413 | 57 | mango lassi |  |
 | `dish_type_agreement` | float64 | [0, 1] | 413 | 7 | 0.5 |  |
 | `dish_type_src` | object |  | 413 | 1 | corpus_neighbours |  |
-| `is_reference_derived` | bool |  | 219,386 | 2 | True |  |
+| `is_reference_derived` | bool |  | 219,384 | 2 | True |  |
 | `upstream_dataset` | object |  | 9,384 | 4 | text_corpora/3A2M |  |
-| `has_real_url` | bool |  | 219,386 | 2 | False |  |
-| `RecipeName_prev7` | object |  | 219,386 | 198,483 | Mutton Nihari |  |
-| `title_repaired_v7` | bool |  | 219,386 | 2 | False |  |
-| `title_breadcrumb` | object |  | 700 | 12 | Home |  |
-| `title_shift_repaired` | bool |  | 219,386 | 2 | False |  |
+| `has_real_url` | bool |  | 219,384 | 2 | False |  |
+| `RecipeName_prev7` | object |  | 219,327 | 198,433 | Mutton Nihari |  |
+| `title_repaired_v7` | object |  | 219,327 | 2 | False |  |
+| `title_breadcrumb` | object |  | 701 | 13 | Owner descriptive repair: upstream What' |  |
+| `title_shift_repaired` | object |  | 219,327 | 2 | False |  |
 | `title_shift_note` | object |  | 702 | 61 | body agrees with the title; left alone |  |
-| `title_is_placeholder` | bool |  | 219,386 | 2 | False |  |
-| `title_placeholder_kind` | object |  | 2,946 | 3 | cms_default |  |
-| `title_unsupported_by_body` | bool |  | 219,386 | 2 | False |  |
-| `is_recipe` | bool |  | 219,386 | 2 | True |  |
+| `title_is_placeholder` | bool |  | 219,384 | 2 | False |  |
+| `title_placeholder_kind` | object |  | 2,945 | 3 | cms_default |  |
+| `title_unsupported_by_body` | bool |  | 219,384 | 2 | False |  |
+| `is_recipe` | bool |  | 219,384 | 2 | True |  |
 | `nonrecipe_spared_reason` | object |  | 38 | 4 | recheck: sprouting fenugreek over three  |  |
-| `atwater_recomputed` | bool |  | 219,386 | 2 | False | True where `Nut_Calories` actually differs from `Nut_Calories_orig` (3,626 rows). |
-| `gluten_declared_pre_r6` | bool |  | 219,386 | 2 | True |  |
-| `gluten_confidence_pre_r6` | object |  | 219,386 | 3 | possible |  |
-| `Diet_pre_r6` | object |  | 219,386 | 4 | Non-Vegetarian |  |
-| `diet_meat_class_pre_r7` | object |  | 30,808 | 15 | poultry |  |
-| `gl_bucket_pre_r7` | object |  | 216,353 | 3 | low |  |
-| `Split_v3` | object |  | 219,386 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
-| `nutrient_subcomponent_violation` | bool |  | 219,386 | 2 | False | True where saturated fat exceeds total fat, or sugar or fibre exceeds carbohydrate (2,570 rows). Left unclipped: which side is wrong is not decidable here. |
-| `ProteinPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 100 | 12.0 |  |
-| `CarbPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 101 | 43.0 |  |
-| `FatPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 101 | 44.0 |  |
-| `macro_pct_is_default` | bool |  | 219,386 | 2 | False |  |
-| `macro_pct_unfounded` | bool |  | 219,386 | 2 | False | True where the 13/40/44 macro-percent trio appeared on a row with no macros to compute it from. Those Pct values are nulled. |
-| `ingredients_unreadable_items` | int64 |  | 219,386 | 34 | 0 |  |
-| `ingredient_items_total` | int64 |  | 219,386 | 52 | 11 |  |
-| `allergen_scan_incomplete` | bool |  | 219,386 | 2 | False |  |
-| `allergen_tier_pre_v10` | object |  | 196,236 | 8,444 | gluten:inherited;milk:derived |  |
+| `atwater_recomputed` | bool |  | 219,384 | 2 | False | True where `Nut_Calories` actually differs from `Nut_Calories_orig` (3,626 rows). |
+| `gluten_declared_pre_r6` | object |  | 219,326 | 2 | True |  |
+| `gluten_confidence_pre_r6` | object |  | 219,326 | 3 | possible |  |
+| `Diet_pre_r6` | object |  | 219,384 | 5 | Non-Vegetarian |  |
+| `diet_meat_class_pre_r7` | object |  | 30,807 | 15 | poultry |  |
+| `gl_bucket_pre_r7` | object |  | 216,294 | 3 | low |  |
+| `Split_v3` | object |  | 219,384 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
+| `nutrient_subcomponent_violation` | object |  | 219,326 | 2 | False | True where saturated fat exceeds total fat, or sugar or fibre exceeds carbohydrate (2,570 rows). Left unclipped: which side is wrong is not decidable here. |
+| `ProteinPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 100 | 12.0 |  |
+| `CarbPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 101 | 43.0 |  |
+| `FatPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 101 | 44.0 |  |
+| `macro_pct_is_default` | object |  | 219,326 | 2 | False |  |
+| `macro_pct_unfounded` | object |  | 219,326 | 2 | False | True where the 13/40/44 macro-percent trio appeared on a row with no macros to compute it from. Those Pct values are nulled. |
+| `ingredients_unreadable_items` | int64 |  | 219,384 | 34 | 0 |  |
+| `ingredient_items_total` | int64 |  | 219,384 | 52 | 11 |  |
+| `allergen_scan_incomplete` | bool |  | 219,384 | 2 | False |  |
+| `allergen_tier_pre_v10` | object |  | 196,180 | 8,443 | gluten:inherited;milk:derived |  |
 | `IngredientsList_src_script` | object |  | 714 | 714 | ["1kg भूरा onion", "300gramginger", "400 |  |
 | `allergen_from_instructions` | object |  | 290 | 3 | asafoetida |  |
 | `ingredients_romanised` | object |  | 714 | 1 | translated |  |
 
 ## `data/corpus/recipes_structured.parquet`
 
-219,386 rows x 269 columns - 103.6 MB
+219,384 rows x 270 columns - 103.4 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `RecipeName` | object |  | 219,386 | 198,467 | Mutton Nihari |  |
-| `URL` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
-| `SourceSite` | object |  | 219,386 | 378 | 3a2m_indian |  |
-| `Course` | object |  | 219,386 | 12 | Main Course |  |
-| `Cuisine` | object |  | 219,386 | 53 | Indian |  |
+| `RecipeName` | object |  | 219,384 | 198,462 | Mutton Nihari |  |
+| `URL` | object |  | 219,384 | 219,384 | https://3a2m.dataset/recipe/23b5b76af243 |  |
+| `SourceSite` | object |  | 219,384 | 378 | 3a2m_indian |  |
+| `Course` | object |  | 219,347 | 12 | Main Course |  |
+| `Cuisine` | object |  | 219,347 | 53 | Indian |  |
 | `Servings` | object |  | 157,565 | 1,778 | 2 |  |
-| `PrepTimeMins` | float64 | `min` | 154,075 | 232 | 5.0 |  |
-| `CookTimeMins` | float64 | `min` | 130,871 | 228 | 120.0 |  |
-| `TotalTimeMins` | float64 | `min` | 159,037 | 686 | 125.0 |  |
-| `IngredientsList` | object |  | 219,386 | 211,672 | ["mutton", "ghee", "onions", "ginger pas |  |
-| `RatingAverage` | float64 | [0, 5] | 117,585 | 746 | 0.0 |  |
-| `RatingCount` | float64 |  | 90,512 | 5,492 | 0.0 |  |
-| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
-| `Nut_Calories` | float64 | `kcal` per dish | 219,386 | 91,081 | 69.17 |  |
-| `Nut_Carbohydrates` | float64 | `g` per dish | 216,353 | 22,624 | 7.82 |  |
-| `Nut_Protein` | float64 | `g` per dish | 218,737 | 9,690 | 2.22 |  |
-| `Nut_Fat` | float64 | `g` per dish | 218,650 | 14,072 | 3.55 |  |
-| `Nut_SaturatedFat` | float64 | `g` per dish | 219,386 | 7,111 | 2.02 |  |
-| `Nut_TransFat` | float64 | `g` per dish | 219,386 | 390 | 0.0 |  |
-| `Nut_Cholesterol` | float64 | `mg` per dish | 219,386 | 21,251 | 9.69 |  |
-| `Nut_Sodium` | float64 | `mg` per dish | 219,386 | 97,753 | 878.0 |  |
-| `Nut_Potassium` | float64 | `mg` per dish | 219,386 | 97,923 | 143.39 |  |
-| `Nut_Fiber` | float64 | `g` per dish | 219,386 | 5,618 | 2.22 |  |
-| `Nut_Sugar` | float64 | `g` per dish | 219,386 | 12,605 | 0.44 |  |
-| `Nut_VitaminA` | float64 | `ug` per dish | 219,386 | 40,221 | 38.01 |  |
-| `Nut_VitaminC` | float64 | `mg` per dish | 219,386 | 11,663 | 2.79 |  |
-| `Nut_Calcium` | float64 | `mg` per dish | 219,386 | 48,085 | 31.65 |  |
-| `Nut_Iron` | float64 | `mg` per dish | 219,386 | 4,294 | 2.05 |  |
-| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 219,386 | 4,964 | 0.22 |  |
-| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 219,386 | 7,618 | 0.97 |  |
-| `Nut_Magnesium` | float64 | `mg` per dish | 219,386 | 32,307 | 10.6 |  |
-| `Nut_Phosphorus` | float64 | `mg` per dish | 219,386 | 60,341 | 25.08 |  |
-| `Nut_Zinc` | float64 | `mg` per dish | 219,386 | 2,431 | 0.32 |  |
-| `Nut_VitaminB6` | float64 | `mg` per dish | 219,386 | 573 | 0.05 |  |
-| `Nut_VitaminB12` | float64 | `ug` per dish | 219,386 | 1,234 | 0.0 |  |
-| `Nut_Folate` | float64 | `ug` per dish | 219,386 | 38,325 | 8.08 |  |
-| `Nut_VitaminD` | float64 | `ug` per dish | 219,386 | 1,105 | 0.0 |  |
-| `Nut_VitaminE` | float64 | `mg` per dish | 219,386 | 3,601 | 0.38 |  |
-| `Nut_VitaminK` | float64 | `ug` per dish | 219,386 | 21,760 | 14.34 |  |
-| `Nut_Thiamin` | float64 | `mg` per dish | 219,386 | 564 | 0.03 |  |
-| `Nut_Riboflavin` | float64 | `mg` per dish | 219,386 | 613 | 0.03 |  |
-| `Nut_Niacin` | float64 | `mg` per dish | 219,386 | 3,799 | 0.43 |  |
-| `Nut_Copper` | float64 | `mg` per dish | 219,386 | 916 | 0.07 |  |
-| `Nut_Selenium` | float64 | `ug` per dish | 219,386 | 10,150 | 1.75 |  |
-| `Nut_Manganese` | float64 | `mg` per dish | 219,386 | 2,993 | 0.55 |  |
-| `Nut_Tier` | object |  | 219,386 | 4 | A |  |
-| `Nut_MatchCov` | float64 | [0, 1] | 219,386 | 85 | 1.0 |  |
-| `Nut_Confidence` | float64 | [0, 1] | 219,386 | 87 | 1.0 |  |
-| `RecipeName_orig` | object |  | 219,386 | 199,002 | Mutton Nihari |  |
-| `Cuisine_orig` | object |  | 209,890 | 53 | Indian |  |
-| `Description_Source` | object |  | 219,386 | 2 | generated |  |
-| `Split_v1_leaky` | object |  | 219,386 | 3 | train |  |
-| `CookingMethod` | object |  | 219,386 | 605 | fried |  |
-| `SpiceLevel` | object |  | 219,386 | 3 | medium |  |
-| `StepCount` | float64 |  | 207,172 | 187 | 13.0 |  |
-| `Difficulty` | object |  | 219,360 | 3 | hard |  |
-| `HealthConditions` | object |  | 211,512 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
-| `ProteinPct` | float64 | `%` per energy [0, 100] | 217,358 | 100 | 12.0 |  |
-| `CarbPct` | float64 | `%` per energy [0, 100] | 217,358 | 101 | 43.0 |  |
-| `FatPct` | float64 | `%` per energy [0, 100] | 217,358 | 101 | 44.0 |  |
-| `Occasion` | object |  | 21,075 | 644 | eid |  |
+| `PrepTimeMins` | float64 | `min` | 154,069 | 232 | 5.0 |  |
+| `CookTimeMins` | float64 | `min` | 130,867 | 228 | 120.0 |  |
+| `TotalTimeMins` | float64 | `min` | 159,031 | 686 | 125.0 |  |
+| `IngredientsList` | object |  | 219,384 | 211,670 | ["mutton", "ghee", "onions", "ginger pas |  |
+| `RatingAverage` | float64 | [0, 5] | 117,579 | 746 | 0.0 |  |
+| `RatingCount` | float64 |  | 90,506 | 5,492 | 0.0 |  |
+| `Lang` | object |  | 217,954 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `Nut_Calories` | float64 | `kcal` per dish | 219,326 | 91,076 | 69.17 |  |
+| `Nut_Carbohydrates` | float64 | `g` per dish | 216,293 | 22,624 | 7.82 |  |
+| `Nut_Protein` | float64 | `g` per dish | 218,677 | 9,690 | 2.22 |  |
+| `Nut_Fat` | float64 | `g` per dish | 218,590 | 14,072 | 3.55 |  |
+| `Nut_SaturatedFat` | float64 | `g` per dish | 219,326 | 7,111 | 2.02 |  |
+| `Nut_TransFat` | float64 | `g` per dish | 219,326 | 390 | 0.0 |  |
+| `Nut_Cholesterol` | float64 | `mg` per dish | 219,326 | 21,251 | 9.69 |  |
+| `Nut_Sodium` | float64 | `mg` per dish | 219,326 | 97,743 | 878.0 |  |
+| `Nut_Potassium` | float64 | `mg` per dish | 219,326 | 97,913 | 143.39 |  |
+| `Nut_Fiber` | float64 | `g` per dish | 219,326 | 5,618 | 2.22 |  |
+| `Nut_Sugar` | float64 | `g` per dish | 219,326 | 12,605 | 0.44 |  |
+| `Nut_VitaminA` | float64 | `ug` per dish | 219,326 | 40,217 | 38.01 |  |
+| `Nut_VitaminC` | float64 | `mg` per dish | 219,326 | 11,660 | 2.79 |  |
+| `Nut_Calcium` | float64 | `mg` per dish | 219,326 | 48,082 | 31.65 |  |
+| `Nut_Iron` | float64 | `mg` per dish | 219,326 | 4,294 | 2.05 |  |
+| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 219,326 | 4,964 | 0.22 |  |
+| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 219,326 | 7,618 | 0.97 |  |
+| `Nut_Magnesium` | float64 | `mg` per dish | 219,326 | 32,305 | 10.6 |  |
+| `Nut_Phosphorus` | float64 | `mg` per dish | 219,326 | 60,338 | 25.08 |  |
+| `Nut_Zinc` | float64 | `mg` per dish | 219,326 | 2,431 | 0.32 |  |
+| `Nut_VitaminB6` | float64 | `mg` per dish | 219,326 | 573 | 0.05 |  |
+| `Nut_VitaminB12` | float64 | `ug` per dish | 219,326 | 1,234 | 0.0 |  |
+| `Nut_Folate` | float64 | `ug` per dish | 219,326 | 38,320 | 8.08 |  |
+| `Nut_VitaminD` | float64 | `ug` per dish | 219,326 | 1,105 | 0.0 |  |
+| `Nut_VitaminE` | float64 | `mg` per dish | 219,326 | 3,601 | 0.38 |  |
+| `Nut_VitaminK` | float64 | `ug` per dish | 219,326 | 21,755 | 14.34 |  |
+| `Nut_Thiamin` | float64 | `mg` per dish | 219,326 | 564 | 0.03 |  |
+| `Nut_Riboflavin` | float64 | `mg` per dish | 219,326 | 613 | 0.03 |  |
+| `Nut_Niacin` | float64 | `mg` per dish | 219,326 | 3,799 | 0.43 |  |
+| `Nut_Copper` | float64 | `mg` per dish | 219,326 | 916 | 0.07 |  |
+| `Nut_Selenium` | float64 | `ug` per dish | 219,326 | 10,150 | 1.75 |  |
+| `Nut_Manganese` | float64 | `mg` per dish | 219,326 | 2,993 | 0.55 |  |
+| `Nut_Tier` | object |  | 219,326 | 4 | A |  |
+| `Nut_MatchCov` | float64 | [0, 1] | 219,326 | 85 | 1.0 |  |
+| `Nut_Confidence` | float64 | [0, 1] | 219,326 | 87 | 1.0 |  |
+| `RecipeName_orig` | object |  | 219,327 | 198,952 | Mutton Nihari |  |
+| `Cuisine_orig` | object |  | 209,832 | 53 | Indian |  |
+| `Description_Source` | object |  | 219,384 | 3 | generated |  |
+| `Split_v1_leaky` | object |  | 219,384 | 3 | train |  |
+| `CookingMethod` | object |  | 219,326 | 605 | fried |  |
+| `SpiceLevel` | object |  | 219,346 | 3 | medium |  |
+| `StepCount` | float64 |  | 207,170 | 187 | 13.0 |  |
+| `Difficulty` | object |  | 219,358 | 3 | hard |  |
+| `HealthConditions` | object |  | 211,452 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
+| `ProteinPct` | float64 | `%` per energy [0, 100] | 217,299 | 100 | 12.0 |  |
+| `CarbPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 43.0 |  |
+| `FatPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 44.0 |  |
+| `Occasion` | object |  | 21,074 | 644 | eid |  |
 | `DietaryContext` | object |  | 6,923 | 3 | jain_sattvic |  |
-| `DV_Protein` | float64 | `%` per dish | 219,386 | 301 | 4.0 |  |
-| `DV_Fiber` | float64 | `%` per dish | 219,386 | 286 | 8.0 |  |
-| `DV_Iron` | float64 | `%` per dish | 219,386 | 251 | 11.0 |  |
-| `DV_Calcium` | float64 | `%` per dish | 219,386 | 231 | 2.0 |  |
-| `DV_VitaminC` | float64 | `%` per dish | 219,386 | 588 | 3.0 |  |
-| `DV_VitaminA` | float64 | `%` per dish | 219,386 | 489 | 4.0 |  |
+| `DV_Protein` | float64 | `%` per dish | 219,326 | 301 | 4.0 |  |
+| `DV_Fiber` | float64 | `%` per dish | 219,326 | 286 | 8.0 |  |
+| `DV_Iron` | float64 | `%` per dish | 219,326 | 251 | 11.0 |  |
+| `DV_Calcium` | float64 | `%` per dish | 219,326 | 231 | 2.0 |  |
+| `DV_VitaminC` | float64 | `%` per dish | 219,326 | 588 | 3.0 |  |
+| `DV_VitaminA` | float64 | `%` per dish | 219,326 | 487 | 4.0 |  |
 | `DV_Folate` | float64 | `%` per unavailable | 0 | 0 |  | Unavailable under folate_basis_v1: total folate does not establish DFE. Historical values remain in field_history; see docs/FOLATE_BASIS_MIGRATION.md. |
-| `DV_VitaminB12` | float64 | `%` per dish | 219,386 | 682 | 0.0 |  |
-| `DV_VitaminD` | float64 | `%` per dish | 219,386 | 177 | 0.0 |  |
-| `DV_Zinc` | float64 | `%` per dish | 219,386 | 349 | 3.0 |  |
-| `Ingredients_Source` | object |  | 218,468 | 8 | scraped |  |
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Title_normalized` | object |  | 219,386 | 198,769 | Mutton Nihari |  |
-| `Diet` | object |  | 219,386 | 5 | Non-Vegetarian |  |
-| `nonveg_corrected` | bool |  | 219,386 | 2 | False |  |
-| `HealthGrade` | object |  | 219,386 | 5 | B |  |
-| `gl_bucket` | object |  | 216,353 | 3 | low |  |
-| `GlycemicLoad_numeric` | float64 | per serving | 216,353 | 15,974 | 1.79 |  |
-| `Nut_Calories_orig` | float64 | `kcal` per dish | 216,713 | 91,045 | 69.17 |  |
-| `atwater_relerr` | float64 |  | 211,830 | 2,452 | 0.043 |  |
-| `atwater_fixed` | bool |  | 219,386 | 2 | False | ⚠ **Misnamed:** flags rows the Atwater check IDENTIFIED, not rows it repaired — `Nut_Calories == Nut_Calories_orig` on all of them. `atwater_recomputed` is the column that means what this one says. |
-| `Region_orig` | object |  | 216,458 | 28 | Mughlai (North India) |  |
-| `Region` | object |  | 219,386 | 27 | North India |  |
-| `region_corrected` | bool |  | 219,386 | 2 | False |  |
-| `cuisine_scope` | object |  | 219,386 | 4 | indian |  |
-| `out_of_scope` | bool |  | 219,386 | 2 | False |  |
-| `confident_coverage` | float64 | [0, 1] | 219,386 | 246 | 0.0 |  |
-| `grams_per_serving_v3` | float64 | `g` per dish | 216,928 | 94,583 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
-| `serving_basis_v3` | object |  | 219,386 | 6 | portion |  |
-| `per100g_confident` | bool |  | 219,386 | 2 | True |  |
-| `per100g_available_v3` | bool |  | 219,386 | 2 | True |  |
-| `energy_capped_v3` | bool |  | 219,386 | 2 | False |  |
-| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 178,333 | 144,761 | 63.605 |  |
-| `per100g_protein` | float64 | `g` per 100g [0, 100] | 178,095 | 24,387 | 2.041 |  |
-| `per100g_carb` | float64 | `g` per 100g [0, 100] | 177,143 | 63,934 | 7.191 |  |
-| `per100g_fat` | float64 | `g` per 100g [0, 100] | 177,981 | 36,375 | 3.264 |  |
-| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,978 | 17,456 | 1.857 |  |
-| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 178,333 | 33,140 | 0.405 |  |
-| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 178,333 | 14,606 | 2.041 |  |
-| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,978 | 128,906 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
-| `per100g_salt` | float64 | `g` per 100g [0, 100] | 155,978 | 128,906 | 2.01839 | **GRAMS** per 100 g, and exactly `per100g_sodium * 0.0025` on every row where both exist — it carries no independent information. |
-| `fsa_fat` | object |  | 168,368 | 3 | amber |  |
-| `fsa_saturates` | object |  | 155,978 | 3 | amber |  |
-| `fsa_sugars` | object |  | 168,716 | 3 | green |  |
-| `fsa_salt` | object |  | 155,978 | 3 | red |  |
-| `fsa_n_red` | float64 | [0, 4] | 168,756 | 5 | 1.0 |  |
-| `fsa_n_green` | float64 | [0, 4] | 168,756 | 5 | 1.0 |  |
-| `gluten_confidence` | object |  | 219,386 | 3 | possible |  |
-| `gluten_declared` | bool |  | 219,386 | 2 | True |  |
-| `SpiceLevel_orig` | object |  | 123,546 | 3 | hot |  |
-| `SpiceLevel_inferred` | bool |  | 219,386 | 2 | True |  |
-| `SpiceLevel_src` | object |  | 219,386 | 2 | ingredient-rule |  |
-| `Allergens_v1_superseded` | object |  | 219,386 | 484 | milk;gluten | ⚠ **Superseded, do not use for safety.** 12 of the 16 classes (no coconut / asafoetida / fenugreek / tamarind), some rows comma-separated, un-normalised `dairy` and `peanuts` tokens. Retained only so a v1-era claim stays reproducible. |
-| `allergens_inferred` | bool |  | 219,386 | 2 | False |  |
-| `allergens_src` | object |  | 218,615 | 3 | source/v5 |  |
-| `Allergens_v2` | object |  | 219,386 | 3,567 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
-| `allergens_encoding_fixed` | bool |  | 219,386 | 1 | True |  |
-| `allergens_sa5_src` | object |  | 219,386 | 2 | none |  |
-| `nutrition_estimated` | bool |  | 219,386 | 2 | False |  |
-| `nutrition_est_method` | object |  | 2,719 | 1 | course_median |  |
-| `region_inferred` | bool |  | 219,386 | 2 | False |  |
-| `region_src` | object |  | 2,901 | 3 | default |  |
-| `region_normalised` | bool |  | 219,386 | 2 | False |  |
-| `Split_v2` | object |  | 219,386 | 3 | train | ⚠ **Leaks.** Groups on `Title_normalized` without case-folding and ignores `dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is inflated. Use `Split_v3`. |
-| `gl_hg_inferred` | bool |  | 219,386 | 2 | False |  |
-| `course_inferred` | bool |  | 219,386 | 2 | False |  |
-| `cuisine_inferred` | bool |  | 219,386 | 2 | False |  |
-| `cookingmethod_inferred` | bool |  | 219,386 | 2 | False |  |
-| `micros_estimated` | bool |  | 219,386 | 2 | False |  |
-| `contains_pork` | bool |  | 219,386 | 2 | False |  |
-| `contains_alcohol` | bool |  | 219,386 | 2 | False |  |
-| `contains_gelatin` | bool |  | 219,386 | 2 | False |  |
-| `diet_contradicts_ingredients` | bool |  | 219,386 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
+| `DV_VitaminB12` | float64 | `%` per dish | 219,326 | 682 | 0.0 |  |
+| `DV_VitaminD` | float64 | `%` per dish | 219,326 | 177 | 0.0 |  |
+| `DV_Zinc` | float64 | `%` per dish | 219,326 | 349 | 3.0 |  |
+| `Ingredients_Source` | object |  | 218,466 | 9 | scraped |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Title_normalized` | object |  | 219,384 | 198,764 | Mutton Nihari |  |
+| `Diet` | object |  | 219,384 | 5 | Non-Vegetarian |  |
+| `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
+| `HealthGrade` | object |  | 219,326 | 5 | B |  |
+| `gl_bucket` | object |  | 216,293 | 3 | low |  |
+| `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
+| `Nut_Calories_orig` | float64 | `kcal` per dish | 216,654 | 91,040 | 69.17 |  |
+| `atwater_relerr` | float64 |  | 211,771 | 2,452 | 0.043 |  |
+| `atwater_fixed` | object |  | 219,326 | 2 | False | ⚠ **Misnamed:** flags rows the Atwater check IDENTIFIED, not rows it repaired — `Nut_Calories == Nut_Calories_orig` on all of them. `atwater_recomputed` is the column that means what this one says. |
+| `Region_orig` | object |  | 216,400 | 28 | Mughlai (North India) |  |
+| `Region` | object |  | 219,347 | 27 | North India |  |
+| `region_corrected` | object |  | 219,327 | 2 | False |  |
+| `cuisine_scope` | object |  | 219,384 | 5 | indian |  |
+| `out_of_scope` | object |  | 219,326 | 2 | False |  |
+| `confident_coverage` | float64 | [0, 1] | 219,384 | 246 | 0.0 |  |
+| `grams_per_serving_v3` | float64 | `g` per dish | 216,868 | 94,570 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
+| `serving_basis_v3` | object |  | 219,384 | 6 | portion |  |
+| `per100g_confident` | bool |  | 219,384 | 2 | True |  |
+| `per100g_available_v3` | bool |  | 219,384 | 2 | True |  |
+| `energy_capped_v3` | object |  | 219,326 | 2 | False |  |
+| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 158,966 | 131,225 | 63.605 |  |
+| `per100g_protein` | float64 | `g` per 100g [0, 100] | 158,667 | 24,226 | 2.041 |  |
+| `per100g_carb` | float64 | `g` per 100g [0, 100] | 156,979 | 60,669 | 7.191 |  |
+| `per100g_fat` | float64 | `g` per 100g [0, 100] | 158,423 | 35,002 | 3.264 |  |
+| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,971 | 17,456 | 1.857 |  |
+| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 157,324 | 30,629 | 0.405 |  |
+| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 158,335 | 14,190 | 2.041 |  |
+| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,971 | 128,900 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
+| `per100g_salt` | float64 | `g` per 100g [0, 100] | 155,971 | 128,900 | 2.01839 | **GRAMS** per 100 g, and exactly `per100g_sodium * 0.0025` on every row where both exist — it carries no independent information. |
+| `fsa_fat` | object |  | 157,401 | 3 | amber |  |
+| `fsa_saturates` | object |  | 155,971 | 3 | amber |  |
+| `fsa_sugars` | object |  | 156,795 | 3 | green |  |
+| `fsa_salt` | object |  | 155,971 | 3 | red |  |
+| `fsa_n_red` | float64 | [0, 4] | 155,971 | 5 | 1.0 |  |
+| `fsa_n_green` | float64 | [0, 4] | 155,971 | 5 | 1.0 |  |
+| `gluten_confidence` | object |  | 219,384 | 3 | possible |  |
+| `gluten_declared` | bool |  | 219,384 | 2 | True |  |
+| `SpiceLevel_orig` | object |  | 123,502 | 3 | hot |  |
+| `SpiceLevel_inferred` | object |  | 219,326 | 2 | True |  |
+| `SpiceLevel_src` | object |  | 219,346 | 3 | ingredient-rule |  |
+| `Allergens_v1_superseded` | object |  | 219,384 | 484 | milk;gluten | ⚠ **Superseded, do not use for safety.** 12 of the 16 classes (no coconut / asafoetida / fenugreek / tamarind), some rows comma-separated, un-normalised `dairy` and `peanuts` tokens. Retained only so a v1-era claim stays reproducible. |
+| `allergens_inferred` | bool |  | 219,384 | 2 | False |  |
+| `allergens_src` | object |  | 218,555 | 3 | source/v5 |  |
+| `Allergens_v2` | object |  | 219,384 | 3,567 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
+| `allergens_encoding_fixed` | bool |  | 219,384 | 1 | True |  |
+| `allergens_sa5_src` | object |  | 219,384 | 2 | none |  |
+| `nutrition_estimated` | object |  | 219,326 | 2 | False |  |
+| `nutrition_est_method` | object |  | 2,777 | 2 | course_median |  |
+| `region_inferred` | object |  | 219,326 | 2 | False |  |
+| `region_src` | object |  | 2,921 | 4 | default |  |
+| `region_normalised` | object |  | 219,326 | 2 | False |  |
+| `Split_v2` | object |  | 219,384 | 3 | train | ⚠ **Leaks.** Groups on `Title_normalized` without case-folding and ignores `dup_family_id`: 2,223 groups straddle a boundary, so **11.9% of the test set has a near-duplicate in train**. Any Recall@K / NDCG@K on it is inflated. Use `Split_v3`. |
+| `gl_hg_inferred` | object |  | 219,326 | 2 | False |  |
+| `course_inferred` | object |  | 219,326 | 2 | False |  |
+| `cuisine_inferred` | object |  | 219,326 | 2 | False |  |
+| `cookingmethod_inferred` | object |  | 219,326 | 2 | False |  |
+| `micros_estimated` | object |  | 219,326 | 2 | False |  |
+| `contains_pork` | bool |  | 219,384 | 2 | False |  |
+| `contains_alcohol` | bool |  | 219,384 | 2 | False |  |
+| `contains_gelatin` | bool |  | 219,384 | 2 | False |  |
+| `diet_contradicts_ingredients` | bool |  | 219,384 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
 | `Occasion_orig` | object |  | 14,095 | 593 | festival |  |
 | `DietaryContext_orig` | object |  | 4,129 | 3 | jain_sattvic |  |
-| `occasion_inferred` | bool |  | 219,386 | 2 | False |  |
-| `dcx_inferred` | bool |  | 219,386 | 2 | False |  |
-| `has_instructions` | bool |  | 219,386 | 2 | True |  |
-| `has_ingredients` | bool |  | 219,386 | 2 | True |  |
-| `has_rating` | bool |  | 219,386 | 2 | True |  |
-| `Servings_num` | float64 |  | 166,082 | 216 | 4.0 |  |
-| `Lang_base` | object |  | 217,956 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
-| `mojibake_fixed` | bool |  | 219,386 | 2 | False |  |
-| `qty_source` | object |  | 219,386 | 3 | none |  |
-| `ing_weight_confident_frac` | float64 | [0, 1] | 219,386 | 371 | 0.0 |  |
-| `source_licence` | object |  | 219,386 | 5 | CC BY-NC-SA 4.0 |  |
-| `source_terms_url` | object |  | 219,386 | 384 | https://arxiv.org/abs/2303.16778 |  |
-| `allergens_tn_fix` | bool |  | 219,386 | 2 | False |  |
-| `allergens_celery_fix` | bool |  | 219,386 | 2 | False |  |
-| `per100g_kcal_uncorrected` | float64 | `kcal` per 100g [0, 900] | 206,398 | 100,440 | 15.901 |  |
-| `per100g_protein_uncorrected` | float64 | `g` per 100g [0, 100] | 205,830 | 13,317 | 0.51 |  |
-| `per100g_carb_uncorrected` | float64 | `g` per 100g [0, 100] | 203,641 | 30,147 | 1.798 |  |
-| `per100g_fat_uncorrected` | float64 | `g` per 100g [0, 100] | 205,831 | 19,128 | 0.816 |  |
-| `per100g_satfat_uncorrected` | float64 | `g` per 100g [0, 100] | 206,162 | 9,979 | 0.464 |  |
-| `per100g_sugar_uncorrected` | float64 | `g` per 100g [0, 100] | 205,540 | 16,003 | 0.101 |  |
-| `per100g_fiber_uncorrected` | float64 | `g` per 100g [0, 100] | 205,824 | 7,859 | 0.51 |  |
-| `per100g_sodium_uncorrected` | float64 | `mg` per 100g [0, 100000] | 206,473 | 118,568 | 201.839 |  |
-| `per100g_salt_uncorrected` | float64 | `g` per 100g [0, 100] | 206,473 | 118,568 | 0.5045974999999999 |  |
-| `per100g_basis` | object |  | 219,386 | 5 | per_serving_v13 |  |
-| `fsa_fat_uncorrected` | object |  | 203,278 | 3 | green |  |
-| `fsa_saturates_uncorrected` | object |  | 203,278 | 3 | green |  |
-| `fsa_sugars_uncorrected` | object |  | 203,278 | 3 | green |  |
-| `fsa_salt_uncorrected` | object |  | 203,278 | 3 | amber |  |
-| `per100g_confident_uncorrected` | bool |  | 219,386 | 2 | False |  |
-| `per100g_available_v3_uncorrected` | bool |  | 219,386 | 2 | True |  |
-| `allergens_lexgap_fix` | bool |  | 219,386 | 2 | False |  |
-| `allergens_lexv9_fix` | bool |  | 219,386 | 2 | False | True where the v9 lexicon pass added a class (316 rows: panir/panner, `ground nut`, crabs/squids/clams plurals). |
-| `diet_contradiction_recomputed_v9` | bool |  | 219,386 | 1 | True |  |
-| `allergens_title_src` | object |  | 3,893 | 34 | gluten | Semicolon list of classes labelled from the recipe TITLE rather than the ingredient text — weaker evidence, kept separable on purpose. |
-| `allergens_title_fix` | bool |  | 219,386 | 2 | False | True where the title channel added at least one class (4,052 rows). |
-| `allergens_rescan_v10` | bool |  | 219,386 | 2 | False |  |
-| `allergens_sesame_v11` | bool |  | 219,386 | 2 | False |  |
-| `cookingmethod_normalised` | bool |  | 219,386 | 1 | True |  |
-| `sulphites_possible` | bool |  | 219,386 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 14,066 | 18 | raisin |  |
-| `badlist_empty` | bool |  | 219,386 | 2 | False |  |
-| `badlist_nav` | bool |  | 219,386 | 2 | False |  |
-| `badlist_meta` | bool |  | 219,386 | 2 | False |  |
-| `badlist_instruction` | bool |  | 219,386 | 2 | False |  |
-| `badlist_prose` | bool |  | 219,386 | 2 | False |  |
-| `badlist_single` | bool |  | 219,386 | 2 | False |  |
-| `badlist_n_items` | float64 |  | 219,386 | 52 | 11.0 |  |
-| `badlist_hard` | bool |  | 219,386 | 2 | False |  |
-| `badlist_any` | bool |  | 219,386 | 2 | False |  |
-| `grams_per_serving_predensity` | float64 | `g` per dish | 210,407 | 16,754 | 435.0 |  |
+| `occasion_inferred` | bool |  | 219,384 | 2 | False |  |
+| `dcx_inferred` | bool |  | 219,384 | 2 | False |  |
+| `has_instructions` | bool |  | 219,384 | 2 | True |  |
+| `has_ingredients` | bool |  | 219,384 | 2 | True |  |
+| `has_rating` | bool |  | 219,384 | 2 | True |  |
+| `Servings_num` | float64 |  | 166,075 | 216 | 4.0 |  |
+| `Lang_base` | object |  | 217,954 | 59 | en | **Use this for language filtering.** ISO 639-1 primary subtag only; `Lang_base == 'en'` returns all 207,659 English rows. |
+| `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
+| `qty_source` | object |  | 219,384 | 3 | none |  |
+| `ing_weight_confident_frac` | float64 | [0, 1] | 218,653 | 350 | 0.0 |  |
+| `source_licence` | object |  | 219,384 | 5 | CC BY-NC-SA 4.0 |  |
+| `source_terms_url` | object |  | 219,384 | 384 | https://arxiv.org/abs/2303.16778 |  |
+| `allergens_tn_fix` | object |  | 219,327 | 2 | False |  |
+| `allergens_celery_fix` | object |  | 219,327 | 2 | False |  |
+| `per100g_kcal_uncorrected` | float64 | `kcal` per 100g [0, 900] | 206,343 | 100,426 | 15.901 |  |
+| `per100g_protein_uncorrected` | float64 | `g` per 100g [0, 100] | 205,775 | 13,315 | 0.51 |  |
+| `per100g_carb_uncorrected` | float64 | `g` per 100g [0, 100] | 203,586 | 30,139 | 1.798 |  |
+| `per100g_fat_uncorrected` | float64 | `g` per 100g [0, 100] | 205,776 | 19,127 | 0.816 |  |
+| `per100g_satfat_uncorrected` | float64 | `g` per 100g [0, 100] | 206,107 | 9,978 | 0.464 |  |
+| `per100g_sugar_uncorrected` | float64 | `g` per 100g [0, 100] | 205,485 | 16,003 | 0.101 |  |
+| `per100g_fiber_uncorrected` | float64 | `g` per 100g [0, 100] | 205,769 | 7,854 | 0.51 |  |
+| `per100g_sodium_uncorrected` | float64 | `mg` per 100g [0, 100000] | 206,416 | 118,551 | 201.839 |  |
+| `per100g_salt_uncorrected` | float64 | `g` per 100g [0, 100] | 206,416 | 118,551 | 0.5045974999999999 |  |
+| `per100g_basis` | object |  | 219,384 | 6 | per_serving_v13 |  |
+| `fsa_fat_uncorrected` | object |  | 203,224 | 3 | green |  |
+| `fsa_saturates_uncorrected` | object |  | 203,224 | 3 | green |  |
+| `fsa_sugars_uncorrected` | object |  | 203,224 | 3 | green |  |
+| `fsa_salt_uncorrected` | object |  | 203,224 | 3 | amber |  |
+| `per100g_confident_uncorrected` | object |  | 219,327 | 2 | False |  |
+| `per100g_available_v3_uncorrected` | object |  | 219,327 | 2 | True |  |
+| `allergens_lexgap_fix` | object |  | 219,327 | 2 | False |  |
+| `allergens_lexv9_fix` | object |  | 219,327 | 2 | False | True where the v9 lexicon pass added a class (316 rows: panir/panner, `ground nut`, crabs/squids/clams plurals). |
+| `diet_contradiction_recomputed_v9` | bool |  | 219,384 | 1 | True |  |
+| `allergens_title_src` | object |  | 3,888 | 34 | gluten | Semicolon list of classes labelled from the recipe TITLE rather than the ingredient text — weaker evidence, kept separable on purpose. |
+| `allergens_title_fix` | object |  | 219,327 | 2 | False | True where the title channel added at least one class (4,052 rows). |
+| `allergens_rescan_v10` | object |  | 219,327 | 2 | False |  |
+| `allergens_sesame_v11` | object |  | 219,327 | 2 | False |  |
+| `cookingmethod_normalised` | bool |  | 219,384 | 1 | True |  |
+| `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
+| `sulphites_possible_src` | object |  | 14,064 | 18 | raisin |  |
+| `badlist_empty` | bool |  | 219,384 | 2 | False |  |
+| `badlist_nav` | bool |  | 219,384 | 2 | False |  |
+| `badlist_meta` | bool |  | 219,384 | 2 | False |  |
+| `badlist_instruction` | bool |  | 219,384 | 2 | False |  |
+| `badlist_prose` | bool |  | 219,384 | 2 | False |  |
+| `badlist_single` | bool |  | 219,384 | 2 | False |  |
+| `badlist_n_items` | float64 |  | 219,384 | 52 | 11.0 |  |
+| `badlist_hard` | bool |  | 219,384 | 2 | False |  |
+| `badlist_any` | bool |  | 219,384 | 2 | False |  |
+| `grams_per_serving_predensity` | float64 | `g` per dish | 210,349 | 16,752 | 435.0 |  |
 | `per100g_kcal_predensity` | float64 | `kcal` per 100g [0, 900] | 150,928 | 142,590 | 44.10635155096011 |  |
 | `per100g_protein_predensity` | float64 | `g` per 100g [0, 100] | 150,759 | 117,919 | 0.6351550960118169 |  |
 | `per100g_carb_predensity` | float64 | `g` per 100g [0, 100] | 149,812 | 129,925 | 1.8020679468242244 |  |
@@ -465,160 +466,161 @@ Covering **all 44 published Parquet tables**.
 | `fsa_saturates_predensity` | object |  | 150,928 | 3 | green |  |
 | `fsa_sugars_predensity` | object |  | 150,928 | 3 | green |  |
 | `fsa_salt_predensity` | object |  | 150,928 | 3 | red |  |
-| `per100g_density_corrected` | bool |  | 219,386 | 2 | True |  |
-| `allergens_failclosed_broken` | bool |  | 219,386 | 2 | False |  |
-| `dup_family_id` | float64 |  | 44,283 | 13,054 | 0.0 |  |
-| `dup_family_size` | int64 |  | 219,386 | 62 | 7 |  |
-| `is_family_primary` | bool |  | 219,386 | 2 | True |  |
-| `family_filled` | object |  | 24,156 | 248 | Servings_num\|RatingAverage\|RatingCount\|T |  |
-| `per100g_v13` | object |  | 219,386 | 6 | recomputed |  |
-| `contains_beef` | bool |  | 219,386 | 2 | False |  |
-| `contains_poultry` | bool |  | 219,386 | 2 | True |  |
-| `contains_fish` | bool |  | 219,386 | 2 | False |  |
+| `per100g_density_corrected` | object |  | 219,327 | 2 | True |  |
+| `allergens_failclosed_broken` | bool |  | 219,384 | 2 | False |  |
+| `dup_family_id` | float64 |  | 44,289 | 13,057 | 0.0 |  |
+| `dup_family_size` | int64 |  | 219,384 | 62 | 7 |  |
+| `is_family_primary` | bool |  | 219,384 | 2 | True |  |
+| `family_filled` | object |  | 24,149 | 248 | Servings_num\|RatingAverage\|RatingCount\|T |  |
+| `per100g_v13` | object |  | 219,327 | 7 | recomputed |  |
+| `contains_beef` | bool |  | 219,384 | 2 | False |  |
+| `contains_poultry` | bool |  | 219,384 | 2 | True |  |
+| `contains_fish` | bool |  | 219,384 | 2 | False |  |
 | `Diet_prior` | object |  | 315 | 3 | Vegan |  |
 | `diet_v13` | object |  | 1,823 | 4 | flagged_weak_evidence_only |  |
-| `diet_meat_class` | object |  | 32,392 | 15 | poultry |  |
-| `allergen_tier` | object |  | 196,518 | 9,502 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
-| `allergens_v14` | bool |  | 219,386 | 2 | False |  |
-| `review_m1m2` | bool |  | 219,386 | 2 | False |  |
-| `title_ingredients_added` | object |  | 3,270 | 58 | chicken |  |
-| `ingredient_src` | object |  | 3,315 | 2 | title_evidence |  |
+| `diet_meat_class` | object |  | 32,394 | 15 | poultry |  |
+| `allergen_tier` | object |  | 196,509 | 9,494 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergens_v14` | object |  | 219,327 | 2 | False |  |
+| `review_m1m2` | object |  | 219,327 | 2 | False |  |
+| `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
+| `ingredient_src` | object |  | 3,371 | 5 | title_evidence |  |
 | `dish_type` | object |  | 413 | 57 | mango lassi |  |
 | `dish_type_agreement` | float64 | [0, 1] | 413 | 7 | 0.5 |  |
 | `dish_type_src` | object |  | 413 | 1 | corpus_neighbours |  |
-| `is_reference_derived` | bool |  | 219,386 | 2 | True |  |
+| `is_reference_derived` | bool |  | 219,384 | 2 | True |  |
 | `upstream_dataset` | object |  | 9,384 | 4 | text_corpora/3A2M |  |
-| `has_real_url` | bool |  | 219,386 | 2 | False |  |
-| `RecipeName_prev7` | object |  | 219,386 | 198,483 | Mutton Nihari |  |
-| `title_repaired_v7` | bool |  | 219,386 | 2 | False |  |
-| `title_breadcrumb` | object |  | 700 | 12 | Home |  |
-| `title_shift_repaired` | bool |  | 219,386 | 2 | False |  |
+| `has_real_url` | bool |  | 219,384 | 2 | False |  |
+| `RecipeName_prev7` | object |  | 219,327 | 198,433 | Mutton Nihari |  |
+| `title_repaired_v7` | object |  | 219,327 | 2 | False |  |
+| `title_breadcrumb` | object |  | 701 | 13 | Owner descriptive repair: upstream What' |  |
+| `title_shift_repaired` | object |  | 219,327 | 2 | False |  |
 | `title_shift_note` | object |  | 702 | 61 | body agrees with the title; left alone |  |
-| `title_is_placeholder` | bool |  | 219,386 | 2 | False |  |
-| `title_placeholder_kind` | object |  | 2,946 | 3 | cms_default |  |
-| `title_unsupported_by_body` | bool |  | 219,386 | 2 | False |  |
-| `is_recipe` | bool |  | 219,386 | 2 | True |  |
+| `title_is_placeholder` | bool |  | 219,384 | 2 | False |  |
+| `title_placeholder_kind` | object |  | 2,945 | 3 | cms_default |  |
+| `title_unsupported_by_body` | bool |  | 219,384 | 2 | False |  |
+| `is_recipe` | bool |  | 219,384 | 2 | True |  |
 | `nonrecipe_spared_reason` | object |  | 38 | 4 | recheck: sprouting fenugreek over three  |  |
-| `allergens_r5` | bool |  | 219,386 | 2 | False |  |
-| `per100g_macrosum_implausible` | bool |  | 219,386 | 2 | False | True where protein+carb+fat exceeds 100 g per 100 g (12,110 rows, max 880). Values are NOT clipped — the upstream `grams_per_serving_v3` is wrong on these rows. |
-| `fsa_n_labelled` | float64 | [0, 4] | 168,756 | 4 | 4.0 | How many of the four FSA lights are set. The denominator for `fsa_n_red` / `fsa_n_green`, which is not 4 everywhere. |
-| `atwater_recomputed` | bool |  | 219,386 | 2 | False | True where `Nut_Calories` actually differs from `Nut_Calories_orig` (3,626 rows). |
-| `gluten_declared_pre_r6` | bool |  | 219,386 | 2 | True |  |
-| `gluten_confidence_pre_r6` | object |  | 219,386 | 3 | possible |  |
-| `Diet_pre_r6` | object |  | 219,386 | 4 | Non-Vegetarian |  |
-| `diet_meat_class_pre_r7` | object |  | 30,808 | 15 | poultry |  |
-| `gl_bucket_pre_r7` | object |  | 216,353 | 3 | low |  |
-| `Split_v3` | object |  | 219,386 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
-| `nutrient_subcomponent_violation` | bool |  | 219,386 | 2 | False | True where saturated fat exceeds total fat, or sugar or fibre exceeds carbohydrate (2,570 rows). Left unclipped: which side is wrong is not decidable here. |
-| `ProteinPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 100 | 12.0 |  |
-| `CarbPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 101 | 43.0 |  |
-| `FatPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,386 | 101 | 44.0 |  |
-| `macro_pct_is_default` | bool |  | 219,386 | 2 | False |  |
-| `macro_pct_unfounded` | bool |  | 219,386 | 2 | False | True where the 13/40/44 macro-percent trio appeared on a row with no macros to compute it from. Those Pct values are nulled. |
-| `ingredients_unreadable_items` | int64 |  | 219,386 | 34 | 0 |  |
-| `ingredient_items_total` | int64 |  | 219,386 | 52 | 11 |  |
-| `allergen_scan_incomplete` | bool |  | 219,386 | 2 | False |  |
-| `Allergens_v2_pre_r9` | object |  | 219,386 | 3,011 | gluten;milk |  |
-| `Allergens_v2_pre_v9` | object |  | 219,386 | 3,011 | gluten;milk |  |
-| `Allergens_v2_pre_v10` | object |  | 219,386 | 3,012 | gluten;milk |  |
-| `allergen_tier_pre_v10` | object |  | 196,236 | 8,444 | gluten:inherited;milk:derived |  |
-| `Allergens_v2_pre_t5` | object |  | 219,386 | 3,564 | ghee;gluten;milk |  |
-| `fsa_fat_pre_portion` | object |  | 168,318 | 3 | amber |  |
-| `fsa_saturates_pre_portion` | object |  | 155,978 | 3 | amber |  |
-| `fsa_sugars_pre_portion` | object |  | 168,670 | 3 | green |  |
-| `fsa_salt_pre_portion` | object |  | 155,978 | 3 | red |  |
-| `fsa_portion_g` | float64 | `g` per serving | 158,867 | 10,036 | 108.8 |  |
-| `fsa_portion_override_applied` | bool |  | 219,386 | 2 | False |  |
+| `allergens_r5` | object |  | 219,327 | 2 | False |  |
+| `per100g_macrosum_implausible` | object |  | 219,326 | 2 | False | True where protein+carb+fat exceeds 100 g per 100 g (12,110 rows, max 880). Values are NOT clipped — the upstream `grams_per_serving_v3` is wrong on these rows. |
+| `fsa_n_labelled` | float64 | [0, 4] | 156,029 | 3 | 4.0 | How many of the four FSA lights are set. The denominator for `fsa_n_red` / `fsa_n_green`, which is not 4 everywhere. |
+| `atwater_recomputed` | bool |  | 219,384 | 2 | False | True where `Nut_Calories` actually differs from `Nut_Calories_orig` (3,626 rows). |
+| `gluten_declared_pre_r6` | object |  | 219,326 | 2 | True |  |
+| `gluten_confidence_pre_r6` | object |  | 219,326 | 3 | possible |  |
+| `Diet_pre_r6` | object |  | 219,384 | 5 | Non-Vegetarian |  |
+| `diet_meat_class_pre_r7` | object |  | 30,807 | 15 | poultry |  |
+| `gl_bucket_pre_r7` | object |  | 216,294 | 3 | low |  |
+| `Split_v3` | object |  | 219,384 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
+| `nutrient_subcomponent_violation` | object |  | 219,326 | 2 | False | True where saturated fat exceeds total fat, or sugar or fibre exceeds carbohydrate (2,570 rows). Left unclipped: which side is wrong is not decidable here. |
+| `ProteinPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 100 | 12.0 |  |
+| `CarbPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 101 | 43.0 |  |
+| `FatPct_pre_r8` | float64 | `%` per energy [0, 100] | 219,327 | 101 | 44.0 |  |
+| `macro_pct_is_default` | object |  | 219,326 | 2 | False |  |
+| `macro_pct_unfounded` | object |  | 219,326 | 2 | False | True where the 13/40/44 macro-percent trio appeared on a row with no macros to compute it from. Those Pct values are nulled. |
+| `ingredients_unreadable_items` | int64 |  | 219,384 | 34 | 0 |  |
+| `ingredient_items_total` | int64 |  | 219,384 | 52 | 11 |  |
+| `allergen_scan_incomplete` | bool |  | 219,384 | 2 | False |  |
+| `Allergens_v2_pre_r9` | object |  | 219,327 | 3,011 | gluten;milk |  |
+| `Allergens_v2_pre_v9` | object |  | 219,327 | 3,011 | gluten;milk |  |
+| `Allergens_v2_pre_v10` | object |  | 219,327 | 3,012 | gluten;milk |  |
+| `allergen_tier_pre_v10` | object |  | 196,180 | 8,443 | gluten:inherited;milk:derived |  |
+| `Allergens_v2_pre_t5` | object |  | 219,327 | 3,564 | ghee;gluten;milk |  |
+| `fsa_fat_pre_portion` | object |  | 168,311 | 3 | amber |  |
+| `fsa_saturates_pre_portion` | object |  | 155,971 | 3 | amber |  |
+| `fsa_sugars_pre_portion` | object |  | 168,663 | 3 | green |  |
+| `fsa_salt_pre_portion` | object |  | 155,971 | 3 | red |  |
+| `fsa_portion_g` | float64 | `g` per serving | 156,512 | 10,036 | 108.8 |  |
+| `fsa_portion_override_applied` | object |  | 219,326 | 2 | False |  |
 | `IngredientsList_src_script` | object |  | 714 | 714 | ["1kg भूरा onion", "300gramginger", "400 |  |
 | `allergen_from_instructions` | object |  | 290 | 3 | asafoetida |  |
 | `ingredients_romanised` | object |  | 714 | 1 | translated |  |
-| `DV_Folate_basis` | object |  | 219,386 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
-| `nut_suppl_fct_frac` | float64 | [0, 1] | 219,386 | 9,901 | 0.6108 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
+| `DV_Folate_basis` | object |  | 219,384 | 1 | unavailable_total_folate_not_dfe | Explicit reason the active percentage is unavailable: unavailable_total_folate_not_dfe. |
+| `nut_suppl_fct_frac` | float64 | [0, 1] | 218,044 | 9,955 | 0.5818 | Share of computed ingredient calories from supplemental FCT rows. Legacy zero may also mean an unavailable denominator. |
+| `nut_suppl_fct_basis` | object |  | 219,384 | 5 | partial_computed_ingredient_energy |  |
 
 ## `data/corpus/rehydration_index.parquet`
 
-219,386 rows x 18 columns - 11.3 MB
+219,384 rows x 18 columns - 11.3 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `URL` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
-| `SourceSite` | object |  | 219,386 | 378 | 3a2m_indian |  |
-| `Lang` | object |  | 217,956 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
-| `text_sha256` | object |  | 219,386 | 218,566 | fc44268315b4226b66fdedcd1918b9d37a5bc644 |  |
-| `rehydratable` | bool |  | 219,386 | 2 | False |  |
-| `source_kind` | object |  | 219,386 | 2 | derived_dataset |  |
-| `had_description` | bool |  | 219,386 | 2 | True |  |
-| `had_instructions` | bool |  | 219,386 | 2 | True |  |
-| `had_ingredients` | bool |  | 219,386 | 2 | True |  |
-| `had_keywords` | bool |  | 219,386 | 2 | True |  |
-| `had_enrich_log` | bool |  | 219,386 | 2 | True |  |
-| `had_ingredientslist_pretitle` | bool |  | 219,386 | 2 | True |  |
-| `had_ingredientslist_preclean` | bool |  | 219,386 | 2 | True |  |
-| `had_ingredientslist_prefused` | bool |  | 219,386 | 2 | True |  |
-| `had_ingredientslist_pregloss` | bool |  | 219,386 | 2 | True |  |
-| `had_recipename_preclean` | bool |  | 219,386 | 1 | True |  |
-| `had_ingredientslist_pre_v9` | bool |  | 219,386 | 2 | True |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `URL` | object |  | 219,384 | 219,384 | https://3a2m.dataset/recipe/23b5b76af243 |  |
+| `SourceSite` | object |  | 219,384 | 378 | 3a2m_indian |  |
+| `Lang` | object |  | 217,954 | 65 | en | ⚠ **Do not filter on this.** BCP-47 with region subtags mixed with bare ISO 639-1, so `Lang == 'en'` returns 122,569 rows and misses 85,090 more (`en-US` 79,581, `en-GB` 5,508) — **41% of the English corpus.** Use `Lang_base`. |
+| `text_sha256` | object |  | 219,384 | 218,564 | fc44268315b4226b66fdedcd1918b9d37a5bc644 |  |
+| `rehydratable` | bool |  | 219,384 | 2 | False |  |
+| `source_kind` | object |  | 219,384 | 2 | derived_dataset |  |
+| `had_description` | bool |  | 219,384 | 2 | True |  |
+| `had_instructions` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredients` | bool |  | 219,384 | 2 | True |  |
+| `had_keywords` | bool |  | 219,384 | 2 | True |  |
+| `had_enrich_log` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredientslist_pretitle` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredientslist_preclean` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredientslist_prefused` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredientslist_pregloss` | bool |  | 219,384 | 2 | True |  |
+| `had_recipename_preclean` | bool |  | 219,384 | 2 | True |  |
+| `had_ingredientslist_pre_v9` | bool |  | 219,384 | 2 | True |  |
 
 ## `data/enrichment/fix11_nonveg.parquet`
 
-219,386 rows x 6 columns - 0.8 MB
+219,384 rows x 6 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Diet_nonveg_orig` | object |  | 219,386 | 276 | Non Vegetarian |  |
-| `Diet_rechecked` | object |  | 219,386 | 276 | Non Vegetarian |  |
-| `animal_in_name` | bool |  | 219,386 | 2 | True |  |
-| `animal_in_ing` | bool |  | 219,386 | 2 | True |  |
-| `nonveg_corrected` | bool |  | 219,386 | 2 | False |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Diet_nonveg_orig` | object |  | 219,326 | 276 | Non Vegetarian |  |
+| `Diet_rechecked` | object |  | 219,326 | 276 | Non Vegetarian |  |
+| `animal_in_name` | boolean |  | 219,326 | 2 | True |  |
+| `animal_in_ing` | boolean |  | 219,326 | 2 | True |  |
+| `nonveg_corrected` | boolean |  | 219,327 | 2 | False |  |
 
 ## `data/enrichment/fix14_region.parquet`
 
-219,386 rows x 5 columns - 0.8 MB
+219,384 rows x 5 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Region_orig` | object |  | 216,458 | 28 | Mughlai (North India) |  |
-| `Region_v5` | object |  | 216,458 | 29 | Mughlai (North India) |  |
-| `region_signal` | object |  | 20,212 | 15 | Andhra Pradesh |  |
-| `region_corrected` | bool |  | 219,386 | 2 | False |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Region_orig` | object |  | 216,400 | 28 | Mughlai (North India) |  |
+| `Region_v5` | object |  | 216,399 | 29 | Mughlai (North India) |  |
+| `region_signal` | object |  | 20,210 | 15 | Andhra Pradesh |  |
+| `region_corrected` | boolean |  | 219,327 | 2 | False |  |
 
 ## `data/enrichment/fix7_atwater.parquet`
 
-219,386 rows x 5 columns - 2.8 MB
+219,384 rows x 5 columns - 2.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Nut_Calories_orig` | float64 | `kcal` per dish | 216,713 | 91,045 | 69.17 |  |
-| `Nut_Calories_v5` | float64 |  | 216,667 | 91,349 | 69.17 |  |
-| `atwater_relerr` | float64 |  | 211,830 | 2,452 | 0.043 |  |
-| `atwater_fixed` | bool |  | 219,386 | 2 | False | ⚠ **Misnamed:** flags rows the Atwater check IDENTIFIED, not rows it repaired — `Nut_Calories == Nut_Calories_orig` on all of them. `atwater_recomputed` is the column that means what this one says. |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Nut_Calories_orig` | float64 | `kcal` per dish | 216,654 | 91,040 | 69.17 |  |
+| `Nut_Calories_v5` | float64 |  | 216,607 | 91,344 | 69.17 |  |
+| `atwater_relerr` | float64 |  | 211,771 | 2,452 | 0.043 |  |
+| `atwater_fixed` | boolean |  | 219,326 | 2 | False | ⚠ **Misnamed:** flags rows the Atwater check IDENTIFIED, not rows it repaired — `Nut_Calories == Nut_Calories_orig` on all of them. `atwater_recomputed` is the column that means what this one says. |
 
 ## `data/enrichment/fix_allergens.parquet`
 
-42,703 rows x 4 columns - 0.1 MB
+42,692 rows x 4 columns - 0.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 42,703 | 42,703 | 4 |  |
-| `Allergens_fill` | object |  | 42,703 | 40 | sulphites |  |
-| `allergens_inferred` | bool |  | 42,703 | 1 | True |  |
-| `allergens_src` | object |  | 42,703 | 1 | ingredient-rule |  |
+| `recipe_id` | int64 |  | 42,692 | 42,692 | 4 |  |
+| `Allergens_fill` | object |  | 42,692 | 40 | sulphites |  |
+| `allergens_inferred` | bool |  | 42,692 | 1 | True |  |
+| `allergens_src` | object |  | 42,692 | 1 | ingredient-rule |  |
 
 ## `data/enrichment/fix_cuisine_scope.parquet`
 
-219,386 rows x 6 columns - 0.9 MB
+219,384 rows x 6 columns - 0.9 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `Cuisine` | object |  | 209,890 | 53 | Indian |  |
-| `cuisine_scope` | object |  | 219,386 | 4 | indian |  |
-| `out_of_scope` | bool |  | 219,386 | 2 | False |  |
-| `indian_sig` | int64 |  | 219,386 | 11 | 3 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Cuisine` | object |  | 209,832 | 53 | Indian |  |
+| `cuisine_scope` | object |  | 219,384 | 5 | indian |  |
+| `out_of_scope` | boolean |  | 219,326 | 2 | False |  |
+| `indian_sig` | Int64 |  | 219,326 | 11 | 3 |  |
 | `indian_equivalent` | object |  | 16,402 | 29 | Shorba / Rasam |  |
 
 ## `data/enrichment/fix_glhg.parquet`
@@ -660,15 +662,15 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/enrichment/fix_occasion_context.parquet`
 
-219,386 rows x 5 columns - 0.7 MB
+219,384 rows x 5 columns - 0.7 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
 | `Occasion_final` | object |  | 15,231 | 644 | festival |  |
-| `occasion_inferred` | bool |  | 219,386 | 2 | False |  |
+| `occasion_inferred` | bool |  | 219,384 | 2 | False |  |
 | `DietaryContext_final` | object |  | 5,096 | 3 | vrat_fasting |  |
-| `dcx_inferred` | bool |  | 219,386 | 2 | False |  |
+| `dcx_inferred` | bool |  | 219,384 | 2 | False |  |
 
 ## `data/enrichment/fix_recipe_rename.parquet`
 
@@ -684,14 +686,14 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/enrichment/fix_region.parquet`
 
-2,901 rows x 4 columns - 0.0 MB
+2,900 rows x 4 columns - 0.0 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 2,901 | 2,901 | 3816 |  |
-| `Region_fill` | object |  | 2,901 | 21 | Pan-Indian |  |
-| `region_inferred` | bool |  | 2,901 | 1 | True |  |
-| `region_src` | object |  | 2,901 | 3 | default |  |
+| `recipe_id` | int64 |  | 2,900 | 2,900 | 3816 |  |
+| `Region_fill` | object |  | 2,900 | 21 | Pan-Indian |  |
+| `region_inferred` | bool |  | 2,900 | 1 | True |  |
+| `region_src` | object |  | 2,900 | 3 | default |  |
 
 ## `data/enrichment/fix_region_review.parquet`
 
@@ -719,13 +721,13 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/enrichment/fix_spicelevel.parquet`
 
-95,840 rows x 3 columns - 0.3 MB
+95,825 rows x 3 columns - 0.3 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 95,840 | 95,840 | 0 |  |
-| `SpiceLevel_inferred` | object |  | 95,840 | 3 | medium |  |
-| `SpiceLevel_src` | object |  | 95,840 | 1 | ingredient-rule |  |
+| `recipe_id` | int64 |  | 95,825 | 95,825 | 0 |  |
+| `SpiceLevel_inferred` | object |  | 95,825 | 3 | medium |  |
+| `SpiceLevel_src` | object |  | 95,825 | 1 | ingredient-rule |  |
 
 ## `data/enrichment/fix_subcontinental_region.parquet`
 
@@ -740,263 +742,298 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/enrichment/fix_text.parquet`
 
-39,168 rows x 7 columns - 0.2 MB
+39,151 rows x 7 columns - 0.2 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 39,168 | 39,168 | 8 |  |
-| `Course_fill` | object |  | 10,364 | 11 | Salad |  |
-| `Cuisine_fill` | object |  | 9,486 | 24 | Indian |  |
-| `CookingMethod_fill` | object |  | 23,532 | 27 | boiled |  |
-| `course_inferred` | bool |  | 39,168 | 2 | False |  |
-| `cuisine_inferred` | bool |  | 39,168 | 2 | False |  |
-| `cookingmethod_inferred` | bool |  | 39,168 | 2 | True |  |
+| `recipe_id` | int64 |  | 39,151 | 39,151 | 8 |  |
+| `Course_fill` | object |  | 10,354 | 11 | Salad |  |
+| `Cuisine_fill` | object |  | 9,485 | 24 | Indian |  |
+| `CookingMethod_fill` | object |  | 23,525 | 27 | boiled |  |
+| `course_inferred` | bool |  | 39,151 | 2 | False |  |
+| `cuisine_inferred` | bool |  | 39,151 | 2 | False |  |
+| `cookingmethod_inferred` | bool |  | 39,151 | 2 | True |  |
 
 ## `data/enrichment/fix_variants.parquet`
 
-219,386 rows x 7 columns - 4.6 MB
+219,384 rows x 7 columns - 4.6 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `RecipeName_variant` | object |  | 219,386 | 219,386 | Mutton Nihari (Variant 1 of 7) |  |
-| `DuplicateType` | object |  | 219,386 | 3 | name_variant |  |
-| `variant_group_id` | int64 |  | 219,386 | 194,267 | 123795 |  |
-| `variant_index` | int64 |  | 219,386 | 151 | 1 |  |
-| `variant_count` | int64 |  | 219,386 | 54 | 7 |  |
-| `dup_of_recipe_id` | int64 |  | 219,386 | 7 | -1 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `RecipeName_variant` | object |  | 219,326 | 219,326 | Mutton Nihari (Variant 1 of 7) |  |
+| `DuplicateType` | object |  | 219,326 | 3 | name_variant |  |
+| `variant_group_id` | Int64 |  | 219,326 | 194,217 | 123795 |  |
+| `variant_index` | Int64 |  | 219,326 | 151 | 1 |  |
+| `variant_count` | Int64 |  | 219,326 | 54 | 7 |  |
+| `dup_of_recipe_id` | Int64 |  | 219,326 | 7 | -1 |  |
 
 ## `data/enrichment/gluten_confidence_v2.parquet`
 
-219,386 rows x 3 columns - 0.7 MB
+219,384 rows x 3 columns - 0.7 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `gluten_confidence` | object |  | 219,386 | 3 | possible |  |
-| `gluten_declared` | bool |  | 219,386 | 2 | True |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `gluten_confidence` | object |  | 219,384 | 3 | possible |  |
+| `gluten_declared` | boolean |  | 219,384 | 2 | True |  |
 
 ## `data/enrichment/ingredients_nutrition.parquet`
 
-2,335,760 rows x 40 columns - 100.5 MB (statistics from the first 500,000 rows)
+2,338,910 rows x 57 columns - 109.5 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 500,000 | 46,426 | 0 |  |
+| `recipe_id` | int64 |  | 500,000 | 46,368 | 0 |  |
 | `ing_index` | int64 |  | 500,000 | 44 | 0 |  |
-| `name` | object |  | 500,000 | 61,168 | mutton |  |
-| `fct_idx` | int64 |  | 500,000 | 1,371 | 128 |  |
-| `fct_food_id` | object |  | 500,000 | 1,371 | O502 |  |
-| `fct_source` | object |  | 500,000 | 4 | INDB-UK |  |
-| `match_score` | float64 |  | 500,000 | 637 | 100.0 |  |
-| `grams` | float64 |  | 500,000 | 727 | 100.0 |  |
-| `Nut_Calories` | float64 | `kcal` per dish | 500,000 | 6,492 | 196.0 |  |
-| `Nut_Protein` | float64 | `g` per dish | 500,000 | 7,590 | 19.1 |  |
-| `Nut_Fat` | float64 | `g` per dish | 500,000 | 6,803 | 13.3 |  |
-| `Nut_Carbohydrates` | float64 | `g` per dish | 500,000 | 9,831 | 0.0 |  |
-| `Nut_Fiber` | float64 | `g` per dish | 500,000 | 2,880 | 0.0 |  |
-| `Nut_Sugar` | float64 | `g` per dish | 500,000 | 6,511 | 0.0 |  |
-| `Nut_SaturatedFat` | float64 | `g` per dish | 500,000 | 6,737 | 6.2 |  |
-| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 500,000 | 6,478 | 5.3 |  |
-| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 500,000 | 6,207 | 0.6 |  |
-| `Nut_TransFat` | float64 | `g` per dish | 500,000 | 1,208 | 0.0 |  |
-| `Nut_Cholesterol` | float64 | `mg` per dish | 500,000 | 1,843 | 77.0 |  |
-| `Nut_Sodium` | float64 | `mg` per dish | 500,000 | 5,054 | 62.1 |  |
-| `Nut_Potassium` | float64 | `mg` per dish | 500,000 | 7,240 | 263.5 |  |
-| `Nut_Calcium` | float64 | `mg` per dish | 500,000 | 4,446 | 16.15 |  |
-| `Nut_Iron` | float64 | `mg` per dish | 500,000 | 5,530 | 1.52 |  |
-| `Nut_VitaminA` | float64 | `ug` per dish | 500,000 | 2,703 | 4.25 |  |
-| `Nut_VitaminC` | float64 | `mg` per dish | 500,000 | 3,270 | 0.0 |  |
-| `Nut_Magnesium` | float64 | `mg` per dish | 500,000 | 3,219 | 18.9 |  |
-| `Nut_Phosphorus` | float64 | `mg` per dish | 500,000 | 5,103 | 180.5 |  |
-| `Nut_Zinc` | float64 | `mg` per dish | 500,000 | 3,982 | 3.325 |  |
-| `Nut_VitaminB6` | float64 | `mg` per dish | 500,000 | 3,612 | 0.16 |  |
-| `Nut_VitaminB12` | float64 | `ug` per dish | 500,000 | 1,617 | 0.0 |  |
-| `Nut_Folate` | float64 | `ug` per dish | 500,000 | 3,087 | 1.5 |  |
-| `Nut_VitaminD` | float64 | `ug` per dish | 500,000 | 554 | 0.0 |  |
-| `Nut_VitaminE` | float64 | `mg` per dish | 500,000 | 3,294 | 0.153 |  |
-| `Nut_VitaminK` | float64 | `ug` per dish | 500,000 | 3,377 | 0.0 |  |
-| `Nut_Thiamin` | float64 | `mg` per dish | 500,000 | 3,192 | 0.096 |  |
-| `Nut_Riboflavin` | float64 | `mg` per dish | 500,000 | 3,379 | 0.153 |  |
-| `Nut_Niacin` | float64 | `mg` per dish | 500,000 | 6,672 | 3.84 |  |
-| `Nut_Copper` | float64 | `mg` per dish | 500,000 | 3,827 | 0.072 |  |
-| `Nut_Selenium` | float64 | `ug` per dish | 500,000 | 3,476 | 1.8 |  |
-| `Nut_Manganese` | float64 | `mg` per dish | 500,000 | 4,897 | 0.009 |  |
+| `name` | object |  | 500,000 | 56,979 | mutton |  |
+| `fct_idx` | Int64 |  | 406,239 | 1,382 | 128 | Legacy combined-FCT row index. Null is valid for an IFCT2017 food identified by fct_source and fct_food_id. |
+| `fct_food_id` | object |  | 411,041 | 1,385 | O502 | Exact food ID within fct_source; IFCT2017 uses source codes such as A018, A019 and L003. |
+| `fct_source` | object |  | 411,041 | 4 | INDB-UK | Source database namespace; combine with fct_food_id for food identity. IFCT2017 identifies the reviewed NIN source snapshot. |
+| `match_score` | float64 |  | 406,239 | 590 | 100.0 |  |
+| `grams` | float64 |  | 499,928 | 1,411 | 100.0 |  |
+| `nutrition_status` | object |  | 500,000 | 6 | estimated_partial_composition | Availability of estimated ingredient contributions. IFCT assignments may have unavailable weights; compatible protein, fat, fibre and energy alone do not establish other nutrients. |
+| `retention_policy` | object |  | 500,000 | 1 | legacy_assumed_cooked |  |
+| `automatic_fct_idx` | float64 |  | 465,297 | 1,383 | 128.0 |  |
+| `match_review_status` | object |  | 500,000 | 3 | automatic_unreviewed | Current source-food match status. agent_reviewed_source_identity establishes food/form evidence only, not human review, quantity approval or nutrient accuracy. |
+| `match_review_id` | object |  | 59,058 | 1,235 | NMR-002 | Evidence ID for the current source-food match decision; previous rejected targets remain in legacy_match_review fields when replaced. |
+| `proposed_food_id` | object |  | 24,807 | 8 | G523 |  |
+| `Nut_Calories` | float64 | `kcal` per dish | 388,963 | 9,681 | 196.0 |  |
+| `Nut_Protein` | float64 | `g` per dish | 409,996 | 10,005 | 19.1 |  |
+| `Nut_Fat` | float64 | `g` per dish | 397,851 | 8,775 | 13.3 |  |
+| `Nut_Carbohydrates` | float64 | `g` per dish | 378,110 | 12,197 | 0.0 |  |
+| `Nut_Fiber` | float64 | `g` per dish | 391,942 | 4,715 | 0.0 |  |
+| `Nut_Sugar` | float64 | `g` per dish | 353,037 | 8,302 | 0.0 |  |
+| `Nut_SaturatedFat` | float64 | `g` per dish | 381,138 | 7,726 | 6.2 |  |
+| `Nut_MonounsaturatedFat` | float64 | `g` per dish | 366,413 | 7,391 | 5.3 |  |
+| `Nut_PolyunsaturatedFat` | float64 | `g` per dish | 367,189 | 7,191 | 0.6 |  |
+| `Nut_TransFat` | float64 | `g` per dish | 252,621 | 1,316 | 0.0 |  |
+| `Nut_Cholesterol` | float64 | `mg` per dish | 398,760 | 2,537 | 77.0 |  |
+| `Nut_Sodium` | float64 | `mg` per dish | 396,266 | 7,299 | 62.1 |  |
+| `Nut_Potassium` | float64 | `mg` per dish | 394,392 | 10,323 | 263.5 |  |
+| `Nut_Calcium` | float64 | `mg` per dish | 396,042 | 6,980 | 16.15 |  |
+| `Nut_Iron` | float64 | `mg` per dish | 382,830 | 7,349 | 1.52 |  |
+| `Nut_VitaminA` | float64 | `ug` per dish | 386,927 | 3,935 | 4.25 |  |
+| `Nut_VitaminC` | float64 | `mg` per dish | 385,575 | 4,772 | 0.0 |  |
+| `Nut_Magnesium` | float64 | `mg` per dish | 382,589 | 5,387 | 18.9 |  |
+| `Nut_Phosphorus` | float64 | `mg` per dish | 384,770 | 7,611 | 180.5 |  |
+| `Nut_Zinc` | float64 | `mg` per dish | 372,833 | 5,409 | 3.325 |  |
+| `Nut_VitaminB6` | float64 | `mg` per dish | 356,787 | 3,974 | 0.16 |  |
+| `Nut_VitaminB12` | float64 | `ug` per dish | 324,965 | 2,011 | 0.0 |  |
+| `Nut_Folate` | float64 | `ug` per dish | 374,555 | 5,138 | 1.5 |  |
+| `Nut_VitaminD` | float64 | `ug` per dish | 317,602 | 817 | 0.0 |  |
+| `Nut_VitaminE` | float64 | `mg` per dish | 342,199 | 4,484 | 0.153 |  |
+| `Nut_VitaminK` | float64 | `ug` per dish | 330,190 | 4,827 | 0.396 |  |
+| `Nut_Thiamin` | float64 | `mg` per dish | 372,092 | 3,570 | 0.096 |  |
+| `Nut_Riboflavin` | float64 | `mg` per dish | 382,667 | 3,721 | 0.153 |  |
+| `Nut_Niacin` | float64 | `mg` per dish | 376,132 | 7,667 | 3.84 |  |
+| `Nut_Copper` | float64 | `mg` per dish | 382,356 | 4,298 | 0.072 |  |
+| `Nut_Selenium` | float64 | `ug` per dish | 339,734 | 5,078 | 1.8 |  |
+| `Nut_Manganese` | float64 | `mg` per dish | 370,467 | 5,631 | 0.009 |  |
+| `sugar_source_concept` | object |  | 500,000 | 3 | total_sugars |  |
+| `sugar_source_verification` | object |  | 500,000 | 7 | numeric_reproduced |  |
+| `sugar_source_value_kind` | object |  | 500,000 | 5 | numeric |  |
+| `sugar_source_denominator_status` | object |  | 500,000 | 2 | original_food_mass_or_volume_basis_requi |  |
+| `ifct_food_review_status` | string |  | 5,093 | 3 | supported_source_identity | IFCT food/form decision; missing evidence is not ingredient invalidity. Independent quantity eligibility still applies. |
+| `ifct_food_review_id` | string |  | 5,093 | 1,218 | ifct_food::d70f14b3351306ab22fc7081adb62 | Source-bound IFCT food/form evidence identifier; raw reviewer prose and recipe instructions are withheld. |
+| `ifct_source_food_basis` | string |  | 4,802 | 1 | raw_general_convention_named_processing_ | Native IFCT source preparation basis retained for the selected food; does not establish cooking yield or finished-dish composition. |
+| `ifct_source_manifest_sha256` | string |  | 4,802 | 1 | 702748067426d9051337ca46e226c16ebec26f87 | SHA-256 of the IFCT source catalog manifest binding the published component profiles. |
+| `ifct_weight_policy` | string |  | 4,802 | 1 | existing_positive_quantity_unit_and_conf | Explicit positive-quantity/unit and confident A/B estimator policy; estimator tiers are not measured accuracy or weighed edible mass. |
+| `legacy_match_review_status` | string |  | 4,802 | 1 | rejected_identity | Previous automatic-target rejection status, retained only where an IFCT alternative is selected; null elsewhere. |
+| `legacy_match_review_id` | string |  | 4,802 | 10 | NMR-AGENT-20260913-42 | Evidence ID for the previous rejected automatic target; distinct from the active IFCT food/form evidence. |
 
 ## `data/enrichment/ingredients_recovered.parquet`
 
-5,534 rows x 2 columns - 0.4 MB
+5,532 rows x 2 columns - 0.4 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 5,534 | 5,534 | 4551 |  |
-| `Ingredients_recovered` | object |  | 5,534 | 5,042 | 2 chilli (finely chopped), wheat dough,  |  |
+| `recipe_id` | int64 |  | 5,532 | 5,532 | 4551 |  |
+| `Ingredients_recovered` | object |  | 5,532 | 5,040 | 2 chilli (finely chopped), wheat dough,  |  |
 
 ## `data/enrichment/ingredients_weights.parquet`
 
-2,335,760 rows x 8 columns - 14.0 MB (statistics from the first 500,000 rows)
+2,338,910 rows x 11 columns - 15.7 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 500,000 | 46,426 | 0 |  |
+| `recipe_id` | int64 |  | 500,000 | 46,368 | 0 |  |
 | `ing_index` | int64 |  | 500,000 | 44 | 0 |  |
-| `name` | object |  | 500,000 | 61,513 | mutton |  |
-| `quantity` | float64 |  | 370,992 | 300 | 0.5 |  |
-| `unit` | object |  | 261,629 | 25 | cup |  |
-| `grams` | float64 |  | 500,000 | 1,437 | 100.0 |  |
+| `name` | object |  | 500,000 | 57,324 | mutton |  |
+| `quantity` | float64 |  | 370,249 | 291 | 0.5 |  |
+| `unit` | object |  | 281,873 | 26 | cup |  |
+| `grams` | float64 |  | 499,928 | 1,411 | 100.0 |  |
 | `confident` | bool |  | 500,000 | 2 | False |  |
-| `tier` | object |  | 500,000 | 5 | D |  |
+| `tier` | object |  | 500,000 | 6 | D |  |
+| `quantity_observed` | float64 |  | 370,319 | 299 | 0.5 |  |
+| `weight_status` | object |  | 500,000 | 6 | estimated |  |
+| `unit_observed` | object |  | 281,772 | 25 | cup |  |
 
 ## `data/enrichment/nutrition_totals.parquet`
 
-219,386 rows x 6 columns - 3.1 MB
+219,384 rows x 6 columns - 3.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `tot_kcal` | float64 |  | 219,386 | 53,884 | 583.0 |  |
-| `tot_protein` | float64 |  | 219,386 | 6,532 | 20.6 |  |
-| `tot_carb` | float64 |  | 219,386 | 13,669 | 69.2 |  |
-| `tot_fat` | float64 |  | 219,386 | 9,418 | 30.6 |  |
-| `tot_grams` | float64 |  | 219,386 | 19,849 | 220.0 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `tot_kcal` | float64 |  | 219,326 | 53,884 | 583.0 |  |
+| `tot_protein` | float64 |  | 219,326 | 6,532 | 20.6 |  |
+| `tot_carb` | float64 |  | 219,326 | 13,669 | 69.2 |  |
+| `tot_fat` | float64 |  | 219,326 | 9,418 | 30.6 |  |
+| `tot_grams` | float64 |  | 219,326 | 19,849 | 220.0 |  |
 
 ## `data/enrichment/prep_features.parquet`
 
-219,386 rows x 13 columns - 1.5 MB
+219,384 rows x 13 columns - 1.5 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `prep_states` | object |  | 219,386 | 21,449 |  |  |
-| `prep_families` | object |  | 219,386 | 105 |  |  |
-| `n_prep_states` | int64 |  | 219,386 | 15 | 0 |  |
-| `n_prepped_ingredients` | int64 |  | 219,386 | 11 | 0 |  |
-| `has_prep_cut` | bool |  | 219,386 | 2 | False |  |
-| `has_prep_thermal` | bool |  | 219,386 | 2 | False |  |
-| `has_prep_hydration` | bool |  | 219,386 | 2 | False |  |
-| `has_prep_milled` | bool |  | 219,386 | 2 | False |  |
-| `prep_mass_changing` | bool |  | 219,386 | 2 | False |  |
-| `recipe_sections` | object |  | 219,386 | 4,482 |  |  |
-| `n_components_min` | int64 |  | 219,386 | 9 | 0 |  |
-| `is_multi_component` | bool |  | 219,386 | 2 | False |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `prep_states` | object |  | 219,384 | 21,457 |  |  |
+| `prep_families` | object |  | 219,384 | 105 |  |  |
+| `n_prep_states` | int64 |  | 219,384 | 15 | 0 |  |
+| `n_prepped_ingredients` | int64 |  | 219,384 | 11 | 0 |  |
+| `has_prep_cut` | bool |  | 219,384 | 2 | False |  |
+| `has_prep_thermal` | bool |  | 219,384 | 2 | False |  |
+| `has_prep_hydration` | bool |  | 219,384 | 2 | False |  |
+| `has_prep_milled` | bool |  | 219,384 | 2 | False |  |
+| `prep_mass_changing` | bool |  | 219,384 | 2 | False |  |
+| `recipe_sections` | object |  | 219,384 | 4,482 |  |  |
+| `n_components_min` | int64 |  | 219,384 | 9 | 0 |  |
+| `is_multi_component` | bool |  | 219,384 | 2 | False |  |
 
 ## `data/enrichment/prep_ingredient.parquet`
 
-458,060 rows x 4 columns - 4.6 MB
+458,285 rows x 4 columns - 4.6 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 458,060 | 139,897 | 1 |  |
-| `ingredient_text` | object |  | 458,060 | 236,367 | ground coriander |  |
-| `prep_state` | object |  | 458,060 | 76 | ground |  |
-| `prep_family` | object |  | 458,060 | 7 | milled |  |
+| `recipe_id` | int64 |  | 458,285 | 139,943 | 1 |  |
+| `ingredient_text` | object |  | 458,285 | 236,527 | ground coriander |  |
+| `prep_state` | object |  | 458,285 | 76 | ground |  |
+| `prep_family` | object |  | 458,285 | 7 | milled |  |
 
 ## `data/enrichment/quarantine_list.parquet`
 
-143,787 rows x 5 columns - 0.7 MB
+143,738 rows x 5 columns - 0.7 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 143,787 | 143,787 | 79844 |  |
-| `max_severity` | object |  | 143,787 | 4 | critical |  |
-| `n_issues` | int64 |  | 143,787 | 11 | 11 |  |
-| `lenses` | object |  | 143,787 | 15 | nutrition |  |
-| `checks` | object |  | 143,787 | 1,084 | B_calories_per_serving; C_calories_meal; |  |
+| `recipe_id` | int64 |  | 143,738 | 143,738 | 79844 |  |
+| `max_severity` | object |  | 143,738 | 4 | critical |  |
+| `n_issues` | Int64 |  | 143,738 | 11 | 11 |  |
+| `lenses` | object |  | 143,738 | 15 | nutrition |  |
+| `checks` | object |  | 143,738 | 1,084 | B_calories_per_serving; C_calories_meal; |  |
+
+## `data/enrichment/recipe_ifct_fraction.parquet`
+
+218,653 rows x 8 columns - 3.2 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 218,653 | 218,653 | 0 |  |
+| `ifct_food_occurrence_count` | int64 |  | 218,653 | 4 | 0 | IFCT food identities assigned to this recipe, including occurrences without usable weight estimates. |
+| `ifct_energy_available_occurrence_count` | int64 |  | 218,653 | 3 | 0 | IFCT ingredient occurrences with available estimated energy. |
+| `ifct_computed_energy_kcal` | float64 | `kcal` per dish | 218,146 | 562 | 0.0 | Sum of available IFCT ingredient energy estimates, not a complete recipe total or declared serving value. |
+| `computed_ingredient_energy_kcal` | float64 | `kcal` per dish | 218,146 | 186,269 | 638.7 | Sum of available computed ingredient energy from all source databases; the denominator may be partial. |
+| `energy_available_count` | int64 |  | 218,653 | 40 | 10 | Number of ingredient occurrences contributing available computed energy across all sources. |
+| `fraction_basis` | object |  | 218,653 | 4 | partial_computed_ingredient_energy | Availability status of the computed-energy denominator; preserves unknown or zero-energy denominators explicitly. |
+| `ifct_computed_energy_fraction` | float64 | per energy [0, 1] | 218,044 | 7,095 | 0.0 | IFCT share of available computed ingredient energy; null without a positive denominator. Does not measure complete nutrient coverage or change the INDB numerator. |
 
 ## `data/enrichment/renutrition_v3.parquet`
 
-219,386 rows x 18 columns - 8.1 MB
+219,384 rows x 18 columns - 7.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 219,386 | 219,386 | 0 |  |
-| `n_ingredients` | int64 |  | 219,386 | 42 | 11 |  |
-| `confident_coverage` | float64 | [0, 1] | 219,386 | 246 | 0.0 |  |
-| `est_total_grams_v3` | float64 |  | 219,386 | 30,484 | 435.0 |  |
-| `best_total_grams_v3` | float64 |  | 210,407 | 23,795 | 435.0 |  |
-| `grams_per_serving_v3` | float64 | `g` per dish | 216,928 | 94,583 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
-| `serving_basis_v3` | object |  | 219,386 | 6 | portion |  |
-| `per100g_confident` | bool |  | 219,386 | 2 | True |  |
-| `per100g_available_v3` | bool |  | 219,386 | 2 | True |  |
-| `energy_capped_v3` | bool |  | 219,386 | 2 | False |  |
-| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 178,333 | 144,761 | 63.605 |  |
-| `per100g_protein` | float64 | `g` per 100g [0, 100] | 178,095 | 24,387 | 2.041 |  |
-| `per100g_carb` | float64 | `g` per 100g [0, 100] | 177,143 | 63,934 | 7.191 |  |
-| `per100g_fat` | float64 | `g` per 100g [0, 100] | 177,981 | 36,375 | 3.264 |  |
-| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,978 | 17,456 | 1.857 |  |
-| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 178,333 | 33,140 | 0.405 |  |
-| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 178,333 | 14,606 | 2.041 |  |
-| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,978 | 128,906 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `n_ingredients` | Int64 |  | 219,326 | 42 | 11 |  |
+| `confident_coverage` | float64 | [0, 1] | 219,384 | 246 | 0.0 |  |
+| `est_total_grams_v3` | float64 |  | 219,326 | 30,482 | 435.0 |  |
+| `best_total_grams_v3` | float64 |  | 210,348 | 23,793 | 435.0 |  |
+| `grams_per_serving_v3` | float64 | `g` per dish | 216,868 | 94,570 | 435.0 | ⚠ **The name is wrong.** This is a WHOLE-DISH weight (median 705 g), not one serving. Divide by `Servings_num` for a per-serving figure. |
+| `serving_basis_v3` | object |  | 219,384 | 6 | portion |  |
+| `per100g_confident` | bool |  | 219,384 | 2 | True |  |
+| `per100g_available_v3` | bool |  | 219,384 | 2 | True |  |
+| `energy_capped_v3` | boolean |  | 219,326 | 2 | False |  |
+| `per100g_kcal` | float64 | `kcal` per 100g [0, 900] | 158,966 | 131,225 | 63.605 |  |
+| `per100g_protein` | float64 | `g` per 100g [0, 100] | 158,667 | 24,226 | 2.041 |  |
+| `per100g_carb` | float64 | `g` per 100g [0, 100] | 156,979 | 60,669 | 7.191 |  |
+| `per100g_fat` | float64 | `g` per 100g [0, 100] | 158,423 | 35,002 | 3.264 |  |
+| `per100g_satfat` | float64 | `g` per 100g [0, 100] | 155,971 | 17,456 | 1.857 |  |
+| `per100g_sugar` | float64 | `g` per 100g [0, 100] | 157,324 | 30,629 | 0.405 |  |
+| `per100g_fiber` | float64 | `g` per 100g [0, 100] | 158,335 | 14,190 | 2.041 |  |
+| `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,971 | 128,900 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
 
 ## `data/kg/kg_edge_evidence.parquet`
 
-236,354 rows x 4 columns - 0.8 MB
+236,315 rows x 4 columns - 0.8 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 236,354 | 219,833 | recipe::0 |  |
-| `rel` | object |  | 236,354 | 5 | from_region |  |
-| `tail` | object |  | 236,354 | 486 | region::North India |  |
-| `attributes_json` | object |  | 236,354 | 9,958 | {"in_primary_axis": false, "scope": "ind |  |
+| `head` | object |  | 236,315 | 219,794 | recipe::0 |  |
+| `rel` | object |  | 236,315 | 5 | from_region |  |
+| `tail` | object |  | 236,315 | 486 | region::North India |  |
+| `attributes_json` | object |  | 236,315 | 9,961 | {"in_primary_axis": false, "scope": "ind |  |
 
 ## `data/kg/kg_edges.parquet`
 
-6,428,315 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,426,916 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 500,000 | 16,723 | recipe::0 |  |
+| `head` | object |  | 500,000 | 16,725 | recipe::0 |  |
 | `rel` | object |  | 500,000 | 22 | in_cuisine |  |
 | `tail` | object |  | 500,000 | 2,866 | cuisine::Indian |  |
 
 ## `data/kg/kg_nodes.parquet`
 
-222,539 rows x 44 columns - 25.2 MB
+222,537 rows x 44 columns - 25.2 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `node_id` | object |  | 222,539 | 222,539 | recipe::0 |  |
-| `type` | object |  | 222,539 | 17 | recipe |  |
-| `name` | object |  | 222,539 | 201,330 | Mutton Nihari |  |
-| `url` | object |  | 219,386 | 219,386 | https://3a2m.dataset/recipe/23b5b76af243 |  |
-| `split` | object |  | 219,386 | 3 | test |  |
-| `health_grade` | object |  | 219,386 | 5 | B |  |
-| `spice` | object |  | 219,386 | 3 | medium |  |
-| `difficulty` | object |  | 219,386 | 4 | hard |  |
-| `glycemic` | float64 | per serving | 216,353 | 15,974 | 1.79 |  |
-| `allergen_assessed` | object |  | 219,386 | 2 | True | False = allergens were never assessed for this recipe. Mirrors the `allergen::unknown` edge; the two are asserted to agree. |
-| `n_Calories` | float64 | `kcal` per dish | 219,386 | 91,081 | 69.17 |  |
-| `n_Protein` | float64 | `g` per dish | 218,737 | 9,690 | 2.22 |  |
-| `n_Fat` | float64 | `g` per dish | 218,650 | 14,072 | 3.55 |  |
-| `n_Carbohydrates` | float64 | `g` per dish | 216,353 | 22,624 | 7.82 |  |
-| `n_Fiber` | float64 | `g` per dish | 219,386 | 5,618 | 2.22 |  |
-| `n_Sugar` | float64 | `g` per dish | 219,386 | 12,605 | 0.44 |  |
-| `n_SaturatedFat` | float64 | `g` per dish | 219,386 | 7,111 | 2.02 |  |
-| `n_MonounsaturatedFat` | float64 | `g` per dish | 219,386 | 7,618 | 0.97 |  |
-| `n_PolyunsaturatedFat` | float64 | `g` per dish | 219,386 | 4,964 | 0.22 |  |
-| `n_TransFat` | float64 | `g` per dish | 219,386 | 390 | 0.0 |  |
-| `n_Cholesterol` | float64 | `mg` per dish | 219,386 | 21,251 | 9.69 |  |
-| `n_Sodium` | float64 | `mg` per dish | 219,386 | 97,753 | 878.0 |  |
-| `n_Potassium` | float64 | `mg` per dish | 219,386 | 97,923 | 143.39 |  |
-| `n_Calcium` | float64 | `mg` per dish | 219,386 | 48,085 | 31.65 |  |
-| `n_Iron` | float64 | `mg` per dish | 219,386 | 4,294 | 2.05 |  |
-| `n_VitaminA` | float64 | `ug` per dish | 219,386 | 40,221 | 38.01 |  |
-| `n_VitaminC` | float64 | `mg` per dish | 219,386 | 11,663 | 2.79 |  |
-| `n_Magnesium` | float64 | `mg` per dish | 219,386 | 32,307 | 10.6 |  |
-| `n_Phosphorus` | float64 | `mg` per dish | 219,386 | 60,341 | 25.08 |  |
-| `n_Zinc` | float64 | `mg` per dish | 219,386 | 2,431 | 0.32 |  |
-| `n_VitaminB6` | float64 | `mg` per dish | 219,386 | 573 | 0.05 |  |
-| `n_VitaminB12` | float64 | `ug` per dish | 219,386 | 1,234 | 0.0 |  |
-| `n_Folate` | float64 | `ug` per dish | 219,386 | 38,325 | 8.08 |  |
-| `n_VitaminD` | float64 | `ug` per dish | 219,386 | 1,105 | 0.0 |  |
-| `n_VitaminE` | float64 | `mg` per dish | 219,386 | 3,601 | 0.38 |  |
-| `n_VitaminK` | float64 | `ug` per dish | 219,386 | 21,760 | 14.34 |  |
-| `n_Thiamin` | float64 | `mg` per dish | 219,386 | 564 | 0.03 |  |
-| `n_Riboflavin` | float64 | `mg` per dish | 219,386 | 613 | 0.03 |  |
-| `n_Niacin` | float64 | `mg` per dish | 219,386 | 3,799 | 0.43 |  |
-| `n_Copper` | float64 | `mg` per dish | 219,386 | 916 | 0.07 |  |
-| `n_Selenium` | float64 | `ug` per dish | 219,386 | 10,150 | 1.75 |  |
-| `n_Manganese` | float64 | `mg` per dish | 219,386 | 2,993 | 0.55 |  |
+| `node_id` | object |  | 222,537 | 222,537 | recipe::0 |  |
+| `type` | object |  | 222,537 | 17 | recipe |  |
+| `name` | object |  | 222,537 | 201,325 | Mutton Nihari |  |
+| `url` | object |  | 219,384 | 219,384 | https://3a2m.dataset/recipe/23b5b76af243 |  |
+| `split` | object |  | 219,384 | 3 | test |  |
+| `health_grade` | object |  | 219,384 | 6 | B |  |
+| `spice` | object |  | 219,384 | 4 | medium |  |
+| `difficulty` | object |  | 219,384 | 4 | hard |  |
+| `glycemic` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
+| `allergen_assessed` | object |  | 219,384 | 2 | True | False = allergens were never assessed for this recipe. Mirrors the `allergen::unknown` edge; the two are asserted to agree. |
+| `n_Calories` | float64 | `kcal` per dish | 219,326 | 91,076 | 69.17 |  |
+| `n_Protein` | float64 | `g` per dish | 218,677 | 9,690 | 2.22 |  |
+| `n_Fat` | float64 | `g` per dish | 218,590 | 14,072 | 3.55 |  |
+| `n_Carbohydrates` | float64 | `g` per dish | 216,293 | 22,624 | 7.82 |  |
+| `n_Fiber` | float64 | `g` per dish | 219,326 | 5,618 | 2.22 |  |
+| `n_Sugar` | float64 | `g` per dish | 219,326 | 12,605 | 0.44 |  |
+| `n_SaturatedFat` | float64 | `g` per dish | 219,326 | 7,111 | 2.02 |  |
+| `n_MonounsaturatedFat` | float64 | `g` per dish | 219,326 | 7,618 | 0.97 |  |
+| `n_PolyunsaturatedFat` | float64 | `g` per dish | 219,326 | 4,964 | 0.22 |  |
+| `n_TransFat` | float64 | `g` per dish | 219,326 | 390 | 0.0 |  |
+| `n_Cholesterol` | float64 | `mg` per dish | 219,326 | 21,251 | 9.69 |  |
+| `n_Sodium` | float64 | `mg` per dish | 219,326 | 97,743 | 878.0 |  |
+| `n_Potassium` | float64 | `mg` per dish | 219,326 | 97,913 | 143.39 |  |
+| `n_Calcium` | float64 | `mg` per dish | 219,326 | 48,082 | 31.65 |  |
+| `n_Iron` | float64 | `mg` per dish | 219,326 | 4,294 | 2.05 |  |
+| `n_VitaminA` | float64 | `ug` per dish | 219,326 | 40,217 | 38.01 |  |
+| `n_VitaminC` | float64 | `mg` per dish | 219,326 | 11,660 | 2.79 |  |
+| `n_Magnesium` | float64 | `mg` per dish | 219,326 | 32,305 | 10.6 |  |
+| `n_Phosphorus` | float64 | `mg` per dish | 219,326 | 60,338 | 25.08 |  |
+| `n_Zinc` | float64 | `mg` per dish | 219,326 | 2,431 | 0.32 |  |
+| `n_VitaminB6` | float64 | `mg` per dish | 219,326 | 573 | 0.05 |  |
+| `n_VitaminB12` | float64 | `ug` per dish | 219,326 | 1,234 | 0.0 |  |
+| `n_Folate` | float64 | `ug` per dish | 219,326 | 38,320 | 8.08 |  |
+| `n_VitaminD` | float64 | `ug` per dish | 219,326 | 1,105 | 0.0 |  |
+| `n_VitaminE` | float64 | `mg` per dish | 219,326 | 3,601 | 0.38 |  |
+| `n_VitaminK` | float64 | `ug` per dish | 219,326 | 21,755 | 14.34 |  |
+| `n_Thiamin` | float64 | `mg` per dish | 219,326 | 564 | 0.03 |  |
+| `n_Riboflavin` | float64 | `mg` per dish | 219,326 | 613 | 0.03 |  |
+| `n_Niacin` | float64 | `mg` per dish | 219,326 | 3,799 | 0.43 |  |
+| `n_Copper` | float64 | `mg` per dish | 219,326 | 916 | 0.07 |  |
+| `n_Selenium` | float64 | `ug` per dish | 219,326 | 10,150 | 1.75 |  |
+| `n_Manganese` | float64 | `mg` per dish | 219,326 | 2,993 | 0.55 |  |
 | `primary_axis` | object |  | 27 | 2 | False |  |
 | `pubchem_id` | object |  | 1,607 | 1,607 | 1130 |  |
 
@@ -1042,18 +1079,21 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/kg/substitutes_ours.parquet`
 
-3,314 rows x 8 columns - 0.1 MB
+3,411 rows x 11 columns - 0.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `ingredient` | object |  | 3,314 | 439 | agar |  |
-| `candidate` | object |  | 3,314 | 420 | condensed milk |  |
-| `cosine` | float64 |  | 3,314 | 1,880 | 0.4477 |  |
-| `pmi` | float64 |  | 3,314 | 1,293 | -2.8918 |  |
-| `avoidance` | float64 |  | 3,314 | 1,140 | 1.0 |  |
-| `score` | float64 |  | 3,314 | 1,791 | 0.4477 |  |
-| `cat` | object |  | 3,314 | 11 |  |  |
-| `cat_candidate` | object |  | 3,314 | 11 |  |  |
+| `ingredient` | object |  | 3,411 | 454 | agar |  |
+| `candidate` | object |  | 3,411 | 440 | condensed milk |  |
+| `cosine` | float64 |  | 3,411 | 1,944 | 0.5682 |  |
+| `pmi` | float64 |  | 3,411 | 1,440 | -2.9951 |  |
+| `avoidance` | float64 |  | 3,411 | 1,256 | 1.0 |  |
+| `score` | float64 |  | 3,411 | 1,790 | 0.5682 |  |
+| `cat` | object |  | 3,411 | 12 |  |  |
+| `cat_candidate` | object |  | 3,411 | 12 |  |  |
+| `category_evidence_status` | object |  | 3,411 | 2 | needs_category_evidence | Food-group evidence: category_supported requires two known equal ING2CAT values; needs_category_evidence is unknown, not a negative substitution label. |
+| `category_supported` | bool |  | 3,411 | 2 | False | True only for two known equal food-group categories; not functional, nutrition or safety approval. |
+| `category_review_hold` | bool |  | 3,411 | 2 | True | Missing category endpoint requires evidence; retained candidate, not a rejection. |
 
 ## `data/kg_flavor/flavor_edges.parquet`
 
@@ -1080,22 +1120,22 @@ Covering **all 44 published Parquet tables**.
 
 ## `data/provenance/field_history.parquet`
 
-7,912,281 rows x 6 columns - 58.6 MB (statistics from the first 500,000 rows)
+8,387,861 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 500,000 | 219,386 | 0 |  |
+| `recipe_id` | int64 |  | 500,000 | 219,327 | 0 |  |
 | `field` | object |  | 500,000 | 3 | RecipeName |  |
 | `generation` | object |  | 500,000 | 1 | orig |  |
-| `value_num` | float64 |  | 70,724 | 46,763 | 69.17 |  |
-| `value_str` | string |  | 429,276 | 199,055 | Mutton Nihari |  |
+| `value_num` | float64 |  | 70,841 | 46,819 | 69.17 |  |
+| `value_str` | string |  | 429,159 | 199,005 | Mutton Nihari |  |
 | `build_id` | object |  | 500,000 | 1 | v15-2026-09-01 |  |
 
 ---
 
 ## Every published file
 
-All 86 files under `data/`, so nothing ships undescribed.
+All 89 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
@@ -1116,16 +1156,16 @@ All 86 files under `data/`, so nothing ships undescribed.
 | `ALLERGEN_AUDIT.json` | 0.02 MB | metadata / manifest |
 | `allergens.parquet` | 2.24 MB | columnar table — documented above |
 | `corpus_manifest.json` | 0.01 MB | metadata / manifest |
-| `labels.parquet` | 2.96 MB | columnar table — documented above |
+| `labels.parquet` | 2.99 MB | columnar table — documented above |
 | `nutrition.parquet` | 16.14 MB | columnar table — documented above |
-| `nutrition_derived.parquet` | 12.71 MB | columnar table — documented above |
+| `nutrition_derived.parquet` | 12.42 MB | columnar table — documented above |
 | `PII_SEMANTIC_SCAN.json` | 0.00 MB | metadata / manifest |
-| `quality.parquet` | 2.89 MB | columnar table — documented above |
-| `recipes.parquet` | 46.94 MB | columnar table — documented above |
-| `recipes_structured.parquet` | 103.64 MB | columnar table — documented above |
+| `quality.parquet` | 2.90 MB | columnar table — documented above |
+| `recipes.parquet` | 46.97 MB | columnar table — documented above |
+| `recipes_structured.parquet` | 103.44 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
 
-### `data/enrichment/`
+### `data/enrichment/` — Structured companion tables. Optional recipe_ifct_fraction.parquet reports IFCT's share of available computed ingredient energy. ifct_source_profiles.json contains native and compatible component evidence; nutrition_source_provenance.json records sanitized source hashes and policies. Food/form agent review does not approve quantities or nutrient accuracy; carbohydrate and other unavailable IFCT components stay null in occurrence contributions.
 
 | file | size | kind |
 |---|---:|---|
@@ -1148,14 +1188,17 @@ All 86 files under `data/`, so nothing ships undescribed.
 | `fix_text.parquet` | 0.16 MB | columnar table — documented above |
 | `fix_variants.parquet` | 4.63 MB | columnar table — documented above |
 | `gluten_confidence_v2.parquet` | 0.73 MB | columnar table — documented above |
-| `ingredients_nutrition.parquet` | 100.48 MB | columnar table — documented above |
+| `ifct_source_profiles.json` | 0.03 MB | metadata / manifest |
+| `ingredients_nutrition.parquet` | 109.52 MB | columnar table — documented above |
 | `ingredients_recovered.parquet` | 0.41 MB | columnar table — documented above |
-| `ingredients_weights.parquet` | 14.00 MB | columnar table — documented above |
+| `ingredients_weights.parquet` | 15.73 MB | columnar table — documented above |
+| `nutrition_source_provenance.json` | 0.00 MB | metadata / manifest |
 | `nutrition_totals.parquet` | 3.13 MB | columnar table — documented above |
 | `prep_features.parquet` | 1.49 MB | columnar table — documented above |
 | `prep_ingredient.parquet` | 4.58 MB | columnar table — documented above |
 | `quarantine_list.parquet` | 0.70 MB | columnar table — documented above |
-| `renutrition_v3.parquet` | 8.13 MB | columnar table — documented above |
+| `recipe_ifct_fraction.parquet` | 3.18 MB | columnar table — documented above |
+| `renutrition_v3.parquet` | 7.78 MB | columnar table — documented above |
 
 ### `data/interactions/` — **Synthetic interaction benchmark, v4.** Regenerated 2026-09-12 from the published corpus by `scripts/build_interactions.py`, replacing the two earlier generations, which could not be merged because their remapped id spaces collide. Zero withdrawn-recipe references by construction; ids are corpus `recipe_id`s, not positional indices. Simulated behaviour, not observed users.
 
@@ -1196,7 +1239,7 @@ All 86 files under `data/`, so nothing ships undescribed.
 | `pairs_ours_meta.json` | 0.00 MB | metadata / manifest |
 | `pairs_regional.parquet` | 0.04 MB | columnar table — documented above |
 | `pairs_regional_meta.json` | 0.00 MB | metadata / manifest |
-| `substitutes_ours.parquet` | 0.07 MB | columnar table — documented above |
+| `substitutes_ours.parquet` | 0.08 MB | columnar table — documented above |
 | `substitutes_ours_meta.json` | 0.00 MB | metadata / manifest |
 
 ### `data/kg_flavor/` — FlavorDB-derived flavour layer, `CC BY-NC-SA 3.0`. Note the same content is ALSO inside `data/kg/`, so taking the core graph alone does not avoid FlavorDB's terms.
@@ -1214,7 +1257,7 @@ All 86 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `builds.json` | 0.00 MB | metadata / manifest |
-| `field_history.parquet` | 58.63 MB | columnar table — documented above |
+| `field_history.parquet` | 61.64 MB | columnar table — documented above |
 | `language_source_evidence.json` | 0.00 MB | metadata / manifest |
 | `release_facts.json` | 0.00 MB | metadata / manifest |
 | `withdrawn_ids.json` | 0.83 MB | metadata / manifest |

@@ -3821,6 +3821,87 @@
    ],
    "basis_note": "pre-correction value of badlist_n_items"
   },
+  "computed_ingredient_energy_kcal": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "Sum of available computed ingredient energy across sources; may be partial and is not declared per-serving energy."
+  },
+  "computed_ingredient_energy_kcal_orig": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_pre_r5": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_pre_r6": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_pre_r7": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_pre_r8": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_pre_r9": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_predensity": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of computed_ingredient_energy_kcal"
+  },
+  "computed_ingredient_energy_kcal_uncorrected": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of computed_ingredient_energy_kcal"
+  },
   "confident_coverage": {
    "unit": "1",
    "basis": "row",
@@ -4117,6 +4198,87 @@
     null
    ],
    "basis_note": "pre-correction value of dup_family_size"
+  },
+  "energy_available_count": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "Count of ingredient occurrences with available computed energy, across source databases."
+  },
+  "energy_available_count_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of energy_available_count"
+  },
+  "energy_available_count_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of energy_available_count"
+  },
+  "energy_available_count_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of energy_available_count"
+  },
+  "energy_available_count_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of energy_available_count"
+  },
+  "energy_available_count_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of energy_available_count"
+  },
+  "energy_available_count_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of energy_available_count"
+  },
+  "energy_available_count_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of energy_available_count"
+  },
+  "energy_available_count_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of energy_available_count"
   },
   "fsa_n_green": {
    "unit": "1",
@@ -4541,6 +4703,330 @@
    ],
    "basis_note": "pre-correction value of grams_per_serving_v3"
   },
+  "ifct_computed_energy_fraction": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "IFCT share of available computed ingredient energy; null without a positive denominator. Not complete composition coverage. Existing INDB numerator is unchanged."
+  },
+  "ifct_computed_energy_fraction_orig": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "original source value of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_pre_r5": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R5 pass of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_pre_r6": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R6 pass of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_pre_r7": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R7 pass of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_pre_r8": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R8 pass of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_pre_r9": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "value before the R9 pass of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_predensity": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-density-correction value of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_fraction_uncorrected": {
+   "unit": "1",
+   "basis": "energy",
+   "domain": [
+    0,
+    1
+   ],
+   "basis_note": "pre-correction value of ifct_computed_energy_fraction"
+  },
+  "ifct_computed_energy_kcal": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "Sum of available IFCT ingredient energy estimates; unknown components are not zero. Null when no recipe energy denominator is available."
+  },
+  "ifct_computed_energy_kcal_orig": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_pre_r5": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_pre_r6": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_pre_r7": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_pre_r8": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_pre_r9": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_predensity": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of ifct_computed_energy_kcal"
+  },
+  "ifct_computed_energy_kcal_uncorrected": {
+   "unit": "kcal",
+   "basis": "dish",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of ifct_computed_energy_kcal"
+  },
+  "ifct_energy_available_occurrence_count": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "Count of IFCT occurrences with available estimated energy contributions."
+  },
+  "ifct_energy_available_occurrence_count_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of ifct_energy_available_occurrence_count"
+  },
+  "ifct_energy_available_occurrence_count_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of ifct_energy_available_occurrence_count"
+  },
+  "ifct_food_occurrence_count": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "Count of ingredient occurrences assigned reviewed IFCT food identity, including unavailable weights."
+  },
+  "ifct_food_occurrence_count_orig": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "original source value of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_pre_r5": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R5 pass of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_pre_r6": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R6 pass of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_pre_r7": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R7 pass of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_pre_r8": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R8 pass of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_pre_r9": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "value before the R9 pass of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_predensity": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-density-correction value of ifct_food_occurrence_count"
+  },
+  "ifct_food_occurrence_count_uncorrected": {
+   "unit": "1",
+   "basis": "row",
+   "domain": [
+    0,
+    null
+   ],
+   "basis_note": "pre-correction value of ifct_food_occurrence_count"
+  },
   "ing_weight_confident_frac": {
    "unit": "1",
    "basis": "row",
@@ -4548,7 +5034,7 @@
     0,
     1
    ],
-   "basis_note": "fraction, 0-1"
+   "basis_note": "current confident occurrence count / occurrence count; no occurrences is null; estimator-tier fraction, not calibrated accuracy"
   },
   "ing_weight_confident_frac_orig": {
    "unit": "1",
@@ -5944,33 +6430,39 @@
  "files_stamped": [
   {
    "file": "data\\corpus\\recipes_structured.parquet",
-   "columns": 269,
+   "columns": 270,
    "stamped": 103,
-   "rows": 219386
+   "rows": 219384
   },
   {
    "file": "data\\corpus\\quality.parquet",
-   "columns": 24,
+   "columns": 25,
    "stamped": 7,
-   "rows": 219386
+   "rows": 219384
   },
   {
    "file": "data\\corpus\\nutrition.parquet",
    "columns": 36,
    "stamped": 35,
-   "rows": 219386
+   "rows": 219384
   },
   {
    "file": "data\\corpus\\nutrition_derived.parquet",
    "columns": 46,
    "stamped": 29,
-   "rows": 219386
+   "rows": 219384
   },
   {
    "file": "data\\kg\\kg_nodes.parquet",
    "columns": 44,
    "stamped": 33,
-   "rows": 222539
+   "rows": 222537
+  },
+  {
+   "file": "data\\enrichment\\recipe_ifct_fraction.parquet",
+   "columns": 8,
+   "stamped": 7,
+   "rows": 218653
   }
  ]
 }

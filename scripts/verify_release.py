@@ -191,6 +191,35 @@ def check_pii(root: Path) -> None:
                 # credit_card over-fires on numeric id strings; only flag when the
                 # column is not otherwise numeric-looking.
                 hits = series.str.contains(rx, regex=True, na=False)
+                # These two occurrence fields contain generated context digests.
+                # A hex digest can contain 13-16 consecutive digits; only the full
+                # documented namespace/length is exempt from this one pattern.
+                if (name == "credit_card"
+                        and path.relative_to(root).as_posix() == "data/enrichment/ingredients_nutrition.parquet"
+                        and col in {"match_review_id", "ifct_food_review_id"}):
+                    context_digest = series.str.fullmatch(r"ifct_food::[0-9a-f]{64}", na=False)
+                    suppressed = hits & context_digest
+                    if suppressed.any():
+                        notes.append(
+                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                            f"({int(suppressed.sum())} hits) — validated IFCT context digest"
+                        )
+                    hits = hits & ~context_digest
+                # `Ingredients_recovered` carries scraped page furniture, including source
+                # URLs whose path segments contain 13-16 consecutive digits. Suppress
+                # credit_card ONLY where the match sits inside a URL, on this one column,
+                # and let every other pattern and every non-URL match fail normally. The
+                # column itself is no longer exempt: that exemption published an email
+                # address on recipe 218869 (withdrawn 2026-09-15).
+                if name == "credit_card" and col == "Ingredients_recovered":
+                    in_url = series.str.contains(r"https?://\S*\d{13,16}", regex=True, na=False)
+                    suppressed = hits & in_url
+                    if suppressed.any():
+                        notes.append(
+                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                            f"({int(suppressed.sum())} hits) — digit run inside a source URL"
+                        )
+                    hits = hits & ~in_url
                 if hits.any():
                     n = int(hits.sum())
                     example = series[hits].iloc[0][:80]
@@ -920,7 +949,7 @@ def main() -> int:
     from allergen_tier_contract import validate_release_tiers
     for problem in validate_release_tiers(args.root):
         fail('allergen-tiers', problem)
-    from nutrition_contract import validate_release_nutrition_alias, validate_release_folate
+    from nutrition_contract import validate_release_nutrition_alias, validate_release_folate, validate_release_density, validate_release_weight_confidence
     nutrition_problems = validate_release_nutrition_alias(args.root)
     for problem in nutrition_problems:
         fail("nutrition-provenance", problem)
@@ -928,6 +957,10 @@ def main() -> int:
         notes.append("nutrition-provenance: canonical supplemental FCT calorie fraction agrees across wide and quality tables")
     for problem in validate_release_folate(args.root):
         fail('folate-basis', problem)
+    for problem in validate_release_density(args.root):
+        fail('density-basis', problem)
+    for problem in validate_release_weight_confidence(args.root):
+        fail('weight-confidence', problem)
     from flavor_contract import validate_release_flavor
     flavor_problems = validate_release_flavor(args.root)
     for problem in flavor_problems:

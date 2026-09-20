@@ -64,6 +64,29 @@ def unit_cell(col: str) -> str:
 #
 # Keep these short: one sentence, and only where reading the wrong column changes an answer.
 COLUMN_NOTES = {
+    "category_evidence_status": "Food-group evidence: category_supported requires two known equal ING2CAT values; needs_category_evidence is unknown, not a negative substitution label.",
+    "category_supported": "True only for two known equal food-group categories; not functional, nutrition or safety approval.",
+    "category_review_hold": "Missing category endpoint requires evidence; retained candidate, not a rejection.",
+    "fct_source": "Source database namespace; combine with fct_food_id for food identity. IFCT2017 identifies the reviewed NIN source snapshot.",
+    "fct_food_id": "Exact food ID within fct_source; IFCT2017 uses source codes such as A018, A019 and L003.",
+    "fct_idx": "Legacy combined-FCT row index. Null is valid for an IFCT2017 food identified by fct_source and fct_food_id.",
+    "match_review_status": "Current source-food match status. agent_reviewed_source_identity establishes food/form evidence only, not human review, quantity approval or nutrient accuracy.",
+    "match_review_id": "Evidence ID for the current source-food match decision; previous rejected targets remain in legacy_match_review fields when replaced.",
+    "ifct_food_review_status": "IFCT food/form decision; missing evidence is not ingredient invalidity. Independent quantity eligibility still applies.",
+    "ifct_food_review_id": "Source-bound IFCT food/form evidence identifier; raw reviewer prose and recipe instructions are withheld.",
+    "ifct_source_food_basis": "Native IFCT source preparation basis retained for the selected food; does not establish cooking yield or finished-dish composition.",
+    "ifct_source_manifest_sha256": "SHA-256 of the IFCT source catalog manifest binding the published component profiles.",
+    "ifct_weight_policy": "Explicit positive-quantity/unit and confident A/B estimator policy; estimator tiers are not measured accuracy or weighed edible mass.",
+    "legacy_match_review_status": "Previous automatic-target rejection status, retained only where an IFCT alternative is selected; null elsewhere.",
+    "legacy_match_review_id": "Evidence ID for the previous rejected automatic target; distinct from the active IFCT food/form evidence.",
+    "nutrition_status": "Availability of estimated ingredient contributions. IFCT assignments may have unavailable weights; compatible protein, fat, fibre and energy alone do not establish other nutrients.",
+    "ifct_food_occurrence_count": "IFCT food identities assigned to this recipe, including occurrences without usable weight estimates.",
+    "ifct_energy_available_occurrence_count": "IFCT ingredient occurrences with available estimated energy.",
+    "ifct_computed_energy_kcal": "Sum of available IFCT ingredient energy estimates, not a complete recipe total or declared serving value.",
+    "computed_ingredient_energy_kcal": "Sum of available computed ingredient energy from all source databases; the denominator may be partial.",
+    "energy_available_count": "Number of ingredient occurrences contributing available computed energy across all sources.",
+    "fraction_basis": "Availability status of the computed-energy denominator; preserves unknown or zero-energy denominators explicitly.",
+    "ifct_computed_energy_fraction": "IFCT share of available computed ingredient energy; null without a positive denominator. Does not measure complete nutrient coverage or change the INDB numerator.",
     # ---- added 2026-09-02 by the standardisation recheck. Each is a case where a consumer
     # reading the obvious column gets a wrong answer, and the note is the only thing that
     # would tell them. Same rationale as the allergen pair below.
@@ -206,6 +229,7 @@ def main() -> int:
         ".py": "generator kept beside its output so the artefact is reproducible",
     }
     NOTES = {
+        "data/enrichment": "Structured companion tables. Optional recipe_ifct_fraction.parquet reports IFCT's share of available computed ingredient energy. ifct_source_profiles.json contains native and compatible component evidence; nutrition_source_provenance.json records sanitized source hashes and policies. Food/form agent review does not approve quantities or nutrient accuracy; carbohydrate and other unavailable IFCT components stay null in occurrence contributions.",
         "data/interactions": "**Synthetic interaction benchmark, v4.** Regenerated 2026-09-12 "
                              "from the published corpus by `scripts/build_interactions.py`, "
                              "replacing the two earlier generations, which could not be merged "

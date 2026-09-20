@@ -13,12 +13,12 @@ original instructions, headnotes and other withheld prose are not redistributed.
 
 | Current payload | Count |
 |---|---:|
-| Recipes | 219,386 |
-| Wide-view columns | 269 |
+| Recipes | 219,384 |
+| Wide-view columns | 270 |
 | Source sites | 378 |
-| Graph nodes | 222,539 |
-| Graph triples | 6,428,315 |
-| Edge evidence rows | 236,354 |
+| Graph nodes | 222,537 |
+| Graph triples | 6,426,916 |
+| Edge evidence rows | 236,315 |
 | Ingredient nodes | 927 |
 | Compound nodes | 1,607 |
 | Node types / relation types | 17 / 22 |
@@ -36,9 +36,9 @@ historical reproducibility and must not be used implicitly in new evaluation.
 
 | Partition | Recipes |
 |---|---:|
-| test | 11,093 |
-| train | 197,355 |
-| val | 10,938 |
+| test | 11,094 |
+| train | 197,350 |
+| val | 10,940 |
 
 The release verifier checks graph/corpus split parity by ID and both group constraints.
 These checks do not establish the absence of all possible semantic near-duplicates.
@@ -50,9 +50,9 @@ no user with a dietary restriction is served an incompatible or undeclared recip
 
 ## Representation
 
-Pan-Indian accounts for 135,055 recipes and primarily denotes an unassigned
+Pan-Indian accounts for 135,018 recipes and primarily denotes an unassigned
 regional label, not an independently sampled geographic population. Region mixes
-states, broad areas and cultural communities. English accounts for 207,658
+states, broad areas and cultural communities. English accounts for 207,657
 recipes; 1,430 language values are missing. Use `Lang_base` for primary
 language filtering, with appropriate validation. Source and regional sampling are uneven.
 Recipe frequency is not population dietary prevalence.
@@ -62,7 +62,7 @@ Recipe frequency is not population dietary prevalence.
 Nutrition values are estimates with source and basis limitations. The composition
 pipeline uses an IFCT-shaped schema but USDA and US/UK composition sources; this
 does not establish Indian composition grounding. Consult `UNITS.json` before use.
-53,304 recipes lack numeric servings and 41,053
+53,309 recipes lack numeric servings and 60,418
 lack per-100g energy. Never replace missing denominators with 1. Estimated ingredient
 density and declared-serving bases remain separate confidence tiers.
 

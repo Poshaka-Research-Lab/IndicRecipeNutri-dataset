@@ -1,0 +1,33 @@
+{
+  "density": {
+    "version": "ingredient_density_completeness_v1",
+    "field": "per100g_basis",
+    "unavailable_value": "unavailable_incomplete_ingredient_layer",
+    "meaning": "A prior ingredient-density estimate lacks complete valid ingredient contributions or otherwise fails density eligibility.",
+    "required_behavior": "Density nutrient values and associated traffic-light labels are null; availability and confidence are false. Missing is not zero and must not satisfy an upper-bound nutrition filter.",
+    "complete_contribution_limit": "Arithmetic completeness does not establish ingredient identity, quantity accuracy, cooking yield or compatible raw/cooked source basis."
+  },
+  "supplemental_fraction": {
+    "version": "supplemental_fraction_basis_v1",
+    "field": "nut_suppl_fct_basis",
+    "meaning": "Denominator evidence for the fraction of computed ingredient calories attributed to supplemental FCT records.",
+    "values": [
+      "complete_computed_ingredient_energy",
+      "partial_computed_ingredient_energy",
+      "unavailable_no_energy",
+      "unavailable_zero_energy",
+      "unavailable_no_summary",
+      "legacy_denominator_unverified"
+    ],
+    "required_behavior": "Unavailable fractions remain null. Numeric zero describes a usable denominator with no supplemental energy only when the basis is verified; legacy zero has an unverified denominator.",
+    "limitation": "Not a fraction of Indian laboratory data, ingredient mass, all nutrients or independently validated recipe energy."
+  },
+  "weight_confidence": {
+    "version": "occurrence_weight_confidence_v1",
+    "field": "ing_weight_confident_frac",
+    "numerator": "Number of current ingredient occurrence rows whose estimator confident flag is true.",
+    "denominator": "Number of current ingredient occurrence rows for that recipe.",
+    "missingness": "No occurrence rows means unavailable (null), not zero. Zero means rows exist and none has the flag.",
+    "limitation": "Estimator-tier fraction, not calibrated probability, source-quantity accuracy or nutrient accuracy."
+  }
+}

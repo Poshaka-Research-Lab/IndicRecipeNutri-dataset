@@ -13,7 +13,7 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 ## Protocol
 
-* **Scope.** All **219,386** recipes in the published payload
+* **Scope.** All **219,384** recipes in the published payload
   (`data/corpus/recipes_structured.parquet`), measured at build time — not a sample,
   and not a figure carried over from an earlier corpus generation.
 * **Column scanned.** `IngredientsList`, the canonicalised list that ships. Earlier
@@ -36,10 +36,10 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 | Allergen | Labelled | Named in text | TP | FP | FN | Precision | Recall | Status |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| coconut | 36,824 | 35,524 | 35,524 | 1,300 | 0 | 96.47% | 100.00% | agrees |
+| coconut | 36,811 | 35,523 | 35,523 | 1,288 | 0 | 96.50% | 100.00% | agrees |
 | tamarind | 12,163 | 12,059 | 12,059 | 104 | 0 | 99.14% | 100.00% | agrees |
-| fenugreek | 20,025 | 17,864 | 17,864 | 2,161 | 0 | 89.21% | 100.00% | agrees |
-| asafoetida | 30,607 | 23,741 | 23,741 | 6,866 | 0 | 77.57% | 100.00% | agrees |
+| fenugreek | 20,028 | 17,864 | 17,864 | 2,164 | 0 | 89.20% | 100.00% | agrees |
+| asafoetida | 30,612 | 23,745 | 23,745 | 6,867 | 0 | 77.57% | 100.00% | agrees |
 
 > **Read the recall column with care.** For `coconut`, `tamarind` and `fenugreek` it is
 > close to a tautology: the labels were derived from a lexicon that is a superset of the
@@ -63,10 +63,10 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 ## Why asafoetida's precision is the outlier
 
-**6,866** recipes carry the `asafoetida` label without naming it in the shipped
+**6,867** recipes carry the `asafoetida` label without naming it in the shipped
 ingredient list. An earlier version of this report put that count at 1,321 and
 attributed it to *"valid knowledge-graph (KG-sourced) labels"*. **There is no KG
-allergen source in this payload** — `allergens_sa5_src` takes only `lexicon_v8` (72,941), `none` (146,445). The actual
+allergen source in this payload** — `allergens_sa5_src` takes only `lexicon_v8` (72,931), `none` (146,453). The actual
 explanation is compositional, and is the reason the class behaves differently from the
 other three:
 
@@ -76,7 +76,7 @@ chaat masala contains asafoetida; its ingredient list does not say so. Labelling
 recipes is correct and is the fail-closed behaviour Codex CXC 80-2020 requires — but it
 makes the label deliberately exceed the text, which is what depresses precision here.
 
-Of those 6,866 rows, **6,530 (95.1%)** name such a blend:
+Of those 6,867 rows, **6,531 (95.1%)** name such a blend:
 
 | Blend named | Recipes |
 |---|---:|
@@ -84,8 +84,8 @@ Of those 6,866 rows, **6,530 (95.1%)** name such a blend:
 | chat masala | 931 |
 | sev | 767 |
 | sambar powder | 630 |
-| pav bhaji | 560 |
-| garam masala | 386 |
+| pav bhaji | 561 |
+| garam masala | 387 |
 
 Leaving **336** rows (0.15% of the corpus) where the
 label is not explained by either a spelling variant or a named blend. These are

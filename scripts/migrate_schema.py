@@ -74,7 +74,7 @@ QUALITY = ["recipe_id", "has_instructions", "has_ingredients", "has_rating",
            "contains_poultry", "contains_fish", "contains_alcohol", "contains_gelatin",
            "sulphites_possible", "sulphites_possible_src", "nonveg_corrected",
            "mojibake_fixed", "qty_source", "ing_weight_confident_frac", "nut_indb_frac", "nut_suppl_fct_frac",
-           "confident_coverage", "dup_family_id", "dup_family_size", "is_family_primary",
+           "nut_suppl_fct_basis", "confident_coverage", "dup_family_id", "dup_family_size", "is_family_primary",
            "family_filled"]
 
 SHADOW = re.compile(r"(_orig|_uncorrected|_predensity)$")
@@ -123,11 +123,14 @@ def main() -> int:
     if EXCLUDED_SOURCE_SITES and "SourceSite" in df.columns:
         df = df[~df["SourceSite"].isin(set(EXCLUDED_SOURCE_SITES))]
     df = df.reset_index(drop=True)
-    from nutrition_contract import normalize_fraction_name, validate_folate_frame
+    from nutrition_contract import normalize_fraction_name, validate_folate_frame, validate_density_frame
     df = normalize_fraction_name(df, retain_legacy=True)
     folate_problems = validate_folate_frame(df)
     if folate_problems:
         raise ValueError('; '.join(folate_problems))
+    density_problems = validate_density_frame(df)
+    if density_problems:
+        raise ValueError('; '.join(density_problems))
     print(f"release exclusions applied: {before - len(df)} row(s) withheld "
           f"({sorted(EXCLUDED_RECIPE_IDS)})")
 
@@ -257,7 +260,7 @@ def main() -> int:
     # Corrective history is keyed separately upstream; do not widen the master with
     # another backup column or overwrite the correction's own generation/build ID.
     correction_counts = {}
-    for history_name in ['nutrition_basis_history', 'language_source_history', 'allergen_tier_history']:
+    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history']:
         history_path = pathlib.Path(_paths.DATA) / f'corrections/{history_name}.parquet'
         correction_counts[history_name] = 0
         if history_path.exists():

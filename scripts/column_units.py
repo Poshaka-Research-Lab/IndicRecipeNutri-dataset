@@ -52,6 +52,18 @@ def _n(unit, note, domain=None):
 NUTRIENT_MAGNITUDE = "derived from median magnitude against physiological range 2026-09-02"
 
 COLUMN_UNITS: dict[str, dict] = {
+    "ifct_food_occurrence_count": U(unit="1", basis="row", domain=[0, None],
+        basis_note="Count of ingredient occurrences assigned reviewed IFCT food identity, including unavailable weights."),
+    "ifct_energy_available_occurrence_count": U(unit="1", basis="row", domain=[0, None],
+        basis_note="Count of IFCT occurrences with available estimated energy contributions."),
+    "energy_available_count": U(unit="1", basis="row", domain=[0, None],
+        basis_note="Count of ingredient occurrences with available computed energy, across source databases."),
+    "ifct_computed_energy_kcal": U(unit="kcal", basis="dish", domain=[0, None],
+        basis_note="Sum of available IFCT ingredient energy estimates; unknown components are not zero. Null when no recipe energy denominator is available."),
+    "computed_ingredient_energy_kcal": U(unit="kcal", basis="dish", domain=[0, None],
+        basis_note="Sum of available computed ingredient energy across sources; may be partial and is not declared per-serving energy."),
+    "ifct_computed_energy_fraction": U(unit="1", basis="energy", domain=[0, 1],
+        basis_note="IFCT share of available computed ingredient energy; null without a positive denominator. Not complete composition coverage. Existing INDB numerator is unchanged."),
     # ---- energy and macros, per dish -----------------------------------------------
     "Nut_Calories": _n("kcal", f"median 253 kcal/dish; {NUTRIENT_MAGNITUDE}"),
     "Nut_Protein": _n(_G, f"median 6.79 g/dish; {NUTRIENT_MAGNITUDE}"),
@@ -149,7 +161,7 @@ COLUMN_UNITS: dict[str, dict] = {
     "confident_coverage": U(unit="1", basis="row", domain=[0, 1], basis_note="fraction, 0-1"),
     "dish_type_agreement": U(unit="1", basis="row", domain=[0, 1], basis_note="fraction, 0-1"),
     "ing_weight_confident_frac": U(unit="1", basis="row", domain=[0, 1],
-                                   basis_note="fraction, 0-1"),
+                                   basis_note="current confident occurrence count / occurrence count; no occurrences is null; estimator-tier fraction, not calibrated accuracy"),
     "atwater_relerr": U(unit="1", basis="row", domain=[0, None],
                         basis_note="relative error, dimensionless; not bounded above"),
     # ---- other dimensioned columns -------------------------------------------------

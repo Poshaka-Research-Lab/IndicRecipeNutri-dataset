@@ -53,7 +53,25 @@ SOURCE_ROOT = Path(os.environ.get("INDICRECIPE_SOURCE_ROOT",
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-MASTER_CSV = SOURCE_ROOT / "data" / "MASTER_indian_recipes_enriched.csv"
+# `MASTER_CSV` is gated on the source-installation reader gate in the datasets workspace
+# and is served by the module __getattr__ below, so the check runs on attribute access
+# (including `from release_config import MASTER_CSV`) rather than on import. That matters
+# twice over: the validator and every builder that does not read the source -- the whole
+# self-contained-clone path this module exists to keep working -- import this module
+# without ever touching the source root, and must stay importable where that root does
+# not exist. Only build_corpus.py and build_enrichment.py ask for MASTER_CSV, and both
+# read the master.
+_MASTER_CSV = SOURCE_ROOT / "data" / "MASTER_indian_recipes_enriched.csv"
+
+
+def __getattr__(name):
+    if name == "MASTER_CSV":
+        import paths as _paths  # noqa: E402 -- DATASETS_ROOT is on sys.path (above)
+
+        _paths.source_gate().require_master_ready(str(_MASTER_CSV))
+        return _MASTER_CSV
+    raise AttributeError("module {0!r} has no attribute {1!r}".format(__name__, name))
+
 KG_DIR = SOURCE_ROOT / "data" / "kg"
 RETRIEVAL_DIR = SOURCE_ROOT / "retrieval"
 # `BENCH_SYNTH_DIR` was removed in 0.7.1. Its only consumer was the historical-snapshot
@@ -150,6 +168,21 @@ EXCLUDED_RECIPE_IDS = {
         "navigation, with the site owner's email address attached. One of 101 rows "
         "from SourceSite=savorytales with the same scrape defect; the other 100 "
         "carry no personal data and are retained, flagged in quarantine_list."
+    ),
+    218869: (
+        "Withdrawn 2026-09-15. Its Ingredients_recovered text ends with an appeal to "
+        "'write mail to' a personal Gmail address, captured verbatim from the source "
+        "page. The address matches PII_PATTERNS['email'] exactly; it survived only "
+        "because Ingredients_recovered was in PII_EXEMPT_COLUMNS, which this change "
+        "also removes. Same defect class as 211731 above: scraped page furniture "
+        "carrying an individual's contact details."
+    ),
+    222341: (
+        "Withdrawn 2026-09-15. Its Ingredients_recovered text is not an ingredient "
+        "list at all but a credits block naming nine private individuals with their "
+        "social handles. No pattern in PII_PATTERNS would ever match it - it is "
+        "exactly the 'author names' the paper's section 3.5 claims were removed, and "
+        "it was found by reading the column rather than by matching it."
     ),
 }
 
@@ -493,7 +526,15 @@ EXPECTED_RECIPES = (EXPECTED_SOURCE_RECIPES - len(EXCLUDED_RECIPE_IDS)
 # 2026-09-13, approved local vocabulary batch: +soya-chaap, -cheesecloth, -creamy.
 # Source/release node and edge sets reconciled under the unchanged recipe exclusion.
 # Evidence: datasets/_admin/progress/VOCAB_REBUILD_20260913/*reconciliation.json.
-EXPECTED_KG_NODES = 222_539
+# 2026-09-20 (v0.10.0): 222,539 -> 222,537 (-2). NOT a corpus loss: `recipe::218869` and
+# `recipe::222341` are the two rows withdrawn on 2026-09-15 into EXCLUDED_RECIPE_IDS because their
+# Ingredients_recovered text carried an individual's contact details and a credits block naming
+# private individuals. 0.9.0 shipped on 09-13, before that withdrawal, so this is the first rebuild
+# that applies it and the old constant still counted them. Measured: the node sets differ by exactly
+# those two ids, no node was added, and `recipe` is the only type whose count moves
+# (219,386 -> 219,384 = EXPECTED_SOURCE_RECIPES 219,387 - 3 excluded). The source KG is unchanged at
+# 222,540 nodes; the release KG drops the 3 excluded recipes, as build_kg.drop_excluded does.
+EXPECTED_KG_NODES = 222_537
 # 2026-08-30: 6,307,080 -> 6,321,106 (+14,026). Every edge accounted for, none unexplained:
 #   for_occasion  +10,045  the duplicate-family merge filled 6,114 `Occasion` values, and
 #                          Occasion is multi-valued, so rows expand to more edges
@@ -876,7 +917,40 @@ EXPECTED_KG_NODES = 222_539
 # Follow-up local substitution repair: four canonical substitutions restored;
 # almond -> cashew replaces one pairs_with slot, net +3. Full source/release
 # table comparison reconciled; all nodes and every other relation unchanged.
-EXPECTED_KG_EDGES = 6_428_315
+# 2026-09-13: exact rejected nutrition-source bindings are excluded before
+# percentile calculation. Independently verified full candidate: 67 direct
+# removals, 9 threshold removals, 12 threshold additions; net -64. All nodes,
+# 6,425,330 non-rich_in source edges and all edge evidence remain exact.
+# Evidence: ifct_graph_nutrition_full_candidate_20260913/independent_verification.json.
+# 2026-09-18: 55 contains_allergen edges removed after independent human review of
+# current-positive/pilot-negative disagreements. The canonical Allergens_v2 cells,
+# long allergen table and KG endpoints were reconciled key-for-key; no other relation moved.
+# 2026-09-20 (v0.10.0): 6,428,196 -> 6,426,916. The 58-recipe source correction was installed by the
+# guarded driver (master d30bb67c..., gate open_verified) together with the owner's 281 decided cells,
+# and the enrichment refresh was installed after it. Reconciled per relation against the release KG on
+# disk (6,428,251 -- the 09-13 build; the -55 line above was written for a state that was reverted and
+# never rebuilt), with ZERO unexplained residual:
+#                        source correction   PII withdrawal
+#   contains_allergen            -65              0
+#   cooked_by                    -90             -2
+#   for_occasion                  -1              0
+#   from_region                  -37             -2
+#   has_diet                     -17             -2
+#   has_health_tag              -549            -10
+#   has_ingredient              -158            -17
+#   in_cuisine                   -37             -2
+#   is_course                    -37             -2
+#   suitable_for                -302             -5
+#   TOTAL                     -1,293            -42     = -1,335 from 6,428,251
+# PII withdrawal: the edges incident on 218869 and 222341 (see EXPECTED_KG_NODES above).
+# Source correction: the 58 re-sourced recipes describe different dishes, so their ingredients, diet,
+# allergens, health tags and course/cuisine/region edges are recomputed from their own corrected text,
+# and the owner's reviewed allergen decisions (46 ledger removals with 168702's fish put back, 13
+# reviewed additions, 4 overrides, Codex's re-sourced labels) apply on top.
+# EVERY recipe whose contains_allergen or has_diet edge set moved is one of the 58 or one of the 88 the
+# owner decided: 107 and 35 recipes respectively, 0 others. Evidence:
+# _admin/progress/release_v0100_run/kg_reconciliation_20260920.json.
+EXPECTED_KG_EDGES = 6_426_916
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;
@@ -1007,7 +1081,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 # node and edge counts move. A patch bump would claim this is backward-compatible; it is not.
 # 0.9.0 publishes the reviewed vocabulary identities, nutrient abstentions, and
 # canonical substitution repair. Ingredient identifiers and graph edges change.
-DATASET_VERSION = "0.9.0"
+DATASET_VERSION = "0.10.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet
@@ -1040,8 +1114,14 @@ PII_EXEMPT_COLUMNS = {
     "url": "same, on the knowledge-graph node table",
     "text_sha256": "hex digest, not free text",
     "recipe_id": "identifier, not free text",
-    "Ingredients_recovered": "raw scraped ingredient text containing external links and IDs",
 }
+# `Ingredients_recovered` was exempt here until 2026-09-15. Its stated reason -- "raw scraped
+# ingredient text containing external links and IDs" -- described the HAZARD rather than
+# mitigating it, and the exemption is what published the personal email address on recipe
+# 218869 (now withdrawn above). A 5,534-row free-text column with values up to 4,646
+# characters must be scanned, not excused. The two remaining credit_card matches on 194849
+# and 195135 are digit runs inside URLs and are suppressed narrowly in verify_release.py,
+# the same way the IFCT context digests are: by shape, on one column, for one pattern.
 
 # ------------------------------------------------------- allergen audit lexicons
 
