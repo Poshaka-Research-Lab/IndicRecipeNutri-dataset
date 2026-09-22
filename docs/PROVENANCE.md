@@ -62,6 +62,34 @@ matches the file, and `--strict-checksums` fails on it.
 both the builders and the verifier import from it, so the licence guard and the
 invariants cannot drift apart.
 
+## Context layers added in 0.11.0
+
+Two directories do not come from the working master and are not rebuilt by the pipeline above.
+
+| directory | upstream | pinned input | produced by |
+|---|---|---|---|
+| `data/cultural_context/` | internal source S1 | `occasions.csv` SHA-256 `4da2145b…1d68` (commit `5d8d780`, blob `e0f408d5`); `rules.yaml` SHA-256 `b1ed03b0…2c9f`, an uncommitted working copy | `scripts/stage_cultural_context.py` |
+| `data/historical_snapshot/` | internal source S2 @ `051c975` | snapshot `recipes_structured.parquet` SHA-256 `ffbb5d14…b4d6` (uncommitted; declares 0.9.0) and 0.10.0 `recipes_structured.parquet` | `scripts/stage_historical_snapshot.py` |
+
+Every row carries `prov_source_repo`, `prov_source_path`, `prov_source_sha256`,
+`prov_source_commit` (a commit, or `uncommitted:<sha256>`), `prov_source_blob_id`,
+`prov_source_locator`, `prov_import_script` and `prov_schema_version`. `prov_import_script`
+names a file in this repository's `scripts/`. The SHA-256 each manifest records for it
+(`import_scripts`) equals the file that ships. The manifests record every transformation,
+dropped field and count.
+
+The two staging scripts are **provenance records, not rebuild steps**. They take machine-local
+source locations from a private source map that is not part of the release, name the sources
+only as `internal source S1` and `internal source S2` (with commit and file SHA-256), and stop
+on any pinned-hash mismatch.
+`stage_historical_snapshot.py` also refuses to run unless the destination is byte-identical to
+0.10.0. So they document how these bytes were produced, but they cannot regenerate them from
+a clone. `scripts/context_rule_adapter.py` is a read-only consumer that maps a declared
+occasion to three-state per-item predicates (`python scripts/context_rule_adapter.py --check`
+runs its fixtures). It never evaluates a rule against a recipe's own labels.
+
+Both layers are silver. Neither adds a recipe, a graph node or a graph edge.
+
 ## What is deliberately omitted, and how to regenerate it
 
 | omitted | size | regenerate with |

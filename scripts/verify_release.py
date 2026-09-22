@@ -58,7 +58,26 @@ import allergen_taxonomy as _AT  # noqa: E402
 # A published string column whose values run this long is prose by any other name.
 # `IngredientsList` is a parsed JSON array and is legitimately long, so it is exempt.
 PROSE_LENGTH_THRESHOLD = 400
-LENGTH_EXEMPT = {"IngredientsList", "HealthConditions", "checks", "lenses", "Ingredients_recovered"}
+LENGTH_EXEMPT = {"IngredientsList", "HealthConditions", "checks", "lenses", "Ingredients_recovered",
+                 # 0.11.0 (schema decision D3, applied at promotion): source-authored text in
+                 # data/cultural_context/, kept whole after quotation and percentage scrubbing.
+                 # Truncating it would cut safety caveats. The names are layer-specific, so
+                 # the exemption reaches no other table.
+                 "registry_note", "date_rule_text", "rule_note", "sect_variants_json"}
+
+# 0.11.0 (independent-validation defect D-1; integration-schema section 8 amendment).
+# Hash-shaped identifier columns in the context layer. A 64-hex SHA-256, or the 16-hex digest
+# in a `link::` id, can hold 13-16 consecutive digits, which `credit_card` reads as a card
+# number. Same shape as the IFCT context-digest suppression in check_pii: ONE pattern
+# (credit_card), on these exact (file, column) pairs only, and only for values that FULLMATCH the
+# documented digest shape. Every other PII pattern still runs on these columns, and a value of
+# any other shape in them still fails.
+CONTEXT_DIGEST_COLUMNS = {
+    ("data/cultural_context/occasion_registry.parquet", "source_text_sha256"): r"[0-9a-f]{64}",
+    ("data/cultural_context/dietary_rules.parquet", "source_text_sha256"): r"[0-9a-f]{64}",
+    ("data/cultural_context/dietary_rules.parquet", "note_text_sha256"): r"[0-9a-f]{64}",
+    ("data/cultural_context/context_tag_links.parquet", "link_uid"): r"link::[0-9a-f]{16}",
+}
 
 REQUIRED_ARTEFACTS = [
     "data/corpus/recipes_structured.parquet",
@@ -205,6 +224,16 @@ def check_pii(root: Path) -> None:
                             f"({int(suppressed.sum())} hits) — validated IFCT context digest"
                         )
                     hits = hits & ~context_digest
+                digest_shape = CONTEXT_DIGEST_COLUMNS.get((path.relative_to(root).as_posix(), col))
+                if name == "credit_card" and digest_shape is not None:
+                    is_digest = series.str.fullmatch(digest_shape, na=False)
+                    suppressed = hits & is_digest
+                    if suppressed.any():
+                        notes.append(
+                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                            f"({int(suppressed.sum())} hits) — validated context-layer digest"
+                        )
+                    hits = hits & ~is_digest
                 # `Ingredients_recovered` carries scraped page furniture, including source
                 # URLs whose path segments contain 13-16 consecutive digits. Suppress
                 # credit_card ONLY where the match sits inside a URL, on this one column,
@@ -463,12 +492,15 @@ def check_exclusions(root: Path) -> None:
 
     for path in published_parquet(root):
         schema = pq.read_schema(path)
-        cols = [c for c in ("recipe_id", "node_id", "head", "tail") if c in schema.names]
+        # `snapshot_recipe_id` added in 0.11.0 (integration-schema section 8.2): the historical-snapshot
+        # crosswalk carries the snapshot-side id under that name.
+        cols = [c for c in ("recipe_id", "snapshot_recipe_id", "node_id", "head", "tail")
+                if c in schema.names]
         if not cols:
             continue
         df = pd.read_parquet(path, columns=cols)
         for col in cols:
-            if col == "recipe_id":
+            if col in ("recipe_id", "snapshot_recipe_id"):
                 hit = df[col].isin(withdrawn)
             else:
                 hit = df[col].isin(node_ids)

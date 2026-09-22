@@ -10,7 +10,7 @@ master documents none; they are not guessed.
 Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 `Enrich_Log`) are withheld from every table below — see `DATASHEET.md`.
 
-Covering **all 45 published Parquet tables**.
+Covering **all 51 published Parquet tables**.
 
 
 ## `data/corpus/allergens.parquet`
@@ -562,6 +562,142 @@ Covering **all 45 published Parquet tables**.
 | `had_recipename_preclean` | bool |  | 219,384 | 2 | True |  |
 | `had_ingredientslist_pre_v9` | bool |  | 219,384 | 2 | True |  |
 
+## `data/cultural_context/context_citations.parquet`
+
+1,111 rows x 19 columns - 0.0 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `citation_uid` | object |  | 1,111 | 1,111 | cite::o.adi_amavasai_puducherry.01 |  |
+| `subject_uid` | object |  | 1,111 | 468 | occ::adi_amavasai_puducherry |  |
+| `citation_role` | object |  | 1,111 | 6 | registry_source |  |
+| `citation_seq` | int16 |  | 1,111 | 8 | 1 |  |
+| `citation_kind` | object |  | 1,111 | 8 | web_page |  |
+| `title` | object |  | 575 | 47 | Indian pre-wedding function guides |  |
+| `publisher` | object |  | 687 | 49 | tourmyindia.com |  |
+| `locator` | object |  | 88 | 19 | iskcongurugram.com/vaishnava-calendar |  |
+| `identifier` | object |  | 61 | 4 | O.M. F.No.12/2/2023-JCA |  |
+| `url` | object |  | 265 | 210 | https://www.maakamakhya.org/festival |  |
+| `access_date` | object |  | 982 | 5 | 2026-08-29 |  |
+| `search_recorded` | object |  | 7 | 1 | 2026-09-01 |  |
+| `prov_source_repo` | object |  | 1,111 | 1 | internal source S1 |  |
+| `prov_source_path` | object |  | 1,111 | 2 | data/registry/occasions.csv |  |
+| `prov_source_sha256` | object |  | 1,111 | 2 | 4da2145b711618e40775ee7a4c5b0cfcde7434f1 |  |
+| `prov_source_commit` | object |  | 1,111 | 2 | 5d8d7808d0252ecc23e66255d2616d74e1d5d3b2 |  |
+| `prov_source_locator` | object |  | 1,111 | 451 | 119 |  |
+| `prov_import_script` | object |  | 1,111 | 1 | scripts/stage_cultural_context.py |  |
+| `prov_schema_version` | object |  | 1,111 | 1 | 1.1.0 |  |
+
+## `data/cultural_context/context_tag_links.parquet`
+
+468 rows x 11 columns - 0.0 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `link_uid` | object |  | 468 | 468 | link::00025f497b9b5ac2 |  |
+| `subject_uid` | object |  | 468 | 468 | rule::ramadan_fasting |  |
+| `target_node_id` | object |  | 25 | 20 | context::vrat_fasting |  |
+| `link_type` | object |  | 468 | 2 | unmatched |  |
+| `resolution_method` | object |  | 468 | 2 | unresolved |  |
+| `link_evidence` | object |  | 25 | 7 | exact_string: lower(rule name) equals co |  |
+| `reviewed_by` | object |  | 0 | 0 |  |  |
+| `reviewed_on` | object |  | 0 | 0 |  |  |
+| `label_status` | object |  | 468 | 1 | silver |  |
+| `prov_import_script` | object |  | 468 | 1 | scripts/stage_cultural_context.py |  |
+| `prov_schema_version` | object |  | 468 | 1 | 1.1.0 |  |
+
+## `data/cultural_context/dietary_rules.parquet`
+
+24 rows x 33 columns - 0.0 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `rule_uid` | object |  | 24 | 24 | rule::bahai_alcohol_prohibition |  |
+| `source_rule_name` | object |  | 24 | 24 | bahai_alcohol_prohibition |  |
+| `rule_class` | object |  | 24 | 3 | narrowing |  |
+| `source_executable` | bool |  | 24 | 2 | True |  |
+| `destination_executable` | bool |  | 24 | 1 | False | False for every rule in 0.11.0: no tag-to-ingredient mapping exists, so an occasion evaluates to UNKNOWN per item, never PASS. |
+| `certifies` | bool |  | 24 | 2 | True |  |
+| `verification` | object |  | 24 | 3 | verified |  |
+| `evidence_tier` | object |  | 24 | 3 | sourced |  |
+| `label_status` | object |  | 24 | 1 | silver |  |
+| `excludes_tags` | object |  | 24 | n/a | ['alcohol' 'intoxicant'] |  |
+| `permits_tags` | object |  | 1 | n/a | ['farali' 'sabudana' 'rajgira' 'kuttu' ' |  |
+| `also_excludes_from_uids` | object |  | 1 | n/a | ['rule::khalsa_rehat'] |  |
+| `standing_for_religions` | object |  | 3 | n/a | ['bahai'] |  |
+| `corpus_filter_text` | object |  | 3 | 3 | vegetarian AND no alcohol AND no fried |  |
+| `time_of_day_text` | object |  | 1 | 1 | dawn to sunset, each day of the month |  |
+| `time_of_day_executable` | object |  | 1 | 1 | False |  |
+| `time_of_day_absent_reason` | object |  | 6 | 6 | Paenitemini III:1 defines WHAT is abstai |  |
+| `variation_not_enumerable_reason` | object |  | 5 | 5 | Duration and permitted liquids vary by t |  |
+| `sect_variants_json` | object |  | 1 | 1 | [{"sects": ["Damdami Taksal", "Akhand Ki |  |
+| `search_recorded` | object |  | 9 | 2 | 2026-09-04 |  |
+| `rule_note` | object |  | 19 | 19 | ADDED 2026-09-04 by patches/standing_rul |  |
+| `rule_note_reduced` | bool |  | 24 | 2 | True |  |
+| `source_text_sha256` | object |  | 24 | 22 | fbf4e13c8a80aa5c20378acc40583b4f3099644b |  |
+| `note_text_sha256` | object |  | 19 | 19 | f7739b2706d278ad472e2d281e0a3c2696b90492 |  |
+| `tag_vocabulary` | object |  | 24 | 1 | s1_rules_v0.2.0 |  |
+| `prov_source_repo` | object |  | 24 | 1 | internal source S1 |  |
+| `prov_source_path` | object |  | 24 | 1 | data/rules/rules.yaml |  |
+| `prov_source_sha256` | object |  | 24 | 1 | b1ed03b0a4fcda4aa2d05d3b164b7e988e68c3a5 |  |
+| `prov_source_commit` | object |  | 24 | 1 | uncommitted:b1ed03b0a4fcda4aa2d05d3b164b |  |
+| `prov_source_blob_id` | object |  | 0 | 0 |  |  |
+| `prov_source_locator` | object |  | 24 | 24 | 499 |  |
+| `prov_import_script` | object |  | 24 | 1 | scripts/stage_cultural_context.py |  |
+| `prov_schema_version` | object |  | 24 | 1 | 1.1.0 |  |
+
+## `data/cultural_context/occasion_registry.parquet`
+
+444 rows x 45 columns - 0.1 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `occasion_uid` | object |  | 444 | 444 | occ::adi_amavasai_puducherry |  |
+| `source_occasion_id` | object |  | 444 | 444 | adi_amavasai_puducherry |  |
+| `name` | object |  | 444 | 437 | Adi Amavasai |  |
+| `native_name` | object |  | 57 | 56 | আইবুড়ো ভাত |  |
+| `kind` | object |  | 444 | 4 | festival |  |
+| `category` | object |  | 444 | 18 | religious |  |
+| `religion` | object |  | 444 | 14 | hindu |  |
+| `scope` | object |  | 444 | 5 | state |  |
+| `calendar_system` | object |  | 375 | 15 | event_triggered |  |
+| `dietary_rule_uid` | object |  | 178 | 23 | rule::feast |  |
+| `dietary_status` | object |  | 444 | 4 | not_reviewed |  |
+| `gazetted_2026` | bool |  | 444 | 2 | False |  |
+| `restricted_2026` | bool |  | 444 | 2 | False |  |
+| `national_holiday` | bool |  | 444 | 2 | False |  |
+| `compulsory_outside_delhi` | bool |  | 444 | 2 | False |  |
+| `optional_outside_delhi` | bool |  | 444 | 2 | False |  |
+| `moon_sighting_dependent` | bool |  | 444 | 2 | False |  |
+| `date_2026` | object |  | 100 | 64 | 2026-04-14 |  |
+| `saka_date_2026` | object |  | 50 | 43 | Kartika 20 |  |
+| `weekday_2026` | object |  | 50 | 7 | Wednesday |  |
+| `trigger` | object |  | 123 | 69 | pre_wedding |  |
+| `date_rule_text` | object |  | 136 | 115 | 14 April, fixed in the Gregorian calenda |  |
+| `states_observed` | object |  | 178 | 39 | Puducherry |  |
+| `season_hint` | object |  | 105 | 26 | July-August |  |
+| `n_sources` | float64 |  | 107 | 3 | 1.0 |  |
+| `region_defining` | object |  | 96 | 2 | False |  |
+| `sect` | object |  | 93 | 47 | Vaishnava (incl. Gaudiya / ISKCON) |  |
+| `variant_of_uid` | object |  | 11 | 5 | occ::annaprashana |  |
+| `verification_status` | object |  | 444 | 4 | single_source |  |
+| `registry_evidence_tier` | object |  | 444 | 5 | general_source |  |
+| `evidence_level` | object |  | 444 | 5 | D |  |
+| `source_locatable` | bool |  | 444 | 2 | True |  |
+| `corpus_circular_source` | bool |  | 444 | 2 | False |  |
+| `registry_note` | object |  | 216 | 214 | Bengal. A ceremonial LAST MEAL AS AN UNM |  |
+| `source_text_sha256` | object |  | 444 | 192 | 585ac4188b29680056a075e2c27da041221b1c79 |  |
+| `source_reduced_to_citations` | bool |  | 444 | 1 | True |  |
+| `label_status` | object |  | 444 | 1 | silver |  |
+| `prov_source_repo` | object |  | 444 | 1 | internal source S1 |  |
+| `prov_source_path` | object |  | 444 | 1 | data/registry/occasions.csv |  |
+| `prov_source_sha256` | object |  | 444 | 1 | 4da2145b711618e40775ee7a4c5b0cfcde7434f1 |  |
+| `prov_source_commit` | object |  | 444 | 1 | 5d8d7808d0252ecc23e66255d2616d74e1d5d3b2 |  |
+| `prov_source_blob_id` | object |  | 444 | 1 | e0f408d556119205e26e5d9a851f18a837e30619 |  |
+| `prov_source_locator` | object |  | 444 | 444 | 119 |  |
+| `prov_import_script` | object |  | 444 | 1 | scripts/stage_cultural_context.py |  |
+| `prov_schema_version` | object |  | 444 | 1 | 1.1.0 |  |
+
 ## `data/enrichment/fix11_nonveg.parquet`
 
 219,384 rows x 6 columns - 0.8 MB
@@ -965,6 +1101,53 @@ Covering **all 45 published Parquet tables**.
 | `per100g_fiber` | float64 | `g` per 100g [0, 100] | 158,335 | 14,190 | 2.041 |  |
 | `per100g_sodium` | float64 | `mg` per 100g [0, 100000] | 155,971 | 128,900 | 807.356 | **MILLIGRAMS** per 100 g — unlike every other `per100g_` mass column, which are grams. `per100g_salt` beside it is grams, so the two differ by 400x. See `docs/UNITS.json`. |
 
+## `data/historical_snapshot/recipe_id_crosswalk.parquet`
+
+219,384 rows x 15 columns - 3.6 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `xw_uid` | object |  | 219,384 | 219,384 | xw::0 |  |
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `snapshot_id` | object |  | 219,384 | 1 | historical_snapshot_20260914 |  |
+| `snapshot_recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `match_status` | object |  | 219,384 | 1 | exact_id |  |
+| `join_key` | object |  | 219,384 | 1 | recipe_id_value |  |
+| `identity_semantics` | object |  | 219,384 | 1 | same_id_not_same_content |  |
+| `prov_source_repo` | object |  | 219,384 | 1 | internal source S2 |  |
+| `prov_source_path` | object |  | 219,384 | 1 | .local/paper-data-20260914/data/corpus/r |  |
+| `prov_source_sha256` | object |  | 219,384 | 1 | ffbb5d145902ace806abbaddfdfb6988bf54e6b8 |  |
+| `prov_source_commit` | object |  | 219,384 | 1 | uncommitted:ffbb5d145902ace806abbaddfdfb |  |
+| `prov_destination_version` | object |  | 219,384 | 1 | 0.10.0 |  |
+| `prov_destination_sha256` | object |  | 219,384 | 1 | e56f424f935f8a7fcb2a5d187e659dd7a6d59d69 |  |
+| `prov_import_script` | object |  | 219,384 | 1 | scripts/stage_historical_snapshot.py |  |
+| `prov_schema_version` | object |  | 219,384 | 1 | 1.1.0 |  |
+
+## `data/historical_snapshot/snapshot_recipe_meta.parquet`
+
+219,384 rows x 18 columns - 1.3 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `snapshot_id` | object |  | 219,384 | 1 | historical_snapshot_20260914 |  |
+| `snapshot_split_v3` | object |  | 219,384 | 3 | test |  |
+| `snapshot_split_v2` | object |  | 219,384 | 3 | train |  |
+| `snapshot_split_v1_leaky` | object |  | 219,384 | 3 | train |  |
+| `split_v3_changed` | bool |  | 219,384 | 2 | False |  |
+| `split_v2_changed` | bool |  | 219,384 | 1 | False |  |
+| `split_v1_leaky_changed` | bool |  | 219,384 | 1 | False |  |
+| `recipe_name_changed` | bool |  | 219,384 | 2 | False |  |
+| `region_changed` | bool |  | 219,384 | 2 | False |  |
+| `dup_family_changed` | bool |  | 219,384 | 2 | False |  |
+| `snapshot_label_status` | object |  | 219,384 | 1 | historical |  |
+| `prov_source_repo` | object |  | 219,384 | 1 | internal source S2 |  |
+| `prov_source_path` | object |  | 219,384 | 1 | .local/paper-data-20260914/data/corpus/r |  |
+| `prov_source_sha256` | object |  | 219,384 | 1 | ffbb5d145902ace806abbaddfdfb6988bf54e6b8 |  |
+| `prov_source_commit` | object |  | 219,384 | 1 | uncommitted:ffbb5d145902ace806abbaddfdfb |  |
+| `prov_import_script` | object |  | 219,384 | 1 | scripts/stage_historical_snapshot.py |  |
+| `prov_schema_version` | object |  | 219,384 | 1 | 1.1.0 |  |
+
 ## `data/kg/kg_edge_evidence.parquet`
 
 236,315 rows x 4 columns - 0.8 MB
@@ -1135,7 +1318,7 @@ Covering **all 45 published Parquet tables**.
 
 ## Every published file
 
-All 89 files under `data/`, so nothing ships undescribed.
+All 97 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
@@ -1164,6 +1347,16 @@ All 89 files under `data/`, so nothing ships undescribed.
 | `recipes.parquet` | 46.97 MB | columnar table — documented above |
 | `recipes_structured.parquet` | 103.44 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
+
+### `data/cultural_context/`
+
+| file | size | kind |
+|---|---:|---|
+| `context_citations.parquet` | 0.03 MB | columnar table — documented above |
+| `CONTEXT_MANIFEST.json` | 0.22 MB | metadata / manifest |
+| `context_tag_links.parquet` | 0.01 MB | columnar table — documented above |
+| `dietary_rules.parquet` | 0.02 MB | columnar table — documented above |
+| `occasion_registry.parquet` | 0.06 MB | columnar table — documented above |
 
 ### `data/enrichment/` — Structured companion tables. Optional recipe_ifct_fraction.parquet reports IFCT's share of available computed ingredient energy. ifct_source_profiles.json contains native and compatible component evidence; nutrition_source_provenance.json records sanitized source hashes and policies. Food/form agent review does not approve quantities or nutrient accuracy; carbohydrate and other unavailable IFCT components stay null in occurrence contributions.
 
@@ -1199,6 +1392,14 @@ All 89 files under `data/`, so nothing ships undescribed.
 | `quarantine_list.parquet` | 0.70 MB | columnar table — documented above |
 | `recipe_ifct_fraction.parquet` | 3.18 MB | columnar table — documented above |
 | `renutrition_v3.parquet` | 7.78 MB | columnar table — documented above |
+
+### `data/historical_snapshot/`
+
+| file | size | kind |
+|---|---:|---|
+| `recipe_id_crosswalk.parquet` | 3.57 MB | columnar table — documented above |
+| `SNAPSHOT_MANIFEST.json` | 0.01 MB | metadata / manifest |
+| `snapshot_recipe_meta.parquet` | 1.28 MB | columnar table — documented above |
 
 ### `data/interactions/` — **Synthetic interaction benchmark, v4.** Regenerated 2026-09-12 from the published corpus by `scripts/build_interactions.py`, replacing the two earlier generations, which could not be merged because their remapped id spaces collide. Zero withdrawn-recipe references by construction; ids are corpus `recipe_id`s, not positional indices. Simulated behaviour, not observed users.
 

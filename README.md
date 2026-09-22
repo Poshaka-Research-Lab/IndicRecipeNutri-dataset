@@ -2,18 +2,18 @@
 
 # IndicRecipeNutri
 
-**A 219,386-recipe Indian corpus with parsed ingredients, a 17-class allergen surface,
+**A 219,384-recipe Indian corpus with parsed ingredients, a 17-class allergen surface,
 dish-level nutrition, and a typed knowledge graph of 6.43 million edges.**
 
 Built for retrieval and recommendation research that needs *culturally specific* food data —
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/release-0.7.0-success.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/release-0.11.0-success.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
-[![Size: 474 MB](https://img.shields.io/badge/size-474%20MB-informational.svg)](#the-data)
+[![Size: 474 MB](https://img.shields.io/badge/size-495%20MB-informational.svg)](#the-data)
 [![Verified](https://img.shields.io/badge/release-self--verifying-brightgreen.svg)](#verify-what-you-downloaded)
 
 [Quick start](#-quick-start-60-seconds) ·
@@ -26,12 +26,13 @@ and that needs to know exactly where the data is weak.
 
 </div>
 
-> [!IMPORTANT]
-> **Breaking in 0.7.0.** The two synthetic interaction directories are replaced by a single
-> [`data/interactions/`](data/interactions), regenerated from the published corpus. Their id
-> spaces are not compatible, so stored user/item pairs from the old sets must not be joined to
-> the new one. See the [changelog](CHANGELOG.md). Historical DOI snapshots keep their original
-> data and identifiers.
+> [!NOTE]
+> **New in 0.11.0, and additive.** [`data/cultural_context/`](data/cultural_context) adds an occasion
+> registry and dietary-rule definitions imported as **silver** data with structured citations.
+> The rules are never executed as constraints. [`data/historical_snapshot/`](data/historical_snapshot) adds a
+> recipe-ID crosswalk to a historical snapshot. No existing file, identifier, count or split
+> changed. The `snapshot_split_*` columns are historical and must never be used as a split.
+> See the [changelog](CHANGELOG.md).
 
 ---
 
@@ -70,7 +71,7 @@ import pandas as pd
 
 recipes = pd.read_parquet("data/corpus/recipes_structured.parquet")
 print(len(recipes), "recipes,", len(recipes.columns), "columns")
-# 219386 recipes, 269 columns
+# 219384 recipes, 270 columns
 ```
 
 <details>
@@ -91,7 +92,7 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
 
 # 4. The knowledge graph, as edges
 kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,916 rows
-kg[kg.rel == "contains_allergen"]                      # 485,065 rows
+kg[kg.rel == "contains_allergen"]                      # 485,055 rows
 ```
 
 </details>
@@ -119,7 +120,7 @@ Do **not** flatten `unknown` to `False`. It means *"never assessed"*, not *"safe
 <td width="33%" valign="top">
 
 ### 🍲 Corpus
-**219,386 recipes** from 378 sites, parsed into 269 typed columns. Ingredients normalised to
+**219,384 recipes** from 378 sites, parsed into 270 typed columns. Ingredients normalised to
 English/Roman with the original script retained as provenance.
 
 </td>
@@ -161,6 +162,16 @@ and a hard diet-compatibility constraint.
 
 </td>
 </tr>
+<tr>
+<td colspan="3" valign="top">
+
+### 🗓️ Occasion context and snapshot crosswalk (0.11.0)
+444 occasions and 24 dietary-rule definitions with structured citations and evidence tiers,
+**silver and never executed**, plus an exact-ID crosswalk to a historical snapshot. No new
+recipes. See [`data/cultural_context/`](data/cultural_context) and [`data/historical_snapshot/`](data/historical_snapshot).
+
+</td>
+</tr>
 </table>
 
 ---
@@ -170,12 +181,13 @@ and a hard diet-compatibility constraint.
 ```mermaid
 flowchart LR
     A["378 recipe sites<br/>+ open datasets"] --> B["parse & normalise<br/>ingredients → English/Roman"]
-    B --> C["corpus<br/>219,386 × 269"]
+    B --> C["corpus<br/>219,384 × 270"]
     C --> D["nutrition<br/>USDA-grounded"]
     C --> E["allergens<br/>17 classes, fail-closed"]
-    C --> F["knowledge graph<br/>222,539 nodes / 6.43M edges"]
+    C --> F["knowledge graph<br/>222,537 nodes / 6.43M edges"]
     F --> G["benchmark<br/>67 queries + gold sets"]
     C --> K["interactions<br/>50K users / 990K ratings"]
+    X["occasion context + snapshot crosswalk<br/>silver, staged from 2 repos"] --> I
     D & E & F & G & K --> I["verify_release.py<br/>licence · counts · PII · checksums"]
     I --> J(["release + DOI"])
 ```
@@ -189,15 +201,17 @@ instead of shipping it — see [Verify what you downloaded](#verify-what-you-dow
 
 | path | size | what is in it |
 |---|---:|---|
-| [`data/corpus/`](data/corpus) | 199 MB | the recipe table, plus long-form allergen / nutrition / label / quality tables, the rehydration index and the allergen audit |
-| [`data/enrichment/`](data/enrichment) | 146 MB | 26 companion tables — nutrition, region, diet, quality flags, ingredient weights |
-| [`data/provenance/`](data/provenance) | 60 MB | build records and per-field change history |
+| [`data/corpus/`](data/corpus) | 198 MB | the recipe table, plus long-form allergen / nutrition / label / quality tables, the rehydration index and the allergen audit |
+| [`data/enrichment/`](data/enrichment) | 159 MB | 27 companion tables — nutrition, region, diet, quality flags, ingredient weights |
+| [`data/provenance/`](data/provenance) | 62 MB | build records and per-field change history |
 | [`data/interactions/`](data/interactions) | 35 MB | synthetic interaction benchmark v4 — 50,000 users, 990,273 ratings, with its own datasheet |
-| [`data/kg/`](data/kg) | 33 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
+| [`data/kg/`](data/kg) | 34 MB | nodes, edges, typed store, ingredient vocabulary, pairing + substitution layers |
 | [`data/benchmark/`](data/benchmark) | 0.4 MB | 67 queries, gold sets, contamination audit |
 | [`data/kg_flavor/`](data/kg_flavor) | 0.1 MB | FlavorDB compound layer, kept separable (CC BY-NC-SA **3.0**) |
+| [`data/cultural_context/`](data/cultural_context) | 0.4 MB | **0.11.0** — occasion registry, dietary rules, citations and node links; silver, never executed |
+| [`data/historical_snapshot/`](data/historical_snapshot) | 5 MB | **0.11.0** — exact-ID crosswalk and historical split labels of a snapshot; not new recipes |
 
-Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.
+Parquet, zstd-compressed, 50,000-row groups. **≈495 MB** total.
 
 > [!NOTE]
 > **Large files are in Git LFS.** A clone without `git-lfs` gives you 130-byte pointer stubs,
@@ -210,10 +224,10 @@ Parquet, zstd-compressed, 50,000-row groups. **≈474 MB** total.
 
 | facet | distinct | most common |
 |---|---:|---|
-| `Region` | 27 | Pan-Indian (135,055) · North India (12,108) · South India (11,581) · Kerala (11,527) · Tamil Nadu (11,375) |
-| `Cuisine` | 53 | Indian (146,525) · American (12,719) · South Indian (9,879) · Kerala (9,403) |
-| `Course` | 12 | Main Course (91,071) · Dessert (37,045) · Breakfast (19,420) |
-| `Diet` | 5 | Vegetarian (88,632) · Vegan (83,940) · Non-Vegetarian (31,824) · Eggetarian (14,259) |
+| `Region` | 27 | Pan-Indian (135,018) · North India (12,112) · South India (11,579) · Kerala (11,527) · Tamil Nadu (11,375) |
+| `Cuisine` | 53 | Indian (146,487) · American (12,718) · South Indian (9,879) · Kerala (9,403) |
+| `Course` | 12 | Main Course (91,036) · Dessert (37,043) · Breakfast (19,421) |
+| `Diet` | 5 | Vegetarian (88,617) · Vegan (83,952) · Non-Vegetarian (31,827) · Eggetarian (14,257) |
 
 `Pan-Indian` dominates because most sources do not declare a region. **Slice on the
 state-level regions for cultural work**, and treat `Pan-Indian` as "unlabelled", not as a
@@ -252,11 +266,11 @@ Comparing either against `Pan-Indian` is not — that bucket is unlabelled, not 
 
 ```python
 r.Diet.value_counts()
-# Vegetarian        88,632
-# Vegan             83,940
-# Non-Vegetarian    31,824
-# Eggetarian        14,259
-# unknown              731
+# Vegetarian       88,617
+# Vegan            83,952
+# Non-Vegetarian   31,827
+# Eggetarian       14,257
+# unknown             731
 ```
 
 `unknown` is a real category and is **not** a permissive default. The interaction benchmark
@@ -305,14 +319,14 @@ retained for reproducibility and must not be used implicitly.
 graph LR
     R((recipe)) -->|has_ingredient 1.92M| I((ingredient))
     R -->|has_health_tag 1.73M| H((healthtag))
-    R -->|suitable_for 896K| D((condition))
+    R -->|suitable_for 895K| D((condition))
     R -->|contains_allergen 485K| A((allergen))
     R -->|cooked_by 404K| M((method))
     R -->|in_cuisine 219K| C((cuisine))
     R -->|from_region 219K| G((region))
     I -->|has_compound 26K| P((compound))
-    I -->|pairs_with 3.2K| I
-    I -->|substitute_for 26| I
+    I -->|pairs_with 3.3K| I
+    I -->|substitute_for 30| I
 ```
 
 <details>
@@ -320,12 +334,12 @@ graph LR
 
 | type | n | | type | n |
 |---|---:|---|---|---:|
-| `recipe` | 219,386 | | `nutrient` | 22 |
+| `recipe` | 219,384 | | `nutrient` | 22 |
 | `compound` | 1,607 | | `allergen` | 18 |
 | `ingredient` | 927 | | `condition` | 13 |
-| `foodclass` | 364 | | `course` | 12 |
+| `foodclass` | 363 | | `course` | 12 |
 | `cuisine` | 53 | | `method` | 11 |
-| `occasion` | 44 | | `category` | 10 |
+| `occasion` | 44 | | `category` | 11 |
 | `healthtag` | 30 | | `diet` | 8 |
 | `region` | 27 | | `zone` | 5 |
 | | | | `context` | 2 |
@@ -337,16 +351,16 @@ graph LR
 
 | relation | edges | | relation | edges |
 |---|---:|---|---|---:|
-| `has_ingredient` | 1,916,173 | | `shares_flavor` | 13,673 |
-| `has_health_tag` | 1,725,659 | | `in_context` | 7,287 |
-| `suitable_for` | 895,759 | | `pairs_with` | 3,224 |
-| `contains_allergen` | 485,065 | | `rich_in` | 3,003 |
-| `cooked_by` | 404,237 | | `grounded_as` | 370 |
-| `has_diet` | 256,151 | | `is_a` | 148 |
-| `is_course` | 219,386 | | `typical_region` | 48 |
-| `in_cuisine` | 219,386 | | `in_zone` | 27 |
-| `from_region` | 219,386 | | `substitute_for` | 26 |
-| `for_occasion` | 33,357 | | `derived_from` | 25 |
+| `has_ingredient` | 1,916,036 | | `shares_flavor` | 13,670 |
+| `has_health_tag` | 1,725,100 | | `in_context` | 7,287 |
+| `suitable_for` | 895,452 | | `pairs_with` | 3,265 |
+| `contains_allergen` | 485,055 | | `rich_in` | 2,935 |
+| `cooked_by` | 404,145 | | `grounded_as` | 369 |
+| `has_diet` | 256,132 | | `is_a` | 173 |
+| `from_region` | 219,347 | | `typical_region` | 48 |
+| `is_course` | 219,347 | | `substitute_for` | 30 |
+| `in_cuisine` | 219,347 | | `derived_from` | 30 |
+| `for_occasion` | 33,356 | | `in_zone` | 27 |
 | `has_compound` | 25,748 | | `subtype_of` | 17 |
 
 `subtype_of` is "is a kind of", ingredient → ingredient. It is **descriptive and never a
@@ -490,7 +504,7 @@ the same text:
 python scripts/rehydrate.py --out prose.parquet --limit 100
 ```
 
-**214,579 of 219,386 rows are rehydratable.** The other 4,807 came from pre-existing datasets
+**214,577 of 219,384 rows are rehydratable.** The other 4,807 came from pre-existing datasets
 rather than scraped pages and carry placeholder URLs, flagged
 `source_kind = "derived_dataset"`.
 
@@ -618,7 +632,7 @@ Pin a version DOI only if your result depends on an exact snapshot.
 
 **Third-party layers** — USDA SR Legacy (public domain), UK CoFID (Open Government Licence),
 FoodOn (CC BY 4.0), FlavorDB (CC BY-NC-SA 3.0 — present in `data/kg/` as well as
-`data/kg_flavor/`, 1,607 compound nodes and 40,049 edges, so the core graph is **not** free
+`data/kg_flavor/`, 1,607 compound nodes and 39,418 `has_compound`/`shares_flavor` edges, so the core graph is **not** free
 of its terms).
 
 > **RecipeDB NER, IFCT 2017 and INDB were previously listed as dependencies and are not used
@@ -680,6 +694,8 @@ for Nutrition-Grounded Indian Recipe Recommendation* — venue and DOI pending.
 | [`docs/BENCHMARK_VERSIONING.md`](docs/BENCHMARK_VERSIONING.md) | you are comparing results across releases |
 | [`docs/RELEASING.md`](docs/RELEASING.md) | you are cutting a release |
 | [`docs/TAKEDOWN.md`](docs/TAKEDOWN.md) | you want content removed |
+| [`data/cultural_context/CONTEXT_MANIFEST.json`](data/cultural_context/CONTEXT_MANIFEST.json) | you use the occasion or dietary-rule layer — pins, tiers, transformations |
+| [`data/historical_snapshot/SNAPSHOT_MANIFEST.json`](data/historical_snapshot/SNAPSHOT_MANIFEST.json) | you join to results keyed to the historical snapshot |
 | [`CHANGELOG.md`](CHANGELOG.md) | you want to know what moved, and why |
 
 <div align="center">

@@ -1081,7 +1081,13 @@ EXPECTED_CORPUS_BUILD = "v15"
 # node and edge counts move. A patch bump would claim this is backward-compatible; it is not.
 # 0.9.0 publishes the reviewed vocabulary identities, nutrient abstentions, and
 # canonical substitution repair. Ingredient identifiers and graph edges change.
-DATASET_VERSION = "0.10.0"
+# 0.10.0 -> 0.11.0, by the owner's decision (2026-09-23). The change is ADDITIVE:
+# two new published directories (data/cultural_context/, data/historical_snapshot/) and five new id
+# namespaces (occ::, rule::, cite::, link::, xw::). No existing
+# identifier, table, column, row, count or split value moved, so by the convention above a patch
+# bump would also have been defensible; the minor position marks the new join surfaces.
+# Every expected count in this file is unchanged.
+DATASET_VERSION = "0.11.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

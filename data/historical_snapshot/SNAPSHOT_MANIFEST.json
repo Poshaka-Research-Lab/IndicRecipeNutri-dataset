@@ -1,0 +1,225 @@
+{
+  "aggregate_split_counts": {
+    "folds": 3,
+    "source": "logs/dataset_current_20260914/learned/split_counts.json @ 051c975, sha256 bccf581912167f4791f5e5df92dd569b7ecf3879e3951c6930d8c053fc53d92c",
+    "test": 4260,
+    "train": 12694,
+    "validation": 4154
+  },
+  "canonical_split": {
+    "column": "Split_v3",
+    "note": "snapshot_split_* are HISTORICAL (0.9.0-era) and never override Split_v3",
+    "version": "0.10.0"
+  },
+  "change_flag_counts": {
+    "dup_family_changed": 108,
+    "recipe_name_changed": 58,
+    "region_changed": 44,
+    "split_v1_leaky_changed": 0,
+    "split_v2_changed": 0,
+    "split_v3_changed": 3
+  },
+  "change_flag_expected_schema": {
+    "dup_family_changed": 108,
+    "recipe_name_changed": 58,
+    "region_changed": 44,
+    "split_v1_leaky_changed": 0,
+    "split_v2_changed": 0,
+    "split_v3_changed": 3
+  },
+  "change_flag_semantics": "null-aware: null==null unchanged, null vs value changed",
+  "classification": "HISTORICAL SNAPSHOT (uncommitted provider working copy 2026-09-14, declares v0.9.0). Mappings and provenance only. Not new recipes. Not independent validation.",
+  "destination_commit": "54bbe5a2c6aee388df37b105764443636987788b",
+  "destination_git_clean_before_and_after": true,
+  "destination_path": "data/corpus/recipes_structured.parquet",
+  "destination_sha256": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa",
+  "destination_version": "0.10.0",
+  "excluded_hash_only": {
+    "kg_edges.parquet": "2daa6c09699135df02e2a47b6689a41c9d999eea0e4c95b08ea18823f9750578"
+  },
+  "excluded_hash_only_note": "kg_edges.parquet hash re-verified at staging; file not opened as a table; FlavorDB-derived (CC BY-NC-SA 3.0), not imported",
+  "import_scripts": {
+    "scripts/stage_historical_snapshot.py": {
+      "repo": "integration workspace (private)",
+      "sha256": "ba2adbe5a9cc9dd0269df85e19cc5ca2b9153350dc3fdda9805e068cc2461c52"
+    }
+  },
+  "join": {
+    "ambiguity_policy": "build fails if either side has a duplicate recipe_id",
+    "ambiguous_ids": 0,
+    "key": "recipe_id (int64) exact value equality",
+    "method": "pandas.merge(how='outer', validate='one_to_one')",
+    "positional_or_fuzzy_joins": "none"
+  },
+  "match_status_counts": {
+    "current_only": 0,
+    "exact_id": 219384,
+    "snapshot_only_retained": 0
+  },
+  "not_carried": [
+    "historical Region values",
+    "historical dup_family_id values",
+    "RecipeName",
+    "any payload column",
+    "any KG-derived column"
+  ],
+  "omitted_withdrawn_snapshot_ids_count": 2,
+  "omitted_withdrawn_snapshot_ids_reason": "build-time exclusion (PII); IDs not written to any staged file",
+  "per_recipe_snapshot_split": "unrecoverable",
+  "per_recipe_snapshot_split_detail": {
+    "declared_file": "split_manifest.npz",
+    "declared_in": "logs/dataset_current_20260914/learned/receipt.json",
+    "declared_sha256": "eeaa22778d296e4fd3316364294d169c4ddbd76fdfd3849cc16a2c52feffec0c",
+    "found_on_disk": []
+  },
+  "receipt_notes": {
+    "provider_check.json": {
+      "scope": "provider-wide strict release check",
+      "status": "failed",
+      "used_by_consumer": false
+    }
+  },
+  "receipts": [
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/execution.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "c9bfe945523595d6d14ff15816a2c31af3bd0298",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/execution.json",
+      "sha256": "54785eaab7f92b0d42118cfa18752677bebaca4aa733dd85743bcfec0aaa3eb5",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/learned/data_audit.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "b031ceba056efa8256115795de150547f64d8d65",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/learned/data_audit.json",
+      "sha256": "f25b68b7e97f50966d2a1f774bc87f653c1358fa4608b611b2df0881fa49bd2b",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/learned/receipt.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "6441ff6651198de51a6db3916aa504a41f356837",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/learned/receipt.json",
+      "sha256": "5d3ae87f5617effedf6970821dc0377488553eb875c6ecff4878ee23d80c0f9a",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/learned/selections.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "28bf80a677fb3808bf093dd12bc9c4bf1aebadf5",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/learned/selections.json",
+      "sha256": "45f0c0353adb1b1079fb1c1bc1271c50d0a887853bbf0ba89029a6d3f34f499e",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/learned/split_counts.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "876f674e7e281c14559c82255a04a3e7e8b752ff",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/learned/split_counts.json",
+      "sha256": "bccf581912167f4791f5e5df92dd569b7ecf3879e3951c6930d8c053fc53d92c",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/learned/verification.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "6efa7dda0c1c1199e172ba0376f9ae413c28788b",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/learned/verification.json",
+      "sha256": "b913d578d378144a046c7c8c39529b135b8f0fa2f80bc76ad0e0e470b15e6f26",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/primary/profile.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "5884c8a1edc6466f4ad17aeecbb76e7d82870d24",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/primary/profile.json",
+      "sha256": "925d20e9bf370f0bcd9c5bc501737dd756d422e04b331f67665f396e5e60b019",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/provider_check.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "0e95af19f2d6686bed3f0d499aabe3f70be99d67",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/provider_check.json",
+      "sha256": "e597816375bbddad3322e91d8dc237aded0175efb0fbc78cb5c537efd21247d4",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/snapshot.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "d100166ec8c822b6ee8eec2bbe498421c53a4cb9",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/snapshot.json",
+      "sha256": "c9e6c58878f175328ab387c07fac56934e222311d23eab554e49a33ad8e4f035",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    },
+    {
+      "bytes_read_from": "output/code-release-v0.17/logs/dataset_current_20260914/verification.json (byte-identical to the HEAD blob)",
+      "head_blob_id": "30b5742ff58a7e44b3d8baf3f1309deffd7eacfc",
+      "head_commit": "051c975a37e2e32bd7e7172016b6f5b318a097e6",
+      "rel": "logs/dataset_current_20260914/verification.json",
+      "sha256": "a3852f74c3d075e666e2713368d306267294f2186934d11ee4d23d0cd8950253",
+      "worktree_status": "deleted (tracked logs/ absent from worktree)"
+    }
+  ],
+  "row_counts": {
+    "destination_rows": 219384,
+    "recipe_id_crosswalk": 219384,
+    "snapshot_input_rows": 219386,
+    "snapshot_recipe_meta": 219384
+  },
+  "schema_id": "indicrecipenutri/context_integration_schema",
+  "schema_version": "1.1.0",
+  "snapshot_declared": {
+    "dataset_version": "0.9.0",
+    "declared_hashes_match_bytes_read": true,
+    "declared_provider_commit_matches_bytes": false,
+    "files": {
+      "data/corpus/recipes_structured.parquet": "ffbb5d145902ace806abbaddfdfb6988bf54e6b857a966c5ea164592a747b4d6",
+      "data/kg/kg_edges.parquet": "2daa6c09699135df02e2a47b6689a41c9d999eea0e4c95b08ea18823f9750578"
+    },
+    "provider_commit": "75452339928352ed51ac94769d5c5c31a80ad1af",
+    "scope": "updated uncommitted working dataset snapshot, 2026-09-14",
+    "source": "logs/dataset_current_20260914/snapshot.json @ 051c975a37e2e32bd7e7172016b6f5b318a097e6"
+  },
+  "snapshot_id": "historical_snapshot_20260914",
+  "snapshot_sha256": "ffbb5d145902ace806abbaddfdfb6988bf54e6b857a966c5ea164592a747b4d6",
+  "snapshot_source": {
+    "columns_compared_not_written": [
+      "RecipeName",
+      "Region",
+      "dup_family_id"
+    ],
+    "columns_read": [
+      "recipe_id",
+      "RecipeName",
+      "Region",
+      "dup_family_id",
+      "Split_v3",
+      "Split_v2",
+      "Split_v1_leaky"
+    ],
+    "columns_written": [
+      "recipe_id (as recipe_id / snapshot_recipe_id)",
+      "Split_v3",
+      "Split_v2",
+      "Split_v1_leaky (as snapshot_split_*)"
+    ],
+    "in_any_commit": false,
+    "path": ".local/paper-data-20260914/data/corpus/recipes_structured.parquet",
+    "prov_source_commit": "uncommitted:ffbb5d145902ace806abbaddfdfb6988bf54e6b857a966c5ea164592a747b4d6",
+    "repo": "internal source S2",
+    "rows_read": 219386
+  },
+  "split_v3_changed_recipe_ids": [
+    220872,
+    220889,
+    220902
+  ],
+  "task": "context-layer integration, release 0.11.0",
+  "withdrawn_sets_checked": {
+    "build_time_exclusion_pii": 3,
+    "union": 4619,
+    "v7_nonrecipe": 3815,
+    "v8_grihshobha": 801
+  }
+}

@@ -1,0 +1,101 @@
+{
+ "about": "integration review fixtures for scripts/context_rule_adapter.py against the staged data/cultural_context tables. Real registry rows unless marked synthetic. No fixture evaluates a recipe: item_evidence is a hypothetical tag assessment, never derived from corpus labels.",
+ "cases": [
+  {
+   "id": "NA-01 no occasion declared: source S1 family does not apply, even if a recipe carries a corpus Occasion tag",
+   "declared_occasion_uid": null,
+   "expect": {"occasion_state": "NOT_APPLICABLE", "item_predicate": null, "abstain": false}
+  },
+  {
+   "id": "PROHIB-01 admits_no_food: FAIL for every item plus explicit abstention",
+   "declared_occasion_uid": "occ::das_lakshana_parva",
+   "expect": {"occasion_state": "EXPLICIT_PROHIBITION", "item_predicate": "FAIL", "abstain": true, "evidence_tiers": ["descriptive"], "hard_constraint_eligible": false}
+  },
+  {
+   "id": "PROHIB-02 admits_no_food with a standing-rule tradition: standing law never relaxes a total fast",
+   "declared_occasion_uid": "occ::bahai_nineteen_day_fast",
+   "expect": {"occasion_state": "EXPLICIT_PROHIBITION", "item_predicate": "FAIL", "abstain": true}
+  },
+  {
+   "id": "UNK-01 narrowing rule not evaluable (sequential_abstinence): UNKNOWN, never PASS",
+   "declared_occasion_uid": "occ::chaturmas_vaishnava_incl_gaudiya_iskcon",
+   "expect": {"occasion_state": "INSUFFICIENT_EVIDENCE", "item_predicate": "UNKNOWN", "abstain": false, "evidence_tiers": ["unsourced"]}
+  },
+  {
+   "id": "UNK-02 taboo_restriction (unsourced, non-executable): UNKNOWN",
+   "declared_occasion_uid": "occ::santal_pregnancy_taboo",
+   "expect": {"occasion_state": "INSUFFICIENT_EVIDENCE", "item_predicate": "UNKNOWN"}
+  },
+  {
+   "id": "UNK-03 no rule recorded and dietary_status not_reviewed: UNKNOWN (absence is not permission)",
+   "declared_occasion_uid": "occ::adi_amavasai_puducherry",
+   "expect": {"occasion_state": "INSUFFICIENT_EVIDENCE", "item_predicate": "UNKNOWN"}
+  },
+  {
+   "id": "UNK-04 occasion not in registry: UNKNOWN",
+   "declared_occasion_uid": "occ::does_not_exist",
+   "expect": {"occasion_state": "INSUFFICIENT_EVIDENCE", "item_predicate": "UNKNOWN"}
+  },
+  {
+   "id": "FB-01 fast-breaking context, tradition with a sourced standing rule (islam/halal): standing rule narrows, UNKNOWN at 0.11.0",
+   "declared_occasion_uid": "occ::id_ul_fitr",
+   "expect": {"occasion_state": "EVALUABLE_CONSTRAINT", "item_predicate": "UNKNOWN", "governing_rules": ["rule::halal"], "evidence_tiers": ["sourced"], "hard_constraint_eligible": true}
+  },
+  {
+   "id": "FB-02 fast_breaking rule, Bahai tradition: standing bahai_alcohol_prohibition narrows",
+   "declared_occasion_uid": "occ::naw_r_z_bah",
+   "expect": {"occasion_state": "EVALUABLE_CONSTRAINT", "item_predicate": "UNKNOWN", "governing_rules": ["rule::bahai_alcohol_prohibition"], "required_user_evidence": ["sect"]}
+  },
+  {
+   "id": "FB-03 fast_breaking rule, Jain tradition (standing rule unsourced, empty upstream): NO_CONSTRAINT, not PASS",
+   "declared_occasion_uid": "occ::samvatsari",
+   "expect": {"occasion_state": "NO_ADDITIONAL_RESTRICTION", "item_predicate": "NO_CONSTRAINT", "certifies": false, "hard_constraint_eligible": false}
+  },
+  {
+   "id": "NC-01 confirmed_no_constraint without a standing rule: NO_CONSTRAINT",
+   "declared_occasion_uid": "occ::meitei_birth",
+   "expect": {"occasion_state": "NO_ADDITIONAL_RESTRICTION", "item_predicate": "NO_CONSTRAINT"}
+  },
+  {
+   "id": "NC-02 confirmed_no_constraint in a tradition with a standing rule: standing rule still applies",
+   "declared_occasion_uid": "occ::bahai_naming",
+   "expect": {"occasion_state": "EVALUABLE_CONSTRAINT", "item_predicate": "UNKNOWN", "governing_rules": ["rule::bahai_alcohol_prohibition"]}
+  },
+  {
+   "id": "CONF-01 conflict: institutional langar rule + standing khalsa_rehat compose (union of exclusions), descriptive tier is not hard-constraint eligible",
+   "declared_occasion_uid": "occ::bandi_chhor_divas",
+   "expect": {"occasion_state": "EVALUABLE_CONSTRAINT", "item_predicate": "UNKNOWN", "governing_rules": ["rule::langar_feast"], "evidence_tiers": ["descriptive"], "hard_constraint_eligible": false, "required_item_evidence": ["egg", "kutha_meat", "meat", "tobacco"]}
+  },
+  {
+   "id": "CONF-02 unsourced narrowing rule (mourning_restriction): evaluable in source S1, reported in its own tier, not hard-constraint eligible",
+   "declared_occasion_uid": "occ::antyeshti",
+   "expect": {"occasion_state": "EVALUABLE_CONSTRAINT", "item_predicate": "UNKNOWN", "evidence_tiers": ["unsourced"], "hard_constraint_eligible": false}
+  },
+  {
+   "id": "SECT-01 sect-specific occasion with a rule requires the user's sect as declared evidence",
+   "declared_occasion_uid": "occ::ashara_mubaraka_shia_dawoodi_bohra_ismaili",
+   "expect": {"required_user_evidence": ["sect"]}
+  },
+  {
+   "id": "SYN-01 synthetic (destination_executable forced true in memory): excluded tag evidenced -> FAIL",
+   "declared_occasion_uid": "occ::bandi_chhor_divas",
+   "synthetic_destination_executable": true,
+   "item_evidence": {"meat": true},
+   "expect": {"item_predicate": "FAIL"}
+  },
+  {
+   "id": "SYN-02 synthetic: every relevant tag assessed absent -> PASS",
+   "declared_occasion_uid": "occ::bandi_chhor_divas",
+   "synthetic_destination_executable": true,
+   "item_evidence": {"meat": false, "egg": false, "kutha_meat": false, "tobacco": false},
+   "expect": {"item_predicate": "PASS"}
+  },
+  {
+   "id": "SYN-03 synthetic: a relevant tag not assessed -> UNKNOWN, never PASS",
+   "declared_occasion_uid": "occ::bandi_chhor_divas",
+   "synthetic_destination_executable": true,
+   "item_evidence": {"meat": false, "egg": false},
+   "expect": {"item_predicate": "UNKNOWN"}
+  }
+ ]
+}

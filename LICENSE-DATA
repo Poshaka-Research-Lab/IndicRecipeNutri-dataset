@@ -104,6 +104,10 @@ Third-party attributions that travel with the data:
   line said "only if you load `data/kg_flavor/`", contradicting the statement above that
   `data/kg/` carries 40,035 FlavorDB-derived edges. Taking the core graph alone does **not**
   avoid FlavorDB's terms.
+- **Occasion registry and dietary rules, internal source S1** (`data/cultural_context/`, since 0.11.0) —
+  Badgujar, Borde and Gurav; licensor H. Y. Badgujar. CC BY 4.0 upstream, shipped here under
+  CC BY-NC-SA 4.0 by licensor statement. The full attribution strings and the list of changes
+  are in `docs/THIRD_PARTY_TERMS.md`.
 
 ### Layers previously recorded here that are NOT used
 

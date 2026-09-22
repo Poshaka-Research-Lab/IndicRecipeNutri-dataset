@@ -1,5 +1,117 @@
 # Changelog
 
+## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
+
+**Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384
+recipes, every `recipe_id`, `Split_v1_leaky`, `Split_v2`, `Split_v3`, the knowledge graph
+(222,537 nodes, 6,426,916 edges), the benchmark and the interaction log are byte-identical to
+0.10.0. Nothing below adds a recipe, a graph node or a graph edge. `rebuild_all.py` was skipped
+on purpose, because no corpus, vocabulary or KG input changed (`RELEASING.md` step 1).
+
+### Added — `data/cultural_context/` (occasion registry and dietary rules, internal source S1)
+
+| table | rows | what it is |
+|---|---:|---|
+| `occasion_registry.parquet` | 444 | occasions, keyed `occ::<id>` |
+| `dietary_rules.parquet` | 24 | rule definitions, keyed `rule::<name>` |
+| `context_citations.parquet` | 1,111 | structured citations for every registry row and rule |
+| `context_tag_links.parquet` | 468 | name links from registry rows and rules to existing `occasion::` / `context::` nodes |
+| `CONTEXT_MANIFEST.json` | — | pins, transformations, counts, attribution |
+
+- **Silver, and never executed.** Every row is `label_status = silver`. Rule predicates are
+  imported as data. `destination_executable` is false for all 24 rules, because no mapping from
+  the source's tag vocabulary to this corpus's ingredients exists yet. At this release a declared
+  occasion therefore evaluates to UNKNOWN for every item, never PASS.
+- **Evidence tiers travel with every rule:** 6 `sourced`, 11 `descriptive`, 7 `unsourced`. A
+  descriptive or unsourced rule is never a silent hard constraint; report tiers separately.
+  The source's own `verification` is carried unchanged (5 verified, 12 partial, 7 unverified).
+- **Sources are citations, not quoted text.** Registry `source` cells and rule source fields are
+  replaced by `context_citations` rows plus a SHA-256 of the original cell. Verbatim
+  third-party quotations and the Pew 2021 survey percentages are not shipped; Pew remains
+  only as one number-free `prevalence_reference` citation. 277 citations name only a site or
+  publisher and are marked unresolved.
+- **Evidence limits.** 94 registry rows name a genre rather than a document (all
+  `single_source` or `needs_gazette`). 10 rows cite this corpus's own knowledge graph and are
+  not independent evidence.
+- **Links assert name correspondence only:** 25 exact, 443 unmatched, no alias rows (none was
+  reviewed). `rule::jain_sattvic` is a sourced rule definition and is a different thing
+  from the inferred corpus label `context::jain_sattvic`; only an explicit link row relates them.
+- No column describes a person. `religion`, `scope`, `states_observed` and
+  `standing_for_religions` describe an occasion's or a rule's tradition, and must not be used
+  to infer anyone's religion, observance or diet.
+- Upstream CC BY 4.0, shipped under this dataset's CC BY-NC-SA 4.0 by licensor statement.
+  Attribution and the list of changes are in `docs/THIRD_PARTY_TERMS.md`. `rules.yaml` was
+  an uncommitted working copy and is pinned by SHA-256.
+
+### Added — `data/historical_snapshot/` (internal source S2: historical-snapshot mappings)
+
+- `recipe_id_crosswalk.parquet`, 219,384 rows, all `exact_id`, built by an exact `recipe_id`
+  join validated one-to-one. 0 `current_only`, 0 `snapshot_only_retained`. The snapshot's 2
+  recipes withdrawn from this dataset for personal data are **omitted**; only their count is
+  recorded.
+- `snapshot_recipe_meta.parquet`, 219,384 rows: the snapshot's historical split labels and
+  change flags. True counts: `split_v3_changed` 3, `split_v2_changed` 0,
+  `split_v1_leaky_changed` 0, `recipe_name_changed` 58, `region_changed` 44,
+  `dup_family_changed` 108.
+- ⚠ **Never use `snapshot_split_*` as a split.** `snapshot_split_v3` places canonical-test
+  recipe 220902 in train. `Split_v3` is the evaluation split.
+- Not new recipes and not independent validation. The per-recipe split of the snapshot's consumer is unrecoverable;
+  `SNAPSHOT_MANIFEST.json` carries aggregate counts only. The snapshot's FlavorDB-derived
+  `kg_edges.parquet` was not imported and is recorded by hash only.
+
+### Added — the scripts that produced them
+
+`scripts/stage_cultural_context.py`, `scripts/stage_historical_snapshot.py`, and the read-only semantic
+adapter `scripts/context_rule_adapter.py` with `scripts/fixtures/context_rule_adapter_fixtures.json`.
+Every new row's `prov_import_script` now reads `scripts/<name>.py` and resolves in this
+repository, and the script hashes recorded in both manifests equal these files. They are
+provenance records rather than rebuild steps: machine-local source locations come from a private
+source map that is not part of the release, and `stage_historical_snapshot.py` refuses to run unless
+the destination is byte-identical to 0.10.0. Provenance names the sources only as `internal source S1`
+and `internal source S2`, with their commits and SHA-256 hashes.
+
+### Changed — release checker (`scripts/verify_release.py`)
+
+- Named length exemptions for four source-authored text columns: `registry_note`,
+  `date_rule_text`, `rule_note`, `sect_variants_json`. Nothing was truncated, because
+  truncation would cut safety caveats.
+- Named privacy suppression for three hash-shaped columns in `data/cultural_context/`:
+  `source_text_sha256`, `note_text_sha256` (64-hex SHA-256) and `link_uid`
+  (`link::` + 16 hex). A hex digest can hold 13 to 16 consecutive digits, which the
+  `credit_card` pattern reads as a card number. The suppression covers that one pattern, on
+  those columns only, and only for values that fully match the digest shape. Every other
+  pattern still runs on them, and every other column is scanned as before.
+- `check_exclusions` also scans `snapshot_recipe_id`.
+
+### Corrected — the 0.10.0 entry's wording on `Split_v3`
+
+The 0.10.0 entry says "Benchmark split membership is unchanged" and, under Compatibility,
+"`recipe_id`s and split membership are unchanged". That holds for `Split_v1_leaky` and
+`Split_v2` only. **`Split_v3` moved 3 re-sourced recipes:** 220872 and 220889 to val, and
+220902 to test. Each corrected record's new title matches a recipe already in that partition
+(71633, 217926 and 220901). `SPLIT_PROTOCOL_v3.md` keeps each title/duplicate-family component
+in a single partition, so the move was required, and the published `Split_v3` counts
+(197,350 / 10,940 / 11,094) already included it. A result computed on a 0.9.0-era `Split_v3`
+has those three recipes in train. The 0.10.0 entry is left as released, and this is its
+correction. `SPLIT_PROTOCOL_v3.md` now says that a content correction can reassign a retained
+recipe.
+
+### Documentation
+
+README figures and badges were still those of 0.7.0 in places, such as the recipe count,
+column count, node and relation counts, facets and size. They are now recomputed from the
+payload. The datasheet generator, data dictionary, provenance, benchmark-versioning note,
+`LICENSE-DATA` attribution list and `THIRD_PARTY_TERMS.md` cover the new layers.
+
+**Compatibility:** additive. No existing identifier, table, column, row, count or split value
+changed. The new namespaces `occ::`, `rule::`, `cite::`, `link::`
+and `xw::` do not occur in the graph or the interaction log.
+
+**Validation:** ⟨VALIDATION⟩
+
+**Not published.** This is a local release commit. No push, no tag, no Zenodo or Hugging Face
+upload and no DOI.
+
 ## [0.10.0] — 2026-09-20 — 58 recipes re-sourced; allergen labels human-reviewed
 
 **58 recipes now describe the dish their record names.** Each of the 58 carried text scraped from a *different*

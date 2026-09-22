@@ -9,6 +9,9 @@ one shared title group. Each component stays in a single partition. Components a
 stratified by Region; multi-region groups use their modal region. The source seed is
 20260902, with approximate proportions of 90% train, 5% validation and 5% test.
 Withdrawals can change published counts without reassigning the retained recipes.
+A content correction can reassign a retained recipe: when a corrected record joins a
+different title or duplicate-family component, it moves to that component's partition.
+0.10.0 did this for three re-sourced recipes (220872 and 220889 to val, 220902 to test).
 
 The release verifier requires valid labels, stable-ID parity between graph and both
 corpus views, and no crossing case-folded title or duplicate-family groups. It does

@@ -64,6 +64,11 @@ def unit_cell(col: str) -> str:
 #
 # Keep these short: one sentence, and only where reading the wrong column changes an answer.
 COLUMN_NOTES = {
+    # ---- 0.11.0 context layers. Only names that occur in no other table, so a note cannot
+    # land on an unrelated column. The historical snapshot split labels are deliberately NOT
+    # annotated here: no build script names them; the warning lives in the docs.
+    "destination_executable": "False for every rule in 0.11.0: no tag-to-ingredient mapping "
+                              "exists, so an occasion evaluates to UNKNOWN per item, never PASS.",
     "category_evidence_status": "Food-group evidence: category_supported requires two known equal ING2CAT values; needs_category_evidence is unknown, not a negative substitution label.",
     "category_supported": "True only for two known equal food-group categories; not functional, nutrition or safety approval.",
     "category_review_hold": "Missing category endpoint requires evidence; retained candidate, not a rejection.",

@@ -176,6 +176,80 @@ and their terms gate the release exactly as the four layers above do.
 | RecipeNLG (Indian subset) | `recipenlg_indian` | 30 | `CC BY-NC-SA 4.0` | Permitted with attribution | Yes |
 | indori | `indori` | 1 | `CC BY 4.0` | Permitted | Yes |
 
+## Occasion registry and dietary-rule table — internal source S1 (added in 0.11.0)
+
+| | occasion registry | dietary rules |
+|---|---|---|
+| Upstream file | internal source S1, `data/registry/occasions.csv` | internal source S1, `data/rules/rules.yaml` (meta version 0.2.0) |
+| Upstream version | git blob `e0f408d556119205e26e5d9a851f18a837e30619` at commit `5d8d7808d0252ecc23e66255d2616d74e1d5d3b2`; SHA-256 of the file as read `4da2145b711618e40775ee7a4c5b0cfcde7434f11cc5845745f687547f641d68` | **uncommitted working copy** against commit `5d8d780` (HEAD blob `d6b1458f`); SHA-256 `b1ed03b0a4fcda4aa2d05d3b164b7e988e68c3a5c94ab00a3b8be73076952c9f`; would-be blob `67ae6bbf…` is not in any commit |
+| Released as | `data/cultural_context/occasion_registry.parquet`, with its sources in `context_citations.parquet` and its node links in `context_tag_links.parquet` | `data/cultural_context/dietary_rules.parquet`, with its sources in `context_citations.parquet` |
+| Consumed by | `scripts/stage_cultural_context.py` (reads the CSV, re-verifies its SHA-256 before reading, and stops on a mismatch) | `scripts/stage_cultural_context.py` (reads the YAML under the same guard). `scripts/context_rule_adapter.py` reads the released tables, not the upstream file |
+| Upstream licence | CC BY 4.0 (the source's `LICENSE-DATA`) | CC BY 4.0 (the source's `LICENSE-DATA`) |
+| Licence here | CC BY-NC-SA 4.0, as part of `data/`, by licensor statement (H. Y. Badgujar, 2026-09-23). The corpus-derived upstream columns `corpus_recipe_count` and `in_corpus` are **not** shipped | CC BY-NC-SA 4.0, as part of `data/` |
+| Redistribution of derived data | Permitted by upstream with attribution, a licence link and an indication of changes | Same |
+| Share-alike | Not upstream; applies here through `data/` | Same |
+| Changes made | Namespaced IDs (`occ::<id>`, `rule::<name>`). `source` is not shipped: each cell became structured `context_citations` rows (title, publisher, locator, identifier, URL, access date) plus `source_text_sha256`, and every quoted span was dropped with it. `corpus_recipe_count` and `in_corpus` were dropped. Renames: `occasion_id`→`source_occasion_id`, `evidence_tier`→`registry_evidence_tier`, `date_rule`→`date_rule_text`, `note`→`registry_note`. Quotations and percentages were removed from `registry_note` and `date_rule_text` through a reviewed span table. Booleans, `n_sources` and `date_2026` were typed. Provenance and flag columns were added (`source_locatable`, `corpus_circular_source`, `label_status = silver`, `prov_*`) | Namespaced IDs. **Predicates stored as data, not executed**; `destination_executable = false` on every rule, and the upstream `executable` flag is carried as `source_executable`. `evidence_tier` added (sourced / descriptive / unsourced). `source`, `certification_source`, `time_of_day_source` and the standing-rule sources were reduced to citations, and quotations were dropped. `meta.prevalence_source` (Pew 2021 percentages) was dropped, and Pew was kept only as a number-free `prevalence_reference` citation. `note` became `rule_note` with quotations and percentages removed. The full list is under `transformations` and `dropped_fields` in `CONTEXT_MANIFEST.json` |
+| Checked | 2026-09-23, rights review; entry completed at promotion | 2026-09-23, rights review; entry completed at promotion |
+
+**Attribution (required by the upstream licence).** These are the strings recorded in
+`data/cultural_context/CONTEXT_MANIFEST.json`, where "this manifest" refers:
+
+    Badgujar, H. Y., Borde, S. P. and Gurav, Y. Occasion registry for constrained food
+    recommendation (internal source S1, data/registry/occasions.csv, git blob e0f408d5);
+    licensor H. Y. Badgujar; CC BY 4.0. https://creativecommons.org/licenses/by/4.0/
+    Modified for IndicRecipeNutri 0.11.0: see `transformations` in this manifest.
+
+    Badgujar, H. Y., Borde, S. P. and Gurav, Y. Dietary-rule predicates
+    (data/rules/rules.yaml, version 0.2.0, internal source S1, uncommitted working copy of
+    commit 5d8d780, SHA-256 b1ed03b0...952c9f); licensor H. Y. Badgujar; CC BY 4.0.
+    https://creativecommons.org/licenses/by/4.0/ Modified for IndicRecipeNutri 0.11.0: see
+    `transformations` in this manifest.
+
+**Facts are not ours.** Every registry row and every rule keeps its source attribution as
+structured citations in `context_citations.parquet`. The underlying facts and any third-party
+text are not licensed by this dataset. **Verbatim quotations were reduced to citations, not
+kept.** This covers the quoted text from Codex, *Paenitemini*, SGPC, bahai.org,
+eos.learnpunjabi.org and sikhmissionarysociety.org. The original cells survive here only as
+SHA-256 digests (`source_text_sha256`, `note_text_sha256`).
+
+**Upstream vocabulary is kept as written.** Rule and occasion identifiers, occasion names, note
+text and cited URLs keep the source's own wording, including common English and Sanskrit words
+for festive meals and religious fasts. They are cultural vocabulary and name no project.
+
+**Evidence limits that travel with these tables:**
+- Registry: 233 of 444 rows are `single_source`. 94 rows name a genre rather than a document
+  (81 `single_source`, 13 `needs_gazette`). 10 rows cite this corpus's own knowledge graph as
+  their source and are **not independent evidence**.
+- Rules: 5 verified, 12 partial, 7 unverified. The 7 unverified rules **are included**, tiered
+  `unsourced`, each with one `none_recorded` citation that preserves the upstream's failed
+  search. Tiers are 6 sourced, 11 descriptive and 7 unsourced.
+- Rules do not certify compliance. `certifies: false` marks predicates that only narrow a
+  catalogue.
+
+**Not imported from the same source:** `data/rules/item_tags.yaml` (derived from FAO/WHO GIFT
+IND-00062 FoodEx2 descriptions; redistribution of derivatives unverified upstream), the US
+occasion file, all survey-derived build arrays, and the source's code.
+
+**Two licence texts, one outcome.** A notice in internal source S2 describes a different upstream
+registry licence, which splits CC BY 4.0 registry material from CC BY-NC-SA 4.0 corpus-linked
+tables. The source's own `LICENSE-DATA` licenses the registry and `rules.yaml` under CC BY 4.0
+with no split. The stricter term was applied. Because `data/` is already CC BY-NC-SA 4.0, both
+readings give the same release licence.
+
+## Historical-snapshot crosswalk and split metadata — internal source S2 (added in 0.11.0)
+
+| | |
+|---|---|
+| Upstream | internal source S2, commit `051c975a37e2e32bd7e7172016b6f5b318a097e6`; snapshot receipts `logs/dataset_current_20260914/` (read from HEAD blobs) |
+| What it is | Recipe-ID crosswalk (exact `recipe_id` join) between an **uncommitted working copy of this dataset** (declared 0.9.0, 2026-09-14, parquet SHA-256 `ffbb5d14…b4d6`) and 0.10.0, plus **aggregate** split counts from the snapshot's consumer. Not new recipes. Not independent validation |
+| Released as | `data/historical_snapshot/recipe_id_crosswalk.parquet`, `data/historical_snapshot/snapshot_recipe_meta.parquet`, `data/historical_snapshot/SNAPSHOT_MANIFEST.json` |
+| Consumed by | `scripts/stage_historical_snapshot.py` (reads the snapshot parquet and receipts after re-verifying their SHA-256, and stops on a mismatch) |
+| Licence | This dataset's own CC BY-NC-SA 4.0. The S2 repository's code licence covers its code only and grants no data rights. No S2 code is included |
+| Third-party layers | None. The snapshot's `kg_edges.parquet` (FlavorDB-derived content, CC BY-NC-SA 3.0) was **not** imported. Hash recorded for provenance only |
+| Withdrawn records | The snapshot contains 2 recipes withdrawn from this dataset for personal data. They are **not** imported, and their IDs appear nowhere in the release. Only the count (2) is recorded, in `SNAPSHOT_MANIFEST.json` |
+| Per-recipe split of the consumer | Unrecoverable (its split manifest is absent). Only aggregate counts are carried |
+| Checked | 2026-09-23, rights review; entry completed at promotion |
+
 ## What to record for each
 
 1. The licence identifier, or the exact terms URL if it is not a standard licence.

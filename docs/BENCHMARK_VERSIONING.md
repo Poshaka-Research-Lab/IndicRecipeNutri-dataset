@@ -35,6 +35,13 @@ feature ablations specified by the database improvement plan remain outstanding.
 Neither of these silver generations supplies those missing judgments.
 
 
+**0.11.0 changes no benchmark artefact.** The new `data/historical_snapshot/snapshot_recipe_meta.parquet`
+carries a historical snapshot's `snapshot_split_v3`, `snapshot_split_v2` and
+`snapshot_split_v1_leaky`. They are records of an older state, not splits. `snapshot_split_v3`
+puts canonical-test recipe 220902 in train, so using it would leak a test recipe. Evaluate on
+`Split_v3`.
+
+
 `data/interactions/` is a **single** synthetic interaction benchmark, regenerated from
 the published corpus by `scripts/build_interactions.py`. It is simulated behaviour and
 is not an aligned human benchmark.

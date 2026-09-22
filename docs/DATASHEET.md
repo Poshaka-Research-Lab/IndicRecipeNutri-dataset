@@ -105,6 +105,21 @@ to empirical pairing edges. `scripts/build_graph.py` restores these attributes.
 The adjacency-dictionary format represents topology only; use the graph or evidence
 table when an explanation needs weights or supporting attributes.
 
+## Occasion context and historical snapshot
+
+Since 0.11.0, `data/cultural_context/` carries an occasion registry, dietary-rule definitions,
+their structured citations and name links to existing occasion and context nodes. All are
+silver. The rules are stored as data and are not executed: `destination_executable` is
+false for every rule, so a declared occasion yields UNKNOWN per item, never PASS. Rules carry
+`evidence_tier` (sourced, descriptive, unsourced), and descriptive or unsourced rules must
+not be used as silent hard constraints. Quoted third-party text was reduced to citations.
+No column describes a person, and none may be used to infer anyone's religion or diet.
+
+`data/historical_snapshot/` maps recipe IDs to a historical snapshot by exact ID. It adds no
+recipes and is not independent validation. Its historical snapshot split labels must never
+be used as a split; use `Split_v3`. Counts, pins and transformations are in each directory's
+manifest, and attribution is in `THIRD_PARTY_TERMS.md`.
+
 ## Provenance, access and maintenance
 
 Per-record attribution is retained. Original prose can be rehydrated where source
