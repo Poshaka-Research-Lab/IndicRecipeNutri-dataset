@@ -1087,7 +1087,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 # identifier, table, column, row, count or split value moved, so by the convention above a patch
 # bump would also have been defensible; the minor position marks the new join surfaces.
 # Every expected count in this file is unchanged.
-DATASET_VERSION = "0.11.0"
+DATASET_VERSION = "0.12.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

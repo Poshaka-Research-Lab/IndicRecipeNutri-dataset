@@ -1,0 +1,56 @@
+{
+  "version": "quality-v1-draft-2-audit-aligned",
+  "status": "provisional_not_independently_validated",
+  "supported_method_language": [
+    "en"
+  ],
+  "terminal_window_characters": 600,
+  "placeholder_pattern": "^(?:n/?a|none|null|not available|coming soon|see (?:above|below)|instructions?)(?:[.! ]*)$",
+  "action_pattern": "\\b(?:add|mix|stir|cook|bake|boil|fry|roast|steam|blend|knead|simmer|chop|heat|combine)\\b",
+  "finish_pattern": "\\b(?:serve|enjoy|ready|cool|refrigerate|store)\\b",
+  "state_pattern": "\\b(?:crispy|crisp|crunchy|liquid|solid|thick|thin|smooth|dry|soft|firm|runny|pourable|golden brown)\\b",
+  "intermediate_pattern": "\\b(?:use|used|reserve|reserved|store|stored)\\b.{0,55}\\b(?:as (?:a |the )?|for (?:the )?)(?:filling|paste|dough|batter|base)\\b",
+  "dish_words": [
+    "salad",
+    "soup",
+    "idli",
+    "dosa",
+    "cake",
+    "dough",
+    "batter",
+    "paste"
+  ],
+  "coarse_regions": [
+    "East India",
+    "North India",
+    "Pan-Indian",
+    "South India",
+    "West India"
+  ],
+  "specific_regions": [
+    "Andhra Pradesh",
+    "Assam",
+    "Bihar",
+    "Goa",
+    "Gujarat",
+    "Himachal Pradesh",
+    "Jammu & Kashmir",
+    "Karnataka",
+    "Kerala",
+    "Maharashtra",
+    "Manipur",
+    "Nagaland",
+    "Odisha",
+    "Parsi",
+    "Punjab",
+    "Rajasthan",
+    "Sindhi",
+    "Tamil Nadu",
+    "Telangana",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ],
+  "ingredient_signature_min_items": 3,
+  "duplicate_policy": "candidate components: legacy family, normalized title, or identical normalized ingredient list; never confirmed equivalence"
+}

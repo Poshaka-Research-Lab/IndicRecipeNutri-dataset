@@ -111,11 +111,11 @@ Third-party attributions that travel with the data:
 
 ### Layers previously recorded here that are NOT used
 
-Three entries were carried in `docs/THIRD_PARTY_TERMS.md` and are not part of this build:
-**RecipeDB NER** (no folder, no tagger, nothing reads it), **IFCT 2017** (no IFCT data is
-read; "IFCT" names only the 42-nutrient schema) and **INDB** (those spreadsheets carry
-`primarysource: usda` and `ukfct`). The nutrition layer is **7,847 USDA + 144 UK CoFID**
-and contains no Indian composition data.
+**RecipeDB NER** is not used (no folder or tagger). **INDB** was a misleading name for spreadsheets carrying `primarysource: usda` and `ukfct`; the supplemental FCT contains 7,847 USDA and 144 UK CoFID rows.
+
+### IFCT 2017: separately permissioned source, declared in 0.12.0
+
+The payload also contains IFCT 2017 profiles for atta, maida and paneer and associated source-share/provenance artifacts. Earlier versions of this document incorrectly denied their presence. Copyright remains with ICMR-NIN; these source values are not relicensed merely by this dataset's own-contribution licence. The owner confirmed on 2026-09-28 that permission is already held and instructed retention. This is owner-attested; the permission document has not been independently inspected by this update. See `docs/THIRD_PARTY_TERMS.md` for source, official terms, consumer paths and limitations. Downstream users must respect applicable third-party terms; no blanket permission is inferred here.
 
 ## What ShareAlike and NonCommercial mean for you
 

@@ -78,6 +78,11 @@ CONTEXT_DIGEST_COLUMNS = {
     ("data/cultural_context/dietary_rules.parquet", "note_text_sha256"): r"[0-9a-f]{64}",
     ("data/cultural_context/context_tag_links.parquet", "link_uid"): r"link::[0-9a-f]{16}",
 }
+QUALITY_DIGEST_COLUMNS = {
+    # 0.12.0 candidate-component IDs: exact namespace/full SHA-256 only.
+    ("data/quality/recipe_quality_v1.parquet", "dup_cluster_id"): r"q1_[0-9a-f]{64}",
+    ("data/quality/duplicate_crosswalk_v1.parquet", "dup_cluster_id"): r"q1_[0-9a-f]{64}",
+}
 
 REQUIRED_ARTEFACTS = [
     "data/corpus/recipes_structured.parquet",
@@ -224,7 +229,8 @@ def check_pii(root: Path) -> None:
                             f"({int(suppressed.sum())} hits) — validated IFCT context digest"
                         )
                     hits = hits & ~context_digest
-                digest_shape = CONTEXT_DIGEST_COLUMNS.get((path.relative_to(root).as_posix(), col))
+                digest_key = (path.relative_to(root).as_posix(), col)
+                digest_shape = CONTEXT_DIGEST_COLUMNS.get(digest_key) or QUALITY_DIGEST_COLUMNS.get(digest_key)
                 if name == "credit_card" and digest_shape is not None:
                     is_digest = series.str.fullmatch(digest_shape, na=False)
                     suppressed = hits & is_digest
@@ -931,6 +937,9 @@ def main() -> int:
     print(f"verifying {args.root}\n")
     check_licence(args.root)
     check_integrity(args.root)
+    from quality_release_contract import validate_release_quality_layers
+    for problem in validate_release_quality_layers(args.root):
+        fail('quality-0.12.0', problem)
     from benchmark_contract import validate_benchmark
     for problem in validate_benchmark(args.root):
         fail('benchmark-version', problem)

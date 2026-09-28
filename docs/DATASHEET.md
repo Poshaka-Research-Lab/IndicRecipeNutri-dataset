@@ -60,8 +60,10 @@ Recipe frequency is not population dietary prevalence.
 ## Nutrition and uncertainty
 
 Nutrition values are estimates with source and basis limitations. The composition
-pipeline uses an IFCT-shaped schema but USDA and US/UK composition sources; this
-does not establish Indian composition grounding. Consult `UNITS.json` before use.
+pipeline uses USDA and US/UK composition sources and three IFCT 2017 profiles
+(atta, maida and paneer). IFCT use is separately permissioned and owner-attested;
+see `THIRD_PARTY_TERMS.md`. This does not establish corpus-wide Indian composition
+grounding. Consult `UNITS.json` before use.
 53,309 recipes lack numeric servings and 60,418
 lack per-100g energy. Never replace missing denominators with 1. Estimated ingredient
 density and declared-serving bases remain separate confidence tiers.
@@ -88,6 +90,19 @@ independence and population weights remain unverified; no corpus-wide rate is cl
 Sulphite carrier inference is not independently validated by an ingredient-text
 lexicon looking for a declared additive. Investigator-defined South Asian classes
 must not be described as a regulatory list.
+
+## Additive 0.12.0 evidence layers
+
+`data/quality/` adds provisional instruction-quality flags, duplicate candidates,
+allergen evidence with a separate fail-closed UNKNOWN status, published item
+attributes and nutrition-estimator diagnostics. Legacy values and splits are
+preserved. See `quality_0_12_0/README.md` for schemas, measured scope and limitations.
+The flags are not independently validated and do not establish food safety.
+
+`data/interactions_v5/` is a separate 50,000-user, 1,000,000-event synthetic log
+generated only from published attributes. Oracle probabilities are separate
+from normal model inputs. These are fictional users and choices, not observations
+of real behaviour or dietary suitability. The previous interaction log is preserved.
 
 ## Flavour and substitution
 

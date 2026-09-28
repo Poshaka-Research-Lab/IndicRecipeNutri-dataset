@@ -1,0 +1,44 @@
+{
+  "status": "trace_completed_not_accuracy_validation",
+  "sources": [
+    {
+      "path": "D:\\Research Drive\\METHOD_K006_FaithfulXAIFood_ACTIVE\\docs\\INTERACTION_AUDIT.md",
+      "sha256": "8a6309d3be7fac8ce4049eb6d91ed57444d460345734a34b493c8404310957a7"
+    },
+    {
+      "path": "D:\\Research Drive\\METHOD_K006_FaithfulXAIFood_ACTIVE\\docs\\K006-109_CONFIDENCE_TRACE.md",
+      "sha256": "d9a6413ddc3f49321e2e3149d05353f80cd61d50b64df16a1c0c799e8e698c00"
+    },
+    {
+      "path": "D:\\Research Drive\\METHOD_K006_FaithfulXAIFood_ACTIVE\\src\\k006\\contracts.py",
+      "sha256": "835049ebe4f6c836fd8e8dd2d2052d26db8e08859def26f0bd5ff42ba3d389c4"
+    },
+    {
+      "path": "D:\\Research Drive\\METHOD_K006_FaithfulXAIFood_ACTIVE\\src\\k006\\adapters\\data.py",
+      "sha256": "97d5be24636fa79e2efc5d90ba5c2ccd9bf25efbb37ea598e06e0ea0843a0fb8"
+    },
+    {
+      "path": "D:\\datasets\\scraped_indian_recipes\\data\\recompute_per100g_v13.py",
+      "sha256": "375b9112a0c6616fb42727f744bc5bbea94cc032d5f1f9584ac5a9b5cb70b1d7"
+    }
+  ],
+  "legacy_generator_drift": {
+    "recipe_ids": [
+      220860,
+      220865,
+      220868,
+      220902
+    ],
+    "current_interaction_rows_by_recipe": {
+      "220860": 33,
+      "220865": 44,
+      "220868": 238,
+      "220902": 35
+    },
+    "total": 350,
+    "historical_feature_change_source": "K006 INTERACTION_AUDIT.md; historical corpus comparison not repeated here",
+    "legacy_files_modified": false
+  },
+  "nutrition": "Current occurrence grams agree; original numerator/denominator model mismatch remains. No reference accuracy claimed.",
+  "diet": "Existing K006 contracts have no admissible PASS source for halal/kosher/Jain; no certification inferred."
+}

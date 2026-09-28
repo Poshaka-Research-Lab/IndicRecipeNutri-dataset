@@ -1,0 +1,119 @@
+{
+  "source_sha256": "cbcf305647f222108b70b6bcf00247e00ee1b0abf296b8522a16c55426d05092",
+  "source_contract": "k006-regions-v1",
+  "codes": {
+    "(missing)": {
+      "level": "missing",
+      "stratum": "unassigned"
+    },
+    "Andhra Pradesh": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Assam": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "Bihar": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "East India": {
+      "level": "coarse",
+      "stratum": "descriptive"
+    },
+    "Goa": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Gujarat": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Himachal Pradesh": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "Jammu & Kashmir": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Karnataka": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Kerala": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Maharashtra": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Manipur": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "Nagaland": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "North India": {
+      "level": "coarse",
+      "stratum": "coarse_stratum"
+    },
+    "Odisha": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "Pan-Indian": {
+      "level": "unassigned",
+      "stratum": "unassigned"
+    },
+    "Parsi": {
+      "level": "community",
+      "stratum": "descriptive"
+    },
+    "Punjab": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Rajasthan": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Sindhi": {
+      "level": "community",
+      "stratum": "descriptive"
+    },
+    "South India": {
+      "level": "coarse",
+      "stratum": "coarse_stratum"
+    },
+    "Tamil Nadu": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Telangana": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Uttar Pradesh": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "Uttarakhand": {
+      "level": "state",
+      "stratum": "descriptive"
+    },
+    "West Bengal": {
+      "level": "state",
+      "stratum": "primary_axis"
+    },
+    "West India": {
+      "level": "coarse",
+      "stratum": "descriptive"
+    }
+  },
+  "scope": "Recipe-region reporting hierarchy only; no person attribute or adequacy claim"
+}

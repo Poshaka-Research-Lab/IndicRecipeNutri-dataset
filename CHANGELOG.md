@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.12.0] ? 2026-09-28 ? local additive candidate
+
+Adds provisional recipe-quality and duplicate-candidate sidecars, allergen evidence plus a separate fail-closed UNKNOWN status, published item attributes, nutrition-estimator diagnostics, and a separate deterministic synthetic generator with 50,000 users and 1,000,000 events. Retains legacy data, splits, graph, benchmark and interaction log. Corrects the IFCT declaration using owner-attested permission for existing profiles.
+
+Engineering checks do not establish semantic accuracy or safety. Instruction-derived flag publication remains conditional on source-terms verification; this is a local update, with no remote publication. Details and measured scope: [0.12.0 evidence layers](docs/quality_0_12_0/README.md).
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

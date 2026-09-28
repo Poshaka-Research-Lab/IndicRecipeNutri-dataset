@@ -1,0 +1,34 @@
+{
+  "builder_sha256": "f5f9816bbc1382aa698a9a4a81bff5cd106aafbc2ad5be4954331028593ba278",
+  "counts": {
+    "SpiceLevel_src": {
+      "None": 38,
+      "ingredient-rule": 95825,
+      "owner_label": 20,
+      "source": 123501
+    },
+    "cuisine_generic_or_missing": {
+      "False": 72860,
+      "True": 146524
+    },
+    "rating_count_bin": {
+      "100_plus": 10648,
+      "10_99": 18480,
+      "1_9": 58940,
+      "unknown": 128878,
+      "zero": 2438
+    }
+  },
+  "limits": [
+    "Spice provenance retained; rule-inferred is not independently sourced.",
+    "Missing ratings remain unknown, distinct from zero.",
+    "No synthetic hidden rank, quality, noise or exposure enters the view."
+  ],
+  "new_external_sources": [],
+  "payload_sha256": "3867944aa9de35dc69bafe5ef29d15c74ddfcfb56e5868ecd498f124a436ad5f",
+  "private_text_exported": false,
+  "rows": 219384,
+  "source_sha256": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa",
+  "text_view": "render_local_card; not materialized in the release",
+  "version": "irn-item-card-0.12.0-v1"
+}

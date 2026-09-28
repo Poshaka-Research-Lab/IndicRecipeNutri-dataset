@@ -1,0 +1,60 @@
+{
+  "builder_sha256": "667c93de1e58a6584d4ede25f43b9827284765096123d69305439aaa4b5213e4",
+  "claims": "No empirical superiority, real exposure propensity, or safety claim.",
+  "config": {
+    "events_per_user": 20,
+    "replacement": false,
+    "restrictions": "none_modeled_synthetic_benchmark_only",
+    "seed": 20260928,
+    "temperature": 1.0,
+    "test_mechanism": "declared_coefficient_shift",
+    "test_weights": [
+      1.1,
+      1.2,
+      0.4,
+      0.5
+    ],
+    "train_events": 16,
+    "train_weights": [
+      1.4,
+      0.9,
+      0.5,
+      0.4
+    ],
+    "users": 50000,
+    "version": "published-attribute-generator-v5.1"
+  },
+  "features": [
+    "Region",
+    "SpiceLevel",
+    "HealthGrade",
+    "rating_count_bin"
+  ],
+  "input_sha256": "3867944aa9de35dc69bafe5ef29d15c74ddfcfb56e5868ecd498f124a436ad5f",
+  "legacy_interactions_modified": false,
+  "numpy_version": "2.1.3",
+  "oracle_only": [
+    "utility",
+    "conditional_choice_probability"
+  ],
+  "outputs": {
+    "generator_truth/choice_probabilities.parquet": {
+      "logical_sha256": "33c80099f74bebd29e85d7ebc830a01e1958e9f956a3fcb77e29a3c67e4c0600",
+      "rows": 1000000,
+      "sha256": "3eba248c9d1939de3505d8e178cdeb79b03f0b10215e284c2abb74b51caf5e7e"
+    },
+    "interactions.parquet": {
+      "logical_sha256": "a92b74b99153d2704b00c9ce220c068d4c0f191dd67bf8fe90e00a05dcc5b963",
+      "rows": 1000000,
+      "sha256": "0b5f379594e4e224a20ced82657691400e72d980eceb4502fe13d698388e9beb"
+    },
+    "users.parquet": {
+      "logical_sha256": "8f3ca90ce6e715876ac1e36aead23d2fcea040791d3df78966a1be151d43b03c",
+      "rows": 50000,
+      "sha256": "5867058d6aee89bcb846416e8a3b7639c0a211885c0a8a8966f64b1d47d1a8a6"
+    }
+  },
+  "scope": "Fully synthetic mechanism benchmark. No diet/medical constraints modeled; not meal recommendations.",
+  "synthetic_user_namespace": "interactions_v5 only; do not join to v4 by numeric ID",
+  "test_design": "Per-user event indices 16-19 use a declared coefficient shift; no user-item pair appears twice."
+}

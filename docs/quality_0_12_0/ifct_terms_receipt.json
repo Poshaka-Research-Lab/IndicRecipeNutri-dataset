@@ -1,0 +1,12 @@
+{
+  "decision": "DS-9",
+  "disposition": "retain",
+  "permission_basis": "owner_attestation",
+  "user_reply": "alrady have it please proceed",
+  "permission_document_inspected": false,
+  "permission_document_path": null,
+  "official_terms_url": "https://www.nin.res.in/ebooks/IFCT2017_16122024.pdf",
+  "terms_checked_date": "2026-09-28",
+  "terms_evidence": "Official search-index text retrieved; full web-tool PDF fetch failed due response size. Personal reproduction and electronic-product permission clauses were visible in official-source result.",
+  "scope": "No new IFCT values added; factual declaration correction for existing 3 source profiles. Separate source rights retained."
+}

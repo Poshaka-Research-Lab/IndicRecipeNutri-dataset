@@ -10,7 +10,7 @@ master documents none; they are not guessed.
 Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 `Enrich_Log`) are withheld from every table below — see `DATASHEET.md`.
 
-Covering **all 51 published Parquet tables**.
+Covering **all 60 published Parquet tables**.
 
 
 ## `data/corpus/allergens.parquet`
@@ -1148,6 +1148,40 @@ Covering **all 51 published Parquet tables**.
 | `prov_import_script` | object |  | 219,384 | 1 | scripts/stage_historical_snapshot.py |  |
 | `prov_schema_version` | object |  | 219,384 | 1 | 1.1.0 |  |
 
+## `data/interactions_v5/generator_truth/choice_probabilities.parquet`
+
+1,000,000 rows x 4 columns - 9.7 MB (statistics from the first 500,000 rows)
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `user_id` | int64 |  | 500,000 | 25,000 | 0 |  |
+| `event_index` | int64 |  | 500,000 | 20 | 0 |  |
+| `utility` | float64 |  | 500,000 | 169 | 1.4 |  |
+| `conditional_choice_probability` | float64 |  | 500,000 | 481,150 | 9.936962146947856e-06 |  |
+
+## `data/interactions_v5/interactions.parquet`
+
+1,000,000 rows x 4 columns - 5.2 MB (statistics from the first 500,000 rows)
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `user_id` | int64 |  | 500,000 | 25,000 | 0 |  |
+| `recipe_id` | int64 |  | 500,000 | 196,744 | 21269 |  |
+| `event_index` | int64 |  | 500,000 | 20 | 0 |  |
+| `split` | object |  | 500,000 | 2 | train |  |
+
+## `data/interactions_v5/users.parquet`
+
+50,000 rows x 5 columns - 0.4 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `user_id` | int64 |  | 50,000 | 50,000 | 0 |  |
+| `preferred_region` | object |  | 50,000 | 26 | Gujarat |  |
+| `preferred_spice` | object |  | 50,000 | 3 | medium |  |
+| `grade_direction` | int64 |  | 50,000 | 2 | 1 |  |
+| `popularity_direction` | int64 |  | 50,000 | 2 | -1 |  |
+
 ## `data/kg/kg_edge_evidence.parquet`
 
 236,315 rows x 4 columns - 0.8 MB
@@ -1314,11 +1348,132 @@ Covering **all 51 published Parquet tables**.
 | `value_str` | string |  | 429,159 | 199,005 | Mutton Nihari |  |
 | `build_id` | object |  | 500,000 | 1 | v15-2026-09-01 |  |
 
+## `data/quality/allergen_evidence_v1.parquet`
+
+3,729,528 rows x 9 columns - 3.8 MB (statistics from the first 500,000 rows)
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 500,000 | 29,412 | 0 |  |
+| `allergen` | object |  | 500,000 | 17 | asafoetida |  |
+| `legacy_status` | object |  | 500,000 | 3 | absent |  |
+| `evidence_kind` | object |  | 500,000 | 5 | text_silent |  |
+| `evidence_reason` | object |  | 500,000 | 6 | no_supported_name_or_carrier_match |  |
+| `status_v012` | object |  | 500,000 | 3 | absent |  |
+| `status_reason` | object |  | 500,000 | 7 | silver_inferred_absence_not_verified_saf |  |
+| `assessment_language_supported` | bool |  | 500,000 | 2 | True |  |
+| `scan_incomplete` | bool |  | 500,000 | 2 | False |  |
+
+## `data/quality/allergen_review_candidates_v1.parquet`
+
+144 rows x 6 columns - 0.0 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 144 | 142 | 1199 |  |
+| `allergen` | object |  | 144 | 5 | milk |  |
+| `legacy_status` | object |  | 144 | 1 | absent |  |
+| `evidence_kind` | object |  | 144 | 2 | implicit_name |  |
+| `status_v012` | object |  | 144 | 1 | unknown |  |
+| `review_status` | object |  | 144 | 1 | unreviewed_candidate |  |
+
+## `data/quality/duplicate_crosswalk_v1.parquet`
+
+219,384 rows x 7 columns - 15.0 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `dup_family_id` | float64 |  | 44,289 | 13,057 | 0.0 |  |
+| `Split_v3` | object |  | 219,384 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
+| `dup_cluster_id` | object |  | 219,384 | 187,700 | q1_2045a13f979bde4848479805d9f08c66ef713 |  |
+| `crosses_legacy_split` | bool |  | 219,384 | 2 | False |  |
+| `dup_family_regions` | Int64 |  | 44,289 | 11 | 1 |  |
+| `dup_family_sites` | Int64 |  | 44,289 | 40 | 3 |  |
+
+## `data/quality/item_attributes_v1.parquet`
+
+219,384 rows x 11 columns - 1.9 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `SpiceLevel` | object |  | 219,346 | 3 | medium |  |
+| `SpiceLevel_src` | object |  | 219,346 | 3 | ingredient-rule |  |
+| `HealthGrade` | object |  | 219,326 | 5 | B |  |
+| `RatingCount` | float64 |  | 90,506 | 5,492 | 0.0 |  |
+| `RatingAverage` | float64 | [0, 5] | 117,579 | 746 | 0.0 |  |
+| `Region` | object |  | 219,347 | 27 | North India |  |
+| `Cuisine` | object |  | 219,347 | 53 | Indian |  |
+| `rating_count_bin` | object |  | 219,384 | 5 | zero |  |
+| `spice_is_rule_inferred` | bool |  | 219,384 | 2 | True |  |
+| `cuisine_generic_or_missing` | bool |  | 219,384 | 2 | True |  |
+
+## `data/quality/nutrition_evidence_v1.parquet`
+
+219,384 rows x 19 columns - 4.8 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `Region` | object |  | 219,347 | 27 | North India |  |
+| `Split_v3` | object |  | 219,384 | 3 | test | **Use this split.** Connected components over case-folded title AND `dup_family_id`; 0 groups span a boundary. Seed 20260902. |
+| `per100g_confident` | bool |  | 219,384 | 2 | True |  |
+| `per100g_basis` | object |  | 219,384 | 6 | per_serving_v13 |  |
+| `serving_basis_v3` | object |  | 219,384 | 6 | portion |  |
+| `ing_weight_confident_frac` | float64 | [0, 1] | 218,653 | 350 | 0.0 |  |
+| `ingredient_line_count` | int64 |  | 219,384 | 52 | 11 |  |
+| `ab_line_count` | int64 |  | 219,384 | 43 | 0 |  |
+| `assumed_weight_line_count` | int64 |  | 219,384 | 45 | 11 |  |
+| `unassessed_weight_line_count` | int64 |  | 219,384 | 18 | 0 |  |
+| `flat20_tier_e_line_count` | int64 |  | 219,384 | 30 | 5 |  |
+| `energy_available_line_count` | int64 |  | 219,384 | 40 | 10 |  |
+| `count_confident_fraction` | float64 |  | 218,653 | 350 | 0.0 |  |
+| `estimated_ab_mass_fraction` | float64 |  | 218,595 | 111,514 | 0.0 |  |
+| `partial_ab_energy_fraction` | float64 |  | 218,044 | 83,863 | 0.0 |  |
+| `has_assumed_weight_line` | bool |  | 219,384 | 2 | True |  |
+| `estimator_high_confidence_rule` | bool |  | 219,384 | 2 | False |  |
+| `reference_validation_status` | object |  | 219,384 | 1 | not_independently_validated_here |  |
+
+## `data/quality/recipe_quality_v1.parquet`
+
+219,384 rows x 27 columns - 15.1 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
+| `coarse_stratum` | object |  | 219,384 | 3 | coarse |  |
+| `coarse_stratum_reason` | object |  | 219,384 | 1 | frozen_region_taxonomy |  |
+| `garbled` | object |  | 219,384 | 2 | not_detected |  |
+| `garbled_reason` | object |  | 219,384 | 2 | no_encoding_artifact_detected |  |
+| `record_completeness` | object |  | 219,384 | 4 | sufficient |  |
+| `record_completeness_reason` | object |  | 219,384 | 6 | audit_complete |  |
+| `end_state_stated` | object |  | 219,384 | 3 | yes |  |
+| `end_state_stated_reason` | object |  | 219,384 | 3 | audit_rule_observation |  |
+| `is_intermediate` | object |  | 219,384 | 3 | no |  |
+| `is_intermediate_reason` | object |  | 219,384 | 2 | audit_rule_observation |  |
+| `title_method_mismatch` | object |  | 219,384 | 3 | unknown |  |
+| `title_method_mismatch_reason` | object |  | 219,384 | 6 | no_comparable_dish_assertion |  |
+| `audit_record_completeness` | object |  | 219,384 | 5 | COMPLETE |  |
+| `audit_end_state_stated` | object |  | 219,384 | 3 | yes |  |
+| `audit_is_intermediate` | object |  | 219,384 | 2 | no |  |
+| `audit_liquid_fate_unstated` | object |  | 219,384 | 3 | no |  |
+| `liquid_fate_unstated` | object |  | 219,384 | 3 | no |  |
+| `over_desk_cut` | bool |  | 219,384 | 2 | False |  |
+| `instruction_language_supported` | bool |  | 219,384 | 2 | True |  |
+| `source_instruction_available` | bool |  | 219,384 | 1 | True |  |
+| `has_instructions_mismatch` | bool |  | 219,384 | 2 | False |  |
+| `cuisine_generic_or_missing` | bool |  | 219,384 | 2 | True |  |
+| `region_stratum` | object |  | 219,384 | 4 | coarse_stratum |  |
+| `region_level` | object |  | 219,384 | 5 | coarse |  |
+| `dup_cluster_id` | object |  | 219,384 | 187,700 | q1_2045a13f979bde4848479805d9f08c66ef713 |  |
+| `dup_cluster_id_reason` | object |  | 219,384 | 1 | candidate_signature_component |  |
+
 ---
 
 ## Every published file
 
-All 97 files under `data/`, so nothing ships undescribed.
+All 111 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
@@ -1420,6 +1575,25 @@ All 97 files under `data/`, so nothing ships undescribed.
 | `user_list.txt` | 0.41 MB | plain-text id or triple list |
 | `users.csv` | 2.62 MB | delimited text |
 
+### `data/interactions_v5/`
+
+| file | size | kind |
+|---|---:|---|
+| `GENERATOR_MANIFEST.json` | 0.00 MB | metadata / manifest |
+
+### `data/interactions_v5/generator_truth/`
+
+| file | size | kind |
+|---|---:|---|
+| `choice_probabilities.parquet` | 9.67 MB | columnar table — documented above |
+
+### `data/interactions_v5/`
+
+| file | size | kind |
+|---|---:|---|
+| `interactions.parquet` | 5.24 MB | columnar table — documented above |
+| `users.parquet` | 0.36 MB | columnar table — documented above |
+
 ### `data/kg/`
 
 | file | size | kind |
@@ -1462,3 +1636,18 @@ All 97 files under `data/`, so nothing ships undescribed.
 | `language_source_evidence.json` | 0.00 MB | metadata / manifest |
 | `release_facts.json` | 0.00 MB | metadata / manifest |
 | `withdrawn_ids.json` | 0.83 MB | metadata / manifest |
+
+### `data/quality/`
+
+| file | size | kind |
+|---|---:|---|
+| `allergen_evidence_manifest.json` | 0.18 MB | metadata / manifest |
+| `allergen_evidence_v1.parquet` | 3.76 MB | columnar table — documented above |
+| `allergen_review_candidates_v1.parquet` | 0.00 MB | columnar table — documented above |
+| `duplicate_crosswalk_v1.parquet` | 14.99 MB | columnar table — documented above |
+| `item_attributes_v1.parquet` | 1.90 MB | columnar table — documented above |
+| `item_card_manifest.json` | 0.00 MB | metadata / manifest |
+| `nutrition_evidence_manifest.json` | 0.00 MB | metadata / manifest |
+| `nutrition_evidence_v1.parquet` | 4.84 MB | columnar table — documented above |
+| `quality_manifest.json` | 1.86 MB | metadata / manifest |
+| `recipe_quality_v1.parquet` | 15.12 MB | columnar table — documented above |

@@ -1,5 +1,16 @@
 # Third-party layers and their terms
 
+## Current IFCT source declaration (0.12.0 correction, 2026-09-28)
+
+The 0.11.0 payload already contains IFCT 2017 source profiles for atta, maida and paneer in `data/enrichment/ifct_source_profiles.json`, associated recipe source shares in `recipe_ifct_fraction.parquet`, and `nutrition_source_provenance.json`. The prior blanket denial of IFCT use below is superseded. This is a declaration correction, not newly added IFCT values or proof of full Indian nutrient coverage.
+
+Source: T. Longvah, R. Ananthan, K. Bhaskarachary and K. Venkaiah, *Indian Food Composition Tables 2017*, ICMR-National Institute of Nutrition, Hyderabad. Copyright ICMR-NIN. [Official publication and copyright notice](https://www.nin.res.in/ebooks/IFCT2017_16122024.pdf), inspected via official indexed text on 2026-09-28. Its notice permits acknowledged personal reproduction and requires prior written permission for electronic product use. A web copy is not an unrestricted redistribution licence.
+
+DS-9: on 2026-09-28 the dataset owner confirmed that the required permission is already held and instructed retention ("alrady have it please proceed"). This release records an **owner-attested permission**, not an independently inspected permission instrument; no document path, grant date or scope beyond that confirmation has been supplied. Do not infer that this confirmation grants every downstream user an unrestricted licence. IFCT source rights remain separate from our own-contribution licence.
+
+Consuming/export path: `scripts/build_enrichment.py::export_ifct_companions` and `sanitized_ifct_profiles`; schema/documentation consumer: `scripts/make_data_dictionary.py`. Nutrition lineage is recorded in `data/enrichment/nutrition_source_provenance.json`, including its limited component set, source digests and estimated-composition limitations. Scope and traceability checks belong in the 0.12.0 provenance report.
+
+
 **Current local candidate, 2026-09-12:** the CID identity repair yields 1,607 compound
 nodes, 25,869 has_compound and 14,180 shares_flavor edges in the core, plus 580
 molecular-sharing assertions retained on pairing edges in the evidence table.
@@ -97,10 +108,9 @@ extent its own licence permits, and the combined graph is released only to that 
 > | RecipeNLG (Indian subset) | `CC BY-NC-SA 4.0` | 30 recipes |
 > | | | **3,833 recipes = 1.71% of 224,002** |
 >
-> `FoodOn` (`CC BY 4.0`) and `IFCT 2017` are compatible; they are absorbed by the more
-> restrictive combined terms rather than being the cause of them.
+> Historical compatibility wording superseded: FoodOn is CC BY 4.0; IFCT is a separately permissioned source, not automatically absorbed by the dataset licence.
 >
-> ### ⚠ CORRECTION — IFCT 2017 was never used either
+> ### Historical IFCT non-use correction - SUPERSEDED for the 0.11.0/0.12.0 payload
 >
 > This document listed **IFCT 2017 (Indian Food Composition Tables), Copyright ICMR-NIN** as
 > the nutrient-grounding layer. **No IFCT 2017 data is present or read.** `compute_ifct.py`
@@ -152,7 +162,7 @@ ecipedb\` **does not exist**. `README_DATASETS.md` lists it among the
 
 | layer | used for | licence | redistribution of derived data | verified |
 |---|---|---|---|---|
-| ~~**IFCT 2017**~~ | ~~nutrient grounding~~ | — | **NOT USED — see correction below** | n/a |
+| **IFCT 2017** | Existing atta, maida and paneer source profiles and associated provenance | Copyright ICMR-NIN; separately permissioned | Retained on owner confirmation; not an unrestricted sublicence | Owner-attested permission; instrument not independently inspected. See current declaration above |
 | **USDA SR Legacy** | 7,793 of 7,991 FCT foods (97.5%) | **US Government public domain / CC0** | Unrestricted | Yes |
 | **INDB** (`US_fct.xlsx`, `UK_fct.xlsx`) | 198 FCT foods (2.5%) | Open Access, citation | Permitted with citation | ⚠ provenance of the two spreadsheets not independently confirmed |
 | **FlavorDB** | `compound` nodes (1,601), `has_compound` (25,854) / `shares_flavor` (14,181) edges | `CC BY-NC-SA 3.0` | Permitted with attribution under copyleft | Yes |
@@ -271,9 +281,7 @@ exclusion in `data/kg/EXCLUDED.json`.
 
 ## Standing rule this document earned
 
-**Three of the six layers listed here were never used**: RecipeDB NER (folder does not
-exist, no tagger), IFCT 2017 (no IFCT data is read), and INDB (the two spreadsheets say
-`primarysource: usda` and `ukfct`). All three were checkable in minutes.
+**Previously misidentified layers:** RecipeDB NER is absent; INDB was a misleading label for USDA/UK CoFID sources. IFCT non-use was a historical statement and is false for the current payload: see the three-profile declaration above. Check actual source consumers before asserting absence.
 
 > Before recording a dependency, verify it is actually imported, read or joined, and name
 > the file or code path that consumes it. A licence document is a factual claim about the

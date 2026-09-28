@@ -1,0 +1,38 @@
+{
+  "builder_sha256": "a6ff7eb4ec18e0831ff8d28ede4501e879fd391b6ccb587374d47a78a5b7a44b",
+  "counts": {
+    "ALL": {
+      "estimator_high_confidence_rule": 85577,
+      "no_occurrence_rows": 731,
+      "rows": 219384,
+      "unassessed_weight_lines": 609,
+      "with_assumed_weight_line": 176062,
+      "with_flat20_line": 148866
+    },
+    "DEV": {
+      "estimator_high_confidence_rule": 81270,
+      "no_occurrence_rows": 689,
+      "rows": 208290,
+      "unassessed_weight_lines": 585,
+      "with_assumed_weight_line": 167115,
+      "with_flat20_line": 141338
+    }
+  },
+  "independent_reference_accuracy_measured": false,
+  "inputs": {
+    "data/corpus/recipes_structured.parquet": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa",
+    "data/enrichment/ingredients_nutrition.parquet": "c219c56f1f9a5b76e12a173bc1aaace56f00e7b980fecaf7bfd5396082f5f9ef",
+    "data/enrichment/ingredients_weights.parquet": "ad12c3263b280e9697ffddaf0f69cf9ca906371345967b9e2f8027c95286c298"
+  },
+  "legacy_values_modified": false,
+  "limits": [
+    "Mass fraction uses estimated grams, not reference weights.",
+    "Energy fraction is over available ingredient energy, not complete nutrient coverage.",
+    "The 0.8 predicate is an estimator rule, not a validated accuracy threshold."
+  ],
+  "numerator_denominator_model_issue": "These occurrence tables agree with each other; this does not establish agreement with the legacy per100g denominator model.",
+  "occurrence_gram_tables_identical": true,
+  "payload_sha256": "a29bb6e420ecccc1d31b71832ec00484b3b537dffcb7b43ddb3cab4172175941",
+  "version": "nutrition-evidence-0.12.0-v1",
+  "weight_fraction_reproduced": true
+}

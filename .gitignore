@@ -20,3 +20,6 @@ Thumbs.db
 desktop.ini
 .~lock.*#
 *.tmp
+
+# Private quality review payloads; never publish recipe text.
+.local/

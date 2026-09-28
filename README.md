@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/release-0.11.0-success.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/candidate-0.12.0-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -25,6 +25,11 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+## 0.12.0 local candidate
+
+Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item attributes, nutrition diagnostics, and a published-attribute synthetic log (50,000 fictional users; 1,000,000 events). Legacy data and splits are preserved. See [scope, checks and limitations](docs/quality_0_12_0/README.md). Independent semantic validation and instruction-derived flag publication clearance remain separate requirements; this local update is not a remote release.
+
 
 > [!NOTE]
 > **New in 0.11.0, and additive.** [`data/cultural_context/`](data/cultural_context) adds an occasion

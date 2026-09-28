@@ -1,0 +1,19 @@
+{
+  "source_audit_run": "20260928T033454Z_k006-dsaudit-stats_08128afa",
+  "instruction_rule_version": "k006-dsaudit/instruction-status/1.0.0",
+  "carrier_lexicon_version": "k006-dsaudit/allergen-carrier-lexicon/1.0.0",
+  "extraction": "AST source segments preserving original code; classifier and gate execution not included",
+  "sources": {
+    "src\\k006\\physical_state_v109_12.py": "02cc71494e66f0851ae71ab4b25bc2fee66eb909cd327f684fc27b105ee79714",
+    "scripts\\dataset_improvement_audit_stats.py": "cb07830f482aaac71386af7e4b60ca481e69cd4beb64e6a6481328c4a0b960be"
+  },
+  "outputs": {
+    "quality_audit_patterns.py": "0b5ca2752e12c254eb2ae4051a36d53cfd67e3e29d546b29565e6be39b741965",
+    "quality_audit_rules.py": "c401a0a482c8d79a66090291f0f63303796836c1f64087394c4fdfc5b2c91a64"
+  },
+  "outputs_before_lf_normalization": {
+    "quality_audit_patterns.py": "9116e70fdd334028d4ab912730ae9b781f5901a475e693b6837447d0b804f6c8",
+    "quality_audit_rules.py": "9af71fe83d10a57e3769d5390c4ecaa05785391e259d30e20c50ad9a4e453da4"
+  },
+  "serialization": "LF-normalized for Git portability; AST unchanged"
+}

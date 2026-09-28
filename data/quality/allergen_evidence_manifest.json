@@ -1,0 +1,8116 @@
+{
+  "audit_lexicon_sha256": "a8d4258b6c34b4b3b2c2840661a349cfccba80447bd2a8fbf766e65c1075b313",
+  "builder_code_sha256": "c273b061dd73366db48069b02e8507d24753c4c80058ea689b1c9f88b2b3a284",
+  "class_count": 17,
+  "deltas_from_audit_proposal": [
+    "explicit-name evidence separated",
+    "negated mentions need review",
+    "alternative carrier clauses assessed independently",
+    "unsupported languages and invalid lists unassessed"
+  ],
+  "heldout_ids_sha256": "c3517fda7c05e07f1e0d7d6e9f0e1d7c4e408fbad25ab7e824ed61965beef717",
+  "input_manifest_sha256": "00d917593ca41ab77267855076c7be86787d0bc5ae55ce6a7604ef3585485dc9",
+  "inputs": {
+    "data/corpus/allergens.parquet": "0980456bde460c8a8ca7b8db2f3a120b0fff5caf462b90911dbe19a0673ad56e",
+    "data/corpus/recipes_structured.parquet": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa"
+  },
+  "interpretation": "Absent remains silver inferred absence, not verified safe; UNKNOWN is abstention.",
+  "legacy_labels_modified": false,
+  "logical_sha256": "a70c7bbfa6dd7413f0f051930f502c34dc9344e0c8b6b1af64412e394723a6fe",
+  "payload_sha256": "14556da6004e3be8222468fbc5941a2a548490fe6164a87e6a04dcc63512df7c",
+  "policy_code_sha256": "3dd7b17b6c1e047d696c8d23879a9ea8930ab3e6213721481301125ba17b37a2",
+  "policy_version": "irn-allergen-evidence-0.12.0-v1",
+  "population_counts": [
+    {
+      "absent_to_unknown": 8971,
+      "allergen": "asafoetida",
+      "kind_explicit": 17038,
+      "kind_implicit_name": 3480,
+      "kind_text_silent": 176021,
+      "kind_unassessed": 11751,
+      "legacy_absent": 178121,
+      "legacy_present": 28946,
+      "legacy_unassessed": 1223,
+      "new_absent": 169150,
+      "new_present": 28946,
+      "new_unknown": 10194,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 8276,
+      "reason_legacy_positive_preserved": 28946,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 695,
+      "reason_silver_inferred_absence_not_verified_safe": 169150,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 11141,
+      "allergen": "celery",
+      "kind_ambiguous_carrier": 5,
+      "kind_explicit": 2147,
+      "kind_text_silent": 194387,
+      "kind_unassessed": 11751,
+      "legacy_absent": 204832,
+      "legacy_present": 2235,
+      "legacy_unassessed": 1223,
+      "new_absent": 193691,
+      "new_present": 2235,
+      "new_unknown": 12364,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 10325,
+      "reason_legacy_positive_preserved": 2235,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 816,
+      "reason_silver_inferred_absence_not_verified_safe": 193691,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 9139,
+      "allergen": "coconut",
+      "kind_ambiguous_carrier": 39,
+      "kind_explicit": 31770,
+      "kind_implicit_name": 42,
+      "kind_text_silent": 164688,
+      "kind_unassessed": 11751,
+      "legacy_absent": 172115,
+      "legacy_present": 34952,
+      "legacy_unassessed": 1223,
+      "new_absent": 162976,
+      "new_present": 34952,
+      "new_unknown": 10362,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 8495,
+      "reason_legacy_positive_preserved": 34952,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 644,
+      "reason_silver_inferred_absence_not_verified_safe": 162976,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 10500,
+      "allergen": "egg",
+      "kind_ambiguous_carrier": 373,
+      "kind_explicit": 16890,
+      "kind_implicit_name": 1893,
+      "kind_text_silent": 177383,
+      "kind_unassessed": 11751,
+      "legacy_absent": 186569,
+      "legacy_present": 20498,
+      "legacy_unassessed": 1223,
+      "new_absent": 176069,
+      "new_present": 20498,
+      "new_unknown": 11723,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9717,
+      "reason_legacy_positive_preserved": 20498,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 783,
+      "reason_silver_inferred_absence_not_verified_safe": 176069,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 9905,
+      "allergen": "fenugreek",
+      "kind_explicit": 11268,
+      "kind_implicit_name": 4489,
+      "kind_text_silent": 180782,
+      "kind_unassessed": 11751,
+      "legacy_absent": 188100,
+      "legacy_present": 18967,
+      "legacy_unassessed": 1223,
+      "new_absent": 178195,
+      "new_present": 18967,
+      "new_unknown": 11128,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9185,
+      "reason_legacy_positive_preserved": 18967,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 720,
+      "reason_silver_inferred_absence_not_verified_safe": 178195,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 10951,
+      "allergen": "fish",
+      "kind_ambiguous_carrier": 2,
+      "kind_explicit": 3634,
+      "kind_text_silent": 192903,
+      "kind_unassessed": 11751,
+      "legacy_absent": 201566,
+      "legacy_present": 5501,
+      "legacy_unassessed": 1223,
+      "new_absent": 190615,
+      "new_present": 5501,
+      "new_unknown": 12174,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 10154,
+      "reason_legacy_positive_preserved": 5501,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 797,
+      "reason_silver_inferred_absence_not_verified_safe": 190615,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 8932,
+      "allergen": "ghee",
+      "kind_ambiguous_carrier": 1,
+      "kind_explicit": 29249,
+      "kind_text_silent": 167289,
+      "kind_unassessed": 11751,
+      "legacy_absent": 175239,
+      "legacy_present": 31828,
+      "legacy_unassessed": 1223,
+      "new_absent": 166307,
+      "new_present": 31828,
+      "new_unknown": 10155,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 8318,
+      "reason_legacy_positive_preserved": 31828,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 614,
+      "reason_silver_inferred_absence_not_verified_safe": 166307,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 22068,
+      "allergen": "gluten",
+      "kind_ambiguous_carrier": 42453,
+      "kind_explicit": 12289,
+      "kind_implicit_name": 16088,
+      "kind_text_silent": 125709,
+      "kind_unassessed": 11751,
+      "legacy_absent": 138758,
+      "legacy_present": 68309,
+      "legacy_unassessed": 1223,
+      "new_absent": 116690,
+      "new_present": 68309,
+      "new_unknown": 23291,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 7074,
+      "reason_legacy_positive_preserved": 68309,
+      "reason_legacy_unassessed": 1223,
+      "reason_name_conflicts_with_legacy_absence": 21,
+      "reason_scan_incomplete": 497,
+      "reason_silver_inferred_absence_not_verified_safe": 116690,
+      "reason_text_open_legacy_absence": 14476,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 6596,
+      "allergen": "milk",
+      "kind_ambiguous_carrier": 1215,
+      "kind_explicit": 31953,
+      "kind_implicit_name": 68128,
+      "kind_text_silent": 95243,
+      "kind_unassessed": 11751,
+      "legacy_absent": 96521,
+      "legacy_present": 110546,
+      "legacy_unassessed": 1223,
+      "new_absent": 89925,
+      "new_present": 110546,
+      "new_unknown": 7819,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 5162,
+      "reason_legacy_positive_preserved": 110546,
+      "reason_legacy_unassessed": 1223,
+      "reason_name_conflicts_with_legacy_absence": 49,
+      "reason_scan_incomplete": 356,
+      "reason_silver_inferred_absence_not_verified_safe": 89925,
+      "reason_text_open_legacy_absence": 1029,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 8927,
+      "allergen": "mustard",
+      "kind_explicit": 29702,
+      "kind_implicit_name": 163,
+      "kind_text_silent": 166674,
+      "kind_unassessed": 11751,
+      "legacy_absent": 172234,
+      "legacy_present": 34833,
+      "legacy_unassessed": 1223,
+      "new_absent": 163307,
+      "new_present": 34833,
+      "new_unknown": 10150,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 8257,
+      "reason_legacy_positive_preserved": 34833,
+      "reason_legacy_unassessed": 1223,
+      "reason_name_conflicts_with_legacy_absence": 1,
+      "reason_scan_incomplete": 669,
+      "reason_silver_inferred_absence_not_verified_safe": 163307,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 78379,
+      "allergen": "peanut",
+      "kind_ambiguous_carrier": 68018,
+      "kind_explicit": 8861,
+      "kind_implicit_name": 1076,
+      "kind_text_silent": 118584,
+      "kind_unassessed": 11751,
+      "legacy_absent": 196196,
+      "legacy_present": 10871,
+      "legacy_unassessed": 1223,
+      "new_absent": 117817,
+      "new_present": 10871,
+      "new_unknown": 79602,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9793,
+      "reason_legacy_positive_preserved": 10871,
+      "reason_legacy_unassessed": 1223,
+      "reason_name_conflicts_with_legacy_absence": 11,
+      "reason_scan_incomplete": 767,
+      "reason_silver_inferred_absence_not_verified_safe": 117817,
+      "reason_text_open_legacy_absence": 67808,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 81127,
+      "allergen": "sesame",
+      "kind_ambiguous_carrier": 71897,
+      "kind_explicit": 9869,
+      "kind_implicit_name": 831,
+      "kind_text_silent": 113942,
+      "kind_unassessed": 11751,
+      "legacy_absent": 194035,
+      "legacy_present": 13032,
+      "legacy_unassessed": 1223,
+      "new_absent": 112908,
+      "new_present": 13032,
+      "new_unknown": 82350,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9785,
+      "reason_legacy_positive_preserved": 13032,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 759,
+      "reason_silver_inferred_absence_not_verified_safe": 112908,
+      "reason_text_open_legacy_absence": 70583,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 11088,
+      "allergen": "shellfish",
+      "kind_ambiguous_carrier": 2,
+      "kind_explicit": 3645,
+      "kind_text_silent": 192892,
+      "kind_unassessed": 11751,
+      "legacy_absent": 203052,
+      "legacy_present": 4015,
+      "legacy_unassessed": 1223,
+      "new_absent": 191964,
+      "new_present": 4015,
+      "new_unknown": 12311,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 10223,
+      "reason_legacy_positive_preserved": 4015,
+      "reason_legacy_unassessed": 1223,
+      "reason_name_conflicts_with_legacy_absence": 53,
+      "reason_scan_incomplete": 812,
+      "reason_silver_inferred_absence_not_verified_safe": 191964,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 90034,
+      "allergen": "soy",
+      "kind_ambiguous_carrier": 80025,
+      "kind_explicit": 5774,
+      "kind_implicit_name": 1524,
+      "kind_text_silent": 109216,
+      "kind_unassessed": 11751,
+      "legacy_absent": 198489,
+      "legacy_present": 8578,
+      "legacy_unassessed": 1223,
+      "new_absent": 108455,
+      "new_present": 8578,
+      "new_unknown": 91257,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9949,
+      "reason_legacy_positive_preserved": 8578,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 807,
+      "reason_silver_inferred_absence_not_verified_safe": 108455,
+      "reason_text_open_legacy_absence": 79278,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 9878,
+      "allergen": "sulphites",
+      "kind_text_silent": 196539,
+      "kind_unassessed": 11751,
+      "legacy_absent": 184293,
+      "legacy_present": 22774,
+      "legacy_unassessed": 1223,
+      "new_absent": 174415,
+      "new_present": 22774,
+      "new_unknown": 11101,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9181,
+      "reason_legacy_positive_preserved": 22774,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 697,
+      "reason_silver_inferred_absence_not_verified_safe": 174415,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 10222,
+      "allergen": "tamarind",
+      "kind_ambiguous_carrier": 3,
+      "kind_explicit": 10384,
+      "kind_implicit_name": 138,
+      "kind_text_silent": 186014,
+      "kind_unassessed": 11751,
+      "legacy_absent": 195502,
+      "legacy_present": 11565,
+      "legacy_unassessed": 1223,
+      "new_absent": 185280,
+      "new_present": 11565,
+      "new_unknown": 11445,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 9442,
+      "reason_legacy_positive_preserved": 11565,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 780,
+      "reason_silver_inferred_absence_not_verified_safe": 185280,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 9589,
+      "allergen": "tree_nuts",
+      "kind_ambiguous_carrier": 35,
+      "kind_explicit": 27536,
+      "kind_implicit_name": 387,
+      "kind_text_silent": 168581,
+      "kind_unassessed": 11751,
+      "legacy_absent": 175384,
+      "legacy_present": 31683,
+      "legacy_unassessed": 1223,
+      "new_absent": 165795,
+      "new_present": 31683,
+      "new_unknown": 10812,
+      "population": "dev",
+      "reason_ingredient_evidence_unassessed": 8883,
+      "reason_legacy_positive_preserved": 31683,
+      "reason_legacy_unassessed": 1223,
+      "reason_scan_incomplete": 706,
+      "reason_silver_inferred_absence_not_verified_safe": 165795,
+      "rows": 208290
+    },
+    {
+      "absent_to_unknown": 481,
+      "allergen": "asafoetida",
+      "kind_explicit": 978,
+      "kind_implicit_name": 191,
+      "kind_text_silent": 9296,
+      "kind_unassessed": 629,
+      "legacy_absent": 9377,
+      "legacy_present": 1666,
+      "legacy_unassessed": 51,
+      "new_absent": 8896,
+      "new_present": 1666,
+      "new_unknown": 532,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 443,
+      "reason_legacy_positive_preserved": 1666,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 38,
+      "reason_silver_inferred_absence_not_verified_safe": 8896,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 600,
+      "allergen": "celery",
+      "kind_explicit": 119,
+      "kind_text_silent": 10346,
+      "kind_unassessed": 629,
+      "legacy_absent": 10921,
+      "legacy_present": 122,
+      "legacy_unassessed": 51,
+      "new_absent": 10321,
+      "new_present": 122,
+      "new_unknown": 651,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 550,
+      "reason_legacy_positive_preserved": 122,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 50,
+      "reason_silver_inferred_absence_not_verified_safe": 10321,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 498,
+      "allergen": "coconut",
+      "kind_ambiguous_carrier": 2,
+      "kind_explicit": 1698,
+      "kind_implicit_name": 4,
+      "kind_text_silent": 8761,
+      "kind_unassessed": 629,
+      "legacy_absent": 9184,
+      "legacy_present": 1859,
+      "legacy_unassessed": 51,
+      "new_absent": 8686,
+      "new_present": 1859,
+      "new_unknown": 549,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 465,
+      "reason_legacy_positive_preserved": 1859,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 33,
+      "reason_silver_inferred_absence_not_verified_safe": 8686,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 575,
+      "allergen": "egg",
+      "kind_ambiguous_carrier": 24,
+      "kind_explicit": 946,
+      "kind_implicit_name": 103,
+      "kind_text_silent": 9392,
+      "kind_unassessed": 629,
+      "legacy_absent": 9907,
+      "legacy_present": 1136,
+      "legacy_unassessed": 51,
+      "new_absent": 9332,
+      "new_present": 1136,
+      "new_unknown": 626,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 529,
+      "reason_legacy_positive_preserved": 1136,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 46,
+      "reason_silver_inferred_absence_not_verified_safe": 9332,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 543,
+      "allergen": "fenugreek",
+      "kind_explicit": 663,
+      "kind_implicit_name": 244,
+      "kind_text_silent": 9558,
+      "kind_unassessed": 629,
+      "legacy_absent": 9982,
+      "legacy_present": 1061,
+      "legacy_unassessed": 51,
+      "new_absent": 9439,
+      "new_present": 1061,
+      "new_unknown": 594,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 497,
+      "reason_legacy_positive_preserved": 1061,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 46,
+      "reason_silver_inferred_absence_not_verified_safe": 9439,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 587,
+      "allergen": "fish",
+      "kind_explicit": 186,
+      "kind_text_silent": 10279,
+      "kind_unassessed": 629,
+      "legacy_absent": 10731,
+      "legacy_present": 312,
+      "legacy_unassessed": 51,
+      "new_absent": 10144,
+      "new_present": 312,
+      "new_unknown": 638,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 537,
+      "reason_legacy_positive_preserved": 312,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 50,
+      "reason_silver_inferred_absence_not_verified_safe": 10144,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 488,
+      "allergen": "ghee",
+      "kind_explicit": 1581,
+      "kind_text_silent": 8884,
+      "kind_unassessed": 629,
+      "legacy_absent": 9333,
+      "legacy_present": 1710,
+      "legacy_unassessed": 51,
+      "new_absent": 8845,
+      "new_present": 1710,
+      "new_unknown": 539,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 447,
+      "reason_legacy_positive_preserved": 1710,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 41,
+      "reason_silver_inferred_absence_not_verified_safe": 8845,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 1223,
+      "allergen": "gluten",
+      "kind_ambiguous_carrier": 2326,
+      "kind_explicit": 685,
+      "kind_implicit_name": 849,
+      "kind_text_silent": 6605,
+      "kind_unassessed": 629,
+      "legacy_absent": 7358,
+      "legacy_present": 3685,
+      "legacy_unassessed": 51,
+      "new_absent": 6135,
+      "new_present": 3685,
+      "new_unknown": 1274,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 360,
+      "reason_legacy_positive_preserved": 3685,
+      "reason_legacy_unassessed": 51,
+      "reason_name_conflicts_with_legacy_absence": 2,
+      "reason_scan_incomplete": 39,
+      "reason_silver_inferred_absence_not_verified_safe": 6135,
+      "reason_text_open_legacy_absence": 822,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 356,
+      "allergen": "milk",
+      "kind_ambiguous_carrier": 68,
+      "kind_explicit": 1636,
+      "kind_implicit_name": 3698,
+      "kind_text_silent": 5063,
+      "kind_unassessed": 629,
+      "legacy_absent": 5171,
+      "legacy_present": 5872,
+      "legacy_unassessed": 51,
+      "new_absent": 4815,
+      "new_present": 5872,
+      "new_unknown": 407,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 271,
+      "reason_legacy_positive_preserved": 5872,
+      "reason_legacy_unassessed": 51,
+      "reason_name_conflicts_with_legacy_absence": 4,
+      "reason_scan_incomplete": 29,
+      "reason_silver_inferred_absence_not_verified_safe": 4815,
+      "reason_text_open_legacy_absence": 52,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 472,
+      "allergen": "mustard",
+      "kind_explicit": 1580,
+      "kind_implicit_name": 6,
+      "kind_text_silent": 8879,
+      "kind_unassessed": 629,
+      "legacy_absent": 9188,
+      "legacy_present": 1855,
+      "legacy_unassessed": 51,
+      "new_absent": 8716,
+      "new_present": 1855,
+      "new_unknown": 523,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 437,
+      "reason_legacy_positive_preserved": 1855,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 35,
+      "reason_silver_inferred_absence_not_verified_safe": 8716,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 4159,
+      "allergen": "peanut",
+      "kind_ambiguous_carrier": 3605,
+      "kind_explicit": 465,
+      "kind_implicit_name": 64,
+      "kind_text_silent": 6331,
+      "kind_unassessed": 629,
+      "legacy_absent": 10450,
+      "legacy_present": 593,
+      "legacy_unassessed": 51,
+      "new_absent": 6291,
+      "new_present": 593,
+      "new_unknown": 4210,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 521,
+      "reason_legacy_positive_preserved": 593,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 46,
+      "reason_silver_inferred_absence_not_verified_safe": 6291,
+      "reason_text_open_legacy_absence": 3592,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 4249,
+      "allergen": "sesame",
+      "kind_ambiguous_carrier": 3740,
+      "kind_explicit": 542,
+      "kind_implicit_name": 48,
+      "kind_text_silent": 6135,
+      "kind_unassessed": 629,
+      "legacy_absent": 10346,
+      "legacy_present": 697,
+      "legacy_unassessed": 51,
+      "new_absent": 6097,
+      "new_present": 697,
+      "new_unknown": 4300,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 523,
+      "reason_legacy_positive_preserved": 697,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 46,
+      "reason_silver_inferred_absence_not_verified_safe": 6097,
+      "reason_text_open_legacy_absence": 3680,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 598,
+      "allergen": "shellfish",
+      "kind_explicit": 179,
+      "kind_text_silent": 10286,
+      "kind_unassessed": 629,
+      "legacy_absent": 10853,
+      "legacy_present": 190,
+      "legacy_unassessed": 51,
+      "new_absent": 10255,
+      "new_present": 190,
+      "new_unknown": 649,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 547,
+      "reason_legacy_positive_preserved": 190,
+      "reason_legacy_unassessed": 51,
+      "reason_name_conflicts_with_legacy_absence": 3,
+      "reason_scan_incomplete": 48,
+      "reason_silver_inferred_absence_not_verified_safe": 10255,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 4804,
+      "allergen": "soy",
+      "kind_ambiguous_carrier": 4265,
+      "kind_explicit": 317,
+      "kind_implicit_name": 91,
+      "kind_text_silent": 5792,
+      "kind_unassessed": 629,
+      "legacy_absent": 10571,
+      "legacy_present": 472,
+      "legacy_unassessed": 51,
+      "new_absent": 5767,
+      "new_present": 472,
+      "new_unknown": 4855,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 530,
+      "reason_legacy_positive_preserved": 472,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 50,
+      "reason_silver_inferred_absence_not_verified_safe": 5767,
+      "reason_text_open_legacy_absence": 4224,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 538,
+      "allergen": "sulphites",
+      "kind_text_silent": 10465,
+      "kind_unassessed": 629,
+      "legacy_absent": 9827,
+      "legacy_present": 1216,
+      "legacy_unassessed": 51,
+      "new_absent": 9289,
+      "new_present": 1216,
+      "new_unknown": 589,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 498,
+      "reason_legacy_positive_preserved": 1216,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 40,
+      "reason_silver_inferred_absence_not_verified_safe": 9289,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 566,
+      "allergen": "tamarind",
+      "kind_explicit": 553,
+      "kind_implicit_name": 5,
+      "kind_text_silent": 9907,
+      "kind_unassessed": 629,
+      "legacy_absent": 10445,
+      "legacy_present": 598,
+      "legacy_unassessed": 51,
+      "new_absent": 9879,
+      "new_present": 598,
+      "new_unknown": 617,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 519,
+      "reason_legacy_positive_preserved": 598,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 47,
+      "reason_silver_inferred_absence_not_verified_safe": 9879,
+      "rows": 11094
+    },
+    {
+      "absent_to_unknown": 519,
+      "allergen": "tree_nuts",
+      "kind_ambiguous_carrier": 1,
+      "kind_explicit": 1414,
+      "kind_implicit_name": 18,
+      "kind_text_silent": 9032,
+      "kind_unassessed": 629,
+      "legacy_absent": 9439,
+      "legacy_present": 1604,
+      "legacy_unassessed": 51,
+      "new_absent": 8920,
+      "new_present": 1604,
+      "new_unknown": 570,
+      "population": "heldout",
+      "reason_ingredient_evidence_unassessed": 480,
+      "reason_legacy_positive_preserved": 1604,
+      "reason_legacy_unassessed": 51,
+      "reason_scan_incomplete": 39,
+      "reason_silver_inferred_absence_not_verified_safe": 8920,
+      "rows": 11094
+    }
+  ],
+  "raw_text_exported": false,
+  "recipe_count": 219384,
+  "region_counts": [
+    {
+      "absent_to_unknown": 25,
+      "allergen": "asafoetida",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "celery",
+      "new_unknown": 38,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 29,
+      "allergen": "coconut",
+      "new_unknown": 31,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 35,
+      "allergen": "egg",
+      "new_unknown": 37,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 29,
+      "allergen": "fenugreek",
+      "new_unknown": 31,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "fish",
+      "new_unknown": 38,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "ghee",
+      "new_unknown": 33,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 435,
+      "allergen": "gluten",
+      "new_unknown": 437,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "milk",
+      "new_unknown": 29,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "mustard",
+      "new_unknown": 20,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 999,
+      "allergen": "peanut",
+      "new_unknown": 1001,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 1054,
+      "allergen": "sesame",
+      "new_unknown": 1056,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "shellfish",
+      "new_unknown": 38,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 1174,
+      "allergen": "soy",
+      "new_unknown": 1176,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 34,
+      "allergen": "sulphites",
+      "new_unknown": 36,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "tamarind",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 35,
+      "allergen": "tree_nuts",
+      "new_unknown": 37,
+      "population": "dev",
+      "region": "Andhra Pradesh",
+      "rows": 1767
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "asafoetida",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "celery",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "coconut",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "egg",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fenugreek",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fish",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "gluten",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "milk",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "mustard",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "peanut",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "sesame",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "shellfish",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "soy",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "sulphites",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tamarind",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tree_nuts",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Assam",
+      "rows": 61
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "asafoetida",
+      "new_unknown": 38,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 41,
+      "allergen": "celery",
+      "new_unknown": 43,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 34,
+      "allergen": "coconut",
+      "new_unknown": 36,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 41,
+      "allergen": "egg",
+      "new_unknown": 43,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 39,
+      "allergen": "fenugreek",
+      "new_unknown": 41,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 41,
+      "allergen": "fish",
+      "new_unknown": 43,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "ghee",
+      "new_unknown": 18,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 53,
+      "allergen": "gluten",
+      "new_unknown": 55,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "milk",
+      "new_unknown": 18,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 32,
+      "allergen": "mustard",
+      "new_unknown": 34,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 196,
+      "allergen": "peanut",
+      "new_unknown": 198,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 227,
+      "allergen": "sesame",
+      "new_unknown": 229,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 41,
+      "allergen": "shellfish",
+      "new_unknown": 43,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 218,
+      "allergen": "soy",
+      "new_unknown": 220,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 38,
+      "allergen": "sulphites",
+      "new_unknown": 40,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 41,
+      "allergen": "tamarind",
+      "new_unknown": 43,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 30,
+      "allergen": "tree_nuts",
+      "new_unknown": 32,
+      "population": "dev",
+      "region": "Bihar",
+      "rows": 734
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "peanut",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "sesame",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "soy",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "East India",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "asafoetida",
+      "new_unknown": 145,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 30,
+      "allergen": "celery",
+      "new_unknown": 150,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "coconut",
+      "new_unknown": 137,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "egg",
+      "new_unknown": 147,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "fenugreek",
+      "new_unknown": 146,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "fish",
+      "new_unknown": 147,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 28,
+      "allergen": "ghee",
+      "new_unknown": 148,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 77,
+      "allergen": "gluten",
+      "new_unknown": 197,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 28,
+      "allergen": "milk",
+      "new_unknown": 148,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "mustard",
+      "new_unknown": 143,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 528,
+      "allergen": "peanut",
+      "new_unknown": 648,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 534,
+      "allergen": "sesame",
+      "new_unknown": 654,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 29,
+      "allergen": "shellfish",
+      "new_unknown": 149,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 561,
+      "allergen": "soy",
+      "new_unknown": 681,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "sulphites",
+      "new_unknown": 145,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "tamarind",
+      "new_unknown": 141,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "tree_nuts",
+      "new_unknown": 147,
+      "population": "dev",
+      "region": "Goa",
+      "rows": 1472
+    },
+    {
+      "absent_to_unknown": 68,
+      "allergen": "asafoetida",
+      "new_unknown": 87,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 118,
+      "allergen": "celery",
+      "new_unknown": 137,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 97,
+      "allergen": "coconut",
+      "new_unknown": 116,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 117,
+      "allergen": "egg",
+      "new_unknown": 136,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 90,
+      "allergen": "fenugreek",
+      "new_unknown": 109,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 118,
+      "allergen": "fish",
+      "new_unknown": 137,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 82,
+      "allergen": "ghee",
+      "new_unknown": 101,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 899,
+      "allergen": "gluten",
+      "new_unknown": 918,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 53,
+      "allergen": "milk",
+      "new_unknown": 72,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 71,
+      "allergen": "mustard",
+      "new_unknown": 90,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 2148,
+      "allergen": "peanut",
+      "new_unknown": 2167,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 1579,
+      "allergen": "sesame",
+      "new_unknown": 1598,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 118,
+      "allergen": "shellfish",
+      "new_unknown": 137,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 2443,
+      "allergen": "soy",
+      "new_unknown": 2462,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 108,
+      "allergen": "sulphites",
+      "new_unknown": 127,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 109,
+      "allergen": "tamarind",
+      "new_unknown": 128,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 108,
+      "allergen": "tree_nuts",
+      "new_unknown": 127,
+      "population": "dev",
+      "region": "Gujarat",
+      "rows": 3488
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "asafoetida",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "celery",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "coconut",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "egg",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fenugreek",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fish",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "gluten",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "milk",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "mustard",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "peanut",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "sesame",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "shellfish",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "soy",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "sulphites",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tamarind",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tree_nuts",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Himachal Pradesh",
+      "rows": 49
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "asafoetida",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 24,
+      "allergen": "celery",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 24,
+      "allergen": "coconut",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "egg",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "fenugreek",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 24,
+      "allergen": "fish",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "ghee",
+      "new_unknown": 21,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 108,
+      "allergen": "gluten",
+      "new_unknown": 111,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "milk",
+      "new_unknown": 7,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "mustard",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 205,
+      "allergen": "peanut",
+      "new_unknown": 208,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 215,
+      "allergen": "sesame",
+      "new_unknown": 218,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 24,
+      "allergen": "shellfish",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 207,
+      "allergen": "soy",
+      "new_unknown": 210,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "sulphites",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 24,
+      "allergen": "tamarind",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "tree_nuts",
+      "new_unknown": 22,
+      "population": "dev",
+      "region": "Jammu & Kashmir",
+      "rows": 433
+    },
+    {
+      "absent_to_unknown": 1273,
+      "allergen": "asafoetida",
+      "new_unknown": 1279,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1745,
+      "allergen": "celery",
+      "new_unknown": 1751,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1301,
+      "allergen": "coconut",
+      "new_unknown": 1307,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1715,
+      "allergen": "egg",
+      "new_unknown": 1721,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1498,
+      "allergen": "fenugreek",
+      "new_unknown": 1504,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1744,
+      "allergen": "fish",
+      "new_unknown": 1750,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1337,
+      "allergen": "ghee",
+      "new_unknown": 1343,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1512,
+      "allergen": "gluten",
+      "new_unknown": 1518,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 859,
+      "allergen": "milk",
+      "new_unknown": 865,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1350,
+      "allergen": "mustard",
+      "new_unknown": 1356,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 2631,
+      "allergen": "peanut",
+      "new_unknown": 2637,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 2705,
+      "allergen": "sesame",
+      "new_unknown": 2711,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1746,
+      "allergen": "shellfish",
+      "new_unknown": 1752,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 2868,
+      "allergen": "soy",
+      "new_unknown": 2874,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1512,
+      "allergen": "sulphites",
+      "new_unknown": 1518,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1514,
+      "allergen": "tamarind",
+      "new_unknown": 1520,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 1492,
+      "allergen": "tree_nuts",
+      "new_unknown": 1498,
+      "population": "dev",
+      "region": "Karnataka",
+      "rows": 4549
+    },
+    {
+      "absent_to_unknown": 235,
+      "allergen": "asafoetida",
+      "new_unknown": 257,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 252,
+      "allergen": "celery",
+      "new_unknown": 274,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 95,
+      "allergen": "coconut",
+      "new_unknown": 117,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 235,
+      "allergen": "egg",
+      "new_unknown": 257,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 222,
+      "allergen": "fenugreek",
+      "new_unknown": 244,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 237,
+      "allergen": "fish",
+      "new_unknown": 259,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 200,
+      "allergen": "ghee",
+      "new_unknown": 222,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 571,
+      "allergen": "gluten",
+      "new_unknown": 593,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 155,
+      "allergen": "milk",
+      "new_unknown": 177,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 158,
+      "allergen": "mustard",
+      "new_unknown": 180,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 3636,
+      "allergen": "peanut",
+      "new_unknown": 3658,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 3711,
+      "allergen": "sesame",
+      "new_unknown": 3733,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 247,
+      "allergen": "shellfish",
+      "new_unknown": 269,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 3908,
+      "allergen": "soy",
+      "new_unknown": 3930,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 219,
+      "allergen": "sulphites",
+      "new_unknown": 241,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 216,
+      "allergen": "tamarind",
+      "new_unknown": 238,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 206,
+      "allergen": "tree_nuts",
+      "new_unknown": 228,
+      "population": "dev",
+      "region": "Kerala",
+      "rows": 10948
+    },
+    {
+      "absent_to_unknown": 183,
+      "allergen": "asafoetida",
+      "new_unknown": 211,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 293,
+      "allergen": "celery",
+      "new_unknown": 321,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 205,
+      "allergen": "coconut",
+      "new_unknown": 233,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 288,
+      "allergen": "egg",
+      "new_unknown": 316,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 279,
+      "allergen": "fenugreek",
+      "new_unknown": 307,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 290,
+      "allergen": "fish",
+      "new_unknown": 318,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 230,
+      "allergen": "ghee",
+      "new_unknown": 258,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 732,
+      "allergen": "gluten",
+      "new_unknown": 760,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 162,
+      "allergen": "milk",
+      "new_unknown": 190,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 216,
+      "allergen": "mustard",
+      "new_unknown": 244,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 1816,
+      "allergen": "peanut",
+      "new_unknown": 1844,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 2209,
+      "allergen": "sesame",
+      "new_unknown": 2237,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 292,
+      "allergen": "shellfish",
+      "new_unknown": 320,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 2495,
+      "allergen": "soy",
+      "new_unknown": 2523,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 268,
+      "allergen": "sulphites",
+      "new_unknown": 296,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 268,
+      "allergen": "tamarind",
+      "new_unknown": 296,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 242,
+      "allergen": "tree_nuts",
+      "new_unknown": 270,
+      "population": "dev",
+      "region": "Maharashtra",
+      "rows": 4760
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sesame",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "soy",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Manipur",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "asafoetida",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "celery",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "coconut",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "egg",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fenugreek",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fish",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "gluten",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "milk",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 5,
+      "allergen": "peanut",
+      "new_unknown": 5,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 5,
+      "allergen": "sesame",
+      "new_unknown": 5,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "shellfish",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "soy",
+      "new_unknown": 6,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sulphites",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tamarind",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tree_nuts",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Nagaland",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 345,
+      "allergen": "asafoetida",
+      "new_unknown": 381,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 460,
+      "allergen": "celery",
+      "new_unknown": 496,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 433,
+      "allergen": "coconut",
+      "new_unknown": 469,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 449,
+      "allergen": "egg",
+      "new_unknown": 485,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 392,
+      "allergen": "fenugreek",
+      "new_unknown": 428,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 459,
+      "allergen": "fish",
+      "new_unknown": 495,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 313,
+      "allergen": "ghee",
+      "new_unknown": 349,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 1044,
+      "allergen": "gluten",
+      "new_unknown": 1080,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 179,
+      "allergen": "milk",
+      "new_unknown": 215,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 406,
+      "allergen": "mustard",
+      "new_unknown": 442,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 6078,
+      "allergen": "peanut",
+      "new_unknown": 6114,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 6712,
+      "allergen": "sesame",
+      "new_unknown": 6748,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 462,
+      "allergen": "shellfish",
+      "new_unknown": 498,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 6344,
+      "allergen": "soy",
+      "new_unknown": 6380,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 420,
+      "allergen": "sulphites",
+      "new_unknown": 456,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 431,
+      "allergen": "tamarind",
+      "new_unknown": 467,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 384,
+      "allergen": "tree_nuts",
+      "new_unknown": 420,
+      "population": "dev",
+      "region": "North India",
+      "rows": 11504
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "asafoetida",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "celery",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "coconut",
+      "new_unknown": 3,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "egg",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "fenugreek",
+      "new_unknown": 9,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "fish",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "ghee",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "gluten",
+      "new_unknown": 14,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "milk",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "mustard",
+      "new_unknown": 8,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 32,
+      "allergen": "peanut",
+      "new_unknown": 32,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "sesame",
+      "new_unknown": 36,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "shellfish",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 33,
+      "allergen": "soy",
+      "new_unknown": 33,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "sulphites",
+      "new_unknown": 9,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "tamarind",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "tree_nuts",
+      "new_unknown": 8,
+      "population": "dev",
+      "region": "Odisha",
+      "rows": 76
+    },
+    {
+      "absent_to_unknown": 5567,
+      "allergen": "asafoetida",
+      "new_unknown": 6446,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 6471,
+      "allergen": "celery",
+      "new_unknown": 7350,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5587,
+      "allergen": "coconut",
+      "new_unknown": 6466,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5948,
+      "allergen": "egg",
+      "new_unknown": 6827,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 6025,
+      "allergen": "fenugreek",
+      "new_unknown": 6904,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 6331,
+      "allergen": "fish",
+      "new_unknown": 7210,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5331,
+      "allergen": "ghee",
+      "new_unknown": 6210,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 9543,
+      "allergen": "gluten",
+      "new_unknown": 10422,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 4204,
+      "allergen": "milk",
+      "new_unknown": 5083,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5581,
+      "allergen": "mustard",
+      "new_unknown": 6460,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 41439,
+      "allergen": "peanut",
+      "new_unknown": 42318,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 42480,
+      "allergen": "sesame",
+      "new_unknown": 43359,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 6432,
+      "allergen": "shellfish",
+      "new_unknown": 7311,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 49790,
+      "allergen": "soy",
+      "new_unknown": 50669,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5695,
+      "allergen": "sulphites",
+      "new_unknown": 6574,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 6115,
+      "allergen": "tamarind",
+      "new_unknown": 6994,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 5556,
+      "allergen": "tree_nuts",
+      "new_unknown": 6435,
+      "population": "dev",
+      "region": "Pan-Indian",
+      "rows": 128178
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "asafoetida",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "celery",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "coconut",
+      "new_unknown": 14,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "egg",
+      "new_unknown": 14,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "fenugreek",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "fish",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "ghee",
+      "new_unknown": 11,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "gluten",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "milk",
+      "new_unknown": 8,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "mustard",
+      "new_unknown": 14,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 78,
+      "allergen": "peanut",
+      "new_unknown": 78,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 83,
+      "allergen": "sesame",
+      "new_unknown": 83,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "shellfish",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 75,
+      "allergen": "soy",
+      "new_unknown": 75,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "sulphites",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "tamarind",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "tree_nuts",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Parsi",
+      "rows": 141
+    },
+    {
+      "absent_to_unknown": 254,
+      "allergen": "asafoetida",
+      "new_unknown": 285,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 311,
+      "allergen": "celery",
+      "new_unknown": 342,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 302,
+      "allergen": "coconut",
+      "new_unknown": 333,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 303,
+      "allergen": "egg",
+      "new_unknown": 334,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 193,
+      "allergen": "fenugreek",
+      "new_unknown": 224,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 312,
+      "allergen": "fish",
+      "new_unknown": 343,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 227,
+      "allergen": "ghee",
+      "new_unknown": 258,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 874,
+      "allergen": "gluten",
+      "new_unknown": 905,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 87,
+      "allergen": "milk",
+      "new_unknown": 118,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 277,
+      "allergen": "mustard",
+      "new_unknown": 308,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 5321,
+      "allergen": "peanut",
+      "new_unknown": 5352,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 5730,
+      "allergen": "sesame",
+      "new_unknown": 5761,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 313,
+      "allergen": "shellfish",
+      "new_unknown": 344,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 5486,
+      "allergen": "soy",
+      "new_unknown": 5517,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 259,
+      "allergen": "sulphites",
+      "new_unknown": 290,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 309,
+      "allergen": "tamarind",
+      "new_unknown": 340,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 270,
+      "allergen": "tree_nuts",
+      "new_unknown": 301,
+      "population": "dev",
+      "region": "Punjab",
+      "rows": 9961
+    },
+    {
+      "absent_to_unknown": 39,
+      "allergen": "asafoetida",
+      "new_unknown": 52,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 66,
+      "allergen": "celery",
+      "new_unknown": 79,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 64,
+      "allergen": "coconut",
+      "new_unknown": 77,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 66,
+      "allergen": "egg",
+      "new_unknown": 79,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 56,
+      "allergen": "fenugreek",
+      "new_unknown": 69,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 66,
+      "allergen": "fish",
+      "new_unknown": 79,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 33,
+      "allergen": "ghee",
+      "new_unknown": 46,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 234,
+      "allergen": "gluten",
+      "new_unknown": 247,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "milk",
+      "new_unknown": 36,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 48,
+      "allergen": "mustard",
+      "new_unknown": 61,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 414,
+      "allergen": "peanut",
+      "new_unknown": 427,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 445,
+      "allergen": "sesame",
+      "new_unknown": 458,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 66,
+      "allergen": "shellfish",
+      "new_unknown": 79,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 422,
+      "allergen": "soy",
+      "new_unknown": 435,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 58,
+      "allergen": "sulphites",
+      "new_unknown": 71,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 66,
+      "allergen": "tamarind",
+      "new_unknown": 79,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 52,
+      "allergen": "tree_nuts",
+      "new_unknown": 65,
+      "population": "dev",
+      "region": "Rajasthan",
+      "rows": 827
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "asafoetida",
+      "new_unknown": 13,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "celery",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "coconut",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "egg",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "fenugreek",
+      "new_unknown": 12,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "fish",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "ghee",
+      "new_unknown": 13,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 36,
+      "allergen": "gluten",
+      "new_unknown": 40,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "milk",
+      "new_unknown": 10,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "mustard",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 192,
+      "allergen": "peanut",
+      "new_unknown": 196,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 205,
+      "allergen": "sesame",
+      "new_unknown": 209,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "shellfish",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 195,
+      "allergen": "soy",
+      "new_unknown": 199,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "sulphites",
+      "new_unknown": 16,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "tamarind",
+      "new_unknown": 14,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "tree_nuts",
+      "new_unknown": 17,
+      "population": "dev",
+      "region": "Sindhi",
+      "rows": 292
+    },
+    {
+      "absent_to_unknown": 397,
+      "allergen": "asafoetida",
+      "new_unknown": 421,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 614,
+      "allergen": "celery",
+      "new_unknown": 638,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 424,
+      "allergen": "coconut",
+      "new_unknown": 448,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 608,
+      "allergen": "egg",
+      "new_unknown": 632,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 463,
+      "allergen": "fenugreek",
+      "new_unknown": 487,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 614,
+      "allergen": "fish",
+      "new_unknown": 638,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 532,
+      "allergen": "ghee",
+      "new_unknown": 556,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 2717,
+      "allergen": "gluten",
+      "new_unknown": 2741,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 406,
+      "allergen": "milk",
+      "new_unknown": 430,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 336,
+      "allergen": "mustard",
+      "new_unknown": 360,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 5713,
+      "allergen": "peanut",
+      "new_unknown": 5737,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 5812,
+      "allergen": "sesame",
+      "new_unknown": 5836,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 614,
+      "allergen": "shellfish",
+      "new_unknown": 638,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 6139,
+      "allergen": "soy",
+      "new_unknown": 6163,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 605,
+      "allergen": "sulphites",
+      "new_unknown": 629,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 473,
+      "allergen": "tamarind",
+      "new_unknown": 497,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 564,
+      "allergen": "tree_nuts",
+      "new_unknown": 588,
+      "population": "dev",
+      "region": "South India",
+      "rows": 10998
+    },
+    {
+      "absent_to_unknown": 223,
+      "allergen": "asafoetida",
+      "new_unknown": 229,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 332,
+      "allergen": "celery",
+      "new_unknown": 338,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 206,
+      "allergen": "coconut",
+      "new_unknown": 212,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 318,
+      "allergen": "egg",
+      "new_unknown": 324,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 281,
+      "allergen": "fenugreek",
+      "new_unknown": 287,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 327,
+      "allergen": "fish",
+      "new_unknown": 333,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 277,
+      "allergen": "ghee",
+      "new_unknown": 283,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 2374,
+      "allergen": "gluten",
+      "new_unknown": 2380,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 216,
+      "allergen": "milk",
+      "new_unknown": 222,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 202,
+      "allergen": "mustard",
+      "new_unknown": 208,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 4688,
+      "allergen": "peanut",
+      "new_unknown": 4694,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 4621,
+      "allergen": "sesame",
+      "new_unknown": 4627,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 326,
+      "allergen": "shellfish",
+      "new_unknown": 332,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 5156,
+      "allergen": "soy",
+      "new_unknown": 5162,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 319,
+      "allergen": "sulphites",
+      "new_unknown": 325,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 286,
+      "allergen": "tamarind",
+      "new_unknown": 292,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 291,
+      "allergen": "tree_nuts",
+      "new_unknown": 297,
+      "population": "dev",
+      "region": "Tamil Nadu",
+      "rows": 10804
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "asafoetida",
+      "new_unknown": 25,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "celery",
+      "new_unknown": 29,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "coconut",
+      "new_unknown": 23,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "egg",
+      "new_unknown": 27,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "fenugreek",
+      "new_unknown": 25,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "fish",
+      "new_unknown": 29,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "ghee",
+      "new_unknown": 20,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 40,
+      "allergen": "gluten",
+      "new_unknown": 44,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "milk",
+      "new_unknown": 12,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "mustard",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 315,
+      "allergen": "peanut",
+      "new_unknown": 319,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 344,
+      "allergen": "sesame",
+      "new_unknown": 348,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "shellfish",
+      "new_unknown": 29,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 399,
+      "allergen": "soy",
+      "new_unknown": 403,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "sulphites",
+      "new_unknown": 26,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "tamarind",
+      "new_unknown": 24,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "tree_nuts",
+      "new_unknown": 23,
+      "population": "dev",
+      "region": "Telangana",
+      "rows": 705
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "gluten",
+      "new_unknown": 6,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "milk",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sesame",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "soy",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "UNKNOWN",
+      "rows": 35
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "asafoetida",
+      "new_unknown": 24,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "celery",
+      "new_unknown": 35,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "coconut",
+      "new_unknown": 35,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "egg",
+      "new_unknown": 35,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "fenugreek",
+      "new_unknown": 31,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "fish",
+      "new_unknown": 35,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "ghee",
+      "new_unknown": 22,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 51,
+      "allergen": "gluten",
+      "new_unknown": 55,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "milk",
+      "new_unknown": 15,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 28,
+      "allergen": "mustard",
+      "new_unknown": 32,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 197,
+      "allergen": "peanut",
+      "new_unknown": 201,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 211,
+      "allergen": "sesame",
+      "new_unknown": 215,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "shellfish",
+      "new_unknown": 35,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 193,
+      "allergen": "soy",
+      "new_unknown": 197,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "sulphites",
+      "new_unknown": 29,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 28,
+      "allergen": "tamarind",
+      "new_unknown": 32,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "tree_nuts",
+      "new_unknown": 30,
+      "population": "dev",
+      "region": "Uttar Pradesh",
+      "rows": 373
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "celery",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "coconut",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "egg",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fenugreek",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fish",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "ghee",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "gluten",
+      "new_unknown": 4,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "milk",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "peanut",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "sesame",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "shellfish",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "soy",
+      "new_unknown": 2,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sulphites",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tamarind",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tree_nuts",
+      "new_unknown": 1,
+      "population": "dev",
+      "region": "Uttarakhand",
+      "rows": 7
+    },
+    {
+      "absent_to_unknown": 204,
+      "allergen": "asafoetida",
+      "new_unknown": 223,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 242,
+      "allergen": "celery",
+      "new_unknown": 261,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 232,
+      "allergen": "coconut",
+      "new_unknown": 251,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 225,
+      "allergen": "egg",
+      "new_unknown": 244,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 200,
+      "allergen": "fenugreek",
+      "new_unknown": 219,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 221,
+      "allergen": "fish",
+      "new_unknown": 240,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 212,
+      "allergen": "ghee",
+      "new_unknown": 231,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 701,
+      "allergen": "gluten",
+      "new_unknown": 720,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 132,
+      "allergen": "milk",
+      "new_unknown": 151,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 108,
+      "allergen": "mustard",
+      "new_unknown": 127,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 1707,
+      "allergen": "peanut",
+      "new_unknown": 1726,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 2158,
+      "allergen": "sesame",
+      "new_unknown": 2177,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 236,
+      "allergen": "shellfish",
+      "new_unknown": 255,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 1879,
+      "allergen": "soy",
+      "new_unknown": 1898,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 205,
+      "allergen": "sulphites",
+      "new_unknown": 224,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 238,
+      "allergen": "tamarind",
+      "new_unknown": 257,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 222,
+      "allergen": "tree_nuts",
+      "new_unknown": 241,
+      "population": "dev",
+      "region": "West Bengal",
+      "rows": 6110
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sesame",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "soy",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "dev",
+      "region": "West India",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "asafoetida",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "celery",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "coconut",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "egg",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fenugreek",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "gluten",
+      "new_unknown": 16,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "milk",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "mustard",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 47,
+      "allergen": "peanut",
+      "new_unknown": 47,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 47,
+      "allergen": "sesame",
+      "new_unknown": 47,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "shellfish",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 52,
+      "allergen": "soy",
+      "new_unknown": 52,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "sulphites",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "tamarind",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tree_nuts",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Andhra Pradesh",
+      "rows": 95
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "peanut",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "sesame",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "soy",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Assam",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "asafoetida",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "celery",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "coconut",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "egg",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fenugreek",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "fish",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "gluten",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "milk",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "mustard",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "peanut",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "sesame",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "shellfish",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "soy",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "sulphites",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tamarind",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "tree_nuts",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Bihar",
+      "rows": 37
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "peanut",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sesame",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "soy",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "East India",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "asafoetida",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "celery",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "egg",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fenugreek",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fish",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "gluten",
+      "new_unknown": 6,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "mustard",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "peanut",
+      "new_unknown": 22,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "sesame",
+      "new_unknown": 22,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "shellfish",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "soy",
+      "new_unknown": 27,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sulphites",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tamarind",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Goa",
+      "rows": 73
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "asafoetida",
+      "new_unknown": 6,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "celery",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "coconut",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "egg",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "fenugreek",
+      "new_unknown": 10,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "fish",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "ghee",
+      "new_unknown": 11,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 48,
+      "allergen": "gluten",
+      "new_unknown": 48,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 5,
+      "allergen": "milk",
+      "new_unknown": 5,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "mustard",
+      "new_unknown": 7,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 125,
+      "allergen": "peanut",
+      "new_unknown": 125,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 96,
+      "allergen": "sesame",
+      "new_unknown": 96,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "shellfish",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 138,
+      "allergen": "soy",
+      "new_unknown": 138,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "sulphites",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "tamarind",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "tree_nuts",
+      "new_unknown": 11,
+      "population": "heldout",
+      "region": "Gujarat",
+      "rows": 189
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "gluten",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sesame",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "soy",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Himachal Pradesh",
+      "rows": 3
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "asafoetida",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "celery",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "coconut",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "egg",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fenugreek",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "ghee",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "gluten",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "mustard",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "peanut",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "sesame",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "shellfish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "soy",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "sulphites",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "tamarind",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "tree_nuts",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Jammu & Kashmir",
+      "rows": 24
+    },
+    {
+      "absent_to_unknown": 70,
+      "allergen": "asafoetida",
+      "new_unknown": 72,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 92,
+      "allergen": "celery",
+      "new_unknown": 94,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 70,
+      "allergen": "coconut",
+      "new_unknown": 72,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 92,
+      "allergen": "egg",
+      "new_unknown": 94,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 84,
+      "allergen": "fenugreek",
+      "new_unknown": 86,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 92,
+      "allergen": "fish",
+      "new_unknown": 94,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 69,
+      "allergen": "ghee",
+      "new_unknown": 71,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 79,
+      "allergen": "gluten",
+      "new_unknown": 81,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 43,
+      "allergen": "milk",
+      "new_unknown": 45,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 73,
+      "allergen": "mustard",
+      "new_unknown": 75,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 137,
+      "allergen": "peanut",
+      "new_unknown": 139,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 143,
+      "allergen": "sesame",
+      "new_unknown": 145,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 92,
+      "allergen": "shellfish",
+      "new_unknown": 94,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 151,
+      "allergen": "soy",
+      "new_unknown": 153,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 81,
+      "allergen": "sulphites",
+      "new_unknown": 83,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 83,
+      "allergen": "tamarind",
+      "new_unknown": 85,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 79,
+      "allergen": "tree_nuts",
+      "new_unknown": 81,
+      "population": "heldout",
+      "region": "Karnataka",
+      "rows": 239
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "asafoetida",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "celery",
+      "new_unknown": 19,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 6,
+      "allergen": "coconut",
+      "new_unknown": 6,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "egg",
+      "new_unknown": 16,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "fenugreek",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "fish",
+      "new_unknown": 19,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "ghee",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 33,
+      "allergen": "gluten",
+      "new_unknown": 33,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "milk",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "mustard",
+      "new_unknown": 10,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 196,
+      "allergen": "peanut",
+      "new_unknown": 196,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 190,
+      "allergen": "sesame",
+      "new_unknown": 190,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "shellfish",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 213,
+      "allergen": "soy",
+      "new_unknown": 213,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "sulphites",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "tamarind",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "tree_nuts",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Kerala",
+      "rows": 579
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "asafoetida",
+      "new_unknown": 9,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "celery",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "coconut",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "egg",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "fenugreek",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "fish",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "ghee",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 37,
+      "allergen": "gluten",
+      "new_unknown": 39,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "milk",
+      "new_unknown": 10,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "mustard",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 115,
+      "allergen": "peanut",
+      "new_unknown": 117,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 126,
+      "allergen": "sesame",
+      "new_unknown": 128,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "shellfish",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 148,
+      "allergen": "soy",
+      "new_unknown": 150,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "sulphites",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "tamarind",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "tree_nuts",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Maharashtra",
+      "rows": 256
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sesame",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "soy",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Nagaland",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "asafoetida",
+      "new_unknown": 19,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "celery",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "coconut",
+      "new_unknown": 27,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "egg",
+      "new_unknown": 27,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 23,
+      "allergen": "fenugreek",
+      "new_unknown": 24,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "fish",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 21,
+      "allergen": "ghee",
+      "new_unknown": 22,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 62,
+      "allergen": "gluten",
+      "new_unknown": 63,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "milk",
+      "new_unknown": 16,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "mustard",
+      "new_unknown": 23,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 319,
+      "allergen": "peanut",
+      "new_unknown": 320,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 348,
+      "allergen": "sesame",
+      "new_unknown": 349,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "shellfish",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 326,
+      "allergen": "soy",
+      "new_unknown": 327,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 22,
+      "allergen": "sulphites",
+      "new_unknown": 23,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "tamarind",
+      "new_unknown": 26,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "tree_nuts",
+      "new_unknown": 27,
+      "population": "heldout",
+      "region": "North India",
+      "rows": 608
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "peanut",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sesame",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "soy",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Odisha",
+      "rows": 4
+    },
+    {
+      "absent_to_unknown": 289,
+      "allergen": "asafoetida",
+      "new_unknown": 329,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 336,
+      "allergen": "celery",
+      "new_unknown": 376,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 292,
+      "allergen": "coconut",
+      "new_unknown": 332,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 315,
+      "allergen": "egg",
+      "new_unknown": 355,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 307,
+      "allergen": "fenugreek",
+      "new_unknown": 347,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 328,
+      "allergen": "fish",
+      "new_unknown": 368,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 280,
+      "allergen": "ghee",
+      "new_unknown": 320,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 540,
+      "allergen": "gluten",
+      "new_unknown": 580,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 219,
+      "allergen": "milk",
+      "new_unknown": 259,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 291,
+      "allergen": "mustard",
+      "new_unknown": 331,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 2196,
+      "allergen": "peanut",
+      "new_unknown": 2236,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 2230,
+      "allergen": "sesame",
+      "new_unknown": 2270,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 335,
+      "allergen": "shellfish",
+      "new_unknown": 375,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 2676,
+      "allergen": "soy",
+      "new_unknown": 2716,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 298,
+      "allergen": "sulphites",
+      "new_unknown": 338,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 324,
+      "allergen": "tamarind",
+      "new_unknown": 364,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 287,
+      "allergen": "tree_nuts",
+      "new_unknown": 327,
+      "population": "heldout",
+      "region": "Pan-Indian",
+      "rows": 6840
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "gluten",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "peanut",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "sesame",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 4,
+      "allergen": "soy",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Parsi",
+      "rows": 8
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "asafoetida",
+      "new_unknown": 11,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "celery",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "coconut",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "egg",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "fenugreek",
+      "new_unknown": 9,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "fish",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "ghee",
+      "new_unknown": 7,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 48,
+      "allergen": "gluten",
+      "new_unknown": 48,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "milk",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 10,
+      "allergen": "mustard",
+      "new_unknown": 10,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 281,
+      "allergen": "peanut",
+      "new_unknown": 281,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 294,
+      "allergen": "sesame",
+      "new_unknown": 294,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "shellfish",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 291,
+      "allergen": "soy",
+      "new_unknown": 291,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "sulphites",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "tamarind",
+      "new_unknown": 11,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 9,
+      "allergen": "tree_nuts",
+      "new_unknown": 9,
+      "population": "heldout",
+      "region": "Punjab",
+      "rows": 541
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "asafoetida",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "celery",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "coconut",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "egg",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "fenugreek",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "fish",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 5,
+      "allergen": "ghee",
+      "new_unknown": 6,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "gluten",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "milk",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 5,
+      "allergen": "mustard",
+      "new_unknown": 6,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "peanut",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 29,
+      "allergen": "sesame",
+      "new_unknown": 30,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "shellfish",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "soy",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "sulphites",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "tamarind",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "tree_nuts",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Rajasthan",
+      "rows": 44
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "celery",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "coconut",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "egg",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fenugreek",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "mustard",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "peanut",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "sesame",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "shellfish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "soy",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tree_nuts",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Sindhi",
+      "rows": 14
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "asafoetida",
+      "new_unknown": 21,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "celery",
+      "new_unknown": 32,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 25,
+      "allergen": "coconut",
+      "new_unknown": 26,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "egg",
+      "new_unknown": 32,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "fenugreek",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "fish",
+      "new_unknown": 32,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 26,
+      "allergen": "ghee",
+      "new_unknown": 27,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 146,
+      "allergen": "gluten",
+      "new_unknown": 147,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "milk",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "mustard",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 278,
+      "allergen": "peanut",
+      "new_unknown": 279,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 288,
+      "allergen": "sesame",
+      "new_unknown": 289,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "shellfish",
+      "new_unknown": 32,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 301,
+      "allergen": "soy",
+      "new_unknown": 302,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 31,
+      "allergen": "sulphites",
+      "new_unknown": 32,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "tamarind",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 27,
+      "allergen": "tree_nuts",
+      "new_unknown": 28,
+      "population": "heldout",
+      "region": "South India",
+      "rows": 581
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "asafoetida",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "celery",
+      "new_unknown": 20,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "coconut",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "egg",
+      "new_unknown": 20,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 18,
+      "allergen": "fenugreek",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "fish",
+      "new_unknown": 20,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "ghee",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 139,
+      "allergen": "gluten",
+      "new_unknown": 139,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 11,
+      "allergen": "milk",
+      "new_unknown": 11,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 8,
+      "allergen": "mustard",
+      "new_unknown": 8,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 241,
+      "allergen": "peanut",
+      "new_unknown": 241,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 237,
+      "allergen": "sesame",
+      "new_unknown": 237,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "shellfish",
+      "new_unknown": 20,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 269,
+      "allergen": "soy",
+      "new_unknown": 269,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "sulphites",
+      "new_unknown": 19,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 19,
+      "allergen": "tamarind",
+      "new_unknown": 19,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "tree_nuts",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Tamil Nadu",
+      "rows": 571
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "asafoetida",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "celery",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "coconut",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "egg",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fenugreek",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "fish",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "ghee",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 3,
+      "allergen": "gluten",
+      "new_unknown": 4,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "milk",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "mustard",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "peanut",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "sesame",
+      "new_unknown": 18,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "shellfish",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 20,
+      "allergen": "soy",
+      "new_unknown": 21,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sulphites",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "tamarind",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 2,
+      "allergen": "tree_nuts",
+      "new_unknown": 3,
+      "population": "heldout",
+      "region": "Telangana",
+      "rows": 38
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "peanut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sesame",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "soy",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "UNKNOWN",
+      "rows": 2
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "asafoetida",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "celery",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "coconut",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "egg",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fenugreek",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "fish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "ghee",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "gluten",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "mustard",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "peanut",
+      "new_unknown": 14,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "sesame",
+      "new_unknown": 16,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "shellfish",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 14,
+      "allergen": "soy",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sulphites",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tamarind",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "tree_nuts",
+      "new_unknown": 2,
+      "population": "heldout",
+      "region": "Uttar Pradesh",
+      "rows": 20
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "asafoetida",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "celery",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "coconut",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "egg",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fenugreek",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "fish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "ghee",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "gluten",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "milk",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "mustard",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "peanut",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "sesame",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "shellfish",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 1,
+      "allergen": "soy",
+      "new_unknown": 1,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "sulphites",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tamarind",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 0,
+      "allergen": "tree_nuts",
+      "new_unknown": 0,
+      "population": "heldout",
+      "region": "Uttarakhand",
+      "rows": 1
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "asafoetida",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "celery",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "coconut",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "egg",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "fenugreek",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 13,
+      "allergen": "fish",
+      "new_unknown": 13,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "ghee",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 39,
+      "allergen": "gluten",
+      "new_unknown": 39,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 12,
+      "allergen": "milk",
+      "new_unknown": 12,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 7,
+      "allergen": "mustard",
+      "new_unknown": 7,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 100,
+      "allergen": "peanut",
+      "new_unknown": 100,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 115,
+      "allergen": "sesame",
+      "new_unknown": 115,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "shellfish",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 102,
+      "allergen": "soy",
+      "new_unknown": 102,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 16,
+      "allergen": "sulphites",
+      "new_unknown": 16,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 17,
+      "allergen": "tamarind",
+      "new_unknown": 17,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    },
+    {
+      "absent_to_unknown": 15,
+      "allergen": "tree_nuts",
+      "new_unknown": 15,
+      "population": "heldout",
+      "region": "West Bengal",
+      "rows": 321
+    }
+  ],
+  "rows": 3729528,
+  "status": "provisional_rule_evidence_not_independent_validation"
+}
