@@ -130,6 +130,35 @@ false for every rule, so a declared occasion yields UNKNOWN per item, never PASS
 not be used as silent hard constraints. Quoted third-party text was reduced to citations.
 No column describes a person, and none may be used to infer anyone's religion or diet.
 
+### DietaryContext: provenance, conflation and a conservative v2 (29 Sep 2026)
+
+The legacy `DietaryContext` column (`jain_sattvic`, `vrat_fasting`; 6,923 recipes) is a
+keyword label, not a verified practice. It was written by `scraper/enrich_params.py` over
+RecipeName + Keywords + Description (the last two are not published, which is why most tagged
+titles show no Jain or fasting word), then unioned in v11 with tags inferred from text and from
+ingredients alone, and finally copied between duplicate-family look-alikes: **1,827 tags were
+inherited from a sibling**, although `Diet` is never inherited for exactly that reason.
+`jain_sattvic` conflates three claims (Jain; sattvic; no onion or garlic) that exclude different
+foods — a sattvic dish may contain potato, a Jain one may not — and the original vrat pattern
+counted `navratri`, a festival, as a fast.
+
+`data/quality/dietary_context_evidence_v1.parquet` records, per tagged recipe, which claim the
+source text makes and in which field, whether the tag was inherited, and which parsed canonical
+ingredients conflict with it. `DietaryContext_v2` splits the token into `jain`, `sattvic`,
+`no_onion_garlic` and `vrat_fasting`, keeping a claim only when it is reproducible from the
+recipe's own source text, its ingredients were scraped from the source, and no hard conflict
+is found. Of 6,923 tagged recipes, v2 keeps at least one claim on 3,295 and withdraws all claims
+on 3,628; the legacy column is unchanged.
+
+A kept v2 token means "claimed by the source and no conflict found among parsed ingredients".
+It is not certification: unparsed ingredient text is not assessed, ambiguous items (ginger and
+turmeric that may be dried, honey, alcohol) are reported but never demote a claim, and
+`kept_optional_conflict` marks recipes whose only conflict is an ingredient listed as optional
+or "skip for Jain". Exclusion sets follow the descriptive, partially verified rules in
+`data/cultural_context/`; vrat has no encoded exclusion, so its onion/garlic guard is the v11
+builder's own and its animal-food guard is recorded as unencoded. Use v2 or the evidence table,
+not the legacy column, for any filtering.
+
 `data/historical_snapshot/` maps recipe IDs to a historical snapshot by exact ID. It adds no
 recipes and is not independent validation. Its historical snapshot split labels must never
 be used as a split; use `Split_v3`. Counts, pins and transformations are in each directory's

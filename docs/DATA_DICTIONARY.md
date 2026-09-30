@@ -10,7 +10,7 @@ master documents none; they are not guessed.
 Prose columns (`Description`, `Instructions`, `Ingredients`, `Keywords`,
 `Enrich_Log`) are withheld from every table below — see `DATASHEET.md`.
 
-Covering **all 60 published Parquet tables**.
+Covering **all 61 published Parquet tables**.
 
 
 ## `data/corpus/allergens.parquet`
@@ -1377,6 +1377,36 @@ Covering **all 60 published Parquet tables**.
 | `status_v012` | object |  | 144 | 1 | unknown |  |
 | `review_status` | object |  | 144 | 1 | unreviewed_candidate |  |
 
+## `data/quality/dietary_context_evidence_v1.parquet`
+
+6,923 rows x 23 columns - 0.1 MB
+
+| column | type | unit / basis | non-null | distinct | example | note |
+|---|---|---|---:|---:|---|---|
+| `recipe_id` | int64 |  | 6,923 | 6,923 | 72 |  |
+| `legacy_dietary_context` | object |  | 6,923 | 3 | jain_sattvic |  |
+| `legacy_inferred_v11` | bool |  | 6,923 | 2 | False |  |
+| `legacy_inherited_from_duplicate` | bool |  | 6,923 | 2 | True |  |
+| `master_is_recipe` | bool |  | 6,923 | 2 | True |  |
+| `ingredients_assessable` | bool |  | 6,923 | 2 | True |  |
+| `n_parsed_ingredients` | int64 |  | 6,923 | 21 | 4 |  |
+| `animal_found` | object |  | 78 | 11 | mutton |  |
+| `allium_found` | object |  | 872 | 14 | garlic\|onion |  |
+| `root_found` | object |  | 2,005 | 37 | carrot |  |
+| `soft_found` | object |  | 2,757 | 10 | honey |  |
+| `jain_match_fields` | object |  | 3,193 | 14 |  |  |
+| `sattvic_match_fields` | object |  | 3,193 | 10 |  |  |
+| `no_onion_garlic_match_fields` | object |  | 3,193 | 14 |  |  |
+| `vrat_match_fields` | object |  | 1,816 | 14 | title\|description |  |
+| `vrat_basis` | object |  | 4,094 | 7 | inherited_from_duplicate_family |  |
+| `claim_strength` | object |  | 3,796 | 4 | title |  |
+| `ingredients_source_trusted` | bool |  | 6,923 | 2 | True |  |
+| `DietaryContext_v2` | object |  | 3,295 | 14 | jain,no_onion_garlic |  |
+| `v2_reasons` | object |  | 3,738 | 57 | jain_sattvic:claim_inherited_from_duplic |  |
+| `v2_status` | object |  | 6,923 | 5 | withdrawn |  |
+| `version` | object |  | 6,923 | 1 | dietary_context_evidence_v1 |  |
+| `interpretation` | object |  | 6,923 | 1 | source_text_claim_and_ingredient_conflic |  |
+
 ## `data/quality/duplicate_crosswalk_v1.parquet`
 
 219,384 rows x 7 columns - 15.0 MB
@@ -1473,7 +1503,7 @@ Covering **all 60 published Parquet tables**.
 
 ## Every published file
 
-All 111 files under `data/`, so nothing ships undescribed.
+All 113 files under `data/`, so nothing ships undescribed.
 
 
 ### `data/benchmark/`
@@ -1644,6 +1674,8 @@ All 111 files under `data/`, so nothing ships undescribed.
 | `allergen_evidence_manifest.json` | 0.18 MB | metadata / manifest |
 | `allergen_evidence_v1.parquet` | 3.76 MB | columnar table — documented above |
 | `allergen_review_candidates_v1.parquet` | 0.00 MB | columnar table — documented above |
+| `dietary_context_evidence_manifest.json` | 0.00 MB | metadata / manifest |
+| `dietary_context_evidence_v1.parquet` | 0.06 MB | columnar table — documented above |
 | `duplicate_crosswalk_v1.parquet` | 14.99 MB | columnar table — documented above |
 | `item_attributes_v1.parquet` | 1.90 MB | columnar table — documented above |
 | `item_card_manifest.json` | 0.00 MB | metadata / manifest |
