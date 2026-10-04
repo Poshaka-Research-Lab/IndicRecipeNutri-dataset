@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6426916,
+  "edges": 6426581,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -33,17 +33,17 @@
     "zone": 5
   },
   "relations": {
-    "contains_allergen": 485055,
+    "contains_allergen": 485057,
     "cooked_by": 404145,
     "derived_from": 30,
-    "for_occasion": 33356,
+    "for_occasion": 33171,
     "from_region": 219347,
     "grounded_as": 369,
     "has_compound": 25748,
-    "has_diet": 256132,
+    "has_diet": 256056,
     "has_health_tag": 1725100,
     "has_ingredient": 1916036,
-    "in_context": 7287,
+    "in_context": 7211,
     "in_cuisine": 219347,
     "in_zone": 27,
     "is_a": 173,
@@ -76,10 +76,10 @@
     "fish": 5813,
     "ghee": 33538,
     "gluten": 71994,
-    "milk": 116418,
+    "milk": 116419,
     "mustard": 36688,
     "peanut": 11464,
-    "sesame": 13729,
+    "sesame": 13730,
     "shellfish": 4205,
     "soy": 9050,
     "sulphites": 23990,
@@ -90,13 +90,13 @@
   "unknown_region": 37,
   "english": 207657,
   "missing_language": 1430,
-  "missing_servings": 53309,
-  "missing_per100g_energy": 60418,
+  "missing_servings": 53323,
+  "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 1274,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa",
-    "data/kg/kg_nodes.parquet": "134174df03460500f8efcd3141436a3c9ddef53f754423c56b501313115d79d7",
-    "data/kg/kg_edges.parquet": "23adc954ab2ccc02627538c997ebb53cf0a99d672ab09cace9f4bf3f6beced85",
+    "data/corpus/recipes_structured.parquet": "5a86bbaa6a9ec88dd18b9f8b425fd3666b05fca5eccc6ce03a452528f25926eb",
+    "data/kg/kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
+    "data/kg/kg_edges.parquet": "c5fc17670d47b5dd26e560921bdd065ef083ceb2c8947833321814c0e745fc46",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }

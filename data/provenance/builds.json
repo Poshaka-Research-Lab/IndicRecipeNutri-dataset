@@ -1,6 +1,6 @@
 {
   "v15-2026-09-01": {
-    "date": "2026-09-20",
+    "date": "2026-10-03",
     "script": "migrate_schema.py",
     "rows": 219384,
     "source_columns": 271,

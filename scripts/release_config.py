@@ -950,7 +950,15 @@ EXPECTED_KG_NODES = 222_537
 # EVERY recipe whose contains_allergen or has_diet edge set moved is one of the 58 or one of the 88 the
 # owner decided: 107 and 35 recipes respectively, 0 others. Evidence:
 # _admin/progress/release_v0100_run/kg_reconciliation_20260920.json.
-EXPECTED_KG_EDGES = 6_426_916
+# 2026-10-03 (T1 error-page repair, master f6de8db0..., gate open_verified): 6,426,916 -> 6,426,581 (-335).
+# Reconciled per relation against the release KG on disk before the rebuild (baseline checkout),
+# ZERO unexplained residual: for_occasion -185, has_diet -76 (diet::Jain -38, diet::Sattvic -38),
+# in_context -76 (family 9781's Occasion and DietaryContext, borrowed values reset) = -337, plus
+# contains_allergen +2 = recipe::76248 -> allergen::milk and recipe::99321 -> allergen::sesame, the two
+# owner-decided allergen additions in the r10c payload (kg_delta.py does not model contains_allergen,
+# which is why the manifest's runbook text says 6,426,579). No other relation moved; no node moved
+# (EXPECTED_KG_NODES unchanged). Evidence: r10/post_install_run/kg_reconciliation_r10c.json.
+EXPECTED_KG_EDGES = 6_426_581
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

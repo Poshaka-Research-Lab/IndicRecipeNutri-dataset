@@ -265,12 +265,12 @@
     },
     "milk": {
       "lexical_present": 110987,
-      "flagged_present": 116418,
+      "flagged_present": 116419,
       "false_negatives": 34,
       "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 5465,
-      "audit_lexicon_coverage_of_flagged": 0.9531,
-      "unaudited_flagged_rows": 5465,
+      "false_positives_flag_only": 5466,
+      "audit_lexicon_coverage_of_flagged": 0.953,
+      "unaudited_flagged_rows": 5466,
       "false_negative_examples": [
         {
           "recipe_id": 33216,
@@ -417,12 +417,12 @@
     },
     "sesame": {
       "lexical_present": 11865,
-      "flagged_present": 13729,
+      "flagged_present": 13730,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1864,
+      "false_positives_flag_only": 1865,
       "audit_lexicon_coverage_of_flagged": 0.8642,
-      "unaudited_flagged_rows": 1864,
+      "unaudited_flagged_rows": 1865,
       "false_negative_examples": []
     },
     "shellfish": {
@@ -478,7 +478,7 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 83952,
+      "rows_with_label": 83945,
       "conflicting_rows": 519,
       "rate": 0.0062,
       "by_allergen": {
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 88617,
+      "rows_with_label": 88611,
       "conflicting_rows": 17,
       "rate": 0.0002,
       "by_allergen": {
@@ -622,7 +622,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 14257,
+      "rows_with_label": 14259,
       "conflicting_rows": 1,
       "rate": 0.0001,
       "by_allergen": {

@@ -9,15 +9,15 @@
     "unsupported languages and invalid lists unassessed"
   ],
   "heldout_ids_sha256": "c3517fda7c05e07f1e0d7d6e9f0e1d7c4e408fbad25ab7e824ed61965beef717",
-  "input_manifest_sha256": "00d917593ca41ab77267855076c7be86787d0bc5ae55ce6a7604ef3585485dc9",
+  "input_manifest_sha256": "32f45d11082fa5870ac3bdea577dec3cbd4b242de333336dabe3672877a3eccc",
   "inputs": {
-    "data/corpus/allergens.parquet": "0980456bde460c8a8ca7b8db2f3a120b0fff5caf462b90911dbe19a0673ad56e",
-    "data/corpus/recipes_structured.parquet": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa"
+    "data/corpus/allergens.parquet": "10f97de7405fc0a0e03d6599264d5c3c65c03f3d9fe45c86682012126e3f6474",
+    "data/corpus/recipes_structured.parquet": "5a86bbaa6a9ec88dd18b9f8b425fd3666b05fca5eccc6ce03a452528f25926eb"
   },
   "interpretation": "Absent remains silver inferred absence, not verified safe; UNKNOWN is abstention.",
   "legacy_labels_modified": false,
-  "logical_sha256": "a70c7bbfa6dd7413f0f051930f502c34dc9344e0c8b6b1af64412e394723a6fe",
-  "payload_sha256": "14556da6004e3be8222468fbc5941a2a548490fe6164a87e6a04dcc63512df7c",
+  "logical_sha256": "1ed6c67c2d355be5b6b848520e4b6be9d814e16982dec4e9932fa33566c6a31c",
+  "payload_sha256": "561183ce4726d439458500d9fa2510745869d8d6599513762405ef1ef5c4bab6",
   "policy_code_sha256": "3dd7b17b6c1e047d696c8d23879a9ea8930ab3e6213721481301125ba17b37a2",
   "policy_version": "irn-allergen-evidence-0.12.0-v1",
   "population_counts": [
@@ -195,22 +195,22 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 6596,
+      "absent_to_unknown": 6595,
       "allergen": "milk",
       "kind_ambiguous_carrier": 1215,
       "kind_explicit": 31953,
       "kind_implicit_name": 68128,
       "kind_text_silent": 95243,
       "kind_unassessed": 11751,
-      "legacy_absent": 96521,
-      "legacy_present": 110546,
+      "legacy_absent": 96520,
+      "legacy_present": 110547,
       "legacy_unassessed": 1223,
       "new_absent": 89925,
-      "new_present": 110546,
-      "new_unknown": 7819,
+      "new_present": 110547,
+      "new_unknown": 7818,
       "population": "dev",
-      "reason_ingredient_evidence_unassessed": 5162,
-      "reason_legacy_positive_preserved": 110546,
+      "reason_ingredient_evidence_unassessed": 5161,
+      "reason_legacy_positive_preserved": 110547,
       "reason_legacy_unassessed": 1223,
       "reason_name_conflicts_with_legacy_absence": 49,
       "reason_scan_incomplete": 356,
@@ -265,24 +265,24 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 81127,
+      "absent_to_unknown": 81126,
       "allergen": "sesame",
       "kind_ambiguous_carrier": 71897,
       "kind_explicit": 9869,
       "kind_implicit_name": 831,
       "kind_text_silent": 113942,
       "kind_unassessed": 11751,
-      "legacy_absent": 194035,
-      "legacy_present": 13032,
+      "legacy_absent": 194034,
+      "legacy_present": 13033,
       "legacy_unassessed": 1223,
       "new_absent": 112908,
-      "new_present": 13032,
-      "new_unknown": 82350,
+      "new_present": 13033,
+      "new_unknown": 82349,
       "population": "dev",
       "reason_ingredient_evidence_unassessed": 9785,
-      "reason_legacy_positive_preserved": 13032,
+      "reason_legacy_positive_preserved": 13033,
       "reason_legacy_unassessed": 1223,
-      "reason_scan_incomplete": 759,
+      "reason_scan_incomplete": 758,
       "reason_silver_inferred_absence_not_verified_safe": 112908,
       "reason_text_open_legacy_absence": 70583,
       "rows": 208290
@@ -2871,9 +2871,9 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 4204,
+      "absent_to_unknown": 4203,
       "allergen": "milk",
-      "new_unknown": 5083,
+      "new_unknown": 5082,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
@@ -2895,9 +2895,9 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 42480,
+      "absent_to_unknown": 42479,
       "allergen": "sesame",
-      "new_unknown": 43359,
+      "new_unknown": 43358,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178

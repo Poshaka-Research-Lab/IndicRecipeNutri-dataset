@@ -1,17 +1,17 @@
 {
   "version": "dietary_context_evidence_v1",
-  "rows": 6923,
+  "rows": 6885,
   "input_sha256": {
-    "master": "d30bb67ca499f4707ab40340d2e810adb0ab7b97595330c7b162c37ff7609500",
-    "released_recipes": "e56f424f935f8a7fcb2a5d187e659dd7a6d59d697987b7e310d4eb699ce6a3fa",
-    "kg_nodes": "134174df03460500f8efcd3141436a3c9ddef53f754423c56b501313115d79d7",
-    "kg_edges": "23adc954ab2ccc02627538c997ebb53cf0a99d672ab09cace9f4bf3f6beced85"
+    "master": "f6de8db0c6143f3d13f96aa99c241b7fe0d2e9372cca1c8fa5cb6f53ad8651db",
+    "released_recipes": "5a86bbaa6a9ec88dd18b9f8b425fd3666b05fca5eccc6ce03a452528f25926eb",
+    "kg_nodes": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
+    "kg_edges": "c5fc17670d47b5dd26e560921bdd065ef083ceb2c8947833321814c0e745fc46"
   },
   "builder_sha256": "235866a6aebe317c08008e30eee6b7cfa1bcca0318b895eebc259b88b2729e9c",
-  "table_sha256": "a0f8b16ac037c672cba1069a6ef580c123037eb05a5f28cc83bf2599f251f130",
+  "table_sha256": "c839daedcaa25c1264c7715416602fcfacfa986a6eec811d6f95cacb4c654054",
   "legacy_column_modified": false,
   "v2_status_counts": {
-    "withdrawn": 3628,
+    "withdrawn": 3590,
     "refined": 1779,
     "kept": 1406,
     "reduced": 72,
@@ -24,12 +24,12 @@
     "sattvic": 191
   },
   "legacy_token_counts": {
-    "vrat_fasting": 4094,
-    "jain_sattvic": 3193
+    "vrat_fasting": 4056,
+    "jain_sattvic": 3155
   },
   "vrat_basis_counts": {
     "fast_term": 1794,
-    "inherited_from_duplicate_family": 900,
+    "inherited_from_duplicate_family": 862,
     "ingredient_inference_only": 781,
     "festival_term_only": 545,
     "not_reproducible": 47,
@@ -37,8 +37,8 @@
     "non_religious_fasting_term": 5
   },
   "reason_counts": {
-    "jain_sattvic:claim": 1036,
-    "vrat_fasting:inherited": 900,
+    "jain_sattvic:claim": 998,
+    "vrat_fasting:inherited": 862,
     "vrat_fasting:ingredient": 781,
     "vrat_fasting:festival": 545,
     "vrat_fasting:ingredients": 162,

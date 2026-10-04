@@ -7,8 +7,8 @@
     "shares_flavor": 14250
   },
   "input_sha256": {
-    "kg_nodes.parquet": "134174df03460500f8efcd3141436a3c9ddef53f754423c56b501313115d79d7",
-    "kg_edges.parquet": "23adc954ab2ccc02627538c997ebb53cf0a99d672ab09cace9f4bf3f6beced85",
+    "kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
+    "kg_edges.parquet": "c5fc17670d47b5dd26e560921bdd065ef083ceb2c8947833321814c0e745fc46",
     "kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   },
   "mapping_validation": "legacy mappings; food identity review not completed"

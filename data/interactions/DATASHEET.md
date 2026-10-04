@@ -16,7 +16,7 @@ Regenerate with `python scripts/build_interactions.py`; re-score with
 
 | | |
 |---|---|
-| Source | `data/corpus/recipes_structured.parquet` — **219,386** published recipes |
+| Source | `data/corpus/recipes_structured.parquet` — **219,384** published recipes |
 | Generator | `scripts/build_interactions.py`, seed 42 |
 | Parameters | `HOTC=18000`, `ZIPF_EXP=0.35`, `GAMMA_EXP=0.6` |
 | Withdrawn recipes referenced | **0** — enforced by the generator and re-checked by `verify_release.py` |
@@ -45,9 +45,9 @@ they could only ever be **declared** clean at a pinned nonzero count.
 | 1★ | 1.45% | 1.05% |
 
 - After positives (≥4) + iterative 10-core + per-user temporal 80/20 split:
-  **35,801 users / 16,567 items / 820,566 interactions** (train 657,610 / test 162,956),
+  **35,856 users / 16,569 items / 821,231 interactions** (train 658,172 / test 163,059),
   **0** train/test leakage.
-- Recipe-attribute KG: **82,835 triples** over **16,614** entities and 5 relations
+- Recipe-attribute KG: **82,842 triples** over **16,617** entities and 5 relations
   (`has_region`, `has_diet`, `has_course`, `has_healthgrade`, `has_spice`).
 - User diet split: Vegetarian 40.02% · Non-Vegetarian 34.79% · Vegan 14.96% ·
   Eggetarian 10.22%. All 27 regions that have recipes are represented by ≥1 user;
@@ -71,11 +71,11 @@ Per-user leave-last-20%-out (the temporal split above), full-item ranking, seen 
 
 | Model | Recall@10 | Recall@20 | NDCG@10 | HR@10 |
 |---|---:|---:|---:|---:|
-| Popularity | 0.0114 | 0.0196 | 0.0089 | 0.0496 |
-| ItemKNN | 0.0059 | 0.0102 | 0.0050 | 0.0336 |
-| BPR-MF | 0.0049 | 0.0088 | 0.0039 | 0.0227 |
+| Popularity | 0.0149 | 0.0248 | 0.0118 | 0.0640 |
+| ItemKNN | 0.0091 | 0.0141 | 0.0078 | 0.0476 |
+| BPR-MF | 0.0056 | 0.0097 | 0.0042 | 0.0239 |
 
-Ranking over 16,567 items. Popularity leads, as it often does on large sparse logs. These are
+Ranking over 16,569 items. Popularity leads, as it often does on large sparse logs. These are
 reference points for comparison on this benchmark, not evidence that any method is good.
 
 ## What changed from the retired generations
@@ -94,8 +94,8 @@ here rather than carried forward:
    `{'low','medium','high'}`, but that column is ~98.6% numeric in both source CSVs and holds
    no such value, so every row fell to `.fillna(0.5)` and the `diabetic` profile (15% of
    users) silently reduced to HealthGrade alone. The categorical column it wanted,
-   `gl_bucket`, sat directly beside it. v4 maps `gl_bucket`: **216,353 of 219,386 recipes
-   (98.62%)**, against 0.00% before, and the build fails if that ever drops below half.
+   `gl_bucket`, sat directly beside it. v4 maps `gl_bucket`: **216,293 of 219,384 recipes
+   (98.59%)**, against 0.00% before, and the build fails if that ever drops below half.
 2. **Diet normalisation failed open.** Anything unrecognised returned `'Vegetarian'`, so
    **731** recipes carrying `Diet == 'unknown'` entered the Vegan, Vegetarian and Eggetarian
    pools — and the audit reported zero violations because it re-used the same function. Here

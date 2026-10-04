@@ -17,7 +17,7 @@ original instructions, headnotes and other withheld prose are not redistributed.
 | Wide-view columns | 270 |
 | Source sites | 378 |
 | Graph nodes | 222,537 |
-| Graph triples | 6,426,916 |
+| Graph triples | 6,426,581 |
 | Edge evidence rows | 236,315 |
 | Ingredient nodes | 927 |
 | Compound nodes | 1,607 |
@@ -64,7 +64,7 @@ pipeline uses USDA and US/UK composition sources and three IFCT 2017 profiles
 (atta, maida and paneer). IFCT use is separately permissioned and owner-attested;
 see `THIRD_PARTY_TERMS.md`. This does not establish corpus-wide Indian composition
 grounding. Consult `UNITS.json` before use.
-53,309 recipes lack numeric servings and 60,418
+53,323 recipes lack numeric servings and 60,431
 lack per-100g energy. Never replace missing denominators with 1. Estimated ingredient
 density and declared-serving bases remain separate confidence tiers.
 
