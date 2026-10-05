@@ -26,7 +26,7 @@
     }
   },
   "audit_pattern_code_sha256": "0b5ca2752e12c254eb2ae4051a36d53cfd67e3e29d546b29565e6be39b741965",
-  "audit_rule_code_sha256": "c401a0a482c8d79a66090291f0f63303796836c1f64087394c4fdfc5b2c91a64",
+  "audit_rule_code_sha256": "1ebf80ab5f96adde5f0a32aae2104f2a2adac18f4de98576a0be22a61a8404ed",
   "baseline_commit": "620496feb4aeffaee7b01e1892418924d8b2fd47",
   "builder_sha256": "d75c1edbcc21fcb9c9f69241810cb5db4fce7b565085fb79c5a4983e521ed3e4",
   "counts": {

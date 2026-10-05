@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import re
 
+import allergen_taxonomy as _AT
 from allergen_taxonomy import TOKENS
 from quality_audit_rules import IMPLICIT_RX, ambiguous_hits, _NOT_DAIRY
 
@@ -23,6 +24,10 @@ DIRECT = {
     'tamarind': r'\btamarind\b', 'coconut': r'\bcoconut\b', 'celery': r'\bcelery\b',
     'sulphites': r'\b(?:sulphites?|sulfites?)\b', 'ghee': r'\bghee\b',
 }
+# gate_m27 M27.1b guard: the KEYS are part of the declared vocabulary, the VALUES are independent evidence.
+_bad = sorted(set(DIRECT) - set(_AT.TOKENS))
+assert not _bad, f"DIRECT names undeclared allergen token(s): {_bad}"
+del _bad
 DIRECT_RX = {k: re.compile(v, re.I) for k, v in DIRECT.items()}
 KINDS = {'explicit', 'implicit_name', 'ambiguous_carrier', 'text_silent', 'unassessed'}
 STATUSES = {'present', 'absent', 'unknown'}

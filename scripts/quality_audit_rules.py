@@ -6,6 +6,8 @@ See audit_rule_provenance.json. No dependency on the live K006 workspace.
 import hashlib
 import json
 import re
+
+import allergen_taxonomy as _AT
 _NOT_DAIRY = r'(?<!coconut\s)(?<!almond\s)(?<!soy\s)(?<!soya\s)(?<!oat\s)(?<!cashew\s)(?<!rice\s)(?<!peanut\s)'
 
 IMPLICIT = {
@@ -49,6 +51,12 @@ AMBIGUOUS = {
                 r'buckwheat|kuttu|singhara|rajgira|amaranth|chickpea|urad|moong)\s+flour\b')],
     'milk': [('unspecified_fat_or_blend', r'\b(?:shortening|margarine|chocolate|biscuits?|ice\s*cream)\b', None)],
 }
+
+# gate_m27 M27.1b guard (added 2026-10-04; the rule tables above are unchanged). IMPLICIT is a
+# subset of the declared classes by design, so the check is subset, not equality.
+_bad = sorted(set(IMPLICIT) - set(_AT.TOKENS))
+assert not _bad, f"IMPLICIT names undeclared allergen token(s): {_bad}"
+del _bad
 
 def _rx(p):
     return re.compile(p, re.I)

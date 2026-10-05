@@ -18,7 +18,7 @@
   "legacy_labels_modified": false,
   "logical_sha256": "1ed6c67c2d355be5b6b848520e4b6be9d814e16982dec4e9932fa33566c6a31c",
   "payload_sha256": "561183ce4726d439458500d9fa2510745869d8d6599513762405ef1ef5c4bab6",
-  "policy_code_sha256": "3dd7b17b6c1e047d696c8d23879a9ea8930ab3e6213721481301125ba17b37a2",
+  "policy_code_sha256": "eab31e44d771dc6863d094f5e152b2b5ff418f2ace35e6866622c85aecf29b2c",
   "policy_version": "irn-allergen-evidence-0.12.0-v1",
   "population_counts": [
     {
