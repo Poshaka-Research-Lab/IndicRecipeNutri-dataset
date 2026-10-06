@@ -195,80 +195,105 @@ def check_integrity(root: Path) -> None:
 # ----------------------------------------------------------------------- 3. privacy
 
 
-def check_pii(root: Path) -> None:
+def _pii_file(root_s: str, path_s: str):
+    """Original per-file body of check_pii, returning (failures, notes) instead of mutating globals."""
+    root, path = Path(root_s), Path(path_s)
     compiled = {k: re.compile(v) for k, v in PII_PATTERNS.items()}
-    for path in published_parquet(root):
-        schema = pq.read_schema(path)
-        str_cols = [
-            n
-            for n, t in zip(schema.names, schema.types)
-            if str(t) in ("string", "large_string") and n not in PII_EXEMPT_COLUMNS
-        ]
-        if not str_cols:
+    _fls, _nts = [], []
+
+    def _fl(check, detail):
+        _fls.append(f"[{check}] {detail}")
+    schema = pq.read_schema(path)
+    str_cols = [
+        n
+        for n, t in zip(schema.names, schema.types)
+        if str(t) in ("string", "large_string") and n not in PII_EXEMPT_COLUMNS
+    ]
+    if not str_cols:
+        return [], []
+    df = pd.read_parquet(path, columns=str_cols)
+    for col in str_cols:
+        series = df[col].dropna().astype(str)
+        if series.empty:
             continue
-        df = pd.read_parquet(path, columns=str_cols)
-        for col in str_cols:
-            series = df[col].dropna().astype(str)
-            if series.empty:
-                continue
-            for name, rx in compiled.items():
-                # credit_card over-fires on numeric id strings; only flag when the
-                # column is not otherwise numeric-looking.
-                hits = series.str.contains(rx, regex=True, na=False)
-                # These two occurrence fields contain generated context digests.
-                # A hex digest can contain 13-16 consecutive digits; only the full
-                # documented namespace/length is exempt from this one pattern.
-                if (name == "credit_card"
-                        and path.relative_to(root).as_posix() == "data/enrichment/ingredients_nutrition.parquet"
-                        and col in {"match_review_id", "ifct_food_review_id"}):
-                    context_digest = series.str.fullmatch(r"ifct_food::[0-9a-f]{64}", na=False)
-                    suppressed = hits & context_digest
-                    if suppressed.any():
-                        notes.append(
-                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
-                            f"({int(suppressed.sum())} hits) — validated IFCT context digest"
-                        )
-                    hits = hits & ~context_digest
-                digest_key = (path.relative_to(root).as_posix(), col)
-                digest_shape = CONTEXT_DIGEST_COLUMNS.get(digest_key) or QUALITY_DIGEST_COLUMNS.get(digest_key)
-                if name == "credit_card" and digest_shape is not None:
-                    is_digest = series.str.fullmatch(digest_shape, na=False)
-                    suppressed = hits & is_digest
-                    if suppressed.any():
-                        notes.append(
-                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
-                            f"({int(suppressed.sum())} hits) — validated context-layer digest"
-                        )
-                    hits = hits & ~is_digest
-                # `Ingredients_recovered` carries scraped page furniture, including source
-                # URLs whose path segments contain 13-16 consecutive digits. Suppress
-                # credit_card ONLY where the match sits inside a URL, on this one column,
-                # and let every other pattern and every non-URL match fail normally. The
-                # column itself is no longer exempt: that exemption published an email
-                # address on recipe 218869 (withdrawn 2026-09-15).
-                if name == "credit_card" and col == "Ingredients_recovered":
-                    in_url = series.str.contains(r"https?://\S*\d{13,16}", regex=True, na=False)
-                    suppressed = hits & in_url
-                    if suppressed.any():
-                        notes.append(
-                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
-                            f"({int(suppressed.sum())} hits) — digit run inside a source URL"
-                        )
-                    hits = hits & ~in_url
-                if hits.any():
-                    n = int(hits.sum())
-                    example = series[hits].iloc[0][:80]
-                    if name == "credit_card" and series.str.fullmatch(r"[\d.eE+-]*").mean() > 0.9:
-                        notes.append(
-                            f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
-                            f"({n} hits) — column is numeric"
-                        )
-                        continue
-                    fail(
-                        "privacy",
-                        f"{path.relative_to(root)} column '{col}' matches {name} "
-                        f"in {n} row(s), e.g. {example!r}",
+        for name, rx in compiled.items():
+            # credit_card over-fires on numeric id strings; only flag when the
+            # column is not otherwise numeric-looking.
+            hits = series.str.contains(rx, regex=True, na=False)
+            # These two occurrence fields contain generated context digests.
+            # A hex digest can contain 13-16 consecutive digits; only the full
+            # documented namespace/length is exempt from this one pattern.
+            if (name == "credit_card"
+                    and path.relative_to(root).as_posix() == "data/enrichment/ingredients_nutrition.parquet"
+                    and col in {"match_review_id", "ifct_food_review_id"}):
+                context_digest = series.str.fullmatch(r"ifct_food::[0-9a-f]{64}", na=False)
+                suppressed = hits & context_digest
+                if suppressed.any():
+                    _nts.append(
+                        f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                        f"({int(suppressed.sum())} hits) — validated IFCT context digest"
                     )
+                hits = hits & ~context_digest
+            digest_key = (path.relative_to(root).as_posix(), col)
+            digest_shape = CONTEXT_DIGEST_COLUMNS.get(digest_key) or QUALITY_DIGEST_COLUMNS.get(digest_key)
+            if name == "credit_card" and digest_shape is not None:
+                is_digest = series.str.fullmatch(digest_shape, na=False)
+                suppressed = hits & is_digest
+                if suppressed.any():
+                    _nts.append(
+                        f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                        f"({int(suppressed.sum())} hits) — validated context-layer digest"
+                    )
+                hits = hits & ~is_digest
+            # `Ingredients_recovered` carries scraped page furniture, including source
+            # URLs whose path segments contain 13-16 consecutive digits. Suppress
+            # credit_card ONLY where the match sits inside a URL, on this one column,
+            # and let every other pattern and every non-URL match fail normally. The
+            # column itself is no longer exempt: that exemption published an email
+            # address on recipe 218869 (withdrawn 2026-09-15).
+            if name == "credit_card" and col == "Ingredients_recovered":
+                in_url = series.str.contains(r"https?://\S*\d{13,16}", regex=True, na=False)
+                suppressed = hits & in_url
+                if suppressed.any():
+                    _nts.append(
+                        f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                        f"({int(suppressed.sum())} hits) — digit run inside a source URL"
+                    )
+                hits = hits & ~in_url
+            if hits.any():
+                n = int(hits.sum())
+                example = series[hits].iloc[0][:80]
+                if name == "credit_card" and series.str.fullmatch(r"[\d.eE+-]*").mean() > 0.9:
+                    _nts.append(
+                        f"pii: {path.relative_to(root)}:{col} '{name}' suppressed "
+                        f"({n} hits) — column is numeric"
+                    )
+                    continue
+                _fl(
+                    "privacy",
+                    f"{path.relative_to(root)} column '{col}' matches {name} "
+                    f"in {n} row(s), e.g. {example!r}",
+                )
+    return _fls, _nts
+
+
+def _pii_file_args(args):
+    """Picklable single-argument wrapper for parallel_config.pmap_processes."""
+    return _pii_file(*args)
+
+
+def check_pii(root: Path) -> None:
+    """Files are independent: scan them in worker processes and merge the per-file (failures, notes)
+    in the ORIGINAL sorted-path order, so both lists are identical to the sequential loop.
+    PIPELINE_WORKERS=1 runs a plain in-process loop (no pool)."""
+    import parallel_config
+    paths = published_parquet(root)
+    results = parallel_config.pmap_processes(
+        _pii_file_args, [(str(root), str(p)) for p in paths],
+        n_workers=parallel_config.budget(cap=max(1, len(paths))))
+    for fls, nts in results:
+        failures.extend(fls)
+        notes.extend(nts)
 
 
 # --------------------------------------------------------------------- 4. checksums
