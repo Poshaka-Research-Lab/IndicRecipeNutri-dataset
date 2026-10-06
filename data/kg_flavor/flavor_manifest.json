@@ -8,7 +8,7 @@
   },
   "input_sha256": {
     "kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
-    "kg_edges.parquet": "c5fc17670d47b5dd26e560921bdd065ef083ceb2c8947833321814c0e745fc46",
+    "kg_edges.parquet": "3c2a5b9503518bdf7b3a8a579e8e3925fc23980b2d21f902872df80904cb2d01",
     "kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   },
   "mapping_validation": "legacy mappings; food identity review not completed"

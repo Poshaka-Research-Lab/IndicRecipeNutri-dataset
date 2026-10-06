@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "b60c6f547abf1f94e4a8bc23ba8314f3f89cd962b7e73be533cd398be294bb38",
+  "queries_sha256": "a861f9aff9ed452633239bfe5e950f821ce56c8e6b016c189bc6edea15b0c19b",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -31,6 +31,56 @@
       "added": [],
       "removed": [
         "recipe::130787"
+      ]
+    },
+    {
+      "query_id": "silver_c780d015e9330cea",
+      "query": "Vegetarian recipes",
+      "added": [
+        "recipe::11",
+        "recipe::102",
+        "recipe::428",
+        "recipe::478",
+        "recipe::544",
+        "recipe::683"
+      ],
+      "removed": [
+        "recipe::789",
+        "recipe::791",
+        "recipe::792",
+        "recipe::803",
+        "recipe::804",
+        "recipe::809"
+      ]
+    },
+    {
+      "query_id": "silver_af3d9923a6d9f482",
+      "query": "Vegan recipes",
+      "added": [
+        "recipe::1376",
+        "recipe::1378",
+        "recipe::1381",
+        "recipe::1382",
+        "recipe::1389",
+        "recipe::1392"
+      ],
+      "removed": [
+        "recipe::11",
+        "recipe::102",
+        "recipe::428",
+        "recipe::478",
+        "recipe::544",
+        "recipe::683"
+      ]
+    },
+    {
+      "query_id": "silver_5195d9b2ec8966e7",
+      "query": "Eggetarian recipes",
+      "added": [
+        "recipe::5862"
+      ],
+      "removed": [
+        "recipe::7122"
       ]
     },
     {
@@ -94,6 +144,37 @@
       ]
     },
     {
+      "query_id": "silver_ab615090e23b21c7",
+      "query": "Non-Vegetarian recipes with mayo",
+      "added": [
+        "recipe::190517"
+      ],
+      "removed": []
+    },
+    {
+      "query_id": "silver_18c1a254ae807245",
+      "query": "Vegan recipes without gluten",
+      "added": [
+        "recipe::1376",
+        "recipe::1382"
+      ],
+      "removed": [
+        "recipe::11",
+        "recipe::102",
+        "recipe::428",
+        "recipe::478",
+        "recipe::683"
+      ]
+    },
+    {
+      "query_id": "silver_1855bc9a966a410d",
+      "query": "Eggetarian recipes without asafoetida",
+      "added": [
+        "recipe::5862"
+      ],
+      "removed": []
+    },
+    {
       "query_id": "silver_70da69c87d1d2f34",
       "query": "Jain recipes without sulphites",
       "added": [
@@ -146,6 +227,32 @@
         "recipe::9781",
         "recipe::9782",
         "recipe::9949"
+      ]
+    },
+    {
+      "query_id": "silver_02036cd6385d1e87",
+      "query": "Eggetarian recipes high in Copper",
+      "added": [
+        "recipe::141133",
+        "recipe::156757",
+        "recipe::172039"
+      ],
+      "removed": [
+        "recipe::27321",
+        "recipe::194758",
+        "recipe::203320"
+      ]
+    },
+    {
+      "query_id": "silver_f812101e57e2cd72",
+      "query": "Eggetarian recipes high in MonounsaturatedFat",
+      "added": [
+        "recipe::140989",
+        "recipe::189611"
+      ],
+      "removed": [
+        "recipe::56038",
+        "recipe::139503"
       ]
     }
   ],

@@ -958,7 +958,16 @@ EXPECTED_KG_NODES = 222_537
 # owner-decided allergen additions in the r10c payload (kg_delta.py does not model contains_allergen,
 # which is why the manifest's runbook text says 6,426,579). No other relation moved; no node moved
 # (EXPECTED_KG_NODES unchanged). Evidence: r10/post_install_run/kg_reconciliation_r10c.json.
-EXPECTED_KG_EDGES = 6_426_581
+# 2026-10-06 (Diet repair, master 83c388d6..., gate open_verified): 6,426,581 -> 6,426,577 (-4).
+# Predicted by kg_delta_diet.json (for_occasion 0, has_diet -2, in_context -2) and measured edge-level
+# against the release KG on disk before the rebuild (protected baseline copy): 356 edges removed, 352 added,
+# relation counts has_diet -2, in_context -2, no other relation moved, ZERO unexplained residual. Per-node
+# has_diet deltas equal the prediction exactly (Eggetarian +188, Non-Vegetarian +51, Vegan -180, Vegetarian -65,
+# Jain -1, Sattvic -1, unknown +6; the prediction's `__unassessed__` is the tool's label for diet::unknown, which
+# build_kg_v3.py assigns when Diet == unknown); in_context jain_sattvic -1 and vrat_fasting -1 (recipes 88699 and
+# 141028 lose their borrowed edges). EXPECTED_KG_NODES unchanged (222,537): diet::unknown already exists.
+# Evidence: _admin/progress/DIET_REPAIR_CANDIDATE_2026-10-02/install/live_prep/post_install_run/kg_reconciliation_diet.json.
+EXPECTED_KG_EDGES = 6_426_577
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

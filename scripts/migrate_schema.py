@@ -260,7 +260,7 @@ def main() -> int:
     # Corrective history is keyed separately upstream; do not widen the master with
     # another backup column or overwrite the correction's own generation/build ID.
     correction_counts = {}
-    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history']:
+    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history', 'allergen_tier_history_diet_repair']:
         history_path = pathlib.Path(_paths.DATA) / f'corrections/{history_name}.parquet'
         correction_counts[history_name] = 0
         if history_path.exists():
@@ -312,6 +312,7 @@ def main() -> int:
                           "nutrition_basis_history_rows": correction_rows,
                           "language_source_history_rows": correction_counts["language_source_history"],
                           "allergen_tier_history_rows": correction_counts["allergen_tier_history"],
+                          "allergen_tier_history_diet_repair_rows": correction_counts["allergen_tier_history_diet_repair"],
                           "note": "S-1 split. 64 build-history columns moved to "
                                   "field_history rows. A future fix adds rows, not columns."}},
               open(os.path.join(OUT, "provenance", "builds.json"), "w", encoding="utf-8", newline="\n"),

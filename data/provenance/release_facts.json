@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6426581,
+  "edges": 6426577,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -40,10 +40,10 @@
     "from_region": 219347,
     "grounded_as": 369,
     "has_compound": 25748,
-    "has_diet": 256056,
+    "has_diet": 256054,
     "has_health_tag": 1725100,
     "has_ingredient": 1916036,
-    "in_context": 7211,
+    "in_context": 7209,
     "in_cuisine": 219347,
     "in_zone": 27,
     "is_a": 173,
@@ -94,9 +94,9 @@
   "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 1274,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "5a86bbaa6a9ec88dd18b9f8b425fd3666b05fca5eccc6ce03a452528f25926eb",
+    "data/corpus/recipes_structured.parquet": "c5b0634fad77b97900324eb26cc1fa161e9254fdf7bd1b639487da0a623caaa9",
     "data/kg/kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
-    "data/kg/kg_edges.parquet": "c5fc17670d47b5dd26e560921bdd065ef083ceb2c8947833321814c0e745fc46",
+    "data/kg/kg_edges.parquet": "3c2a5b9503518bdf7b3a8a579e8e3925fc23980b2d21f902872df80904cb2d01",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }

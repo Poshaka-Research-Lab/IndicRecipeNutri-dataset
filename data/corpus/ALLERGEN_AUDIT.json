@@ -478,91 +478,87 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 83945,
-      "conflicting_rows": 519,
-      "rate": 0.0062,
+      "rows_with_label": 83765,
+      "conflicting_rows": 365,
+      "rate": 0.0044,
       "by_allergen": {
-        "milk": 387,
-        "egg": 124,
+        "milk": 281,
+        "egg": 80,
         "fish": 4,
-        "shellfish": 4
+        "shellfish": 0
       },
       "examples": [
         {
-          "recipe_id": 11,
-          "name": "Cucumber Peanut Raita"
-        },
-        {
-          "recipe_id": 102,
-          "name": "Gobhi Korma"
-        },
-        {
           "recipe_id": 372,
           "name": "Palak Paneer - Veganized!"
-        },
-        {
-          "recipe_id": 428,
-          "name": "My Favourite Curry- Gujrati Kadhi"
-        },
-        {
-          "recipe_id": 478,
-          "name": "Rose Lassi"
-        },
-        {
-          "recipe_id": 544,
-          "name": "Instant Rava Dosa (Semolina Pancakes)"
-        },
-        {
-          "recipe_id": 683,
-          "name": "Chilled Glass Of Shahi Meethi Lassi"
-        },
-        {
-          "recipe_id": 2649,
-          "name": "Cooling Cucumber Raita"
-        },
-        {
-          "recipe_id": 3026,
-          "name": "Aloo Gobi (Potato Cauliflower Vegetable) Recipe"
         },
         {
           "recipe_id": 3079,
           "name": "Hussain's Masala scrambled eggs"
         },
         {
-          "recipe_id": 3255,
-          "name": "Onion and Tomatoes Raita (Pyaaz Tamatar Ka Raita)"
-        },
-        {
-          "recipe_id": 3572,
-          "name": "Banana Peel Raita"
-        },
-        {
           "recipe_id": 5753,
           "name": "Beet Quinoa Sliders Recipe"
         },
         {
-          "recipe_id": 5862,
-          "name": "Bengali Style Dimer Chop Recipe"
+          "recipe_id": 9455,
+          "name": "Mixed Beans Kachumber Recipe"
         },
         {
-          "recipe_id": 7259,
-          "name": "Egg Kothu Paratha Recipe"
+          "recipe_id": 11904,
+          "name": "Thai Basil Vegetarian Pulao With Pineapple and Spicy Thai Red Chillies Recipe"
+        },
+        {
+          "recipe_id": 12353,
+          "name": "Vegetarian Thukpa Recipe"
+        },
+        {
+          "recipe_id": 12775,
+          "name": "Egg Fried Rice Recipe"
+        },
+        {
+          "recipe_id": 16547,
+          "name": "Beetroot Recipe (Cucumber And Tomato Raita)"
+        },
+        {
+          "recipe_id": 16970,
+          "name": "Carrot Dosa Recipe (Carrot Dosa For Chronic Kidney Disease)"
+        },
+        {
+          "recipe_id": 18303,
+          "name": "Fruity Bean Salad for Kidney Disease | Healthy Recipe"
+        },
+        {
+          "recipe_id": 18758,
+          "name": "Sprouts Kadhi Recipe (Healthy Mixed Sprouts Kadhi)"
+        },
+        {
+          "recipe_id": 19317,
+          "name": "Khatta Urad Dal Recipe (Healthy Gujarati Khatta Urad Dal)"
+        },
+        {
+          "recipe_id": 23811,
+          "name": "Caesar Kachumber Recipe"
+        },
+        {
+          "recipe_id": 24002,
+          "name": "Eggless Chocolate Cake Recipe (Soft & Moist)"
+        },
+        {
+          "recipe_id": 24014,
+          "name": "Eggless Pumpkin Bread Recipe"
         }
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 88611,
-      "conflicting_rows": 17,
-      "rate": 0.0002,
+      "rows_with_label": 88546,
+      "conflicting_rows": 10,
+      "rate": 0.0001,
       "by_allergen": {
-        "fish": 11,
-        "shellfish": 6
+        "fish": 9,
+        "shellfish": 1
       },
       "examples": [
-        {
-          "recipe_id": 1988,
-          "name": "Lobster Tandoori"
-        },
         {
           "recipe_id": 29402,
           "name": "Muri"
@@ -580,20 +576,12 @@
           "name": "Khao Pad (Vegan Thai Pulao)"
         },
         {
-          "recipe_id": 81436,
-          "name": "Mammalapuram Kal Erra Recipe"
-        },
-        {
           "recipe_id": 89622,
           "name": "Macher Matha Diye Moong Dal"
         },
         {
           "recipe_id": 93757,
           "name": "Thai Green Papaya Kachumber"
-        },
-        {
-          "recipe_id": 96714,
-          "name": "Machcher Dompokht"
         },
         {
           "recipe_id": 123227,
@@ -604,37 +592,24 @@
           "name": "Lobster Biryani"
         },
         {
-          "recipe_id": 148270,
-          "name": "Macher Dompokht Recipe"
+          "recipe_id": 193427,
+          "name": "Veggie Lettuce Frankie"
         },
         {
-          "recipe_id": 158720,
-          "name": "Indian dish (yummly #49588)"
-        },
-        {
-          "recipe_id": 160331,
-          "name": "Indian dish (yummly #16004)"
-        },
-        {
-          "recipe_id": 191561,
-          "name": "Emily Scott Grilled Lobster with Red Chilli and Garlic Butter Recipe"
+          "recipe_id": 193935,
+          "name": "Vazhaipoo Vadai Recipe | Banana Flower Fritters | South Indian Snack"
         }
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 14259,
-      "conflicting_rows": 1,
-      "rate": 0.0001,
+      "rows_with_label": 14447,
+      "conflicting_rows": 0,
+      "rate": 0.0,
       "by_allergen": {
         "fish": 0,
-        "shellfish": 1
+        "shellfish": 0
       },
-      "examples": [
-        {
-          "recipe_id": 96886,
-          "name": "Lobster Thermidor"
-        }
-      ]
+      "examples": []
     }
   }
 }

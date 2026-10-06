@@ -23,6 +23,6 @@ Assam,272,region:Assam,exact,false,65,resolves by string against the published R
 Himachal Pradesh,248,region:Himachal Pradesh,exact,false,52,resolves by string against the published Region column
 Nagaland,100,,unreachable,false,8,"no item from this region survived the iterative 10-core (8 recipes in the corpus), so the graph carries no entity for it"
 Uttarakhand,98,region:Uttarakhand,exact,false,8,resolves by string against the published Region column
-East India,97,,unreachable,false,8,"no item from this region survived the iterative 10-core (8 recipes in the corpus), so the graph carries no entity for it"
+East India,97,region:East India,exact,false,8,resolves by string against the published Region column
 West India,59,,unreachable,false,3,"no item from this region survived the iterative 10-core (3 recipes in the corpus), so the graph carries no entity for it"
 Manipur,33,,unreachable,false,1,"no item from this region survived the iterative 10-core (1 recipes in the corpus), so the graph carries no entity for it"
