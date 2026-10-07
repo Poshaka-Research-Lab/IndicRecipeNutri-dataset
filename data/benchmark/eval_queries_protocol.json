@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "a861f9aff9ed452633239bfe5e950f821ce56c8e6b016c189bc6edea15b0c19b",
+  "queries_sha256": "c1da92268995146424f904924a17662676624c6100aacb4b8a4d30df9778b422",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -77,9 +77,11 @@
       "query_id": "silver_5195d9b2ec8966e7",
       "query": "Eggetarian recipes",
       "added": [
+        "recipe::5112",
         "recipe::5862"
       ],
       "removed": [
+        "recipe::7114",
         "recipe::7122"
       ]
     },
@@ -170,9 +172,12 @@
       "query_id": "silver_1855bc9a966a410d",
       "query": "Eggetarian recipes without asafoetida",
       "added": [
+        "recipe::5112",
         "recipe::5862"
       ],
-      "removed": []
+      "removed": [
+        "recipe::7114"
+      ]
     },
     {
       "query_id": "silver_70da69c87d1d2f34",
@@ -227,6 +232,16 @@
         "recipe::9781",
         "recipe::9782",
         "recipe::9949"
+      ]
+    },
+    {
+      "query_id": "silver_8af0ce6d04a69d29",
+      "query": "Vegan recipes high in Calories",
+      "added": [
+        "recipe::45282"
+      ],
+      "removed": [
+        "recipe::6074"
       ]
     },
     {

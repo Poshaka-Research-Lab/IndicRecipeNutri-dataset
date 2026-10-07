@@ -967,7 +967,11 @@ EXPECTED_KG_NODES = 222_537
 # build_kg_v3.py assigns when Diet == unknown); in_context jain_sattvic -1 and vrat_fasting -1 (recipes 88699 and
 # 141028 lose their borrowed edges). EXPECTED_KG_NODES unchanged (222,537): diet::unknown already exists.
 # Evidence: _admin/progress/DIET_REPAIR_CANDIDATE_2026-10-02/install/live_prep/post_install_run/kg_reconciliation_diet.json.
-EXPECTED_KG_EDGES = 6_426_577
+# D13 Diet round 2 (txn_d13_20261006): 6,426,577 -> 6,426,576. Edge-level vs the pre-rebuild release: 204 removed, 203 added,
+# net -1 = in_context -1 (recipe 63408 loses context::vrat_fasting); for_occasion 0, has_diet 0 (203 edges re-pointed,
+# per-node: Eggetarian +39, Non-Vegetarian +9, Vegan -112, Vegetarian -13, diet::unknown +77). EXPECTED_KG_NODES unchanged
+# (222,537). Equals kg_delta_d13.json exactly. Evidence: post_install_run/kg_reconciliation_d13.json.
+EXPECTED_KG_EDGES = 6_426_576
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

@@ -2,7 +2,7 @@
   "version": "v3",
   "recipes": 219384,
   "nodes": 222537,
-  "edges": 6426577,
+  "edges": 6426576,
   "node_types": {
     "recipe": 219384,
     "compound": 1607,
@@ -35,7 +35,7 @@
     "for_occasion": 33171,
     "has_compound": 25748,
     "shares_flavor": 13670,
-    "in_context": 7209,
+    "in_context": 7208,
     "pairs_with": 3265,
     "rich_in": 2935,
     "grounded_as": 369,
@@ -48,14 +48,14 @@
   },
   "unique_ingredients": 927,
   "diet_tags": {
-    "Vegetarian": 88546,
-    "Vegan": 83765,
-    "Non-Vegetarian": 31878,
+    "Vegetarian": 88533,
+    "Vegan": 83653,
+    "Non-Vegetarian": 31887,
     "Diabetic-Friendly": 30362,
-    "Eggetarian": 14447,
+    "Eggetarian": 14486,
     "Jain": 3154,
     "Sattvic": 3154,
-    "unknown": 748
+    "unknown": 825
   },
   "health_tags": {
     "low_sugar": 111833,
