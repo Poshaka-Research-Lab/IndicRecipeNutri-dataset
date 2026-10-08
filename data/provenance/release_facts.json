@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6426576,
+  "edges": 6426577,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -33,7 +33,7 @@
     "zone": 5
   },
   "relations": {
-    "contains_allergen": 485057,
+    "contains_allergen": 485058,
     "cooked_by": 404145,
     "derived_from": 30,
     "for_occasion": 33171,
@@ -73,7 +73,7 @@
     "coconut": 36811,
     "egg": 21634,
     "fenugreek": 20028,
-    "fish": 5813,
+    "fish": 5814,
     "ghee": 33538,
     "gluten": 71994,
     "milk": 116419,
@@ -94,9 +94,9 @@
   "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 1274,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "92956970c3b9625e977ece19ff566a45d0cf6a3e0a3cd85fccee9a54b8a387a4",
+    "data/corpus/recipes_structured.parquet": "66a60b83a1af9ac0622e17f81b8dd5b38e9355a4d9092d76bd8cc6f953ce9916",
     "data/kg/kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
-    "data/kg/kg_edges.parquet": "ec7467c1906d84e8af00d62ae4da86ff7ca9993e639ee4be6cbf43791e9df035",
+    "data/kg/kg_edges.parquet": "4da8165ec83f1224ff6f711bbd4bf6c8d436b445f0be94737f0bce2156d47fe5",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }

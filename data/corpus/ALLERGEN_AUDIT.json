@@ -145,12 +145,12 @@
     },
     "fish": {
       "lexical_present": 4919,
-      "flagged_present": 5813,
+      "flagged_present": 5814,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 894,
-      "audit_lexicon_coverage_of_flagged": 0.8462,
-      "unaudited_flagged_rows": 894,
+      "false_positives_flag_only": 895,
+      "audit_lexicon_coverage_of_flagged": 0.8461,
+      "unaudited_flagged_rows": 895,
       "false_negative_examples": []
     },
     "ghee": {
@@ -478,13 +478,13 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 83653,
-      "conflicting_rows": 363,
-      "rate": 0.0043,
+      "rows_with_label": 83470,
+      "conflicting_rows": 279,
+      "rate": 0.0033,
       "by_allergen": {
-        "milk": 279,
-        "egg": 80,
-        "fish": 4,
+        "milk": 221,
+        "egg": 55,
+        "fish": 3,
         "shellfish": 0
       },
       "examples": [
@@ -497,46 +497,6 @@
           "name": "Hussain's Masala scrambled eggs"
         },
         {
-          "recipe_id": 5753,
-          "name": "Beet Quinoa Sliders Recipe"
-        },
-        {
-          "recipe_id": 9455,
-          "name": "Mixed Beans Kachumber Recipe"
-        },
-        {
-          "recipe_id": 11904,
-          "name": "Thai Basil Vegetarian Pulao With Pineapple and Spicy Thai Red Chillies Recipe"
-        },
-        {
-          "recipe_id": 12353,
-          "name": "Vegetarian Thukpa Recipe"
-        },
-        {
-          "recipe_id": 12775,
-          "name": "Egg Fried Rice Recipe"
-        },
-        {
-          "recipe_id": 16547,
-          "name": "Beetroot Recipe (Cucumber And Tomato Raita)"
-        },
-        {
-          "recipe_id": 16970,
-          "name": "Carrot Dosa Recipe (Carrot Dosa For Chronic Kidney Disease)"
-        },
-        {
-          "recipe_id": 18303,
-          "name": "Fruity Bean Salad for Kidney Disease | Healthy Recipe"
-        },
-        {
-          "recipe_id": 18758,
-          "name": "Sprouts Kadhi Recipe (Healthy Mixed Sprouts Kadhi)"
-        },
-        {
-          "recipe_id": 19317,
-          "name": "Khatta Urad Dal Recipe (Healthy Gujarati Khatta Urad Dal)"
-        },
-        {
           "recipe_id": 23811,
           "name": "Caesar Kachumber Recipe"
         },
@@ -547,26 +507,58 @@
         {
           "recipe_id": 24014,
           "name": "Eggless Pumpkin Bread Recipe"
+        },
+        {
+          "recipe_id": 24996,
+          "name": "Zucchini Bread Recipe (Chocolate & Eggless)"
+        },
+        {
+          "recipe_id": 28306,
+          "name": "Vegan Kofta Sliders - Veg Sliders"
+        },
+        {
+          "recipe_id": 28337,
+          "name": "Mexican Bhel"
+        },
+        {
+          "recipe_id": 29318,
+          "name": "Begun Pora (Roasted egg"
+        },
+        {
+          "recipe_id": 30260,
+          "name": "Vegan oats chickpea veggie pancakes | indian pudla | besan oats cheela"
+        },
+        {
+          "recipe_id": 30332,
+          "name": "Easy Instant Pot Vegan Chili recipe"
+        },
+        {
+          "recipe_id": 30418,
+          "name": "Eggless fruit cake without alcohol (Vegan)"
+        },
+        {
+          "recipe_id": 33001,
+          "name": "Harira Recipe (Vegan Moroccan Tomato Shorba)"
+        },
+        {
+          "recipe_id": 33032,
+          "name": "Vegan kofta and tzatziki sauce"
+        },
+        {
+          "recipe_id": 33084,
+          "name": "red lentil dahl (sattvic masoor dal)"
         }
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 88533,
-      "conflicting_rows": 10,
+      "rows_with_label": 88389,
+      "conflicting_rows": 6,
       "rate": 0.0001,
       "by_allergen": {
-        "fish": 9,
-        "shellfish": 1
+        "fish": 6,
+        "shellfish": 0
       },
       "examples": [
-        {
-          "recipe_id": 29402,
-          "name": "Muri"
-        },
-        {
-          "recipe_id": 29823,
-          "name": "Shorshe-posto diye Katla Machher Jhal"
-        },
         {
           "recipe_id": 33020,
           "name": "Ginisang Munggo (Filipino Mung Bean and Spinach Soup)"
@@ -576,20 +568,12 @@
           "name": "Khao Pad (Vegan Thai Pulao)"
         },
         {
-          "recipe_id": 89622,
-          "name": "Macher Matha Diye Moong Dal"
-        },
-        {
           "recipe_id": 93757,
           "name": "Thai Green Papaya Kachumber"
         },
         {
           "recipe_id": 123227,
           "name": "Vietnamese Cucumber Kachumber"
-        },
-        {
-          "recipe_id": 129591,
-          "name": "Lobster Biryani"
         },
         {
           "recipe_id": 193427,
@@ -602,7 +586,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 14486,
+      "rows_with_label": 14559,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

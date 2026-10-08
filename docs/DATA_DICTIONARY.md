@@ -31,7 +31,7 @@ Covering **all 61 published Parquet tables**.
 |---|---|---|---:|---:|---|---|
 | `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
 | `Diet` | object |  | 219,384 | 5 | Non-Vegetarian |  |
-| `Diet_prior` | object |  | 871 | 4 | Vegan |  |
+| `Diet_prior` | object |  | 1,273 | 4 | Vegan |  |
 | `Region` | object |  | 219,347 | 27 | North India |  |
 | `region_src` | object |  | 2,921 | 4 | default |  |
 | `region_normalised` | object |  | 219,326 | 2 | False |  |
@@ -48,8 +48,8 @@ Covering **all 61 published Parquet tables**.
 | `HealthConditions` | object |  | 211,452 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
 | `gl_bucket` | object |  | 216,293 | 3 | low |  |
 | `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
-| `diet_v13` | object |  | 2,280 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,436 | 15 | poultry |  |
+| `diet_v13` | object |  | 2,599 | 4 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,592 | 15 | poultry |  |
 
 ## `data/corpus/nutrition.parquet`
 
@@ -165,7 +165,7 @@ Covering **all 61 published Parquet tables**.
 | `contains_alcohol` | object |  | 219,297 | 2 | False |  |
 | `contains_gelatin` | object |  | 219,297 | 2 | False |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,826 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,830 | 18 | raisin |  |
 | `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
 | `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
 | `qty_source` | object |  | 219,384 | 3 | none |  |
@@ -219,7 +219,7 @@ Covering **all 61 published Parquet tables**.
 | `badlist_n_items` | float64 |  | 219,384 | 52 | 11.0 |  |
 | `badlist_hard` | bool |  | 219,384 | 2 | False |  |
 | `badlist_any` | bool |  | 219,384 | 2 | False |  |
-| `allergen_tier` | object |  | 196,509 | 9,489 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 196,509 | 9,486 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
 | `ingredient_src` | object |  | 3,371 | 5 | title_evidence |  |
@@ -442,7 +442,7 @@ Covering **all 61 published Parquet tables**.
 | `allergens_sesame_v11` | object |  | 219,327 | 2 | False |  |
 | `cookingmethod_normalised` | bool |  | 219,384 | 1 | True |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,826 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,830 | 18 | raisin |  |
 | `badlist_empty` | bool |  | 219,384 | 2 | False |  |
 | `badlist_nav` | bool |  | 219,384 | 2 | False |  |
 | `badlist_meta` | bool |  | 219,384 | 2 | False |  |
@@ -476,10 +476,10 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `Diet_prior` | object |  | 871 | 4 | Vegan |  |
-| `diet_v13` | object |  | 2,280 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,436 | 15 | poultry |  |
-| `allergen_tier` | object |  | 196,509 | 9,489 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `Diet_prior` | object |  | 1,273 | 4 | Vegan |  |
+| `diet_v13` | object |  | 2,599 | 4 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,592 | 15 | poultry |  |
+| `allergen_tier` | object |  | 196,509 | 9,486 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | object |  | 219,327 | 2 | False |  |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
@@ -1195,7 +1195,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/kg/kg_edges.parquet`
 
-6,426,576 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,426,577 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1337,7 +1337,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/provenance/field_history.parquet`
 
-8,388,102 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
+8,388,166 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1662,7 +1662,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `builds.json` | 0.00 MB | metadata / manifest |
-| `field_history.parquet` | 61.64 MB | columnar table — documented above |
+| `field_history.parquet` | 61.65 MB | columnar table — documented above |
 | `language_source_evidence.json` | 0.00 MB | metadata / manifest |
 | `release_facts.json` | 0.00 MB | metadata / manifest |
 | `withdrawn_ids.json` | 0.83 MB | metadata / manifest |

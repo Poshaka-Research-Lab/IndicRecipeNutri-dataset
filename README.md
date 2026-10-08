@@ -47,7 +47,7 @@ Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item 
 |---|---|
 | **Recipes** | 219,384, across **378 source sites** |
 | **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,537 nodes · **6,426,576 edges** · 17 node types · 22 relation types |
+| **Knowledge graph** | 222,537 nodes · **6,426,577 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -96,7 +96,7 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,576 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,577 rows
 kg[kg.rel == "contains_allergen"]                      # 485,055 rows
 ```
 
@@ -318,7 +318,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,537 nodes, 6,426,576 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,426,577 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
@@ -404,10 +404,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,833 users · 16,559 items |
-| Train / test pairs | 657,787 / 163,087 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,841 users · 16,546 items |
+| Train / test pairs | 657,871 / 163,117 |
 | Train/test leakage | **0** |
-| Attribute KG | 82,792 triples · 16,607 entities |
+| Attribute KG | 82,727 triples · 16,594 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover
@@ -433,7 +433,7 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 | `coconut` | 36,811 | | `tamarind` | 12,163 |
 | `mustard` | 36,688 | | `peanut` | 11,464 |
 | `ghee` | 33,538 | | `soy` | 9,050 |
-| `tree_nuts` | 33,287 | | `fish` | 5,813 |
+| `tree_nuts` | 33,287 | | `fish` | 5,814 |
 | `asafoetida` | 30,612 | | `shellfish` | 4,205 |
 | `sulphites` | 23,990 | | `celery` | 2,357 |
 | `egg` | 21,634 | | **`unknown`** | **1,274** |

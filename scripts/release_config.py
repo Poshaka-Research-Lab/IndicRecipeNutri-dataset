@@ -971,7 +971,12 @@ EXPECTED_KG_NODES = 222_537
 # net -1 = in_context -1 (recipe 63408 loses context::vrat_fasting); for_occasion 0, has_diet 0 (203 edges re-pointed,
 # per-node: Eggetarian +39, Non-Vegetarian +9, Vegan -112, Vegetarian -13, diet::unknown +77). EXPECTED_KG_NODES unchanged
 # (222,537). Equals kg_delta_d13.json exactly. Evidence: post_install_run/kg_reconciliation_d13.json.
-EXPECTED_KG_EDGES = 6_426_576
+# D16 batch A (txn_d16a_20261007): 6,426,576 -> 6,426,577. Edge-level vs the pre-rebuild release: 402 removed, 403 added,
+# net +1 = contains_allergen +1 (recipe 113817 -> allergen::fish, the declared owner-chain Allergens_v2 +fish cell, plan s2);
+# kg_delta_d16a.json predicted 0 because it modelled only has_diet / in_context / for_occasion. has_diet 0 (402 edges
+# re-pointed; per-node Eggetarian +73, Non-Vegetarian +254, Vegan -183, Vegetarian -144 = kg_delta_d16a.json exactly).
+# EXPECTED_KG_NODES unchanged (222,537). Evidence: post_install_run/kg_reconciliation_d16a.json.
+EXPECTED_KG_EDGES = 6_426_577
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

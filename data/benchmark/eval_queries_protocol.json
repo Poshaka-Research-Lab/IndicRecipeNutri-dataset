@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "c1da92268995146424f904924a17662676624c6100aacb4b8a4d30df9778b422",
+  "queries_sha256": "a33b0f07a945ec66fbcc03ddddcb73bbebe14ef3df2e150460d235df63d3c1bf",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -45,9 +45,9 @@
         "recipe::683"
       ],
       "removed": [
-        "recipe::789",
-        "recipe::791",
-        "recipe::792",
+        "recipe::210",
+        "recipe::305",
+        "recipe::453",
         "recipe::803",
         "recipe::804",
         "recipe::809"
@@ -62,11 +62,13 @@
         "recipe::1381",
         "recipe::1382",
         "recipe::1389",
-        "recipe::1392"
+        "recipe::1392",
+        "recipe::1396"
       ],
       "removed": [
         "recipe::11",
         "recipe::102",
+        "recipe::403",
         "recipe::428",
         "recipe::478",
         "recipe::544",
@@ -74,13 +76,35 @@
       ]
     },
     {
+      "query_id": "silver_9403cccd78e422df",
+      "query": "Non-Vegetarian recipes",
+      "added": [
+        "recipe::210",
+        "recipe::305",
+        "recipe::403",
+        "recipe::453"
+      ],
+      "removed": [
+        "recipe::826",
+        "recipe::831",
+        "recipe::833",
+        "recipe::834"
+      ]
+    },
+    {
       "query_id": "silver_5195d9b2ec8966e7",
       "query": "Eggetarian recipes",
       "added": [
         "recipe::5112",
-        "recipe::5862"
+        "recipe::5753",
+        "recipe::5862",
+        "recipe::6803",
+        "recipe::6975"
       ],
       "removed": [
+        "recipe::7085",
+        "recipe::7100",
+        "recipe::7106",
         "recipe::7114",
         "recipe::7122"
       ]
@@ -149,6 +173,7 @@
       "query_id": "silver_ab615090e23b21c7",
       "query": "Non-Vegetarian recipes with mayo",
       "added": [
+        "recipe::72404",
         "recipe::190517"
       ],
       "removed": []
@@ -158,14 +183,32 @@
       "query": "Vegan recipes without gluten",
       "added": [
         "recipe::1376",
-        "recipe::1382"
+        "recipe::1382",
+        "recipe::1396"
       ],
       "removed": [
         "recipe::11",
         "recipe::102",
+        "recipe::403",
         "recipe::428",
         "recipe::478",
         "recipe::683"
+      ]
+    },
+    {
+      "query_id": "silver_ae1f50723eaf145c",
+      "query": "Non-Vegetarian recipes without mustard",
+      "added": [
+        "recipe::210",
+        "recipe::305",
+        "recipe::403",
+        "recipe::453"
+      ],
+      "removed": [
+        "recipe::826",
+        "recipe::831",
+        "recipe::833",
+        "recipe::834"
       ]
     },
     {
@@ -173,9 +216,14 @@
       "query": "Eggetarian recipes without asafoetida",
       "added": [
         "recipe::5112",
-        "recipe::5862"
+        "recipe::5753",
+        "recipe::5862",
+        "recipe::6803",
+        "recipe::6975"
       ],
       "removed": [
+        "recipe::7085",
+        "recipe::7106",
         "recipe::7114"
       ]
     },
@@ -259,15 +307,27 @@
       ]
     },
     {
+      "query_id": "silver_3b23a3d577ab0f56",
+      "query": "Non-Vegetarian recipes high in Magnesium",
+      "added": [
+        "recipe::184090"
+      ],
+      "removed": [
+        "recipe::160713"
+      ]
+    },
+    {
       "query_id": "silver_f812101e57e2cd72",
       "query": "Eggetarian recipes high in MonounsaturatedFat",
       "added": [
         "recipe::140989",
+        "recipe::189252",
         "recipe::189611"
       ],
       "removed": [
         "recipe::56038",
-        "recipe::139503"
+        "recipe::139503",
+        "recipe::141100"
       ]
     }
   ],
