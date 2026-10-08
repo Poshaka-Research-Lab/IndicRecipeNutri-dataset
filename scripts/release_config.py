@@ -976,7 +976,10 @@ EXPECTED_KG_NODES = 222_537
 # kg_delta_d16a.json predicted 0 because it modelled only has_diet / in_context / for_occasion. has_diet 0 (402 edges
 # re-pointed; per-node Eggetarian +73, Non-Vegetarian +254, Vegan -183, Vegetarian -144 = kg_delta_d16a.json exactly).
 # EXPECTED_KG_NODES unchanged (222,537). Evidence: post_install_run/kg_reconciliation_d16a.json.
-EXPECTED_KG_EDGES = 6_426_577
+# D16 batch B (txn_d16b_20261008): 6,426,577 -> 6,426,573 (-4), equal to the reviewer's prediction (kg_delta_d16b.json).
+# 1,144 mayonnaise rows moved to Eggetarian (291 Vegan + 853 Vegetarian); the edge-level reconciliation is in
+# post_install_run/kg_reconciliation_d16b.json. EXPECTED_KG_NODES unchanged (222,537).
+EXPECTED_KG_EDGES = 6_426_573
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

@@ -478,12 +478,12 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 83470,
-      "conflicting_rows": 279,
+      "rows_with_label": 83179,
+      "conflicting_rows": 277,
       "rate": 0.0033,
       "by_allergen": {
-        "milk": 221,
-        "egg": 55,
+        "milk": 220,
+        "egg": 54,
         "fish": 3,
         "shellfish": 0
       },
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 88389,
+      "rows_with_label": 87536,
       "conflicting_rows": 6,
       "rate": 0.0001,
       "by_allergen": {
@@ -586,7 +586,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 14559,
+      "rows_with_label": 15702,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

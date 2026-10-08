@@ -47,7 +47,7 @@ Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item 
 |---|---|
 | **Recipes** | 219,384, across **378 source sites** |
 | **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,537 nodes · **6,426,577 edges** · 17 node types · 22 relation types |
+| **Knowledge graph** | 222,537 nodes · **6,426,573 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -96,7 +96,7 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,577 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,573 rows
 kg[kg.rel == "contains_allergen"]                      # 485,055 rows
 ```
 
@@ -318,7 +318,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,537 nodes, 6,426,577 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,426,573 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
@@ -404,10 +404,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,841 users · 16,546 items |
-| Train / test pairs | 657,871 / 163,117 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,814 users · 16,562 items |
+| Train / test pairs | 657,687 / 163,057 |
 | Train/test leakage | **0** |
-| Attribute KG | 82,727 triples · 16,594 entities |
+| Attribute KG | 82,807 triples · 16,610 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover

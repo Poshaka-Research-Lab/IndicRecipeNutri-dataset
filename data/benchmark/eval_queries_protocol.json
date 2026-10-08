@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "a33b0f07a945ec66fbcc03ddddcb73bbebe14ef3df2e150460d235df63d3c1bf",
+  "queries_sha256": "b1042f827effaaa7b3706a88cc1705dfc047ece64033abd2c33fb305553f4ed3",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -63,10 +63,12 @@
         "recipe::1382",
         "recipe::1389",
         "recipe::1392",
-        "recipe::1396"
+        "recipe::1396",
+        "recipe::1398"
       ],
       "removed": [
         "recipe::11",
+        "recipe::57",
         "recipe::102",
         "recipe::403",
         "recipe::428",
@@ -95,13 +97,53 @@
       "query_id": "silver_5195d9b2ec8966e7",
       "query": "Eggetarian recipes",
       "added": [
+        "recipe::57",
+        "recipe::1324",
+        "recipe::1499",
+        "recipe::1655",
+        "recipe::3032",
+        "recipe::3182",
+        "recipe::3453",
+        "recipe::3726",
+        "recipe::4642",
+        "recipe::4670",
+        "recipe::4675",
+        "recipe::4915",
+        "recipe::4937",
+        "recipe::5035",
         "recipe::5112",
+        "recipe::5543",
+        "recipe::5544",
         "recipe::5753",
+        "recipe::5797",
         "recipe::5862",
+        "recipe::5913",
+        "recipe::6106",
+        "recipe::6454",
         "recipe::6803",
-        "recipe::6975"
+        "recipe::6808"
       ],
       "removed": [
+        "recipe::6809",
+        "recipe::6824",
+        "recipe::6840",
+        "recipe::6845",
+        "recipe::6864",
+        "recipe::6888",
+        "recipe::6899",
+        "recipe::6904",
+        "recipe::6907",
+        "recipe::6908",
+        "recipe::6918",
+        "recipe::6924",
+        "recipe::6930",
+        "recipe::6935",
+        "recipe::6941",
+        "recipe::6969",
+        "recipe::6981",
+        "recipe::7010",
+        "recipe::7083",
+        "recipe::7084",
         "recipe::7085",
         "recipe::7100",
         "recipe::7106",
@@ -184,10 +226,12 @@
       "added": [
         "recipe::1376",
         "recipe::1382",
-        "recipe::1396"
+        "recipe::1396",
+        "recipe::1398"
       ],
       "removed": [
         "recipe::11",
+        "recipe::57",
         "recipe::102",
         "recipe::403",
         "recipe::428",
@@ -215,13 +259,50 @@
       "query_id": "silver_1855bc9a966a410d",
       "query": "Eggetarian recipes without asafoetida",
       "added": [
+        "recipe::57",
+        "recipe::1324",
+        "recipe::1499",
+        "recipe::1655",
+        "recipe::3032",
+        "recipe::3182",
+        "recipe::3453",
+        "recipe::3726",
+        "recipe::4642",
+        "recipe::4670",
+        "recipe::4675",
+        "recipe::4915",
+        "recipe::4937",
+        "recipe::5035",
         "recipe::5112",
         "recipe::5753",
+        "recipe::5797",
         "recipe::5862",
+        "recipe::6106",
+        "recipe::6454",
         "recipe::6803",
-        "recipe::6975"
+        "recipe::6808"
       ],
       "removed": [
+        "recipe::6809",
+        "recipe::6824",
+        "recipe::6840",
+        "recipe::6845",
+        "recipe::6864",
+        "recipe::6888",
+        "recipe::6899",
+        "recipe::6904",
+        "recipe::6907",
+        "recipe::6908",
+        "recipe::6918",
+        "recipe::6924",
+        "recipe::6930",
+        "recipe::6935",
+        "recipe::6941",
+        "recipe::6969",
+        "recipe::6981",
+        "recipe::7010",
+        "recipe::7083",
+        "recipe::7084",
         "recipe::7085",
         "recipe::7106",
         "recipe::7114"
@@ -283,6 +364,16 @@
       ]
     },
     {
+      "query_id": "silver_9dbdb1ec2e61d2bc",
+      "query": "Vegetarian recipes high in Calcium",
+      "added": [
+        "recipe::98192"
+      ],
+      "removed": [
+        "recipe::45063"
+      ]
+    },
+    {
       "query_id": "silver_8af0ce6d04a69d29",
       "query": "Vegan recipes high in Calories",
       "added": [
@@ -296,12 +387,16 @@
       "query_id": "silver_02036cd6385d1e87",
       "query": "Eggetarian recipes high in Copper",
       "added": [
+        "recipe::45063",
+        "recipe::50187",
         "recipe::141133",
-        "recipe::156757",
+        "recipe::145416",
         "recipe::172039"
       ],
       "removed": [
         "recipe::27321",
+        "recipe::54686",
+        "recipe::78681",
         "recipe::194758",
         "recipe::203320"
       ]
@@ -320,14 +415,36 @@
       "query_id": "silver_f812101e57e2cd72",
       "query": "Eggetarian recipes high in MonounsaturatedFat",
       "added": [
+        "recipe::17670",
+        "recipe::18501",
+        "recipe::18793",
+        "recipe::23427",
+        "recipe::27247",
+        "recipe::50553",
+        "recipe::71409",
+        "recipe::83917",
         "recipe::140989",
+        "recipe::142299",
+        "recipe::150745",
+        "recipe::170757",
         "recipe::189252",
         "recipe::189611"
       ],
       "removed": [
+        "recipe::12783",
+        "recipe::16020",
         "recipe::56038",
+        "recipe::60550",
+        "recipe::96774",
+        "recipe::96786",
+        "recipe::102813",
+        "recipe::105325",
+        "recipe::121905",
+        "recipe::134467",
         "recipe::139503",
-        "recipe::141100"
+        "recipe::141100",
+        "recipe::181775",
+        "recipe::211539"
       ]
     }
   ],

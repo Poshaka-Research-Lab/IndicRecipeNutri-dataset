@@ -9,10 +9,10 @@
     "unsupported languages and invalid lists unassessed"
   ],
   "heldout_ids_sha256": "c3517fda7c05e07f1e0d7d6e9f0e1d7c4e408fbad25ab7e824ed61965beef717",
-  "input_manifest_sha256": "368a04d02dbe7c34cbac0a4523fc8222738f45d1cff81bc5646b3bb141ed207c",
+  "input_manifest_sha256": "b5c432dfe01fcd749016898a491e74c9c3ac9eac0b4044cc55f236d78576787c",
   "inputs": {
     "data/corpus/allergens.parquet": "3c3b310303f68983ee4653967e5113e3309e9b2078f3cad80c20a68a2778fe3c",
-    "data/corpus/recipes_structured.parquet": "66a60b83a1af9ac0622e17f81b8dd5b38e9355a4d9092d76bd8cc6f953ce9916"
+    "data/corpus/recipes_structured.parquet": "13ae6ae3dbd74cfff6adf08e887703832ff15437c3ad68810e66bdaeb37aa121"
   },
   "interpretation": "Absent remains silver inferred absence, not verified safe; UNKNOWN is abstention.",
   "legacy_labels_modified": false,
