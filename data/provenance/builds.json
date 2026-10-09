@@ -36,7 +36,7 @@
         "mb": 2.2
       },
       "field_history": {
-        "rows": 8388173,
+        "rows": 8388182,
         "cols": 6,
         "mb": 61.6
       }
@@ -50,6 +50,7 @@
     "allergen_tier_history_d16b_rows": 2,
     "allergen_tier_history_d17_rows": 4,
     "allergen_tier_history_d16c_rows": 1,
+    "allergen_tier_history_d16d_rows": 9,
     "note": "S-1 split. 64 build-history columns moved to field_history rows. A future fix adds rows, not columns."
   }
 }

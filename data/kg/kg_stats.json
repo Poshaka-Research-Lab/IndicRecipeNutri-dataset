@@ -48,12 +48,12 @@
   },
   "unique_ingredients": 927,
   "diet_tags": {
-    "Vegetarian": 87182,
-    "Vegan": 81210,
-    "Non-Vegetarian": 32142,
+    "Vegetarian": 89146,
+    "Vegan": 79051,
+    "Non-Vegetarian": 32152,
     "Diabetic-Friendly": 30362,
-    "Eggetarian": 15661,
-    "unknown": 3189,
+    "Eggetarian": 15691,
+    "unknown": 3344,
     "Jain": 3153,
     "Sattvic": 3153
   },

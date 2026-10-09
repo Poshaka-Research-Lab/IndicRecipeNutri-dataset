@@ -22,6 +22,67 @@ Engineering checks do not establish semantic accuracy or safety. Instruction-der
 - `data/build_dup_families.py` no longer inherits `DietaryContext` (moved to `NEVER_FILL`).
 - The legacy `DietaryContext` column, recipe IDs, splits and graph are unchanged.
 
+### Changed 9 Oct 2026 — D17 thin-list allergen flags (master `c8686e2c` → `51c1610e`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-07/D17_thin_lists/install/live_prep/POST_INSTALL_D17_REPORT.md`
+(datasets workspace). Transaction `txn-20261008T204045Z-fd34a5d7aa1a`.
+
+- Master diff: 3,063 rows / 12,588 cells. `Allergens_v2` none_detected → `unknown` on 1,205
+  master rows (1,204 published); `Diet` → `unknown` on 2,058 rows (Vegan 1,674, Vegetarian 343,
+  Eggetarian 41; 277 Non-Vegetarian rows kept by owner decision). `contains_alcohol` (3,045) and
+  `contains_gelatin` (3,062) cells are now blank on these rows.
+- Knowledge graph: 6,426,573 → **6,427,779** edges (+1,206; nodes unchanged at 222,537).
+  `contains_allergen → allergen::unknown` 1,274 → 2,478, `allergen::milk` 116,419 → 116,421
+  (two chain-declared milk labels); `has_diet` 2,057 edges moved to `diet::unknown`. Every edge
+  reconciled against a model of the master diff. `EXPECTED_KG_EDGES` and the gate_m28 milk /
+  unassessed pins were moved to the measured values.
+- Allergen-tier ledger `allergen_tier_history_d17.parquet`: 4 rows, generation `before_d17_v1`.
+- Legacy interactions regenerated: published Diet classes Vegetarian 87,193, Vegan 81,506,
+  Non-Vegetarian 32,142, Eggetarian 15,661; undeclared excluded 2,882 (was 825); 0 served-diet
+  violations.
+- `verify_release --strict-checksums` PASSED; all rebuild gates green.
+
+### Changed 9 Oct 2026 — D16 batch C, mostly-unreadable lists (master `51c1610e` → `98e7934d`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-07/D16C_batch_c_postD17/install/live_prep/POST_INSTALL_D16C_REPORT.md`.
+Transaction `txn-20261009T142632Z-8da9aadf8072`.
+
+- Master diff: 310 rows / 1,287 cells. `Diet` → `unknown` on 307 rows (Vegan 296,
+  Vegetarian 11); `contains_alcohol` / `contains_gelatin` blanked on 310 rows. `Allergens_v2`
+  unchanged.
+- Knowledge graph: **6,427,779 edges, unchanged** (307 `has_diet` edges moved to
+  `diet::unknown`; every edge reconciled). No pin was edited.
+- Allergen-tier ledger `allergen_tier_history_d16c.parquet`: 1 row (201783), generation
+  `before_d16c_v1`.
+- Legacy interactions regenerated: published Diet classes Vegetarian 87,182, Vegan 81,210,
+  Non-Vegetarian 32,142, Eggetarian 15,661; undeclared excluded 3,189; 35,807 users /
+  16,374 items / 820,794 positives; 0 served-diet violations.
+- `verify_release --strict-checksums` PASSED; all rebuild gates green.
+
+### Changed 10 Oct 2026 — D16 batch D, post-C (master `98e7934d` → `d8cbb3cc`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-07/D16D_batch_d_postC/install/live_prep/POST_INSTALL_D16D_REPORT.md`.
+Transaction `txn-20261009T190726Z-a42152510615`.
+
+- Master diff: 2,246 rows / 6,852 cells (Diet 2,246, Diet_prior 2,237, diet_v13 2,138,
+  contains_gelatin 105, contains_alcohol 98, allergen_tier 9, gluten_confidence 5,
+  diet_contradicts_ingredients 4, contains_pork 3, diet_meat_class 3, sulphites_possible 2,
+  sulphites_possible_src 2). `Allergens_v2` unchanged.
+- Diet moves: Vegan → Vegetarian 2,036, Vegan → unknown 111, Vegan → Eggetarian 11,
+  Vegan → Non-Vegetarian 1, Vegetarian → Eggetarian 34, Vegetarian → unknown 38,
+  Eggetarian → Non-Vegetarian 9, Eggetarian → unknown 6.
+- Knowledge graph: **6,427,779 edges, unchanged**; nodes 222,537. `has_diet` per node: Vegan
+  −2,159, Vegetarian +1,964, Eggetarian +30, Non-Vegetarian +10, unknown +155; every edge
+  reconciled. No pin was edited; no `contains_allergen` class count moved.
+- Allergen-tier ledger `allergen_tier_history_d16d.parquet`: 9 rows (96271, 99094, 99271,
+  99300, 99418, 138376, 172274, 204072, 210258), generation `before_d16d_v1`.
+- Benchmark gold sets regenerated from the graph: 9 of 67 queries changed membership (query
+  definitions unchanged); gold-set allergen audit 0 contradicting flags.
+- Legacy interactions regenerated: published Diet classes Vegetarian 89,146, Vegan 79,051,
+  Non-Vegetarian 32,152, Eggetarian 15,691; undeclared excluded 3,344; 35,856 users /
+  16,405 items / 821,536 positives; 0 served-diet violations.
+- `verify_release --strict-checksums` PASSED.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

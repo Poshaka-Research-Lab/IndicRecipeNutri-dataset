@@ -31,7 +31,7 @@ Covering **all 61 published Parquet tables**.
 |---|---|---|---:|---:|---|---|
 | `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
 | `Diet` | object |  | 219,384 | 5 | Non-Vegetarian |  |
-| `Diet_prior` | object |  | 2,724 | 4 | Vegan |  |
+| `Diet_prior` | object |  | 4,961 | 4 | Vegan |  |
 | `Region` | object |  | 219,347 | 27 | North India |  |
 | `region_src` | object |  | 2,921 | 4 | default |  |
 | `region_normalised` | object |  | 219,326 | 2 | False |  |
@@ -48,8 +48,8 @@ Covering **all 61 published Parquet tables**.
 | `HealthConditions` | object |  | 211,452 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
 | `gl_bucket` | object |  | 216,293 | 3 | low |  |
 | `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
-| `diet_v13` | object |  | 3,703 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,643 | 15 | poultry |  |
+| `diet_v13` | object |  | 5,822 | 4 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,646 | 15 | poultry |  |
 
 ## `data/corpus/nutrition.parquet`
 
@@ -162,10 +162,10 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 215,942 | 2 | False |  |
-| `contains_gelatin` | object |  | 215,925 | 2 | False |  |
+| `contains_alcohol` | object |  | 215,844 | 2 | False |  |
+| `contains_gelatin` | object |  | 215,820 | 2 | False |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,818 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,816 | 18 | raisin |  |
 | `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
 | `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
 | `qty_source` | object |  | 219,384 | 3 | none |  |
@@ -398,8 +398,8 @@ Covering **all 61 published Parquet tables**.
 | `cookingmethod_inferred` | object |  | 219,326 | 2 | False |  |
 | `micros_estimated` | object |  | 219,326 | 2 | False |  |
 | `contains_pork` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 215,942 | 2 | False |  |
-| `contains_gelatin` | object |  | 215,925 | 2 | False |  |
+| `contains_alcohol` | object |  | 215,844 | 2 | False |  |
+| `contains_gelatin` | object |  | 215,820 | 2 | False |  |
 | `diet_contradicts_ingredients` | bool |  | 219,384 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
 | `Occasion_orig` | object |  | 14,095 | 593 | festival |  |
 | `DietaryContext_orig` | object |  | 4,129 | 3 | jain_sattvic |  |
@@ -442,7 +442,7 @@ Covering **all 61 published Parquet tables**.
 | `allergens_sesame_v11` | object |  | 219,327 | 2 | False |  |
 | `cookingmethod_normalised` | bool |  | 219,384 | 1 | True |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,818 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,816 | 18 | raisin |  |
 | `badlist_empty` | bool |  | 219,384 | 2 | False |  |
 | `badlist_nav` | bool |  | 219,384 | 2 | False |  |
 | `badlist_meta` | bool |  | 219,384 | 2 | False |  |
@@ -476,9 +476,9 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `Diet_prior` | object |  | 2,724 | 4 | Vegan |  |
-| `diet_v13` | object |  | 3,703 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,643 | 15 | poultry |  |
+| `Diet_prior` | object |  | 4,961 | 4 | Vegan |  |
+| `diet_v13` | object |  | 5,822 | 4 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,646 | 15 | poultry |  |
 | `allergen_tier` | object |  | 196,509 | 9,485 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | object |  | 219,327 | 2 | False |  |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
@@ -1337,7 +1337,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/provenance/field_history.parquet`
 
-8,388,173 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
+8,388,182 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1524,13 +1524,13 @@ All 113 files under `data/`, so nothing ships undescribed.
 | `ALLERGEN_AUDIT.json` | 0.02 MB | metadata / manifest |
 | `allergens.parquet` | 2.25 MB | columnar table — documented above |
 | `corpus_manifest.json` | 0.01 MB | metadata / manifest |
-| `labels.parquet` | 3.00 MB | columnar table — documented above |
+| `labels.parquet` | 3.01 MB | columnar table — documented above |
 | `nutrition.parquet` | 16.14 MB | columnar table — documented above |
 | `nutrition_derived.parquet` | 12.42 MB | columnar table — documented above |
 | `PII_SEMANTIC_SCAN.json` | 0.00 MB | metadata / manifest |
 | `quality.parquet` | 2.90 MB | columnar table — documented above |
 | `recipes.parquet` | 46.98 MB | columnar table — documented above |
-| `recipes_structured.parquet` | 103.47 MB | columnar table — documented above |
+| `recipes_structured.parquet` | 103.48 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
 
 ### `data/cultural_context/`
@@ -1601,7 +1601,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | `relation_list.txt` | 0.00 MB | plain-text id or triple list |
 | `stats.json` | 0.00 MB | metadata / manifest |
 | `test.txt` | 1.05 MB | plain-text id or triple list |
-| `train.txt` | 3.63 MB | plain-text id or triple list |
+| `train.txt` | 3.64 MB | plain-text id or triple list |
 | `user_list.txt` | 0.41 MB | plain-text id or triple list |
 | `users.csv` | 2.62 MB | delimited text |
 

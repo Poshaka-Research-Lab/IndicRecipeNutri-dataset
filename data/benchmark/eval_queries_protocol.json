@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "5c3d23c77ee7aa655ce88de848959aa4e9d6afb7324fbca75bc14336b05a39e4",
+  "queries_sha256": "76dc690f0c7826c2527cd76db6eca50ef842c3197fdcedc0fd161fb2f5bd2663",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -39,15 +39,25 @@
       "added": [
         "recipe::11",
         "recipe::102",
+        "recipe::393",
         "recipe::428",
+        "recipe::468",
         "recipe::478",
         "recipe::544",
-        "recipe::683"
+        "recipe::549",
+        "recipe::569",
+        "recipe::683",
+        "recipe::707"
       ],
       "removed": [
         "recipe::210",
         "recipe::305",
         "recipe::453",
+        "recipe::769",
+        "recipe::777",
+        "recipe::789",
+        "recipe::791",
+        "recipe::792",
         "recipe::803",
         "recipe::804",
         "recipe::809"
@@ -60,23 +70,41 @@
         "recipe::1376",
         "recipe::1378",
         "recipe::1381",
-        "recipe::1382",
         "recipe::1389",
         "recipe::1392",
         "recipe::1396",
         "recipe::1398",
-        "recipe::1402"
+        "recipe::1402",
+        "recipe::1403",
+        "recipe::1414",
+        "recipe::1423",
+        "recipe::1425",
+        "recipe::1431",
+        "recipe::1434",
+        "recipe::1438",
+        "recipe::1439",
+        "recipe::1440",
+        "recipe::1441"
       ],
       "removed": [
         "recipe::11",
         "recipe::51",
         "recipe::57",
         "recipe::102",
+        "recipe::393",
         "recipe::403",
         "recipe::428",
+        "recipe::468",
         "recipe::478",
         "recipe::544",
-        "recipe::683"
+        "recipe::549",
+        "recipe::569",
+        "recipe::683",
+        "recipe::707",
+        "recipe::1199",
+        "recipe::1258",
+        "recipe::1260",
+        "recipe::1344"
       ]
     },
     {
@@ -110,6 +138,7 @@
         "recipe::4642",
         "recipe::4670",
         "recipe::4675",
+        "recipe::4895",
         "recipe::4915",
         "recipe::4937",
         "recipe::5035",
@@ -122,8 +151,7 @@
         "recipe::5913",
         "recipe::6106",
         "recipe::6454",
-        "recipe::6803",
-        "recipe::6808"
+        "recipe::6803"
       ],
       "removed": [
         "recipe::6809",
@@ -214,11 +242,33 @@
       ]
     },
     {
+      "query_id": "silver_08510496ea5bc76f",
+      "query": "Vegetarian recipes with lemongrass",
+      "added": [
+        "recipe::11175",
+        "recipe::17925",
+        "recipe::19476",
+        "recipe::19495",
+        "recipe::108588",
+        "recipe::115715",
+        "recipe::119289",
+        "recipe::156001",
+        "recipe::185087",
+        "recipe::196768",
+        "recipe::196838",
+        "recipe::213340",
+        "recipe::213373",
+        "recipe::222134"
+      ],
+      "removed": []
+    },
+    {
       "query_id": "silver_ca5f8eec43a74d40",
       "query": "Vegan recipes with tapioca",
       "added": [],
       "removed": [
         "recipe::13910",
+        "recipe::70798",
         "recipe::93254",
         "recipe::183281"
       ]
@@ -233,23 +283,51 @@
       "removed": []
     },
     {
+      "query_id": "silver_44c13953d115ab6e",
+      "query": "Vegetarian recipes without milk",
+      "added": [
+        "recipe::393",
+        "recipe::468",
+        "recipe::549",
+        "recipe::569",
+        "recipe::707"
+      ],
+      "removed": []
+    },
+    {
       "query_id": "silver_18c1a254ae807245",
       "query": "Vegan recipes without gluten",
       "added": [
         "recipe::1376",
-        "recipe::1382",
         "recipe::1396",
         "recipe::1398",
-        "recipe::1402"
+        "recipe::1402",
+        "recipe::1414",
+        "recipe::1423",
+        "recipe::1425",
+        "recipe::1431",
+        "recipe::1434",
+        "recipe::1438",
+        "recipe::1440",
+        "recipe::1441"
       ],
       "removed": [
         "recipe::11",
         "recipe::57",
         "recipe::102",
+        "recipe::393",
         "recipe::403",
         "recipe::428",
+        "recipe::468",
         "recipe::478",
-        "recipe::683"
+        "recipe::549",
+        "recipe::569",
+        "recipe::683",
+        "recipe::707",
+        "recipe::1199",
+        "recipe::1258",
+        "recipe::1260",
+        "recipe::1344"
       ]
     },
     {
@@ -283,6 +361,7 @@
         "recipe::4642",
         "recipe::4670",
         "recipe::4675",
+        "recipe::4895",
         "recipe::4915",
         "recipe::4937",
         "recipe::5035",
@@ -292,8 +371,7 @@
         "recipe::5862",
         "recipe::6106",
         "recipe::6454",
-        "recipe::6803",
-        "recipe::6808"
+        "recipe::6803"
       ],
       "removed": [
         "recipe::6809",
@@ -390,10 +468,18 @@
       "query_id": "silver_8af0ce6d04a69d29",
       "query": "Vegan recipes high in Calories",
       "added": [
-        "recipe::45282"
+        "recipe::26954",
+        "recipe::45282",
+        "recipe::113567",
+        "recipe::174629",
+        "recipe::179550"
       ],
       "removed": [
-        "recipe::6074"
+        "recipe::6074",
+        "recipe::27139",
+        "recipe::30282",
+        "recipe::116469",
+        "recipe::122412"
       ]
     },
     {

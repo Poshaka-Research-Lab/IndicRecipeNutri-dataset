@@ -94,9 +94,9 @@
   "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 2478,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "2103ae779f5415788e52abfa30e5a59539807f2bc8f6cbe66737a0ad09aca39b",
+    "data/corpus/recipes_structured.parquet": "935e496f9ce03ff1eb6166140cddc474e6ab9c4e588af5ac420241bbc5009175",
     "data/kg/kg_nodes.parquet": "6ae617c1aede7d43b4afcd967f40e66067c7372bd46229caf905528d4a5ef81a",
-    "data/kg/kg_edges.parquet": "e9d74edcd2b781860fe416c5052dc9fbc9ccd54a137100eeab5e937e6e733e0c",
+    "data/kg/kg_edges.parquet": "99d9e40b32436d35534625d2882d0c567dd4d61baf439cc8272a561418057bd1",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }
