@@ -17,7 +17,7 @@ original instructions, headnotes and other withheld prose are not redistributed.
 | Wide-view columns | 270 |
 | Source sites | 378 |
 | Graph nodes | 222,537 |
-| Graph triples | 6,426,573 |
+| Graph triples | 6,427,779 |
 | Edge evidence rows | 236,315 |
 | Ingredient nodes | 927 |
 | Compound nodes | 1,607 |
@@ -76,7 +76,7 @@ are unchanged by this correction.
 
 ## Allergen assessment
 
-There are 17 assessed classes and 1,274 unassessed recipes.
+There are 17 assessed classes and 2,478 unassessed recipes.
 The long table uses `unassessed`; other surfaces expose `unknown`. Neither means absent.
 Use `scripts/allergen_surface.py` and retain uncertainty. These inferred flags are
 not sufficient as the sole basis of an end-user safety decision.

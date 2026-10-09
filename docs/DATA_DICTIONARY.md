@@ -49,7 +49,7 @@ Covering **all 61 published Parquet tables**.
 | `gl_bucket` | object |  | 216,293 | 3 | low |  |
 | `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
 | `diet_v13` | object |  | 3,703 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,593 | 15 | poultry |  |
+| `diet_meat_class` | object |  | 32,623 | 15 | poultry |  |
 
 ## `data/corpus/nutrition.parquet`
 
@@ -162,10 +162,10 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 219,296 | 2 | False |  |
-| `contains_gelatin` | object |  | 219,296 | 2 | False |  |
+| `contains_alcohol` | object |  | 216,252 | 2 | False |  |
+| `contains_gelatin` | object |  | 216,235 | 2 | False |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,829 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,818 | 18 | raisin |  |
 | `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
 | `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
 | `qty_source` | object |  | 219,384 | 3 | none |  |
@@ -398,8 +398,8 @@ Covering **all 61 published Parquet tables**.
 | `cookingmethod_inferred` | object |  | 219,326 | 2 | False |  |
 | `micros_estimated` | object |  | 219,326 | 2 | False |  |
 | `contains_pork` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 219,296 | 2 | False |  |
-| `contains_gelatin` | object |  | 219,296 | 2 | False |  |
+| `contains_alcohol` | object |  | 216,252 | 2 | False |  |
+| `contains_gelatin` | object |  | 216,235 | 2 | False |  |
 | `diet_contradicts_ingredients` | bool |  | 219,384 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
 | `Occasion_orig` | object |  | 14,095 | 593 | festival |  |
 | `DietaryContext_orig` | object |  | 4,129 | 3 | jain_sattvic |  |
@@ -442,7 +442,7 @@ Covering **all 61 published Parquet tables**.
 | `allergens_sesame_v11` | object |  | 219,327 | 2 | False |  |
 | `cookingmethod_normalised` | bool |  | 219,384 | 1 | True |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,829 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 13,818 | 18 | raisin |  |
 | `badlist_empty` | bool |  | 219,384 | 2 | False |  |
 | `badlist_nav` | bool |  | 219,384 | 2 | False |  |
 | `badlist_meta` | bool |  | 219,384 | 2 | False |  |
@@ -478,7 +478,7 @@ Covering **all 61 published Parquet tables**.
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
 | `Diet_prior` | object |  | 2,417 | 4 | Vegan |  |
 | `diet_v13` | object |  | 3,703 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,593 | 15 | poultry |  |
+| `diet_meat_class` | object |  | 32,623 | 15 | poultry |  |
 | `allergen_tier` | object |  | 196,509 | 9,485 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | object |  | 219,327 | 2 | False |  |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
@@ -1195,11 +1195,11 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/kg/kg_edges.parquet`
 
-6,426,573 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,427,779 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 500,000 | 16,729 | recipe::0 |  |
+| `head` | object |  | 500,000 | 16,727 | recipe::0 |  |
 | `rel` | object |  | 500,000 | 22 | in_cuisine |  |
 | `tail` | object |  | 500,000 | 2,866 | cuisine::Indian |  |
 
@@ -1337,7 +1337,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/provenance/field_history.parquet`
 
-8,388,168 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
+8,388,172 rows x 6 columns - 61.6 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1522,15 +1522,15 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `ALLERGEN_AUDIT.json` | 0.02 MB | metadata / manifest |
-| `allergens.parquet` | 2.24 MB | columnar table — documented above |
+| `allergens.parquet` | 2.25 MB | columnar table — documented above |
 | `corpus_manifest.json` | 0.01 MB | metadata / manifest |
 | `labels.parquet` | 3.00 MB | columnar table — documented above |
 | `nutrition.parquet` | 16.13 MB | columnar table — documented above |
 | `nutrition_derived.parquet` | 12.41 MB | columnar table — documented above |
 | `PII_SEMANTIC_SCAN.json` | 0.00 MB | metadata / manifest |
-| `quality.parquet` | 2.89 MB | columnar table — documented above |
+| `quality.parquet` | 2.90 MB | columnar table — documented above |
 | `recipes.parquet` | 46.98 MB | columnar table — documented above |
-| `recipes_structured.parquet` | 103.46 MB | columnar table — documented above |
+| `recipes_structured.parquet` | 103.47 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
 
 ### `data/cultural_context/`
@@ -1594,14 +1594,14 @@ All 113 files under `data/`, so nothing ships undescribed.
 | `DATASHEET.md` | 0.01 MB | prose |
 | `entity_list.txt` | 0.28 MB | plain-text id or triple list |
 | `interactions.csv` | 25.92 MB | delimited text |
-| `item_list.txt` | 0.20 MB | plain-text id or triple list |
-| `kg_final.txt` | 1.10 MB | plain-text id or triple list |
+| `item_list.txt` | 0.19 MB | plain-text id or triple list |
+| `kg_final.txt` | 1.09 MB | plain-text id or triple list |
 | `region_crosswalk.csv` | 0.00 MB | delimited text |
 | `region_crosswalk_meta.json` | 0.00 MB | metadata / manifest |
 | `relation_list.txt` | 0.00 MB | plain-text id or triple list |
 | `stats.json` | 0.00 MB | metadata / manifest |
 | `test.txt` | 1.05 MB | plain-text id or triple list |
-| `train.txt` | 3.64 MB | plain-text id or triple list |
+| `train.txt` | 3.63 MB | plain-text id or triple list |
 | `user_list.txt` | 0.41 MB | plain-text id or triple list |
 | `users.csv` | 2.62 MB | delimited text |
 
@@ -1672,7 +1672,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `allergen_evidence_manifest.json` | 0.18 MB | metadata / manifest |
-| `allergen_evidence_v1.parquet` | 3.76 MB | columnar table — documented above |
+| `allergen_evidence_v1.parquet` | 3.82 MB | columnar table — documented above |
 | `allergen_review_candidates_v1.parquet` | 0.00 MB | columnar table — documented above |
 | `dietary_context_evidence_manifest.json` | 0.00 MB | metadata / manifest |
 | `dietary_context_evidence_v1.parquet` | 0.06 MB | columnar table — documented above |

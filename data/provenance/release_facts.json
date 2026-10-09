@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6426573,
+  "edges": 6427779,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -33,7 +33,7 @@
     "zone": 5
   },
   "relations": {
-    "contains_allergen": 485058,
+    "contains_allergen": 486264,
     "cooked_by": 404145,
     "derived_from": 30,
     "for_occasion": 33171,
@@ -76,7 +76,7 @@
     "fish": 5814,
     "ghee": 33538,
     "gluten": 71994,
-    "milk": 116419,
+    "milk": 116421,
     "mustard": 36688,
     "peanut": 11464,
     "sesame": 13730,
@@ -92,11 +92,11 @@
   "missing_language": 1430,
   "missing_servings": 53323,
   "missing_per100g_energy": 60431,
-  "unassessed_allergen_recipes": 1274,
+  "unassessed_allergen_recipes": 2478,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "13ae6ae3dbd74cfff6adf08e887703832ff15437c3ad68810e66bdaeb37aa121",
-    "data/kg/kg_nodes.parquet": "e37a36a9e4ab33b0a29892d8c000d9e2643ba3da97307098678b9748d40f11a2",
-    "data/kg/kg_edges.parquet": "9d40abb62b8e1c52a9ed4011dd43c96997a534062fa0c276eb7afd65ed58c06e",
+    "data/corpus/recipes_structured.parquet": "30868630409c13d7e723b3d98f0cd62c3aa599efe560a4c423d0b0d8cce684e2",
+    "data/kg/kg_nodes.parquet": "6ae617c1aede7d43b4afcd967f40e66067c7372bd46229caf905528d4a5ef81a",
+    "data/kg/kg_edges.parquet": "e836016cc131d8a6ce62edb1b6d6806aaa78a4bc3ecd22502d453d21f1aedbb1",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }

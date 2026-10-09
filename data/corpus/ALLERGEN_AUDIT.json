@@ -265,12 +265,12 @@
     },
     "milk": {
       "lexical_present": 110987,
-      "flagged_present": 116419,
+      "flagged_present": 116421,
       "false_negatives": 34,
       "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 5466,
+      "false_positives_flag_only": 5468,
       "audit_lexicon_coverage_of_flagged": 0.953,
-      "unaudited_flagged_rows": 5466,
+      "unaudited_flagged_rows": 5468,
       "false_negative_examples": [
         {
           "recipe_id": 33216,
@@ -478,9 +478,9 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 83179,
+      "rows_with_label": 81506,
       "conflicting_rows": 277,
-      "rate": 0.0033,
+      "rate": 0.0034,
       "by_allergen": {
         "milk": 220,
         "egg": 54,
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 87536,
+      "rows_with_label": 87193,
       "conflicting_rows": 6,
       "rate": 0.0001,
       "by_allergen": {
@@ -586,7 +586,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 15702,
+      "rows_with_label": 15661,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

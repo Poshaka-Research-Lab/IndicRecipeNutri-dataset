@@ -47,8 +47,8 @@ Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item 
 |---|---|
 | **Recipes** | 219,384, across **378 source sites** |
 | **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,537 nodes · **6,426,573 edges** · 17 node types · 22 relation types |
-| **Allergen classes** | 17, with an explicit `unknown` sentinel on 1,274 recipes |
+| **Knowledge graph** | 222,537 nodes · **6,427,779 edges** · 17 node types · 22 relation types |
+| **Allergen classes** | 17, with an explicit `unknown` sentinel on 2,478 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
 | **Ingredient text** | 100% English/Roman; original script kept as provenance |
@@ -96,8 +96,8 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,426,573 rows
-kg[kg.rel == "contains_allergen"]                      # 485,055 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,427,779 rows
+kg[kg.rel == "contains_allergen"]                      # 486,264 rows
 ```
 
 </details>
@@ -318,7 +318,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,537 nodes, 6,426,573 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,427,779 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
@@ -359,7 +359,7 @@ graph LR
 | `has_ingredient` | 1,916,036 | | `shares_flavor` | 13,670 |
 | `has_health_tag` | 1,725,100 | | `in_context` | 7,287 |
 | `suitable_for` | 895,452 | | `pairs_with` | 3,265 |
-| `contains_allergen` | 485,055 | | `rich_in` | 2,935 |
+| `contains_allergen` | 486,264 | | `rich_in` | 2,935 |
 | `cooked_by` | 404,145 | | `grounded_as` | 369 |
 | `has_diet` | 256,132 | | `is_a` | 173 |
 | `from_region` | 219,347 | | `typical_region` | 48 |
@@ -404,10 +404,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,814 users · 16,562 items |
-| Train / test pairs | 657,687 / 163,057 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,773 users · 16,386 items |
+| Train / test pairs | 657,348 / 162,905 |
 | Train/test leakage | **0** |
-| Attribute KG | 82,807 triples · 16,610 entities |
+| Attribute KG | 81,927 triples · 16,434 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover
@@ -428,7 +428,7 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 
 | class | recipes | | class | recipes |
 |---|---:|---|---|---:|
-| `milk` | 116,419 | | `fenugreek` | 20,028 |
+| `milk` | 116,421 | | `fenugreek` | 20,028 |
 | `gluten` | 71,994 | | `sesame` | 13,730 |
 | `coconut` | 36,811 | | `tamarind` | 12,163 |
 | `mustard` | 36,688 | | `peanut` | 11,464 |
@@ -436,11 +436,11 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 | `tree_nuts` | 33,287 | | `fish` | 5,814 |
 | `asafoetida` | 30,612 | | `shellfish` | 4,205 |
 | `sulphites` | 23,990 | | `celery` | 2,357 |
-| `egg` | 21,634 | | **`unknown`** | **1,274** |
+| `egg` | 21,634 | | **`unknown`** | **2,478** |
 
 **Four things you must know before building anything safety-facing.**
 
-1. **`unknown` is a real value and never means "safe".** 1,274 recipes were never assessed.
+1. **`unknown` is a real value and never means "safe".** 2,478 recipes were never assessed.
    The contract is fail-closed: unknown ⇒ treat as unsafe. Every accessor in `scripts/`
    preserves the sentinel. Flatten it to `False` and you have inverted the safety property.
 2. **The South Asian five are investigator-defined, not regulator-derived.** FSSAI's

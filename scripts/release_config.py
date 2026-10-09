@@ -979,7 +979,16 @@ EXPECTED_KG_NODES = 222_537
 # D16 batch B (txn_d16b_20261008): 6,426,577 -> 6,426,573 (-4), equal to the reviewer's prediction (kg_delta_d16b.json).
 # 1,144 mayonnaise rows moved to Eggetarian (291 Vegan + 853 Vegetarian); the edge-level reconciliation is in
 # post_install_run/kg_reconciliation_d16b.json. EXPECTED_KG_NODES unchanged (222,537).
-EXPECTED_KG_EDGES = 6_426_573
+# D17 thin-list allergen flags (txn-20261008T204045Z-fd34a5d7aa1a, master c8686e2c -> 51c1610e): 6,426,573 -> 6,427,779
+# (+1,206), measured from a fresh build (review_v2 W1: the payload-only kg_delta_d17.json predicted 0 by design).
+# Edge-level vs the pre-rebuild release (HEAD 2d2dc64): 2,057 removed, 3,263 added, and BOTH sets equal, edge for edge,
+# the master-diff model (post_install_run/kg_model_d17.json, rules of build_kg_v3.py over the 3,062 published changed rows):
+#   contains_allergen +1,206 = allergen::unknown +1,204 (Allergens_v2 none_detected -> unknown; 1,274 -> 2,478)
+#                              + allergen::milk +2 (207143, 220908; 116,419 -> 116,421)
+#   has_diet 0 net: 2,057 edges re-pointed to diet::unknown (Vegan -1,673, Vegetarian -343, Eggetarian -41; the 277
+#                   Non-Vegetarian owner keep-cells hold). EXPECTED_KG_NODES unchanged (222,537): both sentinel nodes exist.
+# Evidence: D17_thin_lists/install/live_prep/post_install_run/kg_reconciliation_d17.json (every_edge_explained true).
+EXPECTED_KG_EDGES = 6_427_779
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;
