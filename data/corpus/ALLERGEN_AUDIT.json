@@ -478,7 +478,7 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 81506,
+      "rows_with_label": 81210,
       "conflicting_rows": 277,
       "rate": 0.0034,
       "by_allergen": {
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 87193,
+      "rows_with_label": 87182,
       "conflicting_rows": 6,
       "rate": 0.0001,
       "by_allergen": {

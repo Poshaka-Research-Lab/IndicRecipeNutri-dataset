@@ -404,10 +404,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,773 users · 16,386 items |
-| Train / test pairs | 657,348 / 162,905 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,807 users · 16,374 items |
+| Train / test pairs | 657,789 / 163,005 |
 | Train/test leakage | **0** |
-| Attribute KG | 81,927 triples · 16,434 entities |
+| Attribute KG | 81,867 triples · 16,422 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover
