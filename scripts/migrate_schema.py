@@ -260,7 +260,7 @@ def main() -> int:
     # Corrective history is keyed separately upstream; do not widen the master with
     # another backup column or overwrite the correction's own generation/build ID.
     correction_counts = {}
-    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history', 'allergen_tier_history_diet_repair', 'allergen_tier_history_d13_round2', 'allergen_tier_history_d16a', 'allergen_tier_history_d16b', 'allergen_tier_history_d17', 'allergen_tier_history_d16c', 'allergen_tier_history_d16d']:
+    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history', 'allergen_tier_history_diet_repair', 'allergen_tier_history_d13_round2', 'allergen_tier_history_d16a', 'allergen_tier_history_d16b', 'allergen_tier_history_d17', 'allergen_tier_history_d16c', 'allergen_tier_history_d16d', 'allergen_tier_history_d16e']:
         history_path = pathlib.Path(_paths.DATA) / f'corrections/{history_name}.parquet'
         correction_counts[history_name] = 0
         if history_path.exists():
@@ -319,6 +319,7 @@ def main() -> int:
                           "allergen_tier_history_d17_rows": correction_counts["allergen_tier_history_d17"],
                           "allergen_tier_history_d16c_rows": correction_counts["allergen_tier_history_d16c"],
                           "allergen_tier_history_d16d_rows": correction_counts["allergen_tier_history_d16d"],
+                          "allergen_tier_history_d16e_rows": correction_counts["allergen_tier_history_d16e"],
                           "note": "S-1 split. 64 build-history columns moved to "
                                   "field_history rows. A future fix adds rows, not columns."}},
               open(os.path.join(OUT, "provenance", "builds.json"), "w", encoding="utf-8", newline="\n"),

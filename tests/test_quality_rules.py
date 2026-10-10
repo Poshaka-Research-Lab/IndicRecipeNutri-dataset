@@ -71,7 +71,10 @@ class QualityRulesTests(unittest.TestCase):
 
     def test_audit_dependency_hashes_match_received_run(self):
         self.assertEqual(audit_patterns.gate_spec_sha256(), 'b213905ad40cdcb9e759cc0d5e3231dfee78b2eda2c1406d2ceb419cc7e31179')
-        self.assertEqual(audit_rules.lexicon_sha256(), 'a8d4258b6c34b4b3b2c2840661a349cfccba80447bd2a8fbf766e65c1075b313')
+        # Re-pinned 2026-10-10 (D16 batch E post-install): the owner-approved release evidence-layer patch
+        # (curd/curds, named cheeses, ilish/hilsa; BATCH_E/install/post_install_prep/release_evidence_layer_batch_e.patch)
+        # moves lexicon_sha256() from a8d4258b6c34b4b3b2c2840661a349cfccba80447bd2a8fbf766e65c1075b313.
+        self.assertEqual(audit_rules.lexicon_sha256(), '6d642766090d62c05678d5c2c2de2236727fe8a8c8b7afb2eb6b13a33c2385f6')
 
     def test_audit_carrier_exclusion_and_missing_text(self):
         self.assertIn('unspecified_oil', audit_rules.ambiguous_hits('peanut', ['2 tablespoons oil']))

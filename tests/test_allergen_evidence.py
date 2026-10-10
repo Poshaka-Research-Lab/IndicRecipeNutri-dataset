@@ -55,5 +55,22 @@ class AllergenEvidenceTests(unittest.TestCase):
             decide_constraint('safe')
 
 
+class BatchEEvidencePatterns(unittest.TestCase):
+    """Batch E (2026-10): the evidence layer names what the chain's lexicon names (GAP fix 3 root cause; owner "Yes, add milk")."""
+    def test_curds_plural_is_an_implicit_milk_name(self):
+        self.assertEqual(evidence_for_class('milk', ('Curds : 250gm lightly sour',), True)[0], 'implicit_name')
+
+    def test_ilish_is_an_implicit_fish_name(self):
+        self.assertEqual(evidence_for_class('fish', ('4 pieces ilish',), True)[0], 'implicit_name')
+
+    def test_named_cheeses_are_implicit_milk(self):
+        for s in ('250 g halloumi', '1 ball burrata', 'crumbled feta', 'monterey jack'):
+            with self.subTest(s=s):
+                self.assertEqual(evidence_for_class('milk', (s,), True)[0], 'implicit_name')
+
+    def test_plant_milks_stay_text_silent(self):
+        self.assertEqual(evidence_for_class('milk', ('coconut milk',), True)[0], 'text_silent')
+
+
 if __name__ == '__main__':
     unittest.main()

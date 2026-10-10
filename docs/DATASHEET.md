@@ -17,7 +17,7 @@ original instructions, headnotes and other withheld prose are not redistributed.
 | Wide-view columns | 270 |
 | Source sites | 378 |
 | Graph nodes | 222,537 |
-| Graph triples | 6,427,779 |
+| Graph triples | 6,427,883 |
 | Edge evidence rows | 236,315 |
 | Ingredient nodes | 927 |
 | Compound nodes | 1,607 |

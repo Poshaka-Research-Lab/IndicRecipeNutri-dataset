@@ -2,7 +2,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from allergen_tier_contract import validate_row, parse_tiers
+from allergen_tier_contract import validate_row, parse_tiers, REINSTATED
 
 
 class TierContractTests(unittest.TestCase):
@@ -21,3 +21,10 @@ class TierContractTests(unittest.TestCase):
         for text in ['milk:direct;milk:inherited', 'milk:made_up', 'made_up:direct', 'milk']:
             with self.subTest(text=text), self.assertRaises(ValueError):
                 parse_tiers(text)
+
+    def test_reinstated_is_narrow_and_documented(self):
+        self.assertEqual(set(REINSTATED), {(99336, 'gluten')})
+        for (rid, cls), (gen, record) in REINSTATED.items():
+            self.assertIsInstance(rid, int)
+            self.assertIn(cls, parse_tiers(cls + ':inherited'))
+            self.assertTrue(gen.startswith('before_') and record)

@@ -28,7 +28,7 @@
   "payload_sha256": "37a0f28da951b6ec38cd3a0e5fafbf65a93f6feea8c0eb93561c840a227e5a16",
   "private_text_exported": false,
   "rows": 219384,
-  "source_sha256": "935e496f9ce03ff1eb6166140cddc474e6ab9c4e588af5ac420241bbc5009175",
+  "source_sha256": "8c915713e2ea41c9842ec584bd9241848db76309c78b47789a5908f7a0d5367f",
   "text_view": "render_local_card; not materialized in the release",
   "version": "irn-item-card-0.12.0-v1"
 }

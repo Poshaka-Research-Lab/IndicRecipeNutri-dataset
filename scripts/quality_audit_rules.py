@@ -11,9 +11,10 @@ import allergen_taxonomy as _AT
 _NOT_DAIRY = r'(?<!coconut\s)(?<!almond\s)(?<!soy\s)(?<!soya\s)(?<!oat\s)(?<!cashew\s)(?<!rice\s)(?<!peanut\s)'
 
 IMPLICIT = {
-    'milk': r'\b(?:paneer|khoya|khoa|mawa|dahi|curd|malai|chhena|chenna|ghee|makhan|makkhan|chaas|chaach|lassi|'
+    'milk': r'\b(?:paneer|khoya|khoa|mawa|dahi|curds?|malai|chhena|chenna|ghee|makhan|makkhan|chaas|chaach|lassi|'
             r'rabri|rabdi|shrikhand|' + _NOT_DAIRY + r'butter(?!\s*milk)|' + _NOT_DAIRY + r'cream(?!\s+of\s+tartar)|'
-            r'buttermilk|cheese|yogh?urt|' + _NOT_DAIRY + r'milk(?!\s*powder\s*substitute))\b',
+            r'buttermilk|cheese|yogh?urt|hall?oumi|burrata|bries?|camembert|gorgonzola|fett?a|mozz?arr?ell?a|'
+            r'parmigiano|gouda|gruy[eè]re|emmenth?al(?:er)?|provolone|stilton|quark|skyr|queso|manchego|monterey\s*jack|' + _NOT_DAIRY + r'milk(?!\s*powder\s*substitute))\b',
     'gluten': r'\b(?:maida|atta|sooji|suji|rava|rawa|semolina|dalia|daliya|wheat|seviyan|'
               r'pav|pasta|barley|jau)\b',
     'peanut': r'\b(?:peanuts?|groundnuts?|moongphali|mungfali|moongfali|shengdana|shenga|kadalai|verkadalai|'
@@ -28,6 +29,9 @@ IMPLICIT = {
     'tamarind': r'\b(?:tamarind|imli|puli|chintapandu)\b',
     'coconut': r'\b(?:coconut|nariyal|narial|copra|khopra|kopra|thengai|thenga|kobbari)\b',
     'egg': r'\b(?:eggs?|anda|ande|mayonnaise|mayo)\b',
+    # batch E (2026-10): Bengali hilsa. The chain's lexicon finds it (fish direct); without it the evidence layer
+    # called 2 legacy fish rows text_silent (GAP_chain_fixes section 3).
+    'fish': r'\b(?:ilish|hilsa)\b',
 }
 
 _UNSPEC_OIL = (r'\b(?:(?:refined|vegetable|cooking|salad|any|neutral|flavou?rless|white)\s+oil|oil)\b')

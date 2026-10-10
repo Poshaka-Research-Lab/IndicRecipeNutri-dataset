@@ -5,6 +5,13 @@ from allergen_taxonomy import TOKENS
 GENERATION = 'before_allergen_tier_reconciliation_v1'
 # Later transactions that re-derived tier literals on rows of the 401 above. Each records, per changed row, the value it replaced.
 LATER_GENERATIONS = ('before_diet_repair_v1',)
+# Declared re-additions: a (recipe, class) the reconciliation removed as stale and a later owner-authorised transaction restored after reading the recipe
+# text (fail-closed). Each names the generation that recorded the row's prior value and its decision record. The class must be back with the literal it
+# was removed with, that generation's prior value must equal the current tiers without it, and the strict-removal check then applies to the rest.
+REINSTATED = {
+    (99336, 'gluten'): ('before_d16e_v1', 'datasets/_admin/progress/FOLLOWUPS_2026-10-08/BATCH_E/LEAD_READ_5_GLUTEN_ROWS_2026-10-10.md; '
+                                          'owner "Lead reads, fail-closed", OWNER_DECISIONS_BATCH_E_2026-10-10.json'),
+}
 
 
 def parse_tiers(value):
@@ -48,6 +55,10 @@ def validate_release_tiers(root):
         if later.recipe_id.duplicated().any() or not later.field.eq('allergen_tier').all() or not set(later.recipe_id) <= set(wide.index):
             return ['later tier history is duplicated, off-field or names an unknown recipe']
         later_value = dict(zip(later.recipe_id, later.value_str))
+        reinstated_history = pd.read_parquet(root / 'data/provenance/field_history.parquet',
+                                             filters=[('generation', 'in', sorted({g for g, _ in REINSTATED.values()}) or [''])])
+        if not set(rid for rid, _ in REINSTATED) <= set(history.recipe_id):
+            return ['a declared re-addition names a row outside the reconciliation history']
         for row in history.itertuples(index=False):
             old = parse_tiers(row.value_str)
             # A later transaction replaced this row's tiers: the strict removal must have held at the value it replaced.
@@ -59,6 +70,15 @@ def validate_release_tiers(root):
                 now = replaced
             else:
                 now = parse_tiers(wide.loc[row.recipe_id, 'allergen_tier'])
+            back = {cls: gen for (rid, cls), (gen, _) in REINSTATED.items() if rid == row.recipe_id}
+            if back:
+                prior = reinstated_history[(reinstated_history.recipe_id == row.recipe_id) & reinstated_history.field.eq('allergen_tier')
+                                           & reinstated_history.generation.isin(set(back.values()))]
+                rest = {k: v for k, v in now.items() if k not in back}
+                if (any(cls not in now or cls not in old or now[cls] != old[cls] for cls in back) or len(prior) != 1
+                        or parse_tiers(prior.value_str.iloc[0]) != rest):
+                    return ['a declared re-addition does not restore the removed tier or its prior value is not recorded']
+                now = rest
             if not set(now) < set(old) or any(old[k] != v for k, v in now.items()):
                 return ['correction history does not preserve a strict removal of stale tiers']
         return []

@@ -83,6 +83,58 @@ Transaction `txn-20261009T190726Z-a42152510615`.
   16,405 items / 821,536 positives; 0 served-diet violations.
 - `verify_release --strict-checksums` PASSED.
 
+### Changed 10 Oct 2026 — D16 batch E (master `d8cbb3cc` → `4b710bd1`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_E/install/live_prep/POST_INSTALL_D16E_REPORT.md`
+(datasets workspace). Transaction `txn-20261010T105344Z-67bd6fc3436e`.
+
+- Master diff: 220 rows / 722 cells (Diet 148, Diet_prior 143, diet_v13 144, Allergens_v2 104,
+  allergen_tier 168, gluten_declared 1, contains_poultry 2, contains_pork 1, diet_meat_class 3,
+  sulphites_possible 4, sulphites_possible_src 4). `milk` added on 103 recipes whose text names
+  a cheese or curd; `gluten` added on recipe 99336 (lead read, fail-closed).
+- Diet moves: Vegan → Vegetarian 110, Vegetarian → Vegan 21, Non-Vegetarian → Vegetarian 5,
+  Vegetarian → unknown 5, Vegan → unknown 3, Vegan → Non-Vegetarian 1, Eggetarian → Vegetarian 1,
+  Eggetarian → Non-Vegetarian 1, unknown → Vegetarian 1. Of these, 28 are owner-accepted
+  corrections: the Vegetarian → Vegan moves and the moves out of Non-Vegetarian, Eggetarian and
+  unknown.
+- Knowledge graph: 6,427,779 → **6,427,883** edges (+104). Nodes are unchanged at 222,537.
+  - `contains_allergen`: `allergen::milk` 116,421 → 116,524 and `allergen::gluten` 71,994 → 71,995.
+  - `has_diet`: 148 edges were re-pointed (Vegan −93, Vegetarian +91, Eggetarian −2,
+    Non-Vegetarian −3, unknown +7).
+  - Every edge was reconciled against a model of the master diff. `EXPECTED_KG_EDGES` and the
+    gate_m28 milk and gluten pins were moved to the measured values.
+- Allergen-tier ledger `allergen_tier_history_d16e.parquet`: 168 rows, generation
+  `before_d16e_v1`. 25 of the rows record an empty prior tier.
+- `scripts/allergen_tier_contract.py` was amended with one declared reinstatement,
+  `(99336, 'gluten')`. 99336 is one of the 401 rows whose stale tiers were removed in the
+  tier reconciliation, and the contract required that removal to stay strict. The reinstatement
+  requires the restored literal to equal the removed one, and the `before_d16e_v1` prior value
+  to equal the current tier minus gluten. Removing gluten instead would have been a false
+  negative.
+- Release evidence layer (`scripts/quality_audit_rules.py`):
+  - New implicit names: milk `curd` → `curds?` plus named cheeses (halloumi, burrata, feta,
+    mozzarella, queso and others); fish `ilish` / `hilsa`. Four tests were added.
+  - `lexicon_sha256()` changed `a8d4258b…` → `6d642766…`. The manifest and the
+    `tests/test_quality_rules.py` pin were re-pinned.
+  - `allergen_evidence_v1` results:
+    - 640 evidence-kind changes: milk text_silent → implicit_name 603, milk ambiguous_carrier →
+      implicit_name 3, fish text_silent → implicit_name 34.
+    - `status_v012` milk absent → present 103 and gluten unknown → present 1, following the master.
+    - One milk absent → unknown (140592, "vegan queso fresco": a plant cheese named like a dairy
+      one; reported as a conflict, fail-closed).
+- The live labelling lexicon `allergen_lexicon_v14.py` is unchanged at `af62ff8d` (review
+  condition C1). The batch-E vendored copy was not installed.
+- Benchmark gold sets regenerated from the graph: 1 of 67 queries changed membership ("Vegan
+  recipes high in Calories", +1 / −1); query definitions are unchanged.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 89,237, Vegan 78,958, Non-Vegetarian 32,149,
+    Eggetarian 15,689. 3,351 undeclared recipes are excluded.
+  - 35,834 users / 16,397 items / 821,344 positives (train 658,204 / test 163,140).
+  - 0 served-diet violations.
+- README: the Diet table, the `unknown` count and the `contains_allergen` count were updated to
+  the published values.
+- `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384
