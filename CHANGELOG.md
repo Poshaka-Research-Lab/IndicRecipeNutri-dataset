@@ -135,6 +135,63 @@ Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_E/install/live_prep/POST_INS
   the published values.
 - `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
 
+### Changed 11 Oct 2026 — D16 batch F (master `4b710bd1` → `61d606c8`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_F/install/live_prep/POST_INSTALL_D16F_REPORT.md`
+(datasets workspace). Transaction `txn-20261011T132519Z-ca7b60ea1cea` (generation 4; the
+generation-3 window was rolled back before any master write was kept).
+
+- Master diff: 425 rows / 1,524 cells (Diet 76, Diet_prior 36, diet_v13 36, DietaryContext 46,
+  Allergens_v2 32, allergen_tier 32, contains_pork 324, contains_beef 304, contains_poultry 277,
+  contains_fish 3, diet_meat_class 338, sulphites_possible 10, sulphites_possible_src 10). It
+  equals the reviewed expected cell list exactly.
+  - `egg` added on 32 recipes whose ingredients name plain mayonnaise under one of 14
+    enumerated misspellings (`allergen_tier` +`egg:derived`).
+  - `jain_sattvic` removed from 46 recipes whose ingredients name honey (3 keep `vrat_fasting`).
+  - Meat flags: a generic `meat` / `sausage` that is a recipe's only meat clue now also reads
+    as pork and beef (313 recipes); chouriço / kransky read as pork and *con carne* as beef
+    (19 recipes). These are additions; no poultry flag is removed for this reason. Some are
+    known false positives on plant or mock-meat recipes that were already Non-Vegetarian, and
+    are listed for the next batch.
+  - Six held corrections were taken (33364, 133013, 176163, 187781, 187796, 189706:
+    Non-Vegetarian → Vegetarian, stale meat flags cleared).
+- Diet moves: Vegetarian → Vegan 8, Vegan → Eggetarian 10, Vegetarian → Eggetarian 13,
+  Non-Vegetarian → Vegetarian 6, Vegan → unknown 21, Vegetarian → unknown 6,
+  Eggetarian → unknown 4, Vegetarian → Non-Vegetarian 7, Eggetarian → Non-Vegetarian 1.
+  26 cells are owner-accepted corrections that read as weaker than the previous value
+  (the R and H rows); 0 allergen classes were removed.
+- Knowledge graph: 6,427,883 → **6,427,777** edges (−106). Nodes are unchanged at 222,537.
+  - `contains_allergen`: `allergen::egg` 21,634 → 21,666 (+32).
+  - `in_context`: `context::jain_sattvic` −46.
+  - `has_diet`: `Jain` −46 and `Sattvic` −46; 76 edges re-pointed (Vegan −23, Vegetarian −28,
+    Eggetarian +18, Non-Vegetarian +2, unknown +31).
+  - Every edge was reconciled against a model of the master diff (214 removed, 108 added).
+    `EXPECTED_KG_EDGES` and the gate_m28 egg pin were moved to the measured values. The
+    meat-flag, `Diet_prior`, `diet_v13` and sulphite columns feed no edge.
+  - `kg_nodes.parquet` bytes changed by row order only: nodes are written in first-appearance
+    order and recipe 72 (one of the 46) was the first to reach `diet::Jain`. Every node and
+    attribute is unchanged.
+- Allergen-tier ledger `allergen_tier_history_d16f.parquet`: 32 rows, generation
+  `before_d16f_v1`. 4 of the rows record an empty prior tier.
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `af62ff8d` →
+  `518977a5` after the install (named cheeses with an anchored plant-cheese exclusion; the 14
+  mayonnaise misspellings). No recipe loses an allergen class under it. The release evidence
+  layer has its own term list: `lexicon_sha256()` is unchanged (`6d642766…`) and no release
+  evidence-layer patch was applied.
+- `allergen_evidence_v1`: `status_v012` egg absent → present on the 32 recipes, following the
+  master. No `evidence_kind` changed.
+- Benchmark gold sets regenerated from the graph: 7 of 67 queries changed membership (the Jain,
+  Sattvic and Eggetarian templates); query definitions are unchanged. No gold recipe of a
+  "without <allergen>" query carries that allergen.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 89,209, Vegan 78,935, Non-Vegetarian 32,151,
+    Eggetarian 15,707. 3,382 undeclared recipes are excluded.
+  - 35,799 users / 16,353 items / 820,624 positives (train 657,679 / test 162,945).
+  - 0 served-diet violations.
+- README: the Diet table, the `unknown` count and the `contains_allergen` count were updated to
+  the published values.
+- `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

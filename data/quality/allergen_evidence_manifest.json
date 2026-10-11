@@ -9,15 +9,15 @@
     "unsupported languages and invalid lists unassessed"
   ],
   "heldout_ids_sha256": "c3517fda7c05e07f1e0d7d6e9f0e1d7c4e408fbad25ab7e824ed61965beef717",
-  "input_manifest_sha256": "476a3e7c3e9bff7e17157698c8f5feb2219db1a4fc132dd829c4fa0955c89564",
+  "input_manifest_sha256": "f2f93a7b07e8ef1ea8776c7d9839cb970603cda205de169a07a8bc46e490c455",
   "inputs": {
-    "data/corpus/allergens.parquet": "bf14401c08d8554e986eeeca98218cf4a704902b255a3de60d460fbba0dcc8fb",
-    "data/corpus/recipes_structured.parquet": "8c915713e2ea41c9842ec584bd9241848db76309c78b47789a5908f7a0d5367f"
+    "data/corpus/allergens.parquet": "a7d4ae1a2080ff75d98fe4f930a3553744dc2c08177013ba4d85d529706f71e0",
+    "data/corpus/recipes_structured.parquet": "86d4654c8ddfe91508392a4802fbcf4972af64f9c87c2aeab1b4332d28b9a87e"
   },
   "interpretation": "Absent remains silver inferred absence, not verified safe; UNKNOWN is abstention.",
   "legacy_labels_modified": false,
-  "logical_sha256": "98e4eea318e9aee606f246b884984e06f9927f24a125da05e1aec9c6d6fbf79e",
-  "payload_sha256": "e412d4c5f71614d195e81fe2993d53f8d0dcb39f647a121f0162cd0ff422a1c7",
+  "logical_sha256": "49d20a0ea580760d3ca4384857cb383a587ebbc3c438320fe844eb473a477ecf",
+  "payload_sha256": "0a09326f1daeb14dbf586c94035823596a6f9072c6df340fb9e020450033da3d",
   "policy_code_sha256": "eab31e44d771dc6863d094f5e152b2b5ff418f2ace35e6866622c85aecf29b2c",
   "policy_version": "irn-allergen-evidence-0.12.0-v1",
   "population_counts": [
@@ -93,18 +93,18 @@
       "kind_implicit_name": 1893,
       "kind_text_silent": 177383,
       "kind_unassessed": 11751,
-      "legacy_absent": 185427,
-      "legacy_present": 20498,
+      "legacy_absent": 185395,
+      "legacy_present": 20530,
       "legacy_unassessed": 2365,
-      "new_absent": 174145,
-      "new_present": 20498,
+      "new_absent": 174113,
+      "new_present": 20530,
       "new_unknown": 13647,
       "population": "dev",
       "reason_ingredient_evidence_unassessed": 9501,
-      "reason_legacy_positive_preserved": 20498,
+      "reason_legacy_positive_preserved": 20530,
       "reason_legacy_unassessed": 2365,
       "reason_scan_incomplete": 1781,
-      "reason_silver_inferred_absence_not_verified_safe": 174145,
+      "reason_silver_inferred_absence_not_verified_safe": 174113,
       "rows": 208290
     },
     {

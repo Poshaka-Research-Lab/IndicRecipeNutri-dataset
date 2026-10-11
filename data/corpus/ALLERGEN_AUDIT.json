@@ -125,12 +125,12 @@
     },
     "egg": {
       "lexical_present": 18733,
-      "flagged_present": 21634,
+      "flagged_present": 21666,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 2901,
-      "audit_lexicon_coverage_of_flagged": 0.8659,
-      "unaudited_flagged_rows": 2901,
+      "false_positives_flag_only": 2933,
+      "audit_lexicon_coverage_of_flagged": 0.8646,
+      "unaudited_flagged_rows": 2933,
       "false_negative_examples": []
     },
     "fenugreek": {
@@ -478,12 +478,12 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 78958,
-      "conflicting_rows": 278,
+      "rows_with_label": 78935,
+      "conflicting_rows": 275,
       "rate": 0.0035,
       "by_allergen": {
         "milk": 221,
-        "egg": 54,
+        "egg": 51,
         "fish": 3,
         "shellfish": 0
       },
@@ -551,12 +551,12 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 89237,
-      "conflicting_rows": 6,
+      "rows_with_label": 89209,
+      "conflicting_rows": 7,
       "rate": 0.0001,
       "by_allergen": {
         "fish": 6,
-        "shellfish": 0
+        "shellfish": 1
       },
       "examples": [
         {
@@ -576,6 +576,10 @@
           "name": "Vietnamese Cucumber Kachumber"
         },
         {
+          "recipe_id": 176163,
+          "name": "539. Vitumbua (coconut rice pancake balls)"
+        },
+        {
           "recipe_id": 193427,
           "name": "Veggie Lettuce Frankie"
         },
@@ -586,7 +590,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 15689,
+      "rows_with_label": 15707,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "eef8a8974ba35e515edf275d8f5a9ac38d735600a51fa12fe08bc3821b741da5",
+  "queries_sha256": "eea2e42807bb8b84c1ad3c222448a0c867fb01be32285727bea3f0fec3950b10",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -134,6 +134,7 @@
         "recipe::3032",
         "recipe::3182",
         "recipe::3453",
+        "recipe::3520",
         "recipe::3726",
         "recipe::4642",
         "recipe::4670",
@@ -154,6 +155,7 @@
         "recipe::6803"
       ],
       "removed": [
+        "recipe::6807",
         "recipe::6809",
         "recipe::6824",
         "recipe::6840",
@@ -185,22 +187,32 @@
       "query_id": "silver_2b41f47c59f6196b",
       "query": "Jain recipes",
       "added": [
-        "recipe::10193",
         "recipe::10198",
         "recipe::10227",
         "recipe::10228",
         "recipe::10231",
         "recipe::10232",
-        "recipe::10236",
         "recipe::10263",
         "recipe::10279",
         "recipe::10293",
-        "recipe::10294"
+        "recipe::10294",
+        "recipe::10300",
+        "recipe::10340",
+        "recipe::10351",
+        "recipe::10364",
+        "recipe::10377",
+        "recipe::10417",
+        "recipe::10429"
       ],
       "removed": [
+        "recipe::72",
+        "recipe::6108",
+        "recipe::6279",
         "recipe::6402",
+        "recipe::6487",
         "recipe::6761",
         "recipe::7089",
+        "recipe::7184",
         "recipe::7913",
         "recipe::8269",
         "recipe::8628",
@@ -215,22 +227,32 @@
       "query_id": "silver_5a5d0fdb79d30468",
       "query": "Sattvic recipes",
       "added": [
-        "recipe::10193",
         "recipe::10198",
         "recipe::10227",
         "recipe::10228",
         "recipe::10231",
         "recipe::10232",
-        "recipe::10236",
         "recipe::10263",
         "recipe::10279",
         "recipe::10293",
-        "recipe::10294"
+        "recipe::10294",
+        "recipe::10300",
+        "recipe::10340",
+        "recipe::10351",
+        "recipe::10364",
+        "recipe::10377",
+        "recipe::10417",
+        "recipe::10429"
       ],
       "removed": [
+        "recipe::72",
+        "recipe::6108",
+        "recipe::6279",
         "recipe::6402",
+        "recipe::6487",
         "recipe::6761",
         "recipe::7089",
+        "recipe::7184",
         "recipe::7913",
         "recipe::8269",
         "recipe::8628",
@@ -357,6 +379,7 @@
         "recipe::3032",
         "recipe::3182",
         "recipe::3453",
+        "recipe::3520",
         "recipe::3726",
         "recipe::4642",
         "recipe::4670",
@@ -374,6 +397,7 @@
         "recipe::6803"
       ],
       "removed": [
+        "recipe::6807",
         "recipe::6809",
         "recipe::6824",
         "recipe::6840",
@@ -403,21 +427,29 @@
       "query_id": "silver_70da69c87d1d2f34",
       "query": "Jain recipes without sulphites",
       "added": [
-        "recipe::10193",
         "recipe::10198",
         "recipe::10227",
         "recipe::10228",
         "recipe::10231",
         "recipe::10232",
-        "recipe::10236",
         "recipe::10263",
         "recipe::10279",
-        "recipe::10294"
+        "recipe::10294",
+        "recipe::10300",
+        "recipe::10340",
+        "recipe::10351",
+        "recipe::10377",
+        "recipe::10417",
+        "recipe::10429"
       ],
       "removed": [
+        "recipe::72",
+        "recipe::6108",
+        "recipe::6279",
         "recipe::6402",
         "recipe::6761",
         "recipe::7089",
+        "recipe::7184",
         "recipe::7913",
         "recipe::8328",
         "recipe::8628",
@@ -436,12 +468,23 @@
         "recipe::10228",
         "recipe::10231",
         "recipe::10232",
-        "recipe::10236",
         "recipe::10263",
-        "recipe::10279"
+        "recipe::10279",
+        "recipe::10300",
+        "recipe::10340",
+        "recipe::10351",
+        "recipe::10364",
+        "recipe::10377",
+        "recipe::10417",
+        "recipe::10429"
       ],
       "removed": [
+        "recipe::72",
+        "recipe::6108",
+        "recipe::6279",
+        "recipe::6487",
         "recipe::7089",
+        "recipe::7184",
         "recipe::7913",
         "recipe::8269",
         "recipe::8328",
@@ -500,6 +543,18 @@
         "recipe::78681",
         "recipe::194758",
         "recipe::203320"
+      ]
+    },
+    {
+      "query_id": "silver_57e96959845caff1",
+      "query": "Jain recipes high in Fat",
+      "added": [
+        "recipe::84085",
+        "recipe::120736"
+      ],
+      "removed": [
+        "recipe::128936",
+        "recipe::156718"
       ]
     },
     {
