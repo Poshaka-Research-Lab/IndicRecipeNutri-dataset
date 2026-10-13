@@ -36,7 +36,7 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 | Allergen | Labelled | Named in text | TP | FP | FN | Precision | Recall | Status |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| coconut | 36,811 | 35,523 | 35,523 | 1,288 | 0 | 96.50% | 100.00% | agrees |
+| coconut | 36,813 | 35,523 | 35,523 | 1,290 | 0 | 96.50% | 100.00% | agrees |
 | tamarind | 12,163 | 12,059 | 12,059 | 104 | 0 | 99.14% | 100.00% | agrees |
 | fenugreek | 20,028 | 17,864 | 17,864 | 2,164 | 0 | 89.20% | 100.00% | agrees |
 | asafoetida | 30,612 | 23,745 | 23,745 | 6,867 | 0 | 77.57% | 100.00% | agrees |

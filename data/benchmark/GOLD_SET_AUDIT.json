@@ -5,7 +5,7 @@
     "leg_b_lexical": "Each gold-set member's parsed IngredientsList is matched against an allergen ingredient lexicon, minus plant-substitute phrasings. Independent of the flags. Hits are review candidates, not confirmed defects."
   },
   "queries_audited": 7,
-  "gold_entries_audited": 1594,
+  "gold_entries_audited": 1593,
   "flag_contradicting_total": 0,
   "flag_overall_rate": 0.0,
   "lexical_candidates_total": 0,
@@ -34,7 +34,7 @@
     {
       "query": "Non-Vegetarian recipes without mustard",
       "allergen": "mustard",
-      "gold_n": 283,
+      "gold_n": 282,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,

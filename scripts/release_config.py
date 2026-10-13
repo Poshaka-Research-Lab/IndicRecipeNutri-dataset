@@ -1008,7 +1008,15 @@ EXPECTED_KG_NODES = 222_537
 #                           Vegan -23, Vegetarian -28, Eggetarian +18, Non-Vegetarian +2, diet::unknown +31 (net 0).
 # EXPECTED_KG_NODES unchanged (222,537).
 # Evidence: FOLLOWUPS_2026-10-08/BATCH_F/install/live_prep/post_install_run/kg_reconciliation_d16f.json (every_edge_explained true).
-EXPECTED_KG_EDGES = 6_427_777
+# D16 batch G (txn-20261013T052425Z-fba70ecd0ac5, master 61d606c8 -> f666fd66): 6,427,777 -> 6,427,881 (+104),
+# measured from a fresh build. Edge-level vs the pre-rebuild release (HEAD 7146775): every edge explained by the master-diff
+# model (post_install_prep/post_install_run_d16g/kg_model_d16g.py, rules of build_kg_v3.py; of the 17 changed columns only Diet and
+# Allergens_v2 are read by the builder):
+#   contains_allergen +104 = fish +50, gluten +14, milk +14, egg +10, shellfish +5, mustard +3, tree_nuts +3, coconut +2, soy +2, ghee +1
+#   has_diet 0 net: Diet edges re-pointed (Eggetarian -12, Non-Vegetarian +190, Vegan -55, Vegetarian -124, diet::unknown +1).
+# EXPECTED_KG_NODES unchanged (222,537).
+# Evidence: FOLLOWUPS_2026-10-08/BATCH_G/install/post_install_prep/post_install_run_d16g/kg_reconciliation_d16g.json (every_edge_explained true).
+EXPECTED_KG_EDGES = 6_427_881
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;

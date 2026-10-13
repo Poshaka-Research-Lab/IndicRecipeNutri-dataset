@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "eea2e42807bb8b84c1ad3c222448a0c867fb01be32285727bea3f0fec3950b10",
+  "queries_sha256": "859aba999731256f7be99e1af1194ac469a976b8dd4973fdb7703806435cf5af",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -84,7 +84,8 @@
         "recipe::1438",
         "recipe::1439",
         "recipe::1440",
-        "recipe::1441"
+        "recipe::1441",
+        "recipe::1448"
       ],
       "removed": [
         "recipe::11",
@@ -94,6 +95,7 @@
         "recipe::393",
         "recipe::403",
         "recipe::428",
+        "recipe::445",
         "recipe::468",
         "recipe::478",
         "recipe::544",
@@ -114,9 +116,11 @@
         "recipe::210",
         "recipe::305",
         "recipe::403",
+        "recipe::445",
         "recipe::453"
       ],
       "removed": [
+        "recipe::825",
         "recipe::826",
         "recipe::831",
         "recipe::833",
@@ -282,7 +286,9 @@
         "recipe::213373",
         "recipe::222134"
       ],
-      "removed": []
+      "removed": [
+        "recipe::188473"
+      ]
     },
     {
       "query_id": "silver_ca5f8eec43a74d40",
@@ -331,7 +337,8 @@
         "recipe::1434",
         "recipe::1438",
         "recipe::1440",
-        "recipe::1441"
+        "recipe::1441",
+        "recipe::1448"
       ],
       "removed": [
         "recipe::11",
@@ -340,6 +347,7 @@
         "recipe::393",
         "recipe::403",
         "recipe::428",
+        "recipe::445",
         "recipe::468",
         "recipe::478",
         "recipe::549",
@@ -362,6 +370,7 @@
         "recipe::453"
       ],
       "removed": [
+        "recipe::825",
         "recipe::826",
         "recipe::831",
         "recipe::833",

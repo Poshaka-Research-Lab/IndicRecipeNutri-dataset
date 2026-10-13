@@ -115,22 +115,22 @@
     },
     "coconut": {
       "lexical_present": 35563,
-      "flagged_present": 36811,
+      "flagged_present": 36813,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1248,
-      "audit_lexicon_coverage_of_flagged": 0.9661,
-      "unaudited_flagged_rows": 1248,
+      "false_positives_flag_only": 1250,
+      "audit_lexicon_coverage_of_flagged": 0.966,
+      "unaudited_flagged_rows": 1250,
       "false_negative_examples": []
     },
     "egg": {
       "lexical_present": 18733,
-      "flagged_present": 21666,
+      "flagged_present": 21676,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 2933,
-      "audit_lexicon_coverage_of_flagged": 0.8646,
-      "unaudited_flagged_rows": 2933,
+      "false_positives_flag_only": 2943,
+      "audit_lexicon_coverage_of_flagged": 0.8642,
+      "unaudited_flagged_rows": 2943,
       "false_negative_examples": []
     },
     "fenugreek": {
@@ -145,22 +145,22 @@
     },
     "fish": {
       "lexical_present": 4919,
-      "flagged_present": 5814,
+      "flagged_present": 5864,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 895,
-      "audit_lexicon_coverage_of_flagged": 0.8461,
-      "unaudited_flagged_rows": 895,
+      "false_positives_flag_only": 945,
+      "audit_lexicon_coverage_of_flagged": 0.8388,
+      "unaudited_flagged_rows": 945,
       "false_negative_examples": []
     },
     "ghee": {
       "lexical_present": 33490,
-      "flagged_present": 33538,
+      "flagged_present": 33539,
       "false_negatives": 7,
       "false_negative_rate_of_lexical": 0.0002,
-      "false_positives_flag_only": 55,
-      "audit_lexicon_coverage_of_flagged": 0.9984,
-      "unaudited_flagged_rows": 55,
+      "false_positives_flag_only": 56,
+      "audit_lexicon_coverage_of_flagged": 0.9983,
+      "unaudited_flagged_rows": 56,
       "false_negative_examples": [
         {
           "recipe_id": 101647,
@@ -194,12 +194,12 @@
     },
     "gluten": {
       "lexical_present": 53930,
-      "flagged_present": 71995,
+      "flagged_present": 72009,
       "false_negatives": 93,
       "false_negative_rate_of_lexical": 0.0017,
-      "false_positives_flag_only": 18158,
-      "audit_lexicon_coverage_of_flagged": 0.7478,
-      "unaudited_flagged_rows": 18158,
+      "false_positives_flag_only": 18172,
+      "audit_lexicon_coverage_of_flagged": 0.7476,
+      "unaudited_flagged_rows": 18172,
       "false_negative_examples": [
         {
           "recipe_id": 29430,
@@ -265,12 +265,12 @@
     },
     "milk": {
       "lexical_present": 110987,
-      "flagged_present": 116524,
+      "flagged_present": 116538,
       "false_negatives": 34,
       "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 5571,
-      "audit_lexicon_coverage_of_flagged": 0.9522,
-      "unaudited_flagged_rows": 5571,
+      "false_positives_flag_only": 5585,
+      "audit_lexicon_coverage_of_flagged": 0.9521,
+      "unaudited_flagged_rows": 5585,
       "false_negative_examples": [
         {
           "recipe_id": 33216,
@@ -336,12 +336,12 @@
     },
     "mustard": {
       "lexical_present": 33661,
-      "flagged_present": 36688,
+      "flagged_present": 36691,
       "false_negatives": 17,
       "false_negative_rate_of_lexical": 0.0005,
-      "false_positives_flag_only": 3044,
+      "false_positives_flag_only": 3047,
       "audit_lexicon_coverage_of_flagged": 0.917,
-      "unaudited_flagged_rows": 3044,
+      "unaudited_flagged_rows": 3047,
       "false_negative_examples": [
         {
           "recipe_id": 29049,
@@ -427,22 +427,22 @@
     },
     "shellfish": {
       "lexical_present": 3736,
-      "flagged_present": 4205,
+      "flagged_present": 4210,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 469,
-      "audit_lexicon_coverage_of_flagged": 0.8885,
-      "unaudited_flagged_rows": 469,
+      "false_positives_flag_only": 474,
+      "audit_lexicon_coverage_of_flagged": 0.8874,
+      "unaudited_flagged_rows": 474,
       "false_negative_examples": []
     },
     "soy": {
       "lexical_present": 8031,
-      "flagged_present": 9050,
+      "flagged_present": 9052,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1019,
-      "audit_lexicon_coverage_of_flagged": 0.8874,
-      "unaudited_flagged_rows": 1019,
+      "false_positives_flag_only": 1021,
+      "audit_lexicon_coverage_of_flagged": 0.8872,
+      "unaudited_flagged_rows": 1021,
       "false_negative_examples": []
     },
     "sulphites": {
@@ -467,22 +467,22 @@
     },
     "tree_nuts": {
       "lexical_present": 30819,
-      "flagged_present": 33287,
+      "flagged_present": 33290,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 2468,
-      "audit_lexicon_coverage_of_flagged": 0.9259,
-      "unaudited_flagged_rows": 2468,
+      "false_positives_flag_only": 2471,
+      "audit_lexicon_coverage_of_flagged": 0.9258,
+      "unaudited_flagged_rows": 2471,
       "false_negative_examples": []
     }
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 78935,
-      "conflicting_rows": 275,
+      "rows_with_label": 78880,
+      "conflicting_rows": 278,
       "rate": 0.0035,
       "by_allergen": {
-        "milk": 221,
+        "milk": 224,
         "egg": 51,
         "fish": 3,
         "shellfish": 0
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 89209,
+      "rows_with_label": 89085,
       "conflicting_rows": 7,
       "rate": 0.0001,
       "by_allergen": {
@@ -590,7 +590,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 15707,
+      "rows_with_label": 15695,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {
