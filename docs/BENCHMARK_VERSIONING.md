@@ -55,7 +55,7 @@ reproducing results published against them.
 
 | Generation | Post-core items | Train pairs | Test pairs | Withdrawn catalogue items | Withdrawn raw interaction rows |
 |---|---:|---:|---:|---:|---:|
-| **Current (v4)** | 16,364 | 657,910 | 163,014 | **0** | **0** |
+| **Current (v4)** | 16,370 | 658,183 | 163,121 | **0** | **0** |
 | Retired v1 (`v0.6.0`) | 16,688 | 658,098 | 163,115 | 385 | 20,161 |
 | Retired v3 (`v0.6.0`) | 16,194 | 654,605 | 162,182 | 12 | 1,087 |
 

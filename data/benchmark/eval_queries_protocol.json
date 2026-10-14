@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "244fd4cd34c75abd107a00ec3c30d7d0c67898d4c897e32fe0999e216f0b5cde",
+  "queries_sha256": "670281982cc50f8a6ea89336723fb65ccd6d95fd5aef04c0c364acab28d5fa25",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -85,7 +85,11 @@
         "recipe::1439",
         "recipe::1440",
         "recipe::1441",
-        "recipe::1448"
+        "recipe::1448",
+        "recipe::1450",
+        "recipe::1451",
+        "recipe::1454",
+        "recipe::1455"
       ],
       "removed": [
         "recipe::11",
@@ -101,8 +105,12 @@
         "recipe::544",
         "recipe::549",
         "recipe::569",
+        "recipe::614",
         "recipe::683",
         "recipe::707",
+        "recipe::907",
+        "recipe::917",
+        "recipe::1004",
         "recipe::1199",
         "recipe::1258",
         "recipe::1260",
@@ -117,9 +125,11 @@
         "recipe::305",
         "recipe::403",
         "recipe::445",
-        "recipe::453"
+        "recipe::453",
+        "recipe::614"
       ],
       "removed": [
+        "recipe::824",
         "recipe::825",
         "recipe::826",
         "recipe::831",
@@ -133,7 +143,6 @@
       "added": [
         "recipe::57",
         "recipe::1324",
-        "recipe::1499",
         "recipe::1655",
         "recipe::3032",
         "recipe::3182",
@@ -159,7 +168,6 @@
         "recipe::6803"
       ],
       "removed": [
-        "recipe::6807",
         "recipe::6809",
         "recipe::6824",
         "recipe::6840",
@@ -309,6 +317,8 @@
       "query": "Non-Vegetarian recipes with mayo",
       "added": [
         "recipe::72404",
+        "recipe::157360",
+        "recipe::190048",
         "recipe::190517"
       ],
       "removed": []
@@ -341,7 +351,9 @@
         "recipe::1438",
         "recipe::1440",
         "recipe::1441",
-        "recipe::1448"
+        "recipe::1448",
+        "recipe::1450",
+        "recipe::1451"
       ],
       "removed": [
         "recipe::11",
@@ -355,8 +367,12 @@
         "recipe::478",
         "recipe::549",
         "recipe::569",
+        "recipe::614",
         "recipe::683",
         "recipe::707",
+        "recipe::907",
+        "recipe::917",
+        "recipe::1004",
         "recipe::1199",
         "recipe::1258",
         "recipe::1260",
@@ -370,9 +386,11 @@
         "recipe::210",
         "recipe::305",
         "recipe::403",
-        "recipe::453"
+        "recipe::453",
+        "recipe::614"
       ],
       "removed": [
+        "recipe::824",
         "recipe::825",
         "recipe::826",
         "recipe::831",
@@ -386,7 +404,6 @@
       "added": [
         "recipe::57",
         "recipe::1324",
-        "recipe::1499",
         "recipe::1655",
         "recipe::3032",
         "recipe::3182",
@@ -409,7 +426,6 @@
         "recipe::6803"
       ],
       "removed": [
-        "recipe::6807",
         "recipe::6809",
         "recipe::6824",
         "recipe::6840",
@@ -513,10 +529,12 @@
       "query_id": "silver_9dbdb1ec2e61d2bc",
       "query": "Vegetarian recipes high in Calcium",
       "added": [
+        "recipe::84889",
         "recipe::98192"
       ],
       "removed": [
-        "recipe::45063"
+        "recipe::45063",
+        "recipe::71383"
       ]
     },
     {
@@ -540,6 +558,16 @@
       ]
     },
     {
+      "query_id": "silver_e569b9e92f7c52d4",
+      "query": "Non-Vegetarian recipes high in Carbohydrates",
+      "added": [
+        "recipe::26671"
+      ],
+      "removed": [
+        "recipe::181491"
+      ]
+    },
+    {
       "query_id": "silver_02036cd6385d1e87",
       "query": "Eggetarian recipes high in Copper",
       "added": [
@@ -551,8 +579,8 @@
       ],
       "removed": [
         "recipe::27321",
-        "recipe::54686",
         "recipe::78681",
+        "recipe::120439",
         "recipe::194758",
         "recipe::203320"
       ]
@@ -573,10 +601,12 @@
       "query_id": "silver_3b23a3d577ab0f56",
       "query": "Non-Vegetarian recipes high in Magnesium",
       "added": [
+        "recipe::26671",
         "recipe::184090"
       ],
       "removed": [
-        "recipe::160713"
+        "recipe::160713",
+        "recipe::216703"
       ]
     },
     {
@@ -607,11 +637,11 @@
         "recipe::96786",
         "recipe::102813",
         "recipe::105325",
-        "recipe::121905",
         "recipe::134467",
         "recipe::139503",
         "recipe::141100",
         "recipe::181775",
+        "recipe::190515",
         "recipe::211539"
       ]
     }
