@@ -258,6 +258,61 @@ the quoting of empty fields.
   updated to the published values.
 - `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
 
+### Changed 14 Oct 2026 — D16 batch H (master `f666fd66` → `1c0cd8ba`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_H/install/post_install_prep/POST_INSTALL_D16H_REPORT.md`
+(datasets workspace). Transaction `txn-20261013T233617Z-0b1f2065a5a2`. The installed master equals the
+reviewed expected cell list (12,651 cells / 3,116 rows) and the simulated final in every value.
+
+- Master diff: 3,116 rows / 12,651 cells (allergen_tier 3,110, Allergens_v2 3,109,
+  gluten_confidence 3,108, gluten_declared 3,108, Diet 95, diet_meat_class 33, contains_poultry 24,
+  sulphites_possible 20, sulphites_possible_src 20, contains_fish 8, Diet_prior 5, diet_v13 5,
+  contains_alcohol 2, contains_beef 2, contains_gelatin 2).
+  - Soy sauce, shoyu and ponzu are now read as gluten unless the text says tamari or gluten-free.
+    3,108 recipes gain `gluten` (`gluten:derived`) from their RecipeName or IngredientsList. The rule
+    is **not** applied to Description, Keywords or Instructions in this batch: recipes that mention
+    soy sauce only in prose are unchanged and tracked for the next batch.
+  - One recipe gains `fish`. No allergen class was removed.
+  - 84 recipes moved to Diet `unknown` (Vegan 43, Vegetarian 36, Eggetarian 5). These are
+    fail-closed chain readings: the label is withheld, not weakened.
+  - 13 cells are owner-accepted corrections that read as weaker than the previous value, among
+    them 77503 Non-Vegetarian → Vegan (a quoted meat word in the title).
+- Diet moves: Vegan → unknown 43, Vegetarian → unknown 36, Eggetarian → unknown 5,
+  Vegan → Eggetarian 3, Non-Vegetarian → Vegetarian 2, Vegan → Vegetarian 2,
+  Non-Vegetarian → Vegan 1, Vegetarian → Eggetarian 1, unknown → Eggetarian 1,
+  unknown → Vegetarian 1. Totals: Vegetarian 89,053, Vegan 78,834, Non-Vegetarian 32,339,
+  Eggetarian 15,695, unknown 3,466.
+- Knowledge graph: 6,427,881 → **6,430,990** edges (+3,109). Nodes are unchanged at 222,537, and
+  `kg_nodes.parquet` is byte-identical.
+  - `contains_allergen` +3,109: gluten +3,108 (72,009 → 75,117), fish +1 (5,864 → 5,865).
+  - `has_diet`: net 0; edges re-pointed (Non-Vegetarian −3, Vegan −47, Vegetarian −32,
+    unknown +82).
+  - Every edge was reconciled against a model of the master diff (95 removed, 3,204 added). Of the
+    15 changed columns, only Diet and Allergens_v2 feed edges. `EXPECTED_KG_EDGES` and the two
+    gate_m28 per-class pins were moved to the measured values.
+- `gluten_confidence_v2.parquet` was refreshed from the master: 3,108 recipes changed
+  `gluten_confidence` / `gluten_declared`.
+- Allergen-tier ledger `allergen_tier_history_d16h.parquet`: 3,110 rows, generation
+  `before_d16h_v1`. One row records an empty prior tier; one row (77503) changes the tier literal
+  only (`gluten:inherited` → `gluten:derived`).
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `9664383f` → `3f45b2c1`
+  after the install (the soy-sauce rule above and a prose egg guard). The release evidence layer's
+  own term list is unchanged (`lexicon_sha256()` = `6d642766…`).
+- `allergen_evidence_v1`: `status_v012` → `present` on exactly the 3,109 added (recipe, class)
+  pairs (gluten 2,859 from `absent` and 249 from `unknown`; fish 1 from `absent`). No
+  `evidence_kind` changed.
+- Benchmark gold sets regenerated from the graph: 1 of 67 queries changed membership (Vegetarian
+  recipes with lemongrass, 65 → 63); query definitions are unchanged. No gold recipe of a
+  "without <allergen>" query carries that allergen.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 89,053, Vegan 78,833, Non-Vegetarian 32,338,
+    Eggetarian 15,695. 3,465 undeclared recipes are excluded.
+  - 35,834 users / 16,363 items / 821,143 positives (train 658,093 / test 163,050).
+  - 0 served-diet violations.
+- README: the Diet table, the `unknown` count and the `contains_allergen` count (489,613) were
+  updated to the published values.
+- `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

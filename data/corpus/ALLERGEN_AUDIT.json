@@ -145,12 +145,12 @@
     },
     "fish": {
       "lexical_present": 4919,
-      "flagged_present": 5864,
+      "flagged_present": 5865,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 945,
-      "audit_lexicon_coverage_of_flagged": 0.8388,
-      "unaudited_flagged_rows": 945,
+      "false_positives_flag_only": 946,
+      "audit_lexicon_coverage_of_flagged": 0.8387,
+      "unaudited_flagged_rows": 946,
       "false_negative_examples": []
     },
     "ghee": {
@@ -194,12 +194,12 @@
     },
     "gluten": {
       "lexical_present": 53930,
-      "flagged_present": 72009,
+      "flagged_present": 75117,
       "false_negatives": 93,
       "false_negative_rate_of_lexical": 0.0017,
-      "false_positives_flag_only": 18172,
-      "audit_lexicon_coverage_of_flagged": 0.7476,
-      "unaudited_flagged_rows": 18172,
+      "false_positives_flag_only": 21280,
+      "audit_lexicon_coverage_of_flagged": 0.7167,
+      "unaudited_flagged_rows": 21280,
       "false_negative_examples": [
         {
           "recipe_id": 29430,
@@ -478,12 +478,12 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 78880,
-      "conflicting_rows": 278,
+      "rows_with_label": 78833,
+      "conflicting_rows": 273,
       "rate": 0.0035,
       "by_allergen": {
-        "milk": 224,
-        "egg": 51,
+        "milk": 222,
+        "egg": 48,
         "fish": 3,
         "shellfish": 0
       },
@@ -551,7 +551,7 @@
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 89085,
+      "rows_with_label": 89053,
       "conflicting_rows": 7,
       "rate": 0.0001,
       "by_allergen": {

@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6427881,
+  "edges": 6430990,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -33,7 +33,7 @@
     "zone": 5
   },
   "relations": {
-    "contains_allergen": 486504,
+    "contains_allergen": 489613,
     "cooked_by": 404145,
     "derived_from": 30,
     "for_occasion": 33171,
@@ -73,9 +73,9 @@
     "coconut": 36813,
     "egg": 21676,
     "fenugreek": 20028,
-    "fish": 5864,
+    "fish": 5865,
     "ghee": 33539,
-    "gluten": 72009,
+    "gluten": 75117,
     "milk": 116538,
     "mustard": 36691,
     "peanut": 11464,
@@ -94,9 +94,9 @@
   "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 2478,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "5850cb2480cb104f766010d511aaa7a1c2b6c31ed797d05ccc59c7171e6b8e6b",
+    "data/corpus/recipes_structured.parquet": "15d7fd119b3620bb9372d1f4f92cf2da56cb163a5a7b5af5ee4b4ae3ae39cedf",
     "data/kg/kg_nodes.parquet": "b6e3ed192feea264463f0be4a4c82aef64fbc5a3018f6601c046b0fe363bd941",
-    "data/kg/kg_edges.parquet": "2304640daa82fa4ec16a15e283cecce854fc80ac155c3487d62592a01d6d863d",
+    "data/kg/kg_edges.parquet": "cd3fd889cd2a571cd2d9c7fc6bac48e06b74a59bd0f5010090f9231b9b133530",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }
