@@ -313,6 +313,63 @@ reviewed expected cell list (12,651 cells / 3,116 rows) and the simulated final 
   updated to the published values.
 - `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
 
+### Changed 14 Oct 2026 — D16 batch I-1 (master `1c0cd8ba` → `ea5fd733`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_I/install/post_install_prep/POST_INSTALL_D16I_REPORT.md`
+(datasets workspace). Transaction `txn-20261014T132642Z-25a5bae4e8f0`. The installed master equals the
+reviewed expected cell list (5,111 cells / 1,264 rows) in every value.
+
+- Master diff: 1,264 rows / 5,111 cells (Allergens_v2 1,264, allergen_tier 1,264, gluten_declared 1,264,
+  gluten_confidence 1,263, Diet 28, diet_meat_class 7, contains_alcohol 5, contains_gelatin 5,
+  contains_poultry 5, contains_fish 2, sulphites_possible 2, sulphites_possible_src 2).
+  - 1,264 recipes gain `gluten`. Each names soy sauce (or kecap manis, hoisin or teriyaki) without
+    the text saying tamari or gluten-free:
+    - 1,187 recipes, where the mention is in prose (Description / Instructions / Ingredients), carry
+      `gluten:inherited`;
+    - 77 recipes, where it is in the ingredient list, carry `gluten:derived`. Four of these are
+      misspelled soy-sauce lines.
+
+    No allergen class was removed. Recipes that name the sauce only in Keywords are unchanged; they
+    are tracked for the next batch.
+  - 28 recipes moved to Diet `unknown` (Vegan 14, Vegetarian 12, Eggetarian 2). These are
+    fail-closed chain readings on the changed rows: the label is withheld, not weakened.
+  - No owner-accepted weakening.
+- Diet totals (all rows): Vegetarian 89,041, Vegan 78,820, Non-Vegetarian 32,339, Eggetarian 15,693,
+  unknown 3,494.
+- Knowledge graph: 6,430,990 → **6,432,254** edges (+1,264). Nodes are unchanged at 222,537.
+  - `contains_allergen` +1,264: gluten 75,117 → 76,381.
+  - `has_diet`: net 0; edges re-pointed (Vegan −14, Vegetarian −12, Eggetarian −2, unknown +28).
+  - Every edge was reconciled against a model of the master diff (28 removed, 1,292 added).
+    `EXPECTED_KG_EDGES` and the gate_m28 gluten pin were moved to the measured values.
+- `gluten_confidence_v2.parquet` was refreshed from the master.
+- Allergen-tier ledger `allergen_tier_history_d16i.parquet`: 1,264 rows, generation
+  `before_d16i_v1`. 41 rows record an empty prior tier, and no row changes a literal only.
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `3f45b2c1` → `49f93566`
+  after the install. The release evidence layer's own term list is unchanged
+  (`audit_lexicon_sha256` = `6d642766…`).
+- `allergen_evidence_v1`: `status_v012` → `present` on exactly the 1,264 added (recipe, gluten)
+  pairs (1,221 from `absent`, 43 from `unknown`). No `evidence_kind` changed.
+- Benchmark gold sets were regenerated from the graph. 1 of 67 queries changed membership
+  (Vegetarian recipes with lemongrass, 63 → 62), and the query definitions are unchanged. No gold
+  recipe of a "without <allergen>" query carries that allergen.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 89,041, Vegan 78,819, Non-Vegetarian 32,338,
+    Eggetarian 15,693. 3,493 undeclared recipes are excluded.
+  - 35,806 users / 16,364 items / 820,924 positives (train 657,910 / test 163,014).
+  - 0 served-diet violations.
+- README: the Diet table, the `unknown` count and the `contains_allergen` count (490,877) were
+  updated.
+- Tier contract (`scripts/allergen_tier_contract.py`, independently reviewed, owner-ruled): two recipes in
+  the allergen-tier reconciliation history carry gluten after I-1. 99213 re-gains the `gluten:inherited`
+  the reconciliation removed and is a `REINSTATED` entry, on the 99336 precedent. 15690 gains gluten for
+  the first time and is the single entry of a new `DECLARED_ADDITIONS` branch.
+  - The branch is keyed by (recipe, class). It pins the generation `before_d16i_v1` and the literal
+    `inherited`.
+  - The strict-removal check still applies to the row's other classes.
+  - Both rows are now frozen at their I-1 tier form.
+  - `tests/test_allergen_tier_contract.py`: 11 tests.
+  - `verify_release --strict-checksums` PASSED, and all rebuild gates are green.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

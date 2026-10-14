@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "6b3fa3ae62adf1789bdbf13ea70b10130f07bc3798571abdfc52843f723ccbd3",
+  "queries_sha256": "244fd4cd34c75abd107a00ec3c30d7d0c67898d4c897e32fe0999e216f0b5cde",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -288,6 +288,7 @@
       ],
       "removed": [
         "recipe::30818",
+        "recipe::58655",
         "recipe::134282",
         "recipe::188473"
       ]

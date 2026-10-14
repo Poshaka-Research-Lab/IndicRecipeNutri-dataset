@@ -11,6 +11,17 @@ LATER_GENERATIONS = ('before_diet_repair_v1',)
 REINSTATED = {
     (99336, 'gluten'): ('before_d16e_v1', 'datasets/_admin/progress/FOLLOWUPS_2026-10-08/BATCH_E/LEAD_READ_5_GLUTEN_ROWS_2026-10-10.md; '
                                           'owner "Lead reads, fail-closed", OWNER_DECISIONS_BATCH_E_2026-10-10.json'),
+    (99213, 'gluten'): ('before_d16i_v1', 'datasets/_admin/progress/FOLLOWUPS_2026-10-08/BATCH_I/review/review.md C3; '
+                                          'owner "Keep + amend rules", OWNER_DECISIONS_BATCH_I1_ROUND2_2026-10-14.json point 1'),
+}
+# Declared first additions: a (recipe, class) on a row of the 401 above whose reconciliation prior never carried the class, added by a later
+# owner-authorised transaction. There is no removed literal to restore, so the entry pins the literal. The class must be absent from the
+# reconciliation prior and present now with exactly that literal, the named generation's prior value must equal the current tiers without it, and
+# the strict-removal check then applies to the rest. Such a row may not also carry a REINSTATED entry or a later-generation record.
+DECLARED_ADDITIONS = {
+    (15690, 'gluten'): ('before_d16i_v1', 'inherited',
+                        'datasets/_admin/progress/FOLLOWUPS_2026-10-08/BATCH_I/review/review.md C3; '
+                        'owner "Keep + amend rules", OWNER_DECISIONS_BATCH_I1_ROUND2_2026-10-14.json point 1'),
 }
 
 
@@ -59,6 +70,10 @@ def validate_release_tiers(root):
                                              filters=[('generation', 'in', sorted({g for g, _ in REINSTATED.values()}) or [''])])
         if not set(rid for rid, _ in REINSTATED) <= set(history.recipe_id):
             return ['a declared re-addition names a row outside the reconciliation history']
+        addition_history = pd.read_parquet(root / 'data/provenance/field_history.parquet',
+                                           filters=[('generation', 'in', sorted({g for g, _, _ in DECLARED_ADDITIONS.values()}) or [''])])
+        if not set(rid for rid, _ in DECLARED_ADDITIONS) <= set(history.recipe_id):
+            return ['a declared addition names a row outside the reconciliation history']
         for row in history.itertuples(index=False):
             old = parse_tiers(row.value_str)
             # A later transaction replaced this row's tiers: the strict removal must have held at the value it replaced.
@@ -71,6 +86,17 @@ def validate_release_tiers(root):
             else:
                 now = parse_tiers(wide.loc[row.recipe_id, 'allergen_tier'])
             back = {cls: gen for (rid, cls), (gen, _) in REINSTATED.items() if rid == row.recipe_id}
+            added = {cls: (gen, literal) for (rid, cls), (gen, literal, _) in DECLARED_ADDITIONS.items() if rid == row.recipe_id}
+            if added:
+                if back or row.recipe_id in later_value:
+                    return ['a declared addition is combined with another tier exemption']
+                prior = addition_history[(addition_history.recipe_id == row.recipe_id) & addition_history.field.eq('allergen_tier')
+                                         & addition_history.generation.isin({gen for gen, _ in added.values()})]
+                rest = {k: v for k, v in now.items() if k not in added}
+                if (any(cls in old or now.get(cls) != literal for cls, (_, literal) in added.items()) or len(prior) != 1
+                        or parse_tiers(prior.value_str.iloc[0]) != rest):
+                    return ['a declared addition is not in its declared form or its prior value is not recorded']
+                now = rest
             if back:
                 prior = reinstated_history[(reinstated_history.recipe_id == row.recipe_id) & reinstated_history.field.eq('allergen_tier')
                                            & reinstated_history.generation.isin(set(back.values()))]
