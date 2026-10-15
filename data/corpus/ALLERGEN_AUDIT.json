@@ -145,12 +145,12 @@
     },
     "fish": {
       "lexical_present": 4919,
-      "flagged_present": 5981,
+      "flagged_present": 5952,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1062,
-      "audit_lexicon_coverage_of_flagged": 0.8224,
-      "unaudited_flagged_rows": 1062,
+      "false_positives_flag_only": 1033,
+      "audit_lexicon_coverage_of_flagged": 0.8264,
+      "unaudited_flagged_rows": 1033,
       "false_negative_examples": []
     },
     "ghee": {
@@ -194,12 +194,12 @@
     },
     "gluten": {
       "lexical_present": 53930,
-      "flagged_present": 76600,
+      "flagged_present": 76601,
       "false_negatives": 93,
       "false_negative_rate_of_lexical": 0.0017,
-      "false_positives_flag_only": 22763,
+      "false_positives_flag_only": 22764,
       "audit_lexicon_coverage_of_flagged": 0.7028,
-      "unaudited_flagged_rows": 22763,
+      "unaudited_flagged_rows": 22764,
       "false_negative_examples": [
         {
           "recipe_id": 29430,
@@ -265,12 +265,12 @@
     },
     "milk": {
       "lexical_present": 110987,
-      "flagged_present": 116538,
+      "flagged_present": 116539,
       "false_negatives": 34,
       "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 5585,
+      "false_positives_flag_only": 5586,
       "audit_lexicon_coverage_of_flagged": 0.9521,
-      "unaudited_flagged_rows": 5585,
+      "unaudited_flagged_rows": 5586,
       "false_negative_examples": [
         {
           "recipe_id": 33216,
@@ -427,22 +427,22 @@
     },
     "shellfish": {
       "lexical_present": 3736,
-      "flagged_present": 4229,
+      "flagged_present": 4232,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 493,
-      "audit_lexicon_coverage_of_flagged": 0.8834,
-      "unaudited_flagged_rows": 493,
+      "false_positives_flag_only": 496,
+      "audit_lexicon_coverage_of_flagged": 0.8828,
+      "unaudited_flagged_rows": 496,
       "false_negative_examples": []
     },
     "soy": {
       "lexical_present": 8031,
-      "flagged_present": 9052,
+      "flagged_present": 9053,
       "false_negatives": 0,
       "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1021,
-      "audit_lexicon_coverage_of_flagged": 0.8872,
-      "unaudited_flagged_rows": 1021,
+      "false_positives_flag_only": 1022,
+      "audit_lexicon_coverage_of_flagged": 0.8871,
+      "unaudited_flagged_rows": 1022,
       "false_negative_examples": []
     },
     "sulphites": {
@@ -478,11 +478,11 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 78757,
-      "conflicting_rows": 273,
-      "rate": 0.0035,
+      "rows_with_label": 78350,
+      "conflicting_rows": 264,
+      "rate": 0.0034,
       "by_allergen": {
-        "milk": 222,
+        "milk": 213,
         "egg": 48,
         "fish": 3,
         "shellfish": 0
@@ -495,10 +495,6 @@
         {
           "recipe_id": 3079,
           "name": "Hussain's Masala scrambled eggs"
-        },
-        {
-          "recipe_id": 23811,
-          "name": "Caesar Kachumber Recipe"
         },
         {
           "recipe_id": 24002,
@@ -547,11 +543,15 @@
         {
           "recipe_id": 33084,
           "name": "red lentil dahl (sattvic masoor dal)"
+        },
+        {
+          "recipe_id": 33094,
+          "name": "Thai Basil Eggplant"
         }
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 88918,
+      "rows_with_label": 88488,
       "conflicting_rows": 7,
       "rate": 0.0001,
       "by_allergen": {
@@ -590,7 +590,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 15651,
+      "rows_with_label": 15558,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

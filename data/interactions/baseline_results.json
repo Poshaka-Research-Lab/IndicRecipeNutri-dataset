@@ -3,30 +3,30 @@
   "generator": "scripts/build_interactions.py",
   "evaluator": "scripts/build_interaction_baselines.py",
   "seed": 0,
-  "n_users": 35831,
-  "n_items": 16370,
-  "n_train_int": 658183,
+  "n_users": 35825,
+  "n_items": 16300,
+  "n_train_int": 658092,
   "metrics": [
     {
       "model": "Popularity",
-      "Recall@10": 0.0144,
-      "Recall@20": 0.0236,
-      "NDCG@10": 0.0113,
-      "HR@10": 0.0613
+      "Recall@10": 0.0135,
+      "Recall@20": 0.0231,
+      "NDCG@10": 0.0107,
+      "HR@10": 0.0589
     },
     {
       "model": "ItemKNN",
-      "Recall@10": 0.0085,
-      "Recall@20": 0.0135,
-      "NDCG@10": 0.0073,
-      "HR@10": 0.0454
+      "Recall@10": 0.0078,
+      "Recall@20": 0.0126,
+      "NDCG@10": 0.0066,
+      "HR@10": 0.042
     },
     {
       "model": "BPR-MF",
-      "Recall@10": 0.0059,
-      "Recall@20": 0.0102,
-      "NDCG@10": 0.0047,
-      "HR@10": 0.0253
+      "Recall@10": 0.0054,
+      "Recall@20": 0.0092,
+      "NDCG@10": 0.0042,
+      "HR@10": 0.0232
     }
   ],
   "protocol": "implicit top-N; per-user leave-last-20%-out (temporal); full-item ranking; seen items masked. Synthetic behaviour, not observed users."

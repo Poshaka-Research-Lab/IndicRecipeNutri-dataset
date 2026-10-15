@@ -419,6 +419,59 @@ reviewed expected cell list (2,046 cells / 475 rows) in every value.
 - Tier contract: no recipe of the allergen-tier reconciliation history is touched; `validate_release_tiers`
   returns no problem and `verify_release --strict-checksums` PASSED.
 
+### Changed 15 Oct 2026 — D16 batch I-3 (master `817ea8a9` → `f066287f`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_I3/install/post_install_prep/POST_INSTALL_D16K_REPORT.md`
+(datasets workspace). Transaction `txn-20261015T123338Z-501c6f0f518b` (window attempt 2; attempt 1 was rolled back
+before any master change survived). The installed master equals the reviewed expected cell list (3,498 cells /
+1,086 rows) in every value.
+
+- Master diff: 1,086 rows / 3,498 cells (diet_meat_class 1,003, Diet 954, contains_poultry 713, contains_fish 286,
+  contains_beef 82, Diet_prior 79, diet_v13 79, contains_pork 75, allergen_tier 71, Allergens_v2 70,
+  sulphites_possible 39, sulphites_possible_src 39, diet_contradicts_ingredients 4, contains_alcohol 1,
+  contains_gelatin 1, gluten_confidence 1, gluten_declared 1).
+  - Strengthening first: unqualified Worcestershire, pre-cooked meat in the method, Clamato and similar reads move
+    strict-Diet recipes to Non-Vegetarian or `unknown` and add classes: `fish` on 18 recipes, `shellfish` on 3,
+    `gluten`, `milk` and `soy` on 1 each.
+  - **Owner-accepted weakening, 2,157 cells** (the accepted set exactly; no other cell is weaker):
+    - meat flags and `diet_meat_class` cleared on 950 recipes whose every flag was read as a false positive with a
+      verified quote;
+    - `fish` removed from 47 recipes where every Worcestershire mention is qualified vegan or vegetarian;
+    - 14 owner Diet labels on previously `unknown` recipes.
+  - Diet: 954 recipes move. To `unknown`: Vegetarian 409, Vegan 388, Eggetarian 90 (read rows whose remaining
+    meat evidence is weak; fail-closed). To Non-Vegetarian: Vegan 24, Vegetarian 24, Eggetarian 4, `unknown` 5.
+    Vegetarian → Eggetarian 1. Owner labels from `unknown`: Vegan 5, Vegetarian 4.
+  - `sulphites_possible` was cleared on 39 recipes by the recompute chain; all 39 keep `sulphites` in
+    `Allergens_v2`.
+- Diet totals (all rows): Vegetarian 88,488, Vegan 78,351, Non-Vegetarian 32,602, Eggetarian 15,558,
+  unknown 4,388. Strict-Diet recipes with a True meat flag: 1,059 → 111 (0 new).
+- Knowledge graph: 6,432,608 → **6,432,585** edges (−23). Nodes are unchanged at 222,537.
+  - `contains_allergen` −23: fish 5,981 → 5,952, shellfish 4,229 → 4,232, gluten 76,600 → 76,601,
+    milk 116,538 → 116,539, soy 9,052 → 9,053.
+  - `has_diet`: net 0; edges re-pointed (Vegetarian −430, Vegan −407, Eggetarian −93, Non-Vegetarian +57,
+    unknown +873).
+  - Every edge was reconciled against a model of the master diff (1,001 removed, 978 added).
+    `EXPECTED_KG_EDGES` and the gate_m28 fish, shellfish, gluten, milk and soy pins were moved to the measured values.
+- `gluten_confidence_v2.parquet` was refreshed from the master (1 recipe).
+- Allergen-tier ledger `allergen_tier_history_d16k.parquet`: 71 rows, generation `before_d16k_v1`. 1 row records
+  an empty prior tier; 1 row (125004) changes a literal only; 47 rows lose `fish`, each an owner-accepted cell.
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `745e668b` → `b629115e` after the install
+  (glued "Worcestershire" → fish; oyster-flavoured sauce spellings → shellfish and gluten). The release evidence
+  layer's own term list is unchanged (`audit_lexicon_sha256` = `6d642766…`).
+- `allergen_evidence_v1`: `status_v012` changed on exactly the 71 (recipe, class) pairs whose `contains_allergen`
+  edge was added or removed: 24 → `present` (fish 18, shellfish 3, gluten 1 and milk 1 from `absent`, soy 1 from
+  `unknown`) and 47 fish `present` → `absent`. No `evidence_kind` changed.
+- Benchmark gold sets were regenerated from the graph. 9 of 67 queries changed membership, and the query
+  definitions are unchanged. No gold recipe of a "without <allergen>" query carries that allergen.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 88,488, Vegan 78,350, Non-Vegetarian 32,601, Eggetarian 15,558.
+    4,387 undeclared recipes are excluded.
+  - 35,825 users / 16,300 items / 821,189 positives (train 658,092 / test 163,097).
+  - 0 served-diet violations.
+- README: the Diet table, the `unknown` count and the `contains_allergen` count (491,208) were updated.
+- Tier contract: `validate_row` has 0 failures over the master, `validate_release_tiers` returns no problem and
+  `verify_release --strict-checksums` PASSED.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

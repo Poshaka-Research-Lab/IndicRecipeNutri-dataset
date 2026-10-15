@@ -3,7 +3,7 @@
   "frozen_definition_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "query_count": 67,
   "gold_cap": 300,
-  "queries_sha256": "670281982cc50f8a6ea89336723fb65ccd6d95fd5aef04c0c364acab28d5fa25",
+  "queries_sha256": "e0ff147b863d24589e3d05783f562a06438a9c44946dd43a0817b9ef3630e0ac",
   "builder_sha256": "20980db7dc6f8cd2182cc4da653257b4567efbaa358fd18a4e94c4bc04c37e69",
   "evaluation_mode": "full-graph transductive diagnostic; not held-out human relevance",
   "definitions_changed": 0,
@@ -52,8 +52,8 @@
       "removed": [
         "recipe::210",
         "recipe::305",
+        "recipe::410",
         "recipe::453",
-        "recipe::769",
         "recipe::777",
         "recipe::789",
         "recipe::791",
@@ -89,13 +89,19 @@
         "recipe::1450",
         "recipe::1451",
         "recipe::1454",
-        "recipe::1455"
+        "recipe::1455",
+        "recipe::1461",
+        "recipe::1469",
+        "recipe::1470"
       ],
       "removed": [
         "recipe::11",
         "recipe::51",
         "recipe::57",
         "recipe::102",
+        "recipe::196",
+        "recipe::266",
+        "recipe::352",
         "recipe::393",
         "recipe::403",
         "recipe::428",
@@ -124,11 +130,13 @@
         "recipe::210",
         "recipe::305",
         "recipe::403",
+        "recipe::410",
         "recipe::445",
         "recipe::453",
         "recipe::614"
       ],
       "removed": [
+        "recipe::822",
         "recipe::824",
         "recipe::825",
         "recipe::826",
@@ -297,6 +305,7 @@
       "removed": [
         "recipe::30818",
         "recipe::58655",
+        "recipe::94044",
         "recipe::134282",
         "recipe::188473"
       ]
@@ -309,6 +318,10 @@
         "recipe::13910",
         "recipe::70798",
         "recipe::93254",
+        "recipe::130082",
+        "recipe::161833",
+        "recipe::162509",
+        "recipe::169703",
         "recipe::183281"
       ]
     },
@@ -353,12 +366,17 @@
         "recipe::1441",
         "recipe::1448",
         "recipe::1450",
-        "recipe::1451"
+        "recipe::1451",
+        "recipe::1461",
+        "recipe::1469"
       ],
       "removed": [
         "recipe::11",
         "recipe::57",
         "recipe::102",
+        "recipe::196",
+        "recipe::266",
+        "recipe::352",
         "recipe::393",
         "recipe::403",
         "recipe::428",
@@ -386,10 +404,12 @@
         "recipe::210",
         "recipe::305",
         "recipe::403",
+        "recipe::410",
         "recipe::453",
         "recipe::614"
       ],
       "removed": [
+        "recipe::822",
         "recipe::824",
         "recipe::825",
         "recipe::826",
@@ -601,10 +621,12 @@
       "query_id": "silver_3b23a3d577ab0f56",
       "query": "Non-Vegetarian recipes high in Magnesium",
       "added": [
+        "recipe::26609",
         "recipe::26671",
         "recipe::184090"
       ],
       "removed": [
+        "recipe::29558",
         "recipe::160713",
         "recipe::216703"
       ]
@@ -633,6 +655,7 @@
         "recipe::16020",
         "recipe::56038",
         "recipe::60550",
+        "recipe::62406",
         "recipe::96774",
         "recipe::96786",
         "recipe::102813",
@@ -640,7 +663,6 @@
         "recipe::134467",
         "recipe::139503",
         "recipe::141100",
-        "recipe::181775",
         "recipe::190515",
         "recipe::211539"
       ]
