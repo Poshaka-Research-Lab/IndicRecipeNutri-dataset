@@ -47,7 +47,7 @@ Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item 
 |---|---|
 | **Recipes** | 219,384, across **378 source sites** |
 | **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,537 nodes · **6,432,585 edges** · 17 node types · 22 relation types |
+| **Knowledge graph** | 222,537 nodes · **6,433,798 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 2,478 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -96,8 +96,8 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,432,585 rows
-kg[kg.rel == "contains_allergen"]                      # 491,208 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,433,798 rows
+kg[kg.rel == "contains_allergen"]                      # 492,421 rows
 ```
 
 </details>
@@ -232,7 +232,7 @@ Parquet, zstd-compressed, 50,000-row groups. **≈495 MB** total.
 | `Region` | 27 | Pan-Indian (135,018) · North India (12,112) · South India (11,579) · Kerala (11,527) · Tamil Nadu (11,375) |
 | `Cuisine` | 53 | Indian (146,487) · American (12,718) · South Indian (9,879) · Kerala (9,403) |
 | `Course` | 12 | Main Course (91,036) · Dessert (37,043) · Breakfast (19,421) |
-| `Diet` | 5 | Vegetarian (88,488) · Vegan (78,350) · Non-Vegetarian (32,601) · Eggetarian (15,558) |
+| `Diet` | 5 | Vegetarian (88,794) · Vegan (78,522) · Non-Vegetarian (32,607) · Eggetarian (15,630) |
 
 `Pan-Indian` dominates because most sources do not declare a region. **Slice on the
 state-level regions for cultural work**, and treat `Pan-Indian` as "unlabelled", not as a
@@ -271,15 +271,15 @@ Comparing either against `Pan-Indian` is not — that bucket is unlabelled, not 
 
 ```python
 r.Diet.value_counts()
-# Vegetarian       88,488
-# Vegan            78,350
-# Non-Vegetarian   32,601
-# Eggetarian       15,558
-# unknown           4,387
+# Vegetarian       88,794
+# Vegan            78,522
+# Non-Vegetarian   32,607
+# Eggetarian       15,630
+# unknown           3,831
 ```
 
 `unknown` is a real category and is **not** a permissive default. The interaction benchmark
-excludes those 4,387 recipes from every diet-restricted pool rather than treating them as
+excludes those 3,831 recipes from every diet-restricted pool rather than treating them as
 vegetarian.
 
 </details>
@@ -318,14 +318,14 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,537 nodes, 6,432,585 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,433,798 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
     R((recipe)) -->|has_ingredient 1.92M| I((ingredient))
     R -->|has_health_tag 1.73M| H((healthtag))
     R -->|suitable_for 895K| D((condition))
-    R -->|contains_allergen 491K| A((allergen))
+    R -->|contains_allergen 492K| A((allergen))
     R -->|cooked_by 404K| M((method))
     R -->|in_cuisine 219K| C((cuisine))
     R -->|from_region 219K| G((region))
@@ -359,7 +359,7 @@ graph LR
 | `has_ingredient` | 1,916,036 | | `shares_flavor` | 13,670 |
 | `has_health_tag` | 1,725,100 | | `in_context` | 7,287 |
 | `suitable_for` | 895,452 | | `pairs_with` | 3,265 |
-| `contains_allergen` | 491,208 | | `rich_in` | 2,935 |
+| `contains_allergen` | 492,421 | | `rich_in` | 2,935 |
 | `cooked_by` | 404,145 | | `grounded_as` | 369 |
 | `has_diet` | 256,132 | | `is_a` | 173 |
 | `from_region` | 219,347 | | `typical_region` | 48 |
@@ -404,10 +404,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,825 users · 16,300 items |
-| Train / test pairs | 658,092 / 163,097 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,802 users · 16,336 items |
+| Train / test pairs | 657,749 / 163,043 |
 | Train/test leakage | **0** |
-| Attribute KG | 81,497 triples · 16,348 entities |
+| Attribute KG | 81,677 triples · 16,384 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover
@@ -428,13 +428,13 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 
 | class | recipes | | class | recipes |
 |---|---:|---|---|---:|
-| `milk` | 116,539 | | `fenugreek` | 20,028 |
-| `gluten` | 76,601 | | `sesame` | 13,730 |
+| `milk` | 116,541 | | `fenugreek` | 20,028 |
+| `gluten` | 77,813 | | `sesame` | 13,730 |
 | `coconut` | 36,813 | | `tamarind` | 12,163 |
-| `mustard` | 36,691 | | `peanut` | 11,464 |
+| `mustard` | 36,691 | | `peanut` | 11,465 |
 | `ghee` | 33,539 | | `soy` | 9,053 |
 | `tree_nuts` | 33,290 | | `fish` | 5,952 |
-| `asafoetida` | 30,612 | | `shellfish` | 4,232 |
+| `asafoetida` | 30,612 | | `shellfish` | 4,230 |
 | `sulphites` | 23,990 | | `celery` | 2,357 |
 | `egg` | 21,676 | | **`unknown`** | **2,478** |
 
