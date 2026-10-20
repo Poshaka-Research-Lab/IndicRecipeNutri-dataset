@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/candidate-0.12.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/candidate-0.13.0-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -25,6 +25,10 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+## 0.13.0 local candidate
+
+Rebuilds the release on data version v19 (master `e3f89628`) after the post-0.12.0 label installs (latest: D16 batches E to I-5): allergen and Diet labels changed, the knowledge graph is at 6,447,338 edges, and 219,384 recipes are published, unchanged. No recipe was added or removed. The 0.12.0 evidence layers below are carried forward. See the [changelog](CHANGELOG.md). This local update is not a remote release.
 
 ## 0.12.0 local candidate
 

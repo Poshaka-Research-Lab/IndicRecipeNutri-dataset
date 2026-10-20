@@ -1,10 +1,46 @@
 # Changelog
 
-## [0.12.0] ? 2026-09-28 ? local additive candidate
+## [0.13.0] — 2026-10-20 — D16 batches E to I-5, data version v19 (master `e3f89628`)
 
-Adds provisional recipe-quality and duplicate-candidate sidecars, allergen evidence plus a separate fail-closed UNKNOWN status, published item attributes, nutrition-estimator diagnostics, and a separate deterministic synthetic generator with 50,000 users and 1,000,000 events. Retains legacy data, splits, graph, benchmark and interaction log. Corrects the IFCT declaration using owner-attested permission for existing profiles.
+Rebuilds the 0.12.0 release on data version **v19** (master `e3f89628`). Every change since the
+`v0.12.0` tag is a label or graph-value change from a master install followed by a release rebuild;
+the entries below are the per-batch records, moved here unchanged from under [0.12.0], where they
+were appended after the tag. No recipe was added or removed: **219,384 recipes are published**, as at
+0.12.0 (`data/provenance/release_facts.json` at both tags).
 
-Engineering checks do not establish semantic accuracy or safety. Instruction-derived flag publication remains conditional on source-terms verification; this is a local update, with no remote publication. Details and measured scope: [0.12.0 evidence layers](docs/quality_0_12_0/README.md).
+Knowledge graph: 6,426,916 edges at `v0.12.0` (`release_facts.json` at the tag) → **6,447,338**.
+Nodes are unchanged at 222,537. The D16 batch rebuilds E to I-5, from their entries below:
+
+| batch | master | KG edges |
+|---|---|---|
+| E | `d8cbb3cc` → `4b710bd1` | 6,427,779 → 6,427,883 (+104) |
+| F | `4b710bd1` → `61d606c8` | 6,427,883 → 6,427,777 (−106) |
+| G | `61d606c8` → `f666fd66` | 6,427,777 → 6,427,881 (+104) |
+| H | `f666fd66` → `1c0cd8ba` | 6,427,881 → 6,430,990 (+3,109) |
+| I-1 | `1c0cd8ba` → `ea5fd733` | 6,430,990 → 6,432,254 (+1,264) |
+| I-2 | `ea5fd733` → `817ea8a9` | 6,432,254 → 6,432,608 (+354) |
+| I-3 | `817ea8a9` → `f066287f` | 6,432,608 → 6,432,585 (−23) |
+| I-4 | `f066287f` → `016d22fc` | 6,432,585 → 6,433,798 (+1,213) |
+| I-5 | `016d22fc` → `e3f89628` | 6,433,798 → 6,447,338 (+13,540) |
+
+Earlier post-tag rebuilds — the DietaryContext layer, the T1, Diet-repair and D13 installs, D16
+batches A to D and D17 — are recorded in their entries below and in the commit history.
+
+- **Reviewed allergen-tier contract change.** `scripts/allergen_tier_contract.py` admits three
+  declared exceptions to the strict removal of stale tiers: the `(99336, 'gluten')` reinstatement
+  (batch E), the `DECLARED_ADDITIONS` branch (batch I-1, extended in I-5 to 35 entries on 29
+  reconciliation rows), and the new **`COMBINED_READDITIONS`** rule with one entry, recipe **184699**
+  (milk re-added at its reconciliation literal, ghee and tree nuts added; additions only). Owner
+  ruling I5-R10-1, independently reviewed (`BATCH_I5/review/REVIEW_I5_CONTRACT.md`, APPROVE WITH
+  NOTES). 184699 is published with its real allergens.
+- **Benchmark.** The 67 query definitions are unchanged; gold sets were re-derived from the graph at
+  every rebuild, so results are comparable only within a single release.
+- **Version identifiers kept.** Policy and layer identifiers that name 0.12.0 — for example
+  `irn-allergen-evidence-0.12.0-v1`, `irn-item-card-0.12.0-v1`, `nutrition-evidence-0.12.0-v1` and
+  `docs/quality_0_12_0/` — name the layer version that produced those outputs and are not renamed.
+  `data/corpus/corpus_manifest.json` still records `corpus_build` `v15`.
+- Release metadata bumped to 0.13.0 (`scripts/release_config.py`, `CITATION.cff`, `.zenodo.json`,
+  `README.md`, `VERSIONING.md`); facts, data dictionary and checksums rebuilt.
 
 ### Added 29 Sep 2026 — DietaryContext evidence and `DietaryContext_v2` (additive)
 
@@ -586,6 +622,12 @@ published, as before.
   updated.
 - Tier contract: `validate_row` has 0 failures over the master, `validate_release_tiers` returns no problem and
   `verify_release --strict-checksums` PASSED.
+
+## [0.12.0] ? 2026-09-28 ? local additive candidate
+
+Adds provisional recipe-quality and duplicate-candidate sidecars, allergen evidence plus a separate fail-closed UNKNOWN status, published item attributes, nutrition-estimator diagnostics, and a separate deterministic synthetic generator with 50,000 users and 1,000,000 events. Retains legacy data, splits, graph, benchmark and interaction log. Corrects the IFCT declaration using owner-attested permission for existing profiles.
+
+Engineering checks do not establish semantic accuracy or safety. Instruction-derived flag publication remains conditional on source-terms verification; this is a local update, with no remote publication. Details and measured scope: [0.12.0 evidence layers](docs/quality_0_12_0/README.md).
 
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 

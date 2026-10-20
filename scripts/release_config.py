@@ -1201,7 +1201,12 @@ EXPECTED_CORPUS_BUILD = "v15"
 # identifier, table, column, row, count or split value moved, so by the convention above a patch
 # bump would also have been defensible; the minor position marks the new join surfaces.
 # Every expected count in this file is unchanged.
-DATASET_VERSION = "0.12.0"
+# 0.12.0 -> 0.13.0, by the owner's decision (2026-10-20). Label and graph values moved under
+# the post-0.12.0 batch rebuilds (latest D16 batches E, F, G, H, I-1..I-5; data version v19,
+# master e3f89628): EXPECTED_KG_EDGES and the gate_m28 class pins were re-pinned per batch (KG
+# 6,447,338 edges, nodes 222,537); 219,384 recipes are published, unchanged. The reviewed
+# allergen-tier contract adds COMBINED_READDITIONS (one entry, recipe 184699). See CHANGELOG 0.13.0.
+DATASET_VERSION = "0.13.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet
