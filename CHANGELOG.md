@@ -528,6 +528,65 @@ equals the reviewed expected cell list (7,387 cells / 1,989 rows) in every value
 - Tier contract: `validate_row` has 0 failures over the master, `validate_release_tiers` returns no problem and
   `verify_release --strict-checksums` PASSED.
 
+### Changed 20 Oct 2026 — D16 batch I-5, data version v19 (master `016d22fc` → `e3f89628`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_I5/install/post_install_prep/POST_INSTALL_D16M_REPORT.md`
+(datasets workspace). Transaction `txn-20261018T084058Z-a9ba436d7529`. The installed master equals the reviewed
+expected cell list (36,293 cells / 13,105 rows) in every value. No recipe was added or removed; 219,384 recipes are
+published, as before.
+
+- Master diff: 13,105 rows / 36,293 cells (allergen_tier 12,396, Allergens_v2 12,392, Diet 2,710, Diet_prior 2,594,
+  diet_v13 2,594, sulphites_possible 895, sulphites_possible_src 895, DietaryContext 689, gluten_confidence 405,
+  gluten_declared 404, diet_meat_class 137, contains_poultry 87, contains_beef 49, contains_gelatin 23,
+  contains_alcohol 21, contains_pork 2).
+  - Strengthening: an owner-ruled allergen pass over the Instructions text (only classes measured at ≥ 0.90
+    precision on a held-out read, with a plant-milk guard) adds asafoetida, celery, ghee, tree nuts and sulphites,
+    and milk with ghee; the labelling lexicon adds gluten for gluten vocabulary, wrappers and finished dumplings /
+    samosas; one read row (161893, Caesar dressing) adds fish, milk and mustard. (recipe, class) additions: ghee
+    4,945, asafoetida 3,103, sulphites 2,399, milk 2,397, tree_nuts 2,251, gluten 404, celery 185, coconut 1,
+    fish 1, mustard 1, peanut 1.
+  - **Owner-accepted weakening, 448 cells** (the accepted set exactly; no other cell is weaker): `shellfish` removed
+    on 81 recipes whose only shellfish source is an item-qualified vegan / vegetarian / mushroom oyster sauce, and 96
+    homonym Diet restores after a per-row read (with their meat flags).
+  - Vegan recipes that gain a dairy class lose the Vegan label (strengthening). Jain / sattvic context dropped on
+    689 recipes that use garlic or onion.
+- Diet totals (all rows): Vegetarian 91,280, Vegan 76,025, Non-Vegetarian 32,513, Eggetarian 15,642, unknown 3,927.
+  `jain_sattvic` 3,107 → 2,418. Strict-Diet recipes with a True meat flag: 8 → 8 (0 new).
+- Knowledge graph: 6,433,798 → **6,447,338** edges (+13,540). Nodes are unchanged at 222,537; `kg_nodes.parquet`
+  changed row order only (181 positions; the Jain / Sattvic / jain_sattvic nodes' first recipe moved).
+  - `contains_allergen` +15,607: asafoetida 30,612 → 33,715, celery 2,357 → 2,542, coconut 36,813 → 36,814,
+    fish 5,952 → 5,953, ghee 33,539 → 38,484, gluten 77,813 → 78,217, milk 116,541 → 118,938, mustard 36,691 →
+    36,692, peanut 11,465 → 11,466, shellfish 4,230 → 4,149, sulphites 23,990 → 26,389, tree_nuts 33,290 → 35,541.
+  - `has_diet` −1,378 (Jain −689, Sattvic −689, Vegan −2,498, Vegetarian +2,486, Non-Vegetarian −95,
+    Eggetarian +12, unknown +95); `in_context` −689 (`context::jain_sattvic`).
+  - Every edge was reconciled against a model of the master diff (4,858 removed, 18,398 added).
+    `EXPECTED_KG_EDGES` and the 12 moved gate_m28 class pins were set to the measured values.
+- `gluten_confidence_v2.parquet` was refreshed from the master (405 / 404 recipes).
+- Allergen-tier ledger `allergen_tier_history_d16m.parquet`: 12,396 rows, generation `before_d16m_v1`. 674 rows
+  record an empty prior tier; 4 rows (45465, 69032, 96406, 185152) change a literal only; 81 rows lose `shellfish`,
+  each an owner-accepted cell.
+- **Tier contract amended** (owner ruling I5-R10-1; independently reviewed, `BATCH_I5/review/REVIEW_I5_CONTRACT.md`
+  APPROVE WITH NOTES): 35 `DECLARED_ADDITIONS` entries on 29 rows of the 401-row reconciliation set (the batch I-1
+  mechanism), and a new `COMBINED_READDITIONS` rule with one entry, recipe 184699 (milk re-added at its
+  reconciliation literal, ghee and tree nuts added; additions only, the remaining tiers pinned). 184699 is published
+  with its real allergens. `allergen_tier_contract.py` 9262b4dc → 0f3baa90, test ce3a3a9e (17 tests).
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `afd6ce2a` → `f8246a13` after the install.
+  The release evidence layer's own term list is unchanged.
+- `allergen_evidence_v1`: `status_v012` changed on exactly the 15,769 (recipe, class) pairs whose
+  `contains_allergen` edge was added (15,688 → `present`: 14,655 from `absent`, 1,033 from `unknown`) or removed
+  (81 shellfish `present` → `unknown`). No `evidence_kind` changed.
+- Benchmark gold sets were regenerated from the graph: 18 of 67 queries changed membership; query definitions are
+  unchanged. No gold recipe of a "without <allergen>" query carries that allergen.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 91,280, Vegan 76,024, Non-Vegetarian 32,512, Eggetarian 15,642.
+    3,926 undeclared recipes are excluded.
+  - 35,827 users / 16,315 items / 820,947 positives (train 657,889 / test 163,058).
+  - 0 served-diet violations. Popularity still leads (R@10 0.0137).
+- README: the Diet table, the `unknown` count and the `contains_allergen` count (508,028; diagram label 508K) were
+  updated.
+- Tier contract: `validate_row` has 0 failures over the master, `validate_release_tiers` returns no problem and
+  `verify_release --strict-checksums` PASSED.
+
 ## [0.11.0] — 2026-09-23 — cultural-context layer and historical-snapshot crosswalk (additive)
 
 **Additive only.** Two new directories ship. No existing file under `data/` changed: the 219,384

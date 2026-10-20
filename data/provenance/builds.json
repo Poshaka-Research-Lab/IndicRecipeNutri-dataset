@@ -1,6 +1,6 @@
 {
   "v15-2026-09-01": {
-    "date": "2026-10-15",
+    "date": "2026-10-20",
     "script": "migrate_schema.py",
     "rows": 219384,
     "source_columns": 271,
@@ -33,12 +33,12 @@
       "allergens": {
         "rows": 3729528,
         "cols": 3,
-        "mb": 2.2
+        "mb": 2.3
       },
       "field_history": {
-        "rows": 8394479,
+        "rows": 8406875,
         "cols": 6,
-        "mb": 61.7
+        "mb": 61.8
       }
     },
     "nutrition_basis_history_rows": 219384,
@@ -59,6 +59,7 @@
     "allergen_tier_history_d16j_rows": 347,
     "allergen_tier_history_d16k_rows": 71,
     "allergen_tier_history_d16l_rows": 1215,
+    "allergen_tier_history_d16m_rows": 12396,
     "note": "S-1 split. 64 build-history columns moved to field_history rows. A future fix adds rows, not columns."
   }
 }

@@ -36,10 +36,10 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 | Allergen | Labelled | Named in text | TP | FP | FN | Precision | Recall | Status |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| coconut | 36,813 | 35,523 | 35,523 | 1,290 | 0 | 96.50% | 100.00% | agrees |
+| coconut | 36,814 | 35,523 | 35,523 | 1,291 | 0 | 96.49% | 100.00% | agrees |
 | tamarind | 12,163 | 12,059 | 12,059 | 104 | 0 | 99.14% | 100.00% | agrees |
 | fenugreek | 20,028 | 17,864 | 17,864 | 2,164 | 0 | 89.20% | 100.00% | agrees |
-| asafoetida | 30,612 | 23,745 | 23,745 | 6,867 | 0 | 77.57% | 100.00% | agrees |
+| asafoetida | 33,715 | 23,745 | 23,745 | 9,970 | 0 | 70.43% | 100.00% | agrees |
 
 > **Read the recall column with care.** For `coconut`, `tamarind` and `fenugreek` it is
 > close to a tautology: the labels were derived from a lexicon that is a superset of the
@@ -63,7 +63,7 @@ rest entirely on this project's own lexicon: `coconut`, `tamarind`, `fenugreek`,
 
 ## Why asafoetida's precision is the outlier
 
-**6,867** recipes carry the `asafoetida` label without naming it in the shipped
+**9,970** recipes carry the `asafoetida` label without naming it in the shipped
 ingredient list. An earlier version of this report put that count at 1,321 and
 attributed it to *"valid knowledge-graph (KG-sourced) labels"*. **There is no KG
 allergen source in this payload** — `allergens_sa5_src` takes only `lexicon_v8` (72,931), `none` (146,453). The actual
@@ -76,18 +76,18 @@ chaat masala contains asafoetida; its ingredient list does not say so. Labelling
 recipes is correct and is the fail-closed behaviour Codex CXC 80-2020 requires — but it
 makes the label deliberately exceed the text, which is what depresses precision here.
 
-Of those 6,867 rows, **6,531 (95.1%)** name such a blend:
+Of those 9,970 rows, **7,576 (76.0%)** name such a blend:
 
 | Blend named | Recipes |
 |---|---:|
 | chaat masala | 4,285 |
-| chat masala | 931 |
-| sev | 767 |
-| sambar powder | 630 |
-| pav bhaji | 561 |
-| garam masala | 387 |
+| garam masala | 1,216 |
+| chat masala | 932 |
+| sev | 906 |
+| sambar powder | 631 |
+| pav bhaji | 563 |
 
-Leaving **336** rows (0.15% of the corpus) where the
+Leaving **2,394** rows (1.09% of the corpus) where the
 label is not explained by either a spelling variant or a named blend. These are
 recorded, not resolved. They are a **known open item**, and because the residual
 direction is a label the text does not support — an over-warning, not a missed

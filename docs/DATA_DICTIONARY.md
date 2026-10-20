@@ -15,7 +15,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/corpus/allergens.parquet`
 
-3,729,528 rows x 3 columns - 2.2 MB (statistics from the first 500,000 rows)
+3,729,528 rows x 3 columns - 2.3 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -31,7 +31,7 @@ Covering **all 61 published Parquet tables**.
 |---|---|---|---:|---:|---|---|
 | `recipe_id` | int64 |  | 219,384 | 219,384 | 0 |  |
 | `Diet` | object |  | 219,384 | 5 | Non-Vegetarian |  |
-| `Diet_prior` | object |  | 6,403 | 5 | Vegan |  |
+| `Diet_prior` | object |  | 8,997 | 5 | Vegan |  |
 | `Region` | object |  | 219,347 | 27 | North India |  |
 | `region_src` | object |  | 2,921 | 4 | default |  |
 | `region_normalised` | object |  | 219,326 | 2 | False |  |
@@ -42,14 +42,14 @@ Covering **all 61 published Parquet tables**.
 | `SpiceLevel` | object |  | 219,346 | 3 | medium |  |
 | `SpiceLevel_src` | object |  | 219,346 | 3 | ingredient-rule |  |
 | `Occasion` | object |  | 21,037 | 644 | eid |  |
-| `DietaryContext` | object |  | 6,838 | 3 | vrat_fasting |  |
+| `DietaryContext` | object |  | 6,216 | 3 | vrat_fasting |  |
 | `CookingMethod` | object |  | 219,326 | 605 | fried |  |
 | `HealthGrade` | object |  | 219,326 | 5 | B |  |
 | `HealthConditions` | object |  | 211,452 | 1,893 | weight_loss,keto_friendly,low_cholestero |  |
 | `gl_bucket` | object |  | 216,293 | 3 | low |  |
 | `GlycemicLoad_numeric` | float64 | per serving | 216,293 | 15,973 | 1.79 |  |
-| `diet_v13` | object |  | 6,273 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,165 | 15 | poultry |  |
+| `diet_v13` | object |  | 8,865 | 5 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,084 | 15 | poultry |  |
 
 ## `data/corpus/nutrition.parquet`
 
@@ -162,10 +162,10 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 215,833 | 2 | False |  |
-| `contains_gelatin` | object |  | 215,808 | 2 | False |  |
+| `contains_alcohol` | object |  | 215,812 | 2 | False |  |
+| `contains_gelatin` | object |  | 215,785 | 2 | False |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,709 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 12,814 | 18 | raisin |  |
 | `nonveg_corrected` | object |  | 219,327 | 2 | False |  |
 | `mojibake_fixed` | object |  | 219,327 | 2 | False |  |
 | `qty_source` | object |  | 219,384 | 3 | none |  |
@@ -219,7 +219,7 @@ Covering **all 61 published Parquet tables**.
 | `badlist_n_items` | float64 |  | 219,384 | 52 | 11.0 |  |
 | `badlist_hard` | bool |  | 219,384 | 2 | False |  |
 | `badlist_any` | bool |  | 219,384 | 2 | False |  |
-| `allergen_tier` | object |  | 196,697 | 9,635 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `allergen_tier` | object |  | 197,371 | 11,679 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
 | `ingredient_src` | object |  | 3,371 | 5 | title_evidence |  |
@@ -327,7 +327,7 @@ Covering **all 61 published Parquet tables**.
 | `CarbPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 43.0 |  |
 | `FatPct` | float64 | `%` per energy [0, 100] | 217,299 | 101 | 44.0 |  |
 | `Occasion` | object |  | 21,037 | 644 | eid |  |
-| `DietaryContext` | object |  | 6,838 | 3 | vrat_fasting |  |
+| `DietaryContext` | object |  | 6,216 | 3 | vrat_fasting |  |
 | `DV_Protein` | float64 | `%` per dish | 219,326 | 301 | 4.0 |  |
 | `DV_Fiber` | float64 | `%` per dish | 219,326 | 286 | 8.0 |  |
 | `DV_Iron` | float64 | `%` per dish | 219,326 | 251 | 11.0 |  |
@@ -383,7 +383,7 @@ Covering **all 61 published Parquet tables**.
 | `Allergens_v1_superseded` | object |  | 219,384 | 484 | milk;gluten | ⚠ **Superseded, do not use for safety.** 12 of the 16 classes (no coconut / asafoetida / fenugreek / tamarind), some rows comma-separated, un-normalised `dairy` and `peanuts` tokens. Retained only so a v1-era claim stays reproducible. |
 | `allergens_inferred` | bool |  | 219,384 | 2 | False |  |
 | `allergens_src` | object |  | 218,555 | 3 | source/v5 |  |
-| `Allergens_v2` | object |  | 219,384 | 3,512 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
+| `Allergens_v2` | object |  | 219,384 | 3,622 | ghee;gluten;milk | **Authoritative.** All 17 declared classes — the 16-token taxonomy plus `ghee`, a derivative marker that ALWAYS co-occurs with `milk` and never replaces it; `;`-separated. `unknown` means NOT ASSESSED -- treat as unsafe, never as clean. |
 | `allergens_encoding_fixed` | bool |  | 219,384 | 1 | True |  |
 | `allergens_sa5_src` | object |  | 219,384 | 2 | none |  |
 | `nutrition_estimated` | object |  | 219,326 | 2 | False |  |
@@ -398,8 +398,8 @@ Covering **all 61 published Parquet tables**.
 | `cookingmethod_inferred` | object |  | 219,326 | 2 | False |  |
 | `micros_estimated` | object |  | 219,326 | 2 | False |  |
 | `contains_pork` | bool |  | 219,384 | 2 | False |  |
-| `contains_alcohol` | object |  | 215,833 | 2 | False |  |
-| `contains_gelatin` | object |  | 215,808 | 2 | False |  |
+| `contains_alcohol` | object |  | 215,812 | 2 | False |  |
+| `contains_gelatin` | object |  | 215,785 | 2 | False |  |
 | `diet_contradicts_ingredients` | bool |  | 219,384 | 2 | False | True where the declared `Diet` conflicts with a labelled allergen or a meat term. Advisory: the row is NOT auto-corrected. |
 | `Occasion_orig` | object |  | 14,095 | 593 | festival |  |
 | `DietaryContext_orig` | object |  | 4,129 | 3 | jain_sattvic |  |
@@ -442,7 +442,7 @@ Covering **all 61 published Parquet tables**.
 | `allergens_sesame_v11` | object |  | 219,327 | 2 | False |  |
 | `cookingmethod_normalised` | bool |  | 219,384 | 1 | True |  |
 | `sulphites_possible` | bool |  | 219,384 | 2 | False |  |
-| `sulphites_possible_src` | object |  | 13,709 | 18 | raisin |  |
+| `sulphites_possible_src` | object |  | 12,814 | 18 | raisin |  |
 | `badlist_empty` | bool |  | 219,384 | 2 | False |  |
 | `badlist_nav` | bool |  | 219,384 | 2 | False |  |
 | `badlist_meta` | bool |  | 219,384 | 2 | False |  |
@@ -476,10 +476,10 @@ Covering **all 61 published Parquet tables**.
 | `contains_beef` | bool |  | 219,384 | 2 | False |  |
 | `contains_poultry` | bool |  | 219,384 | 2 | True |  |
 | `contains_fish` | bool |  | 219,384 | 2 | False |  |
-| `Diet_prior` | object |  | 6,403 | 5 | Vegan |  |
-| `diet_v13` | object |  | 6,273 | 4 | vegan_to_vegetarian_dairy |  |
-| `diet_meat_class` | object |  | 32,165 | 15 | poultry |  |
-| `allergen_tier` | object |  | 196,697 | 9,635 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
+| `Diet_prior` | object |  | 8,997 | 5 | Vegan |  |
+| `diet_v13` | object |  | 8,865 | 5 | vegan_to_vegetarian_dairy |  |
+| `diet_meat_class` | object |  | 32,084 | 15 | poultry |  |
+| `allergen_tier` | object |  | 197,371 | 11,679 | ghee:direct;gluten:inherited;milk:derive | Evidence tier per asserted class. `inherited` means the class came from an earlier lexicon generation and carries no evidence in the current scan. Empty on `unknown` (unassessed) rows. |
 | `allergens_v14` | object |  | 219,327 | 2 | False |  |
 | `review_m1m2` | object |  | 219,327 | 2 | False |  |
 | `title_ingredients_added` | object |  | 3,269 | 58 | chicken |  |
@@ -1195,11 +1195,11 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/kg/kg_edges.parquet`
 
-6,433,798 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
+6,447,338 rows x 3 columns - 7.2 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `head` | object |  | 500,000 | 16,718 | recipe::0 |  |
+| `head` | object |  | 500,000 | 16,684 | recipe::0 |  |
 | `rel` | object |  | 500,000 | 22 | in_cuisine |  |
 | `tail` | object |  | 500,000 | 2,866 | cuisine::Indian |  |
 
@@ -1337,7 +1337,7 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/provenance/field_history.parquet`
 
-8,394,479 rows x 6 columns - 61.7 MB (statistics from the first 500,000 rows)
+8,406,875 rows x 6 columns - 61.8 MB (statistics from the first 500,000 rows)
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
@@ -1379,33 +1379,33 @@ Covering **all 61 published Parquet tables**.
 
 ## `data/quality/dietary_context_evidence_v1.parquet`
 
-6,838 rows x 23 columns - 0.1 MB
+6,216 rows x 23 columns - 0.1 MB
 
 | column | type | unit / basis | non-null | distinct | example | note |
 |---|---|---|---:|---:|---|---|
-| `recipe_id` | int64 |  | 6,838 | 6,838 | 1020 |  |
-| `legacy_dietary_context` | object |  | 6,838 | 3 | vrat_fasting |  |
-| `legacy_inferred_v11` | bool |  | 6,838 | 2 | False |  |
-| `legacy_inherited_from_duplicate` | bool |  | 6,838 | 2 | True |  |
-| `master_is_recipe` | bool |  | 6,838 | 2 | True |  |
-| `ingredients_assessable` | bool |  | 6,838 | 2 | True |  |
-| `n_parsed_ingredients` | int64 |  | 6,838 | 21 | 9 |  |
-| `animal_found` | object |  | 67 | 10 | mutton |  |
-| `allium_found` | object |  | 845 | 14 | garlic\|onion |  |
-| `root_found` | object |  | 1,993 | 37 | carrot |  |
-| `soft_found` | object |  | 2,703 | 9 | ginger\|turmeric |  |
-| `jain_match_fields` | object |  | 3,107 | 14 |  |  |
-| `sattvic_match_fields` | object |  | 3,107 | 10 |  |  |
-| `no_onion_garlic_match_fields` | object |  | 3,107 | 14 |  |  |
+| `recipe_id` | int64 |  | 6,216 | 6,216 | 1020 |  |
+| `legacy_dietary_context` | object |  | 6,216 | 3 | vrat_fasting |  |
+| `legacy_inferred_v11` | bool |  | 6,216 | 2 | False |  |
+| `legacy_inherited_from_duplicate` | bool |  | 6,216 | 2 | True |  |
+| `master_is_recipe` | bool |  | 6,216 | 2 | True |  |
+| `ingredients_assessable` | bool |  | 6,216 | 2 | True |  |
+| `n_parsed_ingredients` | int64 |  | 6,216 | 21 | 9 |  |
+| `animal_found` | object |  | 44 | 9 | mutton |  |
+| `allium_found` | object |  | 307 | 7 | onion |  |
+| `root_found` | object |  | 1,834 | 37 | carrot |  |
+| `soft_found` | object |  | 2,268 | 8 | turmeric |  |
+| `jain_match_fields` | object |  | 2,418 | 14 |  |  |
+| `sattvic_match_fields` | object |  | 2,418 | 10 |  |  |
+| `no_onion_garlic_match_fields` | object |  | 2,418 | 14 |  |  |
 | `vrat_match_fields` | object |  | 1,816 | 14 | title\|description |  |
 | `vrat_basis` | object |  | 4,053 | 7 | inherited_from_duplicate_family |  |
-| `claim_strength` | object |  | 3,768 | 4 | title |  |
-| `ingredients_source_trusted` | bool |  | 6,838 | 2 | True |  |
-| `DietaryContext_v2` | object |  | 3,269 | 14 | jain,no_onion_garlic |  |
-| `v2_reasons` | object |  | 3,677 | 57 | vrat_fasting:inherited_from_duplicate_fa |  |
-| `v2_status` | object |  | 6,838 | 5 | withdrawn |  |
-| `version` | object |  | 6,838 | 1 | dietary_context_evidence_v1 |  |
-| `interpretation` | object |  | 6,838 | 1 | source_text_claim_and_ingredient_conflic |  |
+| `claim_strength` | object |  | 3,568 | 4 | title |  |
+| `ingredients_source_trusted` | bool |  | 6,216 | 2 | True |  |
+| `DietaryContext_v2` | object |  | 3,209 | 14 | jain,no_onion_garlic |  |
+| `v2_reasons` | object |  | 3,082 | 41 | vrat_fasting:inherited_from_duplicate_fa |  |
+| `v2_status` | object |  | 6,216 | 5 | withdrawn |  |
+| `version` | object |  | 6,216 | 1 | dietary_context_evidence_v1 |  |
+| `interpretation` | object |  | 6,216 | 1 | source_text_claim_and_ingredient_conflic |  |
 
 ## `data/quality/duplicate_crosswalk_v1.parquet`
 
@@ -1512,7 +1512,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 |---|---:|---|
 | `BENCHMARK_MANIFEST.json` | 0.00 MB | metadata / manifest |
 | `eval_queries.jsonl` | 0.22 MB | one JSON object per line |
-| `eval_queries_protocol.json` | 0.02 MB | metadata / manifest |
+| `eval_queries_protocol.json` | 0.03 MB | metadata / manifest |
 | `GOLD_SET_AUDIT.json` | 0.00 MB | metadata / manifest |
 | `silver_regression_v1.json` | 0.00 MB | metadata / manifest |
 | `silver_regression_v1.jsonl` | 0.21 MB | one JSON object per line |
@@ -1522,15 +1522,15 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `ALLERGEN_AUDIT.json` | 0.02 MB | metadata / manifest |
-| `allergens.parquet` | 2.25 MB | columnar table — documented above |
+| `allergens.parquet` | 2.26 MB | columnar table — documented above |
 | `corpus_manifest.json` | 0.01 MB | metadata / manifest |
-| `labels.parquet` | 3.01 MB | columnar table — documented above |
+| `labels.parquet` | 3.02 MB | columnar table — documented above |
 | `nutrition.parquet` | 16.14 MB | columnar table — documented above |
 | `nutrition_derived.parquet` | 12.42 MB | columnar table — documented above |
 | `PII_SEMANTIC_SCAN.json` | 0.00 MB | metadata / manifest |
 | `quality.parquet` | 2.90 MB | columnar table — documented above |
-| `recipes.parquet` | 46.98 MB | columnar table — documented above |
-| `recipes_structured.parquet` | 103.48 MB | columnar table — documented above |
+| `recipes.parquet` | 47.02 MB | columnar table — documented above |
+| `recipes_structured.parquet` | 103.53 MB | columnar table — documented above |
 | `rehydration_index.parquet` | 11.31 MB | columnar table — documented above |
 
 ### `data/cultural_context/`
@@ -1593,7 +1593,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | `baseline_results.json` | 0.00 MB | metadata / manifest |
 | `DATASHEET.md` | 0.01 MB | prose |
 | `entity_list.txt` | 0.28 MB | plain-text id or triple list |
-| `interactions.csv` | 25.92 MB | delimited text |
+| `interactions.csv` | 25.91 MB | delimited text |
 | `item_list.txt` | 0.19 MB | plain-text id or triple list |
 | `kg_final.txt` | 1.09 MB | plain-text id or triple list |
 | `region_crosswalk.csv` | 0.00 MB | delimited text |
@@ -1635,8 +1635,8 @@ All 113 files under `data/`, so nothing ships undescribed.
 | `ingredient_map.json` | 0.04 MB | metadata / manifest |
 | `ingredient_tier.json` | 0.02 MB | metadata / manifest |
 | `kg_edge_evidence.parquet` | 0.82 MB | columnar table — documented above |
-| `kg_edges.parquet` | 7.18 MB | columnar table — documented above |
-| `kg_nodes.parquet` | 25.21 MB | columnar table — documented above |
+| `kg_edges.parquet` | 7.19 MB | columnar table — documented above |
+| `kg_nodes.parquet` | 25.19 MB | columnar table — documented above |
 | `kg_stats.json` | 0.00 MB | metadata / manifest |
 | `pairs_avoid.parquet` | 0.08 MB | columnar table — documented above |
 | `pairs_avoid_meta.json` | 0.00 MB | metadata / manifest |
@@ -1662,7 +1662,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `builds.json` | 0.00 MB | metadata / manifest |
-| `field_history.parquet` | 61.70 MB | columnar table — documented above |
+| `field_history.parquet` | 61.82 MB | columnar table — documented above |
 | `language_source_evidence.json` | 0.00 MB | metadata / manifest |
 | `release_facts.json` | 0.00 MB | metadata / manifest |
 | `withdrawn_ids.json` | 0.83 MB | metadata / manifest |
@@ -1672,7 +1672,7 @@ All 113 files under `data/`, so nothing ships undescribed.
 | file | size | kind |
 |---|---:|---|
 | `allergen_evidence_manifest.json` | 0.18 MB | metadata / manifest |
-| `allergen_evidence_v1.parquet` | 3.83 MB | columnar table — documented above |
+| `allergen_evidence_v1.parquet` | 3.84 MB | columnar table — documented above |
 | `allergen_review_candidates_v1.parquet` | 0.00 MB | columnar table — documented above |
 | `dietary_context_evidence_manifest.json` | 0.00 MB | metadata / manifest |
 | `dietary_context_evidence_v1.parquet` | 0.06 MB | columnar table — documented above |

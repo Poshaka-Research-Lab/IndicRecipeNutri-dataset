@@ -76,7 +76,7 @@
   },
   "gate_spec_sha256": "b213905ad40cdcb9e759cc0d5e3231dfee78b2eda2c1406d2ceb419cc7e31179",
   "independent_validation": "not_performed",
-  "input_manifest_sha256": "a04583e2827980be0892e86adc7638b07bbf167dda5d74e431670d8477ead21e",
+  "input_manifest_sha256": "6c571bd12515005827f5d9da8e6afdfc860b368b81f325b1ae2b5a1aaba2929d",
   "logical_sha256": "9fe2bcfe87371ef101444d34bd1b0cebe6bcd68e5d605acd5020a1a0b37b4a57",
   "payload_sha256": {
     "duplicate_crosswalk_v1.parquet": "b1e3abb7e33baf08d162566188f6bbb2cf8e4a8416c55282513a62e372c94f7a",
@@ -75014,7 +75014,7 @@
     "extra_source_ids_excluded": 3,
     "instructions_exported": false,
     "joined_ids": 219384,
-    "sha256": "016d22fce03869b017a86efb6d9841ad2bee7814fbca86a370ea4c843a4ed7c3",
+    "sha256": "e3f89628b0aee3a0cdf2042fad7927d44a07a9445adc2e1e854294192b2e7d88",
     "status": "gate_passed"
   },
   "status": "provisional_not_independently_validated"
