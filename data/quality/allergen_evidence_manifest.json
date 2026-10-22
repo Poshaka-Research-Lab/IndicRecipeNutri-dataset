@@ -9,15 +9,15 @@
     "unsupported languages and invalid lists unassessed"
   ],
   "heldout_ids_sha256": "c3517fda7c05e07f1e0d7d6e9f0e1d7c4e408fbad25ab7e824ed61965beef717",
-  "input_manifest_sha256": "6c571bd12515005827f5d9da8e6afdfc860b368b81f325b1ae2b5a1aaba2929d",
+  "input_manifest_sha256": "30a42f85b184d2014fd98fb884cbf3388780269acd4b64657a4bc5236ca59422",
   "inputs": {
-    "data/corpus/allergens.parquet": "b75e4c8ee77d605b8b529e19ba27af2ae968de15edfb28059be36818c9b132ce",
-    "data/corpus/recipes_structured.parquet": "ddeef462765d310a816f84f39d4e2a919c039c21be7659c6022639fa8a80a6b0"
+    "data/corpus/allergens.parquet": "ab42b4df03be108379810d09882e24ebfef2d533a7af826c47b1aab4c051cec6",
+    "data/corpus/recipes_structured.parquet": "89837bbcd76b96950853e1ed6f0d0a800d98cebbad2f3df13cc87088d396606f"
   },
   "interpretation": "Absent remains silver inferred absence, not verified safe; UNKNOWN is abstention.",
   "legacy_labels_modified": false,
-  "logical_sha256": "3f3608ce830feb5790cf28c1898ad9865945ebe6ea82ad46f1122fd2672a5190",
-  "payload_sha256": "dcbf876c550dec3919fbad26a069c9926e24b7235dc10131ed317c32a2d318c9",
+  "logical_sha256": "8ded193826ae29c4b77a53f3a05b9854832a78627332f3e4842742d3f4a4d187",
+  "payload_sha256": "55992ef7d5007d730735a7f3fb3db4abb994da2e9d0012170082a9a764c0bc41",
   "policy_code_sha256": "eab31e44d771dc6863d094f5e152b2b5ff418f2ace35e6866622c85aecf29b2c",
   "policy_version": "irn-allergen-evidence-0.12.0-v1",
   "population_counts": [
@@ -86,25 +86,27 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 11281,
+      "absent_to_unknown": 11328,
       "allergen": "egg",
       "kind_ambiguous_carrier": 373,
       "kind_explicit": 16890,
       "kind_implicit_name": 1893,
       "kind_text_silent": 177383,
       "kind_unassessed": 11751,
-      "legacy_absent": 185385,
-      "legacy_present": 20540,
+      "legacy_absent": 185450,
+      "legacy_present": 20475,
       "legacy_unassessed": 2365,
-      "new_absent": 174104,
-      "new_present": 20540,
-      "new_unknown": 13646,
+      "new_absent": 174122,
+      "new_present": 20475,
+      "new_unknown": 13693,
       "population": "dev",
-      "reason_ingredient_evidence_unassessed": 9500,
-      "reason_legacy_positive_preserved": 20540,
+      "reason_ingredient_evidence_unassessed": 9503,
+      "reason_legacy_positive_preserved": 20475,
       "reason_legacy_unassessed": 2365,
+      "reason_name_conflicts_with_legacy_absence": 43,
       "reason_scan_incomplete": 1781,
-      "reason_silver_inferred_absence_not_verified_safe": 174104,
+      "reason_silver_inferred_absence_not_verified_safe": 174122,
+      "reason_text_open_legacy_absence": 1,
       "rows": 208290
     },
     {
@@ -129,44 +131,46 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 11736,
+      "absent_to_unknown": 11761,
       "allergen": "fish",
       "kind_ambiguous_carrier": 2,
       "kind_explicit": 3634,
       "kind_implicit_name": 31,
       "kind_text_silent": 192872,
       "kind_unassessed": 11751,
-      "legacy_absent": 200290,
-      "legacy_present": 5635,
+      "legacy_absent": 200317,
+      "legacy_present": 5608,
       "legacy_unassessed": 2365,
-      "new_absent": 188554,
-      "new_present": 5635,
-      "new_unknown": 14101,
+      "new_absent": 188556,
+      "new_present": 5608,
+      "new_unknown": 14126,
       "population": "dev",
       "reason_ingredient_evidence_unassessed": 9922,
-      "reason_legacy_positive_preserved": 5635,
+      "reason_legacy_positive_preserved": 5608,
       "reason_legacy_unassessed": 2365,
+      "reason_name_conflicts_with_legacy_absence": 25,
       "reason_scan_incomplete": 1814,
-      "reason_silver_inferred_absence_not_verified_safe": 188554,
+      "reason_silver_inferred_absence_not_verified_safe": 188556,
       "rows": 208290
     },
     {
-      "absent_to_unknown": 9442,
+      "absent_to_unknown": 9486,
       "allergen": "ghee",
       "kind_ambiguous_carrier": 1,
       "kind_explicit": 29249,
       "kind_text_silent": 167289,
       "kind_unassessed": 11751,
-      "legacy_absent": 169387,
-      "legacy_present": 36538,
+      "legacy_absent": 169431,
+      "legacy_present": 36494,
       "legacy_unassessed": 2365,
       "new_absent": 159945,
-      "new_present": 36538,
-      "new_unknown": 11807,
+      "new_present": 36494,
+      "new_unknown": 11851,
       "population": "dev",
       "reason_ingredient_evidence_unassessed": 7841,
-      "reason_legacy_positive_preserved": 36538,
+      "reason_legacy_positive_preserved": 36494,
       "reason_legacy_unassessed": 2365,
+      "reason_name_conflicts_with_legacy_absence": 44,
       "reason_scan_incomplete": 1601,
       "reason_silver_inferred_absence_not_verified_safe": 159945,
       "rows": 208290
@@ -196,27 +200,27 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 6817,
+      "absent_to_unknown": 6934,
       "allergen": "milk",
       "kind_ambiguous_carrier": 1212,
       "kind_explicit": 31953,
       "kind_implicit_name": 68705,
       "kind_text_silent": 94669,
       "kind_unassessed": 11751,
-      "legacy_absent": 92984,
-      "legacy_present": 112941,
+      "legacy_absent": 93252,
+      "legacy_present": 112673,
       "legacy_unassessed": 2365,
-      "new_absent": 86167,
-      "new_present": 112941,
-      "new_unknown": 9182,
+      "new_absent": 86318,
+      "new_present": 112673,
+      "new_unknown": 9299,
       "population": "dev",
-      "reason_ingredient_evidence_unassessed": 4819,
-      "reason_legacy_positive_preserved": 112941,
+      "reason_ingredient_evidence_unassessed": 4824,
+      "reason_legacy_positive_preserved": 112673,
       "reason_legacy_unassessed": 2365,
-      "reason_name_conflicts_with_legacy_absence": 50,
-      "reason_scan_incomplete": 952,
-      "reason_silver_inferred_absence_not_verified_safe": 86167,
-      "reason_text_open_legacy_absence": 996,
+      "reason_name_conflicts_with_legacy_absence": 158,
+      "reason_scan_incomplete": 954,
+      "reason_silver_inferred_absence_not_verified_safe": 86318,
+      "reason_text_open_legacy_absence": 998,
       "rows": 208290
     },
     {
@@ -289,25 +293,25 @@
       "rows": 208290
     },
     {
-      "absent_to_unknown": 11975,
+      "absent_to_unknown": 11981,
       "allergen": "shellfish",
       "kind_ambiguous_carrier": 2,
       "kind_explicit": 3645,
       "kind_text_silent": 192892,
       "kind_unassessed": 11751,
-      "legacy_absent": 201967,
-      "legacy_present": 3958,
+      "legacy_absent": 201977,
+      "legacy_present": 3948,
       "legacy_unassessed": 2365,
-      "new_absent": 189992,
-      "new_present": 3958,
-      "new_unknown": 14340,
+      "new_absent": 189996,
+      "new_present": 3948,
+      "new_unknown": 14346,
       "population": "dev",
       "reason_ingredient_evidence_unassessed": 9996,
-      "reason_legacy_positive_preserved": 3958,
+      "reason_legacy_positive_preserved": 3948,
       "reason_legacy_unassessed": 2365,
-      "reason_name_conflicts_with_legacy_absence": 135,
+      "reason_name_conflicts_with_legacy_absence": 141,
       "reason_scan_incomplete": 1844,
-      "reason_silver_inferred_absence_not_verified_safe": 189992,
+      "reason_silver_inferred_absence_not_verified_safe": 189996,
       "rows": 208290
     },
     {
@@ -460,25 +464,26 @@
       "rows": 11094
     },
     {
-      "absent_to_unknown": 615,
+      "absent_to_unknown": 616,
       "allergen": "egg",
       "kind_ambiguous_carrier": 24,
       "kind_explicit": 946,
       "kind_implicit_name": 103,
       "kind_text_silent": 9392,
       "kind_unassessed": 629,
-      "legacy_absent": 9845,
-      "legacy_present": 1136,
+      "legacy_absent": 9848,
+      "legacy_present": 1133,
       "legacy_unassessed": 113,
-      "new_absent": 9230,
-      "new_present": 1136,
-      "new_unknown": 728,
+      "new_absent": 9232,
+      "new_present": 1133,
+      "new_unknown": 729,
       "population": "heldout",
       "reason_ingredient_evidence_unassessed": 517,
-      "reason_legacy_positive_preserved": 1136,
+      "reason_legacy_positive_preserved": 1133,
       "reason_legacy_unassessed": 113,
+      "reason_name_conflicts_with_legacy_absence": 1,
       "reason_scan_incomplete": 98,
-      "reason_silver_inferred_absence_not_verified_safe": 9230,
+      "reason_silver_inferred_absence_not_verified_safe": 9232,
       "rows": 11094
     },
     {
@@ -524,21 +529,22 @@
       "rows": 11094
     },
     {
-      "absent_to_unknown": 510,
+      "absent_to_unknown": 511,
       "allergen": "ghee",
       "kind_explicit": 1581,
       "kind_text_silent": 8884,
       "kind_unassessed": 629,
-      "legacy_absent": 9035,
-      "legacy_present": 1946,
+      "legacy_absent": 9036,
+      "legacy_present": 1945,
       "legacy_unassessed": 113,
       "new_absent": 8525,
-      "new_present": 1946,
-      "new_unknown": 623,
+      "new_present": 1945,
+      "new_unknown": 624,
       "population": "heldout",
       "reason_ingredient_evidence_unassessed": 418,
-      "reason_legacy_positive_preserved": 1946,
+      "reason_legacy_positive_preserved": 1945,
       "reason_legacy_unassessed": 113,
+      "reason_name_conflicts_with_legacy_absence": 1,
       "reason_scan_incomplete": 92,
       "reason_silver_inferred_absence_not_verified_safe": 8525,
       "rows": 11094
@@ -568,26 +574,26 @@
       "rows": 11094
     },
     {
-      "absent_to_unknown": 358,
+      "absent_to_unknown": 363,
       "allergen": "milk",
       "kind_ambiguous_carrier": 68,
       "kind_explicit": 1636,
       "kind_implicit_name": 3727,
       "kind_text_silent": 5034,
       "kind_unassessed": 629,
-      "legacy_absent": 4984,
-      "legacy_present": 5997,
+      "legacy_absent": 4999,
+      "legacy_present": 5982,
       "legacy_unassessed": 113,
-      "new_absent": 4626,
-      "new_present": 5997,
-      "new_unknown": 471,
+      "new_absent": 4636,
+      "new_present": 5982,
+      "new_unknown": 476,
       "population": "heldout",
       "reason_ingredient_evidence_unassessed": 252,
-      "reason_legacy_positive_preserved": 5997,
+      "reason_legacy_positive_preserved": 5982,
       "reason_legacy_unassessed": 113,
-      "reason_name_conflicts_with_legacy_absence": 4,
+      "reason_name_conflicts_with_legacy_absence": 9,
       "reason_scan_incomplete": 51,
-      "reason_silver_inferred_absence_not_verified_safe": 4626,
+      "reason_silver_inferred_absence_not_verified_safe": 4636,
       "reason_text_open_legacy_absence": 51,
       "rows": 11094
     },
@@ -793,9 +799,9 @@
       "rows": 1767
     },
     {
-      "absent_to_unknown": 37,
+      "absent_to_unknown": 40,
       "allergen": "egg",
-      "new_unknown": 42,
+      "new_unknown": 45,
       "population": "dev",
       "region": "Andhra Pradesh",
       "rows": 1767
@@ -1881,9 +1887,9 @@
       "rows": 4549
     },
     {
-      "absent_to_unknown": 1719,
+      "absent_to_unknown": 1721,
       "allergen": "egg",
-      "new_unknown": 1733,
+      "new_unknown": 1735,
       "population": "dev",
       "region": "Karnataka",
       "rows": 4549
@@ -1905,9 +1911,9 @@
       "rows": 4549
     },
     {
-      "absent_to_unknown": 1280,
+      "absent_to_unknown": 1281,
       "allergen": "ghee",
-      "new_unknown": 1294,
+      "new_unknown": 1295,
       "population": "dev",
       "region": "Karnataka",
       "rows": 4549
@@ -1921,9 +1927,9 @@
       "rows": 4549
     },
     {
-      "absent_to_unknown": 812,
+      "absent_to_unknown": 813,
       "allergen": "milk",
-      "new_unknown": 826,
+      "new_unknown": 827,
       "population": "dev",
       "region": "Karnataka",
       "rows": 4549
@@ -2017,9 +2023,9 @@
       "rows": 10948
     },
     {
-      "absent_to_unknown": 266,
+      "absent_to_unknown": 268,
       "allergen": "egg",
-      "new_unknown": 306,
+      "new_unknown": 308,
       "population": "dev",
       "region": "Kerala",
       "rows": 10948
@@ -2033,17 +2039,17 @@
       "rows": 10948
     },
     {
-      "absent_to_unknown": 265,
+      "absent_to_unknown": 269,
       "allergen": "fish",
-      "new_unknown": 305,
+      "new_unknown": 309,
       "population": "dev",
       "region": "Kerala",
       "rows": 10948
     },
     {
-      "absent_to_unknown": 226,
+      "absent_to_unknown": 228,
       "allergen": "ghee",
-      "new_unknown": 266,
+      "new_unknown": 268,
       "population": "dev",
       "region": "Kerala",
       "rows": 10948
@@ -2057,9 +2063,9 @@
       "rows": 10948
     },
     {
-      "absent_to_unknown": 173,
+      "absent_to_unknown": 184,
       "allergen": "milk",
-      "new_unknown": 213,
+      "new_unknown": 224,
       "population": "dev",
       "region": "Kerala",
       "rows": 10948
@@ -2177,9 +2183,9 @@
       "rows": 4760
     },
     {
-      "absent_to_unknown": 231,
+      "absent_to_unknown": 232,
       "allergen": "ghee",
-      "new_unknown": 273,
+      "new_unknown": 274,
       "population": "dev",
       "region": "Maharashtra",
       "rows": 4760
@@ -2561,9 +2567,9 @@
       "rows": 11504
     },
     {
-      "absent_to_unknown": 468,
+      "absent_to_unknown": 470,
       "allergen": "egg",
-      "new_unknown": 525,
+      "new_unknown": 527,
       "population": "dev",
       "region": "North India",
       "rows": 11504
@@ -2601,9 +2607,9 @@
       "rows": 11504
     },
     {
-      "absent_to_unknown": 177,
+      "absent_to_unknown": 182,
       "allergen": "milk",
-      "new_unknown": 234,
+      "new_unknown": 239,
       "population": "dev",
       "region": "North India",
       "rows": 11504
@@ -2833,9 +2839,9 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 6507,
+      "absent_to_unknown": 6534,
       "allergen": "egg",
-      "new_unknown": 8325,
+      "new_unknown": 8352,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
@@ -2849,17 +2855,17 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 6889,
+      "absent_to_unknown": 6909,
       "allergen": "fish",
-      "new_unknown": 8707,
+      "new_unknown": 8727,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
     },
     {
-      "absent_to_unknown": 5774,
+      "absent_to_unknown": 5797,
       "allergen": "ghee",
-      "new_unknown": 7592,
+      "new_unknown": 7615,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
@@ -2873,9 +2879,9 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 4399,
+      "absent_to_unknown": 4489,
       "allergen": "milk",
-      "new_unknown": 6217,
+      "new_unknown": 6307,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
@@ -2905,9 +2911,9 @@
       "rows": 128178
     },
     {
-      "absent_to_unknown": 7093,
+      "absent_to_unknown": 7099,
       "allergen": "shellfish",
-      "new_unknown": 8911,
+      "new_unknown": 8917,
       "population": "dev",
       "region": "Pan-Indian",
       "rows": 128178
@@ -3105,9 +3111,9 @@
       "rows": 9961
     },
     {
-      "absent_to_unknown": 331,
+      "absent_to_unknown": 334,
       "allergen": "egg",
-      "new_unknown": 380,
+      "new_unknown": 383,
       "population": "dev",
       "region": "Punjab",
       "rows": 9961
@@ -3129,9 +3135,9 @@
       "rows": 9961
     },
     {
-      "absent_to_unknown": 235,
+      "absent_to_unknown": 240,
       "allergen": "ghee",
-      "new_unknown": 284,
+      "new_unknown": 289,
       "population": "dev",
       "region": "Punjab",
       "rows": 9961
@@ -3145,9 +3151,9 @@
       "rows": 9961
     },
     {
-      "absent_to_unknown": 84,
+      "absent_to_unknown": 88,
       "allergen": "milk",
-      "new_unknown": 133,
+      "new_unknown": 137,
       "population": "dev",
       "region": "Punjab",
       "rows": 9961
@@ -3401,9 +3407,9 @@
       "rows": 292
     },
     {
-      "absent_to_unknown": 7,
+      "absent_to_unknown": 8,
       "allergen": "ghee",
-      "new_unknown": 14,
+      "new_unknown": 15,
       "population": "dev",
       "region": "Sindhi",
       "rows": 292
@@ -3537,9 +3543,9 @@
       "rows": 10998
     },
     {
-      "absent_to_unknown": 524,
+      "absent_to_unknown": 531,
       "allergen": "ghee",
-      "new_unknown": 563,
+      "new_unknown": 570,
       "population": "dev",
       "region": "South India",
       "rows": 10998
@@ -3553,9 +3559,9 @@
       "rows": 10998
     },
     {
-      "absent_to_unknown": 403,
+      "absent_to_unknown": 407,
       "allergen": "milk",
-      "new_unknown": 442,
+      "new_unknown": 446,
       "population": "dev",
       "region": "South India",
       "rows": 10998
@@ -3649,9 +3655,9 @@
       "rows": 10804
     },
     {
-      "absent_to_unknown": 335,
+      "absent_to_unknown": 337,
       "allergen": "egg",
-      "new_unknown": 353,
+      "new_unknown": 355,
       "population": "dev",
       "region": "Tamil Nadu",
       "rows": 10804
@@ -3673,9 +3679,9 @@
       "rows": 10804
     },
     {
-      "absent_to_unknown": 287,
+      "absent_to_unknown": 290,
       "allergen": "ghee",
-      "new_unknown": 305,
+      "new_unknown": 308,
       "population": "dev",
       "region": "Tamil Nadu",
       "rows": 10804
@@ -3689,9 +3695,9 @@
       "rows": 10804
     },
     {
-      "absent_to_unknown": 220,
+      "absent_to_unknown": 221,
       "allergen": "milk",
-      "new_unknown": 238,
+      "new_unknown": 239,
       "population": "dev",
       "region": "Tamil Nadu",
       "rows": 10804
@@ -3785,9 +3791,9 @@
       "rows": 705
     },
     {
-      "absent_to_unknown": 24,
+      "absent_to_unknown": 25,
       "allergen": "egg",
-      "new_unknown": 28,
+      "new_unknown": 29,
       "population": "dev",
       "region": "Telangana",
       "rows": 705
@@ -4329,9 +4335,9 @@
       "rows": 6110
     },
     {
-      "absent_to_unknown": 244,
+      "absent_to_unknown": 249,
       "allergen": "egg",
-      "new_unknown": 273,
+      "new_unknown": 278,
       "population": "dev",
       "region": "West Bengal",
       "rows": 6110
@@ -4345,17 +4351,17 @@
       "rows": 6110
     },
     {
-      "absent_to_unknown": 240,
+      "absent_to_unknown": 241,
       "allergen": "fish",
-      "new_unknown": 269,
+      "new_unknown": 270,
       "population": "dev",
       "region": "West Bengal",
       "rows": 6110
     },
     {
-      "absent_to_unknown": 227,
+      "absent_to_unknown": 228,
       "allergen": "ghee",
-      "new_unknown": 256,
+      "new_unknown": 257,
       "population": "dev",
       "region": "West Bengal",
       "rows": 6110
@@ -4369,9 +4375,9 @@
       "rows": 6110
     },
     {
-      "absent_to_unknown": 135,
+      "absent_to_unknown": 136,
       "allergen": "milk",
-      "new_unknown": 164,
+      "new_unknown": 165,
       "population": "dev",
       "region": "West Bengal",
       "rows": 6110
@@ -6233,9 +6239,9 @@
       "rows": 608
     },
     {
-      "absent_to_unknown": 26,
+      "absent_to_unknown": 27,
       "allergen": "egg",
-      "new_unknown": 29,
+      "new_unknown": 30,
       "population": "heldout",
       "region": "North India",
       "rows": 608
@@ -6257,9 +6263,9 @@
       "rows": 608
     },
     {
-      "absent_to_unknown": 20,
+      "absent_to_unknown": 21,
       "allergen": "ghee",
-      "new_unknown": 23,
+      "new_unknown": 24,
       "population": "heldout",
       "region": "North India",
       "rows": 608
@@ -6545,9 +6551,9 @@
       "rows": 6840
     },
     {
-      "absent_to_unknown": 221,
+      "absent_to_unknown": 226,
       "allergen": "milk",
-      "new_unknown": 310,
+      "new_unknown": 315,
       "population": "heldout",
       "region": "Pan-Indian",
       "rows": 6840

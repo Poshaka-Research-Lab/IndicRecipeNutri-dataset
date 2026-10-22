@@ -6,6 +6,8 @@
 
 0.13.0 is preserved by local tag `v0.13.0`. It rebuilds the release on data version v19 (master `e3f89628`); historical 0.12.0 identifiers (`irn-allergen-evidence-0.12.0-v1`, `docs/quality_0_12_0/`) keep their names.
 
+Data version v20 (master `6f1a017e`, D16 batch J) is a rebuild on top of 0.13.0. It is recorded under [Unreleased] in the changelog, has no release version and no tag.
+
 0.12.0 is developed on `release-0.12.0`. The active user goal authorizes a final local integration into the canonical dataset checkout after validation. It does not authorize a remote push or DOI publication. Existing recipe IDs, legacy fields and Split_v3 remain immutable during P1. New quality annotations are generated sidecars; new duplicate evidence is reported without moving legacy splits. New recipes/corrections require an explicit scope decision.
 
 Reproduce the source manifest, rule digest and logical-output digest. Private recipe text remains local. A candidate is not independent validation. All commits omit co-author trailers. Retain prior release tags and evidence.

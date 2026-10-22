@@ -125,13 +125,54 @@
     },
     "egg": {
       "lexical_present": 18733,
-      "flagged_present": 21676,
-      "false_negatives": 0,
-      "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 2943,
-      "audit_lexicon_coverage_of_flagged": 0.8642,
-      "unaudited_flagged_rows": 2943,
-      "false_negative_examples": []
+      "flagged_present": 21608,
+      "false_negatives": 10,
+      "false_negative_rate_of_lexical": 0.0005,
+      "false_positives_flag_only": 2885,
+      "audit_lexicon_coverage_of_flagged": 0.8665,
+      "unaudited_flagged_rows": 2885,
+      "false_negative_examples": [
+        {
+          "recipe_id": 33329,
+          "name": "Vegan Breakfast Salan"
+        },
+        {
+          "recipe_id": 33403,
+          "name": "Vegan Mi Quang Recipe"
+        },
+        {
+          "recipe_id": 43117,
+          "name": "Vanilla Pear Cake"
+        },
+        {
+          "recipe_id": 58306,
+          "name": "Vegan Danish Aebleskivers"
+        },
+        {
+          "recipe_id": 58455,
+          "name": "Banana Nutella Swirl Muffins"
+        },
+        {
+          "recipe_id": 77059,
+          "name": "Vegan Sourdough Skillet Cheela"
+        },
+        {
+          "recipe_id": 78315,
+          "name": "Moist Vegan Banana Bread with Walnuts (Easy)"
+        },
+        {
+          "recipe_id": 153175,
+          "name": "Cardamom Maple Pecan Granola Recipe with Pumpkin Seeds"
+        },
+        {
+          "recipe_id": 153979,
+          "name": "Strawberry Lemon Flax Seed Bread"
+        },
+        {
+          "recipe_id": 169284,
+          "name": "Ejja ( Libyan Frittata) Recipe | Ejja with Iptat"
+        }
+      ]
     },
     "fenugreek": {
       "lexical_present": 17864,
@@ -145,42 +186,143 @@
     },
     "fish": {
       "lexical_present": 4919,
-      "flagged_present": 5953,
-      "false_negatives": 0,
-      "false_negative_rate_of_lexical": 0.0,
-      "false_positives_flag_only": 1034,
-      "audit_lexicon_coverage_of_flagged": 0.8263,
-      "unaudited_flagged_rows": 1034,
-      "false_negative_examples": []
+      "flagged_present": 5926,
+      "false_negatives": 25,
+      "false_negative_rate_of_lexical": 0.0051,
+      "false_positives_flag_only": 1032,
+      "audit_lexicon_coverage_of_flagged": 0.8259,
+      "unaudited_flagged_rows": 1032,
+      "false_negative_examples": [
+        {
+          "recipe_id": 33020,
+          "name": "Ginisang Munggo (Filipino Mung Bean and Spinach Soup)"
+        },
+        {
+          "recipe_id": 33072,
+          "name": "Vegan Pad See Ew"
+        },
+        {
+          "recipe_id": 33073,
+          "name": "Nam Jim Jaew"
+        },
+        {
+          "recipe_id": 33090,
+          "name": "B\u00c1NH TR\u00c1NG TR\u1ed8N (Vegan Vietnamese Rice Paper Kachumber)"
+        },
+        {
+          "recipe_id": 33094,
+          "name": "Thai Basil Eggplant"
+        },
+        {
+          "recipe_id": 33267,
+          "name": "Thai Cucumber Kachumber"
+        },
+        {
+          "recipe_id": 33270,
+          "name": "Som Tam (Thai Green Papaya Kachumber)"
+        },
+        {
+          "recipe_id": 33271,
+          "name": "Thai Kachumber Dressing"
+        },
+        {
+          "recipe_id": 33346,
+          "name": "Ginataang Gulay"
+        },
+        {
+          "recipe_id": 33349,
+          "name": "Ensaladang Pipino"
+        },
+        {
+          "recipe_id": 33406,
+          "name": "Vegan Bun Rieu Recipe"
+        },
+        {
+          "recipe_id": 33408,
+          "name": "Vietnamese Cucumber Kachumber"
+        },
+        {
+          "recipe_id": 33425,
+          "name": "Vietnamese Green Mango Kachumber Recipe"
+        },
+        {
+          "recipe_id": 55319,
+          "name": "Poi chingudi curry (Prawns cooked with basella and vegetables)"
+        },
+        {
+          "recipe_id": 93757,
+          "name": "Thai Green Papaya Kachumber"
+        }
+      ]
     },
     "ghee": {
       "lexical_present": 33490,
-      "flagged_present": 38484,
-      "false_negatives": 5,
-      "false_negative_rate_of_lexical": 0.0001,
+      "flagged_present": 38439,
+      "false_negatives": 50,
+      "false_negative_rate_of_lexical": 0.0015,
       "false_positives_flag_only": 4999,
-      "audit_lexicon_coverage_of_flagged": 0.8701,
+      "audit_lexicon_coverage_of_flagged": 0.8699,
       "unaudited_flagged_rows": 4999,
       "false_negative_examples": [
         {
-          "recipe_id": 101647,
-          "name": "Puliyaanam"
+          "recipe_id": 40129,
+          "name": "Hariyali Poha | Green Masala Poha"
         },
         {
-          "recipe_id": 107237,
-          "name": "Seer Fish-Surmai Fish Pollichathu"
+          "recipe_id": 40134,
+          "name": "Yellow Peas Instant Pot Curry Chili | Pattani Kozhumbu"
         },
         {
-          "recipe_id": 107240,
-          "name": "Kuttanadan Seer Fish-Surmai Fish Fry(Meen)"
+          "recipe_id": 40154,
+          "name": "Indian Lentil Soup | Dal Shorba"
         },
         {
-          "recipe_id": 109294,
-          "name": "Puliyaanam"
+          "recipe_id": 40165,
+          "name": "Instant Pot Vegan Sweet Potato Curry with Chickpeas"
         },
         {
-          "recipe_id": 126818,
-          "name": "FISH FRY KERALA STYLE / MEEN VARUTHADHU"
+          "recipe_id": 40169,
+          "name": "Chettinad Kondai Kadalai Kuzhambu"
+        },
+        {
+          "recipe_id": 40179,
+          "name": "Authentic South Indian Tomato Rice (Thakkali Sadam)"
+        },
+        {
+          "recipe_id": 40200,
+          "name": "Flavorful Pudina Rice (Mint Rice) with Crunchy Pistachios & Veggies"
+        },
+        {
+          "recipe_id": 40206,
+          "name": "Masala Dosa with Sweet Potato"
+        },
+        {
+          "recipe_id": 40210,
+          "name": "Instant Pot Masala Khichdi"
+        },
+        {
+          "recipe_id": 40211,
+          "name": "Vegan Coconut Ladoos"
+        },
+        {
+          "recipe_id": 40212,
+          "name": "Methi Matar Malai (Vegan)"
+        },
+        {
+          "recipe_id": 40219,
+          "name": "Easy Methi Dal Recipe"
+        },
+        {
+          "recipe_id": 40226,
+          "name": "Paruppu Rasam | Tamarind Lentil Soup"
+        },
+        {
+          "recipe_id": 40236,
+          "name": "Instant Pot Vegan Carrot Halwa"
+        },
+        {
+          "recipe_id": 40239,
+          "name": "Soya Chunks Pulao"
         }
       ]
     },
@@ -257,72 +399,72 @@
     },
     "milk": {
       "lexical_present": 110987,
-      "flagged_present": 118938,
-      "false_negatives": 34,
-      "false_negative_rate_of_lexical": 0.0003,
-      "false_positives_flag_only": 7985,
-      "audit_lexicon_coverage_of_flagged": 0.9329,
-      "unaudited_flagged_rows": 7985,
+      "flagged_present": 118655,
+      "false_negatives": 127,
+      "false_negative_rate_of_lexical": 0.0011,
+      "false_positives_flag_only": 7795,
+      "audit_lexicon_coverage_of_flagged": 0.9343,
+      "unaudited_flagged_rows": 7795,
       "false_negative_examples": [
+        {
+          "recipe_id": 23649,
+          "name": "Apple Cake Recipe"
+        },
+        {
+          "recipe_id": 30384,
+          "name": "Vegan Mango peach almond loaf cake"
+        },
+        {
+          "recipe_id": 33084,
+          "name": "red lentil dahl (sattvic masoor dal)"
+        },
+        {
+          "recipe_id": 33104,
+          "name": "Roasted carrot lentil Shorba with chestnuts and chili oil"
+        },
+        {
+          "recipe_id": 33145,
+          "name": "Vegan Tostadas with Refried Beans and Tofu Chorizo"
+        },
+        {
+          "recipe_id": 33213,
+          "name": "Vegan Sweet Potato Salan with Buttery Pecan Topping"
+        },
         {
           "recipe_id": 33216,
           "name": "Vegan Curry"
         },
         {
-          "recipe_id": 76668,
-          "name": "Tofu Makhani"
+          "recipe_id": 33224,
+          "name": "Vegan Christmas Nankhatai (The Easiest Holiday Sugar Nankhatai)"
         },
         {
-          "recipe_id": 76700,
-          "name": "Easy Tofu Curry"
+          "recipe_id": 33240,
+          "name": "Easy Vegan Linzer Nankhatai Recipe"
         },
         {
-          "recipe_id": 76797,
-          "name": "Misal Pav Recipe"
+          "recipe_id": 33243,
+          "name": "Easy Vegan Sufganiyot Recipe"
         },
         {
-          "recipe_id": 76802,
-          "name": "Vegan Irish Lamb Salan"
+          "recipe_id": 33250,
+          "name": "Vegan Potato Knishes Recipe"
         },
         {
-          "recipe_id": 76852,
-          "name": "Vegan Beef Salan"
+          "recipe_id": 33259,
+          "name": "Vegan Yapchik"
         },
         {
-          "recipe_id": 76880,
-          "name": "Vegan Guinness Pie"
+          "recipe_id": 33264,
+          "name": "Vegan Noodle Kugel Recipe"
         },
         {
-          "recipe_id": 77322,
-          "name": "Aloo Kulcha"
+          "recipe_id": 33366,
+          "name": "Vegan Scalloped Potatoes"
         },
         {
-          "recipe_id": 77435,
-          "name": "Grilled Tofu Steaks in a Creamy Vegan Cajun Sauce"
-        },
-        {
-          "recipe_id": 77503,
-          "name": "Instant Pot Vegan \"Beef\" Salan"
-        },
-        {
-          "recipe_id": 90139,
-          "name": "Indian Tofu Kadai With Bell Peppers"
-        },
-        {
-          "recipe_id": 100486,
-          "name": "Lauki Kofta Curry, the Best Vegan Recipe"
-        },
-        {
-          "recipe_id": 140762,
-          "name": "Vegan German Chocolate Cupcakes"
-        },
-        {
-          "recipe_id": 152893,
-          "name": "Mushroom Matar Korma"
-        },
-        {
-          "recipe_id": 152919,
-          "name": "Sarson ka Saag and Makki ki Roti"
+          "recipe_id": 40146,
+          "name": "Tofu Bake With Vegan Makhani Sauce"
         }
       ]
     },
@@ -419,12 +561,12 @@
     },
     "shellfish": {
       "lexical_present": 3736,
-      "flagged_present": 4149,
-      "false_negatives": 2,
-      "false_negative_rate_of_lexical": 0.0005,
-      "false_positives_flag_only": 415,
-      "audit_lexicon_coverage_of_flagged": 0.9,
-      "unaudited_flagged_rows": 415,
+      "flagged_present": 4139,
+      "false_negatives": 5,
+      "false_negative_rate_of_lexical": 0.0013,
+      "false_positives_flag_only": 408,
+      "audit_lexicon_coverage_of_flagged": 0.9014,
+      "unaudited_flagged_rows": 408,
       "false_negative_examples": [
         {
           "recipe_id": 33351,
@@ -433,6 +575,18 @@
         {
           "recipe_id": 33383,
           "name": "Vegan Pancit Canton Recipe"
+        },
+        {
+          "recipe_id": 33405,
+          "name": "Vegan B\u00fan B\u00f2 Hue\u0302\u0301 Recipe"
+        },
+        {
+          "recipe_id": 69189,
+          "name": "Medlar Jelly"
+        },
+        {
+          "recipe_id": 165112,
+          "name": "Ponche Navide\u00f1o- Mexican Christmas Fruit Punch"
         }
       ]
     },
@@ -479,12 +633,12 @@
   },
   "diet_conflicts": {
     "Vegan": {
-      "rows_with_label": 76024,
-      "conflicting_rows": 260,
-      "rate": 0.0034,
+      "rows_with_label": 75440,
+      "conflicting_rows": 188,
+      "rate": 0.0025,
       "by_allergen": {
-        "milk": 211,
-        "egg": 46,
+        "milk": 168,
+        "egg": 17,
         "fish": 3,
         "shellfish": 0
       },
@@ -494,44 +648,16 @@
           "name": "Palak Paneer - Veganized!"
         },
         {
-          "recipe_id": 3079,
-          "name": "Hussain's Masala scrambled eggs"
-        },
-        {
           "recipe_id": 24002,
           "name": "Eggless Chocolate Cake Recipe (Soft & Moist)"
-        },
-        {
-          "recipe_id": 24014,
-          "name": "Eggless Pumpkin Bread Recipe"
         },
         {
           "recipe_id": 24996,
           "name": "Zucchini Bread Recipe (Chocolate & Eggless)"
         },
         {
-          "recipe_id": 28306,
-          "name": "Vegan Kofta Sliders - Veg Sliders"
-        },
-        {
-          "recipe_id": 28337,
-          "name": "Mexican Bhel"
-        },
-        {
           "recipe_id": 29318,
           "name": "Begun Pora (Roasted egg"
-        },
-        {
-          "recipe_id": 30260,
-          "name": "Vegan oats chickpea veggie pancakes | indian pudla | besan oats cheela"
-        },
-        {
-          "recipe_id": 30332,
-          "name": "Easy Instant Pot Vegan Chili recipe"
-        },
-        {
-          "recipe_id": 30418,
-          "name": "Eggless fruit cake without alcohol (Vegan)"
         },
         {
           "recipe_id": 33001,
@@ -548,11 +674,39 @@
         {
           "recipe_id": 33094,
           "name": "Thai Basil Eggplant"
+        },
+        {
+          "recipe_id": 33109,
+          "name": "Savoiardi Nankhatai (Vegan Ladyfingers Recipe)"
+        },
+        {
+          "recipe_id": 33124,
+          "name": "White Bean Vegan Alfredo Sauce Recipe"
+        },
+        {
+          "recipe_id": 33229,
+          "name": "Vegan Matzo Ball Shorba Recipe"
+        },
+        {
+          "recipe_id": 33280,
+          "name": "Borani Banjan"
+        },
+        {
+          "recipe_id": 33308,
+          "name": "Just Egg"
+        },
+        {
+          "recipe_id": 33338,
+          "name": "Mexican Calabacitas"
+        },
+        {
+          "recipe_id": 33340,
+          "name": "Vegan Carne Asada"
         }
       ]
     },
     "Vegetarian": {
-      "rows_with_label": 91280,
+      "rows_with_label": 91693,
       "conflicting_rows": 7,
       "rate": 0.0001,
       "by_allergen": {
@@ -591,7 +745,7 @@
       ]
     },
     "Eggetarian": {
-      "rows_with_label": 15642,
+      "rows_with_label": 15730,
       "conflicting_rows": 0,
       "rate": 0.0,
       "by_allergen": {

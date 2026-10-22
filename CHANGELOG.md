@@ -1,5 +1,55 @@
 # Changelog
 
+## [Unreleased] — data version v20 (master `6f1a017e`)
+
+Rebuilds the 0.13.0 payload on data version **v20**. No release version is assigned and nothing is tagged.
+
+### Changed 22 Oct 2026 — D16 batch J, data version v20 (master `e3f89628` → `6f1a017e`)
+
+Source: `_admin/progress/FOLLOWUPS_2026-10-08/BATCH_J/install/post_install_prep/POST_INSTALL_D16N_REPORT.md`
+(datasets workspace). Transaction `txn-20261021T225520Z-9be48942e16b`. The installed master equals the reviewed
+expected cell list (2,891 cells / 1,073 rows) in every value. No recipe was added or removed; 219,384 recipes are
+published, as before.
+
+- Master diff: 1,073 rows / 2,891 cells (Diet 673, Diet_prior 640, diet_v13 640, allergen_tier 461, Allergens_v2 428,
+  contains_alcohol 11, contains_gelatin 11, contains_beef 10, diet_meat_class 10, gluten_confidence 5,
+  gluten_declared 2).
+  - **Owner-accepted weakening, 883 cells** (the accepted set exactly; no other cell is weaker): 856 cells of
+    false allergen flags removed after a per-row read, each with a verbatim quote (owner ruling J-R6-1; milk 283,
+    egg 68, ghee 45, fish 27, shellfish 10 (recipe, class) pairs on 428 recipes), and 27 cells of 9 homonym Diet
+    restores. No allergen class was added.
+  - Diet: a Vegan or Vegetarian label is demoted only where the conflicting class was read-confirmed (650 pairs on
+    635 recipes). Every other remaining Diet / allergen conflict is declared, not demoted, and is the input of the
+    next read batch (2,908 pairs on 2,898 recipes).
+- Diet totals (all rows): Vegetarian 91,693, Vegan 75,441, Non-Vegetarian 32,504, Eggetarian 15,730, unknown 4,019.
+  `jain_sattvic` unchanged at 2,418. Strict-Diet recipes with a True meat flag: 8 → 8 (0 new).
+- Knowledge graph: 6,447,338 → **6,446,905** edges (−433). Nodes are unchanged at 222,537; `kg_nodes.parquet` is
+  byte-identical.
+  - `contains_allergen` −433: egg 21,676 → 21,608, fish 5,953 → 5,926, ghee 38,484 → 38,439, milk 118,938 →
+    118,655, shellfish 4,149 → 4,139.
+  - `has_diet` 0 net (Eggetarian +88, Non-Vegetarian −9, Vegan −584, Vegetarian +413, unknown +92).
+  - Every edge was reconciled against a model of the master diff (1,106 removed, 673 added).
+    `EXPECTED_KG_EDGES` and the 5 moved gate_m28 class pins were set to the measured values.
+- `gluten_confidence_v2.parquet` was refreshed from the master (5 / 2 recipes).
+- Allergen-tier ledger `allergen_tier_history_d16n.parquet`: 461 rows, generation `before_d16n_v1`. 428 rows lose a
+  class, each an owner-accepted cell; 33 rows change a tier literal only. No row has an empty prior tier.
+- The allergen-tier contract is unchanged (`allergen_tier_contract.py` 0f3baa90): `validate_row` has 0 failures over
+  the master and `validate_release_tiers` returns no problem.
+- The workspace labelling lexicon `allergen_lexicon_v14.py` was updated `f8246a13` → `a0b87264` after the install
+  (item-qualified exclusions for the read false surfaces). The release evidence layer's own term list is unchanged.
+- `allergen_evidence_v1`: `status_v012` changed on exactly the 433 (recipe, class) pairs whose `contains_allergen`
+  edge was removed (187 `present` → `absent`, 246 `present` → `unknown`). No `evidence_kind` changed.
+- Benchmark gold sets were regenerated from the graph: 7 of 67 queries changed membership; query definitions are
+  unchanged. No gold recipe of a "without <allergen>" query carries that allergen, and every gold recipe of a Diet
+  query carries that Diet.
+- Legacy interactions regenerated:
+  - Published Diet classes: Vegetarian 91,693, Vegan 75,440, Non-Vegetarian 32,503, Eggetarian 15,730.
+    4,018 undeclared recipes are excluded.
+  - 35,820 users / 16,318 items / 821,020 positives (train 658,045 / test 162,975).
+  - 0 served-diet violations. Popularity still leads (R@10 0.0133).
+- README: the Diet table, the `unknown` count and the `contains_allergen` count (507,595; diagram label 508K) were
+  updated, and a data-version-v20 note was added.
+
 ## [0.13.0] — 2026-10-20 — D16 batches E to I-5, data version v19 (master `e3f89628`)
 
 Rebuilds the 0.12.0 release on data version **v19** (master `e3f89628`). Every change since the

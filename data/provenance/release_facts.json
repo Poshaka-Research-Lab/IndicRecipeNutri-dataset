@@ -11,7 +11,7 @@
     "val": 10940
   },
   "nodes": 222537,
-  "edges": 6447338,
+  "edges": 6446905,
   "edge_evidence_rows": 236315,
   "node_types": {
     "allergen": 18,
@@ -33,7 +33,7 @@
     "zone": 5
   },
   "relations": {
-    "contains_allergen": 508028,
+    "contains_allergen": 507595,
     "cooked_by": 404145,
     "derived_from": 30,
     "for_occasion": 33171,
@@ -71,16 +71,16 @@
     "asafoetida": 33715,
     "celery": 2542,
     "coconut": 36814,
-    "egg": 21676,
+    "egg": 21608,
     "fenugreek": 20028,
-    "fish": 5953,
-    "ghee": 38484,
+    "fish": 5926,
+    "ghee": 38439,
     "gluten": 78217,
-    "milk": 118938,
+    "milk": 118655,
     "mustard": 36692,
     "peanut": 11466,
     "sesame": 13730,
-    "shellfish": 4149,
+    "shellfish": 4139,
     "soy": 9053,
     "sulphites": 26389,
     "tamarind": 12163,
@@ -94,9 +94,9 @@
   "missing_per100g_energy": 60431,
   "unassessed_allergen_recipes": 2478,
   "input_sha256": {
-    "data/corpus/recipes_structured.parquet": "ddeef462765d310a816f84f39d4e2a919c039c21be7659c6022639fa8a80a6b0",
+    "data/corpus/recipes_structured.parquet": "89837bbcd76b96950853e1ed6f0d0a800d98cebbad2f3df13cc87088d396606f",
     "data/kg/kg_nodes.parquet": "1e9301544c5a4723c42c298b2fc24f045630591c0b8467a5f0864cf9e59b6bbf",
-    "data/kg/kg_edges.parquet": "f7c48eff333e711b99648024cf44ca8a05fbd7cefdbb938eeffc19fb7e079ca5",
+    "data/kg/kg_edges.parquet": "3aa0cd9c407ba87c347acd18576039aee599135f1a0f341529eab1238a5d9eaa",
     "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa"
   }
 }

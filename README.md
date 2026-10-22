@@ -26,6 +26,10 @@ and that needs to know exactly where the data is weak.
 
 </div>
 
+## Data version v20 (on 0.13.0, not a new release version)
+
+The payload is rebuilt on data version **v20** (master `6f1a017e`, D16 batch J). Only allergen and Diet labels changed: 433 recipe-allergen flags were removed after a per-row read (milk 283, egg 68, ghee 45, fish 27, shellfish 10), and 673 Diet labels moved, all stricter except 9 owner-accepted restores. No allergen class was added. The knowledge graph is at 6,446,905 edges (−433); 219,384 recipes are published, unchanged. No release version was assigned and nothing was tagged. See the [changelog](CHANGELOG.md).
+
 ## 0.13.0 local candidate
 
 Rebuilds the release on data version v19 (master `e3f89628`) after the post-0.12.0 label installs (latest: D16 batches E to I-5): allergen and Diet labels changed, the knowledge graph is at 6,447,338 edges, and 219,384 recipes are published, unchanged. No recipe was added or removed. The 0.12.0 evidence layers below are carried forward. See the [changelog](CHANGELOG.md). This local update is not a remote release.
@@ -51,7 +55,7 @@ Adds provisional quality flags, separate allergen evidence/UNKNOWN status, item 
 |---|---|
 | **Recipes** | 219,384, across **378 source sites** |
 | **Columns** | 270; field definitions and current fill rates are in the generated data dictionary |
-| **Knowledge graph** | 222,537 nodes · **6,447,338 edges** · 17 node types · 22 relation types |
+| **Knowledge graph** | 222,537 nodes · **6,446,905 edges** · 17 node types · 22 relation types |
 | **Allergen classes** | 17, with an explicit `unknown` sentinel on 2,478 recipes |
 | **Benchmark** | 67 fixed queries, 8 templates, graph-derived silver labels |
 | **Interaction log** | 50,000 users · 990,273 ratings · 10-core splits, zero train/test leakage |
@@ -100,8 +104,8 @@ recipes[(recipes.fsa_fat == "green") & (recipes.fsa_saturates == "green")
         & (recipes.fsa_sugars == "green") & (recipes.fsa_salt == "green")]
 
 # 4. The knowledge graph, as edges
-kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,447,338 rows
-kg[kg.rel == "contains_allergen"]                      # 508,028 rows
+kg = pd.read_parquet("data/kg/kg_edges.parquet")       # 6,446,905 rows
+kg[kg.rel == "contains_allergen"]                      # 507,595 rows
 ```
 
 </details>
@@ -236,7 +240,7 @@ Parquet, zstd-compressed, 50,000-row groups. **≈495 MB** total.
 | `Region` | 27 | Pan-Indian (135,018) · North India (12,112) · South India (11,579) · Kerala (11,527) · Tamil Nadu (11,375) |
 | `Cuisine` | 53 | Indian (146,487) · American (12,718) · South Indian (9,879) · Kerala (9,403) |
 | `Course` | 12 | Main Course (91,036) · Dessert (37,043) · Breakfast (19,421) |
-| `Diet` | 5 | Vegetarian (91,280) · Vegan (76,024) · Non-Vegetarian (32,512) · Eggetarian (15,642) |
+| `Diet` | 5 | Vegetarian (91,693) · Vegan (75,440) · Non-Vegetarian (32,503) · Eggetarian (15,730) |
 
 `Pan-Indian` dominates because most sources do not declare a region. **Slice on the
 state-level regions for cultural work**, and treat `Pan-Indian` as "unlabelled", not as a
@@ -275,15 +279,15 @@ Comparing either against `Pan-Indian` is not — that bucket is unlabelled, not 
 
 ```python
 r.Diet.value_counts()
-# Vegetarian       91,280
-# Vegan            76,024
-# Non-Vegetarian   32,512
-# Eggetarian       15,642
-# unknown           3,926
+# Vegetarian       91,693
+# Vegan            75,440
+# Non-Vegetarian   32,503
+# Eggetarian       15,730
+# unknown           4,018
 ```
 
 `unknown` is a real category and is **not** a permissive default. The interaction benchmark
-excludes those 3,926 recipes from every diet-restricted pool rather than treating them as
+excludes those 4,018 recipes from every diet-restricted pool rather than treating them as
 vegetarian.
 
 </details>
@@ -322,7 +326,7 @@ retained for reproducibility and must not be used implicitly.
 
 ## Knowledge graph
 
-222,537 nodes, 6,447,338 edges, 17 node types, 22 relation types.
+222,537 nodes, 6,446,905 edges, 17 node types, 22 relation types.
 
 ```mermaid
 graph LR
@@ -363,7 +367,7 @@ graph LR
 | `has_ingredient` | 1,916,036 | | `shares_flavor` | 13,670 |
 | `has_health_tag` | 1,725,100 | | `in_context` | 7,287 |
 | `suitable_for` | 895,452 | | `pairs_with` | 3,265 |
-| `contains_allergen` | 508,028 | | `rich_in` | 2,935 |
+| `contains_allergen` | 507,595 | | `rich_in` | 2,935 |
 | `cooked_by` | 404,145 | | `grounded_as` | 369 |
 | `has_diet` | 256,132 | | `is_a` | 173 |
 | `from_region` | 219,347 | | `typical_region` | 48 |
@@ -408,10 +412,10 @@ comparing recommenders on Indian cuisine, which no existing interaction dataset 
 |---|---:|
 | Users, each profiled by region / diet / health / spice / age | 50,000 |
 | Explicit 1–5 ratings | 990,273 |
-| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,827 users · 16,315 items |
-| Train / test pairs | 657,889 / 163,058 |
+| After positives (≥4), iterative 10-core and a temporal 80/20 split | 35,820 users · 16,318 items |
+| Train / test pairs | 658,045 / 162,975 |
 | Train/test leakage | **0** |
-| Attribute KG | 81,572 triples · 16,363 entities |
+| Attribute KG | 81,587 triples · 16,366 entities |
 
 > [!CAUTION]
 > **Simulated behaviour, not observations of real users.** It rewards methods that recover
@@ -432,15 +436,15 @@ investigator-defined South Asian classes, and `ghee` tracked separately from `mi
 
 | class | recipes | | class | recipes |
 |---|---:|---|---|---:|
-| `milk` | 118,938 | | `fenugreek` | 20,028 |
+| `milk` | 118,655 | | `fenugreek` | 20,028 |
 | `gluten` | 78,217 | | `sesame` | 13,730 |
 | `coconut` | 36,814 | | `tamarind` | 12,163 |
 | `mustard` | 36,692 | | `peanut` | 11,466 |
-| `ghee` | 38,484 | | `soy` | 9,053 |
-| `tree_nuts` | 35,541 | | `fish` | 5,953 |
-| `asafoetida` | 33,715 | | `shellfish` | 4,149 |
+| `ghee` | 38,439 | | `soy` | 9,053 |
+| `tree_nuts` | 35,541 | | `fish` | 5,926 |
+| `asafoetida` | 33,715 | | `shellfish` | 4,139 |
 | `sulphites` | 26,389 | | `celery` | 2,542 |
-| `egg` | 21,676 | | **`unknown`** | **2,478** |
+| `egg` | 21,608 | | **`unknown`** | **2,478** |
 
 **Four things you must know before building anything safety-facing.**
 
