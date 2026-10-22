@@ -184,7 +184,7 @@ class D16IExemptionTests(unittest.TestCase):
     PRIOR = [(15690, 'before_d16i_v1', 'soy:inherited;sulphites:derived'), (99213, 'before_d16i_v1', 'soy:inherited;sulphites:derived'),
              (99336, 'before_d16e_v1', 'milk:derived;sulphites:inherited')]
 
-    def _run(self, current=None, recon=None, prior=None, filler_current=None, d16m_hist=None):
+    def _run(self, current=None, recon=None, prior=None, filler_current=None, d16m_hist=None, n_filler=368, recon_extra=()):
         import tempfile
         import pandas as pd
         import allergen_tier_contract as c
@@ -197,7 +197,7 @@ class D16IExemptionTests(unittest.TestCase):
             root = Path(d)
             (root / 'data/corpus').mkdir(parents=True)
             (root / 'data/provenance').mkdir(parents=True)
-            filler = list(range(1, 369))
+            filler = list(range(1, n_filler + 1))
             ids = sorted(cur) + filler
             tiers = dict(cur)
             tiers.update({i: 'milk:derived' for i in filler})
@@ -207,8 +207,10 @@ class D16IExemptionTests(unittest.TestCase):
             wide.to_parquet(root / 'data/corpus/recipes_structured.parquet')
             wide[['recipe_id', 'allergen_tier']].to_parquet(root / 'data/corpus/recipes.parquet')
             hist = [(i, c.GENERATION, rec[i]) for i in sorted(rec)] + [(i, c.GENERATION, 'milk:derived;sesame:direct') for i in filler]
-            hist += list(hist_prior) + list(m_prior)
-            pd.DataFrame({'recipe_id': [h[0] for h in hist], 'field': 'allergen_tier', 'generation': [h[1] for h in hist],
+            hist += list(recon_extra) + list(hist_prior) + list(m_prior)
+            # an optional 4th element names the field (default allergen_tier)
+            pd.DataFrame({'recipe_id': [h[0] for h in hist], 'field': [h[3] if len(h) > 3 else 'allergen_tier' for h in hist],
+                          'generation': [h[1] for h in hist],
                           'value_num': float('nan'), 'value_str': pd.array([h[2] for h in hist], dtype='string'),
                           'build_id': 'test'}).to_parquet(root / 'data/provenance/field_history.parquet')
             return c.validate_release_tiers(root)
@@ -304,3 +306,25 @@ class D16MExemptionTests(unittest.TestCase):
 
     def test_combined_shape_on_an_undeclared_row_refused(self):
         self.assertNotEqual(self._r(filler_current={7: 'ghee:inherited;milk:derived;sesame:direct;tree_nuts:inherited'}), [])
+
+
+class ReconciliationCountTests(unittest.TestCase):
+    """REVIEW_I5_CONTRACT N1: the reconciliation generation must carry exactly 401 unique allergen_tier rows; any other count is refused."""
+    MSG = ['401 unique prior tier values missing from correction history']
+
+    def _r(self, **kw):
+        return D16IExemptionTests._run(D16IExemptionTests(), **kw)
+
+    def test_401_admitted(self):
+        self.assertEqual(self._r(), [])
+
+    def test_wrong_count_refused(self):
+        import allergen_tier_contract as c
+        for name, kw in [
+            ('400 rows', {'n_filler': 367}),
+            ('402 rows', {'n_filler': 369}),
+            ('401 rows with one recipe duplicated', {'n_filler': 367, 'recon_extra': [(1, c.GENERATION, 'milk:derived;sesame:direct')]}),
+            ('401 unique rows, one off-field', {'n_filler': 367, 'recon_extra': [(368, c.GENERATION, 'milk;sesame', 'Allergens_v2')]}),
+        ]:
+            with self.subTest(name):
+                self.assertEqual(self._r(**kw), self.MSG)
