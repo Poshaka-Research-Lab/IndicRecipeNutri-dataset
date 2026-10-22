@@ -32,8 +32,8 @@ authors:
     name-prefix: Dr.
     affiliation: "Dr. D. Y. Patil Technical Campus Pune"
     email: ybgurav1977@gmail.com
-version: 0.13.0
-date-released: 2026-10-20
+version: 0.14.0
+date-released: 2026-10-22
 license: CC-BY-NC-SA-4.0
 repository-code: "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset"
 keywords:

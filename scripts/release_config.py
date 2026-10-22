@@ -1214,7 +1214,9 @@ EXPECTED_CORPUS_BUILD = "v15"
 # master e3f89628): EXPECTED_KG_EDGES and the gate_m28 class pins were re-pinned per batch (KG
 # 6,447,338 edges, nodes 222,537); 219,384 recipes are published, unchanged. The reviewed
 # allergen-tier contract adds COMBINED_READDITIONS (one entry, recipe 184699). See CHANGELOG 0.13.0.
-DATASET_VERSION = "0.13.0"
+# 0.13.0 -> 0.14.0 (2026-10-22): data version v20 (D16 batch J, master 6f1a017e). Allergen and
+# Diet label values moved; KG 6,446,905 edges; 219,384 recipes published, unchanged. See CHANGELOG 0.14.0.
+DATASET_VERSION = "0.14.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

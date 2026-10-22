@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased] — data version v20 (master `6f1a017e`)
+## [0.14.0] — 2026-10-22 — data version v20 (master `6f1a017e`)
 
-Rebuilds the 0.13.0 payload on data version **v20**. No release version is assigned and nothing is tagged.
+Rebuilds the 0.13.0 payload on data version **v20**.
 
 ### Changed 22 Oct 2026 — D16 batch J, data version v20 (master `e3f89628` → `6f1a017e`)
 

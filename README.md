@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/candidate-0.13.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/candidate-0.14.0-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -26,9 +26,9 @@ and that needs to know exactly where the data is weak.
 
 </div>
 
-## Data version v20 (on 0.13.0, not a new release version)
+## 0.14.0 local candidate (data version v20)
 
-The payload is rebuilt on data version **v20** (master `6f1a017e`, D16 batch J). Only allergen and Diet labels changed: 433 recipe-allergen flags were removed after a per-row read (milk 283, egg 68, ghee 45, fish 27, shellfish 10), and 673 Diet labels moved, all stricter except 9 owner-accepted restores. No allergen class was added. The knowledge graph is at 6,446,905 edges (−433); 219,384 recipes are published, unchanged. No release version was assigned and nothing was tagged. See the [changelog](CHANGELOG.md).
+The payload is rebuilt on data version **v20** (master `6f1a017e`, D16 batch J). Only allergen and Diet labels changed: 433 recipe-allergen flags were removed after a per-row read (milk 283, egg 68, ghee 45, fish 27, shellfish 10), and 673 Diet labels moved, all stricter except 9 owner-accepted restores. No allergen class was added. The knowledge graph is at 6,446,905 edges (−433); 219,384 recipes are published, unchanged. Released as 0.14.0. See the [changelog](CHANGELOG.md).
 
 ## 0.13.0 local candidate
 
