@@ -1,8 +1,8 @@
 {
   "version": "graph_silver_manifest_v1",
-  "current_queries_sha256": "c6175fb87a0c45874d6cbaca8a76f4a62a861103d7a37c2ee0907a3935d99c5d",
+  "current_queries_sha256": "c666f8fe901cfd1ad2c27a1f56a385136911e86d4fb7e61e51512dd727649060",
   "current_query_count": 67,
-  "graph_edges_sha256": "3aa0cd9c407ba87c347acd18576039aee599135f1a0f341529eab1238a5d9eaa",
+  "graph_edges_sha256": "8f5076e9d00fc6f5ba3566a88c122c5c55d335d933ddc31dfa94e516ab9b00e5",
   "label_protocol": "fixed_silver_v1",
   "frozen_regression_sha256": "53f6be6a9c56b56ff04a350b8c694c65ed9dc838de3581a5d0298113cff0a300",
   "frozen_regression_queries": 67,

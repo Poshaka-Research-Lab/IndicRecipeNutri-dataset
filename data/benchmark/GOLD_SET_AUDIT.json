@@ -5,7 +5,7 @@
     "leg_b_lexical": "Each gold-set member's parsed IngredientsList is matched against an allergen ingredient lexicon, minus plant-substitute phrasings. Independent of the flags. Hits are review candidates, not confirmed defects."
   },
   "queries_audited": 7,
-  "gold_entries_audited": 1571,
+  "gold_entries_audited": 1576,
   "flag_contradicting_total": 0,
   "flag_overall_rate": 0.0,
   "lexical_candidates_total": 0,
@@ -14,7 +14,7 @@
     {
       "query": "Vegetarian recipes without milk",
       "allergen": "milk",
-      "gold_n": 12,
+      "gold_n": 14,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -24,7 +24,7 @@
     {
       "query": "Vegan recipes without gluten",
       "allergen": "gluten",
-      "gold_n": 217,
+      "gold_n": 224,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -54,7 +54,7 @@
     {
       "query": "Eggetarian recipes without asafoetida",
       "allergen": "asafoetida",
-      "gold_n": 289,
+      "gold_n": 287,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -64,7 +64,7 @@
     {
       "query": "Jain recipes without sulphites",
       "allergen": "sulphites",
-      "gold_n": 271,
+      "gold_n": 268,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,
@@ -74,7 +74,7 @@
     {
       "query": "Sattvic recipes without fenugreek",
       "allergen": "fenugreek",
-      "gold_n": 261,
+      "gold_n": 262,
       "flag_contradicting": 0,
       "flag_rate": 0.0,
       "lexical_candidates": 0,

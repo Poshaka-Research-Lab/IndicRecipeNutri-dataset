@@ -20,7 +20,7 @@
   },
   "independent_reference_accuracy_measured": false,
   "inputs": {
-    "data/corpus/recipes_structured.parquet": "89837bbcd76b96950853e1ed6f0d0a800d98cebbad2f3df13cc87088d396606f",
+    "data/corpus/recipes_structured.parquet": "ccc5f9fb1062345083718cc24b93edf8c3e05ea3da7127d757782aff39d96f6a",
     "data/enrichment/ingredients_nutrition.parquet": "c219c56f1f9a5b76e12a173bc1aaace56f00e7b980fecaf7bfd5396082f5f9ef",
     "data/enrichment/ingredients_weights.parquet": "ad12c3263b280e9697ffddaf0f69cf9ca906371345967b9e2f8027c95286c298"
   },

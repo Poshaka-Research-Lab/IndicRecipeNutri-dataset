@@ -4,29 +4,29 @@
   "evaluator": "scripts/build_interaction_baselines.py",
   "seed": 0,
   "n_users": 35820,
-  "n_items": 16318,
-  "n_train_int": 658045,
+  "n_items": 16116,
+  "n_train_int": 657947,
   "metrics": [
     {
       "model": "Popularity",
-      "Recall@10": 0.0133,
-      "Recall@20": 0.0226,
-      "NDCG@10": 0.01,
-      "HR@10": 0.0571
+      "Recall@10": 0.0135,
+      "Recall@20": 0.0227,
+      "NDCG@10": 0.0105,
+      "HR@10": 0.0585
     },
     {
       "model": "ItemKNN",
       "Recall@10": 0.0076,
       "Recall@20": 0.0123,
-      "NDCG@10": 0.0065,
-      "HR@10": 0.0418
+      "NDCG@10": 0.0066,
+      "HR@10": 0.042
     },
     {
       "model": "BPR-MF",
-      "Recall@10": 0.0056,
-      "Recall@20": 0.0092,
-      "NDCG@10": 0.0041,
-      "HR@10": 0.0238
+      "Recall@10": 0.0051,
+      "Recall@20": 0.0093,
+      "NDCG@10": 0.004,
+      "HR@10": 0.0225
     }
   ],
   "protocol": "implicit top-N; per-user leave-last-20%-out (temporal); full-item ranking; seen items masked. Synthetic behaviour, not observed users."

@@ -45,9 +45,9 @@ they could only ever be **declared** clean at a pinned nonzero count.
 | 1★ | 1.45% | 1.05% |
 
 - After positives (≥4) + iterative 10-core + per-user temporal 80/20 split:
-  **35,820 users / 16,318 items / 821,020 interactions** (train 658,045 / test 162,975),
+  **35,820 users / 16,116 items / 820,964 interactions** (train 657,947 / test 163,017),
   **0** train/test leakage.
-- Recipe-attribute KG: **81,587 triples** over **16,366** entities and 5 relations
+- Recipe-attribute KG: **80,577 triples** over **16,164** entities and 5 relations
   (`has_region`, `has_diet`, `has_course`, `has_healthgrade`, `has_spice`).
 - User diet split: Vegetarian 40.02% · Non-Vegetarian 34.79% · Vegan 14.96% ·
   Eggetarian 10.22%. All 27 regions that have recipes are represented by ≥1 user;
@@ -71,11 +71,11 @@ Per-user leave-last-20%-out (the temporal split above), full-item ranking, seen 
 
 | Model | Recall@10 | Recall@20 | NDCG@10 | HR@10 |
 |---|---:|---:|---:|---:|
-| Popularity | 0.0133 | 0.0226 | 0.0100 | 0.0571 |
-| ItemKNN | 0.0076 | 0.0123 | 0.0065 | 0.0418 |
-| BPR-MF | 0.0056 | 0.0092 | 0.0041 | 0.0238 |
+| Popularity | 0.0135 | 0.0227 | 0.0105 | 0.0585 |
+| ItemKNN | 0.0076 | 0.0123 | 0.0066 | 0.0420 |
+| BPR-MF | 0.0051 | 0.0093 | 0.0040 | 0.0225 |
 
-Ranking over 16,318 items. Popularity leads, as it often does on large sparse logs. These are
+Ranking over 16,116 items. Popularity leads, as it often does on large sparse logs. These are
 reference points for comparison on this benchmark, not evidence that any method is good.
 
 ## What changed from the retired generations

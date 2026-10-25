@@ -1,31 +1,31 @@
 {
   "version": "dietary_context_evidence_v1",
-  "rows": 6216,
+  "rows": 6092,
   "input_sha256": {
-    "master": "6f1a017e8e91885ae89d3625c00905bc6e4a372b5a30e65d404aee5222ed2922",
-    "released_recipes": "89837bbcd76b96950853e1ed6f0d0a800d98cebbad2f3df13cc87088d396606f",
+    "master": "e397522e6bf11af9cb4f2afcecb133694b9c55d0f582e571fb843b8a69b47f76",
+    "released_recipes": "ccc5f9fb1062345083718cc24b93edf8c3e05ea3da7127d757782aff39d96f6a",
     "kg_nodes": "1e9301544c5a4723c42c298b2fc24f045630591c0b8467a5f0864cf9e59b6bbf",
-    "kg_edges": "3aa0cd9c407ba87c347acd18576039aee599135f1a0f341529eab1238a5d9eaa"
+    "kg_edges": "8f5076e9d00fc6f5ba3566a88c122c5c55d335d933ddc31dfa94e516ab9b00e5"
   },
   "builder_sha256": "235866a6aebe317c08008e30eee6b7cfa1bcca0318b895eebc259b88b2729e9c",
-  "table_sha256": "f9ce48baeaaec5ed3842d1ffb1d876fe455cfddbdc149ecb6a51777b2b7112f7",
+  "table_sha256": "00bda44f03deacea5470f158132a85e6042e62c5abcce8cf1f862e3ce00a2c3e",
   "legacy_column_modified": false,
   "v2_status_counts": {
-    "withdrawn": 3007,
-    "refined": 1726,
-    "kept": 1408,
-    "reduced": 68,
+    "withdrawn": 2977,
+    "refined": 1625,
+    "kept": 1416,
+    "reduced": 67,
     "kept_optional_conflict": 7
   },
   "v2_token_counts": {
     "vrat_fasting": 1567,
-    "no_onion_garlic": 1373,
-    "jain": 532,
-    "sattvic": 181
+    "no_onion_garlic": 1280,
+    "jain": 515,
+    "sattvic": 176
   },
   "legacy_token_counts": {
     "vrat_fasting": 4053,
-    "jain_sattvic": 2418
+    "jain_sattvic": 2284
   },
   "vrat_basis_counts": {
     "fast_term": 1794,
@@ -40,23 +40,22 @@
     "vrat_fasting:inherited": 859,
     "vrat_fasting:ingredient": 781,
     "vrat_fasting:festival": 545,
-    "jain_sattvic:claim": 501,
+    "jain_sattvic:claim": 494,
     "vrat_fasting:ingredients": 162,
     "vrat_fasting:not": 47,
     "vrat_fasting:conflict": 37,
-    "no_onion_garlic:ingredients": 36,
     "jain:conflict": 33,
-    "no_onion_garlic:conflict": 31,
     "jain:ingredients": 31,
+    "no_onion_garlic:ingredients": 30,
     "vrat_fasting:no": 28,
     "vrat_fasting:other": 22,
+    "no_onion_garlic:conflict": 15,
     "sattvic:ingredients": 12,
     "vrat_fasting:optional": 5,
     "vrat_fasting:non": 5,
     "jain:no": 2,
     "jain:optional": 2,
-    "sattvic:conflict": 2,
-    "no_onion_garlic:no": 2,
+    "sattvic:conflict": 1,
     "sattvic:no": 1
   },
   "master_not_recipe_rows": 6,
