@@ -21,11 +21,16 @@ def digest(path):
 
 def collect(root):
     paths = ['data/corpus/recipes_structured.parquet', 'data/kg/kg_nodes.parquet', 'data/kg/kg_edges.parquet',
-             'data/kg/kg_edge_evidence.parquet']
+             'data/kg/kg_edge_evidence.parquet', 'data/corpus/allergens.parquet',
+             'data/corpus/quality.parquet', 'data/benchmark/eval_queries.jsonl']
     corpus = pd.read_parquet(root / paths[0], columns=['recipe_id', 'Split_v3', 'Region', 'Lang_base', 'SourceSite', 'per100g_kcal', 'Servings_num'])
     nodes = pd.read_parquet(root / paths[1], columns=['type', 'pubchem_id'])
     edges = pd.read_parquet(root / paths[2], columns=['rel'])
     allergens = pd.read_parquet(root / 'data/corpus/allergens.parquet', columns=['recipe_id', 'allergen', 'status'])
+    quality = pd.read_parquet(root / 'data/corpus/quality.parquet',
+                              columns=['recipe_id', 'contains_alcohol', 'contains_gelatin', 'sulphites_possible'])
+    sul_surface = set(allergens.loc[allergens.allergen.eq('sulphites') & allergens.status.eq('present'), 'recipe_id'])
+    sul_possible = set(quality.loc[quality.sulphites_possible.eq(True), 'recipe_id'])
     queries = [json.loads(line) for line in (root / 'data/benchmark/eval_queries.jsonl').read_text(encoding='utf-8').splitlines() if line.strip()]
     return {
         'schema_version': 1, 'scope': 'local release payload', 'canonical_split': 'Split_v3',
@@ -49,6 +54,14 @@ def collect(root):
         'missing_servings': int(corpus.Servings_num.isna().sum()),
         'missing_per100g_energy': int(corpus.per100g_kcal.isna().sum()),
         'unassessed_allergen_recipes': int(allergens.loc[allergens.status.eq('unassessed'), 'recipe_id'].nunique()),
+        # K-R4-7 D-04: a blank contains_alcohol / contains_gelatin is UNKNOWN, never "absent".
+        'blank_contains_alcohol': int(quality.contains_alcohol.isna().sum()
+                                      + quality.contains_alcohol.astype(str).str.strip().eq('').sum()),
+        'blank_contains_gelatin': int(quality.contains_gelatin.isna().sum()
+                                      + quality.contains_gelatin.astype(str).str.strip().eq('').sum()),
+        # K-R4-4 (c): sulphites_possible is not a complete sulphite flag.
+        'sulphites_present_not_possible': len(sul_surface - sul_possible),
+        'sulphites_possible_not_present': len(sul_possible - sul_surface),
         'input_sha256': {p: digest(root / p) for p in paths},
     }
 
@@ -145,6 +158,23 @@ independence and population weights remain unverified; no corpus-wide rate is cl
 Sulphite carrier inference is not independently validated by an ingredient-text
 lexicon looking for a declared additive. Investigator-defined South Asian classes
 must not be described as a regulatory list.
+
+**Avoiding sulphites: check the allergen surface (`Allergens_v2`), not
+`sulphites_possible` alone.** The `sulphites` class in `data/corpus/allergens.parquet`
+(through `scripts/allergen_surface.py`, with `unassessed` read as possibly present) is
+the primary signal. `sulphites_possible` in `quality.parquet` is a narrower
+carrier-word hint. It was retired to False on rows where the allergen surface still
+carries sulphites, and {f['sulphites_present_not_possible']:,} recipes carry sulphites
+in the allergen surface while `sulphites_possible` is not True. Do not discard a True
+hint either: {f['sulphites_possible_not_present']:,} recipes have
+`sulphites_possible` True without a present `sulphites` label. A user avoiding
+sulphites should exclude a recipe if either signal is positive.
+
+**Blank `contains_alcohol` / `contains_gelatin` means unknown.** An empty cell means
+the build could not decide, not that the recipe has no alcohol or gelatin
+({f['blank_contains_alcohol']:,} and {f['blank_contains_gelatin']:,} recipes
+respectively). Consumers enforcing halal, vegetarian or abstinence constraints should
+treat a blank as possibly present (fail-closed), and never coerce it to False.
 
 ## Additive 0.12.0 evidence layers
 
@@ -270,7 +300,28 @@ def current_readme(text, facts):
     for name, count in facts['allergen_counts'].items():
         text = re.sub(r'(\| `' + re.escape(name) + r'` \| )[\d,]+',
                       lambda m, count=count: m[1]+f'{count:,}', text)
+    # D-16: the node-type and relation-type count tables are read from the built KG (the same
+    # parquet counts as data/kg/kg_stats.json), scoped to their own <details> block so a name
+    # shared with another table (`diet`, `course`, `condition`) is never rewritten there.
+    text = _refresh_block(text, 'node types, with counts', facts['node_types'])
+    text = _refresh_block(text, 'relation types, with counts', facts['relations'])
     return text
+
+
+def _refresh_block(text, summary, counts):
+    """Rewrite `| `name` | N` cells inside the <details> block whose summary contains `summary`."""
+    m = re.search(r'<summary><b>All \d+ ' + re.escape(summary) + r'</b></summary>(.*?)</details>',
+                  text, flags=re.S)
+    if m is None:
+        raise ValueError(f'README count block missing: {summary}')
+    body = m[1]
+    for name, count in counts.items():
+        body, n = re.subn(r'(\| `' + re.escape(name) + r'` \| )[\d,]+',
+                          lambda mm, count=count: mm[1] + f'{count:,}', body)
+        if n != 1:
+            raise ValueError(f'README {summary}: `{name}` found {n} times, expected 1')
+    head = re.sub(r'All \d+ ', f'All {len(counts)} ', text[m.start():m.start(1)], count=1)
+    return text[:m.start()] + head + body + text[m.end(1):]
 
 
 def outputs(root):

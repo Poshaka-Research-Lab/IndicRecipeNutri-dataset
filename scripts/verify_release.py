@@ -1012,8 +1012,10 @@ def main() -> int:
     from source_recovery_contract import validate_release_source_recovery
     for problem in validate_release_source_recovery(args.root):
         fail('source-recovery', problem)
-    from allergen_tier_contract import validate_release_tiers
+    from allergen_tier_contract import validate_release_tiers, validate_tier_ledger
     for problem in validate_release_tiers(args.root):
+        fail('allergen-tiers', problem)
+    for problem in validate_tier_ledger(args.root):
         fail('allergen-tiers', problem)
     from nutrition_contract import validate_release_nutrition_alias, validate_release_folate, validate_release_density, validate_release_weight_confidence
     nutrition_problems = validate_release_nutrition_alias(args.root)

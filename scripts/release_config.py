@@ -1072,7 +1072,15 @@ EXPECTED_KG_NODES = 222_537
 #   has_diet +0 net (Eggetarian +88, Non-Vegetarian -9, Vegan -584, Vegetarian +413, diet::unknown +92); in_context +0.
 # EXPECTED_KG_NODES unchanged (222,537).
 # Evidence: FOLLOWUPS_2026-10-08/BATCH_J/install/post_install_prep/post_install_run_d16n/kg_reconciliation_d16n.json (every_edge_explained true).
-EXPECTED_KG_EDGES = 6_446_905
+# D16 batch K, data v21 (forward-k-20261024T233000Z, master 6f1a017e -> e397522e): 6,446,905 -> 6,449,114 (+2209),
+# measured from a fresh build. Edge-level vs protected release baseline 35274ec: every edge explained by the master-diff
+# model (post_install_prep/post_install_run_d16o/kg_model_d16o.py, rules of build_kg_v3.py; changed KG inputs are Diet,
+# DietaryContext and Allergens_v2):
+#   contains_allergen +2611 = gluten +1809, fish +534, shellfish +288, ghee +123, milk +90, peanut +5, coconut +3, soy +3, sesame +1, egg -245
+#   has_diet -268 net (Eggetarian +556, Jain -134, Non-Vegetarian +2, Sattvic -134, Vegan -7217, Vegetarian +3889, unknown +2770); in_context -134.
+# EXPECTED_KG_NODES unchanged (222,537).
+# Evidence: FOLLOWUPS_2026-10-08/BATCH_K/install/post_install_prep/post_install_run_d16o/kg_reconciliation_d16o.json (every_edge_explained true).
+EXPECTED_KG_EDGES = 6_449_114
 # --------------------------------------------------------------- allergen taxonomy
 # 17 declared classes: the 16-token taxonomy (CLAUDE.md 6.3 — FALCPA 9 + South Asian 5 +
 # EU FIC 2) plus `ghee`, a derivative marker added 2026-09-02. The TAXONOMY is still 16;
@@ -1216,7 +1224,9 @@ EXPECTED_CORPUS_BUILD = "v15"
 # allergen-tier contract adds COMBINED_READDITIONS (one entry, recipe 184699). See CHANGELOG 0.13.0.
 # 0.13.0 -> 0.14.0 (2026-10-22): data version v20 (D16 batch J, master 6f1a017e). Allergen and
 # Diet label values moved; KG 6,446,905 edges; 219,384 recipes published, unchanged. See CHANGELOG 0.14.0.
-DATASET_VERSION = "0.14.0"
+# 0.14.0 -> 0.15.0 (2026-10-25): data version v21 (D16 batch K, master e397522e);
+# KG 6,449,114 edges and 219,384 published recipes. See CHANGELOG 0.15.0.
+DATASET_VERSION = "0.15.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

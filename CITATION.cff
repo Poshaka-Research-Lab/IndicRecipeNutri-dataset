@@ -6,7 +6,7 @@ abstract: >-
   A corpus of 219,384 Indian recipes across 378 source sites, with parsed
   ingredients in English/Roman, a 17-class allergen surface carrying an explicit
   unassessed sentinel, dish-level nutrition estimates and FSA traffic lights; a
-  typed knowledge graph of 222,537 nodes and 6,446,905 edges; a 67-query
+  typed knowledge graph of 222,537 nodes and 6,449,114 edges; a 67-query
   retrieval benchmark with gold sets; and a synthetic collaborative
   interaction log; and, since 0.11.0, an occasion-registry and dietary-rule
   context layer imported as silver data with structured citations, plus a
@@ -32,8 +32,8 @@ authors:
     name-prefix: Dr.
     affiliation: "Dr. D. Y. Patil Technical Campus Pune"
     email: ybgurav1977@gmail.com
-version: 0.14.0
-date-released: 2026-10-22
+version: 0.15.0
+date-released: 2026-10-25
 license: CC-BY-NC-SA-4.0
 repository-code: "https://github.com/Poshaka-Research-Lab/IndicRecipeNutri-dataset"
 keywords:

@@ -106,6 +106,22 @@ def _hist_frame(ids, field, generation, values):
                          "value_str": values.where(~is_num).astype("string").values})
 
 
+def allergen_statuses(blob, classes):
+    """Keep known positives when a recipe also has unresolved allergen labels."""
+    toks = {t.strip() for t in re.split(r"[;,]", blob or "") if t.strip()}
+    unexpected = toks - set(classes) - {"unknown", "none_detected"}
+    if unexpected:
+        raise ValueError(f"undeclared Allergens_v2 token(s): {sorted(unexpected)}")
+    if not toks or toks == {"unknown"}:
+        return ["unassessed"] * len(classes)
+    if toks == {"none_detected"}:
+        return ["absent"] * len(classes)
+    if "none_detected" in toks:
+        raise ValueError("none_detected mixed with other allergen tokens")
+    return ["present" if c in toks else "unassessed" if "unknown" in toks else "absent"
+            for c in classes]
+
+
 def main() -> int:
     print(f"reading {_paths.MASTER}", flush=True)
     df = pd.read_csv(_paths.MASTER, low_memory=False)
@@ -209,25 +225,8 @@ def main() -> int:
     src = df["Allergens_v2"].fillna("").astype(str)
     rows = []
     for rid, blob in zip(df[ID], src):
-        toks = {t.strip() for t in re.split(r"[;,]", blob) if t.strip()}
-        if not toks or "unknown" in toks:
-            # FIXED 2026-09-02. This emitted ONE row with a literal `*` as the allergen
-            # name, which put a 17th member into a dimension the release declares as 16 and
-            # made those 1,131 recipes vanish from every per-class filter: a query for
-            # `allergen == 'peanut'` returned 219,056 recipes, not 220,187, with the missing
-            # 1,131 being exactly the unassessed ones. Silently dropping the rows that are
-            # NOT KNOWN to be safe is the fail-open direction Codex CXC 80-2020 forbids.
-            # Sixteen explicit `unassessed` rows keep the table a true cross product and
-            # make `unassessed` reachable per class, as this function's docstring intended.
-            for c in CLASSES:
-                rows.append((rid, c, "unassessed"))
-            continue
-        if toks == {"none_detected"}:
-            for c in CLASSES:
-                rows.append((rid, c, "absent"))
-            continue
-        for c in CLASSES:
-            rows.append((rid, c, "present" if c in toks else "absent"))
+        for c, status in zip(CLASSES, allergen_statuses(blob, CLASSES)):
+            rows.append((rid, c, status))
     al = pd.DataFrame(rows, columns=[ID, "allergen", "status"])
     pth = os.path.join(OUT, "corpus", "allergens.parquet")
     al.to_parquet(pth, index=False)
@@ -260,7 +259,7 @@ def main() -> int:
     # Corrective history is keyed separately upstream; do not widen the master with
     # another backup column or overwrite the correction's own generation/build ID.
     correction_counts = {}
-    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history', 'allergen_tier_history_diet_repair', 'allergen_tier_history_d13_round2', 'allergen_tier_history_d16a', 'allergen_tier_history_d16b', 'allergen_tier_history_d17', 'allergen_tier_history_d16c', 'allergen_tier_history_d16d', 'allergen_tier_history_d16e', 'allergen_tier_history_d16f', 'allergen_tier_history_d16g', 'allergen_tier_history_d16h', 'allergen_tier_history_d16i', 'allergen_tier_history_d16j', 'allergen_tier_history_d16k', 'allergen_tier_history_d16l', 'allergen_tier_history_d16m', 'allergen_tier_history_d16n']:
+    for history_name in ['nutrition_basis_history', 'nutrition_update_history', 'language_source_history', 'allergen_tier_history', 'allergen_tier_history_diet_repair', 'allergen_tier_history_d13_round2', 'allergen_tier_history_d16a', 'allergen_tier_history_d16b', 'allergen_tier_history_d17', 'allergen_tier_history_d16c', 'allergen_tier_history_d16d', 'allergen_tier_history_d16e', 'allergen_tier_history_d16f', 'allergen_tier_history_d16g', 'allergen_tier_history_d16h', 'allergen_tier_history_d16i', 'allergen_tier_history_d16j', 'allergen_tier_history_d16k', 'allergen_tier_history_d16l', 'allergen_tier_history_d16m', 'allergen_tier_history_d16n', 'allergen_tier_history_d16o']:
         history_path = pathlib.Path(_paths.DATA) / f'corrections/{history_name}.parquet'
         correction_counts[history_name] = 0
         if history_path.exists():
@@ -329,6 +328,7 @@ def main() -> int:
                           "allergen_tier_history_d16l_rows": correction_counts["allergen_tier_history_d16l"],
                           "allergen_tier_history_d16m_rows": correction_counts["allergen_tier_history_d16m"],
                           "allergen_tier_history_d16n_rows": correction_counts["allergen_tier_history_d16n"],
+                          "allergen_tier_history_d16o_rows": correction_counts["allergen_tier_history_d16o"],
                           "note": "S-1 split. 64 build-history columns moved to "
                                   "field_history rows. A future fix adds rows, not columns."}},
               open(os.path.join(OUT, "provenance", "builds.json"), "w", encoding="utf-8", newline="\n"),

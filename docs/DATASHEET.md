@@ -17,7 +17,7 @@ original instructions, headnotes and other withheld prose are not redistributed.
 | Wide-view columns | 270 |
 | Source sites | 378 |
 | Graph nodes | 222,537 |
-| Graph triples | 6,446,905 |
+| Graph triples | 6,449,114 |
 | Edge evidence rows | 236,315 |
 | Ingredient nodes | 927 |
 | Compound nodes | 1,607 |
@@ -90,6 +90,23 @@ independence and population weights remain unverified; no corpus-wide rate is cl
 Sulphite carrier inference is not independently validated by an ingredient-text
 lexicon looking for a declared additive. Investigator-defined South Asian classes
 must not be described as a regulatory list.
+
+**Avoiding sulphites: check the allergen surface (`Allergens_v2`), not
+`sulphites_possible` alone.** The `sulphites` class in `data/corpus/allergens.parquet`
+(through `scripts/allergen_surface.py`, with `unassessed` read as possibly present) is
+the primary signal. `sulphites_possible` in `quality.parquet` is a narrower
+carrier-word hint. It was retired to False on rows where the allergen surface still
+carries sulphites, and 26,389 recipes carry sulphites
+in the allergen surface while `sulphites_possible` is not True. Do not discard a True
+hint either: 3,156 recipes have
+`sulphites_possible` True without a present `sulphites` label. A user avoiding
+sulphites should exclude a recipe if either signal is positive.
+
+**Blank `contains_alcohol` / `contains_gelatin` means unknown.** An empty cell means
+the build could not decide, not that the recipe has no alcohol or gelatin
+(3,624 and 3,653 recipes
+respectively). Consumers enforcing halal, vegetarian or abstinence constraints should
+treat a blank as possibly present (fail-closed), and never coerce it to False.
 
 ## Additive 0.12.0 evidence layers
 

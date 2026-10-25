@@ -22,7 +22,8 @@ D16M = {
     126908: ('asafoetida:direct;fenugreek:direct;ghee:direct;milk:derived;mustard:blend', 'asafoetida:direct;fenugreek:direct;ghee:direct;milk:derived;sulphites:inherited', 'asafoetida:direct;fenugreek:direct;ghee:direct;milk:derived'),
     126913: ('asafoetida:direct;milk:inherited;mustard:blend', 'asafoetida:direct;ghee:inherited;milk:inherited', 'asafoetida:direct;milk:inherited'),
     127710: ('ghee:direct;gluten:direct;milk:derived;mustard:blend;sulphites:derived', 'asafoetida:inherited;ghee:direct;gluten:direct;milk:derived;sulphites:derived', 'ghee:direct;gluten:direct;milk:derived;sulphites:derived'),
-    127968: ('gluten:inherited;mustard:blend;sulphites:derived', 'asafoetida:inherited;gluten:inherited;sulphites:derived', 'gluten:inherited;sulphites:derived'),
+    # batch K (D16O, K-R5-7) also adds milk:inherited on 127968: current tiers are its v21 form; its before_d16o_v1 prior is in D16O_PRIOR
+    127968: ('gluten:inherited;mustard:blend;sulphites:derived', 'asafoetida:inherited;gluten:inherited;milk:inherited;sulphites:derived', 'gluten:inherited;sulphites:derived'),
     129964: ('asafoetida:direct;fenugreek:direct;milk:derived;mustard:blend;peanut:direct', 'asafoetida:direct;fenugreek:direct;gluten:derived;milk:derived;peanut:direct', 'asafoetida:direct;fenugreek:direct;milk:derived;peanut:direct'),
     130331: ('ghee:direct;milk:derived;mustard:blend', 'ghee:direct;gluten:derived;milk:derived', 'ghee:direct;milk:derived'),
     139708: ('coconut:direct;ghee:direct;milk:derived;mustard:blend;tree_nuts:direct', 'coconut:direct;ghee:direct;milk:derived;sulphites:inherited;tree_nuts:direct', 'coconut:direct;ghee:direct;milk:derived;tree_nuts:direct'),
@@ -78,10 +79,24 @@ D16M_ADDITIONS = {
 }
 
 
+# batch K (D16O, K-R5-7; BATCH_K/consolidate/K_TIER_CONTRACT_ADDITIONS.json ce803282): five more 401-set rows gain a declared first
+# addition, as (reconciliation prior, v21 current tiers, before_d16o_v1 prior); 127968 (a D16M row) gains milk, its d16o prior is below.
+D16O = {
+    3855: ('mustard:blend', 'gluten:inherited', ''),
+    3860: ('mustard:blend;soy:derived', 'gluten:inherited;soy:derived', 'soy:derived'),
+    24467: ('asafoetida:direct;mustard:blend;peanut:direct;sulphites:derived;tree_nuts:direct', 'asafoetida:direct;gluten:inherited;peanut:direct;sulphites:derived;tree_nuts:direct', 'asafoetida:direct;peanut:direct;sulphites:derived;tree_nuts:direct'),
+    130714: ('mustard:blend', 'gluten:inherited', ''),
+    214227: ('asafoetida:direct;milk:derived;mustard:blend', 'asafoetida:direct;gluten:inherited;milk:derived', 'asafoetida:direct;milk:derived'),
+}
+D16O_PRIOR = [(r, 'before_d16o_v1', v[2]) for r, v in D16O.items()] + [(127968, 'before_d16o_v1', 'asafoetida:inherited;gluten:inherited;sulphites:derived')]
+D16O_ADDITIONS = {(3855, 'gluten'): 'inherited', (3860, 'gluten'): 'inherited', (24467, 'gluten'): 'inherited', (130714, 'gluten'): 'inherited', (214227, 'gluten'): 'inherited', (127968, 'milk'): 'inherited'}
+
+
 def d16m_rows(gen):
-    """(ids, current tiers, history rows) for the 30 D16M rows in their declared forms."""
-    hist = [(r, gen, v[0]) for r, v in D16M.items()] + [(r, 'before_d16m_v1', v[2]) for r, v in D16M.items()]
-    return sorted(D16M), {r: v[1] for r, v in D16M.items()}, hist
+    """(ids, current tiers, history rows) for the 30 D16M and 5 D16O rows in their declared forms (D16O priors included)."""
+    both = {**D16M, **D16O}
+    hist = [(r, gen, v[0]) for r, v in both.items()] + [(r, 'before_d16m_v1', v[2]) for r, v in D16M.items()] + D16O_PRIOR
+    return sorted(both), {r: v[1] for r, v in both.items()}, hist
 
 
 class TierContractTests(unittest.TestCase):
@@ -109,7 +124,9 @@ class TierContractTests(unittest.TestCase):
             self.assertTrue(gen.startswith('before_') and record)
 
     def test_declared_additions_is_narrow_and_documented(self):
-        self.assertEqual(set(DECLARED_ADDITIONS), {(15690, 'gluten')} | set(D16M_ADDITIONS))
+        self.assertEqual(set(DECLARED_ADDITIONS), {(15690, 'gluten')} | set(D16M_ADDITIONS) | set(D16O_ADDITIONS))
+        self.assertEqual({k: DECLARED_ADDITIONS[k][1] for k in D16O_ADDITIONS}, D16O_ADDITIONS)
+        self.assertTrue(all(DECLARED_ADDITIONS[k][0] == 'before_d16o_v1' for k in D16O_ADDITIONS))
         self.assertEqual({k: DECLARED_ADDITIONS[k][1] for k in D16M_ADDITIONS}, D16M_ADDITIONS)
         self.assertTrue(all(DECLARED_ADDITIONS[k][0] == 'before_d16m_v1' for k in D16M_ADDITIONS))
         self.assertFalse(set(rid for rid, _ in DECLARED_ADDITIONS) & set(rid for rid, _ in REINSTATED))
@@ -139,15 +156,15 @@ class ReinstatedExemptionTests(unittest.TestCase):
             # the batch I-1 rows 15690 / 99213 and the 30 D16M rows are present in their declared forms; 368 fillers keep 401
             i1 = D16IExemptionTests
             m_ids, m_cur, m_hist = d16m_rows(c.GENERATION)
-            ids = [99336, 15690, 99213] + m_ids + list(range(1, 369))
+            ids = [99336, 15690, 99213] + m_ids + list(range(1, 369 - len(D16O)))
             tiers = {99336: current, 15690: i1.CURRENT[15690], 99213: i1.CURRENT[99213], **m_cur}
-            tiers.update({i: 'milk:derived' for i in range(1, 369)})
+            tiers.update({i: 'milk:derived' for i in range(1, 369 - len(D16O))})
             labels = {i: ';'.join(sorted(parse_tiers(t))) or 'none_detected' for i, t in tiers.items()}
             wide = pd.DataFrame({'recipe_id': ids, 'Allergens_v2': [labels[i] for i in ids], 'allergen_tier': [tiers[i] for i in ids]})
             wide.to_parquet(root / 'data/corpus/recipes_structured.parquet')
             wide[['recipe_id', 'allergen_tier']].to_parquet(root / 'data/corpus/recipes.parquet')
             hist = [(99336, c.GENERATION, 'gluten:inherited;milk:derived;sulphites:inherited')]
-            hist += [(i, c.GENERATION, 'milk:derived;sesame:direct') for i in range(1, 369)] + m_hist
+            hist += [(i, c.GENERATION, 'milk:derived;sesame:direct') for i in range(1, 369 - len(D16O))] + m_hist
             hist += [(i, c.GENERATION, i1.RECON[i]) for i in (15690, 99213)] + [x for x in i1.PRIOR if x[0] in (15690, 99213)]
             if d16e_prior is not None:
                 hist.append((99336, 'before_d16e_v1', d16e_prior))
@@ -190,14 +207,14 @@ class D16IExemptionTests(unittest.TestCase):
         import allergen_tier_contract as c
         m_ids, m_cur, m_hist = d16m_rows(c.GENERATION)
         cur = {**self.CURRENT, **m_cur, **(current or {})}
-        rec = {**self.RECON, **{r: v[0] for r, v in D16M.items()}, **(recon or {})}
+        rec = {**self.RECON, **{r: v[0] for r, v in {**D16M, **D16O}.items()}, **(recon or {})}
         hist_prior = self.PRIOR if prior is None else prior
-        m_prior = [h for h in m_hist if h[1] == 'before_d16m_v1'] if d16m_hist is None else d16m_hist
+        m_prior = ([h for h in m_hist if h[1] == 'before_d16m_v1'] if d16m_hist is None else list(d16m_hist)) + D16O_PRIOR
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             (root / 'data/corpus').mkdir(parents=True)
             (root / 'data/provenance').mkdir(parents=True)
-            filler = list(range(1, n_filler + 1))
+            filler = list(range(1, n_filler + 1 - len(D16O)))
             ids = sorted(cur) + filler
             tiers = dict(cur)
             tiers.update({i: 'milk:derived' for i in filler})
@@ -328,3 +345,177 @@ class ReconciliationCountTests(unittest.TestCase):
         ]:
             with self.subTest(name):
                 self.assertEqual(self._r(**kw), self.MSG)
+
+
+class MultiClassRemovalTests(unittest.TestCase):
+    """OPEN_ITEMS 60 (BATCH_E review_contract N1; BATCH K B4): a re-addition of any class the reconciliation removed is detected whatever the
+    number of classes removed, and is admitted only by a declared re-addition. Synthetic row 500000 replaces one filler so the set stays 401;
+    its reconciliation output (milk:derived) is recorded as the prior value of the later transaction that re-added classes."""
+    RID = 500000
+    LOST2 = 'gluten:direct;milk:derived;sesame:direct'
+    LOST3 = 'gluten:direct;milk:derived;peanut:direct;sesame:direct'
+    LATER = [(RID, 'before_d16n_v1', 'milk:derived')]
+    MSG = ['a class removed by the reconciliation is back without a declared re-addition']
+
+    def _r(self, recon, current, later=LATER):
+        return D16IExemptionTests._run(D16IExemptionTests(), current={self.RID: current}, recon={self.RID: recon}, n_filler=367,
+                                       prior=D16IExemptionTests.PRIOR + list(later))
+
+    def test_no_readdition_admitted(self):
+        for recon in (self.LOST2, self.LOST3):
+            with self.subTest(recon=recon):
+                self.assertEqual(self._r(recon, 'milk:derived'), [])
+
+    def test_readdition_detected(self):
+        for name, recon, current in [
+            ('2 lost, 1 re-added', self.LOST2, 'gluten:direct;milk:derived'),
+            ('2 lost, all re-added', self.LOST2, self.LOST2),
+            ('3 lost, 1 re-added', self.LOST3, 'milk:derived;peanut:direct'),
+            ('3 lost, 2 re-added', self.LOST3, 'gluten:direct;milk:derived;sesame:direct'),
+            ('3 lost, all re-added', self.LOST3, self.LOST3),
+        ]:
+            with self.subTest(name):
+                self.assertEqual(self._r(recon, current), self.MSG)
+
+    def test_declared_readdition_still_admitted(self):
+        from unittest import mock
+        import allergen_tier_contract as c
+        for name, recon, current, classes in [
+            ('2 lost, 1 re-added', self.LOST2, 'gluten:direct;milk:derived', ['gluten']),
+            ('3 lost, 1 re-added', self.LOST3, 'milk:derived;peanut:direct', ['peanut']),
+            ('3 lost, all re-added', self.LOST3, self.LOST3, ['gluten', 'peanut', 'sesame']),
+        ]:
+            entries = {(self.RID, cls): ('before_d16n_v1', 'synthetic test record') for cls in classes}
+            with self.subTest(name), mock.patch.dict(c.REINSTATED, entries):
+                self.assertEqual(self._r(recon, current), [])
+            # a declaration naming a different class does not admit the re-addition
+            other = {(self.RID, 'sesame' if classes != ['gluten', 'peanut', 'sesame'] else 'gluten'): ('before_d16n_v1', 'synthetic test record')}
+            with self.subTest(name + ', wrong class declared'), mock.patch.dict(c.REINSTATED, other):
+                self.assertNotEqual(self._r(recon, current), [])
+
+
+class TierLedgerTests(unittest.TestCase):
+    """BATCH K D-19: validate_tier_ledger refuses a tier change on a row of the 401 that left no field_history record of the value it replaced,
+    including the case the per-class check cannot see (a re-addition on a row that lost >=2 classes, with no record). Synthetic release in the
+    MultiClassRemovalTests shape, pinned at its own reconciliation-output state."""
+    RID = 500000
+    LOST2 = 'gluten:direct;milk:derived;sesame:direct'
+    MSG = ['allergen tier ledger: a tier on the 401 reconciliation rows changed without a field_history record of the value it replaced']
+
+    def _release(self, d, current, extra=()):
+        import pandas as pd
+        import allergen_tier_contract as c
+        root = Path(d)
+        (root / 'data/corpus').mkdir(parents=True, exist_ok=True)
+        (root / 'data/provenance').mkdir(parents=True, exist_ok=True)
+        filler = list(range(1, 401))
+        tiers = {i: 'milk:derived' for i in filler}
+        tiers[self.RID] = current
+        ids = sorted(tiers)
+        labels = {i: ';'.join(sorted(parse_tiers(t))) or 'none_detected' for i, t in tiers.items()}
+        wide = pd.DataFrame({'recipe_id': ids, 'Allergens_v2': [labels[i] for i in ids], 'allergen_tier': [tiers[i] for i in ids]})
+        wide.to_parquet(root / 'data/corpus/recipes_structured.parquet')
+        wide[['recipe_id', 'allergen_tier']].to_parquet(root / 'data/corpus/recipes.parquet')
+        hist = [(i, c.GENERATION, 'milk:derived;sesame:direct') for i in filler] + [(self.RID, c.GENERATION, self.LOST2)] + list(extra)
+        pd.DataFrame({'recipe_id': [h[0] for h in hist], 'field': [h[3] if len(h) > 3 else 'allergen_tier' for h in hist],
+                      'generation': [h[1] for h in hist], 'value_num': float('nan'),
+                      'value_str': pd.array([h[2] for h in hist], dtype='string'),
+                      'build_id': 'test'}).to_parquet(root / 'data/provenance/field_history.parquet')
+        return root
+
+    def _pin(self):
+        import allergen_tier_contract as c
+        state = {i: 'milk:derived' for i in range(1, 401)}
+        state[self.RID] = 'milk:derived'          # the reconciliation output: gluten and sesame removed
+        return {'rows': 401, 'sha256': c.tier_state_digest(state)}
+
+    def _run(self, current, extra=(), later=()):
+        import tempfile
+        from unittest import mock
+        import allergen_tier_contract as c
+        with tempfile.TemporaryDirectory() as d:
+            root = self._release(d, current, extra)
+            # the synthetic release carries none of the declared exemption rows, so the contract runs with the exemptions empty
+            with mock.patch.dict(c.REINSTATED, clear=True), mock.patch.dict(c.DECLARED_ADDITIONS, clear=True), \
+                    mock.patch.dict(c.COMBINED_READDITIONS, clear=True):
+                return c.validate_tier_ledger(root, pin=self._pin(), later=later), c.validate_release_tiers(root)
+
+    def test_unchanged_state_admitted(self):
+        self.assertEqual(self._run('milk:derived'), ([], []))
+
+    def test_unrecorded_readdition_on_a_two_class_row_refused(self):
+        # the D-19 case: a removed class re-added with no history record. The 401-row contract alone does not see it (no snapshot shows
+        # the removal); the ledger check does.
+        for current in ('gluten:direct;milk:derived', 'milk:derived;sesame:direct', self.LOST2):
+            with self.subTest(current=current):
+                self.assertEqual(self._run(current)[0], self.MSG)
+        self.assertEqual(self._run('gluten:direct;milk:derived')[1], [])
+
+    def test_unrecorded_removal_or_literal_change_refused(self):
+        for current in ('', 'milk:direct'):
+            with self.subTest(current=current):
+                self.assertEqual(self._run(current)[0], self.MSG)
+
+    def test_recorded_change_under_a_registered_generation_admitted(self):
+        rec = [(self.RID, 'before_d16o_v1', 'milk:derived')]
+        ledger, contract = self._run('gluten:direct;milk:derived', rec, later=('before_d16o_v1',))
+        self.assertEqual(ledger, [])
+        # once recorded, the per-class check sees the re-addition (undeclared here, so the contract refuses it)
+        self.assertEqual(contract, ['a class removed by the reconciliation is back without a declared re-addition'])
+
+    def test_two_later_generations_use_the_earliest(self):
+        rec = [(self.RID, 'before_d16o_v1', 'milk:derived'), (self.RID, 'before_d16p_v1', 'milk:direct')]
+        self.assertEqual(self._run('milk:inherited', rec, later=('before_d16o_v1', 'before_d16p_v1'))[0], [])
+        self.assertEqual(self._run('milk:inherited', rec, later=('before_d16p_v1', 'before_d16o_v1'))[0], self.MSG)
+
+    def test_recorded_variants_refused(self):
+        for name, extra, later, want in [
+            ('generation not registered', [(self.RID, 'before_d16o_v1', 'milk:derived')], (),
+             ["allergen tier ledger: unregistered allergen_tier history generation(s) ['before_d16o_v1']"]),
+            ('replaced value misrecorded', [(self.RID, 'before_d16o_v1', 'milk:direct')], ('before_d16o_v1',), self.MSG),
+            ('recorded twice', [(self.RID, 'before_d16o_v1', 'milk:derived')] * 2, ('before_d16o_v1',),
+             ['allergen tier ledger: a later generation records a row twice']),
+            ('later repeats a pinned generation', [], ('before_d16n_v1',), ['allergen tier ledger: a later generation repeats a pinned one']),
+        ]:
+            with self.subTest(name):
+                self.assertEqual(self._run('gluten:direct;milk:derived', extra, later)[0], want)
+
+    def test_record_on_another_field_is_not_a_tier_record(self):
+        rec = [(self.RID, 'before_d16o_v1', 'milk:derived', 'Allergens_v2')]
+        self.assertEqual(self._run('gluten:direct;milk:derived', rec, later=('before_d16o_v1',))[0], self.MSG)
+
+    def test_pin_matches_the_shipped_release(self):
+        import allergen_tier_contract as c
+        root = Path(__file__).resolve().parents[1]
+        if not (root / 'data/provenance/field_history.parquet').exists():
+            self.skipTest('release data not present')
+        self.assertEqual(c.validate_tier_ledger(root), [])
+        self.assertEqual(c.TIER_HISTORY_ORDER[0], c.GENERATION)
+        self.assertEqual(c.TIER_LEDGER_LATER, ('before_d16o_v1',))
+
+
+class D16OAdditionTests(unittest.TestCase):
+    """BATCH K (K-R5-7): the five D16O first additions and 127968's second-generation addition (milk in before_d16o_v1 over asafoetida in
+    before_d16m_v1) are admitted only in their declared forms; the generations are peeled latest first."""
+
+    def _r(self, **kw):
+        return D16IExemptionTests._run(D16IExemptionTests(), **kw)
+
+    def test_declared_forms_admitted(self):
+        self.assertEqual(self._r(), [])
+
+    def test_127968_variants_refused(self):
+        import allergen_tier_contract as c
+        base = [h for h in D16O_PRIOR if h[0] != 127968]
+        for name, extra in [('d16o prior missing', []),
+                            ('d16o prior altered', [(127968, 'before_d16o_v1', 'gluten:inherited;sulphites:derived')]),
+                            ('d16o prior duplicated', [D16O_PRIOR[-1], D16O_PRIOR[-1]])]:
+            with self.subTest(name):
+                from unittest import mock
+                with mock.patch.object(sys.modules[__name__], 'D16O_PRIOR', base + extra):
+                    self.assertNotEqual(self._r(), [])
+        self.assertNotEqual(self._r(current={127968: 'asafoetida:inherited;gluten:inherited;milk:direct;sulphites:derived'}), [])
+
+    def test_d16o_row_variants_refused(self):
+        self.assertNotEqual(self._r(current={3860: 'gluten:direct;soy:derived'}), [])
+        self.assertNotEqual(self._r(current={3860: 'gluten:derived;peanut:direct;soy:derived'}), [])

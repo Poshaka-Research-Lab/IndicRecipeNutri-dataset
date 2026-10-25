@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.15.0] — 2026-10-25 — data version v21
+
+Rebuilds the 0.14.0 payload on data version **v21**.
+
+### Changed — D16 batch K (master `6f1a017e` → `e397522e`)
+
+- Installed 65,195 reviewed cell changes on 23,059 source recipes; the installed values exactly match the pinned expected-cell list.
+- Changed columns: Allergens_v2 6,484, Diet 9,779, Diet_prior 9,203, DietaryContext 134, allergen_scan_incomplete 2, allergen_tier 6,674, contains_alcohol 41, contains_beef 8, contains_fish 64, contains_gelatin 115, contains_pork 25, contains_poultry 34, diet_contradicts_ingredients 371, diet_meat_class 119, diet_v13 9,203, gluten_confidence 1,812, gluten_declared 1,811, sulphites_possible 9,658, sulphites_possible_src 9,658.
+- Retired 9,658 `sulphites_possible` flags under the K sulphites ruling; the corresponding `Allergens_v2` sulphites protection is retained.
+- Diet and allergen changes follow the six Batch K owner-decision records, including read-backed removals, fail-closed additions and per-pair holds.
+- Published knowledge graph: 6,446,905 → 6,449,114 edges (+2,209); 222,537 nodes. All 12,408 removed and 14,617 added edges match the model.
+- Whole-source edge delta: +2,210; the published delta excludes withdrawn recipes according to release configuration.
+
+Evidence: Batch K forward-only `C1_INSTALLED.json`, `expected_post_install_cells_d16o.json`, `kg_model_d16o.json` and `kg_reconciliation_d16o.json` in the datasets workspace.
+
 ## [0.14.0] — 2026-10-22 — data version v20 (master `6f1a017e`)
 
 Rebuilds the 0.13.0 payload on data version **v20**.
