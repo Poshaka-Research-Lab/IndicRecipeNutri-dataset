@@ -32,8 +32,9 @@ they could only ever be **declared** clean at a pinned nonzero count.
   (Vegetarian / Vegan / Non-Vegetarian / Eggetarian), `health_profile`
   (general / diabetic / heart_lowsodium / weight_loss), `spice_pref` (mild / medium / hot),
   `age_band`.
-- **990,273 explicit 1–5 ratings** over **18,010** distinct rated recipes; per-user counts
+- **990,273 explicit 1–5 ratings** over **17,530** distinct rated recipes; per-user counts
   lognormal, clipped to [5, 200] — median 15, mean 19.8, p95 51, p99 85.
+
 - Rating skew calibrated to real Food.com / HUMMUS logs:
 
 | Star | Achieved | Target |
@@ -52,6 +53,12 @@ they could only ever be **declared** clean at a pinned nonzero count.
 - User diet split: Vegetarian 40.02% · Non-Vegetarian 34.79% · Vegan 14.96% ·
   Eggetarian 10.22%. All 27 regions that have recipes are represented by ≥1 user;
   Pan-Indian is held to 24.96%.
+
+Documentation correction (2026-10-25): the v0.15.0 tag's datasheet said 18,010
+distinct rated recipes. A direct count of distinct `recipe_id` values in
+`data/interactions/interactions.csv` gives 17,530, matching
+`data/interactions/stats.json` (`n_items_total_rated`). The CSV, statistics,
+interaction split, and immutable release tag are unchanged.
 
 ## Generation model
 
