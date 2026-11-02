@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Documentation
+
+- Datasheet template (`scripts/build_release_facts.py`): states the 17 allergen classes, that there is no `wheat` class (`gluten` is not equivalent), that `ghee` must be blocked with `milk`, and that the five South Asian classes are investigator-defined, and gives the train-partition ghee/milk and wheat/gluten checks (2026-11-02). Requested by the PHD-01 / PR1 pass-3 review (row 17) and approved by the owner on 2026-11-01. Takes effect at the next release render; `docs/DATASHEET.md` and `checksums/SHA256SUMS` for v0.15.0 are unchanged.
+
 ## [0.15.0] — 2026-10-25 — data version v21
 
 Rebuilds the 0.14.0 payload on data version **v21**.
