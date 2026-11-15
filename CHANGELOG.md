@@ -22,6 +22,9 @@ cause and changes no data.
   private datasets workspace, and `scripts/verify_release.py` imports `build_enrichment` for `prose_stem`, so the verifier
   and four test modules could not be imported on a clean clone. `MASTER_CSV` is now resolved inside `_master_columns`,
   the only function that reads the master. Builder behaviour is unchanged.
+- `tests/test_ifct_enrichment_export.py`: the one test that runs the enrichment *builder* end to end is skipped when
+  `_admin/occurrence_gate.py` (private datasets workspace) is absent. The builder fails closed without that gate, by
+  design, so the test cannot pass on a clean clone; the gate itself is unchanged. The other 152 tests run everywhere.
 - Release workflow: `pytest` is installed so that `tests/test_parallel_config.py` can be imported during discovery.
   Its pytest-style tests are still not collected by `unittest discover`; they run locally under pytest.
 

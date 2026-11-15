@@ -98,6 +98,12 @@ class IFCTEnrichmentExportTests(unittest.TestCase):
             self.assertTrue(COLUMN_NOTES[key]);self.assertEqual(exporter.check_licence('ingredients_nutrition',[key]),[])
         self.assertIn('Null is valid',COLUMN_NOTES['fct_idx'])
 
+    # build_enrichment.main() fails closed when the occurrence-key supersession gate
+    # (`_admin/occurrence_gate.py` in the private datasets workspace) cannot be loaded.
+    # That refusal is deliberate and is not relaxed here: on a clean clone the builder
+    # cannot run, so this builder test is skipped rather than made to pass (0.15.1).
+    @unittest.skipUnless((exporter.REPO_ROOT.parent/'_admin'/'occurrence_gate.py').is_file(),
+        'builder main() needs the private datasets workspace occurrence gate')
     def test_main_preserves_ifct_identity_and_all_seven_review_fields(self):
         with tempfile.TemporaryDirectory() as folder:
             source,out=self.fixture(Path(folder))
