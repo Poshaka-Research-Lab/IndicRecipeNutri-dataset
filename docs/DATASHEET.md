@@ -91,6 +91,25 @@ Sulphite carrier inference is not independently validated by an ingredient-text
 lexicon looking for a declared additive. Investigator-defined South Asian classes
 must not be described as a regulatory list.
 
+**The 17 classes, and what they do not cover.** The classes are milk, egg, fish,
+shellfish, tree_nuts, peanut, gluten, soy, sesame, mustard, fenugreek, asafoetida,
+tamarind, coconut, celery, sulphites and ghee. There is no `wheat` class: `gluten` is
+the nearest and is not equivalent (it also covers non-wheat grains). `ghee` is a milk
+product encoded as its own class, so a consumer blocking `milk` must also block `ghee`
+(present or `unassessed`). Both were checked on the `Split_v3` train partition only
+(197,322 recipes, 2026-11-02, PHD-01 run `s-allergen-audit`): no recipe has `ghee`
+present or `unassessed` with `milk` absent, and of 24,527 recipes whose ingredient list
+carries a wheat-bearing token (a declared 16-term lexicon, so a lower bound on misses)
+24,526 carry `gluten` present; the one miss (recipe 20366) has an ingredient list
+scraped from page navigation. With this repository's own second-leg gluten pattern
+(`scripts/release_config.py`), 48,411 train recipes match and 61 carry `gluten`
+absent: 52 are `deliciouslyindian` rows whose ingredient list is the site's navigation
+menu, 5 are labelled gluten-free, 1 is prose, and 3 (recipes 20366, 50422 and
+126241) are candidate fail-open misses awaiting adjudication. The val and test
+partitions were not checked. Mustard, fenugreek, asafoetida, tamarind and coconut are
+investigator-defined South Asian extensions; FSSAI Labelling and Display Regulations
+2020 clause 5(14) does not name them.
+
 **Avoiding sulphites: check the allergen surface (`Allergens_v2`), not
 `sulphites_possible` alone.** The `sulphites` class in `data/corpus/allergens.parquet`
 (through `scripts/allergen_surface.py`, with `unassessed` read as possibly present) is

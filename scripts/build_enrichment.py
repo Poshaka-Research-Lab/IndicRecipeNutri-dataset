@@ -23,7 +23,6 @@ import pyarrow.parquet as pq
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_config import (  # noqa: E402
     EXCLUDED_RECIPE_IDS,
-    MASTER_CSV,
     PARQUET_COMPRESSION,
     PARQUET_COMPRESSION_LEVEL,
     PARQUET_ROW_GROUP_SIZE,
@@ -355,8 +354,13 @@ def _master_columns(cols: list[str]) -> "pd.DataFrame":
     """Read `cols` from the master once per process, keyed by recipe_id."""
     want = tuple(sorted(cols))
     if want not in _MASTER_CACHE:
+        # Resolved here, not at import: `MASTER_CSV` is served by release_config's source
+        # gate, which needs the private datasets workspace. verify_release.py imports this
+        # module for `prose_stem` and must stay importable on a clean clone (0.15.1).
+        import release_config
+
         _MASTER_CACHE[want] = pd.read_csv(
-            MASTER_CSV, usecols=["recipe_id"] + list(want), low_memory=False
+            release_config.MASTER_CSV, usecols=["recipe_id"] + list(want), low_memory=False
         ).set_index("recipe_id")
     return _MASTER_CACHE[want]
 

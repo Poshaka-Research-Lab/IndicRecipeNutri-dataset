@@ -1226,7 +1226,9 @@ EXPECTED_CORPUS_BUILD = "v15"
 # Diet label values moved; KG 6,446,905 edges; 219,384 recipes published, unchanged. See CHANGELOG 0.14.0.
 # 0.14.0 -> 0.15.0 (2026-10-25): data version v21 (D16 batch K, master e397522e);
 # KG 6,449,114 edges and 219,384 published recipes. See CHANGELOG 0.15.0.
-DATASET_VERSION = "0.15.0"
+# 0.15.0 -> 0.15.1 (2026-11-15): no data change. Release-tooling portability only: the
+# verifier is importable without the private datasets workspace. See CHANGELOG 0.15.1.
+DATASET_VERSION = "0.15.1"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

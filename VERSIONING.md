@@ -8,6 +8,8 @@
 
 0.15.0 is preserved by tag `v0.15.0`. It corresponds to data version v21 (master `e397522e`, D16 batch K), rebuilt on top of 0.14.0.
 
+0.15.1 is preserved by tag `v0.15.1`. It changes no data: data version v21, with every data table byte-identical to 0.15.0. It repairs the release tooling so that the release workflow can run on a clean clone. Experiments recorded against 0.15.0 inputs are valid against 0.15.1 and need not be re-pinned.
+
 0.14.0 is preserved by local tag `v0.14.0`. It corresponds to data version v20 (master `6f1a017e`, D16 batch J), a rebuild on top of 0.13.0.
 
 0.12.0 is developed on `release-0.12.0`. The active user goal authorizes a final local integration into the canonical dataset checkout after validation. It does not authorize a remote push or DOI publication. Existing recipe IDs, legacy fields and Split_v3 remain immutable during P1. New quality annotations are generated sidecars; new duplicate evidence is reported without moving legacy splits. New recipes/corrections require an explicit scope decision.

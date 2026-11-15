@@ -2,9 +2,35 @@
 
 ## [Unreleased]
 
+## [0.15.1] — 2026-11-15 — data version v21, no data change
+
+First version archived on Zenodo since 0.9.0. Versions 0.10.0, 0.13.0, 0.14.0 and 0.15.0 were tagged on GitHub but the
+release workflow failed on each, so no GitHub Release was created and Zenodo archived nothing. This release fixes the
+cause and changes no data.
+
+### Unchanged
+
+- Data version v21. `data/corpus/recipes_structured.parquet`, `data/kg/kg_edges.parquet`, `data/kg/kg_nodes.parquet`,
+  `data/quality/duplicate_crosswalk_v1.parquet` and every other data table are byte-identical to 0.15.0
+  (`git diff --stat v0.15.0 v0.15.1 -- data/` lists one file, the generated `data/interactions/DATASHEET.md`).
+- 219,384 recipes; knowledge graph 222,537 nodes and 6,449,114 edges.
+- `rebuild_all.py` was skipped on purpose: no corpus, vocabulary or KG input changed (`docs/RELEASING.md`, step 1).
+
+### Fixed
+
+- `scripts/build_enrichment.py` imported `MASTER_CSV` at module import. `MASTER_CSV` is served by the source gate in the
+  private datasets workspace, and `scripts/verify_release.py` imports `build_enrichment` for `prose_stem`, so the verifier
+  and four test modules could not be imported on a clean clone. `MASTER_CSV` is now resolved inside `_master_columns`,
+  the only function that reads the master. Builder behaviour is unchanged.
+- Release workflow: `pytest` is installed so that `tests/test_parallel_config.py` can be imported during discovery.
+  Its pytest-style tests are still not collected by `unittest discover`; they run locally under pytest.
+
 ### Documentation
 
 - Datasheet template (`scripts/build_release_facts.py`): states the 17 allergen classes, that there is no `wheat` class (`gluten` is not equivalent), that `ghee` must be blocked with `milk`, and that the five South Asian classes are investigator-defined, and gives the train-partition ghee/milk and wheat/gluten checks (2026-11-02). Requested by the PHD-01 / PR1 pass-3 review (row 17) and approved by the owner on 2026-11-01. Takes effect at the next release render; `docs/DATASHEET.md` and `checksums/SHA256SUMS` for v0.15.0 are unchanged.
+- `docs/DATASHEET.md` and `data/provenance/release_facts.json` re-rendered. This applies the 2 November datasheet-template
+  change recorded under 0.15.0 development (17 allergen classes, no `wheat` class, `ghee` blocked with `milk`, the five
+  South Asian classes investigator-defined, train-partition ghee/milk and wheat/gluten checks).
 
 ## [0.15.0] — 2026-10-25 — data version v21
 

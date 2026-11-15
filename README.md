@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/candidate-0.15.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.15.1-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -25,6 +25,10 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+## 0.15.1 (data version v21)
+
+No data change. Every file under `data/corpus/`, `data/kg/` and `data/quality/` is byte-identical to 0.15.0. This release makes the release verifier run on a clean clone, so that the automated checks pass and the version is archived on Zenodo; versions 0.10.0 to 0.15.0 were tagged but never published as releases. See [CHANGELOG](CHANGELOG.md).
 
 ## 0.15.0 (data version v21)
 
