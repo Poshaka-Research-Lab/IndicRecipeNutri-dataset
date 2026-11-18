@@ -57,6 +57,17 @@ recipes; 1,430 language values are missing. Use `Lang_base` for primary
 language filtering, with appropriate validation. Source and regional sampling are uneven.
 Recipe frequency is not population dietary prevalence.
 
+**Cuisine label and publisher are entangled (measured 16 Nov 2026).** `Cuisine_orig` is the
+publisher's own category, and a few publishers supply most of some cuisines. In the 21,108
+recipes that carry one of ten `Cuisine_orig` labels and pass the completion-cohort filters
+(28 Oct 2026 snapshot), one source supplies 5,181 of the 7,285 Kerala-labelled recipes. In an
+ingredient-completion experiment on those recipes, conditioning a linear model on the
+publisher alone gave +0.0278 NDCG@20 over a label-blind model, against +0.0326 for the
+cuisine label: about 85% of the gain. Cuisine still added information beyond the publisher
+(+0.0112 for cuisine-by-publisher cells over publisher alone). Analyses that attribute an
+effect to "cuisine" should control for the source, for example by holding out whole
+publishers. These figures come from one downstream study, not from this repository's build.
+
 ## Nutrition and uncertainty
 
 Nutrition values are estimates with source and basis limitations. The composition

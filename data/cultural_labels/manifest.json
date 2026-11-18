@@ -1,0 +1,55 @@
+{
+  "schema": "public_cultural_proposals_v1",
+  "rows": 24486,
+  "status_counts": {
+    "proposed": 21295,
+    "abstain": 3191
+  },
+  "review_status": "pending",
+  "base_data_version": "v21",
+  "local_source_enrichment_version": "v22-labels.1",
+  "base_payload_sha256": {
+    "data/corpus/ALLERGEN_AUDIT.json": "c06f82ef9ca49c7607a7b7dba5ba7ca2477c3f9e2e71076b14ccaf3b2f965924",
+    "data/corpus/allergens.parquet": "b84684a25a5a6945d567c85cc429ef1f006f1fdf027841b09d6d861dafd7f930",
+    "data/corpus/corpus_manifest.json": "64bfe1bee2d54e9bcc80ccf97ef0f916db945f8c347f8944e59611c9a2f76cde",
+    "data/corpus/labels.parquet": "c0f73669f53e160eeac8e43117c9457e9b637e812a15bdc6b53465b1852627dc",
+    "data/corpus/nutrition.parquet": "4c2d2dd046b9dc6bad492fd6655b5e5c920f4223c24a68cdda97ddd847530ea5",
+    "data/corpus/nutrition_derived.parquet": "7d66ec400cd82b23a7b0a8867f7daf2fcea2d8060641cf2109f0a02e4ff514a9",
+    "data/corpus/PII_SEMANTIC_SCAN.json": "86545f4d9da1d4b99b6bf285fe81a36be7a5a92a01020de4dce64f61536e7202",
+    "data/corpus/quality.parquet": "a697a112c28468c81ede662c3b22f49db1f2f34533f631ff8307e18c7558c943",
+    "data/corpus/recipes.parquet": "e621e9b5c4eff8991fa8e896dd31c324413028edd591e500940f4f0cfe840f34",
+    "data/corpus/recipes_structured.parquet": "ccc5f9fb1062345083718cc24b93edf8c3e05ea3da7127d757782aff39d96f6a",
+    "data/corpus/rehydration_index.parquet": "95c1c4c2ce879e082e8b2624a78e266d05a7a5245d8bad5513089ed1a134b749",
+    "data/kg/compound_id_crosswalk.csv": "154a742d4785fc68bfadc8f912a9bafb67cb91e44cbd8c9904287899306cd225",
+    "data/kg/EXCLUDED.json": "85f8930e5d632e4a7e142bfac642ab7c842d12a2f31cf3ed95f22f92b8388245",
+    "data/kg/ingredient_bridge_food.csv": "a99542067540adfe879d8d4d084f002c09fc1cf4273a12ffa8b7e061ba412043",
+    "data/kg/ingredient_freq.json": "2b3f9b3fba0a9760339538011c625fcbebf00ba1655cf7631ad2d9bac2e9258f",
+    "data/kg/ingredient_map.json": "85dbf46f0da4d0d97e2f5660fa74840742f6e908e5f93ffad20f047a4d0a3418",
+    "data/kg/ingredient_tier.json": "0effd496b3fe2817b8ece243e40e31c54f2f5f00ed3373cdaff8bed72d5a3cc5",
+    "data/kg/kg_edge_evidence.parquet": "75b7430b6fa0d6300efca89237e603c0660816b0d8a0fb556f63c9631687daaa",
+    "data/kg/kg_edges.parquet": "8f5076e9d00fc6f5ba3566a88c122c5c55d335d933ddc31dfa94e516ab9b00e5",
+    "data/kg/kg_nodes.parquet": "1e9301544c5a4723c42c298b2fc24f045630591c0b8467a5f0864cf9e59b6bbf",
+    "data/kg/kg_stats.json": "2082f69acf4ce87d3c455c1dc141ae1b8c89df5ee3802c4303ed2784597c0de3",
+    "data/kg/pairs_avoid.parquet": "9cff37aaf48b2c8a4535a0ae2614d09d372bdbab042c535c04e58ce2f318530e",
+    "data/kg/pairs_avoid_meta.json": "cad7e27fc759c95ad4ccb613982718799778625e2635147ac128a9b11849ecbe",
+    "data/kg/pairs_ours.parquet": "3cccbfea39f7287e367c082b746defe6bdb8d4901d669e4895a245c5065f5585",
+    "data/kg/pairs_ours_meta.json": "f0c931289d64ca30fcfa219e0ef0d44766642d6360458c0f3fa1f5a563f81106",
+    "data/kg/pairs_regional.parquet": "660e8fa9dad69e81397858f025c797d92701b546ae9d8fc334d819ae2f42dc80",
+    "data/kg/pairs_regional_meta.json": "522f6e31b996ab8d763a230de24d7da46cc73063a6d6cf00cf557ad35d665a07",
+    "data/kg/substitutes_ours.parquet": "e7ac43612a1d9cedae06ee9604c7690a144e6766bf9620801004141b90ff29a0",
+    "data/kg/substitutes_ours_meta.json": "a057e8580267c83291c667916edbbcb592771382f66a8f62fddb8c8ccb3a7bb5"
+  },
+  "private_prose_published": false,
+  "limitations": [
+    "Quote matching is not semantic verification.",
+    "Not ground truth; not eligible for silent benchmark cohort expansion.",
+    "Abstention means no accepted proposal under this protocol, not absence of cultural identity.",
+    "Unlisted recipe IDs were not processed; recovery may be partial."
+  ],
+  "scope_crosswalk": {
+    "Indian": "indian",
+    "Pan-Indian": "indian",
+    "Fusion": "indo-fusion (owner dataset convention)",
+    "International": null
+  }
+}

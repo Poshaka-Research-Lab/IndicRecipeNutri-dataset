@@ -998,6 +998,9 @@ def main() -> int:
     from build_release_facts import check as check_current_facts
     for stale_path in check_current_facts(args.root):
         fail("release-facts", f"{stale_path} differs from current payload; run scripts/build_release_facts.py")
+    from cultural_labels_contract import validate_release as validate_cultural_labels
+    for problem in validate_cultural_labels(args.root):
+        fail('cultural-labels', problem)
     check_licence_tiers(args.root)
     check_kg_allergens(args.root)
     from edge_evidence import validate_release_evidence

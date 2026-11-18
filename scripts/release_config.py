@@ -89,6 +89,8 @@ RETRIEVAL_DIR = SOURCE_ROOT / "retrieval"
 # is the *parsed* list, which section 3.5 explicitly places in the redistributable
 # tier ("parsed ingredients, quantities").
 PROSE_COLUMNS = [
+    "label_annotation_json", # private source evidence and local audit history
+
     "Description",
     "Instructions",
     "Ingredients",
@@ -1228,7 +1230,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 # KG 6,449,114 edges and 219,384 published recipes. See CHANGELOG 0.15.0.
 # 0.15.0 -> 0.15.1 (2026-11-15): no data change. Release-tooling portability only: the
 # verifier is importable without the private datasets workspace. See CHANGELOG 0.15.1.
-DATASET_VERSION = "0.15.1"
+DATASET_VERSION = "0.16.0"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

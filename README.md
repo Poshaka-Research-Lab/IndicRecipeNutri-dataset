@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/version-0.15.1-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.16.0-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -25,6 +25,13 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+## 0.16.0 (base data v21; cultural proposals sidecar)
+
+Adds `data/cultural_labels/proposals.parquet` and `.csv`. Labels are **pending
+review**, preserve multiple declared facets and must not be used as verified
+ground truth. Recipe prose and source quotations remain local. Core corpus/KG
+files are unchanged. See [scope and usage](docs/CULTURAL_LABELS.md).
 
 ## 0.15.1 (data version v21)
 

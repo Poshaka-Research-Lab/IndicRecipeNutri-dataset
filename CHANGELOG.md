@@ -2,6 +2,30 @@
 
 ## [Unreleased]
 
+## [0.16.0] — 2026-11-18 — cultural label proposals
+
+Adds a separate pending-review cultural label sidecar in Parquet and CSV, with
+explicit cuisine, state/UT/broad-region, community, culinary-subregion, locality
+and scope facets. Source recipe text, quotes, local paths and model explanations
+are withheld. Source-only extraction includes local rejection recovery; labels
+remain proposals, not verified ground truth. Fusion maps to indo-fusion under the
+owner's dataset convention; International has no unconditional legacy mapping.
+
+Core corpus, graph, splits and quality payloads remain byte-identical to 0.15.1
+(data v21). The local additive master generation is v22-labels.1. No graph or pairing
+rebuild is needed for this separate sidecar: it changes no corpus/KG inputs. The
+existing local retrieval reader has stale pins and is not certified by this release.
+The verifier checks the new sidecar's schema, IDs, pending status and base hashes.
+A withheld-column guard prevents future corpus builders exporting the private
+label_annotation_json field. See docs/CULTURAL_LABELS.md.
+
+
+### Added
+
+- Datasheet, Representation section: a note that the `Cuisine_orig` label and the publisher are entangled, with the
+  measured figures and the advice to hold out whole publishers (`scripts/build_release_facts.py` template; `docs/DATASHEET.md`
+  regenerated). No data change. `checksums/SHA256SUMS` regenerated; only the `docs/DATASHEET.md` line changes.
+
 ## [0.15.1] — 2026-11-15 — data version v21, no data change
 
 First version archived on Zenodo since 0.9.0. Versions 0.10.0, 0.13.0, 0.14.0 and 0.15.0 were tagged on GitHub but the
