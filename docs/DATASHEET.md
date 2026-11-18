@@ -5,6 +5,19 @@ Exact source hashes and current counts are in `data/provenance/release_facts.jso
 Historical assessments are preserved in [the archived datasheet](history/DATASHEET_pre_2026-09-12.md),
 not presented as current measurements. Its detailed audit history remains available.
 
+## Reviewed cultural declarations
+
+`data/labels/cuisine_declarations_v1.parquet` (also CSV) contains
+13,151 accepted declarations; `reviewed_scope_v1.parquet`
+contains 7,945 recipe scope decisions, including abstentions.
+The dataset owner approved a frozen set of rule-assisted assistant recommendations.
+This is not independent human semantic validation. Original labels are preserved.
+Source quotations remain private; evidence quote hashes, reviewer, decision,
+result hash and approval bundle hash permit provenance joins. These sidecars do
+not alter the KG or establish a larger scored GCRE cohort. International remains
+ambiguous; Fusion means Indian mixed with another cuisine. No non-Indian exclusion
+is inferred from ambiguity. The earlier cultural proposal snapshot remains pending.
+
 ## Purpose and composition
 
 IndicRecipeNutri supports research on recipe retrieval, nutrition estimates and cultural context.

@@ -34,6 +34,8 @@ def collect(root):
     queries = [json.loads(line) for line in (root / 'data/benchmark/eval_queries.jsonl').read_text(encoding='utf-8').splitlines() if line.strip()]
     return {
         'schema_version': 1, 'scope': 'local release payload', 'canonical_split': 'Split_v3',
+        'reviewed_declarations': pq.read_metadata(root / 'data/labels/cuisine_declarations_v1.parquet').num_rows,
+        'reviewed_scope_recipes': pq.read_metadata(root / 'data/labels/reviewed_scope_v1.parquet').num_rows,
         'recipes': len(corpus), 'columns': len(pq.read_schema(root / paths[0])),
         'source_sites': int(corpus.SourceSite.nunique()),
         'split_counts': {k: int(v) for k, v in corpus.Split_v3.value_counts().sort_index().items()},
@@ -74,6 +76,19 @@ Generated from the local payload by `scripts/build_release_facts.py`.
 Exact source hashes and current counts are in `data/provenance/release_facts.json`.
 Historical assessments are preserved in [the archived datasheet](history/DATASHEET_pre_2026-09-12.md),
 not presented as current measurements. Its detailed audit history remains available.
+
+## Reviewed cultural declarations
+
+`data/labels/cuisine_declarations_v1.parquet` (also CSV) contains
+{f['reviewed_declarations']:,} accepted declarations; `reviewed_scope_v1.parquet`
+contains {f['reviewed_scope_recipes']:,} recipe scope decisions, including abstentions.
+The dataset owner approved a frozen set of rule-assisted assistant recommendations.
+This is not independent human semantic validation. Original labels are preserved.
+Source quotations remain private; evidence quote hashes, reviewer, decision,
+result hash and approval bundle hash permit provenance joins. These sidecars do
+not alter the KG or establish a larger scored GCRE cohort. International remains
+ambiguous; Fusion means Indian mixed with another cuisine. No non-Indian exclusion
+is inferred from ambiguity. The earlier cultural proposal snapshot remains pending.
 
 ## Purpose and composition
 

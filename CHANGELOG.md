@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.16.1] — 2026-11-18 — reviewed cultural declarations
+
+Adds 13,151 accepted declarations and 7,945 reviewed scope decisions in separate
+Parquet and CSV tables. The owner approved the frozen rule-assisted assistant
+recommendations; this is not independent human semantic validation. Abstentions
+are retained privately and are never converted to accepted labels. Public evidence
+is represented by quote hashes; verbatim source quotations remain private.
+Original cuisine/region fields and the core corpus/KG remain byte-identical.
+Adds strict schema, provenance, approval and payload-integrity checks.
+
 ## [0.16.0] — 2026-11-18 — cultural label proposals
 
 Adds a separate pending-review cultural label sidecar in Parquet and CSV, with

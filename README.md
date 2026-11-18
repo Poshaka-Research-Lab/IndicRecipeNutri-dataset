@@ -9,7 +9,7 @@ Built for retrieval and recommendation research that needs *culturally specific*
 and that needs to know exactly where the data is weak.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22512534.svg)](https://doi.org/10.5281/zenodo.22512534)
-[![Version](https://img.shields.io/badge/version-0.16.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.16.1-blue.svg)](CHANGELOG.md)
 [![Data licence: CC BY-NC-SA 4.0](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE-CODE)
 [![Format: Parquet](https://img.shields.io/badge/format-Parquet%20%2B%20zstd-orange.svg)](#the-data)
@@ -25,6 +25,15 @@ and that needs to know exactly where the data is weak.
 [Cite](#citation)
 
 </div>
+
+## 0.16.1 (owner-approved cultural declarations)
+
+Adds `data/labels/cuisine_declarations_v1.parquet` and `.csv` with 13,151
+accepted declarations, plus reviewed scope decisions for 7,945 recipes.
+These are owner-approved, rule-assisted assistant recommendations, without
+independent human semantic validation. Evidence quotations remain private;
+public tables contain their hashes. Original labels and core corpus/KG are preserved.
+The earlier proposal sidecar remains a historical pending snapshot.
 
 ## 0.16.0 (base data v21; cultural proposals sidecar)
 

@@ -19,3 +19,6 @@ Reproduce the source manifest, rule digest and logical-output digest. Private re
 0.16.0 adds a cultural label proposal sidecar, retaining all 0.15.1 core corpus/KG
 bytes and historical experiment pins. Local master v22-labels.1 adds annotations
 without altering any legacy cells. Pending proposals are not accepted labels.
+
+0.16.1 adds owner-approved reviewed declaration and scope sidecars. Core data v21
+and the historical pending proposal snapshot are unchanged.

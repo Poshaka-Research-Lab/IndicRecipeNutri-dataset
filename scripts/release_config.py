@@ -1230,7 +1230,7 @@ EXPECTED_CORPUS_BUILD = "v15"
 # KG 6,449,114 edges and 219,384 published recipes. See CHANGELOG 0.15.0.
 # 0.15.0 -> 0.15.1 (2026-11-15): no data change. Release-tooling portability only: the
 # verifier is importable without the private datasets workspace. See CHANGELOG 0.15.1.
-DATASET_VERSION = "0.16.0"
+DATASET_VERSION = "0.16.1"
 CONCEPT_TITLE = "IndicRecipeNutri"
 
 # --------------------------------------------------------------------------- parquet

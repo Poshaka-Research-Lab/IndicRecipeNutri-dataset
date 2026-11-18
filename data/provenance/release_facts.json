@@ -2,6 +2,8 @@
   "schema_version": 1,
   "scope": "local release payload",
   "canonical_split": "Split_v3",
+  "reviewed_declarations": 13151,
+  "reviewed_scope_recipes": 7945,
   "recipes": 219384,
   "columns": 270,
   "source_sites": 378,

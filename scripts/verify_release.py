@@ -72,6 +72,12 @@ LENGTH_EXEMPT = {"IngredientsList", "HealthConditions", "checks", "lenses", "Ing
 # (credit_card), on these exact (file, column) pairs only, and only for values that FULLMATCH the
 # documented digest shape. Every other PII pattern still runs on these columns, and a value of
 # any other shape in them still fails.
+REVIEWED_DIGEST_COLUMNS = {
+    **{('data/labels/cuisine_declarations_v1.'+ext, col): r'[0-9a-f]{64}'
+       for ext in ['parquet','csv'] for col in ['evidence_quote_sha256','result_hash','approval_bundle_sha256']},
+    **{('data/labels/reviewed_scope_v1.'+ext, 'approval_bundle_sha256'): r'[0-9a-f]{64}'
+       for ext in ['parquet','csv']},
+}
 CONTEXT_DIGEST_COLUMNS = {
     ("data/cultural_context/occasion_registry.parquet", "source_text_sha256"): r"[0-9a-f]{64}",
     ("data/cultural_context/dietary_rules.parquet", "source_text_sha256"): r"[0-9a-f]{64}",
@@ -235,7 +241,7 @@ def _pii_file(root_s: str, path_s: str):
                     )
                 hits = hits & ~context_digest
             digest_key = (path.relative_to(root).as_posix(), col)
-            digest_shape = CONTEXT_DIGEST_COLUMNS.get(digest_key) or QUALITY_DIGEST_COLUMNS.get(digest_key)
+            digest_shape = CONTEXT_DIGEST_COLUMNS.get(digest_key) or QUALITY_DIGEST_COLUMNS.get(digest_key) or REVIEWED_DIGEST_COLUMNS.get(digest_key)
             if name == "credit_card" and digest_shape is not None:
                 is_digest = series.str.fullmatch(digest_shape, na=False)
                 suppressed = hits & is_digest
@@ -1001,6 +1007,9 @@ def main() -> int:
     from cultural_labels_contract import validate_release as validate_cultural_labels
     for problem in validate_cultural_labels(args.root):
         fail('cultural-labels', problem)
+    from reviewed_labels_contract import validate_release as validate_reviewed_labels
+    for problem in validate_reviewed_labels(args.root):
+        fail('reviewed-labels', problem)
     check_licence_tiers(args.root)
     check_kg_allergens(args.root)
     from edge_evidence import validate_release_evidence
